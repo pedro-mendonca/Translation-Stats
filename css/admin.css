@@ -1,0 +1,154 @@
+/* No wrap */
+#translation-stats,
+.translation-stats-title,
+.translation-stats-wrap .subproject,
+.translation-stats-wrap .disabled .subproject {
+  white-space: nowrap;
+}
+
+/* Border radius */
+.translation-stats-wrap a,
+.translation-stats-wrap a div,
+.translation-stats-wrap a div .subproject,
+.translation-stats-wrap .disabled,
+.translation-stats-wrap .disabled .subproject {
+  border-radius: 3px;
+}
+
+/* Stats title */
+.translation-stats-title {
+  display: block;
+  margin-bottom: .8em;
+  font-size: 14px;
+}
+
+/* Stats percentage */
+.translation-stats-wrap .subproject .percentage {
+  display: inline-block;
+  font-weight: 700;
+  text-align: right;
+  width: 32px;
+  margin-right: 10px;
+}
+
+/* Stats grid layout */
+.translation-stats-wrap {
+  display: grid;
+  grid-row-gap: 6px;
+  padding: 6px;
+  margin: 0px 10px 10px 0px;
+}
+
+/* Configuration of easeOutCirc */
+.translation-stats-wrap a,
+.translation-stats-wrap a:hover,
+.translation-stats-wrap a:focus,
+.translation-stats-wrap a div,
+.translation-stats-wrap a:hover div,
+.translation-stats-wrap a:focus div,
+.translation-stats-wrap a div.percent0,
+.translation-stats-wrap a:hover div.percent0,
+.translation-stats-wrap a:focus div.percent0,
+.translation-stats-wrap a div.percent100,
+.translation-stats-wrap a:hover div.percent100,
+.translation-stats-wrap a:focus div.percent100,
+.translation-stats-wrap a div .subproject,
+.translation-stats-wrap a:hover div .subproject,
+.translation-stats-wrap a:focus div .subproject {
+  -webkit-transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  -moz-transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  -o-transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
+  /* easeOutCirc */
+  -webkit-transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+  -moz-transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+  -o-transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+  /* easeOutCirc */
+}
+
+/* Stats bar generic text color */
+.translation-stats-wrap a div {
+  color: #000000;
+  text-shadow: 0px 0px 6px rgba(255, 255, 225, 0.5);
+}
+
+/* Stats bar 100% text color */
+.translation-stats-wrap a div.percent100 .subproject {
+  color: #FFFFFF;
+  text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Stats bar 0% and 100% hover/focus text color */
+.translation-stats-wrap a:hover div.percent0,
+.translation-stats-wrap a:focus div.percent0,
+.translation-stats-wrap a:hover div.percent100,
+.translation-stats-wrap a:focus div.percent100 {
+  color: #FFFFFF;
+  text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Stats bar lenght on hover/focus */
+.translation-stats-wrap a:hover div,
+.translation-stats-wrap a:focus div {
+  width: 100% !important;
+}
+
+/* Status bar overlay color */
+.translation-stats-wrap a div .subproject {
+  background-color: rgba(0,0,0,0);
+}
+
+/* Status bar overlay hover/focus color */
+.translation-stats-wrap a:hover div .subproject,
+.translation-stats-wrap a:focus div .subproject {
+  background-color: rgba(255,255,255,0.2);
+}
+
+/* Stats bar size */  
+.translation-stats-wrap a div .subproject,
+.translation-stats-wrap .disabled .subproject {
+  display: block;
+  padding: 5px 10px;
+  /*background-color: cyan;*/
+}
+
+/* Stats bar colors from GlotPress */
+.translation-stats-wrap a div.percent100 {
+  background-color: #46B450;
+}
+.translation-stats-wrap a div.percent90 {
+  background-color: #6BC373;
+}
+.translation-stats-wrap a div.percent80 {
+  background-color: #90D296;
+}
+.translation-stats-wrap a div.percent70 {
+  background-color: #B5E1B9;
+}
+.translation-stats-wrap a div.percent60 {
+  background-color: #C7E8CA;
+}
+.translation-stats-wrap a div.percent50 {
+  background-color: #FFE399;
+}
+.translation-stats-wrap a div.percent40 {
+  background-color: #FBC5A9;
+}
+.translation-stats-wrap a div.percent30 {
+  background-color: #F1ADAD;
+}
+.translation-stats-wrap a div.percent20 {
+  background-color: #EA8484;
+}
+.translation-stats-wrap a div.percent10 {
+  background-color: #E35B5B;
+}
+.translation-stats-wrap a div.percent0 {
+  background-color: #DC3232;
+}
+
+.translation-stats-wrap .disabled {
+  background-color: #DDDDDD;
+  color: #8f98a1;
+}
