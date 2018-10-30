@@ -232,7 +232,7 @@ class Plugin_Translation_Stats {
 			echo sprintf( __( 'Translation for %s', 'translation-stats' ), $locale_link );
 			?>
 		</div>
-		<?php
+		<?php // To remove
 		$test = true;
 		$square = 128;
 		?>
@@ -317,20 +317,21 @@ class Plugin_Translation_Stats {
 		// If translation stats are an object, get the percent translated property
 		} else {
 
-			/* Get the 'percent_translated' property from subproject translation stats
-					Example of allowed properties:
-					[id] => 416518
-					[name] => Portuguese (Portugal)
-					[slug] => default | ao90 | informal
-					[project_id] => 3333
-					[locale] => pt
-					[current_count] => 136
-					[untranslated_count] => 0
-					[waiting_count] => 0
-					[fuzzy_count] => 0
-					[percent_translated] => 100
-					[wp_locale] => pt_PT
-					[last_modified] => 2018-10-11 10:05:30
+			/*
+				Get the 'percent_translated' property from subproject translation stats
+				Example of allowed properties:
+				[id] => 416518
+				[name] => Portuguese (Portugal)
+				[slug] => default | ao90 | informal
+				[project_id] => 3333
+				[locale] => pt
+				[current_count] => 136
+				[untranslated_count] => 0
+				[waiting_count] => 0
+				[fuzzy_count] => 0
+				[percent_translated] => 100
+				[wp_locale] => pt_PT
+				[last_modified] => 2018-10-11 10:05:30
 			*/
 			$percent_translated = $translation_stats->percent_translated;
 			$i18n_error = false;
