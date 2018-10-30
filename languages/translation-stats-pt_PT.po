@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Translation Stats\n"
 "POT-Creation-Date: 2018-10-30 14:35+0000\n"
-"PO-Revision-Date: 2018-10-30 14:36+0000\n"
+"PO-Revision-Date: 2018-10-30 16:14+0000\n"
 "Last-Translator: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language-Team: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language: pt_PT\n"
@@ -95,7 +95,7 @@ msgstr "https://github.com/pedro-mendonca/translation-stats"
 
 #. Description of the plugin/theme
 msgid "Show your plugins translation statistics from WordPress.org on your dashboard."
-msgstr "Mostre no painel as estatísticas de tradução de WordPress.org dos seus plugins."
+msgstr "Mostre as estatísticas de tradução de WordPress.org dos seus plugins, no painel do WordPress."
 
 #. Author of the plugin/theme
 msgid "Pedro Mendonça"
