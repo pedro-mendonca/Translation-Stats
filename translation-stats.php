@@ -18,8 +18,8 @@ class Plugin_Translation_Stats {
 	 * Constructor.
 	 */
 	function __construct() {
-	
-		// Load GlotPress locales data  
+
+		// Load GlotPress locales data
 		include 'lib/glotpress/locales.php';
 
 		// Register and enqueue plugin style sheet.
@@ -44,7 +44,7 @@ class Plugin_Translation_Stats {
 	function ts_register_plugin_styles( $hook ) {
 		// Loads plugin style sheets only in the plugins page.
 		if ( 'plugins.php' != $hook ) {
-				return;
+			return;
 		};
 		wp_register_style( 'translation-stats', plugins_url( 'translation-stats/css/admin.css' ), false, '0.5.0' );
 		wp_enqueue_style( 'translation-stats' );
@@ -127,7 +127,7 @@ class Plugin_Translation_Stats {
 		$plugin_error = ob_get_clean();
 		return $plugin_error;
 	}
-	
+
 
 	/**
 	 * Show Plugin Translation Stats Content
@@ -143,12 +143,12 @@ class Plugin_Translation_Stats {
 		// Add Translation Stats if plugin is on wordpress.org and if user Locale isn't 'en_US'
 		// Check if is in column 'translation-stats'
 		if ( $column_name == 'translation-stats' ) {
-			
+
 			// Check if user locale is not 'en_US'
 			if ( get_user_locale() != 'en_US' ) {
 
 				$project_slug = $this->ts_plugin_metadata( $plugin_file, 'slug' );
-				
+
 				// Check if plugin is on WordPress.org
 				if ( empty( $this->ts_plugin_on_wporg( $plugin_file ) ) ) {
 					echo $this->ts_error_message( __( 'Plugin not found on WordPress.org', 'translation-stats' ) ); // Add alternative GlotPress API
@@ -218,7 +218,7 @@ class Plugin_Translation_Stats {
 	 * @return string $plugin_translation_stats    Plugin translation stats
 	 */
 	function ts_render_plugin_stats( $project_slug ) {
-		
+
 		$locale = get_user_locale();
 		$variant = 'default'; // Todo: Add support for non-default variant
 		// Depends of GlotPress library
@@ -245,7 +245,7 @@ class Plugin_Translation_Stats {
 			$dev_readme = $this->ts_render_stats_bar( $locale, $project_slug, __( 'Development Readme', 'translation-stats' ), 'dev-readme' );
 			$stable = $this->ts_render_stats_bar( $locale, $project_slug, __( 'Stable', 'translation-stats' ), 'stable' );
 			$stable_readme = $this->ts_render_stats_bar( $locale, $project_slug, __( 'Stable Readme', 'translation-stats' ), 'stable-readme' );
-			
+
 			echo $dev['stats'];
 			echo $dev_readme['stats'];
 			echo $stable['stats'];
@@ -253,7 +253,7 @@ class Plugin_Translation_Stats {
 			?>
 		</div>
 		<?php
-		
+
 		$i18n_errors = $dev['error'] + $dev_readme['error'] + $stable['error'] + $stable_readme['error'];
 		if ( ! empty ( $i18n_errors ) ) { ?>
 			<p>
@@ -281,7 +281,7 @@ class Plugin_Translation_Stats {
 				); ?>
 			</p>
 		<?php }
-		
+
 		$plugin_translation_stats = ob_get_clean();
 		return $plugin_translation_stats;
 	}
@@ -297,10 +297,10 @@ class Plugin_Translation_Stats {
 	 * @return string $translation_stats_bar    Plugin stats
 	 */
 	function ts_render_stats_bar( $locale, $project_slug, $subproject, $subproject_slug ) {
-		
+
 		$variant = 'default'; // Todo: Add support for non-default variant
 		$url = 'https://translate.wordpress.org/projects/wp-plugins/' . $project_slug . '/' . $subproject_slug . '/' . $locale->slug . '/' . $variant;
-		
+
 		// Get plugin subproject translation stats
 		$translation_stats = $this->ts_plugin_subproject_stats( $locale->slug, $variant, $project_slug, $subproject_slug );
 
@@ -364,7 +364,7 @@ class Plugin_Translation_Stats {
 
 		// Check subproject transients
 		$translation_stats = get_transient( 'translation_stats_plugin_' . $project_slug . '_' . $subproject_slug . '_' . $locale );
-		
+
 		if ( $translation_stats === false ) {
 
 			$json = wp_remote_get( $this->ts_translate_api_url() . $project_slug . '/' . $subproject_slug );
@@ -396,7 +396,7 @@ class Plugin_Translation_Stats {
 
 			set_transient( 'translation_stats_plugin_' . $project_slug . '_' . $subproject_slug . '_' . $locale, $translation_stats, DAY_IN_SECONDS );
 		}
-		
+
 		return $translation_stats;
 	}
 
