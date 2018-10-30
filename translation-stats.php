@@ -232,14 +232,7 @@ class Plugin_Translation_Stats {
 			echo sprintf( __( 'Translation for %s', 'translation-stats' ), $locale_link );
 			?>
 		</div>
-		<?php // To remove
-		$test = true;
-		$square = 128;
-		?>
-		<div class="translation-stats-wrap notice-warning notice-alt" <?php if( $test ) {
-			echo 'style="height: ' . $square . 'px; width: ' . $square . 'px;"';
-		}?>
-			>
+		<div class="translation-stats-wrap notice-warning notice-alt">
 			<?php
 			$dev = $this->ts_render_stats_bar( $locale, $project_slug, __( 'Development', 'translation-stats' ), 'dev' );
 			$dev_readme = $this->ts_render_stats_bar( $locale, $project_slug, __( 'Development Readme', 'translation-stats' ), 'dev-readme' );
