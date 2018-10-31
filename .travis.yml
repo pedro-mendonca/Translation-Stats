@@ -1,5 +1,11 @@
 language: php
+
 php:
-  - '5.6'
-  - '7.1'
-  - hhvm # on Trusty only
+  - 5.6
+  - 7.0
+  - 7.1
+  - 7.2
+
+env:
+  - WP_VERSION=latest WP_MULTISITE=0
+- WP_VERSION=latest WP_MULTISITE=1
