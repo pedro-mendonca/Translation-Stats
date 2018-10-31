@@ -1,4 +1,13 @@
-# Translation Stats
+# Translation Stats #
+**Contributors:** pedromendonca  
+**Donate link:** http://paypal.me/pedromendonca/  
+**Tags:** glotpress, translation, statistics, i18n, l10n, dark mode  
+**Requires at least:** 4.9  
+**Tested up to:** 4.9  
+**Stable tag:** 0.6.0  
+**License:** GPLv2 or later  
+**License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
+
 WordPress plugin to show plugins translation statistics from WordPress.org on the dashboard.
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/bcd1b44a1d6542e2b75b7b479ce56804)](https://www.codacy.com/app/pedro-mendonca/translation-stats?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=pedro-mendonca/translation-stats&amp;utm_campaign=Badge_Grade)
