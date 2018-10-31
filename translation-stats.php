@@ -104,12 +104,14 @@ class Plugin_Translation_Stats {
 
 
 	/**
+	 * Get data from translate.WordPress.org API
 	 *
-	 * @return string  Returns the translate.WordPress.org API URL
+	 * @param string $url       URL to get the data from
+	 * @return string $api_get  Returns the response from translate.WordPress.org API URL
 	 */
-	function ts_translate_api_url() {
-		$api_url = 'https://translate.wordpress.org/api/projects/wp-plugins/';
-		return $api_url;
+	function ts_translate_api_get( $url ) {
+		$api_get = wp_remote_get( 'https://translate.wordpress.org/api/projects/wp-plugins/' . $url );
+		return $api_get;
 	}
 
 
@@ -176,7 +178,7 @@ class Plugin_Translation_Stats {
 		// Check project transients
 		$on_wporg = get_transient( 'translation_stats_plugin_' . $project_slug );
 		if ( $on_wporg === false ) {
-			$json = wp_remote_get( $this->ts_translate_api_url() . $project_slug );
+			$json = $this->ts_translate_api_get( $project_slug );
 			if ( is_wp_error( $json ) || wp_remote_retrieve_response_code( $json ) !== 200 ) {
 				$on_wporg = false;
 			} else {
@@ -199,7 +201,7 @@ class Plugin_Translation_Stats {
 		// Check subproject transients
 		$on_wporg = get_transient( 'translation_stats_plugin_' . $project_slug . '_' . $subproject_slug );
 		if ( $on_wporg === false ) {
-			$json = wp_remote_get( $this->ts_translate_api_url() . $project_slug . '/' . $subproject_slug );
+			$json = $this->ts_translate_api_get( $project_slug . '/' . $subproject_slug );
 			if ( is_wp_error( $json ) || wp_remote_retrieve_response_code( $json ) !== 200 ) {
 				$on_wporg = false;
 			} else {
@@ -362,7 +364,7 @@ class Plugin_Translation_Stats {
 
 		if ( $translation_stats === false ) {
 
-			$json = wp_remote_get( $this->ts_translate_api_url() . $project_slug . '/' . $subproject_slug );
+			$json = $this->ts_translate_api_get( $project_slug . '/' . $subproject_slug );
 			if ( is_wp_error( $json ) || wp_remote_retrieve_response_code( $json ) !== 200 ) {
 
 				// Subproject not found (Error 404) - Plugin is not properly prepared for localization
