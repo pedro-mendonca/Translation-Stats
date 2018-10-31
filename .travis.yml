@@ -16,3 +16,20 @@ php:
 env:
   - WP_VERSION=latest WP_MULTISITE=0
   - WP_VERSION=latest WP_MULTISITE=1
+
+matrix:
+  include:
+  - php: 7.2
+    env: WP_TRAVISCI=travis:phpvalidate
+  - php: 7.2
+    env: WP_TRAVISCI=travis:codecoverage
+  - php: 7.2
+    env: WP_TRAVISCI=travis:eslint
+  - php: 7.1
+    env: WP_TRAVISCI=travis:phpunit
+  - php: 7.0
+    env: WP_TRAVISCI=travis:phpunit
+  - php: 5.6
+    env: WP_TRAVISCI=travis:phpunit
+
+fast_finish: true
