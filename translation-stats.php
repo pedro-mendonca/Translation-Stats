@@ -6,7 +6,7 @@ Description: Show your plugins translation statistics from WordPress.org on your
 Author:      Pedro Mendonça
 Author URI:  https://pedromendonca.pt
 GitHub Plugin URI: https://github.com/pedro-mendonca/translation-stats
-Version:     0.6
+Version:     0.6.1
 Text Domain: translation-stats
 Domain Path: /languages
 Tags: glotpress, translation, statistics, i18n, l10n, dark mode
