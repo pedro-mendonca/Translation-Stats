@@ -1,12 +1,12 @@
 # Translation Stats #
 **Contributors:** pedromendonca  
-**Donate link:** http://paypal.me/pedromendonca/  
+**Donate link:** [paypal.me/pedromendonca](http://paypal.me/pedromendonca/)  
 **Tags:** glotpress, translation, statistics, i18n, l10n, dark mode  
 **Requires at least:** 4.9  
 **Tested up to:** 4.9  
 **Stable tag:** 0.6.0  
 **License:** GPLv2 or later  
-**License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
+**License URI:** [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html)  
 
 WordPress plugin to show plugins translation statistics from WordPress.org on the dashboard.
 
