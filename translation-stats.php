@@ -244,10 +244,10 @@ class Plugin_Translation_Stats {
 			$stable = $this->ts_render_stats_bar( $locale, $project_slug, esc_html__( 'Stable', 'translation-stats' ), 'stable' );
 			$stable_readme = $this->ts_render_stats_bar( $locale, $project_slug, esc_html__( 'Stable Readme', 'translation-stats' ), 'stable-readme' );
 
-			echo esc_html( $dev['stats'] );
-			echo esc_html( $dev_readme['stats'] );
-			echo esc_html( $stable['stats'] );
-			echo esc_html( $stable_readme['stats'] );
+			echo $dev['stats'];
+			echo $dev_readme['stats'];
+			echo $stable['stats'];
+			echo $stable_readme['stats'];
 			?>
 		</div>
 		<?php
