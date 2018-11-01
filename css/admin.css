@@ -45,6 +45,56 @@
   text-shadow: 0 0 6px rgba(255, 255, 225, 0.5);
 }
 
+/* Stats bar colors from GlotPress */
+.translation-stats-wrap a div.percent100 {
+  background-color: #46b450;
+}
+
+.translation-stats-wrap a div.percent90 {
+  background-color: #6bc373;
+}
+
+.translation-stats-wrap a div.percent80 {
+  background-color: #90d296;
+}
+
+.translation-stats-wrap a div.percent70 {
+  background-color: #b5e1b9;
+}
+
+.translation-stats-wrap a div.percent60 {
+  background-color: #c7e8ca;
+}
+
+.translation-stats-wrap a div.percent50 {
+  background-color: #ffe399;
+}
+
+.translation-stats-wrap a div.percent40 {
+  background-color: #fbc5a9;
+}
+
+.translation-stats-wrap a div.percent30 {
+  background-color: #f1adad;
+}
+
+.translation-stats-wrap a div.percent20 {
+  background-color: #ea8484;
+}
+
+.translation-stats-wrap a div.percent10 {
+  background-color: #e35b5b;
+}
+
+.translation-stats-wrap a div.percent0 {
+  background-color: #dc3232;
+}
+
+.translation-stats-wrap .disabled {
+  background-color: #ddd;
+  color: #8f98a1;
+}
+
 /* Configuration of easeOutCirc */
 .translation-stats-wrap a,
 .translation-stats-wrap a:hover,
@@ -113,54 +163,4 @@
   display: block;
   padding: 5px 10px;
   /* background-color: cyan; */
-}
-
-/* Stats bar colors from GlotPress */
-.translation-stats-wrap a div.percent100 {
-  background-color: #46b450;
-}
-
-.translation-stats-wrap a div.percent90 {
-  background-color: #6bc373;
-}
-
-.translation-stats-wrap a div.percent80 {
-  background-color: #90d296;
-}
-
-.translation-stats-wrap a div.percent70 {
-  background-color: #b5e1b9;
-}
-
-.translation-stats-wrap a div.percent60 {
-  background-color: #c7e8ca;
-}
-
-.translation-stats-wrap a div.percent50 {
-  background-color: #ffe399;
-}
-
-.translation-stats-wrap a div.percent40 {
-  background-color: #fbc5a9;
-}
-
-.translation-stats-wrap a div.percent30 {
-  background-color: #f1adad;
-}
-
-.translation-stats-wrap a div.percent20 {
-  background-color: #ea8484;
-}
-
-.translation-stats-wrap a div.percent10 {
-  background-color: #e35b5b;
-}
-
-.translation-stats-wrap a div.percent0 {
-  background-color: #dc3232;
-}
-
-.translation-stats-wrap .disabled {
-  background-color: #ddd;
-  color: #8f98a1;
 }
