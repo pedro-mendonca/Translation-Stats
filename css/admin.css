@@ -1,11 +1,3 @@
-/* No wrap */
-#translation-stats,
-.translation-stats-title,
-.translation-stats-wrap .subproject,
-.translation-stats-wrap .disabled .subproject {
-  white-space: nowrap;
-}
-
 /* Border radius */
 .translation-stats-wrap a,
 .translation-stats-wrap a div,
@@ -13,6 +5,14 @@
 .translation-stats-wrap .disabled,
 .translation-stats-wrap .disabled .subproject {
   border-radius: 3px;
+}
+
+/* No wrap */
+#translation-stats,
+.translation-stats-title,
+.translation-stats-wrap .subproject,
+.translation-stats-wrap .disabled .subproject {
+  white-space: nowrap;
 }
 
 /* Stats title */
@@ -112,14 +112,14 @@
 .translation-stats-wrap a:hover div .subproject,
 .translation-stats-wrap a:focus div .subproject {
 
-	/* easeOutCirc */
+  /* easeOutCirc */
   -webkit-transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
   -moz-transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
   -o-transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
   transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1);
 
   /* easeOutCirc */
-	-webkit-transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
+  -webkit-transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
   -moz-transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
   -o-transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
   transition-timing-function: cubic-bezier(0.075, 0.82, 0.165, 1);
@@ -162,5 +162,6 @@
 .translation-stats-wrap .disabled .subproject {
   display: block;
   padding: 5px 10px;
+
   /* background-color: cyan; */
 }
