@@ -15,7 +15,6 @@
 
 WordPress plugin to show plugins translation statistics from WordPress.org on the dashboard.
 
-
 ## Description ##
 
 The plugins adds a "Translation Stats" column to the plugin list screen in WordPress admin. The translation data is fetched from translate.wordpress.org, if the plugin exists in the directory and if it's prepared for localization.
