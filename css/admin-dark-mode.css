@@ -1,16 +1,16 @@
 /* Status bar overlay color */
 .translation-stats-wrap a div .subproject {
-  background-color: rgba(0,0,0,0);
+  background-color: rgba(0, 0, 0, 0);
 }
 
 /* Status bar overlay hover/focus color */
 .translation-stats-wrap a:hover div .subproject,
 .translation-stats-wrap a:focus div .subproject {
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 /* Stats bar generic text color */
 .translation-stats-wrap a div {
-  color: #ffffff;
-  text-shadow: 0px 0px 6px rgba(0, 0, 0, 0.5);
+  color: #fff;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
 }
