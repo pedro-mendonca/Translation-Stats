@@ -126,7 +126,7 @@ class Plugin_Translation_Stats {
 	function ts_error_message( $error_message ) {
 		ob_start(); ?>
 		<div class="translation-stats-error">
-			<span class="error-message"><?php echo esc_html__( 'Error:', 'translation-stats' ); ?></span> <span><?php echo $error_message; ?></span>
+			<span class="error-message"><?php echo esc_html__( 'Error:', 'translation-stats' ); ?></span> <span><?php echo esc_html( $error_message ); ?></span>
 		</div>
 		<?php
 		$plugin_error = ob_get_clean();
@@ -156,7 +156,7 @@ class Plugin_Translation_Stats {
 
 				// Check if plugin is on WordPress.org
 				if ( empty( $this->ts_plugin_on_wporg( $plugin_file ) ) ) {
-					echo $this->ts_error_message( esc_html__( 'Plugin not found on WordPress.org', 'translation-stats' ) ); // Add alternative GlotPress API
+					echo $this->ts_error_message( esc_html__( 'Plugin not found on WordPress.org', 'translation-stats' ) ); // Todo: Add alternative GlotPress API
 				} else {
 					// Check if translation project is on WordPress.org
 					if ( $this->ts_plugin_project_on_translate_wporg( $project_slug ) != true ) {
@@ -244,10 +244,10 @@ class Plugin_Translation_Stats {
 			$stable = $this->ts_render_stats_bar( $locale, $project_slug, esc_html__( 'Stable', 'translation-stats' ), 'stable' );
 			$stable_readme = $this->ts_render_stats_bar( $locale, $project_slug, esc_html__( 'Stable Readme', 'translation-stats' ), 'stable-readme' );
 
-			echo $dev['stats'];
-			echo $dev_readme['stats'];
-			echo $stable['stats'];
-			echo $stable_readme['stats'];
+			echo esc_html( $dev['stats'] );
+			echo esc_html( $dev_readme['stats'] );
+			echo esc_html( $stable['stats'] );
+			echo esc_html( $stable_readme['stats'] );
 			?>
 		</div>
 		<?php
@@ -307,8 +307,8 @@ class Plugin_Translation_Stats {
 
 			$i18n_error = true;
 			ob_start(); ?>
-			<div class="disabled <?php echo $subproject_slug; ?>">
-				<span class="subproject"><?php echo sprintf( /* translators: %1$s Name of subproject. %2$s Error message. */ __( '%1$s: %2$s', 'translation-stats' ), $subproject, '<strong>' . esc_html__( 'Not found', 'translation-stats' ) . '</strong>' ); ?></span>
+			<div class="disabled <?php echo esc_html( $subproject_slug ); ?>">
+				<span class="subproject"><?php echo sprintf( /* translators: %1$s Name of subproject. %2$s Error message. */ esc_html__( '%1$s: %2$s', 'translation-stats' ), $subproject, '<strong>' . esc_html__( 'Not found', 'translation-stats' ) . '</strong>' ); ?></span>
 			</div>
 			<?php $translation_stats_bar = ob_get_clean();
 
@@ -334,10 +334,10 @@ class Plugin_Translation_Stats {
 			$percent_translated = $translation_stats->percent_translated;
 			$i18n_error = false;
 			ob_start(); ?>
-			<a target="_blank" href="<?php echo $url; ?>">
-				<div class="<?php echo 'percent' . 10 * floor ( $percent_translated/10 ) . ' ' . $subproject_slug; ?>" style="width: <?php echo $percent_translated; ?>%;">
+			<a target="_blank" href="<?php echo esc_url( $url ); ?>">
+				<div class="<?php echo 'percent' . 10 * floor ( $percent_translated/10 ) . ' ' . $subproject_slug; ?>" style="width: <?php echo esc_html( $percent_translated ); ?>%;">
 					<div class="subproject">
-						<span class="percentage"><?php echo $percent_translated; ?>%</span><span class="subproject-name"><?php echo $subproject; ?></span>
+						<span class="percentage"><?php echo esc_html( $percent_translated ); ?>%</span><span class="subproject-name"><?php echo esc_html( $subproject ); ?></span>
 					</div>
 				</div>
 			</a>
