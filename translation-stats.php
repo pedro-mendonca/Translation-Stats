@@ -1,15 +1,17 @@
 <?php
 /*
-Plugin Name: Translation Stats
-Plugin URI:  https://github.com/pedro-mendonca/translation-stats
-Description: Show your plugins translation statistics from WordPress.org on your dashboard.
-Author:      Pedro Mendonça
-Author URI:  https://pedromendonca.pt
+Plugin Name:       Translation Stats
+Plugin URI:        https://github.com/pedro-mendonca/translation-stats
 GitHub Plugin URI: https://github.com/pedro-mendonca/translation-stats
-Version:     0.6.1
-Text Domain: translation-stats
-Domain Path: /languages
-Tags: glotpress, translation, statistics, i18n, l10n, dark mode
+Description:       Show your plugins translation statistics from WordPress.org on your dashboard.
+Version:           0.6.2
+Author:            Pedro Mendonça
+Author URI:        https://pedromendonca.pt
+License:           GPL2
+License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain:       translation-stats
+Domain Path:       /languages
+Tags:              glotpress, translation, statistics, i18n, l10n, dark mode
 */
 
 
@@ -35,7 +37,7 @@ class Plugin_Translation_Stats {
 		}
 
 		// Show plugin translation stats content in column
-		add_action( 'manage_plugins_custom_column' , array( $this, 'ts_render_plugin_stats_column' ), 10, 3 );
+		add_action( 'manage_plugins_custom_column', array( $this, 'ts_render_plugin_stats_column' ), 10, 3 );
 	}
 
 
@@ -124,7 +126,7 @@ class Plugin_Translation_Stats {
 	function ts_error_message( $error_message ) {
 		ob_start(); ?>
 		<div class="translation-stats-error">
-			<span class="error-message"><?php echo __( 'Error:', 'translation-stats' ); ?></span> <span><?php echo $error_message; ?></span>
+			<span class="error-message"><?php echo esc_html__( 'Error:', 'translation-stats' ); ?></span> <span><?php echo $error_message; ?></span>
 		</div>
 		<?php
 		$plugin_error = ob_get_clean();
@@ -154,11 +156,11 @@ class Plugin_Translation_Stats {
 
 				// Check if plugin is on WordPress.org
 				if ( empty( $this->ts_plugin_on_wporg( $plugin_file ) ) ) {
-					echo $this->ts_error_message( __( 'Plugin not found on WordPress.org', 'translation-stats' ) ); // Add alternative GlotPress API
+					echo $this->ts_error_message( esc_html__( 'Plugin not found on WordPress.org', 'translation-stats' ) ); // Add alternative GlotPress API
 				} else {
 					// Check if translation project is on WordPress.org
 					if ( $this->ts_plugin_project_on_translate_wporg( $project_slug ) != true ) {
-						echo $this->ts_error_message( __( 'Translation project not found on WordPress.org', 'translation-stats' ) );
+						echo $this->ts_error_message( esc_html__( 'Translation project not found on WordPress.org', 'translation-stats' ) );
 					} else {
 						echo $this->ts_render_plugin_stats( $project_slug );
 					}
@@ -237,10 +239,10 @@ class Plugin_Translation_Stats {
 		</div>
 		<div class="translation-stats-wrap notice-warning notice-alt">
 			<?php
-			$dev = $this->ts_render_stats_bar( $locale, $project_slug, __( 'Development', 'translation-stats' ), 'dev' );
-			$dev_readme = $this->ts_render_stats_bar( $locale, $project_slug, __( 'Development Readme', 'translation-stats' ), 'dev-readme' );
-			$stable = $this->ts_render_stats_bar( $locale, $project_slug, __( 'Stable', 'translation-stats' ), 'stable' );
-			$stable_readme = $this->ts_render_stats_bar( $locale, $project_slug, __( 'Stable Readme', 'translation-stats' ), 'stable-readme' );
+			$dev = $this->ts_render_stats_bar( $locale, $project_slug, esc_html__( 'Development', 'translation-stats' ), 'dev' );
+			$dev_readme = $this->ts_render_stats_bar( $locale, $project_slug, esc_html__( 'Development Readme', 'translation-stats' ), 'dev-readme' );
+			$stable = $this->ts_render_stats_bar( $locale, $project_slug, esc_html__( 'Stable', 'translation-stats' ), 'stable' );
+			$stable_readme = $this->ts_render_stats_bar( $locale, $project_slug, esc_html__( 'Stable Readme', 'translation-stats' ), 'stable-readme' );
 
 			echo $dev['stats'];
 			echo $dev_readme['stats'];
@@ -264,7 +266,7 @@ class Plugin_Translation_Stats {
 				<?php echo sprintf(
 					( '%1$s%2$s%3$s' ),
 					'<a href="https://make.wordpress.org/meta/handbook/documentation/translations/#this-plugin-is-not-properly-prepared-for-localization-%e2%80%93-help" target="_blank">',
-					__( 'View detailed logs on Slack', 'translation-stats' ),
+					esc_html__( 'View detailed logs on Slack', 'translation-stats' ),
 					'</a>'
 				); ?>
 			</p>
@@ -306,7 +308,7 @@ class Plugin_Translation_Stats {
 			$i18n_error = true;
 			ob_start(); ?>
 			<div class="disabled <?php echo $subproject_slug; ?>">
-				<span class="subproject"><?php echo sprintf( /* translators: %1$s Name of subproject. %2$s Error message. */ __( '%1$s: %2$s', 'translation-stats' ), $subproject, '<strong>' . __( 'Not found', 'translation-stats' ) . '</strong>' ); ?></span>
+				<span class="subproject"><?php echo sprintf( /* translators: %1$s Name of subproject. %2$s Error message. */ __( '%1$s: %2$s', 'translation-stats' ), $subproject, '<strong>' . esc_html__( 'Not found', 'translation-stats' ) . '</strong>' ); ?></span>
 			</div>
 			<?php $translation_stats_bar = ob_get_clean();
 
