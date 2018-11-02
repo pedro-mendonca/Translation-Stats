@@ -160,7 +160,7 @@ class Plugin_Translation_Stats {
 					if ( $this->ts_plugin_project_on_translate_wporg( $project_slug ) != true ) {
 						$this->ts_error_message( esc_html__( 'Translation project not found on WordPress.org', 'translation-stats' ) );
 					} else {
-						echo wp_kses_post( $this->ts_render_plugin_stats( $project_slug ) );
+						wp_kses_post( $this->ts_render_plugin_stats( $project_slug ) );
 					}
 				}
 			}
