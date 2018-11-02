@@ -1,3 +1,11 @@
+/* No wrap */
+#translation-stats,
+.translation-stats-title,
+.translation-stats-wrap .subproject,
+.translation-stats-wrap .disabled .subproject {
+  white-space: nowrap;
+}
+
 /* Border radius */
 .translation-stats-wrap a,
 .translation-stats-wrap a div,
@@ -5,14 +13,6 @@
 .translation-stats-wrap .disabled,
 .translation-stats-wrap .disabled .subproject {
   border-radius: 3px;
-}
-
-/* No wrap */
-#translation-stats,
-.translation-stats-title,
-.translation-stats-wrap .subproject,
-.translation-stats-wrap .disabled .subproject {
-  white-space: nowrap;
 }
 
 /* Stats title */
@@ -44,7 +44,6 @@
   color: #000;
   text-shadow: 0 0 6px rgba(255, 255, 225, 0.5);
 }
-
 
 /* Stats bar colors from GlotPress */
 .translation-stats-wrap a div.percent100 {
@@ -95,7 +94,6 @@
   background-color: #ddd;
   color: #8f98a1;
 }
-
 
 /* Configuration of easeOutCirc */
 .translation-stats-wrap a,
