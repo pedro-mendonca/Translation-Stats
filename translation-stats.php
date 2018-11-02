@@ -130,7 +130,7 @@ class Plugin_Translation_Stats {
 		</div>
 		<?php
 		$plugin_error = ob_get_clean();
-		return $plugin_error;
+		echo wp_kses_post( $plugin_error );
 	}
 
 
@@ -139,12 +139,10 @@ class Plugin_Translation_Stats {
 	 *
 	 * @param string  $column_name    Column Slug ( e.g. 'translation-stats' )
 	 * @param string  $plugin_file    Plugin ID ( e.g. 'slug/plugin-name.php' )
-	 * @param string  $plugin_data    Plugin data from WP.org
 	 * @return string echo            Show plugin stats if the plugin is in WP.org and if Locale isn´t 'en_US'
 	 */
-	function ts_render_plugin_stats_column( $column_name, $plugin_file, $plugin_data ) {
+	function ts_render_plugin_stats_column( $column_name, $plugin_file ) {
 
-		// if ( 'translation-stats' == $column_name && 'My Plugin Name' == $plugin_data['Name'] ) :
 		// Add Translation Stats if plugin is on wordpress.org and if user Locale isn't 'en_US'
 		// Check if is in column 'translation-stats'
 		if ( $column_name == 'translation-stats' ) {
@@ -156,13 +154,13 @@ class Plugin_Translation_Stats {
 
 				// Check if plugin is on WordPress.org
 				if ( empty( $this->ts_plugin_on_wporg( $plugin_file ) ) ) {
-					echo $this->ts_error_message( esc_html__( 'Plugin not found on WordPress.org', 'translation-stats' ) ); // Todo: Add alternative GlotPress API
+					$this->ts_error_message( esc_html__( 'Plugin not found on WordPress.org', 'translation-stats' ) ); // Todo: Add alternative GlotPress API
 				} else {
 					// Check if translation project is on WordPress.org
 					if ( $this->ts_plugin_project_on_translate_wporg( $project_slug ) != true ) {
-						echo $this->ts_error_message( esc_html__( 'Translation project not found on WordPress.org', 'translation-stats' ) );
+						$this->ts_error_message( esc_html__( 'Translation project not found on WordPress.org', 'translation-stats' ) );
 					} else {
-						echo $this->ts_render_plugin_stats( $project_slug );
+						echo wp_kses_post( $this->ts_render_plugin_stats( $project_slug ) );
 					}
 				}
 			}
@@ -234,7 +232,7 @@ class Plugin_Translation_Stats {
 			$url = 'https://translate.wordpress.org/locale/' . $locale->slug . '/' . $variant . '/wp-plugins/' . $project_slug;
 			$locale_link = '<a href="' . $url . '" _target="blank">' . $locale->native_name . '</a>';
 			/* translators: %s Language native name. */
-			echo sprintf( __( 'Translation for %s', 'translation-stats' ), $locale_link );
+			echo sprintf( wp_kses_post( __( 'Translation for %s', 'translation-stats' ) ), $locale_link );
 			?>
 		</div>
 		<div class="translation-stats-wrap notice-warning notice-alt">
@@ -244,10 +242,10 @@ class Plugin_Translation_Stats {
 			$stable = $this->ts_render_stats_bar( $locale, $project_slug, esc_html__( 'Stable', 'translation-stats' ), 'stable' );
 			$stable_readme = $this->ts_render_stats_bar( $locale, $project_slug, esc_html__( 'Stable Readme', 'translation-stats' ), 'stable-readme' );
 
-			echo $dev['stats'];
-			echo $dev_readme['stats'];
-			echo $stable['stats'];
-			echo $stable_readme['stats'];
+			echo wp_kses_post( $dev['stats'] );
+			echo wp_kses_post( $dev_readme['stats'] );
+			echo wp_kses_post( $stable['stats'] );
+			echo wp_kses_post( $stable_readme['stats'] );
 			?>
 		</div>
 		<?php
@@ -257,7 +255,7 @@ class Plugin_Translation_Stats {
 			<p>
 				<?php echo sprintf(
 					/* translators: %1$s Opening link tag <a href="[link]">. %2$s Closing link tag </a>. */
-					__( 'This plugin is not %1$sproperly prepared for localization%2$s.', 'translation-stats' ),
+					wp_kses_post( __( 'This plugin is not %1$sproperly prepared for localization%2$s.', 'translation-stats' ) ),
 					'<a href="https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/" target="_blank">',
 					'</a>'
 				); ?>
@@ -273,7 +271,7 @@ class Plugin_Translation_Stats {
 			<p>
 				<?php echo sprintf(
 					/* translators: %1$s Opening link tag <a href="[link]">. %2$s Closing link tag </a>. */
-					__( 'If you would like to translate this plugin, %1$splease contact the author%2$s.', 'translation-stats' ),
+					wp_kses_post( __( 'If you would like to translate this plugin, %1$splease contact the author%2$s.', 'translation-stats' ) ),
 					'<a href="https://wordpress.org/support/plugin/' . $project_slug . '" target="_blank">',
 					'</a>'
 				); ?>
@@ -281,7 +279,7 @@ class Plugin_Translation_Stats {
 		<?php }
 
 		$plugin_translation_stats = ob_get_clean();
-		return $plugin_translation_stats;
+		echo wp_kses_post( $plugin_translation_stats );
 	}
 
 
