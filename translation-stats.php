@@ -217,8 +217,8 @@ class Plugin_Translation_Stats {
 	/**
 	 * Render plugin stats for current locale.
 	 *
-	 * @param string  $project_slug                Plugin Slug
-	 * @return string $plugin_translation_stats    Plugin translation stats
+	 * @param string  $project_slug  Plugin Slug
+	 * @return string $plugin_stats  Plugin translation stats
 	 */
 	function ts_render_plugin_stats( $project_slug ) {
 
@@ -278,8 +278,8 @@ class Plugin_Translation_Stats {
 			</p>
 		<?php }
 
-		$plugin_translation_stats = ob_get_clean();
-		echo wp_kses_post( $plugin_translation_stats );
+		$plugin_stats = ob_get_clean();
+		echo wp_kses_post( $plugin_stats );
 	}
 
 
