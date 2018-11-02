@@ -118,19 +118,26 @@ class Plugin_Translation_Stats {
 
 
 	/**
-	 * Display error message.
+	 * Display notice message.
 	 *
-	 * @param string $message  Error message to display
-	 * @return string          Returns formated error message
+	 * Usage of notice types:
+	 * notice-error – error message displayed with a red border
+ 	 * notice-warning – warning message displayed with a yellow border
+ 	 * notice-success – success message displayed with a green border
+ 	 * notice-info - info message displayed with a blue border
+	 *
+	 * @param string $notice_message   Message to display
+	 * @param string $notice_type      WordPress core notice types ( 'error', 'warning', 'success' and 'info' )
+	 * @return string $display_notice  Returns formated notice message
 	 */
-	function ts_error_message( $error_message ) {
+	function ts_notice_message( $notice_message, $notice_type ) {
 		ob_start(); ?>
-		<div class="translation-stats-error">
-			<span class="error-message"><?php echo esc_html__( 'Error:', 'translation-stats' ); ?></span> <span><?php echo esc_html( $error_message ); ?></span>
+		<div class="notice notice-alt inline notice-<?php echo esc_attr( $notice_type ); ?>">
+			<p class="aria-label"><?php echo esc_html( $notice_message ); ?></p>
 		</div>
 		<?php
-		$plugin_error = ob_get_clean();
-		echo wp_kses_post( $plugin_error );
+		$display_notice = ob_get_clean();
+		echo wp_kses_post( $display_notice );
 	}
 
 
@@ -154,11 +161,11 @@ class Plugin_Translation_Stats {
 
 				// Check if plugin is on WordPress.org
 				if ( empty( $this->ts_plugin_on_wporg( $plugin_file ) ) ) {
-					$this->ts_error_message( esc_html__( 'Plugin not found on WordPress.org', 'translation-stats' ) ); // Todo: Add alternative GlotPress API
+					$this->ts_notice_message( esc_html__( 'Plugin not found on WordPress.org', 'translation-stats' ), 'error' ); // Todo: Add alternative GlotPress API
 				} else {
 					// Check if translation project is on WordPress.org
 					if ( $this->ts_plugin_project_on_translate_wporg( $project_slug ) != true ) {
-						$this->ts_error_message( esc_html__( 'Translation project not found on WordPress.org', 'translation-stats' ) );
+						$this->ts_notice_message( esc_html__( 'Translation project not found on WordPress.org', 'translation-stats' ), 'warning' );
 					} else {
 						$this->ts_render_plugin_stats( $project_slug );
 					}
