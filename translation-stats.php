@@ -160,7 +160,7 @@ class Plugin_Translation_Stats {
 					if ( $this->ts_plugin_project_on_translate_wporg( $project_slug ) != true ) {
 						$this->ts_error_message( esc_html__( 'Translation project not found on WordPress.org', 'translation-stats' ) );
 					} else {
-						wp_kses_post( $this->ts_render_plugin_stats( $project_slug ) );
+						$this->ts_render_plugin_stats( $project_slug );
 					}
 				}
 			}
@@ -306,7 +306,7 @@ class Plugin_Translation_Stats {
 			$i18n_error = true;
 			ob_start(); ?>
 			<div class="disabled <?php echo esc_html( $subproject_slug ); ?>">
-				<span class="subproject"><?php echo sprintf( /* translators: %1$s Name of subproject. %2$s Error message. */ esc_html__( '%1$s: %2$s', 'translation-stats' ), $subproject, '<strong>' . esc_html__( 'Not found', 'translation-stats' ) . '</strong>' ); ?></span>
+				<span class="subproject"><?php echo wp_kses_post ( sprintf( /* translators: %1$s Name of subproject. %2$s Error message. */ __( '%1$s: %2$s', 'translation-stats' ), $subproject, '<strong>' . __( 'Not found', 'translation-stats' ) . '</strong>' ) ); ?></span>
 			</div>
 			<?php $translation_stats_bar = ob_get_clean();
 
@@ -333,7 +333,7 @@ class Plugin_Translation_Stats {
 			$i18n_error = false;
 			ob_start(); ?>
 			<a target="_blank" href="<?php echo esc_url( $url ); ?>">
-				<div class="<?php echo 'percent' . 10 * floor ( $percent_translated/10 ) . ' ' . $subproject_slug; ?>" style="width: <?php echo esc_html( $percent_translated ); ?>%;">
+				<div class="<?php echo esc_html( 'percent' . 10 * floor ( $percent_translated/10 ) . ' ' . $subproject_slug ); ?>" style="width: <?php echo esc_html( $percent_translated ); ?>%;">
 					<div class="subproject">
 						<span class="percentage"><?php echo esc_html( $percent_translated ); ?>%</span><span class="subproject-name"><?php echo esc_html( $subproject ); ?></span>
 					</div>
