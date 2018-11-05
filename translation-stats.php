@@ -133,7 +133,7 @@ class Plugin_Translation_Stats {
 	function ts_notice_message( $notice_message, $notice_type ) {
 		ob_start(); ?>
 		<div class="notice notice-alt inline notice-<?php echo esc_attr( $notice_type ); ?>">
-			<p class="aria-label"><?php echo esc_html( $notice_message ); ?></p>
+			<p class="aria-label"><?php echo wp_kses_post( $notice_message ); ?></p>
 		</div>
 		<?php
 		$display_notice = ob_get_clean();
@@ -258,32 +258,35 @@ class Plugin_Translation_Stats {
 		<?php
 
 		$i18n_errors = $dev['error'] + $dev_readme['error'] + $stable['error'] + $stable_readme['error'];
-		if ( ! empty ( $i18n_errors ) ) { ?>
-			<p>
-				<?php echo sprintf(
+		if ( ! empty ( $i18n_errors ) ) {
+			$this->ts_notice_message(
+				sprintf(
 					/* translators: %1$s Opening link tag <a href="[link]">. %2$s Closing link tag </a>. */
 					wp_kses_post( __( 'This plugin is not %1$sproperly prepared for localization%2$s.', 'translation-stats' ) ),
 					'<a href="https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/" target="_blank">',
 					'</a>'
-				); ?>
-			</p>
-			<p>
-				<?php echo sprintf(
+				),
+				'warning'
+			);
+			$this->ts_notice_message(
+				sprintf(
 					( '%1$s%2$s%3$s' ),
 					'<a href="https://make.wordpress.org/meta/handbook/documentation/translations/#this-plugin-is-not-properly-prepared-for-localization-%e2%80%93-help" target="_blank">',
 					esc_html__( 'View detailed logs on Slack', 'translation-stats' ),
 					'</a>'
-				); ?>
-			</p>
-			<p>
-				<?php echo sprintf(
+				),
+				'warning'
+			);
+			$this->ts_notice_message(
+				sprintf(
 					/* translators: %1$s Opening link tag <a href="[link]">. %2$s Closing link tag </a>. */
 					wp_kses_post( __( 'If you would like to translate this plugin, %1$splease contact the author%2$s.', 'translation-stats' ) ),
 					'<a href="https://wordpress.org/support/plugin/' . esc_html__( $project_slug ) . '" target="_blank">',
 					'</a>'
-				); ?>
-			</p>
-		<?php }
+				),
+				'warning'
+			);
+		}
 
 		$plugin_stats = ob_get_clean();
 		echo wp_kses_post( $plugin_stats );
