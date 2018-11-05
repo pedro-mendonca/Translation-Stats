@@ -11,7 +11,7 @@ License:           GPL2
 License URI:       https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain:       translation-stats
 Domain Path:       /languages
-Tags:              glotpress, translation, statistics, i18n, l10n, dark mode
+Tags:              glotpress, translation, statistics, internacionalization, i18n, localization, l10n, dark mode
 */
 
 

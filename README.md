@@ -5,7 +5,7 @@
 
 **Contributors:** pedromendonca  
 **Donate link:** [paypal.me/pedromendonca](http://paypal.me/pedromendonca/)  
-**Tags:** glotpress, translation, statistics, i18n, l10n, dark mode  
+**Tags:** glotpress, translation, statistics, internacionalization, i18n, localization, l10n, dark mode  
 **Requires at least:** 4.9  
 **Tested up to:** 4.9.8  
 **Requires PHP:** 5.4  

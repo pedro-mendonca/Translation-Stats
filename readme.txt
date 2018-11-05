@@ -1,7 +1,7 @@
 === Translation Stats ===
 Contributors: pedromendonca
 Donate link: [paypal.me/pedromendonca](http://paypal.me/pedromendonca/)
-Tags: translation
+Tags: glotpress, translation, statistics, internacionalization, i18n, localization, l10n, dark mode
 Requires at least: 4.9
 Tested up to: 4.9.8
 Requires PHP: 5.4
