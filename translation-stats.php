@@ -165,7 +165,7 @@ class Plugin_Translation_Stats {
 				} else {
 					// Check if translation project is on WordPress.org
 					if ( $this->ts_plugin_project_on_translate_wporg( $project_slug ) != true ) {
-						$this->ts_notice_message( esc_html__( 'Translation project not found on WordPress.org', 'translation-stats' ), 'warning' );
+						$this->ts_notice_message( esc_html__( 'Translation project not found on WordPress.org', 'translation-stats' ), 'error' );
 					} else {
 						$this->ts_render_plugin_stats( $project_slug );
 					}
