@@ -9,16 +9,53 @@ Stable tag: 0.6.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-WordPress plugin to show plugins translation statistics from WordPress.org on the dashboard.
+Show the WordPress.org translation stats in your installed plugins list.
 
 == Description ==
 
-The plugins adds a "Translation Stats" column to the plugin list screen in WordPress admin. The translation data is fetched from translate.wordpress.org, if the plugin exists in the directory and if it's prepared for localization.
+The plugins adds a "Translation Stats" column to the plugin list screen in WordPress admin.
+
+The translation stats are shown only for plugins that exist in [translate.wordpress.org](https://translate.wordpress.org/) and are [properly prepared for localization](https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/).
+
+If a plugin doesn't have complete translation stats, you'll see a notice with one of the reasons bellow:
+* Plugin not found on WordPress.org
+* Translation project not found on WordPress.org
+* The plugin is not properly prepared for localization
+
+The color scheme of the translation stats bars is exactly same used in [GlotPress](https://wordpress.org/plugins/glotpress/) for consistency with the translation experience in [translate.wp.org](https://translate.wordpress.org/).
+
+This plugin is properly prepared for localization.
 
 == Frequently Asked Questions ==
 
+= What are the plugin subprojects? =
+* **Development** - Translation of the *Development* version of the plugin
+* **Development Readme** - Readme of the *Development* version of the plugin page on [wp.org/plugins](https://wordpress.org/plugins/)
+* **Stable** - Translation of the *Stable* version of the plugin
+* **Stable Readme** - Readme of the *Stable* version of the plugin page on [wp.org/plugins](https://wordpress.org/plugins/)
+
+= How can I translate a plugin? =
+* Register and login in [wp.org](https://wordpress.org/)
+* Click on the plugin subproject stats bar you want to help to complete
+* Read the Polyglots [Translator’s Handbook](https://make.wordpress.org/polyglots/handbook/)
+* Translate according the rules of your [Locale Translation Team](https://make.wordpress.org/polyglots/teams/)
+
+= Should I translate both Stable and Development? =
+Since mid-April 2016, not only new strings but also edits are synced between dev and stable (both ways, only approved translations). When a plugin releases a new version all translations are copied from dev to stable. [Read more...](https://make.wordpress.org/polyglots/handbook/frequently-asked-questions/#should-i-translate-both-stable-and-dev)
+
+= Is this plugin compatible with Dark Mode? =
+Yes, Translation Stats includes a color scheme that works specifically with the plugin [Dark Mode](https://wordpress.org/plugins/dark-mode/).
+
+= Can I contribute to this plugin? =
+Sure! You are welcome to report any issues or add feature suggestions on the [GitHub repository](https://github.com/pedro-mendonca/translation-stats).
+
 == Changelog ==
 
-== Upgrade Notice ==
+= 0.6 =
+* Add WordPress core notices styles to error messages
+* Add assets
+* Minor code improvements
+* Readme update
 
-== Screenshots ==
+= 0.5 =
+* Initial release.
