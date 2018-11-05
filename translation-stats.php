@@ -279,7 +279,7 @@ class Plugin_Translation_Stats {
 				<?php echo sprintf(
 					/* translators: %1$s Opening link tag <a href="[link]">. %2$s Closing link tag </a>. */
 					wp_kses_post( __( 'If you would like to translate this plugin, %1$splease contact the author%2$s.', 'translation-stats' ) ),
-					'<a href="https://wordpress.org/support/plugin/' . $project_slug . '" target="_blank">',
+					'<a href="https://wordpress.org/support/plugin/' . esc_html__( $project_slug ) . '" target="_blank">',
 					'</a>'
 				); ?>
 			</p>
