@@ -49,7 +49,7 @@ class Plugin_Translation_Stats {
 		if ( 'plugins.php' != $hook ) {
 			return;
 		};
-		wp_register_style( 'translation-stats', plugins_url( 'translation-stats/css/admin.css' ), false, '0.5.0' );
+		wp_register_style( 'translation-stats', plugins_url( 'css/admin.css', __FILE__ ), false, '0.6.4' );
 		wp_enqueue_style( 'translation-stats' );
 		// Add Dark Mode style sheet.
 		// https://github.com/danieltj27/Dark-Mode/wiki/Help:-Plugin-Compatibility-Guide
@@ -61,7 +61,7 @@ class Plugin_Translation_Stats {
 	 * Register and enqueue Dark Mode style sheet.
 	 */
 	 function ts_register_plugin_styles_dark_mode() {
-		wp_register_style( 'translation-stats-dark-mode', plugins_url( 'translation-stats/css/admin-dark-mode.css' ), false, '0.5.0' );
+		wp_register_style( 'translation-stats-dark-mode', plugins_url( 'css/admin-dark-mode.css', __FILE__ ), false, '0.6.4' );
 		wp_enqueue_style( 'translation-stats-dark-mode' );
 	}
 
