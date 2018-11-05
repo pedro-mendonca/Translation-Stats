@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Translation Stats\n"
-"POT-Creation-Date: 2018-10-30 14:35+0000\n"
-"PO-Revision-Date: 2018-10-30 16:14+0000\n"
+"POT-Creation-Date: 2018-11-05 15:45+0000\n"
+"PO-Revision-Date: 2018-11-05 15:45+0000\n"
 "Last-Translator: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language-Team: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language: pt_PT\n"
@@ -20,20 +20,16 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: lib\n"
 
-#: translation-stats.php:40
+#: translation-stats.php:35
 msgctxt "Column label"
 msgid "Translation Stats"
 msgstr "Estatísticas de tradução"
 
-#: translation-stats.php:133
-msgid "Error:"
-msgstr "Erro:"
-
-#: translation-stats.php:163
+#: translation-stats.php:164
 msgid "Plugin not found on WordPress.org"
 msgstr "Plugin não encontrado em WordPress.org"
 
-#: translation-stats.php:167
+#: translation-stats.php:168
 msgid "Translation project not found on WordPress.org"
 msgstr "Projecto de tradução não encontrado em WordPress.org"
 
@@ -43,45 +39,53 @@ msgstr "Projecto de tradução não encontrado em WordPress.org"
 msgid "Translation for %s"
 msgstr "Tradução para %s"
 
-#: translation-stats.php:255
+#. translators: translate.wp.org subproject name, please don't translate!
+#: translation-stats.php:247
+msgctxt "Subproject name"
 msgid "Development"
 msgstr "Development"
 
-#: translation-stats.php:256
+#. translators: translate.wp.org subproject  name, please don't translate!
+#: translation-stats.php:248
+msgctxt "Subproject name"
 msgid "Development Readme"
 msgstr "Development Readme"
 
-#: translation-stats.php:257
+#. translators: translate.wp.org subproject  name, please don't translate!
+#: translation-stats.php:249
+msgctxt "Subproject name"
 msgid "Stable"
 msgstr "Stable"
 
-#: translation-stats.php:258
+#. translators: translate.wp.org subproject  name, please don't translate!
+#: translation-stats.php:250
+msgctxt "Subproject name"
 msgid "Stable Readme"
 msgstr "Stable Readme"
 
 #. translators: %1$s Opening link tag <a href="[link]">. %2$s Closing link tag </a>.
-#: translation-stats.php:273
+#: translation-stats.php:265
 #, php-format
 msgid "This plugin is not %1$sproperly prepared for localization%2$s."
 msgstr "Este plugin não está %1$scorrectamente preparado para localização%2$s."
 
-#: translation-stats.php:282
+#: translation-stats.php:274
 msgid "View detailed logs on Slack"
 msgstr "Ver registos detalhados no Slack"
 
 #. translators: %1$s Opening link tag <a href="[link]">. %2$s Closing link tag </a>.
-#: translation-stats.php:289
+#: translation-stats.php:281
 #, php-format
 msgid "If you would like to translate this plugin, %1$splease contact the author%2$s."
 msgstr "Se quiser traduzir este plugin, %1$spor favor contacte o autor%2$s."
 
 #. translators: %1$s Name of subproject. %2$s Error message.
-#: translation-stats.php:326
+#: translation-stats.php:316
 #, php-format
 msgid "%1$s: %2$s"
 msgstr "%1$s: %2$s"
 
-#: translation-stats.php:326
+#: translation-stats.php:316
 msgid "Not found"
 msgstr "Não encontrado"
 
@@ -94,13 +98,13 @@ msgid "https://github.com/pedro-mendonca/translation-stats"
 msgstr "https://github.com/pedro-mendonca/translation-stats"
 
 #. Description of the plugin/theme
-msgid "Show your plugins translation statistics from WordPress.org on your dashboard."
-msgstr "Mostre as estatísticas de tradução de WordPress.org dos seus plugins, no painel do WordPress."
+msgid "Show WordPress.org translation stats in your installed plugins list."
+msgstr "Mostre as estatísticas de tradução na sua lista de plugins instalados."
 
 #. Author of the plugin/theme
 msgid "Pedro Mendonça"
 msgstr "Pedro Mendonça"
 
 #. Author URI of the plugin/theme
-msgid "https://pedromendonca.com"
-msgstr "https://pedromendonca.com"
+msgid "https://pedromendonca.pt"
+msgstr "https://pedromendonca.pt"

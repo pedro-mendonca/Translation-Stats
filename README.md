@@ -41,7 +41,7 @@ This plugin is properly prepared for localization.
 * **Stable Readme** - Readme of the *Stable* version of the plugin page on [wp.org/plugins](https://wordpress.org/plugins/)
 
 ### How can I translate a plugin? ###
-* Register and login in [wp.org](https://wordpress.org/)
+* Register and login in [wp.org](https://login.wordpress.org/)
 * Click on the plugin subproject stats bar you want to help to complete
 * Read the Polyglots [Translator’s Handbook](https://make.wordpress.org/polyglots/handbook/)
 * Translate according the rules of your [Locale Translation Team](https://make.wordpress.org/polyglots/teams/)

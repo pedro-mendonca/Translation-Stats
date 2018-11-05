@@ -3,8 +3,8 @@
 Plugin Name:       Translation Stats
 Plugin URI:        https://github.com/pedro-mendonca/translation-stats
 GitHub Plugin URI: https://github.com/pedro-mendonca/translation-stats
-Description:       Show your plugins translation statistics from WordPress.org on your dashboard.
-Version:           0.6.2
+Description:       Show WordPress.org translation stats in your installed plugins list.
+Version:           0.6.3
 Author:            Pedro Mendonça
 Author URI:        https://pedromendonca.pt
 License:           GPL2
@@ -244,10 +244,10 @@ class Plugin_Translation_Stats {
 		</div>
 		<div class="translation-stats-wrap notice-warning notice-alt">
 			<?php
-			$dev = $this->ts_render_stats_bar( $locale, $project_slug, esc_html__( 'Development', 'translation-stats' ), 'dev' );
-			$dev_readme = $this->ts_render_stats_bar( $locale, $project_slug, esc_html__( 'Development Readme', 'translation-stats' ), 'dev-readme' );
-			$stable = $this->ts_render_stats_bar( $locale, $project_slug, esc_html__( 'Stable', 'translation-stats' ), 'stable' );
-			$stable_readme = $this->ts_render_stats_bar( $locale, $project_slug, esc_html__( 'Stable Readme', 'translation-stats' ), 'stable-readme' );
+			$dev = $this->ts_render_stats_bar( $locale, $project_slug, /* translators: translate.wp.org subproject name, please don't translate! */ esc_html_x( 'Development', 'Subproject name', 'translation-stats' ), 'dev' );
+			$dev_readme = $this->ts_render_stats_bar( $locale, $project_slug, /* translators: translate.wp.org subproject  name, please don't translate! */ esc_html_x( 'Development Readme', 'Subproject name', 'translation-stats' ), 'dev-readme' );
+			$stable = $this->ts_render_stats_bar( $locale, $project_slug, /* translators: translate.wp.org subproject  name, please don't translate! */ esc_html_x( 'Stable', 'Subproject name', 'translation-stats' ), 'stable' );
+			$stable_readme = $this->ts_render_stats_bar( $locale, $project_slug, /* translators: translate.wp.org subproject  name, please don't translate! */ esc_html_x( 'Stable Readme', 'Subproject name', 'translation-stats' ), 'stable-readme' );
 
 			echo wp_kses_post( $dev['stats'] );
 			echo wp_kses_post( $dev_readme['stats'] );

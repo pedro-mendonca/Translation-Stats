@@ -18,20 +18,16 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: lib\n"
 
-#: translation-stats.php:40
+#: translation-stats.php:35
 msgctxt "Column label"
 msgid "Translation Stats"
 msgstr ""
 
-#: translation-stats.php:133
-msgid "Error:"
-msgstr ""
-
-#: translation-stats.php:163
+#: translation-stats.php:164
 msgid "Plugin not found on WordPress.org"
 msgstr ""
 
-#: translation-stats.php:167
+#: translation-stats.php:168
 msgid "Translation project not found on WordPress.org"
 msgstr ""
 
@@ -40,42 +36,46 @@ msgstr ""
 msgid "Translation for %s"
 msgstr ""
 
-#: translation-stats.php:255
+#: translation-stats.php:247
+msgctxt "Subproject name"
 msgid "Development"
 msgstr ""
 
-#: translation-stats.php:256
+#: translation-stats.php:248
+msgctxt "Subproject name"
 msgid "Development Readme"
 msgstr ""
 
-#: translation-stats.php:257
+#: translation-stats.php:249
+msgctxt "Subproject name"
 msgid "Stable"
 msgstr ""
 
-#: translation-stats.php:258
+#: translation-stats.php:250
+msgctxt "Subproject name"
 msgid "Stable Readme"
 msgstr ""
 
-#: translation-stats.php:273
+#: translation-stats.php:265
 #, php-format
 msgid "This plugin is not %1$sproperly prepared for localization%2$s."
 msgstr ""
 
-#: translation-stats.php:282
+#: translation-stats.php:274
 msgid "View detailed logs on Slack"
 msgstr ""
 
-#: translation-stats.php:289
+#: translation-stats.php:281
 #, php-format
 msgid "If you would like to translate this plugin, %1$splease contact the author%2$s."
 msgstr ""
 
-#: translation-stats.php:326
+#: translation-stats.php:316
 #, php-format
 msgid "%1$s: %2$s"
 msgstr ""
 
-#: translation-stats.php:326
+#: translation-stats.php:316
 msgid "Not found"
 msgstr ""
 
@@ -88,7 +88,7 @@ msgid "https://github.com/pedro-mendonca/translation-stats"
 msgstr ""
 
 #. Description of the plugin/theme
-msgid "Show your plugins translation statistics from WordPress.org on your dashboard."
+msgid "Show WordPress.org translation stats in your installed plugins list."
 msgstr ""
 
 #. Author of the plugin/theme
@@ -96,5 +96,5 @@ msgid "Pedro Mendonça"
 msgstr ""
 
 #. Author URI of the plugin/theme
-msgid "https://pedromendonca.com"
+msgid "https://pedromendonca.pt"
 msgstr ""
