@@ -293,11 +293,11 @@ class Plugin_Translation_Stats {
 	/**
 	 * Render plugin subproject stat bar.
 	 *
-	 * @param string  $locale                   Locale (wp_locale), e.g. 'pt_PT' or get_user_locale()
-	 * @param string  $project_slug             Plugin Slug
-	 * @param string  $subproject               Translation subproject (' Dev', 'Dev Readme', 'Stable', 'Stable Readme' )
-	 * @param string  $subproject_slug          Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' )
-	 * @return string $translation_stats_bar    Plugin stats
+	 * @param string  $locale           Locale (wp_locale), e.g. 'pt_PT' or get_user_locale()
+	 * @param string  $project_slug     Plugin Slug
+	 * @param string  $subproject       Translation subproject (' Dev', 'Dev Readme', 'Stable', 'Stable Readme' )
+	 * @param string  $subproject_slug  Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' )
+	 * @return string $stats_bar        Subproject stats bar
 	 */
 	function ts_render_stats_bar( $locale, $project_slug, $subproject, $subproject_slug ) {
 
@@ -315,7 +315,7 @@ class Plugin_Translation_Stats {
 			<div class="disabled <?php echo esc_html( $subproject_slug ); ?>">
 				<span class="subproject"><?php echo wp_kses_post ( sprintf( /* translators: %1$s Name of subproject. %2$s Error message. */ __( '%1$s: %2$s', 'translation-stats' ), $subproject, '<strong>' . __( 'Not found', 'translation-stats' ) . '</strong>' ) ); ?></span>
 			</div>
-			<?php $translation_stats_bar = ob_get_clean();
+			<?php $stats_bar = ob_get_clean();
 
 		// If translation stats are an object, get the percent translated property
 		} else {
@@ -346,12 +346,12 @@ class Plugin_Translation_Stats {
 					</div>
 				</div>
 			</a>
-			<?php $translation_stats_bar = ob_get_clean();
+			<?php $stats_bar = ob_get_clean();
 
 		}
 
-		$stats = array( 'stats' => $translation_stats_bar, 'error' => $i18n_error );
-		return $stats;
+		$stats_bar = array( 'stats' => $stats_bar, 'error' => $i18n_error );
+		return $stats_bar;
 	}
 
 
