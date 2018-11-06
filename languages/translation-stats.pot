@@ -16,47 +16,52 @@ msgstr ""
 "Last-Translator: \n"
 "Language-Team: \n"
 "X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: lib\n"
 
-#: translation-stats.php:35
+#: lib/glotpress/locales.php:59
+#, php-format
+msgctxt "locales"
+msgid "%1$s/%2$s"
+msgstr ""
+
+#: translation-stats.php:34
 msgctxt "Column label"
 msgid "Translation Stats"
 msgstr ""
 
-#: translation-stats.php:164
+#: translation-stats.php:163
 msgid "Plugin not found on WordPress.org"
 msgstr ""
 
-#: translation-stats.php:168
+#: translation-stats.php:167
 msgid "Translation project not found on WordPress.org"
 msgstr ""
 
-#: translation-stats.php:242
+#: translation-stats.php:241
 #, php-format
 msgid "Translation for %s"
 msgstr ""
 
-#: translation-stats.php:247
+#: translation-stats.php:246
 msgctxt "Subproject name"
 msgid "Development"
 msgstr ""
 
-#: translation-stats.php:248
+#: translation-stats.php:247
 msgctxt "Subproject name"
 msgid "Development Readme"
 msgstr ""
 
-#: translation-stats.php:249
+#: translation-stats.php:248
 msgctxt "Subproject name"
 msgid "Stable"
 msgstr ""
 
-#: translation-stats.php:250
+#: translation-stats.php:249
 msgctxt "Subproject name"
 msgid "Stable Readme"
 msgstr ""
 
-#: translation-stats.php:265
+#: translation-stats.php:264
 #, php-format
 msgid "This plugin is not %1$sproperly prepared for localization%2$s."
 msgstr ""
@@ -65,17 +70,17 @@ msgstr ""
 msgid "View detailed logs on Slack"
 msgstr ""
 
-#: translation-stats.php:281
+#: translation-stats.php:282
 #, php-format
 msgid "If you would like to translate this plugin, %1$splease contact the author%2$s."
 msgstr ""
 
-#: translation-stats.php:316
+#: translation-stats.php:318
 #, php-format
 msgid "%1$s: %2$s"
 msgstr ""
 
-#: translation-stats.php:316
+#: translation-stats.php:318
 msgid "Not found"
 msgstr ""
 

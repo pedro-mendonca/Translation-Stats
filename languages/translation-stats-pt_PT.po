@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Translation Stats\n"
-"POT-Creation-Date: 2018-11-05 15:45+0000\n"
-"PO-Revision-Date: 2018-11-05 15:45+0000\n"
+"POT-Creation-Date: 2018-11-06 01:48+0000\n"
+"PO-Revision-Date: 2018-11-06 01:48+0000\n"
 "Last-Translator: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language-Team: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language: pt_PT\n"
@@ -18,53 +18,59 @@ msgstr ""
 "X-Poedit-WPHeader: translation-stats.php\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: lib\n"
 
-#: translation-stats.php:35
+#. translators: combined name for locales: 1: name in English, 2: native name
+#: lib/glotpress/locales.php:59
+#, php-format
+msgctxt "locales"
+msgid "%1$s/%2$s"
+msgstr "%1$s/%2$s"
+
+#: translation-stats.php:34
 msgctxt "Column label"
 msgid "Translation Stats"
 msgstr "Estatísticas de tradução"
 
-#: translation-stats.php:164
+#: translation-stats.php:163
 msgid "Plugin not found on WordPress.org"
 msgstr "Plugin não encontrado em WordPress.org"
 
-#: translation-stats.php:168
+#: translation-stats.php:167
 msgid "Translation project not found on WordPress.org"
 msgstr "Projecto de tradução não encontrado em WordPress.org"
 
 #. translators: %s Language native name.
-#: translation-stats.php:242
+#: translation-stats.php:241
 #, php-format
 msgid "Translation for %s"
 msgstr "Tradução para %s"
 
 #. translators: translate.wp.org subproject name, please don't translate!
-#: translation-stats.php:247
+#: translation-stats.php:246
 msgctxt "Subproject name"
 msgid "Development"
 msgstr "Development"
 
 #. translators: translate.wp.org subproject  name, please don't translate!
-#: translation-stats.php:248
+#: translation-stats.php:247
 msgctxt "Subproject name"
 msgid "Development Readme"
 msgstr "Development Readme"
 
 #. translators: translate.wp.org subproject  name, please don't translate!
-#: translation-stats.php:249
+#: translation-stats.php:248
 msgctxt "Subproject name"
 msgid "Stable"
 msgstr "Stable"
 
 #. translators: translate.wp.org subproject  name, please don't translate!
-#: translation-stats.php:250
+#: translation-stats.php:249
 msgctxt "Subproject name"
 msgid "Stable Readme"
 msgstr "Stable Readme"
 
 #. translators: %1$s Opening link tag <a href="[link]">. %2$s Closing link tag </a>.
-#: translation-stats.php:265
+#: translation-stats.php:264
 #, php-format
 msgid "This plugin is not %1$sproperly prepared for localization%2$s."
 msgstr "Este plugin não está %1$scorrectamente preparado para localização%2$s."
@@ -74,18 +80,18 @@ msgid "View detailed logs on Slack"
 msgstr "Ver registos detalhados no Slack"
 
 #. translators: %1$s Opening link tag <a href="[link]">. %2$s Closing link tag </a>.
-#: translation-stats.php:281
+#: translation-stats.php:282
 #, php-format
 msgid "If you would like to translate this plugin, %1$splease contact the author%2$s."
 msgstr "Se quiser traduzir este plugin, %1$spor favor contacte o autor%2$s."
 
 #. translators: %1$s Name of subproject. %2$s Error message.
-#: translation-stats.php:316
+#: translation-stats.php:318
 #, php-format
 msgid "%1$s: %2$s"
 msgstr "%1$s: %2$s"
 
-#: translation-stats.php:316
+#: translation-stats.php:318
 msgid "Not found"
 msgstr "Não encontrado"
 
