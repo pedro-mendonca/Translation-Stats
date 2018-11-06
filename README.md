@@ -19,7 +19,7 @@ Show the WordPress.org translation stats in your installed plugins list.
 
 The plugins adds a "Translation Stats" column to the plugin list screen in WordPress admin.
 
-The translation stats are shown only for plugins that exist in [translate.wordpress.org](https://translate.wordpress.org/) and are [properly prepared for localization](https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/).
+The translation stats are shown only for plugins that exist in [translate.wordpress.org](https://translate.wordpress.org/) and are [prepared for localization](https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/).
 
 ![GlotPress](./assets/banner-772x250.png)
 
@@ -42,7 +42,7 @@ This plugin is properly prepared for localization.
 
 ### How can I translate a plugin? ###
 *   Register and login in [wp.org](https://login.wordpress.org/)
-*   Click on the plugin subproject stats bar you want to help to complete
+*   Click on the plugin subproject stats bar you want to translate
 *   Read the Polyglots [Translator’s Handbook](https://make.wordpress.org/polyglots/handbook/)
 *   Translate according the rules of your [Locale Translation Team](https://make.wordpress.org/polyglots/teams/)
 
