@@ -5,7 +5,7 @@
 
 **Contributors:** pedromendonca  
 **Donate link:** [paypal.me/pedromendonca](http://paypal.me/pedromendonca/)  
-**Tags:** glotpress, translation, statistics, internacionalization, i18n, localization, l10n, dark mode  
+**Tags:** internationalization, i18n, localization, l10n, translation, statistics, glotpress, dark mode  
 **Requires at least:** 4.9  
 **Tested up to:** 4.9.8  
 **Requires PHP:** 5.4  
@@ -51,6 +51,9 @@ Since mid-April 2016, not only new strings but also edits are synced between dev
 
 ### Is this plugin compatible with Dark Mode? ###
 Yes, Translation Stats includes a color scheme that works specifically with the plugin [Dark Mode](https://wordpress.org/plugins/dark-mode/).
+
+### Can I help translating this plugin to my own language? ###
+Yes you can! If you want to translate this plugin to your language, please [click here](https://translate.wordpress.org/projects/wp-plugins/translation-stats).
 
 ### Can I contribute to this plugin? ###
 Sure! You are welcome to report any issues or add feature suggestions on the [GitHub repository](https://github.com/pedro-mendonca/translation-stats).
