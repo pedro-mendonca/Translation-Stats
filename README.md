@@ -35,6 +35,8 @@ This plugin is properly prepared for localization.
 
 ## Frequently Asked Questions ##
 
+<img align="right" width="240" height="240" src="/assets/icon-256x256.png">
+
 ### What are the plugin subprojects? ###
 *   **Development** - Translation of the *Development* version of the plugin
 *   **Development Readme** - Readme of the *Development* version of the plugin page on [wp.org/plugins](https://wordpress.org/plugins/)
