@@ -2,6 +2,7 @@
 
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/bcd1b44a1d6542e2b75b7b479ce56804)](https://www.codacy.com/app/pedro-mendonca/translation-stats?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=pedro-mendonca/translation-stats&amp;utm_campaign=Badge_Grade)
 [![Build Status](https://travis-ci.org/pedro-mendonca/translation-stats.svg?branch=master)](https://travis-ci.org/pedro-mendonca/translation-stats)
+[![RIPS CodeRisk](https://coderisk.com/wp/plugin/translation-stats/badge "RIPS CodeRisk")](https://coderisk.com/wp/plugin/translation-stats)
 
 **Contributors:** pedromendonca  
 **Donate link:** [paypal.me/pedromendonca](http://paypal.me/pedromendonca/)  
