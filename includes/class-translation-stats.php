@@ -265,7 +265,7 @@ class Translation_Stats {
 			echo sprintf( wp_kses_post( __( 'Translation for %s', 'translation-stats' ) ), $locale_link );
 			?>
 		</div>
-		<div class="translation-stats-wrap notice-warning notice-alt">
+		<div class="translation-stats-content notice-warning notice-alt">
 			<?php
 			$dev           = $this->ts_render_stats_bar( $locale, $project_slug, /* translators: translate.wp.org subproject name, please don't translate! */ esc_html_x( 'Development', 'Subproject name', 'translation-stats' ), 'dev' );
 			$dev_readme    = $this->ts_render_stats_bar( $locale, $project_slug, /* translators: translate.wp.org subproject name, please don't translate! */ esc_html_x( 'Development Readme', 'Subproject name', 'translation-stats' ), 'dev-readme' );
