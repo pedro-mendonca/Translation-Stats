@@ -338,53 +338,52 @@ if ( ! class_exists( 'Translation_Stats' ) ) {
 			// Get plugin subproject translation stats.
 			$translation_stats = $this->ts_plugin_subproject_stats( $locale->slug, $variant, $project_slug, $subproject_slug );
 
+			// If translation stats are not an object, project not found.
+			if ( ! is_object( $translation_stats ) ) {
+
+				$i18n_error = true;
+
+			} else { // If translation stats are an object, get the percent translated property.
+				/*
+				 * Get the 'percent_translated' property from subproject translation stats.
+				 *
+				 * Example of allowed properties:
+				 * [id] => 416518
+				 * [name] => Portuguese (Portugal)
+				 * [slug] => default | ao90 | informal
+				 * [project_id] => 3333
+				 * [locale] => pt
+				 * [current_count] => 136
+				 * [untranslated_count] => 0
+				 * [waiting_count] => 0
+				 * [fuzzy_count] => 0
+				 * [percent_translated] => 100
+				 * [wp_locale] => pt_PT
+				 * [last_modified] => 2018-10-11 10:05:30
+				 */
+				$percent_translated = $translation_stats->percent_translated;
+				$i18n_error         = false;
+			}
+
 			ob_start();
 			?>
-			<div class="content__subproject">
-				<?php
 
-				// If translation stats are not an object, project not found.
-				if ( ! is_object( $translation_stats ) ) {
-
-					$i18n_error = true;
-					?>
-					<div class="content__subproject--disabled disabled <?php echo esc_html( $subproject_slug ); ?>">
-						<span class="subproject"><?php echo wp_kses_post( sprintf( /* translators: %1$s Name of subproject. %2$s Error message. */ __( '%1$s: %2$s', 'translation-stats' ), $subproject, '<strong>' . __( 'Not found', 'translation-stats' ) . '</strong>' ) ); ?></span>
-					</div>
+			<div class="content__subproject <?php echo esc_html( $subproject_slug ); ?>">
+				<a class="<?php if( ! $i18n_error ) { echo 'enabled'; } else { echo 'disabled'; }; ?>" target="_blank" <?php if( ! $i18n_error ) { echo 'href="' . esc_url( $url ) . '"'; }; ?>>
 					<?php
-
-				} else { // If translation stats are an object, get the percent translated property.
-					/*
-					 * Get the 'percent_translated' property from subproject translation stats.
-					 *
-					 * Example of allowed properties:
-					 * [id] => 416518
-					 * [name] => Portuguese (Portugal)
-					 * [slug] => default | ao90 | informal
-					 * [project_id] => 3333
-					 * [locale] => pt
-					 * [current_count] => 136
-					 * [untranslated_count] => 0
-					 * [waiting_count] => 0
-					 * [fuzzy_count] => 0
-					 * [percent_translated] => 100
-					 * [wp_locale] => pt_PT
-					 * [last_modified] => 2018-10-11 10:05:30
-					 */
-					$percent_translated = $translation_stats->percent_translated;
-					$i18n_error         = false;
-					?>
-					<a class="content__subproject--enabled" target="_blank" href="<?php echo esc_url( $url ); ?>">
+					if ( ! $i18n_error ) { ?>
 						<div class="<?php echo esc_html( 'percent' . 10 * floor( $percent_translated / 10 ) . ' ' . $subproject_slug ); ?>" style="width: <?php echo esc_html( $percent_translated ); ?>%;">
-							<div class="subproject">
-								<span class="percentage"><?php echo esc_html( $percent_translated ); ?>%</span><span class="subproject-name"><?php echo esc_html( $subproject ); ?></span>
+							<div class="subproject-bar">
+								<span class="subproject-bar__percentage"><?php echo esc_html( $percent_translated ); ?>%</span><span class="subproject-bar__name"><?php echo esc_html( $subproject ); ?></span>
 							</div>
 						</div>
-					</a>
-					<?php
-				}
-				?>
+					<?php } else { ?>
+						<div class="subproject-bar"><?php echo wp_kses_post( sprintf( /* translators: %1$s Name of subproject. %2$s Error message. */ __( '%1$s: %2$s', 'translation-stats' ), $subproject, '<strong>' . __( 'Not found', 'translation-stats' ) . '</strong>' ) ); ?></div>
+					<?php }
+					?>
+				</a>
 			</div>
+
 			<?php
 			$stats_bar = ob_get_clean();
 			$stats_bar = array(
