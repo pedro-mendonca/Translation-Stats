@@ -20,5 +20,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Include class-files used by our plugin.
 require_once( dirname( __FILE__ ) . '/includes/class-translation-stats.php' );
+require_once( dirname( __FILE__ ) . '/includes/class-translation-stats-options.php' );
 
 new Translation_Stats;
