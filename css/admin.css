@@ -17,7 +17,7 @@
   margin: 0 10px 10px 0;
 }
 
-.column-translation-stats .translation-stats-content .subproject {
+.column-translation-stats .translation-stats-content .content__subproject .subproject {
   /* Stats bar size */
   display: block;
   padding: 5px 10px;
@@ -25,7 +25,7 @@
   white-space: nowrap;
 }
 
-.column-translation-stats .translation-stats-content .subproject .percentage {
+.column-translation-stats .translation-stats-content .content__subproject .subproject .percentage {
   display: inline-block;
   font-weight: 700;
   text-align: right;
@@ -33,110 +33,110 @@
   margin-right: 10px;
 }
 
-.column-translation-stats .translation-stats-content a,
-.column-translation-stats .translation-stats-content a div,
-.column-translation-stats .translation-stats-content a div .subproject,
-.column-translation-stats .translation-stats-content .disabled,
-.column-translation-stats .translation-stats-content .disabled .subproject {
+.column-translation-stats .translation-stats-content .content__subproject a,
+.column-translation-stats .translation-stats-content .content__subproject a div,
+.column-translation-stats .translation-stats-content .content__subproject a div .subproject,
+.column-translation-stats .translation-stats-content .content__subproject .disabled,
+.column-translation-stats .translation-stats-content .content__subproject .disabled .subproject {
   border-radius: 3px;
 }
 
-.column-translation-stats .translation-stats-content a {
+.column-translation-stats .translation-stats-content .content__subproject a {
   /* Stats bar colors from GlotPress */
 }
 
-.column-translation-stats .translation-stats-content a div {
+.column-translation-stats .translation-stats-content .content__subproject a div {
   color: #000;
   text-shadow: 0 0 6px rgba(255, 255, 225, 0.5);
 }
 
-.column-translation-stats .translation-stats-content a div.percent100 {
+.column-translation-stats .translation-stats-content .content__subproject a div.percent100 {
   background-color: #46b450;
 }
 
-.column-translation-stats .translation-stats-content a div.percent100 .subproject {
+.column-translation-stats .translation-stats-content .content__subproject a div.percent100 .subproject {
   color: #fff;
   text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
-.column-translation-stats .translation-stats-content a div.percent90 {
+.column-translation-stats .translation-stats-content .content__subproject a div.percent90 {
   background-color: #6bc373;
 }
 
-.column-translation-stats .translation-stats-content a div.percent80 {
+.column-translation-stats .translation-stats-content .content__subproject a div.percent80 {
   background-color: #90d296;
 }
 
-.column-translation-stats .translation-stats-content a div.percent70 {
+.column-translation-stats .translation-stats-content .content__subproject a div.percent70 {
   background-color: #b5e1b9;
 }
 
-.column-translation-stats .translation-stats-content a div.percent60 {
+.column-translation-stats .translation-stats-content .content__subproject a div.percent60 {
   background-color: #c7e8ca;
 }
 
-.column-translation-stats .translation-stats-content a div.percent50 {
+.column-translation-stats .translation-stats-content .content__subproject a div.percent50 {
   background-color: #ffe399;
 }
 
-.column-translation-stats .translation-stats-content a div.percent40 {
+.column-translation-stats .translation-stats-content .content__subproject a div.percent40 {
   background-color: #fbc5a9;
 }
 
-.column-translation-stats .translation-stats-content a div.percent30 {
+.column-translation-stats .translation-stats-content .content__subproject a div.percent30 {
   background-color: #f1adad;
 }
 
-.column-translation-stats .translation-stats-content a div.percent20 {
+.column-translation-stats .translation-stats-content .content__subproject a div.percent20 {
   background-color: #ea8484;
 }
 
-.column-translation-stats .translation-stats-content a div.percent10 {
+.column-translation-stats .translation-stats-content .content__subproject a div.percent10 {
   background-color: #e35b5b;
 }
 
-.column-translation-stats .translation-stats-content a div.percent0 {
+.column-translation-stats .translation-stats-content .content__subproject a div.percent0 {
   background-color: #dc3232;
 }
 
-.column-translation-stats .translation-stats-content a,
-.column-translation-stats .translation-stats-content a:hover,
-.column-translation-stats .translation-stats-content a:focus,
-.column-translation-stats .translation-stats-content a div,
-.column-translation-stats .translation-stats-content a:hover div,
-.column-translation-stats .translation-stats-content a:focus div,
-.column-translation-stats .translation-stats-content a div.percent0,
-.column-translation-stats .translation-stats-content a:hover div.percent0,
-.column-translation-stats .translation-stats-content a:focus div.percent0,
-.column-translation-stats .translation-stats-content a div.percent100,
-.column-translation-stats .translation-stats-content a:hover div.percent100,
-.column-translation-stats .translation-stats-content a:focus div.percent100,
-.column-translation-stats .translation-stats-content a div .subproject,
-.column-translation-stats .translation-stats-content a:hover div .subproject,
-.column-translation-stats .translation-stats-content a:focus div .subproject {
+.column-translation-stats .translation-stats-content .content__subproject a,
+.column-translation-stats .translation-stats-content .content__subproject a:hover,
+.column-translation-stats .translation-stats-content .content__subproject a:focus,
+.column-translation-stats .translation-stats-content .content__subproject a div,
+.column-translation-stats .translation-stats-content .content__subproject a:hover div,
+.column-translation-stats .translation-stats-content .content__subproject a:focus div,
+.column-translation-stats .translation-stats-content .content__subproject a div.percent0,
+.column-translation-stats .translation-stats-content .content__subproject a:hover div.percent0,
+.column-translation-stats .translation-stats-content .content__subproject a:focus div.percent0,
+.column-translation-stats .translation-stats-content .content__subproject a div.percent100,
+.column-translation-stats .translation-stats-content .content__subproject a:hover div.percent100,
+.column-translation-stats .translation-stats-content .content__subproject a:focus div.percent100,
+.column-translation-stats .translation-stats-content .content__subproject a div .subproject,
+.column-translation-stats .translation-stats-content .content__subproject a:hover div .subproject,
+.column-translation-stats .translation-stats-content .content__subproject a:focus div .subproject {
   -webkit-transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
   -moz-transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
   -o-transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
   transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
 }
 
-.column-translation-stats .translation-stats-content a:hover div,
-.column-translation-stats .translation-stats-content a:focus div {
+.column-translation-stats .translation-stats-content .content__subproject a:hover div,
+.column-translation-stats .translation-stats-content .content__subproject a:focus div {
   width: 100% !important;
 }
 
-.column-translation-stats .translation-stats-content a:hover div .subproject,
-.column-translation-stats .translation-stats-content a:focus div .subproject {
+.column-translation-stats .translation-stats-content .content__subproject a:hover div .subproject,
+.column-translation-stats .translation-stats-content .content__subproject a:focus div .subproject {
   background-color: rgba(255, 255, 255, 0.2);
 }
 
-.column-translation-stats .translation-stats-content a:hover div.percent0 .subproject,
-.column-translation-stats .translation-stats-content a:focus div.percent0 .subproject {
+.column-translation-stats .translation-stats-content .content__subproject a:hover div.percent0 .subproject,
+.column-translation-stats .translation-stats-content .content__subproject a:focus div.percent0 .subproject {
   color: #fff;
   text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
-.column-translation-stats .translation-stats-content .disabled {
+.column-translation-stats .translation-stats-content .content__subproject .disabled {
   background-color: #ddd;
   color: #8f98a1;
 }
