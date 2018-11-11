@@ -26,8 +26,8 @@ if ( ! class_exists( 'Translation_Stats_Options' ) ) {
 
 
 		/**
-	     * Registers a new Translation Stats options page under Settings.
-	     */
+		 * Registers a new Translation Stats options page under Settings.
+		 */
 		function ts_admin_menu() {
 			add_options_page(
 				esc_html__( 'Translation Stats Options', 'translation-stats' ), // Page title.
@@ -40,10 +40,10 @@ if ( ! class_exists( 'Translation_Stats_Options' ) ) {
 
 
 		/**
-	     * Options page display callback.
-	     */
+		 * Options page display callback.
+		 */
 		function ts_options() {
-			if ( !current_user_can( 'manage_options' ) )  {
+			if ( ! current_user_can( 'manage_options' ) ) {
 				wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'translation-stats' ) );
 			}
 			?>

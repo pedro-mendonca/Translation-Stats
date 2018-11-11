@@ -1,6 +1,8 @@
 <?php
 /**
  * Primary class file for the Translation Stats plugin.
+ *
+ * @package Translation Stats
  */
 
 // Exit if accessed directly.
@@ -349,22 +351,24 @@ if ( ! class_exists( 'Translation_Stats' ) ) {
 				$stats_bar = ob_get_clean();
 
 			} else { // If translation stats are an object, get the percent translated property.
+
 				/*
-					Get the 'percent_translated' property from subproject translation stats
-					Example of allowed properties:
-					[id] => 416518
-					[name] => Portuguese (Portugal)
-					[slug] => default | ao90 | informal
-					[project_id] => 3333
-					[locale] => pt
-					[current_count] => 136
-					[untranslated_count] => 0
-					[waiting_count] => 0
-					[fuzzy_count] => 0
-					[percent_translated] => 100
-					[wp_locale] => pt_PT
-					[last_modified] => 2018-10-11 10:05:30
-				*/
+				 * Get the 'percent_translated' property from subproject translation stats.
+				 *
+				 * Example of allowed properties:
+				 * [id] => 416518
+				 * [name] => Portuguese (Portugal)
+				 * [slug] => default | ao90 | informal
+				 * [project_id] => 3333
+				 * [locale] => pt
+				 * [current_count] => 136
+				 * [untranslated_count] => 0
+				 * [waiting_count] => 0
+				 * [fuzzy_count] => 0
+				 * [percent_translated] => 100
+				 * [wp_locale] => pt_PT
+				 * [last_modified] => 2018-10-11 10:05:30
+				 */
 				$percent_translated = $translation_stats->percent_translated;
 				$i18n_error         = false;
 				ob_start();
