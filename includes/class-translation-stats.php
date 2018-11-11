@@ -344,6 +344,7 @@ if ( ! class_exists( 'Translation_Stats' ) ) {
 				$i18n_error = true;
 
 			} else { // If translation stats are an object, get the percent translated property.
+
 				/*
 				 * Get the 'percent_translated' property from subproject translation stats.
 				 *
@@ -369,18 +370,36 @@ if ( ! class_exists( 'Translation_Stats' ) ) {
 			?>
 
 			<div class="content__subproject <?php echo esc_html( $subproject_slug ); ?>">
-				<a class="<?php if( ! $i18n_error ) { echo 'enabled'; } else { echo 'disabled'; }; ?>" target="_blank" <?php if( ! $i18n_error ) { echo 'href="' . esc_url( $url ) . '"'; }; ?>>
-					<?php
-					if ( ! $i18n_error ) { ?>
-						<div class="<?php echo esc_html( 'percent' . 10 * floor( $percent_translated / 10 ) . ' ' . $subproject_slug ); ?>" style="width: <?php echo esc_html( $percent_translated ); ?>%;">
-							<div class="subproject-bar">
-								<span class="subproject-bar__percentage"><?php echo esc_html( $percent_translated ); ?>%</span><span class="subproject-bar__name"><?php echo esc_html( $subproject ); ?></span>
-							</div>
-						</div>
-					<?php } else { ?>
-						<div class="subproject-bar"><?php echo wp_kses_post( sprintf( /* translators: %1$s Name of subproject. %2$s Error message. */ __( '%1$s: %2$s', 'translation-stats' ), $subproject, '<strong>' . __( 'Not found', 'translation-stats' ) . '</strong>' ) ); ?></div>
-					<?php }
+				<a class="
+				<?php
+				if ( ! $i18n_error ) {
+					echo 'enabled';
+				} else {
+					echo 'disabled';
+				};
+				?>
+				" target="_blank"
+				<?php
+				if ( ! $i18n_error ) {
+					echo 'href="' . esc_url( $url ) . '"';
+				};
+				?>
+				>
+				<?php
+				if ( ! $i18n_error ) {
 					?>
+					<div class="<?php echo esc_html( 'percent' . 10 * floor( $percent_translated / 10 ) . ' ' . $subproject_slug ); ?>" style="width: <?php echo esc_html( $percent_translated ); ?>%;">
+						<div class="subproject-bar">
+							<span class="subproject-bar__percentage"><?php echo esc_html( $percent_translated ); ?>%</span><span class="subproject-bar__name"><?php echo esc_html( $subproject ); ?></span>
+						</div>
+					</div>
+					<?php
+				} else {
+					?>
+					<div class="subproject-bar"><?php echo wp_kses_post( sprintf( /* translators: %1$s Name of subproject. %2$s Error message. */ __( '%1$s: %2$s', 'translation-stats' ), $subproject, '<strong>' . __( 'Not found', 'translation-stats' ) . '</strong>' ) ); ?></div>
+					<?php
+				}
+				?>
 				</a>
 			</div>
 

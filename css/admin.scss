@@ -35,9 +35,6 @@
           width: 32px;
           margin-right: 10px;
         }
-
-        .subproject-bar__name {
-        }
       }
 
       a,
@@ -50,18 +47,15 @@
 
       a {
         display: block;
-        
-        &.enabled {
-          div { // Stats bar enabled generic text color
-            color: #000;
-            text-shadow: 0 0 6px rgba(255, 255, 225, 0.5);
-          }
-        } 
-        &.disabled {
-          div { // Stats bar disabled generic text color
-            background-color: #ddd;
-            color: #8f98a1;
-          }
+
+        &.enabled div { // Stats bar enabled generic text color
+          color: #000;
+          text-shadow: 0 0 6px rgba(255, 255, 225, 0.5);
+        }
+
+        &.disabled div { // Stats bar disabled generic text color
+          background-color: #ddd;
+          color: #8f98a1;
         }
 
         /* Stats bar colors from GlotPress */
@@ -153,5 +147,3 @@
     }
   }
 }
-
-
