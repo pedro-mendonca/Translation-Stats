@@ -1,0 +1,25 @@
+// _hover.scss
+
+// easeOutCubic - Generated in https://matthewlein.com/tools/ceaser
+@mixin transition-easeOutCubic( $transition-property, $transition-duration, $transition-timing-function, $transition-delay ) { // easeOutCirc [transition-property] [transition-duration] [transition-timing-function] [transition-delay]
+  -webkit-transition: $transition-property $transition-duration $transition-timing-function $transition-delay;
+  -moz-transition: $transition-property $transition-duration $transition-timing-function $transition-delay;
+  -o-transition: $transition-property $transition-duration $transition-timing-function $transition-delay;
+  transition: $transition-property $transition-duration $transition-timing-function $transition-delay;
+}
+
+// Configuration of Global Border Radius.
+$global-radius: 3px;
+
+// Stats bar colors from GlotPress.
+$glotpress-percent100: #46b450;
+$glotpress-percent90: #6bc373;
+$glotpress-percent80: #90d296;
+$glotpress-percent70: #b5e1b9;
+$glotpress-percent60: #c7e8ca;
+$glotpress-percent50: #ffe399;
+$glotpress-percent40: #fbc5a9;
+$glotpress-percent30: #f1adad;
+$glotpress-percent20: #ea8484;
+$glotpress-percent10: #e35b5b;
+$glotpress-percent0: #dc3232;
