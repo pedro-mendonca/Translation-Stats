@@ -2,11 +2,142 @@
 <ruleset name="Translation Stats">
 	<description>A custom set of PHPCS rules for plugin Translation Stats.</description>
 
-	<!-- Include the WordPress Coding Standards. -->
+	<!-- Exclude some files from being fixed. -->
+	<exclude-pattern>*/includes/glotpress/*</exclude-pattern>
+
+ 	<!-- Include the WordPress Coding Standards. -->
 	<rule ref="WordPress">
 		<!--
 		<exclude name="WordPress.Files.FileName"/>
 		-->
+	</rule>
+
+	<!-- Include the WordPress-Core standard. -->
+	<rule ref="WordPress-Core"/>
+
+	<!-- Let's also check that everything is properly documented. -->
+	<rule ref="WordPress-Docs"/>
+
+	<!-- Include the WordPress-Extra standard. -->
+	<rule ref="WordPress-Extra">
+
+		<!--
+		We may want a middle ground though. The best way to do this is add the
+		entire ruleset, then rule by rule, remove ones that don't suit a project.
+		We can do this by running `phpcs` with the '-s' flag, which allows us to
+		see the names of the sniffs reporting errors.
+		Once we know the sniff names, we can opt to exclude sniffs which don't
+		suit our project like so.
+		The below two examples just show how you can exclude rules.
+		They are not intended as advice about which sniffs to exclude.
+		-->
+
+		<!--
+		<exclude name="WordPress.WhiteSpace.ControlStructureSpacing"/>
+		<exclude name="WordPress.Security.EscapeOutput"/>
+		-->
+
+		<!-- Even though the VIP sniffs are not included in Extra, this will remove them from the scan. -->
+		<exclude name="WordPress.VIP"/>
+	</rule>
+
+	<rule ref="WordPress.PHP.DiscouragedPHPFunctions">
+		<!-- From "VIP": The obfuscation group is excluded as there are plenty of legitimate uses for the base64 functions. -->
+		<properties>
+			<property name="exclude" type="array" value="obfuscation"/>
+		</properties>
+	</rule>
+
+	<!--
+	To get the optimal benefits of using WPCS, we should add a couple of
+	custom properties.
+	Adjust the values of these properties to fit our needs.
+	For information on additional custom properties available, check out
+	the wiki:
+	https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards/wiki/Customizable-sniff-properties
+	-->
+	<config name="minimum_supported_wp_version" value="4.6"/>
+
+	<config name="testVersion" value="5.2-99.0"/>
+
+	<config name="ignore_warnings_on_exit" value="1"/>
+
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="string" value="translation-stats"/>
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array" value="ts"/>
+		</properties>
+	</rule>
+
+	<!--
+	#############################################################################
+	Account for deprecated sniffs.
+	These directives can be removed when the deprecated sniffs are removed.
+	#############################################################################
+	-->
+
+	<!-- Prevent deprecation notice when the sniff is not explicitly included. -->
+	<rule ref="WordPress.WP.PreparedSQL.DeprecatedSniff">
+		<severity>0</severity>
+	</rule>
+
+	<!-- Prevent duplicate messages from deprecated sniff. -->
+	<rule ref="WordPress.WP.PreparedSQL.NotPrepared">
+		<severity>0</severity>
+	</rule>
+
+	<!-- Prevent deprecation notice when the sniff is not explicitly included. -->
+	<rule ref="WordPress.Functions.DontExtract.DeprecatedSniff">
+		<severity>0</severity>
+	</rule>
+
+	<!-- Prevent duplicate messages from deprecated sniff. -->
+	<rule ref="WordPress.Functions.DontExtract.extract_extract">
+		<severity>0</severity>
+	</rule>
+
+	<!-- Prevent deprecation notice when the sniff is not explicitly included. -->
+	<rule ref="WordPress.CSRF.NonceVerification.DeprecatedSniff">
+		<severity>0</severity>
+	</rule>
+
+	<!-- Prevent duplicate messages from deprecated sniff. -->
+	<rule ref="WordPress.CSRF.NonceVerification.NoNonceVerification">
+		<severity>0</severity>
+	</rule>
+
+	<!-- Prevent deprecation notice when the sniff is not explicitly included. -->
+	<rule ref="WordPress.XSS.EscapeOutput.DeprecatedSniff">
+		<severity>0</severity>
+	</rule>
+
+	<!-- Prevent duplicate messages from deprecated sniff. -->
+	<rule ref="WordPress.XSS.EscapeOutput.OutputNotEscaped">
+		<severity>0</severity>
+	</rule>
+	<rule ref="WordPress.XSS.EscapeOutput.OutputNotEscapedShortEcho">
+		<severity>0</severity>
+	</rule>
+	<rule ref="WordPress.XSS.EscapeOutput.UnsafePrintingFunction">
+		<severity>0</severity>
+	</rule>
+	<rule ref="WordPress.XSS.EscapeOutput.DeprecatedCustomSanitizingFunctions">
+		<severity>0</severity>
+	</rule>
+
+	<!-- Prevent deprecation notice when the sniff is not explicitly included. -->
+	<rule ref="WordPress.Variables.GlobalVariables.DeprecatedSniff">
+		<severity>0</severity>
+	</rule>
+
+	<!-- Prevent duplicate messages from deprecated sniff. -->
+	<rule ref="WordPress.Variables.GlobalVariables.OverrideProhibited">
+		<severity>0</severity>
 	</rule>
 
 </ruleset>
