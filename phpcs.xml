@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<ruleset name="Translation Stats">
+	<description>A custom set of PHPCS rules for plugin Translation Stats.</description>
+
+	<!-- Include the WordPress Coding Standards. -->
+	<rule ref="WordPress">
+		<!--
+		<exclude name="WordPress.Files.FileName"/>
+		-->
+	</rule>
+
+</ruleset>
