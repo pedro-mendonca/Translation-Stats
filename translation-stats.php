@@ -1,5 +1,13 @@
 <?php
 /**
+ * Translation Stats
+ *
+ * @package      TranslationStats
+ * @author       Pedro Mendonça
+ * @copyright    2018 Pedro Mendonça
+ * @license      GPL2
+ *
+ * @wordpress-plugin
  * Plugin Name:       Translation Stats
  * Plugin URI:        https://github.com/pedro-mendonca/translation-stats
  * GitHub Plugin URI: https://github.com/pedro-mendonca/translation-stats
