@@ -17,71 +17,89 @@ msgstr ""
 "Language-Team: \n"
 "X-Poedit-SearchPath-0: .\n"
 
-#: lib/glotpress/locales.php:59
-#, php-format
-msgctxt "locales"
-msgid "%1$s/%2$s"
-msgstr ""
-
-#: translation-stats.php:34
+#: includes/class-tstats-main.php:43
 msgctxt "Column label"
 msgid "Translation Stats"
 msgstr ""
 
-#: translation-stats.php:163
+#: includes/class-tstats-main.php:174
 msgid "Plugin not found on WordPress.org"
 msgstr ""
 
-#: translation-stats.php:167
+#: includes/class-tstats-main.php:178
 msgid "Translation project not found on WordPress.org"
 msgstr ""
 
-#: translation-stats.php:241
+#: includes/class-tstats-main.php:273
 #, php-format
 msgid "Translation for %s"
 msgstr ""
 
-#: translation-stats.php:246
+#: includes/class-tstats-main.php:278
 msgctxt "Subproject name"
 msgid "Development"
 msgstr ""
 
-#: translation-stats.php:247
+#: includes/class-tstats-main.php:279
 msgctxt "Subproject name"
 msgid "Development Readme"
 msgstr ""
 
-#: translation-stats.php:248
+#: includes/class-tstats-main.php:280
 msgctxt "Subproject name"
 msgid "Stable"
 msgstr ""
 
-#: translation-stats.php:249
+#: includes/class-tstats-main.php:281
 msgctxt "Subproject name"
 msgid "Stable Readme"
 msgstr ""
 
-#: translation-stats.php:264
+#: includes/class-tstats-main.php:296
 #, php-format
 msgid "This plugin is not %1$sproperly prepared for localization%2$s."
 msgstr ""
 
-#: translation-stats.php:274
+#: includes/class-tstats-main.php:306
 msgid "View detailed logs on Slack"
 msgstr ""
 
-#: translation-stats.php:282
+#: includes/class-tstats-main.php:314
 #, php-format
 msgid "If you would like to translate this plugin, %1$splease contact the author%2$s."
 msgstr ""
 
-#: translation-stats.php:318
+#: includes/class-tstats-main.php:402
 #, php-format
 msgid "%1$s: %2$s"
 msgstr ""
 
-#: translation-stats.php:318
+#: includes/class-tstats-main.php:402
 msgid "Not found"
+msgstr ""
+
+#: includes/class-tstats-options.php:33
+msgid "Translation Stats Options"
+msgstr ""
+
+#: includes/class-tstats-options.php:34
+msgctxt "Menu title"
+msgid "Translation Stats"
+msgstr ""
+
+#: includes/class-tstats-options.php:47
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#: includes/class-tstats-options.php:51
+msgctxt "Page title"
+msgid "Translation Stats"
+msgstr ""
+
+#: includes/glotpress/locales.php:59
+#, php-format
+msgctxt "locales"
+msgid "%1$s/%2$s"
 msgstr ""
 
 #. Plugin Name of the plugin/theme

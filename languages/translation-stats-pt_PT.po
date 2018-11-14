@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Translation Stats\n"
-"POT-Creation-Date: 2018-11-06 01:48+0000\n"
-"PO-Revision-Date: 2018-11-06 01:48+0000\n"
+"POT-Creation-Date: 2018-11-14 16:31+0000\n"
+"PO-Revision-Date: 2018-11-14 16:32+0000\n"
 "Last-Translator: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language-Team: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language: pt_PT\n"
@@ -19,81 +19,99 @@ msgstr ""
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-SearchPath-0: .\n"
 
-#. translators: combined name for locales: 1: name in English, 2: native name
-#: lib/glotpress/locales.php:59
-#, php-format
-msgctxt "locales"
-msgid "%1$s/%2$s"
-msgstr "%1$s/%2$s"
-
-#: translation-stats.php:34
+#: includes/class-tstats-main.php:43
 msgctxt "Column label"
 msgid "Translation Stats"
 msgstr "Estatísticas de tradução"
 
-#: translation-stats.php:163
+#: includes/class-tstats-main.php:174
 msgid "Plugin not found on WordPress.org"
 msgstr "Plugin não encontrado em WordPress.org"
 
-#: translation-stats.php:167
+#: includes/class-tstats-main.php:178
 msgid "Translation project not found on WordPress.org"
 msgstr "Projecto de tradução não encontrado em WordPress.org"
 
 #. translators: %s Language native name.
-#: translation-stats.php:241
+#: includes/class-tstats-main.php:273
 #, php-format
 msgid "Translation for %s"
 msgstr "Tradução para %s"
 
 #. translators: translate.wp.org subproject name, please don't translate!
-#: translation-stats.php:246
+#: includes/class-tstats-main.php:278
 msgctxt "Subproject name"
 msgid "Development"
 msgstr "Development"
 
-#. translators: translate.wp.org subproject  name, please don't translate!
-#: translation-stats.php:247
+#. translators: translate.wp.org subproject name, please don't translate!
+#: includes/class-tstats-main.php:279
 msgctxt "Subproject name"
 msgid "Development Readme"
 msgstr "Development Readme"
 
-#. translators: translate.wp.org subproject  name, please don't translate!
-#: translation-stats.php:248
+#. translators: translate.wp.org subproject name, please don't translate!
+#: includes/class-tstats-main.php:280
 msgctxt "Subproject name"
 msgid "Stable"
 msgstr "Stable"
 
-#. translators: translate.wp.org subproject  name, please don't translate!
-#: translation-stats.php:249
+#. translators: translate.wp.org subproject name, please don't translate!
+#: includes/class-tstats-main.php:281
 msgctxt "Subproject name"
 msgid "Stable Readme"
 msgstr "Stable Readme"
 
 #. translators: %1$s Opening link tag <a href="[link]">. %2$s Closing link tag </a>.
-#: translation-stats.php:264
+#: includes/class-tstats-main.php:296
 #, php-format
 msgid "This plugin is not %1$sproperly prepared for localization%2$s."
 msgstr "Este plugin não está %1$scorrectamente preparado para localização%2$s."
 
-#: translation-stats.php:274
+#: includes/class-tstats-main.php:306
 msgid "View detailed logs on Slack"
 msgstr "Ver registos detalhados no Slack"
 
 #. translators: %1$s Opening link tag <a href="[link]">. %2$s Closing link tag </a>.
-#: translation-stats.php:282
+#: includes/class-tstats-main.php:314
 #, php-format
 msgid "If you would like to translate this plugin, %1$splease contact the author%2$s."
 msgstr "Se quiser traduzir este plugin, %1$spor favor contacte o autor%2$s."
 
 #. translators: %1$s Name of subproject. %2$s Error message.
-#: translation-stats.php:318
+#: includes/class-tstats-main.php:402
 #, php-format
 msgid "%1$s: %2$s"
 msgstr "%1$s: %2$s"
 
-#: translation-stats.php:318
+#: includes/class-tstats-main.php:402
 msgid "Not found"
 msgstr "Não encontrado"
+
+#: includes/class-tstats-options.php:33
+msgid "Translation Stats Options"
+msgstr "Opções das estatísticas de tradução"
+
+#: includes/class-tstats-options.php:34
+msgctxt "Menu title"
+msgid "Translation Stats"
+msgstr "Estatísticas de tradução"
+
+#: includes/class-tstats-options.php:47
+msgid "You do not have sufficient permissions to access this page."
+msgstr "Não tem permissões suficientes para aceder a esta página."
+
+#: includes/class-tstats-options.php:51
+msgctxt "Page title"
+msgid "Translation Stats"
+msgstr "Estatísticas de tradução"
+
+#. translators: combined name for locales: 1: name in English, 2: native name
+#: includes/glotpress/locales.php:59
+#, php-format
+msgctxt "locales"
+msgid "%1$s/%2$s"
+msgstr "%1$s/%2$s"
 
 #. Plugin Name of the plugin/theme
 msgid "Translation Stats"
