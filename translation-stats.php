@@ -29,11 +29,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Include class-files used by our plugin.
 require_once dirname( __FILE__ ) . '/includes/class-tstats-main.php';
 
-/* Files to require in the future.
-require_once dirname( __FILE__ ) . '/includes/class-translation-stats-options.php';
-require_once dirname( __FILE__ ) . '/includes/class-translation-stats-api.php';
-require_once dirname( __FILE__ ) . '/includes/class-translation-stats-shortcode.php';
-require_once dirname( __FILE__ ) . '/includes/class-translation-stats-widget.php';
-*/
+// Future use: require_once dirname( __FILE__ ) . '/includes/class-translation-stats-options.php';
+// Future use: require_once dirname( __FILE__ ) . '/includes/class-translation-stats-api.php';
+// Future use: require_once dirname( __FILE__ ) . '/includes/class-translation-stats-shortcode.php';
+// Future use: require_once dirname( __FILE__ ) . '/includes/class-translation-stats-widget.php';
 
 new TStats_Main();
