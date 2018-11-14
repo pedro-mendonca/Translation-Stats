@@ -10,7 +10,7 @@
 **Requires at least:** 4.9  
 **Tested up to:** 4.9.8  
 **Requires PHP:** 5.4  
-**Stable tag:** 0.6.4  
+**Stable tag:** 0.7.0  
 **License:** GPLv2 or later  
 **License URI:** [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html)  
 
@@ -62,6 +62,10 @@ Yes you can! If you want to translate this plugin to your language, please [clic
 Sure! You are welcome to report any issues or add feature suggestions on the [GitHub repository](https://github.com/pedro-mendonca/translation-stats).
 
 ## Changelog ##
+
+### 0.7 ###
+*   Fix Translation Stats column show/hide logic
+*   Use [WordPress Coding Standards](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards)
 
 ### 0.6 ###
 *   Add WordPress core notices styles to error messages
