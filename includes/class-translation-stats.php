@@ -32,13 +32,16 @@ if ( ! class_exists( 'Translation_Stats' ) ) {
 			add_filter( 'manage_plugins_columns', 'ts_add_translation_stats_column' );
 
 			/**
-			 * Set the plugin translation stats column.
+			 * Set the plugin translation stats column if user locale is not 'en_US'.
 			 *
 			 * @param array $columns   Columns array.
 			 * @return array $columns  Columns array with added 'translation-stats'.
 			 */
 			function ts_add_translation_stats_column( $columns ) {
-				$columns['translation-stats'] = _x( 'Translation Stats', 'Column label', 'translation-stats' );
+				// Check if user locale is not 'en_US'.
+				if ( get_user_locale() !== 'en_US' ) {
+					$columns['translation-stats'] = _x( 'Translation Stats', 'Column label', 'translation-stats' );
+				}
 				return $columns;
 			}
 
@@ -55,7 +58,7 @@ if ( ! class_exists( 'Translation_Stats' ) ) {
 		 */
 		function ts_register_plugin_styles( $hook ) {
 			// Loads plugin style sheets only in the plugins page.
-			if ( 'plugins.php' != $hook ) {
+			if ( 'plugins.php' !== $hook ) {
 				return;
 			};
 			wp_register_style( 'translation-stats', plugins_url( '../css/admin.css', __FILE__ ), false, '0.6.4' );
@@ -159,10 +162,10 @@ if ( ! class_exists( 'Translation_Stats' ) ) {
 
 			// Add Translation Stats if plugin is on wordpress.org and if user Locale isn't 'en_US'.
 			// Check if is in column 'translation-stats'.
-			if ( 'translation-stats' == $column_name ) {
+			if ( 'translation-stats' === $column_name ) {
 
 				// Check if user locale is not 'en_US'.
-				if ( get_user_locale() != 'en_US' ) {
+				if ( get_user_locale() !== 'en_US' ) {
 
 					$project_slug = $this->ts_plugin_metadata( $plugin_file, 'slug' );
 
