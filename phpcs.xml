@@ -4,8 +4,6 @@
 
 	<!-- Exclude some files from being fixed. -->
 	<exclude-pattern>./includes/glotpress/</exclude-pattern>
-	<exclude-pattern>*.scss</exclude-pattern>
-	<exclude-pattern>*.css</exclude-pattern>
 
  	<!-- Include the WordPress Coding Standards. -->
 	<rule ref="WordPress">
