@@ -58,4 +58,4 @@ if ( ! class_exists( 'Translation_Stats_Options' ) ) {
 
 }
 
-new Translation_Stats_Options;
+new Translation_Stats_Options();

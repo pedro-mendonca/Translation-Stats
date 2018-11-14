@@ -19,10 +19,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Include class-files used by our plugin.
-require_once( dirname( __FILE__ ) . '/includes/class-translation-stats.php' );
-require_once( dirname( __FILE__ ) . '/includes/class-translation-stats-options.php' );
-// require_once( dirname( __FILE__ ) . '/includes/class-translation-stats-api.php' );
-// require_once( dirname( __FILE__ ) . '/includes/class-translation-stats-shortcode.php' );
-// require_once( dirname( __FILE__ ) . '/includes/class-translation-stats-widget.php' );
+require_once dirname( __FILE__ ) . '/includes/class-translation-stats.php';
 
-new Translation_Stats;
+/*
+require_once dirname( __FILE__ ) . '/includes/class-translation-stats-options.php';
+require_once dirname( __FILE__ ) . '/includes/class-translation-stats-api.php';
+require_once dirname( __FILE__ ) . '/includes/class-translation-stats-shortcode.php';
+require_once dirname( __FILE__ ) . '/includes/class-translation-stats-widget.php';
+*/
+
+new Translation_Stats();

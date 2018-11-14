@@ -27,3 +27,5 @@ if ( ! class_exists( 'Translation_Stats_API' ) ) {
 	}
 
 }
+
+new Translation_Stats_API();
