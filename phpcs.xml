@@ -60,6 +60,8 @@
 	-->
 	<config name="minimum_supported_wp_version" value="4.6"/>
 
+	<config name="ignore_warnings_on_exit" value="2"/>
+
 	<rule ref="WordPress.WP.I18n">
 		<properties>
 			<property name="text_domain" type="string" value="translation-stats"/>
