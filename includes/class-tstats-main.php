@@ -270,7 +270,7 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 				$url         = 'https://translate.wordpress.org/locale/' . $locale->slug . '/' . $variant . '/wp-plugins/' . $project_slug;
 				$locale_link = '<a href="' . esc_url( $url ) . '" _target="blank">' . $locale->native_name . '</a>';
 				/* translators: %s Language native name. */
-				echo sprintf( wp_kses_post( __( 'Translation for %s', 'translation-stats' ) ), $locale_link );
+				echo sprintf( wp_kses_post( __( 'Translation for %s', 'translation-stats' ) ), wp_kses_post( $locale_link ) );
 				?>
 			</div>
 			<div class="translation-stats-content notice-warning notice-alt">
