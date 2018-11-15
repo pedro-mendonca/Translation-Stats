@@ -2,50 +2,11 @@
 <ruleset name="Translation Stats">
 	<description>A custom set of PHPCS rules for plugin Translation Stats.</description>
 
-	<!-- Exclude some files from being fixed. -->
-	<exclude-pattern>./includes/glotpress/</exclude-pattern>
-
  	<!-- Include the WordPress Coding Standards. -->
 	<rule ref="WordPress">
 		<!--
 		<exclude name="WordPress.Files.FileName"/>
 		-->
-	</rule>
-
-	<!-- Include the WordPress-Core standard. -->
-	<rule ref="WordPress-Core"/>
-
-	<!-- Let's also check that everything is properly documented. -->
-	<rule ref="WordPress-Docs"/>
-
-	<!-- Include the WordPress-Extra standard. -->
-	<rule ref="WordPress-Extra">
-
-		<!--
-		We may want a middle ground though. The best way to do this is add the
-		entire ruleset, then rule by rule, remove ones that don't suit a project.
-		We can do this by running `phpcs` with the '-s' flag, which allows us to
-		see the names of the sniffs reporting errors.
-		Once we know the sniff names, we can opt to exclude sniffs which don't
-		suit our project like so.
-		The below two examples just show how you can exclude rules.
-		They are not intended as advice about which sniffs to exclude.
-		-->
-
-		<!--
-		<exclude name="WordPress.WhiteSpace.ControlStructureSpacing"/>
-		<exclude name="WordPress.Security.EscapeOutput"/>
-		-->
-
-		<!-- Even though the VIP sniffs are not included in Extra, this will remove them from the scan. -->
-		<exclude name="WordPress.VIP"/>
-	</rule>
-
-	<rule ref="WordPress.PHP.DiscouragedPHPFunctions">
-		<!-- From "VIP": The obfuscation group is excluded as there are plenty of legitimate uses for the base64 functions. -->
-		<properties>
-			<property name="exclude" type="array" value="obfuscation"/>
-		</properties>
 	</rule>
 
 	<!--
@@ -56,9 +17,6 @@
 	the wiki:
 	https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards/wiki/Customizable-sniff-properties
 	-->
-	<config name="minimum_supported_wp_version" value="4.6"/>
-
-	<config name="ignore_warnings_on_exit" value="2"/>
 
 	<rule ref="WordPress.WP.I18n">
 		<properties>
@@ -71,6 +29,17 @@
 			<property name="prefixes" type="array" value="tstats"/>
 		</properties>
 	</rule>
+
+	<file>.</file>
+
+	<!-- Exclude some files from being fixed. -->
+	<exclude-pattern>./includes/glotpress/</exclude-pattern>
+
+	<arg name="extensions" value="php,css"/>
+
+	<arg name="report" value="summary,source,full"/>
+
+	<config name="ignore_warnings_on_exit" value="2"/>
 
 	<!--
 	#############################################################################
