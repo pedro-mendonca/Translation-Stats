@@ -2,12 +2,32 @@
 <ruleset name="Translation Stats">
 	<description>A custom set of PHPCS rules for plugin Translation Stats.</description>
 
- 	<!-- Include the WordPress Coding Standards. -->
+	<!-- Include the WordPress Coding Standards. -->
 	<rule ref="WordPress">
 		<!--
 		<exclude name="WordPress.Files.FileName"/>
 		-->
+		<!-- Exclude temporarily. -->
+		<exclude name="WordPress.PHP.StrictComparisons.LooseComparison"/>
 	</rule>
+
+	<!-- Throws errors if tabs are used for indentation. -->
+	<!--
+	<rule ref="Generic.WhiteSpace.DisallowTabIndent"/>
+	-->
+
+	<!-- Throws errors if spaces are used for indentation other than precision indentation. -->
+	<rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/>
+
+	<!-- Excludes errors if tabs are used for indentation. -->
+	<!--
+	<exclude name="Generic.WhiteSpace.DisallowTabIndent"/>
+	-->
+
+	<!-- Excludes errors if spaces are used for indentation other than precision indentation. -->
+	<!--
+	<exclude name="Generic.WhiteSpace.DisallowSpaceIndent"/>
+	-->
 
 	<!--
 	To get the optimal benefits of using WPCS, we should add a couple of
@@ -20,26 +40,45 @@
 
 	<rule ref="WordPress.WP.I18n">
 		<properties>
+			<!-- Set the Text Domain. -->
 			<property name="text_domain" type="string" value="translation-stats"/>
 		</properties>
 	</rule>
 
 	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
 		<properties>
+			<!-- Set the global prefix. -->
 			<property name="prefixes" type="array" value="tstats"/>
 		</properties>
 	</rule>
 
+	<!-- Files to check. -->
 	<file>.</file>
 
 	<!-- Exclude some files from being fixed. -->
 	<exclude-pattern>./includes/glotpress/</exclude-pattern>
 
+	<!-- A comma separated list of file extensions to check. -->
 	<arg name="extensions" value="php,css"/>
 
+	<!-- The report types to print. -->
 	<arg name="report" value="summary,source,full"/>
 
+	<!-- Show sniff codes in all reports. -->
+	<arg value="s"/>
+
+	<!-- Show progress of the run. -->
+	<arg value="p"/>
+
+	<!-- Enable colors in report -->
+	<arg name="colors"/>
+
+	<arg name="tab-width" value="4"/>
+
+	<!-- Ignore warnings severity level when generating the exit code. -->
+	<!--
 	<config name="ignore_warnings_on_exit" value="2"/>
+	-->
 
 	<!--
 	#############################################################################
