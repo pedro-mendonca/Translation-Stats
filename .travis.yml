@@ -49,14 +49,13 @@ before_install:
   - if [[ "$SNIFF" == "1" ]]; then $PHPCS_DIR/bin/phpcs --config-set installed_paths $SNIFFS_DIR; fi
   # After CodeSniffer install you should refresh your path.
   - if [[ "$SNIFF" == "1" ]]; then phpenv rehash; fi
+  # Set the path/file to the installed coding standards.
+  - if [[ "$SNIFF" == "1" ]]; then export CODING_STANDARDS=./phpcs.xml; fi
 
 script:
   # Search for PHP syntax errors.
   - find -L . -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
-  # Run against WordPress Coding Standards.
-  # If the custom ruleset is named `.phpcs.xml`, `phpcs.xml`, `.phpcs.xml.dist` or `phpcs.xml.dist`
-  # and, like the travis script, is in the root of the project, you can leave
-  # out the `--standard=` part of the command.
-  # - if [[ "$SNIFF" == "1" ]]; then $PHPCS_DIR/bin/phpcs -p . --standard=WordPress; fi
-  - if [[ "$SNIFF" == "1" ]]; then $PHPCS_DIR/bin/phpcs -i ; fi
-  - if [[ "$SNIFF" == "1" ]]; then $PHPCS_DIR/bin/phpcs -p -s ; fi
+  # Show a list of installed coding standards.
+  - if [[ "$SNIFF" == "1" ]]; then $PHPCS_DIR/bin/phpcs -i --standard=$CODING_STANDARDS; fi
+  # Run against installed coding standards.
+  - if [[ "$SNIFF" == "1" ]]; then $PHPCS_DIR/bin/phpcs --standard=$CODING_STANDARDS; fi
