@@ -6,9 +6,10 @@
 [![PHP from Travis config](https://img.shields.io/travis/php-v/pedro-mendonca/translation-stats.svg)](https://travis-ci.org/pedro-mendonca/translation-stats)
 [![Wordpress Plugin: Tested WP Version](https://img.shields.io/wordpress/plugin/tested/translation-stats.svg)](https://wordpress.org/plugins/translation-stats/advanced/)
 [![Wordpress Plugin Downloads](https://img.shields.io/wordpress/plugin/dt/translation-stats.svg)](https://wordpress.org/plugins/translation-stats/advanced/)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://paypal.me/pedromendonca/)
 
 **Contributors:** pedromendonca  
-**Donate link:** [paypal.me/pedromendonca](http://paypal.me/pedromendonca/)  
+**Donate link:** [paypal.me/pedromendonca](https://paypal.me/pedromendonca/)  
 **Tags:** internationalization, i18n, localization, l10n, translation, statistics, glotpress, dark mode  
 **Requires at least:** 4.9  
 **Tested up to:** 4.9.8  
