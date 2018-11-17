@@ -2,10 +2,10 @@
 
 // easeOutCubic - Generated in https://matthewlein.com/tools/ceaser
 @mixin transition-easeOutCubic( $transition-property, $transition-duration, $transition-timing-function, $transition-delay ) { // easeOutCirc [transition-property] [transition-duration] [transition-timing-function] [transition-delay]
-  -webkit-transition: $transition-property $transition-duration $transition-timing-function $transition-delay;
-  -moz-transition: $transition-property $transition-duration $transition-timing-function $transition-delay;
-  -o-transition: $transition-property $transition-duration $transition-timing-function $transition-delay;
-  transition: $transition-property $transition-duration $transition-timing-function $transition-delay;
+	-webkit-transition: $transition-property $transition-duration $transition-timing-function $transition-delay;
+	-moz-transition: $transition-property $transition-duration $transition-timing-function $transition-delay;
+	-o-transition: $transition-property $transition-duration $transition-timing-function $transition-delay;
+	transition: $transition-property $transition-duration $transition-timing-function $transition-delay;
 }
 
 // Configuration of Global Border Radius.
