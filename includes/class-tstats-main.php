@@ -174,7 +174,7 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 						$this->tstats_notice_message( esc_html__( 'Plugin not found on WordPress.org', 'translation-stats' ), 'error' ); // Todo: Add alternative GlotPress API.
 					} else {
 						// Check if translation project is on WordPress.org.
-						if ( $this->tstats_plugin_project_on_translate_wporg( $project_slug ) != true ) {
+						if ( ! $this->tstats_plugin_project_on_translate_wporg( $project_slug ) ) {
 							$this->tstats_notice_message( esc_html__( 'Translation project not found on WordPress.org', 'translation-stats' ), 'error' );
 						} else {
 							$this->tstats_render_plugin_stats( $project_slug );
