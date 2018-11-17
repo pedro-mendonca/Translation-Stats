@@ -69,7 +69,9 @@
 	<!-- Enable colors in report -->
 	<arg name="colors"/>
 
+	<!--
 	<arg name="tab-width" value="4"/>
+	-->
 
 	<!-- Ignore warnings severity level when generating the exit code. -->
 	<!--
