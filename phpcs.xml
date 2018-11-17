@@ -7,9 +7,6 @@
 		<!--
 		<exclude name="WordPress.Files.FileName"/>
 		-->
-		<!-- Exclude temporarily.
-		<exclude name="WordPress.PHP.StrictComparisons.LooseComparison"/>
-		-->
 	</rule>
 
 	<!-- Throws errors if tabs are used for indentation. -->
@@ -21,9 +18,7 @@
 	<rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/>
 
 	<!-- Excludes errors if tabs are used for indentation. -->
-	<!--
 	<exclude name="Generic.WhiteSpace.DisallowTabIndent"/>
-	-->
 
 	<!-- Excludes errors if spaces are used for indentation other than precision indentation. -->
 	<!--
