@@ -105,7 +105,7 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 		public function tstats_plugin_metadata( $plugin_file, $metadata ) {
 			$plugin_state = get_site_transient( 'update_plugins' );
 			// Check if plugin is on WordPress.org.
-			if ( ! empty( $this->tstats_plugin_on_wporg( $plugin_file ) ) ) {
+			if ( $this->tstats_plugin_on_wporg( $plugin_file ) ) {
 				if ( isset( $plugin_state->response[ $plugin_file ]->$metadata ) ) {
 					$plugin_metadata = $plugin_state->response[ $plugin_file ]->$metadata;
 				}
@@ -170,7 +170,7 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 					$project_slug = $this->tstats_plugin_metadata( $plugin_file, 'slug' );
 
 					// Check if plugin is on WordPress.org.
-					if ( empty( $this->tstats_plugin_on_wporg( $plugin_file ) ) ) {
+					if ( ! $this->tstats_plugin_on_wporg( $plugin_file ) ) {
 						$this->tstats_notice_message( esc_html__( 'Plugin not found on WordPress.org', 'translation-stats' ), 'error' ); // Todo: Add alternative GlotPress API.
 					} else {
 						// Check if translation project is on WordPress.org.
