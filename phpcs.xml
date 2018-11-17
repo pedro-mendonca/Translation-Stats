@@ -2,6 +2,34 @@
 <ruleset name="Translation Stats">
 	<description>A custom set of PHPCS rules for plugin Translation Stats.</description>
 
+	<!-- Files to check. -->
+	<file>.</file>
+
+	<!-- Exclude some files from being fixed. -->
+	<exclude-pattern>./includes/glotpress/</exclude-pattern>
+
+	<!-- A comma separated list of file extensions to check. -->
+	<arg name="extensions" value="php,css"/>
+
+	<!-- The report types to print. -->
+	<arg name="report" value="summary,source,full"/>
+
+	<!-- Show sniff codes in all reports. -->
+	<arg value="s"/>
+
+	<!-- Show progress of the run. -->
+	<arg value="p"/>
+
+	<!-- Enable colors in report -->
+	<arg name="colors"/>
+
+	<arg name="tab-width" value="2"/>
+
+	<!-- Ignore warnings severity level when generating the exit code. -->
+	<!--
+	<config name="ignore_warnings_on_exit" value="2"/>
+	-->
+
 	<!-- Include the WordPress Coding Standards. -->
 	<rule ref="WordPress">
 		<!--
@@ -47,36 +75,6 @@
 			<property name="prefixes" type="array" value="tstats"/>
 		</properties>
 	</rule>
-
-	<!-- Files to check. -->
-	<file>.</file>
-
-	<!-- Exclude some files from being fixed. -->
-	<exclude-pattern>./includes/glotpress/</exclude-pattern>
-
-	<!-- A comma separated list of file extensions to check. -->
-	<arg name="extensions" value="php,css"/>
-
-	<!-- The report types to print. -->
-	<arg name="report" value="summary,source,full"/>
-
-	<!-- Show sniff codes in all reports. -->
-	<arg value="s"/>
-
-	<!-- Show progress of the run. -->
-	<arg value="p"/>
-
-	<!-- Enable colors in report -->
-	<arg name="colors"/>
-
-	<!--
-	<arg name="tab-width" value="4"/>
-	-->
-
-	<!-- Ignore warnings severity level when generating the exit code. -->
-	<!--
-	<config name="ignore_warnings_on_exit" value="2"/>
-	-->
 
 	<!--
 	#############################################################################
