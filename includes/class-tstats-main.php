@@ -208,28 +208,6 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 
 
 		/**
-		 * Check if translation project exist without /subproject slug (e.g. https://translate.wordpress.org/api/projects/wp-plugins/wp-seo-acf-content-analysis).
-		 *
-		 * @param string $project_slug  Plugin Slug (e.g. 'plugin-slug').
-		 * @return string               Returns 'true' if the translation project exist on WordPress.org.
-		 */
-		public function tstats_check_plugin_project_on_translate_wporg( $project_slug ) {
-			// Check project transients.
-			$on_wporg = get_transient( 'translation_stats_plugin_' . $project_slug );
-			if ( false === $on_wporg ) {
-				$json = $this->tstats_translate_api_get( $project_slug );
-				if ( is_wp_error( $json ) || wp_remote_retrieve_response_code( $json ) !== 200 ) {
-					$on_wporg = false;
-				} else {
-					$on_wporg = true;
-				}
-				set_transient( 'translation_stats_plugin_' . $project_slug, $on_wporg, MONTH_IN_SECONDS );
-			}
-			return $on_wporg;
-		}
-
-
-		/**
 		 * Check if translation subproject exist (e.g. https://translate.wordpress.org/api/projects/wp-plugins/wp-seo-acf-content-analysis/stable).
 		 *
 		 * @param string $project_slug     Plugin Slug (e.g. 'plugin-slug').
