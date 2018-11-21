@@ -96,7 +96,7 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 		 * Get plugin metadata, if the plugin exists on WordPress.org.
 		 *
 		 * Example:
-		 * $plugin_metadata = $this->plugin_data( $plugin_file, 'metadata' ) (e.g. 'slug').
+		 * $plugin_metadata = $this->tstats_plugin_metadata( $plugin_file, 'metadata' ) (e.g. 'slug').
 		 *
 		 * @param string $plugin_file       Plugin ID ( e.g. 'slug/plugin-name.php' ).
 		 * @param string $metadata          Metadata field ( e.g. 'slug' ).
