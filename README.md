@@ -1,7 +1,7 @@
 # Translation Stats #
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/bcd1b44a1d6542e2b75b7b479ce56804)](https://www.codacy.com/app/pedro-mendonca/Translation-Stats?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=pedro-mendonca/Translation-Stats&amp;utm_campaign=Badge_Grade)
 [![Build Status](https://travis-ci.org/pedro-mendonca/Translation-Stats.svg?branch=master)](https://travis-ci.org/pedro-mendonca/Translation-Stats)
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/bcd1b44a1d6542e2b75b7b479ce56804)](https://www.codacy.com/app/pedro-mendonca/Translation-Stats?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=pedro-mendonca/Translation-Stats&amp;utm_campaign=Badge_Grade)
 [![RIPS CodeRisk](https://coderisk.com/wp/plugin/translation-stats/badge "RIPS CodeRisk")](https://coderisk.com/wp/plugin/translation-stats)
 [![PHP from Travis config](https://img.shields.io/travis/php-v/pedro-mendonca/Translation-Stats.svg)](https://travis-ci.org/pedro-mendonca/Translation-Stats)
 [![Wordpress Plugin: Tested WP Version](https://img.shields.io/wordpress/plugin/tested/translation-stats.svg)](https://wordpress.org/plugins/translation-stats/advanced/)
@@ -42,10 +42,13 @@ This plugin is properly prepared for localization.
 <img align="right" width="240" height="240" src="/assets/icon-256x256.png">
 
 ### What are the plugin subprojects? ###
-*   **Development** - Translation of the *Development* version of the plugin
-*   **Development Readme** - Readme of the *Development* version of the plugin page on [wp.org/plugins](https://wordpress.org/plugins/)
-*   **Stable** - Translation of the *Stable* version of the plugin
-*   **Stable Readme** - Readme of the *Stable* version of the plugin page on [wp.org/plugins](https://wordpress.org/plugins/)
+
+| Subproject | Description |
+|---|---|
+| **Development** | Translation of the *Development* version of the plugin |
+| **Development Readme** | Readme of the *Development* version of the plugin page on [wp.org/plugins](https://wordpress.org/plugins/) |
+| **Stable** | Translation of the *Stable* version of the plugin |
+| **Stable Readme** | Readme of the *Stable* version of the plugin page on [wp.org/plugins](https://wordpress.org/plugins/) |
 
 ### How can I translate a plugin? ###
 *   Register and login in [wp.org](https://login.wordpress.org/)
