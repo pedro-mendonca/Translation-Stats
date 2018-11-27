@@ -39,8 +39,6 @@ This plugin is properly prepared for localization.
 
 ## Frequently Asked Questions ##
 
-<img align="right" width="240" height="240" src="/assets/icon-256x256.png">
-
 ### What are the plugin subprojects? ###
 
 | Subproject | Description |
