@@ -62,7 +62,7 @@ matrix:
 before_install:
   # Speed up build time by disabling Xdebug.
   # https://johnblackbourn.com/reducing-travis-ci-build-times-for-wordpress-projects/
-  - phpenv config-rm xdebug.ini || echo "xdebug not available"
+  - phpenv config-rm xdebug.ini || echo "xdebug not available for PHP $TRAVIS_PHP_VERSION"
   - if [[ "$SNIFF" == "1" ]]; then export PHPCS_DIR=/tmp/phpcs; fi
   - if [[ "$SNIFF" == "1" ]]; then export SNIFFS_DIR=/tmp/sniffs; fi
   # Install PHP_CodeSniffer.
