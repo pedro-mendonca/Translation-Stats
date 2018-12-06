@@ -52,6 +52,12 @@ matrix:
   - name: "PHP 7.2 / Latest WordPress multisite"
     php: "7.2"
     env: WP_VERSION=latest WP_MULTISITE=1 SNIFF=1
+  - name: "PHP 7.3 / Latest WordPress"
+    php: "7.3"
+    env: WP_VERSION=latest WP_MULTISITE=0 SNIFF=1
+  - name: "PHP 7.3 / Latest WordPress multisite"
+    php: "7.3"
+    env: WP_VERSION=latest WP_MULTISITE=1 SNIFF=1
 
 before_install:
   # Speed up build time by disabling Xdebug.
