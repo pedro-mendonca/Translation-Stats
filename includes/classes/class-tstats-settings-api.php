@@ -31,51 +31,26 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 		/**
 		 * Adds settings field.
 		 *
-		 * @param array $field  Array of field data.
+		 * @param array $args  Array of field arguments.
 		 */
-		public function tstats_add_settings_field( $field ) {
+		public function tstats_add_settings_field( $args ) {
 
-			switch( $field['type'] ) {
-				/*
-				case 'text': // If it is a text field
+			switch ( $args['type'] ) {
+				case 'text': // If it's a text field.
 					break;
-				case 'textarea': // If it is a textarea
+				case 'textarea': // If it's a textarea.
 					break;
-				*/
 				case 'checkbox': // If it's a checkbox.
-					$this->tstats_add_settings_checkbox( $field );
+					$this->tstats_add_settings_checkbox( $args );
 					break;
 				case 'button': // If it's a button.
-					$this->tstats_add_settings_button( $field );
+					$this->tstats_add_settings_button( $args );
 					break;
 				case 'select': // If it's a select dropdown.
-					$this->tstats_add_settings_select( $field );
+					$this->tstats_add_settings_select( $args );
 					break;
 			}
 		}
-
-
-		/**
-		 * Display settings checkbox.
-		 *
-		 * @param array $args  Array of checkbox arguments: 'id' and 'label'.
-		 */
-		/*
-		public function tstats_field_render( $arguments ) {
-
-			switch( $arguments['type'] ){
-				case 'text':
-					echo 'This is the first description here!';
-					break;
-				case 'checkbox':
-					$this->tstats_input_checkbox_render ( $arguments );
-					break;
-				case 'select':
-					echo 'Third time is the charm!';
-					break;
-			}
-		}
-		*/
 
 
 		/**
@@ -184,13 +159,7 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 			</label>
 			<p class='description'><?php echo esc_html( $description ); ?></p>
 			<?php
-			/*
-			if( $helper ) {
-				printf( '<span class="helper"> %s</span>', $helper ); // Show it.
-			}
-			*/
 			$this->tstats_debug->tstats_debug_setting_field( $id, $option, $default, 'info', false );
-			// Todo: Add disabled()
 		}
 
 
@@ -248,16 +217,15 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 			?>
 			<label>
 				<?php
-				wp_dropdown_languages(
-					$args = array(
-						'id'                          => $id,    // ID attribute of the select element. Default 'locale'.
-						'name'                        => $id,    // Name attribute of the select element. Default 'locale'.
-						'selected'                    => $value, // Language which should be selected.
-						'echo'                        => '1',    // Whether to echo the generated markup. Accepts 0, 1, or their boolean equivalents. Default 1.
-						'show_available_translations' => true,   // Whether to show available translations. Default true.
-						'show_option_site_default'    => true,   // Whether to show an option to fall back to the site's locale. Default false.
-					)
+				$args = array(
+					'id'                          => $id,    // ID attribute of the select element. Default 'locale'.
+					'name'                        => $id,    // Name attribute of the select element. Default 'locale'.
+					'selected'                    => $value, // Language which should be selected.
+					'echo'                        => '1',    // Whether to echo the generated markup. Accepts 0, 1, or their boolean equivalents. Default 1.
+					'show_available_translations' => true,   // Whether to show available translations. Default true.
+					'show_option_site_default'    => true,   // Whether to show an option to fall back to the site's locale. Default false.
 				);
+				wp_dropdown_languages( $args );
 				echo ' ' . esc_html( $label );
 				?>
 			</label>
@@ -297,11 +265,6 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 			?>
 			<p class='description'><?php echo esc_html( $description ); ?></p>
 			<?php
-			/*
-			if( $helper ) {
-				printf( '<span class="helper"> %s</span>', $helper ); // Show it.
-			}
-			*/
 		}
 	}
 }

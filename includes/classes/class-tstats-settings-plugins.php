@@ -59,7 +59,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 					<tr>
 						<td scope="col" id="cb" class="manage-column column-cb check-column">
 							<?php
-							$id    = TSTATS_WP_OPTION . '[all_plugins]';
+							$id      = TSTATS_WP_OPTION . '[all_plugins]';
 							$checked = empty( $options['all_plugins'] ) ? '' : true;
 							?>
 							<label class="screen-reader-text"><?php esc_html_e( 'Select All', 'translation-stats' ); ?></label>
@@ -79,7 +79,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 						foreach ( $subprojects as $subproject ) {
 							?>
 							<th scope="col" id="column-<?php echo esc_attr( $subproject['slug'] ); ?>" class="manage-column column-<?php echo esc_attr( $subproject['slug'] ); ?> column-subproject">
-								<?php esc_html_e( $subproject['name'] ); ?>
+								<?php echo esc_html( $subproject['name'] ); ?>
 							</th>
 							<?php
 						}
@@ -146,7 +146,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 
 					foreach ( $all_plugins as $key => $plugin ) {
 						$plugin_slug = $this->tstats_translate_api->tstats_plugin_metadata( $key, 'slug' );
-						$field_name  = TSTATS_WP_OPTION . '[' . $plugin_slug . ']' . '[enabled]';
+						$field_name  = TSTATS_WP_OPTION . '[' . $plugin_slug . '][enabled]';
 						// $disabled    = empty( $plugin_slug ) ? true : '';
 						// $checked     = empty( $options[ $plugin_slug ] ['enabled'] ) ? '' : true;
 						// $status      = empty( $plugin_slug ) ? 'inactive' : 'active';
@@ -158,10 +158,10 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 						} else {
 							$disabled = false;
 							if ( empty( $options[ $plugin_slug ] ['enabled'] ) ) {
-								$status = 'inactive';
+								$status  = 'inactive';
 								$checked = false;
 							} else {
-								$status = 'active';
+								$status  = 'active';
 								$checked = true;
 							}
 						}
@@ -184,12 +184,13 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 								<?php
 							}
 							foreach ( $subprojects as $subproject ) {
-								$field_name       = TSTATS_WP_OPTION . '[' . $plugin_slug . ']' . '[' . $subproject['slug'] . ']';
-								$checked  = empty( $options[ $plugin_slug ] [ $subproject['slug'] ] ) ? '' : true;
+								$field_name  = TSTATS_WP_OPTION . '[' . $plugin_slug . '][' . $subproject['slug'] . ']';
+								$checked     = empty( $options[ $plugin_slug ] [ $subproject['slug'] ] ) ? '' : true;
+								$plugin_item = ! $disabled ? 'plugin_' . $plugin_item : '';
 								?>
 								<td class="check-column plugin-subproject">
 									<label class="screen-reader-text"><?php esc_html_e( 'Select Subproject', 'translation-stats' ); ?></label>
-									<input name="<?php echo esc_attr( $field_name ); ?>" <?php checked( $checked, true ); ?> <?php disabled( $disabled, true ); ?> class="checkbox-subproject <?php if ( ! $disabled ) { echo esc_attr( 'plugin_' . $plugin_item ); } ?>" type="checkbox" value="true" />
+									<input name="<?php echo esc_attr( $field_name ); ?>" <?php checked( $checked, true ); ?> <?php disabled( $disabled, true ); ?> class="checkbox-subproject <?php echo esc_attr( $plugin_item ); ?>" type="checkbox" value="true" />
 								</td>
 								<?php
 							}

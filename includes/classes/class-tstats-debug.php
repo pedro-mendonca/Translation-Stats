@@ -43,9 +43,10 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 */
 		public function tstats_debug( $type, $inline, $debug ) {
 			if ( TSTATS_DEBUG || $debug ) {
+				$inline = $inline ? 'inline' : '';
 				?>
 				<br/>
-				<div class="tstats-debug-block notice notice-alt <?php if ( $inline ) { echo 'inline'; } ?> notice-<?php echo esc_html( $type ); ?>">
+				<div class="tstats-debug-block notice notice-alt <?php echo esc_html( $inline ); ?> notice-<?php echo esc_html( $type ); ?>">
 					<?php
 					// Show server info.
 					$this->tstats_debug_server();
@@ -77,7 +78,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 				printf(
 					/* translators: %s Version Number. */
 					esc_html__( 'PHP Version: %s', 'translation-stats' ),
-					'<code>' . phpversion() . '</code>'
+					'<code>' . esc_html( phpversion() ) . '</code>'
 				);
 				?>
 			</p>
@@ -205,20 +206,45 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 * notice-success – success message displayed with a green border.
 		 * notice-info - info message displayed with a blue border.
 		 *
-		 * @param string $id     Setting ID.
-		 * @param string $value  Setting Value.
-		 * @param string $type   WordPress core notice types ( 'error', 'warning', 'success' and 'info' ).
-		 * @param string $debug  True or false value to activate debug message.
+		 * @param string $id       Setting ID.
+		 * @param string $value    Setting Value.
+		 * @param string $default  Setting Default.
+		 * @param string $type     WordPress core notice types ( 'error', 'warning', 'success' and 'info' ).
+		 * @param string $debug    True or false value to activate debug message.
 		 */
 		public function tstats_debug_setting_field( $id, $value, $default, $type, $debug ) {
 			if ( TSTATS_DEBUG || $debug ) {
 				?>
 				<div class="tstats-debug-block notice notice-alt inline notice-<?php echo esc_html( $type ); ?>">
-					<p>ID: <code><?php echo esc_html( $id ); ?></code></p>
-					<p>Value: <code><?php echo esc_html( $value ); ?></code></p>
-					<p>Default: <code><?php echo esc_html( $default ); ?></code></p>
+					<p>
+						<?php
+						printf(
+							/* translators: %s Setting ID. */
+							esc_html__( 'ID: %s', 'translation-stats' ),
+							'<code>' . esc_html( $id ) . '</code>'
+						);
+						?>
+					</p>
+					<p>
+						<?php
+						printf(
+							/* translators: %s Setting Value. */
+							esc_html__( 'Value: %s', 'translation-stats' ),
+							'<code>' . esc_html( $value ) . '</code>'
+						);
+						?>
+					</p>
+					<p>
+						<?php
+						printf(
+							/* translators: %s Setting Default. */
+							esc_html__( 'Default: %s', 'translation-stats' ),
+							'<code>' . esc_html( $default ) . '</code>'
+						);
+						?>
+					</p>
 				</div>
-				<?
+				<?php
 			}
 		}
 

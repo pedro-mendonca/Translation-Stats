@@ -136,13 +136,6 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 				TSTATS_WP_OPTION                       // The WordPress option to store Translation Stats settings.
 			);
 
-			/*
-			register_setting(
-				'tstats_settings_advanced_debug', // The menu page on which to display this section. Should match $menu_slug.
-				TSTATS_WP_OPTION                  // The WordPress option to store Translation Stats settings.
-			);
-			*/
-
 		}
 
 
@@ -153,10 +146,13 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 
 			$section = 'tstats_settings_general';
 
-			// esc_html_e( 'General settings for Translation Stats', 'translation-stats' );
+			/*
+			Section description.
+			esc_html_e( 'General settings for Translation Stats', 'translation-stats' );
+			*/
 
 			$this->tstats_settings_api->tstats_add_settings_field(
-				$field = array(
+				array(
 					'section'     => $section,
 					'id'          => 'show_warnings',
 					'type'        => 'checkbox',
@@ -192,7 +188,7 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 			*/
 
 			$this->tstats_settings_api->tstats_add_settings_field(
-				$field = array(
+				array(
 					'section'        => $section,
 					'id'             => 'translation_language',
 					'type'           => 'select',
@@ -216,10 +212,13 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 
 			$section = 'tstats_settings_advanced';
 
-			// esc_html_e( 'Advanced settings for Translation Stats', 'translation-stats' );
+			/*
+			Section description.
+			esc_html_e( 'Advanced settings for Translation Stats', 'translation-stats' );
+			*/
 
 			$this->tstats_settings_api->tstats_add_settings_field(
-				$field = array(
+				array(
 					'section'     => $section,
 					'id'          => 'delete_data_on_uninstall',
 					'class'       => '',
@@ -234,7 +233,7 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 			);
 
 			$this->tstats_settings_api->tstats_add_settings_field(
-				$field = array(
+				array(
 					'section'      => $section,
 					'id'           => 'reset_settings',
 					'name'         => 'reset_settings',
@@ -260,10 +259,13 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 
 			$section = 'tstats_settings_advanced_transients';
 
-			// esc_html_e( 'Transient settings for Translation Stats', 'translation-stats' );
+			/*
+			Section description.
+			esc_html_e( 'Transient settings for Translation Stats', 'translation-stats' );
+			*/
 
 			$this->tstats_settings_api->tstats_add_settings_field(
-				$field = array(
+				array(
 					'section'        => $section,
 					'id'             => 'transients_expiration',
 					'type'           => 'select',
@@ -284,7 +286,7 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 			);
 
 			$this->tstats_settings_api->tstats_add_settings_field(
-				$field = array(
+				array(
 					'section'      => $section,
 					'id'           => 'delete_transients',
 					'name'         => 'delete_transients',
@@ -329,10 +331,16 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 * Callback function for Reset Settings.
 		 */
 		public function tstats_settings_reset_callback() {
-			if ( isset ( $_POST['reset_settings'] ) ) {
+			if ( isset( $_POST['reset_settings'] ) ) {
 				$this->tstats_nonce_verify_callback();
-				update_option( TSTATS_WP_OPTION, $this->tstats_settings_defaults() );
-				// delete_option( TSTATS_WP_OPTION );
+
+				// Choose 'load-defaults' or 'delete'.
+				$action = 'load-defaults';
+				if ( 'load-defaults' === $action ) {
+					update_option( TSTATS_WP_OPTION, $this->tstats_settings_defaults() );
+				} elseif ( 'delete' === $action ) {
+					delete_option( TSTATS_WP_OPTION );
+				}
 				?>
 				<div class="notice notice-success is-dismissible">
 					<p><strong><?php esc_html_e( 'Settings restored successfully.', 'translation-stats' ); ?></strong></p>
@@ -349,7 +357,7 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 * Callback function for Delete Transients.
 		 */
 		public function tstats_transients_delete_callback() {
-			if ( isset ( $_POST['delete_transients'] ) ) {
+			if ( isset( $_POST['delete_transients'] ) ) {
 				$this->tstats_nonce_verify_callback();
 				$this->tstats_transients->tstats_delete_transients( TSTATS_TRANSIENTS_PREFIX );
 				?>
@@ -381,7 +389,6 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		public function tstats_settings_defaults() {
 			$defaults = array(
 				'show_warnings'            => true,
-				// 'notify_new_strings'       => false,
 				'translation_language'     => 'site-default',
 				'delete_data_on_uninstall' => true,
 				'transients_expiration'    => DAY_IN_SECONDS,
@@ -429,8 +436,8 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 								/* translators: Plugin Name and version - Do not translate! */
 								esc_html__( 'Translation Stats %s', 'translation-stats' ),
 								'<small>v.' . esc_html( TSTATS_VERSION ) . '</small>'
-							 );
-							 ?>
+							);
+							?>
 						</span>
 					</h2>
 
@@ -466,9 +473,6 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 								<?php
 								$section = 'tstats_settings_advanced_debug';
 								do_settings_sections( $section );
-								/*
-								settings_fields( $section );
-								*/
 								?>
 							</div>
 							<?php } ?>
