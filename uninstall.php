@@ -54,9 +54,13 @@ function tstats_uninstall() {
  */
 function tstats_uninstall_delete_transients() {
 	global $wpdb;
-	$query = "SELECT option_name AS name, option_value AS value FROM $wpdb->options WHERE option_name LIKE '%_transient_" . $search . "%'";
 
-	$tstats_transients = $wpdb->get_results( $query );
+	$tstats_transients = $wpdb->get_results(
+		$wpdb->prepare(
+			"SELECT option_name AS name FROM $wpdb->options WHERE option_name LIKE %s",
+			'%_transient_' . $search . '%'
+		)
+	);
 	$tstats_transients = array_map(
 		function( $o ) {
 			return $o->name;
