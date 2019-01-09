@@ -69,9 +69,16 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 ## Screenshots ##
 
 1. Translation Stats shown in WordPress plugins page
+![screenshot-1](./assets/screenshot-1.png)
+
 2. Translation Stats installed plugins list
+![screenshot-2](./assets/screenshot-2.png)
+
 3. Translation Stats settings tab
+![screenshot-3](./assets/screenshot-3.png)
+
 4. Translation Stats tools tab
+![screenshot-4](./assets/screenshot-4.png)
 
 ## Changelog ##
 
