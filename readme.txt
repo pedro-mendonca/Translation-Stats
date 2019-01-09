@@ -53,6 +53,13 @@ Yes you can! If you want to translate this plugin to your language, please [clic
 = Can I contribute to this plugin? =
 Sure! You are welcome to report any issues or add feature suggestions on the [GitHub repository](https://github.com/pedro-mendonca/Translation-Stats).
 
+== Screenshots ==
+
+1. Translation Stats shown in WordPress plugins page
+2. Translation Stats installed plugins list
+3. Translation Stats settings tab
+4. Translation Stats tools tab
+
 == Changelog ==
 
 = 0.8 =
