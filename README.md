@@ -12,9 +12,9 @@
 **Donate link:** [paypal.me/pedromendonca](https://paypal.me/pedromendonca/)  
 **Tags:** internationalization, i18n, localization, l10n, translation, statistics, glotpress, dark mode  
 **Requires at least:** 4.9  
-**Tested up to:** 5.0.1  
+**Tested up to:** 5.0.2  
 **Requires PHP:** 5.4  
-**Stable tag:** 0.7.0  
+**Stable tag:** 0.8.0  
 **License:** GPLv2 or later  
 **License URI:** [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html)  
 
@@ -29,9 +29,9 @@ The translation stats are shown only for plugins that exist in [translate.wordpr
 ![GlotPress](./assets/banner-772x250.png)
 
 If a plugin doesn't have complete translation stats, you'll see a notice with one of the reasons bellow:
-- Plugin not found on WordPress.org
-- Translation project not found on WordPress.org
-- The plugin is not properly prepared for localization
+-   Plugin not found on WordPress.org
+-   Translation project not found on WordPress.org
+-   The plugin is not properly prepared for localization
 
 The color scheme of the translation stats bars is exactly same used in [GlotPress](https://wordpress.org/plugins/glotpress/) for consistency with the translation experience in [translate.wp.org](https://translate.wordpress.org/).
 
@@ -49,10 +49,10 @@ This plugin is properly prepared for localization.
 | **Stable Readme**      | Readme of the *Stable* version of the plugin page on [wp.org/plugins](https://wordpress.org/plugins/)      |
 
 ### How can I translate a plugin? ###
-- Register and login in [wp.org](https://login.wordpress.org/)
-- Click on the plugin subproject stats bar you want to translate
-- Read the Polyglots [Translator’s Handbook](https://make.wordpress.org/polyglots/handbook/)
-- Translate according the rules of your [Locale Translation Team](https://make.wordpress.org/polyglots/teams/)
+-   Register and login in [wp.org](https://login.wordpress.org/)
+-   Click on the plugin subproject stats bar you want to translate
+-   Read the Polyglots [Translator’s Handbook](https://make.wordpress.org/polyglots/handbook/)
+-   Translate according the rules of your [Locale Translation Team](https://make.wordpress.org/polyglots/teams/)
 
 ### Should I translate both Stable and Development? ###
 Since mid-April 2016, not only new strings but also edits are synced between dev and stable (both ways, only approved translations). When a plugin releases a new version all translations are copied from dev to stable. [Read more...](https://make.wordpress.org/polyglots/handbook/frequently-asked-questions/#should-i-translate-both-stable-and-dev)
@@ -68,15 +68,24 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
 ## Changelog ##
 
+### 0.8 ###
+-   Add Translation Stats settings page
+-   Add installed plugins table to select only the plugins you want to manage translation stats to reduce http requests
+-   Add option to enable or disable warnings of translation projects
+-   Add options to reset settings and clean cache to force update the translation stats
+-   Add option to specify the translation language you want
+-   Add option to choose to keep or delete plugin data on uninstall
+-   Add uninstall file
+
 ### 0.7 ###
-- Fix Translation Stats column show/hide logic
-- Use [WordPress Coding Standards](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards)
+-   Fix Translation Stats column show/hide logic
+-   Use [WordPress Coding Standards](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards)
 
 ### 0.6 ###
-- Add WordPress core notices styles to error messages
-- Add assets
-- Minor code improvements
-- Readme update
+-   Add WordPress core notices styles to error messages
+-   Add assets
+-   Minor code improvements
+-   Readme update
 
 ### 0.5 ###
-- Initial release.
+-   Initial release.

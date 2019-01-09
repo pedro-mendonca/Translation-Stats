@@ -146,3 +146,125 @@
 		}
 	}
 }
+
+tr:nth-child(even) {
+	/*
+	background-color: #f2f2f2
+	*/
+}
+
+.wp-plugin-list-table tr.disabled {
+	background-color: #f1f1f1;
+}
+
+.wp-plugin-list-table tr.disabled th {
+	border-left: 4px solid transparent;
+}
+
+input[type=checkbox][disabled] {
+	pointer-events: none;
+}
+
+.wp-plugin-list-table.plugins {
+	thead {
+		//white-space: nowrap;
+
+		.column-subproject {
+			//width: 10% !important;
+			width: 10em;
+			overflow: hidden;
+			text-align: center;
+			vertical-align: text-top;
+		}
+	}
+
+	tbody {
+		tr {
+			.check-column {
+				input[type="checkbox"] {
+					margin-top: 0;
+					margin-bottom: 0;
+					margin-right: 0;
+				}
+				//margin: 0;
+				//padding: 0;
+				//vertical-align: middle;
+			}
+
+			td {
+				.check-column {
+					padding: 0 0 0 2px;
+				}
+				//margin: 0;
+				//padding: 0;
+				//vertical-align: middle;
+			}
+		}
+
+		tr.active + tr.inactive td,
+		tr.active + tr.inactive th,
+		tr.active + tr.disabled td,
+		tr.active + tr.disabled th {
+			border-top: 0 solid;
+		}
+
+		.disabled {
+			.plugin-title {
+				padding: 10px 9px;
+				opacity: 0.33;
+			}
+		}
+
+		.plugin-title {
+			//vertical-align: middle;
+		}
+
+		.check-column.plugin-subproject {
+			vertical-align: middle;
+			text-align: center;
+		}
+
+		.check-column.plugin-select {
+			vertical-align: middle;
+			padding: 0 0 0 2px;
+		}
+
+		.inactive .check-column.plugin-select {
+			vertical-align: middle;
+			padding: 0 0 0 6px;
+		}
+	}
+}
+
+.plugins input[type="checkbox"],
+input[type="radio"] {
+	//margin-top: -4px;
+	vertical-align: top;
+}
+
+.widefat .check-column {
+	padding-top: 0;
+	padding-bottom: 0;
+}
+
+#tstats-settings {
+	.tstats-version-info {
+		float: right;
+	}
+}
+
+.tstats-code-block {
+	display: inline-block;
+
+	.dashicons-yes {
+		color: green;
+	}
+
+	.dashicons-no {
+		color: red;
+	}
+}
+
+.tstats-debug-block {
+	display: inline-block;
+}
