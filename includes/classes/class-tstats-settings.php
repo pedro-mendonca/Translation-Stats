@@ -168,25 +168,6 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 				)
 			);
 
-			/*
-			$this->tstats_settings_api->tstats_add_settings_field(
-				$field = array(
-					'section'     => $section,
-					'id'          => 'notify_new_strings',
-					'type'        => 'checkbox',
-					'options'     => false,
-					'placeholder' => '',
-					'class'       => '',
-					'title'       => __( 'New Strings', 'translation-stats' ),
-					'label'       => __( 'Notify user when new strings are available (Next!)', 'translation-stats' ),
-					'description' => __( 'Send admin an email notification when new strings are available.', 'translation-stats' ),
-					'helper'      => __( 'Need help?', 'translation-stats' ),
-					'callback'    => 'tstats_render_input_checkbox',
-					'default'     => true,
-				)
-			);
-			*/
-
 			$this->tstats_settings_api->tstats_add_settings_field(
 				array(
 					'section'        => $section,
@@ -279,7 +260,6 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 						'3600'   => __( '60 Minutes', 'translation-stats' ),
 						'86400'  => __( '24 Hours', 'translation-stats' ),
 						'604800' => __( '7 Days', 'translation-stats' ),
-						// '2592000' => __( '30 Days', 'translation-stats' ),
 					),
 					'default'        => '86400',
 				)
@@ -331,25 +311,24 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 * Callback function for Reset Settings.
 		 */
 		public function tstats_settings_reset_callback() {
-			if ( isset( $_POST['reset_settings'] ) ) {
-				$this->tstats_nonce_verify_callback();
+			$action = 'reset_settings';
+			$this->tstats_nonce_verify_callback( $action );
 
-				// Choose 'load-defaults' or 'delete'.
-				$action = 'load-defaults';
-				if ( 'load-defaults' === $action ) {
-					update_option( TSTATS_WP_OPTION, $this->tstats_settings_defaults() );
-				} elseif ( 'delete' === $action ) {
-					delete_option( TSTATS_WP_OPTION );
-				}
-				?>
-				<div class="notice notice-success is-dismissible">
-					<p><strong><?php esc_html_e( 'Settings restored successfully.', 'translation-stats' ); ?></strong></p>
-					<button type="button" class="notice-dismiss">
-						<span class="screen-reader-text"><?php esc_html_e( 'Dismiss this notice.', 'translation-stats' ); ?></span>
-					</button>
-				</div>
-				<?php
+			// Choose 'load-defaults' or 'delete'.
+			$action_setting = 'load-defaults';
+			if ( 'load-defaults' === $action_setting ) {
+				update_option( TSTATS_WP_OPTION, $this->tstats_settings_defaults() );
+			} elseif ( 'delete' === $action_setting ) {
+				delete_option( TSTATS_WP_OPTION );
 			}
+			?>
+			<div class="notice notice-success is-dismissible">
+				<p><strong><?php esc_html_e( 'Settings restored successfully.', 'translation-stats' ); ?></strong></p>
+				<button type="button" class="notice-dismiss">
+					<span class="screen-reader-text"><?php esc_html_e( 'Dismiss this notice.', 'translation-stats' ); ?></span>
+				</button>
+			</div>
+			<?php
 		}
 
 
@@ -357,26 +336,33 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 * Callback function for Delete Transients.
 		 */
 		public function tstats_transients_delete_callback() {
-			if ( isset( $_POST['delete_transients'] ) ) {
-				$this->tstats_nonce_verify_callback();
-				$this->tstats_transients->tstats_delete_transients( TSTATS_TRANSIENTS_PREFIX );
-				?>
-				<div class="notice notice-success is-dismissible">
-					<p><strong><?php esc_html_e( 'Cache cleaned successfully.', 'translation-stats' ); ?></strong></p>
-					<button type="button" class="notice-dismiss">
-						<span class="screen-reader-text"><?php esc_html_e( 'Dismiss this notice.', 'translation-stats' ); ?></span>
-					</button>
-				</div>
-				<?php
-			}
+			$action = 'delete_transients';
+			$this->tstats_nonce_verify_callback( $action );
+			$this->tstats_transients->tstats_delete_transients( TSTATS_TRANSIENTS_PREFIX );
+			?>
+			<div class="notice notice-success is-dismissible">
+				<p><strong><?php esc_html_e( 'Cache cleaned successfully.', 'translation-stats' ); ?></strong></p>
+				<button type="button" class="notice-dismiss">
+					<span class="screen-reader-text"><?php esc_html_e( 'Dismiss this notice.', 'translation-stats' ); ?></span>
+				</button>
+			</div>
+			<?php
 		}
 
 
 		/**
 		 * Callback function for Nonce verification.
+		 *
+		 * @param array $action  Action button from form.
+		 * @return string        Return true if nonce verify.
 		 */
-		public function tstats_nonce_verify_callback() {
-			if ( ! isset( $_POST['tstats_nonce_field'] ) || ! wp_verify_nonce( $_POST['tstats_nonce_field'], 'tstats_action' ) ) {
+		public function tstats_nonce_verify_callback( $action ) {
+			if (
+				isset( $_POST[ $action ], $_POST['tstats_nonce_field'] )
+				&& wp_verify_nonce( sanitize_key( $_POST['tstats_nonce_field'] ), 'tstats_action' )
+			) {
+				return true;
+			} else {
 				esc_html_e( 'Sorry, your nonce did not verify.', 'translation-stats' );
 				exit;
 			}

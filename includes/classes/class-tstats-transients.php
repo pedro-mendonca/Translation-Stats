@@ -25,7 +25,7 @@ if ( ! class_exists( 'TStats_Transients' ) ) {
 		public function tstats_get_transients( $search ) {
 			global $wpdb;
 
-			$tstats_transients = $wpdb->get_results(
+			$tstats_transients = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
 				$wpdb->prepare(
 					"SELECT option_name AS name FROM $wpdb->options WHERE option_name LIKE %s",
 					'%_transient_' . $search . '%'

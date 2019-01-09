@@ -143,7 +143,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 				$tstats_options = get_option( TSTATS_WP_OPTION );
 				if ( $tstats_options ) {
 					?>
-					<pre><code class="tstats-code-block"><?php echo esc_html( print_r( $tstats_options, true ) ); ?></code></pre>
+					<pre><code class="tstats-code-block"><?php echo esc_html( print_r( $tstats_options, true ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r ?></code></pre>
 					<?php
 				} else {
 					?>

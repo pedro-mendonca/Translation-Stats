@@ -141,12 +141,6 @@
 	text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
-tr:nth-child(even) {
-	/*
-	background-color: #f2f2f2
-	*/
-}
-
 .wp-plugin-list-table tr.disabled {
 	background-color: #f1f1f1;
 }

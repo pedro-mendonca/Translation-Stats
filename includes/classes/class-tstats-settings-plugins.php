@@ -147,10 +147,6 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 					foreach ( $all_plugins as $key => $plugin ) {
 						$plugin_slug = $this->tstats_translate_api->tstats_plugin_metadata( $key, 'slug' );
 						$field_name  = TSTATS_WP_OPTION . '[' . $plugin_slug . '][enabled]';
-						// $disabled    = empty( $plugin_slug ) ? true : '';
-						// $checked     = empty( $options[ $plugin_slug ] ['enabled'] ) ? '' : true;
-						// $status      = empty( $plugin_slug ) ? 'inactive' : 'active';
-						// Set plugin status ( 'active', 'inactive' or 'disabled' )
 						if ( empty( $plugin_slug ) ) {
 							$status   = 'disabled';
 							$checked  = false;
