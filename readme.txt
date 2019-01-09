@@ -3,9 +3,9 @@ Contributors: pedromendonca
 Donate link: [paypal.me/pedromendonca](https://paypal.me/pedromendonca/)
 Tags: internationalization, i18n, localization, l10n, translation, statistics, glotpress, dark mode
 Requires at least: 4.9
-Tested up to: 5.0.1
+Tested up to: 5.0.2
 Requires PHP: 5.4
-Stable tag: 0.7.0
+Stable tag: 0.8.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,16 +30,16 @@ This plugin is properly prepared for localization.
 == Frequently Asked Questions ==
 
 = What are the plugin subprojects? =
-* **Development** - Translation of the *Development* version of the plugin
-* **Development Readme** - Readme of the *Development* version of the plugin page on [wp.org/plugins](https://wordpress.org/plugins/)
-* **Stable** - Translation of the *Stable* version of the plugin
-* **Stable Readme** - Readme of the *Stable* version of the plugin page on [wp.org/plugins](https://wordpress.org/plugins/)
+*   **Development** - Translation of the *Development* version of the plugin
+*   **Development Readme** - Readme of the *Development* version of the plugin page on [wp.org/plugins](https://wordpress.org/plugins/)
+*   **Stable** - Translation of the *Stable* version of the plugin
+*   **Stable Readme** - Readme of the *Stable* version of the plugin page on [wp.org/plugins](https://wordpress.org/plugins/)
 
 = How can I translate a plugin? =
-* Register and login in [wp.org](https://login.wordpress.org/)
-* Click on the plugin subproject stats bar you want to translate
-* Read the Polyglots [Translator’s Handbook](https://make.wordpress.org/polyglots/handbook/)
-* Translate according the rules of your [Locale Translation Team](https://make.wordpress.org/polyglots/teams/)
+*   Register and login in [wp.org](https://login.wordpress.org/)
+*   Click on the plugin subproject stats bar you want to translate
+*   Read the Polyglots [Translator’s Handbook](https://make.wordpress.org/polyglots/handbook/)
+*   Translate according the rules of your [Locale Translation Team](https://make.wordpress.org/polyglots/teams/)
 
 = Should I translate both Stable and Development? =
 Since mid-April 2016, not only new strings but also edits are synced between dev and stable (both ways, only approved translations). When a plugin releases a new version all translations are copied from dev to stable. [Read more...](https://make.wordpress.org/polyglots/handbook/frequently-asked-questions/#should-i-translate-both-stable-and-dev)
@@ -51,19 +51,28 @@ Yes, Translation Stats includes a color scheme that works specifically with the 
 Yes you can! If you want to translate this plugin to your language, please [click here](https://translate.wordpress.org/projects/wp-plugins/translation-stats).
 
 = Can I contribute to this plugin? =
-Sure! You are welcome to report any issues or add feature suggestions on the [GitHub repository](https://github.com/pedro-mendonca/translation-stats).
+Sure! You are welcome to report any issues or add feature suggestions on the [GitHub repository](https://github.com/pedro-mendonca/Translation-Stats).
 
 == Changelog ==
 
+= 0.8 =
+*   Add Translation Stats settings page
+*   Add installed plugins table to select only the plugins you want to manage translation stats to reduce http requests
+*   Add option to enable or disable warnings of translation projects
+*   Add options to reset settings and clean cache to force update the translation stats
+*   Add option to specify the translation language you want
+*   Add option to choose to keep or delete plugin data on uninstall
+*   Add uninstall file
+
 = 0.7 =
-* Fix Translation Stats column show/hide logic
-* Use [WordPress Coding Standards](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards)
+*   Fix Translation Stats column show/hide logic
+*   Use [WordPress Coding Standards](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards)
 
 = 0.6 =
-* Add WordPress core notices styles to error messages
-* Add assets
-* Minor code improvements
-* Readme update
+*   Add WordPress core notices styles to error messages
+*   Add assets
+*   Minor code improvements
+*   Readme update
 
 = 0.5 =
-* Initial release.
+*   Initial release.
