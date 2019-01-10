@@ -1,36 +1,36 @@
 /* No wrap */
 #translation-stats {
-	white-space: nowrap;
+		white-space: nowrap;
 }
 
 .column-translation-stats .translation-stats-title {
-	display: block;
-	margin-bottom: 0.8em;
-	font-size: 14px;
-	white-space: nowrap;
+		display: block;
+		margin-bottom: 0.8em;
+		font-size: 14px;
+		white-space: nowrap;
 }
 
 .column-translation-stats .translation-stats-content {
-	display: grid;
-	grid-row-gap: 6px;
-	padding: 6px;
-	margin: 0 10px 10px 0;
+		display: grid;
+		grid-row-gap: 6px;
+		padding: 6px;
+		margin: 0 10px 10px 0;
 }
 
 .column-translation-stats .translation-stats-content .content__subproject .subproject-bar {
-	/* Stats bar size */
-	display: block;
-	padding: 5px 10px;
-	background-color: transparent;
-	white-space: nowrap;
+		/* Stats bar size */
+		display: block;
+		padding: 5px 10px;
+		background-color: transparent;
+		white-space: nowrap;
 }
 
 .column-translation-stats .translation-stats-content .content__subproject .subproject-bar .subproject-bar__percentage {
-	display: inline-block;
-	font-weight: 700;
-	text-align: right;
-	width: 32px;
-	margin-right: 10px;
+		display: inline-block;
+		font-weight: 700;
+		text-align: right;
+		width: 32px;
+		margin-right: 10px;
 }
 
 .column-translation-stats .translation-stats-content .content__subproject a,
@@ -38,70 +38,70 @@
 .column-translation-stats .translation-stats-content .content__subproject a div .subproject-bar,
 .column-translation-stats .translation-stats-content .content__subproject .disabled,
 .column-translation-stats .translation-stats-content .content__subproject .disabled .subproject-bar {
-	border-radius: 3px;
+		border-radius: 3px;
 }
 
 .column-translation-stats .translation-stats-content .content__subproject a {
-	display: block;
+		display: block;
 }
 
 .column-translation-stats .translation-stats-content .content__subproject a.enabled div {
-	color: #000;
-	text-shadow: 0 0 6px rgba(255, 255, 225, 0.5);
+		color: #000;
+		text-shadow: 0 0 6px rgba(255, 255, 225, 0.5);
 }
 
 .column-translation-stats .translation-stats-content .content__subproject a.disabled div {
-	background-color: #ddd;
-	color: #8f98a1;
+		background-color: #ddd;
+		color: #8f98a1;
 }
 
 .column-translation-stats .translation-stats-content .content__subproject a div.percent100 {
-	background-color: #46b450;
+		background-color: #46b450;
 }
 
 .column-translation-stats .translation-stats-content .content__subproject a div.percent100 .subproject-bar {
-	color: #fff;
-	text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+		color: #fff;
+		text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
 .column-translation-stats .translation-stats-content .content__subproject a div.percent90 {
-	background-color: #6bc373;
+		background-color: #6bc373;
 }
 
 .column-translation-stats .translation-stats-content .content__subproject a div.percent80 {
-	background-color: #90d296;
+		background-color: #90d296;
 }
 
 .column-translation-stats .translation-stats-content .content__subproject a div.percent70 {
-	background-color: #b5e1b9;
+		background-color: #b5e1b9;
 }
 
 .column-translation-stats .translation-stats-content .content__subproject a div.percent60 {
-	background-color: #c7e8ca;
+		background-color: #c7e8ca;
 }
 
 .column-translation-stats .translation-stats-content .content__subproject a div.percent50 {
-	background-color: #ffe399;
+		background-color: #ffe399;
 }
 
 .column-translation-stats .translation-stats-content .content__subproject a div.percent40 {
-	background-color: #fbc5a9;
+		background-color: #fbc5a9;
 }
 
 .column-translation-stats .translation-stats-content .content__subproject a div.percent30 {
-	background-color: #f1adad;
+		background-color: #f1adad;
 }
 
 .column-translation-stats .translation-stats-content .content__subproject a div.percent20 {
-	background-color: #ea8484;
+		background-color: #ea8484;
 }
 
 .column-translation-stats .translation-stats-content .content__subproject a div.percent10 {
-	background-color: #e35b5b;
+		background-color: #e35b5b;
 }
 
 .column-translation-stats .translation-stats-content .content__subproject a div.percent0 {
-	background-color: #dc3232;
+		background-color: #dc3232;
 }
 
 .column-translation-stats .translation-stats-content .content__subproject a,
@@ -119,116 +119,115 @@
 .column-translation-stats .translation-stats-content .content__subproject a div .subproject-bar,
 .column-translation-stats .translation-stats-content .content__subproject a:hover div .subproject-bar,
 .column-translation-stats .translation-stats-content .content__subproject a:focus div .subproject-bar {
-	-webkit-transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
-	-moz-transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
-	-o-transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
-	transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+		-webkit-transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+		-moz-transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+		-o-transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+		transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
 }
 
 .column-translation-stats .translation-stats-content .content__subproject a:hover div,
 .column-translation-stats .translation-stats-content .content__subproject a:focus div {
-	width: 100% !important;
+		width: 100% !important;
 }
 
 .column-translation-stats .translation-stats-content .content__subproject a:hover div .subproject-bar,
 .column-translation-stats .translation-stats-content .content__subproject a:focus div .subproject-bar {
-	background-color: rgba(255, 255, 255, 0.2);
+		background-color: rgba(255, 255, 255, 0.2);
 }
 
 .column-translation-stats .translation-stats-content .content__subproject a:hover div.percent0 .subproject-bar,
 .column-translation-stats .translation-stats-content .content__subproject a:focus div.percent0 .subproject-bar {
-	color: #fff;
-	text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
-}
-
-tr:nth-child(even) {
-	/*
-	background-color: #f2f2f2
-	*/
+		color: #fff;
+		text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
 .wp-plugin-list-table tr.disabled {
-	background-color: #f1f1f1;
+		background-color: #f1f1f1;
 }
 
 .wp-plugin-list-table tr.disabled th {
-	border-left: 4px solid transparent;
+		border-left: 4px solid transparent;
 }
 
 input[type=checkbox][disabled] {
-	pointer-events: none;
+		pointer-events: none;
 }
 
 .wp-plugin-list-table.plugins thead .column-subproject {
-	width: 10em;
-	overflow: hidden;
-	text-align: center;
-	vertical-align: text-top;
+		width: 10em;
+		overflow: hidden;
+		text-align: center;
+		vertical-align: text-top;
 }
 
 .wp-plugin-list-table.plugins tbody tr .check-column input[type="checkbox"] {
-	margin-top: 0;
-	margin-bottom: 0;
-	margin-right: 0;
+		margin-top: 0;
+		margin-bottom: 0;
+		margin-right: 0;
 }
 
 .wp-plugin-list-table.plugins tbody tr td .check-column {
-	padding: 0 0 0 2px;
+		padding: 0 0 0 2px;
 }
 
 .wp-plugin-list-table.plugins tbody tr.active + tr.inactive td,
 .wp-plugin-list-table.plugins tbody tr.active + tr.inactive th,
 .wp-plugin-list-table.plugins tbody tr.active + tr.disabled td,
 .wp-plugin-list-table.plugins tbody tr.active + tr.disabled th {
-	border-top: 0 solid;
+		border-top: 0 solid;
 }
 
-.wp-plugin-list-table.plugins tbody .disabled .plugin-title {
-	padding: 10px 9px;
-	opacity: 0.33;
+.wp-plugin-list-table.plugins tbody .disabled .plugin-name {
+		padding: 10px 9px;
+}
+
+.wp-plugin-list-table.plugins tbody .disabled .plugin-name,
+.wp-plugin-list-table.plugins tbody .disabled .plugin-author,
+.wp-plugin-list-table.plugins tbody .disabled .plugin-slug {
+		opacity: 0.33;
 }
 
 .wp-plugin-list-table.plugins tbody .check-column.plugin-subproject {
-	vertical-align: middle;
-	text-align: center;
+		vertical-align: middle;
+		text-align: center;
 }
 
 .wp-plugin-list-table.plugins tbody .check-column.plugin-select {
-	vertical-align: middle;
-	padding: 0 0 0 2px;
+		vertical-align: middle;
+		padding: 0 0 0 2px;
 }
 
 .wp-plugin-list-table.plugins tbody .inactive .check-column.plugin-select {
-	vertical-align: middle;
-	padding: 0 0 0 6px;
+		vertical-align: middle;
+		padding: 0 0 0 6px;
 }
 
 .plugins input[type="checkbox"],
 input[type="radio"] {
-	vertical-align: top;
+		vertical-align: top;
 }
 
 .widefat .check-column {
-	padding-top: 0;
-	padding-bottom: 0;
+		padding-top: 0;
+		padding-bottom: 0;
 }
 
 #tstats-settings .tstats-version-info {
-	float: right;
+		float: right;
 }
 
 .tstats-code-block {
-	display: inline-block;
+		display: inline-block;
 }
 
 .tstats-code-block .dashicons-yes {
-	color: green;
+		color: green;
 }
 
 .tstats-code-block .dashicons-no {
-	color: red;
+		color: red;
 }
 
 .tstats-debug-block {
-	display: inline-block;
+		display: inline-block;
 }

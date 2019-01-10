@@ -13,7 +13,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 
 // Check if it is a multisite uninstall - if so, run the uninstall function for each blog id.
 if ( is_multisite() ) {
-	foreach ( $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" ) as $tstats_blog ) {
+	foreach ( $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" ) as $tstats_blog ) { // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
 		switch_to_blog( $tstats_blog );
 		tstats_uninstall();
 	}
@@ -54,9 +54,13 @@ function tstats_uninstall() {
  */
 function tstats_uninstall_delete_transients() {
 	global $wpdb;
-	$query = "SELECT option_name AS name, option_value AS value FROM $wpdb->options WHERE option_name LIKE '%_transient_" . $search . "%'";
 
-	$tstats_transients = $wpdb->get_results( $query );
+	$tstats_transients = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
+		$wpdb->prepare(
+			"SELECT option_name AS name FROM $wpdb->options WHERE option_name LIKE %s",
+			'%_transient_' . $search . '%'
+		)
+	);
 	$tstats_transients = array_map(
 		function( $o ) {
 			return $o->name;

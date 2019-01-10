@@ -36,10 +36,11 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 
 		/**
 		 * Add action links to the settings on the Plugins screen.
-		 * @param array $links   Array of plugin action links.
-		 * @return array         Array with added Translation Stats action links.
+		 *
+		 * @param array $links  Array of plugin action links.
+		 * @return array        Array with added Translation Stats action links.
 		 */
-		public function tstats_action_links ( $links ) {
+		public function tstats_action_links( $links ) {
 			$tstats_links = array(
 				'<a href="' . admin_url( 'options-general.php?page=' . TSTATS_SETTINGS_PAGE ) . '">' . __( 'Settings', 'translation-stats' ) . '</a>',
 			);
