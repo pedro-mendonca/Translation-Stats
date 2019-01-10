@@ -122,18 +122,22 @@ if ( ! class_exists( 'TStats_Translate_API' ) ) {
 			$subprojects = array(
 				array(
 					'slug' => 'dev',
+					/* translators: Subproject name in translate.wordpress.org, do not translate! */
 					'name' => _x( 'Development', 'Subproject name', 'translation-stats' ),
 				),
 				array(
 					'slug' => 'dev-readme',
+					/* translators: Subproject name in translate.wordpress.org, do not translate! */
 					'name' => _x( 'Development Readme', 'Subproject name', 'translation-stats' ),
 				),
 				array(
 					'slug' => 'stable',
+					/* translators: Subproject name in translate.wordpress.org, do not translate! */
 					'name' => _x( 'Stable', 'Subproject name', 'translation-stats' ),
 				),
 				array(
 					'slug' => 'stable-readme',
+					/* translators: Subproject name in translate.wordpress.org, do not translate! */
 					'name' => _x( 'Stable Readme', 'Subproject name', 'translation-stats' ),
 				),
 			);
