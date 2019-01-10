@@ -203,13 +203,17 @@ input[type=checkbox][disabled] {
 		}
 
 		.disabled {
-			.plugin-title {
+			.plugin-name {
 				padding: 10px 9px;
+			}
+			.plugin-name,
+			.plugin-author,
+			.plugin-slug {
 				opacity: 0.33;
 			}
 		}
 
-		.plugin-title {
+		.plugin-name {
 			//vertical-align: middle;
 		}
 
