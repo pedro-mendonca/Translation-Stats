@@ -14,7 +14,7 @@
 **Requires at least:** 4.9  
 **Tested up to:** 5.0.3  
 **Requires PHP:** 5.4  
-**Stable tag:** 0.8.1  
+**Stable tag:** 0.8.2  
 **License:** GPLv2 or later  
 **License URI:** [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html)  
 
@@ -81,6 +81,9 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 ![screenshot-4](./assets/screenshot-4.png)
 
 ## Changelog ##
+
+### 0.8.2 ###
+*   Fix Author links
 
 ### 0.8.1 ###
 -   Add Author column to plugins list - feature suggestion from [Webdados](https://www.webdados.pt/)
