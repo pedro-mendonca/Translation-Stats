@@ -180,8 +180,8 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 								<?php
 							}
 							foreach ( $subprojects as $subproject ) {
-								$field_name  = TSTATS_WP_OPTION . '[' . $plugin_slug . '][' . $subproject['slug'] . ']';
-								$checked     = empty( $options[ $plugin_slug ] [ $subproject['slug'] ] ) ? '' : true;
+								$field_name   = TSTATS_WP_OPTION . '[' . $plugin_slug . '][' . $subproject['slug'] . ']';
+								$checked      = empty( $options[ $plugin_slug ] [ $subproject['slug'] ] ) ? '' : true;
 								$plugin_class = ! $disabled ? 'plugin_' . $plugin_item : '';
 								?>
 								<td class="check-column plugin-subproject">

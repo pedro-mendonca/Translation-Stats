@@ -339,7 +339,7 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		public function tstats_transients_delete_callback() {
 			$action = 'delete_transients';
 			if ( isset( $_POST[ $action ] ) ) {
-			$this->tstats_nonce_verify_callback();
+				$this->tstats_nonce_verify_callback();
 				$this->tstats_transients->tstats_delete_transients( TSTATS_TRANSIENTS_PREFIX );
 				?>
 				<div class="notice notice-success is-dismissible">
