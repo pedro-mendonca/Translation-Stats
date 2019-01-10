@@ -178,7 +178,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 						}
 						$plugin_item++;
 						$plugin_name   = $this->tstats_translate_api->tstats_plugin_on_wporg( $key ) ? '<a href="' . $plugin_url . '" target="_blank">' . $plugin['Name'] . '</a>' : $plugin['Name'];
-						$plugin_author = $this->tstats_translate_api->tstats_plugin_on_wporg( $key ) ? '<a href="' . $plugin['AuthorURI'] . '" target="_blank">' . $plugin['AuthorName'] . '</a>' : $plugin['AuthorName'];
+						$plugin_author = $this->tstats_translate_api->tstats_plugin_on_wporg( $key ) && $plugin['AuthorURI'] ? '<a href="' . $plugin['AuthorURI'] . '" target="_blank">' . $plugin['AuthorName'] . '</a>' : $plugin['AuthorName'];
 						?>
 						<tr class="<?php echo esc_html( $status ); ?>">
 							<th scope="row" class="check-column plugin-select">
