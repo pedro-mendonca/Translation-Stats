@@ -311,7 +311,7 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 */
 		public function tstats_settings_reset_callback() {
 			$action = 'reset_settings';
-			if ( isset( $_POST[ $action ] ) ) {
+			if ( isset( $_POST[ $action ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
 				$this->tstats_nonce_verify_callback();
 
 				// Choose 'load-defaults' or 'delete'.
@@ -338,7 +338,7 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 */
 		public function tstats_transients_delete_callback() {
 			$action = 'delete_transients';
-			if ( isset( $_POST[ $action ] ) ) {
+			if ( isset( $_POST[ $action ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
 				$this->tstats_nonce_verify_callback();
 				$this->tstats_transients->tstats_delete_transients( TSTATS_TRANSIENTS_PREFIX );
 				?>
