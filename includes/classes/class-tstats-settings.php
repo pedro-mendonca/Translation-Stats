@@ -292,7 +292,6 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		public function tstats_settings_advanced_debug_callback() {
 
 			$section = 'tstats_settings_advanced_debug';
-
 			?>
 			<p class="description">
 				<?php
@@ -312,23 +311,25 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 */
 		public function tstats_settings_reset_callback() {
 			$action = 'reset_settings';
-			$this->tstats_nonce_verify_callback( $action );
+			if ( isset( $_POST[ $action ] ) ) {
+				$this->tstats_nonce_verify_callback();
 
-			// Choose 'load-defaults' or 'delete'.
-			$action_setting = 'load-defaults';
-			if ( 'load-defaults' === $action_setting ) {
-				update_option( TSTATS_WP_OPTION, $this->tstats_settings_defaults() );
-			} elseif ( 'delete' === $action_setting ) {
-				delete_option( TSTATS_WP_OPTION );
+				// Choose 'load-defaults' or 'delete'.
+				$action = 'load-defaults';
+				if ( 'load-defaults' === $action ) {
+					update_option( TSTATS_WP_OPTION, $this->tstats_settings_defaults() );
+				} elseif ( 'delete' === $action ) {
+					delete_option( TSTATS_WP_OPTION );
+				}
+				?>
+				<div class="notice notice-success is-dismissible">
+					<p><strong><?php esc_html_e( 'Settings restored successfully.', 'translation-stats' ); ?></strong></p>
+					<button type="button" class="notice-dismiss">
+						<span class="screen-reader-text"><?php esc_html_e( 'Dismiss this notice.', 'translation-stats' ); ?></span>
+					</button>
+				</div>
+				<?php
 			}
-			?>
-			<div class="notice notice-success is-dismissible">
-				<p><strong><?php esc_html_e( 'Settings restored successfully.', 'translation-stats' ); ?></strong></p>
-				<button type="button" class="notice-dismiss">
-					<span class="screen-reader-text"><?php esc_html_e( 'Dismiss this notice.', 'translation-stats' ); ?></span>
-				</button>
-			</div>
-			<?php
 		}
 
 
@@ -337,32 +338,26 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 */
 		public function tstats_transients_delete_callback() {
 			$action = 'delete_transients';
-			$this->tstats_nonce_verify_callback( $action );
-			$this->tstats_transients->tstats_delete_transients( TSTATS_TRANSIENTS_PREFIX );
-			?>
-			<div class="notice notice-success is-dismissible">
-				<p><strong><?php esc_html_e( 'Cache cleaned successfully.', 'translation-stats' ); ?></strong></p>
-				<button type="button" class="notice-dismiss">
-					<span class="screen-reader-text"><?php esc_html_e( 'Dismiss this notice.', 'translation-stats' ); ?></span>
-				</button>
-			</div>
-			<?php
+			if ( isset( $_POST[ $action ] ) ) {
+			$this->tstats_nonce_verify_callback();
+				$this->tstats_transients->tstats_delete_transients( TSTATS_TRANSIENTS_PREFIX );
+				?>
+				<div class="notice notice-success is-dismissible">
+					<p><strong><?php esc_html_e( 'Cache cleaned successfully.', 'translation-stats' ); ?></strong></p>
+					<button type="button" class="notice-dismiss">
+						<span class="screen-reader-text"><?php esc_html_e( 'Dismiss this notice.', 'translation-stats' ); ?></span>
+					</button>
+				</div>
+				<?php
+			}
 		}
 
 
 		/**
 		 * Callback function for Nonce verification.
-		 *
-		 * @param array $action  Action button from form.
-		 * @return string        Return true if nonce verify.
 		 */
-		public function tstats_nonce_verify_callback( $action ) {
-			if (
-				isset( $_POST[ $action ], $_POST['tstats_nonce_field'] )
-				&& wp_verify_nonce( sanitize_key( $_POST['tstats_nonce_field'] ), 'tstats_action' )
-			) {
-				return true;
-			} else {
+		public function tstats_nonce_verify_callback() {
+			if ( ! isset( $_POST['tstats_nonce_field'] ) || ! wp_verify_nonce( sanitize_key( $_POST['tstats_nonce_field'] ), 'tstats_action' ) ) {
 				esc_html_e( 'Sorry, your nonce did not verify.', 'translation-stats' );
 				exit;
 			}
