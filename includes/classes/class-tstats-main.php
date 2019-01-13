@@ -3,6 +3,8 @@
  * Primary class file for the Translation Stats plugin.
  *
  * @package Translation Stats
+ *
+ * @since 0.8.0
  */
 
 // Exit if accessed directly.
@@ -37,6 +39,8 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 		/**
 		 * Add action links to the settings on the Plugins screen.
 		 *
+		 * @since 0.8.0
+		 *
 		 * @param array $links  Array of plugin action links.
 		 * @return array        Array with added Translation Stats action links.
 		 */
@@ -50,6 +54,8 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 
 		/**
 		 * Register and enqueue style sheet.
+		 *
+		 * @since 0.8.0
 		 *
 		 * @param string $hook  Hook.
 		 */
@@ -77,6 +83,8 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 
 		/**
 		 * Register and enqueue Dark Mode style sheet.
+		 *
+		 * @since 0.8.0
 		 */
 		public function tstats_register_plugin_styles_dark_mode() {
 
@@ -93,6 +101,8 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 
 		/**
 		 * Register and enqueue scripts.
+		 *
+		 * @since 0.8.0
 		 */
 		public function tstats_register_plugin_scripts() {
 

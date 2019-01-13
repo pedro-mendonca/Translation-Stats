@@ -3,6 +3,8 @@
  * Class file for registering Translation Stats Plugin Settings.
  *
  * @package Translation Stats
+ *
+ * @since 0.8.0
  */
 
 // Exit if accessed directly.
@@ -29,6 +31,8 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 
 		/**
 		 * Callback function for section "Plugins Settings".
+		 *
+		 * @since 0.8.0
 		 */
 		public function tstats_settings_plugins_callback() {
 			?>
@@ -47,6 +51,8 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 
 		/**
 		 * Render installed plugins settings table.
+		 *
+		 * @since 0.8.0
 		 */
 		public function tstats_render_settings_plugins_list() {
 
