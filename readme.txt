@@ -5,7 +5,7 @@ Tags: internationalization, i18n, localization, l10n, translation, statistics, g
 Requires at least: 4.9
 Tested up to: 5.0.3
 Requires PHP: 5.4
-Stable tag: 0.8.2
+Stable tag: 0.8.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
