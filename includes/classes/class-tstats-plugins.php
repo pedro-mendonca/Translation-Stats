@@ -3,6 +3,8 @@
  * Class file for the Translation Stats Plugins.
  *
  * @package Translation Stats
+ *
+ * @since 0.8.0
  */
 
 // Exit if accessed directly.
@@ -43,6 +45,8 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		/**
 		 * Set the Translation Language.
 		 *
+		 * @since 0.8.0
+		 *
 		 * @return string $tstats_language  Translation Language.
 		 */
 		public function tstats_translation_language() {
@@ -58,6 +62,8 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		/**
 		 * Set the plugin translation stats column if user locale is not 'en_US'.
 		 *
+		 * @since 0.8.0
+		 *
 		 * @param array $columns   Columns array.
 		 * @return array $columns  Columns array with added 'translation-stats'.
 		 */
@@ -72,6 +78,8 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 
 		/**
 		 * Show Plugin Translation Stats Content if the plugin is in WP.org and if Locale isn´t 'en_US'.
+		 *
+		 * @since 0.8.0
 		 *
 		 * @param string $column_name  Column Slug ( e.g. 'translation-stats' ).
 		 * @param string $plugin_file  Plugin ID ( e.g. 'slug/plugin-name.php' ).
@@ -111,6 +119,8 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 
 		/**
 		 * Render Plugin Translation Stats for current locale.
+		 *
+		 * @since 0.8.0
 		 *
 		 * @param string $project_slug   Plugin Slug.
 		 */
@@ -180,6 +190,8 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 
 		/**
 		 * Render plugin subproject stat bar.
+		 *
+		 * @since 0.8.0
 		 *
 		 * @param string $locale           Locale (wp_locale), e.g. 'pt_PT' or $this->tstats_translation_language().
 		 * @param string $project_slug     Plugin Slug.
@@ -276,6 +288,8 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 
 		/**
 		 * Render plugin subproject stat bar.
+		 *
+		 * @since 0.8.0
 		 *
 		 * @param string $locale              Locale (wp_locale), e.g. 'pt_PT' or $this->tstats_translation_language().
 		 * @param string $variant             Variant ( e.g. 'default', 'formal' ).

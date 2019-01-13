@@ -3,6 +3,8 @@
  * Class file for registering Translation Stats Debug.
  *
  * @package Translation Stats
+ *
+ * @since 0.8.0
  */
 
 // Exit if accessed directly.
@@ -37,6 +39,8 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 * notice-success – success message displayed with a green border.
 		 * notice-info - info message displayed with a blue border.
 		 *
+		 * @since 0.8.0
+		 *
 		 * @param string $type    WordPress core notice types ( 'error', 'warning', 'success' and 'info' ).
 		 * @param string $inline  True show message inline, false show message on top.
 		 * @param string $debug   True or false value to activate debug message.
@@ -64,6 +68,8 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 
 		/**
 		 * Show the site settings debug info.
+		 *
+		 * @since 0.8.0
 		 */
 		public function tstats_debug_server() {
 			?>
@@ -111,6 +117,8 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 
 		/**
 		 * Show the site settings debug info.
+		 *
+		 * @since 0.8.0
 		 */
 		public function tstats_debug_settings() {
 			?>
@@ -158,6 +166,8 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 
 		/**
 		 * Show the site transients debug info.
+		 *
+		 * @since 0.8.0
 		 */
 		public function tstats_debug_transients() {
 			?>
@@ -205,6 +215,8 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 * notice-warning – warning message displayed with a yellow border.
 		 * notice-success – success message displayed with a green border.
 		 * notice-info - info message displayed with a blue border.
+		 *
+		 * @since 0.8.0
 		 *
 		 * @param string $id       Setting ID.
 		 * @param string $value    Setting Value.

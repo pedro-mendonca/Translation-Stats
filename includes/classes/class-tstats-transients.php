@@ -3,6 +3,8 @@
  * Class file for registering Translation Stats transients.
  *
  * @package Translation Stats
+ *
+ * @since 0.8.0
  */
 
 // Exit if accessed directly.
@@ -19,6 +21,8 @@ if ( ! class_exists( 'TStats_Transients' ) ) {
 
 		/**
 		 * Retrieve the site transients.
+		 *
+		 * @since 0.8.0
 		 *
 		 * @param string $search  Transient search term.
 		 */
@@ -44,6 +48,8 @@ if ( ! class_exists( 'TStats_Transients' ) ) {
 
 		/**
 		 * Delete the site transients.
+		 *
+		 * @since 0.8.0
 		 *
 		 * @param string $prefix  Transient prefix.
 		 */

@@ -3,6 +3,8 @@
  * Primary class file for the Translation Stats translate.wordpress.org API.
  *
  * @package Translation Stats
+ *
+ * @since 0.8.0
  */
 
 // Exit if accessed directly.
@@ -20,6 +22,8 @@ if ( ! class_exists( 'TStats_Translate_API' ) ) {
 		/**
 		 * Check if plugin is on WordPress.org by checking if ID (from Plugin wp.org info) exists in 'response' or 'no_update' in 'update_plugins' transient.
 		 *
+		 * @since 0.8.0
+		 *
 		 * @param string $plugin_file  Plugin ID ( e.g. 'slug/plugin-name.php' ).
 		 * @return string              Returns 'true' if the plugin exists on WordPress.org.
 		 */
@@ -36,6 +40,8 @@ if ( ! class_exists( 'TStats_Translate_API' ) ) {
 		 *
 		 * Example:
 		 * $plugin_metadata = $this->tstats_translate_api->tstats_plugin_metadata( $plugin_file, 'metadata' ) (e.g. 'slug').
+		 *
+		 * @since 0.8.0
 		 *
 		 * @param string $plugin_file       Plugin ID ( e.g. 'slug/plugin-name.php' ).
 		 * @param string $metadata          Metadata field ( e.g. 'slug' ).
@@ -59,6 +65,8 @@ if ( ! class_exists( 'TStats_Translate_API' ) ) {
 		/**
 		 * Get data from translate.WordPress.org API.
 		 *
+		 * @since 0.8.0
+		 *
 		 * @param string $url       URL to get the data from.
 		 * @return string $api_get  Returns the response from translate.WordPress.org API URL.
 		 */
@@ -70,6 +78,8 @@ if ( ! class_exists( 'TStats_Translate_API' ) ) {
 
 		/**
 		 * Check if translation project exist without /subproject slug (e.g. https://translate.wordpress.org/api/projects/wp-plugins/wp-seo-acf-content-analysis).
+		 *
+		 * @since 0.8.0
 		 *
 		 * @param string $project_slug  Plugin Slug (e.g. 'plugin-slug').
 		 * @return string $on_wporg     Returns 'true' if the translation project exist on WordPress.org.
@@ -93,6 +103,8 @@ if ( ! class_exists( 'TStats_Translate_API' ) ) {
 		/**
 		 * Check if translation subproject exist (e.g. https://translate.wordpress.org/api/projects/wp-plugins/wp-seo-acf-content-analysis/stable).
 		 *
+		 * @since 0.8.0
+		 *
 		 * @param string $project_slug     Plugin Slug (e.g. 'plugin-slug').
 		 * @param string $subproject_slug  Plugin Subproject Slug (e.g. 'dev', 'dev-readme', 'stable', 'stable-readme').
 		 * @return string                  Returns 'true' if the translation subproject exist on WordPress.org.
@@ -115,6 +127,8 @@ if ( ! class_exists( 'TStats_Translate_API' ) ) {
 
 		/**
 		 * Set the translate.wordpress.org plugins subprojects structure with 'slug' and 'name'.
+		 *
+		 * @since 0.8.0
 		 *
 		 * @return array $subprojects  Returns array of the plugins translation subprojects structure.
 		 */
