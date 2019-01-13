@@ -3,6 +3,8 @@
  * Translation Stats uninstall file to clean all settings and transient data from the database.
  *
  * @package Translation Stats
+ *
+ * @since 0.8.0
  */
 
 // Exit if accessed directly.
@@ -26,7 +28,9 @@ if ( is_multisite() ) {
 /**
  * Removes ALL plugin data if set in the settings.
  *
- * @since 0.8
+ * @since 0.8.0
+ *
+ * @param string $search  Transient search term.
  */
 function tstats_uninstall() {
 	$option = get_option( 'tstats_settings' );
@@ -50,7 +54,7 @@ function tstats_uninstall() {
 /**
  * Removes ALL transiantes on uninstall.
  *
- * @since 0.8
+ * @since 0.8.0
  */
 function tstats_uninstall_delete_transients( $search ) {
 	global $wpdb;
