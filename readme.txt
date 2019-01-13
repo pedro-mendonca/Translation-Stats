@@ -62,6 +62,9 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
 == Changelog ==
 
+= 0.8.3 =
+*   Fix uninstall function
+
 = 0.8.2 =
 *   Fix Author links
 
