@@ -1,6 +1,6 @@
 <?php
 /**
- * Translation Stats unistall file to clean all settings and transient data from the database.
+ * Translation Stats uninstall file to clean all settings and transient data from the database.
  *
  * @package Translation Stats
  */
@@ -42,7 +42,7 @@ function tstats_uninstall() {
 			delete_option( 'tstats_settings' );
 		}
 		// Delete transients.
-		tstats_uninstall_delete_transients();
+		tstats_uninstall_delete_transients( 'translation_stats_plugin_' );
 	}
 }
 
@@ -52,7 +52,7 @@ function tstats_uninstall() {
  *
  * @since 0.8
  */
-function tstats_uninstall_delete_transients() {
+function tstats_uninstall_delete_transients( $search ) {
 	global $wpdb;
 
 	$tstats_transients = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
