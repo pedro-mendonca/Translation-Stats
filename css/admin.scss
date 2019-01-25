@@ -2,7 +2,7 @@
 @import "_global.scss";
 
 
-/* Installed Plugins table. */
+/* WordPress Installed Plugins table. */
 table.wp-list-table.plugins {
 
 	th.column-translation-stats { // Translation Stats Column Header.
@@ -160,27 +160,18 @@ table.wp-list-table.plugins {
 	}
 }
 
+/* Translation Stats Settings Plugins table. */
+table.wp-plugin-list-table {
 
-.wp-plugin-list-table tr.disabled {
-	background-color: #f1f1f1;
-}
-
-.wp-plugin-list-table tr.disabled th {
-	border-left: 4px solid transparent;
-}
-
-input[type="checkbox"][disabled] {
-	pointer-events: none;
-}
-
-.wp-plugin-list-table.plugins {
+	.check-column {
+		padding-top: 0;
+		padding-bottom: 0;
+	}
 
 	thead {
-
 		/* white-space: nowrap; */
 		.column-subproject {
 
-			/* width: 10% !important; */
 			width: 10em;
 			overflow: hidden;
 			text-align: center;
@@ -191,6 +182,7 @@ input[type="checkbox"][disabled] {
 	tbody {
 
 		tr {
+
 
 			.check-column {
 
@@ -254,17 +246,28 @@ input[type="checkbox"][disabled] {
 			padding: 0 0 0 6px;
 		}
 	}
-}
 
-.plugins input[type="checkbox"],
-input[type="radio"] {
-	//margin-top: -4px;
-	vertical-align: top;
-}
+	tr.disabled {
+		background-color: #f1f1f1;
 
-.widefat .check-column {
-	padding-top: 0;
-	padding-bottom: 0;
+		th {
+
+			border-left: 4px solid transparent;
+
+		}
+	}
+
+	input[type="checkbox"],
+	input[type="radio"] {
+		//margin-top: -4px;
+		vertical-align: top;
+
+	}
+
+	input[type="checkbox"][disabled] {
+		pointer-events: none;
+
+	}
 }
 
 #tstats-settings {
