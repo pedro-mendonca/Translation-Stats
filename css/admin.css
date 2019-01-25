@@ -1,35 +1,34 @@
-/* No wrap */
-#translation-stats {
+/* Installed Plugins table. */
+table.wp-list-table.plugins th.column-translation-stats {
 	white-space: nowrap;
 }
 
-.plugins td.column-translation-stats {
+table.wp-list-table.plugins td.column-translation-stats {
 	padding-right: 20px;
 }
 
-.plugins td.column-translation-stats .translation-stats-title {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-title {
 	display: block;
 	margin-bottom: 0.8em;
 	font-size: 14px;
 	white-space: nowrap;
 }
 
-.plugins td.column-translation-stats .translation-stats-content {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content {
 	display: grid;
 	grid-row-gap: 6px;
 	padding: 6px;
 	margin: 0 0 10px 0;
 }
 
-.plugins td.column-translation-stats .translation-stats-content .content__subproject .subproject-bar {
-	/* Stats bar size */
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject .subproject-bar {
 	display: block;
 	padding: 5px 10px;
 	background-color: rgba(0, 0, 0, 0);
 	white-space: nowrap;
 }
 
-.plugins td.column-translation-stats .translation-stats-content .content__subproject .subproject-bar .subproject-bar__percentage {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject .subproject-bar .subproject-bar__percentage {
 	display: inline-block;
 	font-weight: 700;
 	text-align: right;
@@ -37,110 +36,111 @@
 	margin-right: 10px;
 }
 
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a,
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a div,
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a div .subproject-bar,
-.plugins td.column-translation-stats .translation-stats-content .content__subproject .disabled,
-.plugins td.column-translation-stats .translation-stats-content .content__subproject .disabled .subproject-bar {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div .subproject-bar,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject .disabled,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject .disabled .subproject-bar {
 	border-radius: 3px;
 }
 
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a {
 	display: block;
 }
 
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled div {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled div {
 	color: #000;
 	text-shadow: 0 0 6px rgba(255, 255, 225, 0.5);
 }
 
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a.disabled div {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.disabled div {
 	background-color: #ddd;
 	color: #8f98a1;
 }
 
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent100 {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent100 {
 	background-color: #46b450;
 }
 
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent100 .subproject-bar {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent100 .subproject-bar {
+	/* Stats bar 100% text color. */
 	color: #fff;
 	text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent90 {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent90 {
 	background-color: #6bc373;
 }
 
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent80 {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent80 {
 	background-color: #90d296;
 }
 
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent70 {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent70 {
 	background-color: #b5e1b9;
 }
 
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent60 {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent60 {
 	background-color: #c7e8ca;
 }
 
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent50 {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent50 {
 	background-color: #ffe399;
 }
 
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent40 {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent40 {
 	background-color: #fbc5a9;
 }
 
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent30 {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent30 {
 	background-color: #f1adad;
 }
 
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent20 {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent20 {
 	background-color: #ea8484;
 }
 
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent10 {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent10 {
 	background-color: #e35b5b;
 }
 
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent0 {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent0 {
 	background-color: #dc3232;
 }
 
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a,
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a:hover,
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a:focus,
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a div,
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a:hover div,
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a:focus div,
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent0,
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a:hover div.percent0,
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a:focus div.percent0,
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent100,
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a:hover div.percent100,
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a:focus div.percent100,
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a div .subproject-bar,
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a:hover div .subproject-bar,
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a:focus div .subproject-bar {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a:hover,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a:focus,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a:hover div,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a:focus div,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent0,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a:hover div.percent0,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a:focus div.percent0,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent100,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a:hover div.percent100,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a:focus div.percent100,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div .subproject-bar,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a:hover div .subproject-bar,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a:focus div .subproject-bar {
 	-webkit-transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
 	-moz-transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
 	-o-transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
 	transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
 }
 
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled:hover div.subproject,
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled:focus div.subproject {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled:hover div.subproject,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled:focus div.subproject {
 	width: 100% !important;
 }
 
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled:hover div.subproject div.subproject-bar,
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled:focus div.subproject div.subproject-bar {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled:hover div.subproject div.subproject-bar,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled:focus div.subproject div.subproject-bar {
 	background-color: rgba(255, 255, 255, 0.2);
 }
 
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled:hover div.percent0 .subproject-bar,
-.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled:focus div.percent0 .subproject-bar {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled:hover div.percent0 .subproject-bar,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled:focus div.percent0 .subproject-bar {
 	color: #fff;
 	text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
 }
@@ -153,15 +153,28 @@
 	border-left: 4px solid transparent;
 }
 
-input[type=checkbox][disabled] {
+input[type="checkbox"][disabled] {
 	pointer-events: none;
 }
 
+.wp-plugin-list-table.plugins thead {
+	/* white-space: nowrap; */
+}
+
 .wp-plugin-list-table.plugins thead .column-subproject {
+	/* width: 10% !important; */
 	width: 10em;
 	overflow: hidden;
 	text-align: center;
 	vertical-align: text-top;
+}
+
+.wp-plugin-list-table.plugins tbody tr .check-column {
+	/*
+				margin: 0;
+				padding: 0;
+				vertical-align: middle;
+				*/
 }
 
 .wp-plugin-list-table.plugins tbody tr .check-column input[type="checkbox"] {
@@ -225,11 +238,11 @@ input[type="radio"] {
 }
 
 .tstats-code-block .dashicons-yes {
-	color: green;
+	color: #008000;
 }
 
 .tstats-code-block .dashicons-no {
-	color: red;
+	color: #f00;
 }
 
 .tstats-debug-block {

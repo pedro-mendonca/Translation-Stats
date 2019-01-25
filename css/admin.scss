@@ -1,154 +1,165 @@
 // Import GlotPress Colors
-@import '_global.scss';
+@import "_global.scss";
 
-/* No wrap */
-#translation-stats {
-	white-space: nowrap;
-}
 
-.plugins td.column-translation-stats {
-	
-	padding-right: 20px;
+/* Installed Plugins table. */
+table.wp-list-table.plugins {
 
-	.translation-stats-title {
-		display: block;
-		margin-bottom: 0.8em;
-		font-size: 14px;
+	th.column-translation-stats { // Translation Stats Column Header.
 		white-space: nowrap;
 	}
 
-	.translation-stats-content {
-		display: grid; // Stats grid layout
-		grid-row-gap: 6px;
-		padding: 6px;
-		margin: 0 0 10px 0;
+	td.column-translation-stats { // Translation Stats Column.
 
-		.content__subproject {
-			.subproject-bar {
-				/* Stats bar size */
-				display: block;
-				padding: 5px 10px; // Stats bar size
-				background-color: rgba(0, 0, 0, 0); // Status bar overlay color
-				white-space: nowrap;
+		padding-right: 20px;
 
-				.subproject-bar__percentage { // Stats percentage value
-					display: inline-block;
-					font-weight: 700;
-					text-align: right;
-					width: 32px;
-					margin-right: 10px;
-				}
-			}
+		.translation-stats-title {
+			display: block;
+			margin-bottom: 0.8em;
+			font-size: 14px;
+			white-space: nowrap;
+		}
 
-			a,
-			a div,
-			a div .subproject-bar,
-			.disabled,
-			.disabled .subproject-bar { // Border radius
-				border-radius: $global-radius;
-			}
+		.translation-stats-content { // Stats grid layout.
+			display: grid;
+			grid-row-gap: 6px;
+			padding: 6px;
+			margin: 0 0 10px 0;
 
-			a {
-				display: block;
+			.content__subproject {
 
-				&.enabled div { // Stats bar enabled generic text color
-					color: #000;
-					text-shadow: 0 0 6px rgba(255, 255, 225, 0.5);
-				}
+				.subproject-bar { // Stats bar size.
 
-				&.disabled div { // Stats bar disabled generic text color
-					background-color: #ddd;
-					color: #8f98a1;
-				}
+					display: block;
+					padding: 5px 10px; // Stats bar size
+					background-color: rgba(0, 0, 0, 0); // Status bar overlay color
+					white-space: nowrap;
 
-				div.percent100 {
-					.subproject-bar { // Stats bar 100% text color
-						color: #fff; // Check duplicate
-						text-shadow: 0 0 6px rgba(0, 0, 0, 0.5); // Check duplicate
-					}
-
-					background-color: $glotpress-percent100;
-				}
-
-				div.percent90 {
-					background-color: $glotpress-percent90;
-				}
-
-				div.percent80 {
-					background-color: $glotpress-percent80;
-				}
-
-				div.percent70 {
-					background-color: $glotpress-percent70;
-				}
-
-				div.percent60 {
-					background-color: $glotpress-percent60;
-				}
-
-				div.percent50 {
-					background-color: $glotpress-percent50;
-				}
-
-				div.percent40 {
-					background-color: $glotpress-percent40;
-				}
-
-				div.percent30 {
-					background-color: $glotpress-percent30;
-				}
-
-				div.percent20 {
-					background-color: $glotpress-percent20;
-				}
-
-				div.percent10 {
-					background-color: $glotpress-percent10;
-				}
-
-				div.percent0 {
-					background-color: $glotpress-percent0;
-				}
-			}
-
-			a,
-			a:hover,
-			a:focus,
-			a div,
-			a:hover div,
-			a:focus div,
-			a div.percent0,
-			a:hover div.percent0,
-			a:focus div.percent0,
-			a div.percent100,
-			a:hover div.percent100,
-			a:focus div.percent100,
-			a div .subproject-bar,
-			a:hover div .subproject-bar,
-			a:focus div .subproject-bar { // Configuration of easeOutCirc
-				@include transition-easeOutCubic ( all, 300ms, cubic-bezier(0.075, 0.82, 0.165, 1), 0s );
-			}
-
-			a.enabled:hover,
-			a.enabled:focus {
-				div.subproject {
-					width: 100% !important; //Stats bar lenght on hover/focus
-
-					div.subproject-bar {
-						background-color: rgba(255, 255, 255, 0.2); // Status bar overlay hover/focus color
+					.subproject-bar__percentage { // Stats percentage value
+						display: inline-block;
+						font-weight: 700;
+						text-align: right;
+						width: 32px;
+						margin-right: 10px;
 					}
 				}
 
-				div.percent0 {
-					.subproject-bar { // Stats bar 0% and 100% hover/focus text color and shadow
-						color: #fff;
-						text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+				a,
+				a div,
+				a div .subproject-bar,
+				.disabled,
+				.disabled .subproject-bar { // Border radius.
+					border-radius: $global-radius;
+				}
+
+				a {
+					display: block;
+
+					&.enabled div { // Stats bar enabled generic text color.
+						color: #000;
+						text-shadow: 0 0 6px rgba(255, 255, 225, 0.5);
 					}
+
+					&.disabled div { // Stats bar disabled generic text color.
+						background-color: #ddd;
+						color: #8f98a1;
+					}
+
+					div.percent100 {
+
+						.subproject-bar {
+
+							/* Stats bar 100% text color. */
+							color: #fff; // Check duplicate.
+							text-shadow: 0 0 6px rgba(0, 0, 0, 0.5); // Check duplicate.
+						}
+
+						background-color: $glotpress-percent100;
+					}
+
+					div.percent90 {
+						background-color: $glotpress-percent90;
+					}
+
+					div.percent80 {
+						background-color: $glotpress-percent80;
+					}
+
+					div.percent70 {
+						background-color: $glotpress-percent70;
+					}
+
+					div.percent60 {
+						background-color: $glotpress-percent60;
+					}
+
+					div.percent50 {
+						background-color: $glotpress-percent50;
+					}
+
+					div.percent40 {
+						background-color: $glotpress-percent40;
+					}
+
+					div.percent30 {
+						background-color: $glotpress-percent30;
+					}
+
+					div.percent20 {
+						background-color: $glotpress-percent20;
+					}
+
+					div.percent10 {
+						background-color: $glotpress-percent10;
+					}
+
+					div.percent0 {
+						background-color: $glotpress-percent0;
+					}
+				}
+
+				a,
+				a:hover,
+				a:focus,
+				a div,
+				a:hover div,
+				a:focus div,
+				a div.percent0,
+				a:hover div.percent0,
+				a:focus div.percent0,
+				a div.percent100,
+				a:hover div.percent100,
+				a:focus div.percent100,
+				a div .subproject-bar,
+				a:hover div .subproject-bar,
+				a:focus div .subproject-bar { // Configuration of easeOutCirc
+					@include transition-easeOutCubic ( all, 300ms, cubic-bezier(0.075, 0.82, 0.165, 1), 0s );
+				}
+
+				a.enabled:hover,
+				a.enabled:focus {
+
+					div.subproject {
+						width: 100% !important; //Stats bar lenght on hover/focus
+
+						div.subproject-bar {
+							background-color: rgba(255, 255, 255, 0.2); // Status bar overlay hover/focus color
+						}
+					}
+					div.percent0 {
+
+						.subproject-bar { // Stats bar 0% and 100% hover/focus text color and shadow
+							color: #fff;
+							text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+						}
+					}
+
 				}
 			}
 		}
 	}
 }
+
 
 .wp-plugin-list-table tr.disabled {
 	background-color: #f1f1f1;
@@ -158,16 +169,18 @@
 	border-left: 4px solid transparent;
 }
 
-input[type=checkbox][disabled] {
+input[type="checkbox"][disabled] {
 	pointer-events: none;
 }
 
 .wp-plugin-list-table.plugins {
-	thead {
-		//white-space: nowrap;
 
+	thead {
+
+		/* white-space: nowrap; */
 		.column-subproject {
-			//width: 10% !important;
+
+			/* width: 10% !important; */
 			width: 10em;
 			overflow: hidden;
 			text-align: center;
@@ -176,19 +189,26 @@ input[type=checkbox][disabled] {
 	}
 
 	tbody {
+
 		tr {
+
 			.check-column {
+
 				input[type="checkbox"] {
 					margin-top: 0;
 					margin-bottom: 0;
 					margin-right: 0;
 				}
-				//margin: 0;
-				//padding: 0;
-				//vertical-align: middle;
+
+				/*
+				margin: 0;
+				padding: 0;
+				vertical-align: middle;
+				*/
 			}
 
 			td {
+
 				.check-column {
 					padding: 0 0 0 2px;
 				}
@@ -206,18 +226,17 @@ input[type=checkbox][disabled] {
 		}
 
 		.disabled {
+
 			.plugin-name {
+
 				padding: 10px 9px;
 			}
+
 			.plugin-name,
 			.plugin-author,
 			.plugin-slug {
 				opacity: 0.33;
 			}
-		}
-
-		.plugin-name {
-			//vertical-align: middle;
 		}
 
 		.check-column.plugin-subproject {
@@ -249,6 +268,7 @@ input[type="radio"] {
 }
 
 #tstats-settings {
+
 	.tstats-version-info {
 		float: right;
 	}
@@ -258,11 +278,11 @@ input[type="radio"] {
 	display: inline-block;
 
 	.dashicons-yes {
-		color: green;
+		color: #008000;
 	}
 
 	.dashicons-no {
-		color: red;
+		color: #f00;
 	}
 }
 
