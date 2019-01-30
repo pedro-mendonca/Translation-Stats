@@ -13,7 +13,7 @@ Show the WordPress.org translation stats in your installed plugins list.
 
 == Description ==
 
-The plugins adds a "Translation Stats" column to the plugin list screen in WordPress admin.
+The plugin adds a "Translation Stats" column to the plugin list screen in WordPress admin.
 
 The translation stats are shown only for plugins that exist in [translate.wordpress.org](https://translate.wordpress.org/) and are [prepared for localization](https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/).
 

@@ -63,7 +63,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 			$subprojects = $this->tstats_translate_api->tstats_plugin_subprojects();
 
 			?>
-			<table class="wp-plugin-list-table widefat plugins">
+			<table class="tstats-plugin-list-table widefat plugins">
 				<thead>
 					<tr>
 						<td scope="col" id="cb" class="manage-column column-cb check-column">

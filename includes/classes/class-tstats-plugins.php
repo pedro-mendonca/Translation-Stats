@@ -240,28 +240,16 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 				$i18n_error         = false;
 			}
 
+			$class = ! $i18n_error ? 'enabled' : 'disabled';
+			$href  = ! $i18n_error ? 'href="' . esc_url( $url ) . '"' : '';
 			ob_start();
 			?>
 			<div class="content__subproject <?php echo esc_html( $subproject_slug ); ?>">
-				<a class="
-					<?php
-					if ( ! $i18n_error ) {
-						echo 'enabled';
-					} else {
-						echo 'disabled';
-					};
-					?>
-				" target="_blank"
-				<?php
-				if ( ! $i18n_error ) {
-					echo 'href="' . esc_url( $url ) . '"';
-				};
-				?>
-				>
+				<a class="<?php echo esc_attr( $class ); ?>" target="_blank" <?php echo esc_attr( $href ); ?>>
 				<?php
 				if ( ! $i18n_error ) {
 					?>
-					<div class="<?php echo esc_html( 'percent' . 10 * floor( $percent_translated / 10 ) . ' ' . $subproject_slug ); ?>" style="width: <?php echo esc_html( $percent_translated ); ?>%;">
+					<div class="subproject <?php echo esc_html( 'percent' . 10 * floor( $percent_translated / 10 ) . ' ' . $subproject_slug ); ?>" style="width: <?php echo esc_html( $percent_translated ); ?>%;">
 						<div class="subproject-bar">
 							<span class="subproject-bar__percentage"><?php echo esc_html( $percent_translated ); ?>%</span><span class="subproject-bar__name"><?php echo esc_html( $subproject ); ?></span>
 						</div>
