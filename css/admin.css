@@ -146,23 +146,23 @@ table.wp-list-table.plugins td.column-translation-stats .translation-stats-conte
 }
 
 /* Translation Stats Settings Plugins table. */
-table.wp-plugin-list-table .check-column {
+table.tstats-plugin-list-table .check-column {
 	padding-top: 0;
 	padding-bottom: 0;
 }
 
-table.wp-plugin-list-table thead {
+table.tstats-plugin-list-table thead {
 	/* white-space: nowrap; */
 }
 
-table.wp-plugin-list-table thead .column-subproject {
+table.tstats-plugin-list-table thead .column-subproject {
 	width: 10em;
 	overflow: hidden;
 	text-align: center;
 	vertical-align: text-top;
 }
 
-table.wp-plugin-list-table tbody tr .check-column {
+table.tstats-plugin-list-table tbody tr .check-column {
 	/*
 				margin: 0;
 				padding: 0;
@@ -170,62 +170,62 @@ table.wp-plugin-list-table tbody tr .check-column {
 				*/
 }
 
-table.wp-plugin-list-table tbody tr .check-column input[type="checkbox"] {
+table.tstats-plugin-list-table tbody tr .check-column input[type="checkbox"] {
 	margin-top: 0;
 	margin-bottom: 0;
 	margin-right: 0;
 }
 
-table.wp-plugin-list-table tbody tr td .check-column {
+table.tstats-plugin-list-table tbody tr td .check-column {
 	padding: 0 0 0 2px;
 }
 
-table.wp-plugin-list-table tbody tr.active + tr.inactive td,
-table.wp-plugin-list-table tbody tr.active + tr.inactive th,
-table.wp-plugin-list-table tbody tr.active + tr.disabled td,
-table.wp-plugin-list-table tbody tr.active + tr.disabled th {
+table.tstats-plugin-list-table tbody tr.active + tr.inactive td,
+table.tstats-plugin-list-table tbody tr.active + tr.inactive th,
+table.tstats-plugin-list-table tbody tr.active + tr.disabled td,
+table.tstats-plugin-list-table tbody tr.active + tr.disabled th {
 	border-top: 0 solid;
 }
 
-table.wp-plugin-list-table tbody .disabled .plugin-name {
+table.tstats-plugin-list-table tbody .disabled .plugin-name {
 	padding: 10px 9px;
 }
 
-table.wp-plugin-list-table tbody .disabled .plugin-name,
-table.wp-plugin-list-table tbody .disabled .plugin-author,
-table.wp-plugin-list-table tbody .disabled .plugin-slug {
+table.tstats-plugin-list-table tbody .disabled .plugin-name,
+table.tstats-plugin-list-table tbody .disabled .plugin-author,
+table.tstats-plugin-list-table tbody .disabled .plugin-slug {
 	opacity: 0.33;
 }
 
-table.wp-plugin-list-table tbody .check-column.plugin-subproject {
+table.tstats-plugin-list-table tbody .check-column.plugin-subproject {
 	vertical-align: middle;
 	text-align: center;
 }
 
-table.wp-plugin-list-table tbody .check-column.plugin-select {
+table.tstats-plugin-list-table tbody .check-column.plugin-select {
 	vertical-align: middle;
 	padding: 0 0 0 2px;
 }
 
-table.wp-plugin-list-table tbody .inactive .check-column.plugin-select {
+table.tstats-plugin-list-table tbody .inactive .check-column.plugin-select {
 	vertical-align: middle;
 	padding: 0 0 0 6px;
 }
 
-table.wp-plugin-list-table tr.disabled {
+table.tstats-plugin-list-table tr.disabled {
 	background-color: #f1f1f1;
 }
 
-table.wp-plugin-list-table tr.disabled th {
+table.tstats-plugin-list-table tr.disabled th {
 	border-left: 4px solid transparent;
 }
 
-table.wp-plugin-list-table input[type="checkbox"],
-table.wp-plugin-list-table input[type="radio"] {
+table.tstats-plugin-list-table input[type="checkbox"],
+table.tstats-plugin-list-table input[type="radio"] {
 	vertical-align: top;
 }
 
-table.wp-plugin-list-table input[type="checkbox"][disabled] {
+table.tstats-plugin-list-table input[type="checkbox"][disabled] {
 	pointer-events: none;
 }
 
