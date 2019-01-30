@@ -63,7 +63,6 @@ table.wp-list-table.plugins td.column-translation-stats .translation-stats-conte
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent100 .subproject-bar {
-	/* Stats bar 100% text color. */
 	color: #fff;
 	text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
 }
@@ -111,16 +110,20 @@ table.wp-list-table.plugins td.column-translation-stats .translation-stats-conte
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a,
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a:hover,
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a:focus,
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div,
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a:hover div,
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a:focus div,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled div,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.disabled div,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled:hover div,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.disabled:hover div,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled:focus div,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.disabled:focus div,
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent0,
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a:hover div.percent0,
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a:focus div.percent0,
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent100,
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a:hover div.percent100,
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a:focus div.percent100,
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div .subproject-bar,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled div .subproject-bar,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.disabled div .subproject-bar,
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a:hover div .subproject-bar,
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a:focus div .subproject-bar {
 	-webkit-transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
@@ -151,8 +154,13 @@ table.tstats-plugin-list-table .check-column {
 	padding-bottom: 0;
 }
 
-table.tstats-plugin-list-table thead {
-	/* white-space: nowrap; */
+table.tstats-plugin-list-table input[type="checkbox"],
+table.tstats-plugin-list-table input[type="radio"] {
+	vertical-align: text-top;
+}
+
+table.tstats-plugin-list-table input[type="checkbox"][disabled] {
+	pointer-events: none;
 }
 
 table.tstats-plugin-list-table thead .column-subproject {
@@ -162,12 +170,22 @@ table.tstats-plugin-list-table thead .column-subproject {
 	vertical-align: text-top;
 }
 
-table.tstats-plugin-list-table tbody tr .check-column {
-	/*
-				margin: 0;
-				padding: 0;
-				vertical-align: middle;
-				*/
+table.tstats-plugin-list-table tbody tr.disabled {
+	background-color: #f1f1f1;
+}
+
+table.tstats-plugin-list-table tbody tr.disabled th {
+	border-left: 4px solid transparent;
+}
+
+table.tstats-plugin-list-table tbody tr.disabled .plugin-name {
+	padding: 10px 9px;
+}
+
+table.tstats-plugin-list-table tbody tr.disabled .plugin-name,
+table.tstats-plugin-list-table tbody tr.disabled .plugin-author,
+table.tstats-plugin-list-table tbody tr.disabled .plugin-slug {
+	opacity: 0.33;
 }
 
 table.tstats-plugin-list-table tbody tr .check-column input[type="checkbox"] {
@@ -187,16 +205,6 @@ table.tstats-plugin-list-table tbody tr.active + tr.disabled th {
 	border-top: 0 solid;
 }
 
-table.tstats-plugin-list-table tbody .disabled .plugin-name {
-	padding: 10px 9px;
-}
-
-table.tstats-plugin-list-table tbody .disabled .plugin-name,
-table.tstats-plugin-list-table tbody .disabled .plugin-author,
-table.tstats-plugin-list-table tbody .disabled .plugin-slug {
-	opacity: 0.33;
-}
-
 table.tstats-plugin-list-table tbody .check-column.plugin-subproject {
 	vertical-align: middle;
 	text-align: center;
@@ -210,23 +218,6 @@ table.tstats-plugin-list-table tbody .check-column.plugin-select {
 table.tstats-plugin-list-table tbody .inactive .check-column.plugin-select {
 	vertical-align: middle;
 	padding: 0 0 0 6px;
-}
-
-table.tstats-plugin-list-table tr.disabled {
-	background-color: #f1f1f1;
-}
-
-table.tstats-plugin-list-table tr.disabled th {
-	border-left: 4px solid transparent;
-}
-
-table.tstats-plugin-list-table input[type="checkbox"],
-table.tstats-plugin-list-table input[type="radio"] {
-	vertical-align: top;
-}
-
-table.tstats-plugin-list-table input[type="checkbox"][disabled] {
-	pointer-events: none;
 }
 
 #tstats-settings .tstats-version-info {

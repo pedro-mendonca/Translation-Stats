@@ -67,11 +67,9 @@ table.wp-list-table.plugins {
 
 					div.percent100 {
 
-						.subproject-bar {
-
-							/* Stats bar 100% text color. */
-							color: #fff; // Check duplicate.
-							text-shadow: 0 0 6px rgba(0, 0, 0, 0.5); // Check duplicate.
+						.subproject-bar { // Stats bar 100% text color.
+							color: #fff;
+							text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
 						}
 
 						background-color: $glotpress-percent100;
@@ -121,16 +119,20 @@ table.wp-list-table.plugins {
 				a,
 				a:hover,
 				a:focus,
-				a div,
-				a:hover div,
-				a:focus div,
+				a.enabled div,
+				a.disabled div,
+				a.enabled:hover div,
+				a.disabled:hover div,
+				a.enabled:focus div,
+				a.disabled:focus div,
 				a div.percent0,
 				a:hover div.percent0,
 				a:focus div.percent0,
 				a div.percent100,
 				a:hover div.percent100,
 				a:focus div.percent100,
-				a div .subproject-bar,
+				a.enabled div .subproject-bar,
+				a.disabled div .subproject-bar,
 				a:hover div .subproject-bar,
 				a:focus div .subproject-bar { // Configuration of easeOutCirc
 					@include transition-easeOutCubic ( all, 300ms, cubic-bezier(0.075, 0.82, 0.165, 1), 0s );
@@ -140,20 +142,20 @@ table.wp-list-table.plugins {
 				a.enabled:focus {
 
 					div.subproject {
-						width: 100% !important; //Stats bar lenght on hover/focus
+						width: 100% !important; //Stats bar lenght on hover/focus.
 
 						div.subproject-bar {
-							background-color: rgba(255, 255, 255, 0.2); // Status bar overlay hover/focus color
+							background-color: rgba(255, 255, 255, 0.2); // Status bar overlay hover/focus color.
 						}
 					}
+
 					div.percent0 {
 
-						.subproject-bar { // Stats bar 0% and 100% hover/focus text color and shadow
+						.subproject-bar { // Stats bar 0% hover/focus text color and shadow
 							color: #fff;
 							text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
 						}
 					}
-
 				}
 			}
 		}
@@ -168,8 +170,17 @@ table.tstats-plugin-list-table {
 		padding-bottom: 0;
 	}
 
+	input[type="checkbox"],
+	input[type="radio"] {
+		vertical-align: text-top;
+	}
+
+	input[type="checkbox"][disabled] {
+		pointer-events: none;
+	}
+
 	thead {
-		/* white-space: nowrap; */
+
 		.column-subproject {
 
 			width: 10em;
@@ -183,6 +194,24 @@ table.tstats-plugin-list-table {
 
 		tr {
 
+			&.disabled {
+
+				background-color: #f1f1f1;
+
+				th {
+					border-left: 4px solid transparent;
+				}
+
+				.plugin-name {
+					padding: 10px 9px;
+				}
+
+				.plugin-name,
+				.plugin-author,
+				.plugin-slug {
+					opacity: 0.33;
+				}
+			}
 
 			.check-column {
 
@@ -191,12 +220,6 @@ table.tstats-plugin-list-table {
 					margin-bottom: 0;
 					margin-right: 0;
 				}
-
-				/*
-				margin: 0;
-				padding: 0;
-				vertical-align: middle;
-				*/
 			}
 
 			td {
@@ -204,9 +227,6 @@ table.tstats-plugin-list-table {
 				.check-column {
 					padding: 0 0 0 2px;
 				}
-				//margin: 0;
-				//padding: 0;
-				//vertical-align: middle;
 			}
 		}
 
@@ -215,20 +235,6 @@ table.tstats-plugin-list-table {
 		tr.active + tr.disabled td,
 		tr.active + tr.disabled th {
 			border-top: 0 solid;
-		}
-
-		.disabled {
-
-			.plugin-name {
-
-				padding: 10px 9px;
-			}
-
-			.plugin-name,
-			.plugin-author,
-			.plugin-slug {
-				opacity: 0.33;
-			}
 		}
 
 		.check-column.plugin-subproject {
@@ -245,28 +251,6 @@ table.tstats-plugin-list-table {
 			vertical-align: middle;
 			padding: 0 0 0 6px;
 		}
-	}
-
-	tr.disabled {
-		background-color: #f1f1f1;
-
-		th {
-
-			border-left: 4px solid transparent;
-
-		}
-	}
-
-	input[type="checkbox"],
-	input[type="radio"] {
-		//margin-top: -4px;
-		vertical-align: top;
-
-	}
-
-	input[type="checkbox"][disabled] {
-		pointer-events: none;
-
 	}
 }
 
