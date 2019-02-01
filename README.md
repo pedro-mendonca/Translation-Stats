@@ -4,8 +4,8 @@
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/bcd1b44a1d6542e2b75b7b479ce56804)](https://www.codacy.com/app/pedro-mendonca/Translation-Stats?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=pedro-mendonca/Translation-Stats&amp;utm_campaign=Badge_Grade)
 [![RIPS CodeRisk](https://coderisk.com/wp/plugin/translation-stats/badge "RIPS CodeRisk")](https://coderisk.com/wp/plugin/translation-stats)
 [![PHP from Travis config](https://img.shields.io/travis/php-v/pedro-mendonca/Translation-Stats.svg)](https://travis-ci.org/pedro-mendonca/Translation-Stats)
-[![Wordpress Plugin: Tested WP Version](https://img.shields.io/wordpress/plugin/tested/translation-stats.svg)](https://wordpress.org/plugins/translation-stats/advanced/)
-[![Wordpress Plugin Downloads](https://img.shields.io/wordpress/plugin/dt/translation-stats.svg)](https://wordpress.org/plugins/translation-stats/advanced/)
+[![WordPress Plugin: Tested WP Version](https://img.shields.io/wordpress/plugin/tested/translation-stats.svg)](https://wordpress.org/plugins/translation-stats/advanced/)
+[![WordPress Plugin Downloads](https://img.shields.io/wordpress/plugin/dt/translation-stats.svg)](https://wordpress.org/plugins/translation-stats/advanced/)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://paypal.me/pedromendonca/)
 
 **Contributors:** pedromendonca  
@@ -68,16 +68,16 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
 ## Screenshots ##
 
-1. Translation Stats shown in WordPress plugins page
+1.  Translation Stats shown in WordPress plugins page
 ![screenshot-1](./assets/screenshot-1.png)
 
-2. Translation Stats installed plugins list
+2.  Translation Stats installed plugins list
 ![screenshot-2](./assets/screenshot-2.png)
 
-3. Translation Stats settings tab
+3.  Translation Stats settings tab
 ![screenshot-3](./assets/screenshot-3.png)
 
-4. Translation Stats tools tab
+4.  Translation Stats tools tab
 ![screenshot-4](./assets/screenshot-4.png)
 
 ## Changelog ##
