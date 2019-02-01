@@ -267,7 +267,6 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 			$wrap         = $args['wrap'];
 			$formaction   = $args['formaction'];
 			$confirmation = $args['confirmation'];
-			$helper       = $args['helper'];
 			if ( $confirmation ) {
 				$onclick = sprintf( 'return confirm( \'%s\' )', esc_js( $confirmation ) );
 			} else {
