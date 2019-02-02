@@ -309,7 +309,6 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 */
 		public function tstats_settings_advanced_debug_callback() {
 
-			$section = 'tstats_settings_advanced_debug';
 			?>
 			<p class="description">
 				<?php
