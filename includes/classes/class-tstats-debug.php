@@ -218,13 +218,13 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 *
 		 * @since 0.8.0
 		 *
-		 * @param string $id       Setting ID.
-		 * @param string $value    Setting Value.
-		 * @param string $default  Setting Default.
-		 * @param string $type     WordPress core notice types ( 'error', 'warning', 'success' and 'info' ).
-		 * @param string $debug    True or false value to activate debug message.
+		 * @param string $field_id  Setting ID.
+		 * @param string $value     Setting Value.
+		 * @param string $default   Setting Default.
+		 * @param string $type      WordPress core notice types ( 'error', 'warning', 'success' and 'info' ).
+		 * @param string $debug     True or false value to activate debug message.
 		 */
-		public function tstats_debug_setting_field( $id, $value, $default, $type, $debug ) {
+		public function tstats_debug_setting_field( $field_id, $value, $default, $type, $debug ) {
 			if ( TSTATS_DEBUG || $debug ) {
 				?>
 				<div class="tstats-debug-block notice notice-alt inline notice-<?php echo esc_html( $type ); ?>">
@@ -233,7 +233,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 						printf(
 							/* translators: %s Setting ID. */
 							esc_html__( 'ID: %s', 'translation-stats' ),
-							'<code>' . esc_html( $id ) . '</code>'
+							'<code>' . esc_html( $field_id ) . '</code>'
 						);
 						?>
 					</p>

@@ -36,8 +36,8 @@ if ( ! class_exists( 'TStats_Transients' ) ) {
 				)
 			);
 			$tstats_transients = array_map(
-				function( $o ) {
-					return $o->name;
+				function( $object ) {
+					return $object->name;
 				},
 				$tstats_transients
 			);
