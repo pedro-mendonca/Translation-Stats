@@ -339,36 +339,36 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 */
 		public function tstats_allowed_html() {
 			$allowed_html = array(
-				'a' => array(
-					'href' => array(),
-					'title' => array(),
-					'class' => array(),
-					'data' => array(),
-					'rel'   => array(),
+				'a'      => array(
+					'href'   => array(),
+					'title'  => array(),
+					'class'  => array(),
+					'data'   => array(),
+					'rel'    => array(),
 					'target' => array(),
 				),
-				'br' => array(),
-				'em' => array(),
-				'ul' => array(
+				'br'     => array(),
+				'em'     => array(),
+				'ul'     => array(
 					'class' => array(),
 				),
-				'ol' => array(
+				'ol'     => array(
 					'class' => array(),
 				),
-				'li' => array(
-					  'class' => array(),
+				'li'     => array(
+					'class' => array(),
 				),
 				'strong' => array(),
-				'div' => array(
+				'div'    => array(
 					'class' => array(),
-					'data' => array(),
+					'data'  => array(),
 					'style' => array(),
 				),
-				'span' => array(
+				'span'   => array(
 					'class' => array(),
 					'style' => array(),
 				),
-				'img' => array(
+				'img'    => array(
 					'alt'    => array(),
 					'class'  => array(),
 					'height' => array(),
@@ -376,15 +376,15 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 					'width'  => array(),
 				),
 				'select' => array(
-					'id'   => array(),
+					'id'    => array(),
 					'class' => array(),
-					'name' => array(),
+					'name'  => array(),
 				),
 				'option' => array(
-					'value' => array(),
+					'value'    => array(),
 					'selected' => array(),
 				),
-				'style' => array(),
+				'style'  => array(),
 			);
 
 			return $allowed_html;
