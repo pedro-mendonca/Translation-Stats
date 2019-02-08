@@ -145,9 +145,8 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 				$subprojects = $this->tstats_translate_api->tstats_plugin_subprojects();
 				$i18n_errors = 0;
 				foreach ( $subprojects as $subproject ) {
-					$subproject = $this->tstats_render_stats_bar( $locale, $project_slug, esc_html( $subproject['name'] ), esc_html( $subproject['slug'] ) );
-					// echo wp_kses_post( $subproject['stats'] );
-					echo $subproject['stats'];
+					$subproject = $this->tstats_render_stats_bar( $locale, $project_slug, $subproject['name'], $subproject['slug'] );
+					echo wp_kses( $subproject['stats'], $this->tstats_allowed_html() );
 					$i18n_errors = $i18n_errors + $subproject['error'];
 				}
 				?>
@@ -177,7 +176,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 					sprintf(
 						/* translators: %1$s Opening link tag <a href="[link]">. %2$s Closing link tag </a>. */
 						wp_kses_post( __( 'If you would like to translate this plugin, %1$splease contact the author%2$s.', 'translation-stats' ) ),
-						'<a href="https://wordpress.org/support/plugin/' . esc_html( $project_slug ) . '" target="_blank">',
+						'<a href="https://wordpress.org/support/plugin/' . esc_attr( $project_slug ) . '" target="_blank">',
 						'</a>'
 					),
 					'warning'
@@ -185,8 +184,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 			}
 
 			$plugin_stats = ob_get_clean();
-			// echo wp_kses_post( $plugin_stats );
-			echo $plugin_stats;
+			echo wp_kses( $plugin_stats, $this->tstats_allowed_html() );
 		}
 
 
@@ -246,8 +244,8 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 			$href  = ! $i18n_error ? 'href="' . esc_url( $url ) . '"' : '';
 			ob_start();
 			?>
-			<div class="content__subproject <?php echo esc_html( $subproject_slug ); ?>">
-				<a class="<?php echo esc_attr( $class ); ?>" target="_blank" <?php echo esc_attr( $href ); ?>>
+			<div class="content__subproject <?php echo esc_attr( $subproject_slug ); ?>">
+				<a class="<?php echo esc_attr( $class ); ?>" target="_blank" <?php echo wp_kses_post( $href ); ?>>
 				<?php
 				if ( ! $i18n_error ) {
 					?>
@@ -256,7 +254,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 							width: <?php echo esc_attr( $percent_translated ); ?>%;
 						}
 					</style>
-					<div class="subproject <?php echo esc_html( 'percent' . 10 * floor( $percent_translated / 10 ) . ' ' . $subproject_slug ); ?>">
+					<div class="subproject <?php echo esc_attr( 'percent' . 10 * floor( $percent_translated / 10 ) . ' ' . $subproject_slug ); ?>">
 						<div class="subproject-bar">
 							<span class="subproject-bar__percentage"><?php echo esc_html( $percent_translated ); ?>%</span><span class="subproject-bar__name"><?php echo esc_html( $subproject ); ?></span>
 						</div>
@@ -329,6 +327,67 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 			}
 
 			return $translation_stats;
+		}
+
+
+		/**
+		 * Returns array of allowed HTML elements for use in wp_kses().
+		 *
+		 * @since 0.8.5
+		 *
+		 * @return array  Array of allowed HTML elements.
+		 */
+		public function tstats_allowed_html() {
+			$allowed_html = array(
+				'a' => array(
+					'href' => array(),
+					'title' => array(),
+					'class' => array(),
+					'data' => array(),
+					'rel'   => array(),
+					'target' => array(),
+				),
+				'br' => array(),
+				'em' => array(),
+				'ul' => array(
+					'class' => array(),
+				),
+				'ol' => array(
+					'class' => array(),
+				),
+				'li' => array(
+					  'class' => array(),
+				),
+				'strong' => array(),
+				'div' => array(
+					'class' => array(),
+					'data' => array(),
+					'style' => array(),
+				),
+				'span' => array(
+					'class' => array(),
+					'style' => array(),
+				),
+				'img' => array(
+					'alt'    => array(),
+					'class'  => array(),
+					'height' => array(),
+					'src'    => array(),
+					'width'  => array(),
+				),
+				'select' => array(
+					'id'   => array(),
+					'class' => array(),
+					'name' => array(),
+				),
+				'option' => array(
+					'value' => array(),
+					'selected' => array(),
+				),
+				'style' => array(),
+			);
+
+			return $allowed_html;
 		}
 
 	}
