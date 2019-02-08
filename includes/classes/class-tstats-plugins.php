@@ -249,7 +249,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 				<?php
 				if ( ! $i18n_error ) {
 					?>
-					<div class="subproject <?php echo esc_html( 'percent' . 10 * floor( $percent_translated / 10 ) . ' ' . $subproject_slug ); ?>" style="width: <?php echo esc_html( $percent_translated ); ?>%;">
+					<div class="subproject <?php echo esc_html( 'percent' . 10 * floor( $percent_translated / 10 ) . ' ' . $subproject_slug ); ?>">
 						<div class="subproject-bar">
 							<span class="subproject-bar__percentage"><?php echo esc_html( $percent_translated ); ?>%</span><span class="subproject-bar__name"><?php echo esc_html( $subproject ); ?></span>
 						</div>
