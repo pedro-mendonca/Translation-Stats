@@ -146,7 +146,8 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 				$i18n_errors = 0;
 				foreach ( $subprojects as $subproject ) {
 					$subproject = $this->tstats_render_stats_bar( $locale, $project_slug, esc_html( $subproject['name'] ), esc_html( $subproject['slug'] ) );
-					echo wp_kses_post( $subproject['stats'] );
+					// echo wp_kses_post( $subproject['stats'] );
+					echo $subproject['stats'];
 					$i18n_errors = $i18n_errors + $subproject['error'];
 				}
 				?>
@@ -184,7 +185,8 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 			}
 
 			$plugin_stats = ob_get_clean();
-			echo wp_kses_post( $plugin_stats );
+			// echo wp_kses_post( $plugin_stats );
+			echo $plugin_stats;
 		}
 
 
