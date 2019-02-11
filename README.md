@@ -12,7 +12,7 @@
 **Donate link:** [paypal.me/pedromendonca](https://paypal.me/pedromendonca/)  
 **Tags:** internationalization, i18n, localization, l10n, translation, statistics, glotpress, dark mode  
 **Requires at least:** 4.9  
-**Tested up to:** 5.0.3  
+**Tested up to:** 5.1  
 **Requires PHP:** 5.4  
 **Stable tag:** 0.8.4  
 **License:** GPLv2 or later  
