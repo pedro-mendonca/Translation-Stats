@@ -153,7 +153,7 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 		 * @param array $args  Array of checkbox field arguments.
 		 */
 		public function tstats_render_input_checkbox( $args ) {
-			$id          = TSTATS_WP_OPTION . '[' . $args['id'] . ']';
+			$field_id    = TSTATS_WP_OPTION . '[' . $args['id'] . ']';
 			$label       = $args['label'];
 			$description = $args['description'];
 			$class       = $args['class'];
@@ -164,14 +164,14 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 			$value       = is_array( $options ) ? $option : $default;
 			?>
 			<label>
-				<input name="<?php echo esc_attr( $id ); ?>" id="<?php echo esc_attr( $id ); ?>" <?php checked( $value, true ); ?> class="<?php echo esc_attr( $class ); ?>" type="checkbox" value="true" />
+				<input name="<?php echo esc_attr( $field_id ); ?>" id="<?php echo esc_attr( $field_id ); ?>" <?php checked( $value, true ); ?> class="<?php echo esc_attr( $class ); ?>" type="checkbox" value="true" />
 				<?php
 				echo esc_html( $label );
 				?>
 			</label>
 			<p class='description'><?php echo esc_html( $description ); ?></p>
 			<?php
-			$this->tstats_debug->tstats_debug_setting_field( $id, $option, $default, 'info', false );
+			$this->tstats_debug->tstats_debug_setting_field( $field_id, $option, $default, 'info', false );
 		}
 
 
@@ -184,7 +184,7 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 		 */
 		public function tstats_render_input_select( $args ) {
 
-			$id             = TSTATS_WP_OPTION . '[' . $args['id'] . ']';
+			$field_id       = TSTATS_WP_OPTION . '[' . $args['id'] . ']';
 			$label          = $args['label'];
 			$description    = $args['description'];
 			$select_options = $args['select_options'];
@@ -194,10 +194,9 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 			$options        = get_option( TSTATS_WP_OPTION );
 			$option         = empty( $options[ $args['id'] ] ) ? '' : $options[ $args['id'] ];
 			$value          = is_array( $options ) ? $option : $default;
-
 			?>
 			<label>
-				<select class="<?php echo esc_attr( $size ); ?>" name="<?php echo esc_attr( $id ); ?>" id="<?php echo esc_attr( $id ); ?>">
+				<select class="<?php echo esc_attr( $size ); ?>" name="<?php echo esc_attr( $field_id ); ?>" id="<?php echo esc_attr( $field_id ); ?>">
 				<?php
 				foreach ( $select_options as $key => $option_label ) {
 					printf( '<option value="%s"%s>%s</option>', esc_attr( $key ), selected( $value, $key, false ), esc_html( $option_label ) );
@@ -210,7 +209,7 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 			</label>
 			<p class='description'><?php echo esc_html( $description ); ?></p>
 			<?php
-			$this->tstats_debug->tstats_debug_setting_field( $id, $option, $default, 'info', false );
+			$this->tstats_debug->tstats_debug_setting_field( $field_id, $option, $default, 'info', false );
 		}
 
 
@@ -223,7 +222,7 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 		 */
 		public function tstats_render_input_select__language( $args ) {
 
-			$id          = TSTATS_WP_OPTION . '[' . $args['id'] . ']';
+			$field_id    = TSTATS_WP_OPTION . '[' . $args['id'] . ']';
 			$label       = $args['label'];
 			$description = $args['description'];
 			$default     = $args['default'];
@@ -234,12 +233,12 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 			<label>
 				<?php
 				$args = array(
-					'id'                          => $id,    // ID attribute of the select element. Default 'locale'.
-					'name'                        => $id,    // Name attribute of the select element. Default 'locale'.
-					'selected'                    => $value, // Language which should be selected.
-					'echo'                        => '1',    // Whether to echo the generated markup. Accepts 0, 1, or their boolean equivalents. Default 1.
-					'show_available_translations' => true,   // Whether to show available translations. Default true.
-					'show_option_site_default'    => true,   // Whether to show an option to fall back to the site's locale. Default false.
+					'id'                          => $field_id, // ID attribute of the select element. Default 'locale'.
+					'name'                        => $field_id, // Name attribute of the select element. Default 'locale'.
+					'selected'                    => $value,    // Language which should be selected.
+					'echo'                        => '1',       // Whether to echo the generated markup. Accepts 0, 1, or their boolean equivalents. Default 1.
+					'show_available_translations' => true,      // Whether to show available translations. Default true.
+					'show_option_site_default'    => true,      // Whether to show an option to fall back to the site's locale. Default false.
 				);
 				wp_dropdown_languages( $args );
 				echo ' ' . esc_html( $label );
@@ -247,7 +246,7 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 			</label>
 			<p class='description'><?php echo esc_html( $description ); ?></p>
 			<?php
-			$this->tstats_debug->tstats_debug_setting_field( $id, $option, $default, 'info', false );
+			$this->tstats_debug->tstats_debug_setting_field( $field_id, $option, $default, 'info', false );
 		}
 
 
@@ -259,7 +258,7 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 		 * @param array $args  Array of button field arguments.
 		 */
 		public function tstats_render_input_button( $args ) {
-			$id           = TSTATS_WP_OPTION . '[' . $args['id'] . ']';
+			$field_id     = TSTATS_WP_OPTION . '[' . $args['id'] . ']';
 			$name         = $args['name'];
 			$label        = $args['label'];
 			$description  = $args['description'];
@@ -274,7 +273,7 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 			}
 
 			$button_args = array(
-				'id'         => $id,
+				'id'         => $field_id,
 				'formaction' => $formaction,
 				'onclick'    => $onclick,
 			);

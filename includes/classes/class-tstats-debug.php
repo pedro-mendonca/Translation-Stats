@@ -95,15 +95,15 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 				<?php
 
 				// Test important functions.
-				$tstats_test_functions = array(
+				$test_functions = array(
 					'array_column',
 					'array_map',
 				);
-				if ( ! empty( $tstats_test_functions ) ) {
-					foreach ( $tstats_test_functions as $tstats_test_function ) {
-						$dashicon = function_exists( $tstats_test_function ) ? 'dashicons-yes' : 'dashicons-no';
+				if ( ! empty( $test_functions ) ) {
+					foreach ( $test_functions as $test_function ) {
+						$dashicon = function_exists( $test_function ) ? 'dashicons-yes' : 'dashicons-no';
 						?>
-						<span class="dashicons <?php echo esc_html( $dashicon ); ?>"></span><?php echo esc_html( $tstats_test_function . '()' ); ?><br/>
+						<span class="dashicons <?php echo esc_html( $dashicon ); ?>"></span><?php echo esc_html( $test_function . '()' ); ?><br/>
 						<?php
 					}
 				} else {
