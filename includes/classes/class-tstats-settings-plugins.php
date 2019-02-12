@@ -68,11 +68,11 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 					<tr>
 						<td scope="col" id="cb" class="manage-column column-cb check-column">
 							<?php
-							$id      = TSTATS_WP_OPTION . '[all_plugins]';
-							$checked = empty( $options['all_plugins'] ) ? '' : true;
+							$input_id = TSTATS_WP_OPTION . '[all_plugins]';
+							$checked  = empty( $options['all_plugins'] ) ? '' : true;
 							?>
 							<label class="screen-reader-text"><?php esc_html_e( 'Select All', 'translation-stats' ); ?></label>
-							<input name="<?php echo esc_attr( $id ); ?>" <?php checked( $checked, true ); ?> class="all_plugins" id="all_plugins" type="checkbox" value="true"/>
+							<input name="<?php echo esc_attr( $input_id ); ?>" <?php checked( $checked, true ); ?> class="all_plugins" id="all_plugins" type="checkbox" value="true"/>
 						</td>
 						<th scope="col" id='column-name' class='manage-column column-name column-primary'>
 							<?php esc_html_e( 'Plugin', 'translation-stats' ); ?>

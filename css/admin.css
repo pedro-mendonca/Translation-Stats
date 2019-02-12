@@ -134,7 +134,7 @@ table.wp-list-table.plugins td.column-translation-stats .translation-stats-conte
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled:hover div.subproject,
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled:focus div.subproject {
-	width: 100% !important;
+	width: 100%;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled:hover div.subproject div.subproject-bar,

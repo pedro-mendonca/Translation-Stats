@@ -168,8 +168,6 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 					'section'     => $section,
 					'id'          => 'show_warnings',
 					'type'        => 'checkbox',
-					'options'     => false,
-					'placeholder' => '',
 					'class'       => '',
 					'title'       => __( 'Warnings', 'translation-stats' ),
 					'label'       => __( 'Show translation project warnings', 'translation-stats' ),
@@ -216,8 +214,8 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 				array(
 					'section'     => $section,
 					'id'          => 'delete_data_on_uninstall',
-					'class'       => '',
 					'type'        => 'checkbox',
+					'class'       => '',
 					'title'       => __( 'Uninstall', 'translation-stats' ),
 					'label'       => __( 'Delete all plugin data on uninstall', 'translation-stats' ),
 					'description' => __( 'Check to delete all Translation Stats plugin settings and cache on uninstall.', 'translation-stats' ),
@@ -232,8 +230,8 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 					'section'      => $section,
 					'id'           => 'reset_settings',
 					'name'         => 'reset_settings',
-					'class'        => 'secondary',
 					'type'         => 'button',
+					'class'        => 'primary',
 					'title'        => __( 'Reset Settings', 'translation-stats' ),
 					'label'        => __( 'Reset', 'translation-stats' ),
 					'description'  => __( 'Click to restore the default Translation Stats plugin settings.', 'translation-stats' ),
@@ -244,6 +242,7 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 					'confirmation' => __( 'Warning! Translation Stats plugin settings will be reset to default! Click \'Cancel\' to go back, \'OK\' to reset.', 'translation-stats' ),
 				)
 			);
+
 		}
 
 
@@ -286,8 +285,8 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 					'section'      => $section,
 					'id'           => 'delete_transients',
 					'name'         => 'delete_transients',
-					'class'        => 'secondary',
 					'type'         => 'button',
+					'class'        => 'primary',
 					'title'        => __( 'Clean Cache', 'translation-stats' ),
 					'label'        => __( 'Clean', 'translation-stats' ),
 					'description'  => __( 'Click to delete all Translation Stats cache and force update translation stats.', 'translation-stats' ),
@@ -309,7 +308,6 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 */
 		public function tstats_settings_advanced_debug_callback() {
 
-			$section = 'tstats_settings_advanced_debug';
 			?>
 			<p class="description">
 				<?php
@@ -400,7 +398,6 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 				'delete_data_on_uninstall' => true,
 				'transients_expiration'    => DAY_IN_SECONDS,
 			);
-
 			return $defaults;
 		}
 

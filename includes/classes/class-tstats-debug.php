@@ -95,15 +95,15 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 				<?php
 
 				// Test important functions.
-				$tstats_test_functions = array(
+				$test_functions = array(
 					'array_column',
 					'array_map',
 				);
-				if ( ! empty( $tstats_test_functions ) ) {
-					foreach ( $tstats_test_functions as $tstats_test_function ) {
-						$dashicon = function_exists( $tstats_test_function ) ? 'dashicons-yes' : 'dashicons-no';
+				if ( ! empty( $test_functions ) ) {
+					foreach ( $test_functions as $test_function ) {
+						$dashicon = function_exists( $test_function ) ? 'dashicons-yes' : 'dashicons-no';
 						?>
-						<span class="dashicons <?php echo esc_html( $dashicon ); ?>"></span><?php echo esc_html( $tstats_test_function . '()' ); ?><br/>
+						<span class="dashicons <?php echo esc_html( $dashicon ); ?>"></span><?php echo esc_html( $test_function . '()' ); ?><br/>
 						<?php
 					}
 				} else {
@@ -218,13 +218,13 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 *
 		 * @since 0.8.0
 		 *
-		 * @param string $id       Setting ID.
-		 * @param string $value    Setting Value.
-		 * @param string $default  Setting Default.
-		 * @param string $type     WordPress core notice types ( 'error', 'warning', 'success' and 'info' ).
-		 * @param string $debug    True or false value to activate debug message.
+		 * @param string $field_id  Setting ID.
+		 * @param string $value     Setting Value.
+		 * @param string $default   Setting Default.
+		 * @param string $type      WordPress core notice types ( 'error', 'warning', 'success' and 'info' ).
+		 * @param string $debug     True or false value to activate debug message.
 		 */
-		public function tstats_debug_setting_field( $id, $value, $default, $type, $debug ) {
+		public function tstats_debug_setting_field( $field_id, $value, $default, $type, $debug ) {
 			if ( TSTATS_DEBUG || $debug ) {
 				?>
 				<div class="tstats-debug-block notice notice-alt inline notice-<?php echo esc_html( $type ); ?>">
@@ -233,7 +233,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 						printf(
 							/* translators: %s Setting ID. */
 							esc_html__( 'ID: %s', 'translation-stats' ),
-							'<code>' . esc_html( $id ) . '</code>'
+							'<code>' . esc_html( $field_id ) . '</code>'
 						);
 						?>
 					</p>
