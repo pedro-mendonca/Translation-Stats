@@ -17,7 +17,7 @@ jQuery( document ).ready( function( $ ) {
 
 		// Active tab.
 		$( this ).parent().children().removeClass( 'nav-tab-active' );
-		$( this ).addClass( 'nav-tab-activ e' );
+		$( this ).addClass( 'nav-tab-active' );
 
 		// Active tab content.
 		$( '.tabs-content form' ).children( '.tab-content' ).addClass( 'hidden' );
