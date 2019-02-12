@@ -158,7 +158,6 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 			$description = $args['description'];
 			$class       = $args['class'];
 			$default     = $args['default'];
-			$helper      = $args['helper'];
 			$options     = get_option( TSTATS_WP_OPTION );
 			$option      = empty( $options[ $args['id'] ] ) ? '' : true;
 			$value       = is_array( $options ) ? $option : $default;
@@ -189,7 +188,6 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 			$description    = $args['description'];
 			$select_options = $args['select_options'];
 			$default        = $args['default'];
-			$helper         = $args['helper'];
 			$size           = isset( $args['size'] ) && ! is_null( $args['size'] ) ? $args['size'] : 'regular';
 			$options        = get_option( TSTATS_WP_OPTION );
 			$option         = empty( $options[ $args['id'] ] ) ? '' : $options[ $args['id'] ];
