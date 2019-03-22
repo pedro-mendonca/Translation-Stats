@@ -18,7 +18,7 @@
 **License:** GPLv2 or later  
 **License URI:** [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html)  
 
-Show the WordPress.org translation stats in your installed plugins list.
+Show plugins translation stats on your WordPress install.
 
 ## Description ##
 

@@ -1,6 +1,6 @@
 === Translation Stats ===
 Contributors: pedromendonca
-Donate link: [paypal.me/pedromendonca](https://paypal.me/pedromendonca/)
+Donate link: https://paypal.me/pedromendonca/
 Tags: internationalization, i18n, localization, l10n, translation, statistics, glotpress, dark mode
 Requires at least: 4.9
 Tested up to: 5.1
@@ -9,7 +9,7 @@ Stable tag: 0.8.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Show the WordPress.org translation stats in your installed plugins list.
+Show plugins translation stats on your WordPress install.
 
 == Description ==
 
