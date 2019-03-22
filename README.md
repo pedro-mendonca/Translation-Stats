@@ -28,7 +28,7 @@ The translation stats are shown only for plugins that exist in [translate.wordpr
 
 ![GlotPress](./assets/banner-772x250.png)
 
-If a plugin doesn't have complete translation stats, you'll see a notice with one of the reasons bellow:
+If a plugin doesn't have complete translation stats, you'll see a notice with one of the reasons below:
 *   Plugin not found on WordPress.org
 *   Translation project not found on WordPress.org
 *   The plugin is not properly prepared for localization
@@ -81,6 +81,9 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 ![screenshot-4](./assets/screenshot-4.png)
 
 ## Changelog ##
+
+### Development ###
+*   Fix typo
 
 ### 0.8.5 ###
 *   Tested up to WP 5.1

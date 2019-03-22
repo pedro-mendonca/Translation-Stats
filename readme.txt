@@ -17,7 +17,7 @@ The plugin adds a "Translation Stats" column to the plugin list screen in WordPr
 
 The translation stats are shown only for plugins that exist in [translate.wordpress.org](https://translate.wordpress.org/) and are [prepared for localization](https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/).
 
-If a plugin doesn't have complete translation stats, you'll see a notice with one of the reasons bellow:
+If a plugin doesn't have complete translation stats, you'll see a notice with one of the reasons below:
 
 *   Plugin not found on WordPress.org
 *   Translation project not found on WordPress.org
@@ -61,6 +61,9 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 4. Translation Stats tools tab
 
 == Changelog ==
+
+= Development =
+*   Fix typo
 
 = 0.8.5 =
 *   Tested up to WP 5.1
