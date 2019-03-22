@@ -64,6 +64,7 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
 = Development =
 *   Fix typo
+*   Support new locales
 
 = 0.8.5 =
 *   Tested up to WP 5.1
