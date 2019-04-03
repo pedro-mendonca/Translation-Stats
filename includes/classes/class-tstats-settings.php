@@ -396,7 +396,7 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 				'show_warnings'            => true,
 				'translation_language'     => 'site-default',
 				'delete_data_on_uninstall' => true,
-				'transients_expiration'    => DAY_IN_SECONDS,
+				'transients_expiration'    => TSTATS_TRANSIENTS_TRANSLATIONS_EXPIRATION,
 			);
 			return $defaults;
 		}

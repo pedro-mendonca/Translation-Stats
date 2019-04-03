@@ -40,6 +40,12 @@ define( 'TSTATS_SETTINGS_PAGE', 'translation-stats' );
 // Set Translation Stats transients prefix.
 define( 'TSTATS_TRANSIENTS_PREFIX', 'translation_stats_plugin_' );
 
+// Set Translation Stats transients default 24h expiration for Translations data.
+define( 'TSTATS_TRANSIENTS_TRANSLATIONS_EXPIRATION', DAY_IN_SECONDS );
+
+// Set Translation Stats transients 1 week expiration for Locales data.
+define( 'TSTATS_TRANSIENTS_LOCALES_EXPIRATION', WEEK_IN_SECONDS );
+
 // Set Translation Stats plugin path.
 define( 'TSTATS_PATH', plugin_dir_url( __FILE__ ) );
 
