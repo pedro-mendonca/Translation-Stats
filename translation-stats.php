@@ -60,7 +60,7 @@ define( 'TSTATS_DEBUG', false );
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-main.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-notices.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-transients.php';
-require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-translate-api.php';
+require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-translations-api.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-debug.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-settings-api.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-settings-plugins.php';
