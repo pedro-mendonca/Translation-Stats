@@ -76,9 +76,6 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 			<h3>
 				<?php esc_html_e( 'Server', 'translation-stats' ); ?>
 			</h3>
-
-
-
 			<p>
 				<?php
 				printf(
@@ -93,7 +90,6 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 			</p>
 			<code class="tstats-code-block">
 				<?php
-
 				// Test important functions.
 				$test_functions = array(
 					'array_column',
@@ -121,10 +117,30 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 * @since 0.8.0
 		 */
 		public function tstats_debug_settings() {
+			// Get plugin settings.
+			$tstats_options = get_option( TSTATS_WP_OPTION );
 			?>
 			<h3>
 				<?php esc_html_e( 'Settings', 'translation-stats' ); ?>
 			</h3>
+			<p>
+				<?php
+				printf(
+					/* translators: %s WordPress Locale code. */
+					esc_html__( 'Site Locale: %s', 'translation-stats' ),
+					'<code>' . get_locale() . '</code>'
+				);
+				?>
+			</p>
+			<p>
+				<?php
+				printf(
+					/* translators: %s WordPress Locale code. */
+					esc_html__( 'Translation Stats Locale: %s', 'translation-stats' ),
+					'<code>' . $tstats_options['translation_language'] . '</code>'
+				);
+				?>
+			</p>
 			<p>
 				<?php
 				printf(
@@ -148,7 +164,6 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 			</p>
 			<div>
 				<?php
-				$tstats_options = get_option( TSTATS_WP_OPTION );
 				if ( $tstats_options ) {
 					?>
 					<pre><code class="tstats-code-block"><?php echo esc_html( print_r( $tstats_options, true ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r ?></code></pre>
