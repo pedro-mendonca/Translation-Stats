@@ -24,8 +24,8 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 		 */
 		public function __construct() {
 
-			// Instantiate Translation Stats Translate API.
-			$this->tstats_translate_api = new TStats_Translate_API();
+			// Instantiate Translation Stats Translations API.
+			$this->tstats_translations_api = new TStats_Translations_API();
 
 		}
 
@@ -60,7 +60,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 			$show_slug   = false;                                                   // Set to 'true' to show Slug column.
 			$locale_slug = GP_Locales::by_field( 'wp_locale', get_locale() )->slug; // Get site WordPress Locale ( 'wp_locale'->'slug' - 'pt_PT'->'pt' ).
 			$options     = get_option( TSTATS_WP_OPTION );
-			$subprojects = $this->tstats_translate_api->tstats_plugin_subprojects();
+			$subprojects = $this->tstats_translations_api->tstats_plugin_subprojects();
 
 			?>
 			<table class="tstats-plugin-list-table widefat plugins">
@@ -161,11 +161,11 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 					$plugin_item = '';
 
 					foreach ( $all_plugins as $key => $plugin ) {
-						$plugin_slug = $this->tstats_translate_api->tstats_plugin_metadata( $key, 'slug' );
-						$plugin_url  = $this->tstats_translate_api->tstats_plugin_metadata( $key, 'url' );
+						$plugin_slug = $this->tstats_translations_api->tstats_plugin_metadata( $key, 'slug' );
+						$plugin_url  = $this->tstats_translations_api->tstats_plugin_metadata( $key, 'url' );
 						if ( get_locale() !== 'en_US' ) {
 							// If current locale is not 'en_US', add Locale Slug prefix to plugin URL (eg. https://pt.wordpress.org/plugins/translation-stats/ ).
-							$plugin_url = 'https://' . $locale_slug . '.' . substr( $this->tstats_translate_api->tstats_plugin_metadata( $key, 'url' ), strlen( 'https://' ) );
+							$plugin_url = 'https://' . $locale_slug . '.' . substr( $this->tstats_translations_api->tstats_plugin_metadata( $key, 'url' ), strlen( 'https://' ) );
 						}
 						$field_name = TSTATS_WP_OPTION . '[' . $plugin_slug . '][enabled]';
 						if ( empty( $plugin_slug ) ) {
@@ -183,8 +183,8 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 							}
 						}
 						$plugin_item++;
-						$plugin_name   = $this->tstats_translate_api->tstats_plugin_on_wporg( $key ) ? '<a href="' . $plugin_url . '" target="_blank">' . $plugin['Name'] . '</a>' : $plugin['Name'];
-						$plugin_author = $this->tstats_translate_api->tstats_plugin_on_wporg( $key ) && $plugin['AuthorURI'] ? '<a href="' . $plugin['AuthorURI'] . '" target="_blank">' . $plugin['AuthorName'] . '</a>' : $plugin['AuthorName'];
+						$plugin_name   = $this->tstats_translations_api->tstats_plugin_on_wporg( $key ) ? '<a href="' . $plugin_url . '" target="_blank">' . $plugin['Name'] . '</a>' : $plugin['Name'];
+						$plugin_author = $this->tstats_translations_api->tstats_plugin_on_wporg( $key ) && $plugin['AuthorURI'] ? '<a href="' . $plugin['AuthorURI'] . '" target="_blank">' . $plugin['AuthorName'] . '</a>' : $plugin['AuthorName'];
 						?>
 						<tr class="<?php echo esc_html( $status ); ?>">
 							<th scope="row" class="check-column plugin-select">
