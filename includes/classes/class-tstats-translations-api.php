@@ -63,15 +63,15 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 
 
 		/**
-		 * Get data from translate.WordPress.org API.
+		 * Get plugin data from translate.WordPress.org API.
 		 *
 		 * @since 0.8.0
 		 *
-		 * @param string $url       URL to get the data from.
+		 * @param string $plugin    Plugin slug (project or project/subproject).
 		 * @return string $api_get  Returns the response from translate.WordPress.org API URL.
 		 */
-		public function tstats_translations_api_get( $url ) {
-			$api_get = wp_remote_get( 'https://translate.wordpress.org/api/projects/wp-plugins/' . $url );
+		public function tstats_translations_api_get_plugin( $plugin ) {
+			$api_get = wp_remote_get( $this->tstats_translations_api_url( 'plugins' ) . $plugin );
 			return $api_get;
 		}
 
@@ -88,7 +88,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 			// Check project transients.
 			$on_wporg = get_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug );
 			if ( false === $on_wporg ) {
-				$json = $this->tstats_translations_api_get( $project_slug );
+				$json = $this->tstats_translations_api_get_plugin( $project_slug );
 				if ( is_wp_error( $json ) || wp_remote_retrieve_response_code( $json ) !== 200 ) {
 					$on_wporg = false;
 				} else {
@@ -113,7 +113,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 			// Check subproject transients.
 			$on_wporg = get_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug );
 			if ( false === $on_wporg ) {
-				$json = $this->tstats_translations_api_get( $project_slug . '/' . $subproject_slug );
+				$json = $this->tstats_translations_api_get_plugin( $project_slug . '/' . $subproject_slug );
 				if ( is_wp_error( $json ) || wp_remote_retrieve_response_code( $json ) !== 200 ) {
 					$on_wporg = false;
 				} else {
@@ -156,6 +156,31 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 				),
 			);
 			return $subprojects;
+		}
+
+
+		/**
+		 * Get Translate API URL.
+		 *
+		 * Example:
+		 * $api_url = $this->tstats_translations_api->tstats_translations_api_url( 'plugins' );
+		 *
+		 * @since 0.8.6
+		 *
+		 * @param string $project       Set the project API URL you want to get.
+		 * @return string $locale_data  Returns API URL.
+		 */
+		public function tstats_translations_api_url( $project ) {
+
+			$tstats_translations_api = array(
+				'languages' => 'https://translate.wordpress.org/api/languages',            // Translate API languages URL.
+				'plugins'   => 'https://translate.wordpress.org/api/projects/wp-plugins/', // Translate API plugins URL.
+				'themes'    => 'https://translate.wordpress.org/api/projects/wp-themes/',  // Translate API themes URL.
+				'wordpress' => 'https://translate.wordpress.org/api/projects/wp/',         // Translate API WordPress core URL.
+			);
+
+			return $tstats_translations_api[ $project ];
+
 		}
 
 	}

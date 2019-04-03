@@ -297,7 +297,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 
 			if ( false === $translation_stats ) {
 
-				$json = $this->tstats_translations_api->tstats_translations_api_get( $project_slug . '/' . $subproject_slug );
+				$json = $this->tstats_translations_api->tstats_translations_api_get_plugin( $project_slug . '/' . $subproject_slug );
 				if ( is_wp_error( $json ) || wp_remote_retrieve_response_code( $json ) !== 200 ) {
 
 					// Subproject not found (Error 404) - Plugin is not properly prepared for localization.
