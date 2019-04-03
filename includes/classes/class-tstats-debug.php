@@ -128,7 +128,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 				printf(
 					/* translators: %s WordPress Locale code. */
 					esc_html__( 'Site Locale: %s', 'translation-stats' ),
-					'<code>' . get_locale() . '</code>'
+					'<code>' . esc_html( get_locale() ) . '</code>'
 				);
 				?>
 			</p>
@@ -137,7 +137,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 				printf(
 					/* translators: %s WordPress Locale code. */
 					esc_html__( 'Translation Stats Locale: %s', 'translation-stats' ),
-					'<code>' . $tstats_options['translation_language'] . '</code>'
+					'<code>' . esc_html( $tstats_options['translation_language'] ) . '</code>'
 				);
 				?>
 			</p>
