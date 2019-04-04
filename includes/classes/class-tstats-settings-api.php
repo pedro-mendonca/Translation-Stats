@@ -237,6 +237,7 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 					'echo'                        => '1',       // Whether to echo the generated markup. Accepts 0, 1, or their boolean equivalents. Default 1.
 					'show_available_translations' => true,      // Whether to show available translations. Default true.
 					'show_option_site_default'    => true,      // Whether to show an option to fall back to the site's locale. Default false.
+					'show_option_en_us'           => false,     // Whether to show an option for English (United States). Default true.
 				);
 				wp_dropdown_languages( $args );
 				echo ' ' . esc_html( $label );
