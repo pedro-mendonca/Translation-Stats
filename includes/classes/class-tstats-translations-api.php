@@ -199,10 +199,10 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 			$url = $this->tstats_translations_api_url( 'languages' );
 
 			// Translation Stats languages transient name.
-			$available_translations_transient = 'available_translations';
+			$transient_name = 'available_translations';
 
 			// Check languages transients.
-			$tstats_locales = get_transient( TSTATS_TRANSIENTS_PREFIX . $available_translations_transient );
+			$tstats_locales = get_transient( TSTATS_TRANSIENTS_PREFIX . $transient_name );
 
 			if ( false === $tstats_locales ) {
 
@@ -233,7 +233,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 					}
 				}
 
-				set_transient( TSTATS_TRANSIENTS_PREFIX . $available_translations_transient, $tstats_locales, TSTATS_TRANSIENTS_LOCALES_EXPIRATION );
+				set_transient( TSTATS_TRANSIENTS_PREFIX . $transient_name, $tstats_locales, TSTATS_TRANSIENTS_LOCALES_EXPIRATION );
 			}
 			return $tstats_locales;
 		}
