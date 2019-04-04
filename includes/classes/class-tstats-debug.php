@@ -107,8 +107,8 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 			</p>
 			<?php
 
-			// Display debug formated message with plugin options.
-			$this->tstats_debug( 'info', true, false );
+			// Display plugin options and transients debug information.
+			$this->tstats_debug_info();
 
 		}
 
@@ -116,31 +116,21 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		/**
 		 * Display debug formated message with plugin options.
 		 *
-		 * Usage of notice types:
-		 * notice-error – error message displayed with a red border.
-		 * notice-warning – warning message displayed with a yellow border.
-		 * notice-success – success message displayed with a green border.
-		 * notice-info - info message displayed with a blue border.
-		 *
 		 * @since 0.8.0
 		 *
-		 * @param string $type    WordPress core notice types ( 'error', 'warning', 'success' and 'info' ).
-		 * @param string $inline  True show message inline, false show message on top.
-		 * @param string $debug   True or false value to activate debug message.
 		 */
-		public function tstats_debug( $type, $inline, $debug ) {
-			if ( TSTATS_DEBUG || $debug ) {
-				$inline = $inline ? 'inline' : '';
+		public function tstats_debug_info() {
+			if ( TSTATS_DEBUG ) {
 				?>
 				<br/>
-				<div class="tstats-debug-block notice notice-alt <?php echo esc_html( $inline ); ?> notice-<?php echo esc_html( $type ); ?>">
+				<div class="tstats-debug-block notice notice-alt inline notice-info">
 					<?php
 					// Show server info.
-					$this->tstats_debug_server();
+					$this->tstats_debug_info__server();
 					// Show the site settings debug info.
-					$this->tstats_debug_settings();
+					$this->tstats_debug_info__settings();
 					// Show the site transients debug info.
-					$this->tstats_debug_transients();
+					$this->tstats_debug_info__transients();
 					?>
 					<br/>
 				</div>
@@ -150,11 +140,11 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 
 
 		/**
-		 * Show the site settings debug info.
+		 * Show the server debug info.
 		 *
 		 * @since 0.8.0
 		 */
-		public function tstats_debug_server() {
+		public function tstats_debug_info__server() {
 			?>
 			<h3>
 				<?php esc_html_e( 'Server', 'translation-stats' ); ?>
@@ -199,7 +189,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 *
 		 * @since 0.8.0
 		 */
-		public function tstats_debug_settings() {
+		public function tstats_debug_info__settings() {
 			// Get plugin settings.
 			$tstats_options = get_option( TSTATS_WP_OPTION );
 			?>
@@ -276,7 +266,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 *
 		 * @since 0.8.0
 		 */
-		public function tstats_debug_transients() {
+		public function tstats_debug_info__transients() {
 			?>
 			<h3>
 				<?php esc_html_e( 'Transients', 'translation-stats' ); ?>
