@@ -48,9 +48,11 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 * @since 0.8.6
 		 */
 		public function tstats_setting_tab__debug() {
-			if ( TSTATS_DEBUG ) { ?>
+			if ( TSTATS_DEBUG ) {
+				?>
 				<a class="nav-tab" href="#debug"><?php esc_html_e( 'Debug', 'translation-stats' ); ?></a>
-			<?php }
+				<?php
+			}
 		}
 
 
@@ -60,14 +62,16 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 * @since 0.8.6
 		 */
 		public function tstats_setting_content__debug() {
-			if ( TSTATS_DEBUG ) { ?>
+			if ( TSTATS_DEBUG ) {
+				?>
 				<div id="tab-debug" class="tab-content hidden">
 					<?php
 					$section = 'tstats_settings_advanced_debug';
 					do_settings_sections( $section );
 					?>
 				</div>
-			<?php }
+				<?php
+			}
 		}
 
 
@@ -117,7 +121,6 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 * Display debug formated message with plugin options.
 		 *
 		 * @since 0.8.0
-		 *
 		 */
 		public function tstats_debug_info() {
 			if ( TSTATS_DEBUG ) {
