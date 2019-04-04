@@ -27,6 +27,89 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 			// Instantiate Translation Stats Transients.
 			$this->tstats_transients = new TStats_Transients();
 
+			// Add Translation Stats settings field debug info.
+			add_action( 'tstats_debug_setting_field_info', array( $this, 'tstats_debug_setting_field_info' ), 10, 3 );
+
+			// Add Translation Stats settings debug section.
+			add_action( 'tstats_setting_section__after', array( $this, 'tstats_settings_section__debug' ) );
+
+			// Add Translation Stats settings debug tab.
+			add_action( 'tstats_setting_tab__after', array( $this, 'tstats_setting_tab__debug' ) );
+
+			// Add Translation Stats settings debug content.
+			add_action( 'tstats_setting_content__after', array( $this, 'tstats_setting_content__debug' ) );
+
+		}
+
+
+		/**
+		 * Add Translation Stats settings debug tab.
+		 *
+		 * @since 0.8.6
+		 */
+		public function tstats_setting_tab__debug() {
+			if ( TSTATS_DEBUG ) { ?>
+				<a class="nav-tab" href="#debug"><?php esc_html_e( 'Debug', 'translation-stats' ); ?></a>
+			<?php }
+		}
+
+
+		/**
+		 * Add Translation Stats settings debug content.
+		 *
+		 * @since 0.8.6
+		 */
+		public function tstats_setting_content__debug() {
+			if ( TSTATS_DEBUG ) { ?>
+				<div id="tab-debug" class="tab-content hidden">
+					<?php
+					$section = 'tstats_settings_advanced_debug';
+					do_settings_sections( $section );
+					?>
+				</div>
+			<?php }
+		}
+
+
+		/**
+		 * Register Settings Page sections Debug.
+		 *
+		 * @since 0.8.6
+		 */
+		public function tstats_settings_section__debug() {
+
+			if ( TSTATS_DEBUG ) {
+
+				add_settings_section(
+					'tstats_settings_advanced_debug',                          // String for use in the 'id' attribute of tags.
+					__( 'Debug', 'translation-stats' ),                        // Title of the section.
+					array( $this, 'tstats_settings_advanced_debug_callback' ), // Function that fills the section with the desired content.
+					'tstats_settings_advanced_debug'                           // The menu page on which to display this section. Should match $menu_slug.
+				);
+
+			}
+
+		}
+
+
+		/**
+		 * Callback function for section "Debug".
+		 *
+		 * @since 0.8.0
+		 */
+		public function tstats_settings_advanced_debug_callback() {
+
+			?>
+			<p class="description">
+				<?php
+				esc_html_e( 'List of settings and transients of Translation Stats.', 'translation-stats' );
+				?>
+			</p>
+			<?php
+
+			// Display debug formated message with plugin options.
+			$this->tstats_debug( 'info', true, false );
+
 		}
 
 
@@ -232,26 +315,18 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 
 
 		/**
-		 * Display debug formated message with plugin options.
-		 *
-		 * Usage of notice types:
-		 * notice-error – error message displayed with a red border.
-		 * notice-warning – warning message displayed with a yellow border.
-		 * notice-success – success message displayed with a green border.
-		 * notice-info - info message displayed with a blue border.
+		 * Display debug formated message with plugin setting info.
 		 *
 		 * @since 0.8.0
 		 *
 		 * @param string $field_id  Setting ID.
 		 * @param string $value     Setting Value.
 		 * @param string $default   Setting Default.
-		 * @param string $type      WordPress core notice types ( 'error', 'warning', 'success' and 'info' ).
-		 * @param string $debug     True or false value to activate debug message.
 		 */
-		public function tstats_debug_setting_field( $field_id, $value, $default, $type, $debug ) {
-			if ( TSTATS_DEBUG || $debug ) {
+		public function tstats_debug_setting_field_info( $field_id, $value, $default ) {
+			if ( TSTATS_DEBUG ) {
 				?>
-				<div class="tstats-debug-block notice notice-alt inline notice-<?php echo esc_html( $type ); ?>">
+				<div class="tstats-debug-block notice notice-alt inline notice-info">
 					<p>
 						<?php
 						printf(
@@ -287,3 +362,5 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 	}
 
 }
+
+new TStats_Debug();

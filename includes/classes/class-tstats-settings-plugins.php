@@ -37,7 +37,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 		 *
 		 * @since 0.8.0
 		 */
-		public function tstats_settings_plugins_callback() {
+		public function tstats_settings__plugins__callback() {
 			?>
 			<p class="description">
 				<?php
@@ -47,7 +47,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 			<br/>
 			<?php
 
-			$this->tstats_render_settings_plugins_list();
+			$this->tstats_render_settings__plugins_list();
 
 		}
 
@@ -57,7 +57,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 		 *
 		 * @since 0.8.0
 		 */
-		public function tstats_render_settings_plugins_list() {
+		public function tstats_render_settings__plugins_list() {
 
 			$show_author     = true; // Set to 'true' to show Author column.
 			$show_slug       = false;

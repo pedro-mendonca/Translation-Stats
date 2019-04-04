@@ -24,9 +24,6 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 		 */
 		public function __construct() {
 
-			// Instantiate Translation Stats Debug.
-			$this->tstats_debug = new TStats_Debug();
-
 		}
 
 
@@ -170,7 +167,9 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 			</label>
 			<p class='description'><?php echo esc_html( $description ); ?></p>
 			<?php
-			$this->tstats_debug->tstats_debug_setting_field( $field_id, $option, $default, 'info', false );
+
+			// Add Translation Stats debug setting field info.
+			do_action( 'tstats_debug_setting_field_info', $field_id, $option, $default );
 		}
 
 
@@ -207,7 +206,9 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 			</label>
 			<p class='description'><?php echo esc_html( $description ); ?></p>
 			<?php
-			$this->tstats_debug->tstats_debug_setting_field( $field_id, $option, $default, 'info', false );
+
+			// Add Translation Stats debug setting field info.
+			do_action( 'tstats_debug_setting_field_info', $field_id, $option, $default );
 		}
 
 
@@ -245,7 +246,9 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 			</label>
 			<p class='description'><?php echo esc_html( $description ); ?></p>
 			<?php
-			$this->tstats_debug->tstats_debug_setting_field( $field_id, $option, $default, 'info', false );
+
+			// Add Translation Stats debug setting field info.
+			do_action( 'tstats_debug_setting_field_info', $field_id, $option, $default );
 		}
 
 
