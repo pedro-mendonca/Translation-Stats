@@ -37,10 +37,7 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 			add_action( 'admin_menu', array( $this, 'tstats_admin_menu' ) );
 
 			// Add plugin settings sections.
-			add_action( 'admin_init', array( $this, 'tstats_settings_section__plugins' ) );
-			add_action( 'admin_init', array( $this, 'tstats_settings_section__general' ) );
-			add_action( 'admin_init', array( $this, 'tstats_settings_section__tools' ) );
-			add_action( 'admin_init', array( $this, 'tstats_settings_section__after' ) );
+			add_action( 'admin_init', array( $this, 'tstats_settings_sections' ) );
 
 		}
 
@@ -59,6 +56,28 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 				TSTATS_SETTINGS_PAGE,                                                         // The unique slug name to refer to this menu.
 				array( $this, 'tstats_options_page' )                                         // The function to output the page content.
 			);
+		}
+
+
+		/**
+		 * Add Settings Sections.
+		 *
+		 * @since 0.8.6
+		 */
+		public function tstats_settings_sections() {
+
+			// Plugins settings section.
+			$this->tstats_settings_section__plugins();
+
+			// General settings section.
+			$this->tstats_settings_section__general();
+
+			// Tools settings section.
+			$this->tstats_settings_section__tools();
+
+			// Add section after Translation settings sections.
+			do_action( 'tstats_setting_section__after' );
+
 		}
 
 
@@ -136,19 +155,6 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 				'tstats_settings__tools__transients', // The menu page on which to display this section. Should match $menu_slug.
 				TSTATS_WP_OPTION                       // The WordPress option to store Translation Stats settings.
 			);
-
-		}
-
-
-		/**
-		 * Registers Settings after page section.
-		 *
-		 * @since 0.8.6
-		 */
-		public function tstats_settings_section__after() {
-
-			// Add after Translation Stats settings sections.
-			do_action( 'tstats_setting_section__after' );
 
 		}
 
