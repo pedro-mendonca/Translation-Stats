@@ -226,7 +226,8 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 						foreach ( $body as $key => $tstats_locale ) {
 
 							// List locales based on existent 'wp_locale'.
-							if ( $tstats_locale['wp_locale'] ) { // Check for language 'wp_locale'.
+							if ( $tstats_locale['wp_locale'] ) {
+								unset( $key );
 								$tstats_locales[ $tstats_locale['wp_locale'] ] = $tstats_locale;
 							}
 						}
@@ -260,6 +261,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 
 			foreach ( $tstats_locales as $key => $value ) {
 				if ( $value['wp_locale'] === $wp_locale ) {
+					unset( $key );
 					$tstats_locale = $value;
 				}
 			}
