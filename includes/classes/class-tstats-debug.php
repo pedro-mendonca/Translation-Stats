@@ -136,6 +136,15 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 				<?php
 				printf(
 					/* translators: %s WordPress Locale code. */
+					esc_html__( 'User Locale: %s', 'translation-stats' ),
+					'<code>' . esc_html( get_user_locale() ) . '</code>'
+				);
+				?>
+			</p>
+			<p>
+				<?php
+				printf(
+					/* translators: %s WordPress Locale code. */
 					esc_html__( 'Translation Stats Locale: %s', 'translation-stats' ),
 					'<code>' . esc_html( $tstats_options['translation_language'] ) . '</code>'
 				);
