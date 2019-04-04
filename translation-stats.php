@@ -53,7 +53,9 @@ define( 'TSTATS_PATH', plugin_dir_url( __FILE__ ) );
 define( 'TSTATS_FILE', plugin_basename( __FILE__ ) );
 
 // Set Translation Stats Debug ( true / false ).
-define( 'TSTATS_DEBUG', false );
+// Use 'tstats_enable_debug' to enable debug:
+// add_filter( 'tstats_enable_debug', '__return_true' );
+define( 'TSTATS_DEBUG', apply_filters( 'tstats_enable_debug', false ) );
 
 
 // Include class files used by our plugin.
