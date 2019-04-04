@@ -349,6 +349,8 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 			$action = 'delete_transients';
 			if ( isset( $_POST[ $action ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
 				$this->tstats_nonce_verify_callback();
+				// Delete translations stats and available languages transients.
+				// The transient 'translation_stats_plugin_available_translations' will be immediatly rebuilt on tstats_render_settings__plugins_list() loading.
 				$this->tstats_transients->tstats_delete_transients( TSTATS_TRANSIENTS_PREFIX );
 				?>
 				<div class="notice notice-success is-dismissible">
