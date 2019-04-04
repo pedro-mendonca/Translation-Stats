@@ -24,14 +24,14 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 */
 		public function __construct() {
 
+			// Instantiate Translation Stats Globals.
+			$this->tstats_globals = new TStats_Globals();
+
 			// Instantiate Translation Stats Notices.
 			$this->tstats_notices = new TStats_Notices();
 
 			// Instantiate Translation Stats Translations API.
 			$this->tstats_translations_api = new TStats_Translations_API();
-
-			// Load GlotPress locales data.
-			require_once dirname( __DIR__ ) . '/glotpress/locales.php';
 
 			// Add plugin translation stats column.
 			add_filter( 'manage_plugins_columns', array( $this, 'tstats_add_translation_stats_column' ) );
@@ -39,23 +39,6 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 			// Show plugin translation stats content in column.
 			add_action( 'manage_plugins_custom_column', array( $this, 'tstats_render_plugin_stats_column' ), 10, 3 );
 
-		}
-
-
-		/**
-		 * Set the Translation Language.
-		 *
-		 * @since 0.8.0
-		 *
-		 * @return string $tstats_language  Translation Language.
-		 */
-		public function tstats_translation_language() {
-			// Get Translation Language from Settings.
-			$tstats_language = get_option( TSTATS_WP_OPTION )['translation_language'];
-			if ( ! $tstats_language || 'site-default' === $tstats_language ) {
-				$tstats_language = get_locale();
-			}
-			return $tstats_language;
 		}
 
 
@@ -68,9 +51,10 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 * @return array $columns  Columns array with added 'translation-stats'.
 		 */
 		public function tstats_add_translation_stats_column( $columns ) {
+			$tstats_language = $this->tstats_globals->tstats_translation_language();
 			// Check if user locale is not 'en_US'.
-			if ( $this->tstats_translation_language() !== 'en_US' ) {
-				$columns['translation-stats'] = _x( 'Translation Stats', 'Column label', 'translation-stats' ) . ' (' . $this->tstats_translation_language() . ')';
+			if ( 'en_US' !== $tstats_language ) {
+				$columns['translation-stats'] = _x( 'Translation Stats', 'Column label', 'translation-stats' );
 			}
 			return $columns;
 		}
@@ -90,8 +74,9 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 			// Check if is in column 'translation-stats'.
 			if ( 'translation-stats' === $column_name ) {
 
+				$tstats_language = $this->tstats_globals->tstats_translation_language();
 				// Check if user locale is not 'en_US'.
-				if ( $this->tstats_translation_language() !== 'en_US' ) {
+				if ( 'en_US' !== $tstats_language ) {
 
 					$project_slug = $this->tstats_translations_api->tstats_plugin_metadata( $plugin_file, 'slug' );
 					$options      = get_option( TSTATS_WP_OPTION );
@@ -126,15 +111,15 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 */
 		public function tstats_render_plugin_stats( $project_slug ) {
 
-			$locale  = $this->tstats_translation_language();
-			$variant = 'default'; // Todo: Add support for non-default variant.
-			$locale  = GP_Locales::by_field( 'wp_locale', $locale ); // Depends of GlotPress library.
+			$variant         = 'default'; // Todo: Add support for non-default variant.
+			$tstats_language = $this->tstats_globals->tstats_translation_language();
+			$locale          = $this->tstats_translations_api->tstats_locale( $tstats_language );
 			ob_start();
 			?>
 			<div class="translation-stats-title">
 				<?php
-				$url         = 'https://translate.wordpress.org/locale/' . $locale->slug . '/' . $variant . '/wp-plugins/' . $project_slug;
-				$locale_link = '<a href="' . esc_url( $url ) . '" _target="blank">' . $locale->native_name . '</a>';
+				$url         = 'https://translate.wordpress.org/locale/' . $locale['slug'] . '/' . $variant . '/wp-plugins/' . $project_slug;
+				$locale_link = '<a href="' . esc_url( $url ) . '" _target="blank">' . $locale['native_name'] . '</a>';
 				/* translators: %s Language native name. */
 				echo sprintf( wp_kses_post( __( 'Translation for %s', 'translation-stats' ) ), wp_kses_post( $locale_link ) );
 				?>
@@ -193,7 +178,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 *
 		 * @since 0.8.0
 		 *
-		 * @param string $locale           Locale (wp_locale), e.g. 'pt_PT' or $this->tstats_translation_language().
+		 * @param string $locale           Locale (wp_locale), e.g. 'pt_PT' or $this->tstats_globals->tstats_translation_language().
 		 * @param string $project_slug     Plugin Slug.
 		 * @param string $subproject       Translation subproject (' Dev', 'Dev Readme', 'Stable', 'Stable Readme' ).
 		 * @param string $subproject_slug  Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).
@@ -208,10 +193,10 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 			}
 
 			$variant = 'default'; // Todo: Add support for non-default variant.
-			$url     = 'https://translate.wordpress.org/projects/wp-plugins/' . $project_slug . '/' . $subproject_slug . '/' . $locale->slug . '/' . $variant;
+			$url     = 'https://translate.wordpress.org/projects/wp-plugins/' . $project_slug . '/' . $subproject_slug . '/' . $locale['slug'] . '/' . $variant;
 
 			// Get plugin subproject translation stats.
-			$translation_stats = $this->tstats_plugin_subproject_stats( $locale->slug, $variant, $project_slug, $subproject_slug );
+			$translation_stats = $this->tstats_plugin_subproject_stats( $locale['slug'], $variant, $project_slug, $subproject_slug );
 
 			// If translation stats are not an object, project not found.
 			if ( ! is_object( $translation_stats ) ) {
@@ -284,7 +269,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 *
 		 * @since 0.8.0
 		 *
-		 * @param string $locale              Locale (wp_locale), e.g. 'pt_PT' or $this->tstats_translation_language().
+		 * @param string $locale              Locale (wp_locale), e.g. 'pt_PT' or $this->tstats_globals->tstats_translation_language().
 		 * @param string $variant             Variant ( e.g. 'default', 'formal' ).
 		 * @param string $project_slug        Plugin Slug.
 		 * @param string $subproject_slug     Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).

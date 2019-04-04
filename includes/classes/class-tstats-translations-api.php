@@ -167,19 +167,103 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 *
 		 * @since 0.8.6
 		 *
-		 * @param string $project       Set the project API URL you want to get.
-		 * @return string $locale_data  Returns API URL.
+		 * @param string $project   Set the project API URL you want to get.
+		 * @return string $api_url  Returns API URL.
 		 */
 		public function tstats_translations_api_url( $project ) {
 
-			$tstats_translations_api = array(
+			$translations_api = array(
 				'languages' => 'https://translate.wordpress.org/api/languages',            // Translate API languages URL.
 				'plugins'   => 'https://translate.wordpress.org/api/projects/wp-plugins/', // Translate API plugins URL.
 				'themes'    => 'https://translate.wordpress.org/api/projects/wp-themes/',  // Translate API themes URL.
 				'wordpress' => 'https://translate.wordpress.org/api/projects/wp/',         // Translate API WordPress core URL.
 			);
 
-			return $tstats_translations_api[ $project ];
+			$api_url = $translations_api[ $project ];
+
+			return $api_url;
+
+		}
+
+
+		/**
+		 * Get available translations locales data from translate.WordPress.org API.
+		 * Store the available translation locales in transient.
+		 *
+		 * @since 0.8.6
+		 *
+		 * @return object $tstats_locales  Returns all the locales with 'wp_locale' available in translate.WordPress.org.
+		 */
+		public function tstats_locales() {
+			// Translate API languages URL.
+			$url = $this->tstats_translations_api_url( 'languages' );
+
+			// Translation Stats languages transient name.
+			$available_translations_transient = 'available_translations';
+
+			// Check languages transients.
+			$tstats_locales = get_transient( TSTATS_TRANSIENTS_PREFIX . $available_translations_transient );
+
+			if ( false === $tstats_locales ) {
+
+				$json = wp_remote_get( $url );
+				if ( is_wp_error( $json ) || wp_remote_retrieve_response_code( $json ) !== 200 ) {
+
+					// API Unreachable (Error 404).
+					$tstats_locales = false;
+
+				} else {
+
+					$body = json_decode( $json['body'], true );
+					if ( empty( $body ) ) {
+
+						// No languages found.
+						$tstats_locales = false;
+
+					} else {
+
+						$tstats_locales = array();
+						foreach ( $body as $key => $tstats_locale ) {
+
+							// List locales based on existent 'wp_locale'.
+							if ( $tstats_locale['wp_locale'] ) { // Check for language 'wp_locale'.
+								$tstats_locales[ $tstats_locale['wp_locale'] ] = $tstats_locale;
+							}
+						}
+					}
+				}
+
+				set_transient( TSTATS_TRANSIENTS_PREFIX . $available_translations_transient, $tstats_locales, TSTATS_TRANSIENTS_LOCALES_EXPIRATION );
+			}
+			return $tstats_locales;
+		}
+
+
+		/**
+		 * Get locale data.
+		 *
+		 * Example:
+		 * $locale = $this->tstats_translations_api->tstats_locale( 'pt_PT' );
+		 * $locale_english_name = $locale['english_name'].
+		 *
+		 * @since 0.8.6
+		 *
+		 * @param string $wp_locale       WordPress Locale ( e.g. 'pt_PT' ).
+		 *
+		 * @return array $tstats_locale  Returns locale array from GlotPress (e.g. 'english_name', 'native_name', 'lang_code_iso_639_1', 'country_code', 'wp_locale', 'slug', etc. ).
+		 */
+		public function tstats_locale( $wp_locale ) {
+
+			$tstats_locales = $this->tstats_locales();
+
+			$tstats_locale = null;
+
+			foreach ( $tstats_locales as $key => $value ) {
+				if ( $value['wp_locale'] === $wp_locale ) {
+					$tstats_locale = $value;
+				}
+			}
+			return $tstats_locale;
 
 		}
 

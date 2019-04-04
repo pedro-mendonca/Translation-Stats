@@ -58,6 +58,7 @@ define( 'TSTATS_DEBUG', false );
 
 // Include class files used by our plugin.
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-main.php';
+require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-globals.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-notices.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-transients.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-translations-api.php';
