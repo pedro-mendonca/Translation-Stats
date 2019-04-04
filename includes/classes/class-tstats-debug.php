@@ -135,7 +135,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 			<p>
 				<?php
 				printf(
-					/* translators: %s WordPress Locale code. */
+					/* translators: %s User Locale code. */
 					esc_html__( 'User Locale: %s', 'translation-stats' ),
 					'<code>' . esc_html( get_user_locale() ) . '</code>'
 				);
