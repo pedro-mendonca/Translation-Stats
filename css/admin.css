@@ -223,7 +223,6 @@ table.tstats-plugin-list-table tbody .inactive .check-column.plugin-select {
 /* Translation Stats Settings Layout. */
 .tstats-settings-wrapper {
 	display: flex;
-	justify-content: space-between;
 	flex-wrap: wrap;
 	/* Translation Stats Settings Content. */
 	/* Translation Stats Settings Sidebar. */
@@ -239,14 +238,23 @@ table.tstats-plugin-list-table tbody .inactive .check-column.plugin-select {
 	width: 100%;
 }
 
+@media (min-width: 992px) {
+	.tstats-settings-wrapper .tstats-settings__content {
+		order: 1;
+	}
+}
+
 .tstats-settings-wrapper .tstats-settings__sidebar {
 	width: 100%;
+	flex-shrink: 0;
+	padding: 0;
 }
 
 @media (min-width: 992px) {
 	.tstats-settings-wrapper .tstats-settings__sidebar {
 		width: 400px;
 		padding-left: 20px;
+		order: 2;
 	}
 }
 

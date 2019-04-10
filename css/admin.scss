@@ -256,7 +256,6 @@ table.tstats-plugin-list-table {
 /* Translation Stats Settings Layout. */
 .tstats-settings-wrapper {
 	display: flex;
-	justify-content: space-between;
 	flex-wrap: wrap;
 
 	@media (min-width: $break-large) {
@@ -266,15 +265,22 @@ table.tstats-plugin-list-table {
 	/* Translation Stats Settings Content. */
 	.tstats-settings__content {
 		width: 100%;
+
+		@media (min-width: $break-large) {
+			order: 1;
+		}
 	}
 
 	/* Translation Stats Settings Sidebar. */
 	.tstats-settings__sidebar {
 		width: 100%;
+		flex-shrink: 0;
+		padding: 0;
 
 		@media (min-width: $break-large) {
 			width: 400px;
 			padding-left: 20px;
+			order: 2;
 		}
 
 	}
