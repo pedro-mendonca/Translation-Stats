@@ -31,13 +31,13 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 			add_action( 'tstats_debug_setting_field_info', array( $this, 'tstats_debug_setting_field_info' ), 10, 3 );
 
 			// Add Translation Stats settings debug section.
-			add_action( 'tstats_setting_section__after', array( $this, 'tstats_settings_section__debug' ) );
+			add_action( 'tstats_settings_section__after', array( $this, 'tstats_settings_section__debug' ) );
 
 			// Add Translation Stats settings debug tab.
-			add_action( 'tstats_setting_tab__after', array( $this, 'tstats_setting_tab__debug' ) );
+			add_action( 'tstats_settings_tab__after', array( $this, 'tstats_settings_tab__debug' ) );
 
 			// Add Translation Stats settings debug content.
-			add_action( 'tstats_setting_content__after', array( $this, 'tstats_setting_content__debug' ) );
+			add_action( 'tstats_settings_content__after', array( $this, 'tstats_settings_content__debug' ) );
 
 		}
 
@@ -47,7 +47,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 *
 		 * @since 0.8.6
 		 */
-		public function tstats_setting_tab__debug() {
+		public function tstats_settings_tab__debug() {
 			if ( TSTATS_DEBUG ) {
 				?>
 				<a class="nav-tab" href="#debug"><?php esc_html_e( 'Debug', 'translation-stats' ); ?></a>
@@ -61,7 +61,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 *
 		 * @since 0.8.6
 		 */
-		public function tstats_setting_content__debug() {
+		public function tstats_settings_content__debug() {
 			if ( TSTATS_DEBUG ) {
 				?>
 				<div id="tab-debug" class="tab-content hidden">

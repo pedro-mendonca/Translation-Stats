@@ -76,7 +76,7 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 			$this->tstats_settings_section__tools();
 
 			// Add section after Translation settings sections.
-			do_action( 'tstats_setting_section__after' );
+			do_action( 'tstats_settings_section__after' );
 
 		}
 
@@ -427,7 +427,7 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 
 						<?php
 						// Add after Translation Stats settings tabs items.
-						do_action( 'tstats_setting_tab__after' );
+						do_action( 'tstats_settings_tab__after' );
 						?>
 
 						<span class="tstats-version-info">
@@ -471,7 +471,7 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 
 							<?php
 							// Add after Translation Stats settings content items.
-							do_action( 'tstats_setting_content__after' );
+							do_action( 'tstats_settings_content__after' );
 							?>
 
 
