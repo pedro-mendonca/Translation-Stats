@@ -63,6 +63,7 @@ require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-globals.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-notices.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-transients.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-translations-api.php';
+require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-settings-sidebar.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-settings-api.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-settings-plugins.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-settings.php';

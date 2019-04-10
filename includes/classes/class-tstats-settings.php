@@ -420,9 +420,10 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 
 				<div class="tstats-settings-wrapper">
 
-					<div class="tstats-settings__sidebar">
-
-					</div>
+					<?php
+					// Add before Translation Stats settings.
+					do_action( 'tstats_settings__before' );
+					?>
 
 					<div class="tstats-settings__content">
 
@@ -436,15 +437,6 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 							do_action( 'tstats_settings_tab__after' );
 							?>
 
-							<span class="tstats-version-info">
-								<?php
-								printf(
-									/* translators: Plugin Name and version - Do not translate! */
-									esc_html__( 'Translation Stats %s', 'translation-stats' ),
-									'<small>v.' . esc_html( TSTATS_VERSION ) . '</small>'
-								);
-								?>
-							</span>
 						</h2>
 
 						<div class="tabs-content">
@@ -490,6 +482,11 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 							</form>
 						</div>
 					</div>
+
+					<?php
+					// Add after Translation Stats settings.
+					do_action( 'tstats_settings__after' );
+					?>
 
 				</div>
 			</div>
