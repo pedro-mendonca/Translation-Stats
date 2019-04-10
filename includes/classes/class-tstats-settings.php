@@ -418,7 +418,9 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 				<h1><?php echo esc_html_x( 'Translation Stats', 'Options Page Title', 'translation-stats' ); ?></h1>
 				<p><?php esc_html_e( 'Customize the translation stats you want to show.', 'translation-stats' ); ?></p>
 
-				<div id="tstats-settings">
+				<div class="tstats-settings-wrapper">
+
+					<div class="tstats-settings__content">
 
 					<h2 class="nav-tab-wrapper">
 						<a class="nav-tab nav-tab-active" href="#plugins"><?php esc_html_e( 'Plugins', 'translation-stats' ); ?></a>
@@ -482,6 +484,11 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 								?>
 							</p>
 						</form>
+					</div>
+					</div>
+
+					<div class="tstats-settings__sidebar">
+
 					</div>
 				</div>
 			</div>
