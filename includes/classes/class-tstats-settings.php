@@ -446,30 +446,30 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 						<div class="tabs-content">
 							<form action='options.php' method='post'>
 
-							<div id="tab-plugins" class="tab-content">
-								<?php
-								$section = 'tstats_settings__plugins';
-								do_settings_sections( $section );
-								settings_fields( $section );
-								?>
-							</div>
-							<div id="tab-settings" class="tab-content hidden">
-								<?php
-								$section = 'tstats_settings__general';
-								do_settings_sections( $section );
-								settings_fields( $section );
-								?>
-							</div>
-							<div id="tab-tools" class="tab-content hidden">
-								<?php
-								$section = 'tstats_settings__tools__settings';
-								do_settings_sections( $section );
-								settings_fields( $section );
-								$section = 'tstats_settings__tools__transients';
-								do_settings_sections( $section );
-								settings_fields( $section );
-								?>
-							</div>
+								<div id="tab-plugins" class="tab-content">
+									<?php
+									$section = 'tstats_settings__plugins';
+									do_settings_sections( $section );
+									settings_fields( $section );
+									?>
+								</div>
+								<div id="tab-settings" class="tab-content hidden">
+									<?php
+									$section = 'tstats_settings__general';
+									do_settings_sections( $section );
+									settings_fields( $section );
+									?>
+								</div>
+								<div id="tab-tools" class="tab-content hidden">
+									<?php
+									$section = 'tstats_settings__tools__settings';
+									do_settings_sections( $section );
+									settings_fields( $section );
+									$section = 'tstats_settings__tools__transients';
+									do_settings_sections( $section );
+									settings_fields( $section );
+									?>
+								</div>
 
 							<?php
 							// Add after Translation Stats settings content items.
