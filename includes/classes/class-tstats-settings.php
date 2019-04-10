@@ -423,14 +423,14 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 					<div class="tstats-settings__content">
 
 						<h2 class="nav-tab-wrapper">
-						<a class="nav-tab nav-tab-active" href="#plugins"><?php esc_html_e( 'Plugins', 'translation-stats' ); ?></a>
-						<a class="nav-tab" href="#settings"><?php esc_html_e( 'Settings', 'translation-stats' ); ?></a>
-						<a class="nav-tab" href="#tools"><?php esc_html_e( 'Tools', 'translation-stats' ); ?></a>
+							<a class="nav-tab nav-tab-active" href="#plugins"><?php esc_html_e( 'Plugins', 'translation-stats' ); ?></a>
+							<a class="nav-tab" href="#settings"><?php esc_html_e( 'Settings', 'translation-stats' ); ?></a>
+							<a class="nav-tab" href="#tools"><?php esc_html_e( 'Tools', 'translation-stats' ); ?></a>
 
-						<?php
-						// Add after Translation Stats settings tabs items.
-						do_action( 'tstats_settings_tab__after' );
-						?>
+							<?php
+							// Add after Translation Stats settings tabs items.
+							do_action( 'tstats_settings_tab__after' );
+							?>
 
 						<span class="tstats-version-info">
 							<?php
