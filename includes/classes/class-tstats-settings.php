@@ -422,7 +422,7 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 
 					<div class="tstats-settings__content">
 
-					<h2 class="nav-tab-wrapper">
+						<h2 class="nav-tab-wrapper">
 						<a class="nav-tab nav-tab-active" href="#plugins"><?php esc_html_e( 'Plugins', 'translation-stats' ); ?></a>
 						<a class="nav-tab" href="#settings"><?php esc_html_e( 'Settings', 'translation-stats' ); ?></a>
 						<a class="nav-tab" href="#tools"><?php esc_html_e( 'Tools', 'translation-stats' ); ?></a>
@@ -441,10 +441,10 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 							);
 							?>
 						</span>
-					</h2>
+						</h2>
 
-					<div class="tabs-content">
-						<form action='options.php' method='post'>
+						<div class="tabs-content">
+							<form action='options.php' method='post'>
 
 							<div id="tab-plugins" class="tab-content">
 								<?php
@@ -483,8 +483,8 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 								submit_button( __( 'Save Changes', 'translation-stats' ), 'primary', 'submit', false );
 								?>
 							</p>
-						</form>
-					</div>
+							</form>
+						</div>
 					</div>
 
 					<div class="tstats-settings__sidebar">
