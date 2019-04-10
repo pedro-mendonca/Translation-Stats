@@ -471,13 +471,13 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 									?>
 								</div>
 
-							<?php
-							// Add after Translation Stats settings content items.
-							do_action( 'tstats_settings_content__after' );
-							?>
-
+								<?php
+								// Add after Translation Stats settings content items.
+								do_action( 'tstats_settings_content__after' );
+								?>
 
 								<?php wp_nonce_field( 'tstats_action', 'tstats_nonce_field' ); ?>
+
 								<p class="submit">
 									<?php
 									submit_button( __( 'Save Changes', 'translation-stats' ), 'primary', 'submit', false );
