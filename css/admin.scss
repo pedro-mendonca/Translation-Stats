@@ -253,11 +253,32 @@ table.tstats-plugin-list-table {
 	}
 }
 
-#tstats-settings {
+/* Translation Stats Settings Layout. */
+.tstats-settings-wrapper {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
 
-	.tstats-version-info {
-		float: right;
+	@media (min-width: $break-large) {
+		flex-wrap: nowrap;
 	}
+
+	/* Translation Stats Settings Content. */
+	.tstats-settings__content {
+		width: 100%;
+	}
+
+	/* Translation Stats Settings Sidebar. */
+	.tstats-settings__sidebar {
+		width: 100%;
+
+		@media (min-width: $break-large) {
+			width: 400px;
+			padding-left: 20px;
+		}
+
+	}
+
 }
 
 .tstats-code-block {

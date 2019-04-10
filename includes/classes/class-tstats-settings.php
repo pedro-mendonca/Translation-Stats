@@ -420,6 +420,10 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 
 				<div class="tstats-settings-wrapper">
 
+					<div class="tstats-settings__sidebar">
+
+					</div>
+
 					<div class="tstats-settings__content">
 
 						<h2 class="nav-tab-wrapper">
@@ -487,9 +491,6 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 						</div>
 					</div>
 
-					<div class="tstats-settings__sidebar">
-
-					</div>
 				</div>
 			</div>
 			<?php

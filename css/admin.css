@@ -220,8 +220,34 @@ table.tstats-plugin-list-table tbody .inactive .check-column.plugin-select {
 	padding: 0 0 0 6px;
 }
 
-#tstats-settings .tstats-version-info {
-	float: right;
+/* Translation Stats Settings Layout. */
+.tstats-settings-wrapper {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	/* Translation Stats Settings Content. */
+	/* Translation Stats Settings Sidebar. */
+}
+
+@media (min-width: 992px) {
+	.tstats-settings-wrapper {
+		flex-wrap: nowrap;
+	}
+}
+
+.tstats-settings-wrapper .tstats-settings__content {
+	width: 100%;
+}
+
+.tstats-settings-wrapper .tstats-settings__sidebar {
+	width: 100%;
+}
+
+@media (min-width: 992px) {
+	.tstats-settings-wrapper .tstats-settings__sidebar {
+		width: 400px;
+		padding-left: 20px;
+	}
 }
 
 .tstats-code-block {
