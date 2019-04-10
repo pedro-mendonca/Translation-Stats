@@ -477,12 +477,12 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 							?>
 
 
-							<?php wp_nonce_field( 'tstats_action', 'tstats_nonce_field' ); ?>
-							<p class="submit">
-								<?php
-								submit_button( __( 'Save Changes', 'translation-stats' ), 'primary', 'submit', false );
-								?>
-							</p>
+								<?php wp_nonce_field( 'tstats_action', 'tstats_nonce_field' ); ?>
+								<p class="submit">
+									<?php
+									submit_button( __( 'Save Changes', 'translation-stats' ), 'primary', 'submit', false );
+									?>
+								</p>
 							</form>
 						</div>
 					</div>
