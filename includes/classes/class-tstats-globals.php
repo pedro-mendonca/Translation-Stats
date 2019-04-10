@@ -4,7 +4,7 @@
  *
  * @package Translation Stats
  *
- * @since 0.8.6
+ * @since 0.9.0
  */
 
 // Exit if accessed directly.

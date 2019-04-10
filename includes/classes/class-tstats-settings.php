@@ -62,7 +62,7 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		/**
 		 * Add Settings Sections.
 		 *
-		 * @since 0.8.6
+		 * @since 0.9.0
 		 */
 		public function tstats_settings_sections() {
 

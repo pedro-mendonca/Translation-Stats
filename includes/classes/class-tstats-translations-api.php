@@ -165,7 +165,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 * Example:
 		 * $api_url = $this->tstats_translations_api->tstats_translations_api_url( 'plugins' );
 		 *
-		 * @since 0.8.6
+		 * @since 0.9.0
 		 *
 		 * @param string $project   Set the project API URL you want to get.
 		 * @return string $api_url  Returns API URL.
@@ -190,7 +190,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 * Get available translations locales data from translate.WordPress.org API.
 		 * Store the available translation locales in transient.
 		 *
-		 * @since 0.8.6
+		 * @since 0.9.0
 		 *
 		 * @return object $tstats_locales  Returns all the locales with 'wp_locale' available in translate.WordPress.org.
 		 */
@@ -247,7 +247,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 * $locale = $this->tstats_translations_api->tstats_locale( 'pt_PT' );
 		 * $locale_english_name = $locale['english_name'].
 		 *
-		 * @since 0.8.6
+		 * @since 0.9.0
 		 *
 		 * @param string $wp_locale       WordPress Locale ( e.g. 'pt_PT' ).
 		 *

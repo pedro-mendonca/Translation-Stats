@@ -45,7 +45,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		/**
 		 * Add Translation Stats settings debug tab.
 		 *
-		 * @since 0.8.6
+		 * @since 0.9.0
 		 */
 		public function tstats_settings_tab__debug() {
 			if ( TSTATS_DEBUG ) {
@@ -59,7 +59,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		/**
 		 * Add Translation Stats settings debug content.
 		 *
-		 * @since 0.8.6
+		 * @since 0.9.0
 		 */
 		public function tstats_settings_content__debug() {
 			if ( TSTATS_DEBUG ) {
@@ -78,7 +78,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		/**
 		 * Register Settings Page sections Debug.
 		 *
-		 * @since 0.8.6
+		 * @since 0.9.0
 		 */
 		public function tstats_settings_section__debug() {
 

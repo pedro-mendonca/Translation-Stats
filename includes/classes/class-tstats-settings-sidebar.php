@@ -1,8 +1,8 @@
 <?php
 /**
- * Class file for registering Translation Stats Settings Sidebar.
+ * Class file for registering Translation Stats settings sidebar.
  *
- * @since 0.8.6
+ * @since 0.9.0
  *
  * @package Translation Stats
  */
@@ -24,21 +24,39 @@ if ( ! class_exists( 'TStats_Settings_Sidebar' ) ) {
 		 */
 		public function __construct() {
 
-			// Add Translation Stats settings debug content.
+			// Add Sidebar before Translation Stats settings.
 			add_action( 'tstats_settings__before', array( $this, 'tstats_settings__sidebar' ) );
 
 		}
 
 
 		/**
-		 * Show plugin info sidebar.
+		 * Show Translation Stats settings sidebar.
 		 *
-		 * @since 0.8.6
-		 *
-		 * @param string $show  True or false.
+		 * @since 0.9.0
 		 */
 		public function tstats_settings__sidebar() {
+			?>
 
+			<div class="tstats-settings__sidebar">
+
+				<h2 class="tstats-settings__sidebar__title">
+					<?php
+					printf(
+						/* translators: Plugin Name and version - Do not translate! */
+						esc_html__( 'Translation Stats %s', 'translation-stats' ),
+						'<small>v.' . esc_html( TSTATS_VERSION ) . '</small>'
+					);
+					?>
+				</h2>
+
+				<?php
+				// Add content to Translation Stats settings sidebar.
+				do_action( 'tstats_settings__sidebar__content' );
+				?>
+
+			</div>
+			<?php
 		}
 
 	}

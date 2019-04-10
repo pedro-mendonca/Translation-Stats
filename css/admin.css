@@ -258,6 +258,26 @@ table.tstats-plugin-list-table tbody .inactive .check-column.plugin-select {
 	}
 }
 
+.tstats-settings-wrapper .tstats-settings__sidebar h2.tstats-settings__sidebar__title {
+	box-sizing: border-box;
+	width: 100%;
+	margin: 4px 0 1em 0;
+	padding: 10px 0;
+	border-bottom: 1px solid #235a28;
+	color: #235a28;
+	line-height: 19px;
+	text-align: left;
+	white-space: nowrap;
+}
+
+.tstats-settings-wrapper .tstats-settings__sidebar .postbox a {
+	text-decoration: none;
+}
+
+.tstats-settings-wrapper .tstats-settings__sidebar .postbox .footer {
+	padding: 10px;
+}
+
 .tstats-code-block {
 	display: inline-block;
 }
