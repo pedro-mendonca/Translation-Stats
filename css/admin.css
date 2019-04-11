@@ -246,13 +246,12 @@ table.tstats-plugin-list-table tbody .inactive .check-column.plugin-select {
 
 .tstats-settings-wrapper .tstats-settings__sidebar {
 	width: 100%;
-	flex-shrink: 0;
 	padding: 0;
 }
 
 @media (min-width: 992px) {
 	.tstats-settings-wrapper .tstats-settings__sidebar {
-		width: 400px;
+		width: 280px;
 		padding-left: 20px;
 		order: 2;
 	}
@@ -268,9 +267,20 @@ table.tstats-plugin-list-table tbody .inactive .check-column.plugin-select {
 	line-height: 19px;
 	text-align: left;
 	white-space: nowrap;
+	display: none;
 }
 
-.tstats-settings-wrapper .tstats-settings__sidebar .postbox a {
+.tstats-settings-wrapper .tstats-settings__sidebar .postbox .inside h3 {
+	margin: 30px 0 0;
+}
+
+.tstats-settings-wrapper .tstats-settings__sidebar .postbox .inside .tstats-logo a img {
+	display: block;
+	width: 200px;
+	margin: auto;
+}
+
+.tstats-settings-wrapper .tstats-settings__sidebar .postbox .inside a {
 	text-decoration: none;
 }
 

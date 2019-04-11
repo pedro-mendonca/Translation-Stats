@@ -274,11 +274,11 @@ table.tstats-plugin-list-table {
 	/* Translation Stats Settings Sidebar. */
 	.tstats-settings__sidebar {
 		width: 100%;
-		flex-shrink: 0;
+		// flex-shrink: 0;
 		padding: 0;
 
 		@media (min-width: $break-large) {
-			width: 400px;
+			width: 280px;
 			padding-left: 20px;
 			order: 2;
 		}
@@ -293,11 +293,35 @@ table.tstats-plugin-list-table {
 			line-height: 19px;
 			text-align: left;
 			white-space: nowrap;
+			display: none;
 		}
 
 		.postbox {
-			a {
-				text-decoration: none;
+
+			.inside {
+
+				h3 {
+					margin: 30px 0 0;
+				}
+
+				.tstats-logo {
+					//padding: 10px;
+
+					a {
+
+						img {
+							display: block;
+							width: 200px;
+							margin: auto;
+
+						}
+					}
+				}
+
+				a {
+					text-decoration: none;
+				}
+
 			}
 
 			.footer {
