@@ -51,10 +51,12 @@ if ( ! class_exists( 'TStats_Globals' ) ) {
 		 */
 		public function tstats_link( $link, $source, $medium, $campaign ) {
 
-			$utm_source    = ! empty( $source ) ? $source : rawurlencode( home_url() );
-			$utm_medium    = ! empty( $medium ) ? $medium : 'link';
-			$utm_campaign  = ! empty( $campaign ) ? $campaign : 'tstats_plugin';
-			$campaign_link = $link . '?utm_source=' . $utm_source . '&amp;utm_medium=' . $medium . '&amp;utm_campaign=' . $campaign;
+			$utm_source   = ! empty( $source ) ? $source : rawurlencode( home_url() );
+			$utm_medium   = ! empty( $medium ) ? $medium : 'link';
+			$utm_campaign = ! empty( $campaign ) ? $campaign : 'tstats_plugin';
+
+			$campaign_link = $link . '?utm_source=' . $utm_source . '&amp;utm_medium=' . $utm_medium . '&amp;utm_campaign=' . $utm_campaign;
+
 			return $campaign_link;
 		}
 
