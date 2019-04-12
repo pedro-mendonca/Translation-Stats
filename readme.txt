@@ -46,7 +46,7 @@ Since mid-April 2016, not only new strings but also edits are synced between dev
 
 = How long does it take for a translation to become available? =
 Translations for the readme are published almost immediately.
-Plugin language packs are generated when 95% of the Stable sub-project strings have been translated.
+The language pack for a plugin will be generated when 95% of the Stable (latest release) sub-project strings have been translated.
 
 = Is this plugin compatible with Dark Mode? =
 Yes, Translation Stats includes a color scheme that works specifically with the plugin [Dark Mode](https://wordpress.org/plugins/dark-mode/).
