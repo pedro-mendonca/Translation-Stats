@@ -50,7 +50,7 @@ if ( ! class_exists( 'TStats_Settings_Widgets' ) ) {
 				<div class="inside">
 
 					<div class="tstats-logo">
-						<a href="<?php echo esc_url( $this->tstats_globals->tstats_link( $external_site_link_url, rawurlencode( home_url() ), 'link', 'tstats_plugin_logo' ) ); ?>">
+						<a href="<?php echo esc_url( $this->tstats_globals->tstats_link( $external_site_link_url, rawurlencode( home_url() ), 'link', 'tstats_plugin_logo' ) ); ?>" target="_blank">
 							<img src="<?php echo esc_html( TSTATS_PATH ) . '/img/logo-color-transparent.png'; ?>" alt="<?php esc_attr_e( 'Translation Stats', 'translation-stats' ); ?>">
 						</a>
 					</div>
