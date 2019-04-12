@@ -24,9 +24,6 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 		 */
 		public function __construct() {
 
-			// Instantiate Translation Stats Debug.
-			$this->tstats_debug = new TStats_Debug();
-
 		}
 
 
@@ -170,7 +167,9 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 			</label>
 			<p class='description'><?php echo esc_html( $description ); ?></p>
 			<?php
-			$this->tstats_debug->tstats_debug_setting_field( $field_id, $option, $default, 'info', false );
+
+			// Add Translation Stats debug setting field info.
+			do_action( 'tstats_debug_setting_field_info', $field_id, $option, $default );
 		}
 
 
@@ -207,7 +206,9 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 			</label>
 			<p class='description'><?php echo esc_html( $description ); ?></p>
 			<?php
-			$this->tstats_debug->tstats_debug_setting_field( $field_id, $option, $default, 'info', false );
+
+			// Add Translation Stats debug setting field info.
+			do_action( 'tstats_debug_setting_field_info', $field_id, $option, $default );
 		}
 
 
@@ -237,6 +238,7 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 					'echo'                        => '1',       // Whether to echo the generated markup. Accepts 0, 1, or their boolean equivalents. Default 1.
 					'show_available_translations' => true,      // Whether to show available translations. Default true.
 					'show_option_site_default'    => true,      // Whether to show an option to fall back to the site's locale. Default false.
+					'show_option_en_us'           => false,     // Whether to show an option for English (United States). Default true.
 				);
 				wp_dropdown_languages( $args );
 				echo ' ' . esc_html( $label );
@@ -244,7 +246,9 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 			</label>
 			<p class='description'><?php echo esc_html( $description ); ?></p>
 			<?php
-			$this->tstats_debug->tstats_debug_setting_field( $field_id, $option, $default, 'info', false );
+
+			// Add Translation Stats debug setting field info.
+			do_action( 'tstats_debug_setting_field_info', $field_id, $option, $default );
 		}
 
 

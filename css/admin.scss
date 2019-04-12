@@ -253,11 +253,86 @@ table.tstats-plugin-list-table {
 	}
 }
 
-#tstats-settings {
+/* Translation Stats Settings Layout. */
+.tstats-settings-wrapper {
+	display: flex;
+	flex-wrap: wrap;
 
-	.tstats-version-info {
-		float: right;
+	@media (min-width: $break-large) {
+		flex-wrap: nowrap;
 	}
+
+	/* Translation Stats Settings Content. */
+	.tstats-settings__content {
+		width: 100%;
+
+		@media (min-width: $break-large) {
+			order: 1;
+		}
+	}
+
+	/* Translation Stats Settings Sidebar. */
+	.tstats-settings__sidebar {
+		width: 100%;
+		// flex-shrink: 0;
+		padding: 0;
+
+		@media (min-width: $break-large) {
+			width: 280px;
+			padding-left: 20px;
+			order: 2;
+		}
+
+		h2.tstats-settings__sidebar__title {
+			box-sizing: border-box;
+			width: 100%;
+			margin: 4px 0 1em 0;
+			padding: 10px 0;
+			border-bottom: 1px solid $color-primary;
+			color: $color-primary;
+			line-height: 19px;
+			text-align: left;
+			white-space: nowrap;
+			display: none;
+		}
+
+		.postbox {
+
+			.inside {
+
+				h3 {
+					margin: 30px 0 0;
+				}
+
+				.tstats-logo {
+					//padding: 10px;
+
+					a {
+
+						img {
+							display: block;
+							width: 200px;
+							margin: auto;
+
+						}
+					}
+				}
+
+				a {
+					text-decoration: none;
+				}
+
+			}
+
+			.footer {
+				padding: 10px;
+
+			}
+
+		}
+
+	}
+
 }
 
 .tstats-code-block {

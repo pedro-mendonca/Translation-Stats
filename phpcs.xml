@@ -5,9 +5,6 @@
 	<!-- Files to check. -->
 	<file>.</file>
 
-	<!-- Exclude some files from being fixed. -->
-	<exclude-pattern>./includes/glotpress/</exclude-pattern>
-
 	<!-- A comma separated list of file extensions to check. -->
 	<arg name="extensions" value="php,css"/>
 

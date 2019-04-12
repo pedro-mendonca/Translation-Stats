@@ -12,12 +12,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'TStats_Translate_API' ) ) {
+if ( ! class_exists( 'TStats_Translations_API' ) ) {
 
 	/**
-	 * Class TStats_Translate_API.
+	 * Class TStats_Translations_API.
 	 */
-	class TStats_Translate_API {
+	class TStats_Translations_API {
 
 		/**
 		 * Check if plugin is on WordPress.org by checking if ID (from Plugin wp.org info) exists in 'response' or 'no_update' in 'update_plugins' transient.
@@ -39,7 +39,7 @@ if ( ! class_exists( 'TStats_Translate_API' ) ) {
 		 * Get plugin metadata, if the plugin exists on WordPress.org.
 		 *
 		 * Example:
-		 * $plugin_metadata = $this->tstats_translate_api->tstats_plugin_metadata( $plugin_file, 'metadata' ) (e.g. 'slug').
+		 * $plugin_metadata = $this->tstats_translations_api->tstats_plugin_metadata( $plugin_file, 'metadata' ) (e.g. 'slug').
 		 *
 		 * @since 0.8.0
 		 *
@@ -63,15 +63,15 @@ if ( ! class_exists( 'TStats_Translate_API' ) ) {
 
 
 		/**
-		 * Get data from translate.WordPress.org API.
+		 * Get plugin data from translate.WordPress.org API.
 		 *
 		 * @since 0.8.0
 		 *
-		 * @param string $url       URL to get the data from.
+		 * @param string $plugin    Plugin slug (project or project/subproject).
 		 * @return string $api_get  Returns the response from translate.WordPress.org API URL.
 		 */
-		public function tstats_translate_api_get( $url ) {
-			$api_get = wp_remote_get( 'https://translate.wordpress.org/api/projects/wp-plugins/' . $url );
+		public function tstats_translations_api_get_plugin( $plugin ) {
+			$api_get = wp_remote_get( $this->tstats_translations_api_url( 'plugins' ) . $plugin );
 			return $api_get;
 		}
 
@@ -88,7 +88,7 @@ if ( ! class_exists( 'TStats_Translate_API' ) ) {
 			// Check project transients.
 			$on_wporg = get_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug );
 			if ( false === $on_wporg ) {
-				$json = $this->tstats_translate_api_get( $project_slug );
+				$json = $this->tstats_translations_api_get_plugin( $project_slug );
 				if ( is_wp_error( $json ) || wp_remote_retrieve_response_code( $json ) !== 200 ) {
 					$on_wporg = false;
 				} else {
@@ -113,7 +113,7 @@ if ( ! class_exists( 'TStats_Translate_API' ) ) {
 			// Check subproject transients.
 			$on_wporg = get_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug );
 			if ( false === $on_wporg ) {
-				$json = $this->tstats_translate_api_get( $project_slug . '/' . $subproject_slug );
+				$json = $this->tstats_translations_api_get_plugin( $project_slug . '/' . $subproject_slug );
 				if ( is_wp_error( $json ) || wp_remote_retrieve_response_code( $json ) !== 200 ) {
 					$on_wporg = false;
 				} else {
@@ -156,6 +156,117 @@ if ( ! class_exists( 'TStats_Translate_API' ) ) {
 				),
 			);
 			return $subprojects;
+		}
+
+
+		/**
+		 * Get Translate API URL.
+		 *
+		 * Example:
+		 * $api_url = $this->tstats_translations_api->tstats_translations_api_url( 'plugins' );
+		 *
+		 * @since 0.9.0
+		 *
+		 * @param string $project   Set the project API URL you want to get.
+		 * @return string $api_url  Returns API URL.
+		 */
+		public function tstats_translations_api_url( $project ) {
+
+			$translations_api = array(
+				'languages' => 'https://translate.wordpress.org/api/languages',            // Translate API languages URL.
+				'plugins'   => 'https://translate.wordpress.org/api/projects/wp-plugins/', // Translate API plugins URL.
+				'themes'    => 'https://translate.wordpress.org/api/projects/wp-themes/',  // Translate API themes URL.
+				'wordpress' => 'https://translate.wordpress.org/api/projects/wp/',         // Translate API WordPress core URL.
+			);
+
+			$api_url = $translations_api[ $project ];
+
+			return $api_url;
+
+		}
+
+
+		/**
+		 * Get available translations locales data from translate.WordPress.org API.
+		 * Store the available translation locales in transient.
+		 *
+		 * @since 0.9.0
+		 *
+		 * @return object $tstats_locales  Returns all the locales with 'wp_locale' available in translate.WordPress.org.
+		 */
+		public function tstats_locales() {
+			// Translate API languages URL.
+			$url = $this->tstats_translations_api_url( 'languages' );
+
+			// Translation Stats languages transient name.
+			$transient_name = 'available_translations';
+
+			// Check languages transients.
+			$tstats_locales = get_transient( TSTATS_TRANSIENTS_PREFIX . $transient_name );
+
+			if ( false === $tstats_locales ) {
+
+				$json = wp_remote_get( $url );
+				if ( is_wp_error( $json ) || wp_remote_retrieve_response_code( $json ) !== 200 ) {
+
+					// API Unreachable (Error 404).
+					$tstats_locales = false;
+
+				} else {
+
+					$body = json_decode( $json['body'], true );
+					if ( empty( $body ) ) {
+
+						// No languages found.
+						$tstats_locales = false;
+
+					} else {
+
+						$tstats_locales = array();
+						foreach ( $body as $key => $tstats_locale ) {
+
+							// List locales based on existent 'wp_locale'.
+							if ( $tstats_locale['wp_locale'] ) {
+								unset( $key );
+								$tstats_locales[ $tstats_locale['wp_locale'] ] = $tstats_locale;
+							}
+						}
+					}
+				}
+
+				set_transient( TSTATS_TRANSIENTS_PREFIX . $transient_name, $tstats_locales, TSTATS_TRANSIENTS_LOCALES_EXPIRATION );
+			}
+			return $tstats_locales;
+		}
+
+
+		/**
+		 * Get locale data.
+		 *
+		 * Example:
+		 * $locale = $this->tstats_translations_api->tstats_locale( 'pt_PT' );
+		 * $locale_english_name = $locale['english_name'].
+		 *
+		 * @since 0.9.0
+		 *
+		 * @param string $wp_locale       WordPress Locale ( e.g. 'pt_PT' ).
+		 *
+		 * @return array $tstats_locale  Returns locale array from GlotPress (e.g. 'english_name', 'native_name', 'lang_code_iso_639_1', 'country_code', 'wp_locale', 'slug', etc. ).
+		 */
+		public function tstats_locale( $wp_locale ) {
+
+			$tstats_locales = $this->tstats_locales();
+
+			$tstats_locale = null;
+
+			foreach ( $tstats_locales as $key => $value ) {
+				if ( $value['wp_locale'] === $wp_locale ) {
+					unset( $key );
+					$tstats_locale = $value;
+				}
+			}
+			return $tstats_locale;
+
 		}
 
 	}

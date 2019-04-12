@@ -24,9 +24,6 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 */
 		public function __construct() {
 
-			// Instantiate Translation Stats Debug.
-			$this->tstats_debug = new TStats_Debug();
-
 			// Instantiate Translation Stats Transients.
 			$this->tstats_transients = new TStats_Transients();
 
@@ -39,10 +36,8 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 			// Add admin menu item.
 			add_action( 'admin_menu', array( $this, 'tstats_admin_menu' ) );
 
-			// Add plugin settings.
-			add_action( 'admin_init', array( $this, 'tstats_settings_section_plugins' ) );
-			add_action( 'admin_init', array( $this, 'tstats_settings_section_general' ) );
-			add_action( 'admin_init', array( $this, 'tstats_settings_section_advanced' ) );
+			// Add plugin settings sections.
+			add_action( 'admin_init', array( $this, 'tstats_settings_sections' ) );
 
 		}
 
@@ -65,21 +60,43 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 
 
 		/**
-		 * Registers Settings Page sections.
+		 * Add Settings Sections.
+		 *
+		 * @since 0.9.0
+		 */
+		public function tstats_settings_sections() {
+
+			// Plugins settings section.
+			$this->tstats_settings_section__plugins();
+
+			// General settings section.
+			$this->tstats_settings_section__general();
+
+			// Tools settings section.
+			$this->tstats_settings_section__tools();
+
+			// Add section after Translation settings sections.
+			do_action( 'tstats_settings_section__after' );
+
+		}
+
+
+		/**
+		 * Registers Settings Plugins page section.
 		 *
 		 * @since 0.8.0
 		 */
-		public function tstats_settings_section_plugins() {
+		public function tstats_settings_section__plugins() {
 
 			add_settings_section(
-				'tstats_settings_plugins',                                                   // String for use in the 'id' attribute of tags.
+				'tstats_settings__plugins',                                                   // String for use in the 'id' attribute of tags.
 				__( 'Installed Plugins', 'translation-stats' ),                              // Title of the section.
-				array( $this->tstats_settings_plugins, 'tstats_settings_plugins_callback' ), // Function that fills the section with the desired content.
-				'tstats_settings_plugins'                                                    // The menu page on which to display this section. Should match $menu_slug.
+				array( $this->tstats_settings_plugins, 'tstats_settings__plugins__callback' ), // Function that fills the section with the desired content.
+				'tstats_settings__plugins'                                                    // The menu page on which to display this section. Should match $menu_slug.
 			);
 
 			register_setting(
-				'tstats_settings_plugins', // The menu page on which to display this section. Should match $menu_slug.
+				'tstats_settings__plugins', // The menu page on which to display this section. Should match $menu_slug.
 				TSTATS_WP_OPTION           // The WordPress option to store Translation Stats settings.
 			);
 
@@ -87,21 +104,21 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 
 
 		/**
-		 * Registers Settings Page sections.
+		 * Registers Settings General page section.
 		 *
 		 * @since 0.8.0
 		 */
-		public function tstats_settings_section_general() {
+		public function tstats_settings_section__general() {
 
 			add_settings_section(
-				'tstats_settings_general',                          // String for use in the 'id' attribute of tags.
+				'tstats_settings__general',                          // String for use in the 'id' attribute of tags.
 				__( 'General Settings', 'translation-stats' ),      // Title of the section.
-				array( $this, 'tstats_settings_general_callback' ), // Function that fills the section with the desired content.
-				'tstats_settings_general'                           // The menu page on which to display this section. Should match $menu_slug.
+				array( $this, 'tstats_settings__general__callback' ), // Function that fills the section with the desired content.
+				'tstats_settings__general'                           // The menu page on which to display this section. Should match $menu_slug.
 			);
 
 			register_setting(
-				'tstats_settings_general', // The menu page on which to display this section. Should match $menu_slug.
+				'tstats_settings__general', // The menu page on which to display this section. Should match $menu_slug.
 				TSTATS_WP_OPTION           // The WordPress option to store Translation Stats settings.
 			);
 
@@ -109,40 +126,33 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 
 
 		/**
-		 * Registers Settings Page sections.
+		 * Registers Settings Tools page section.
 		 *
 		 * @since 0.8.0
 		 */
-		public function tstats_settings_section_advanced() {
+		public function tstats_settings_section__tools() {
 
 			add_settings_section(
-				'tstats_settings_advanced',                          // String for use in the 'id' attribute of tags.
+				'tstats_settings__tools__settings',                          // String for use in the 'id' attribute of tags.
 				__( 'Settings', 'translation-stats' ),               // Title of the section.
-				array( $this, 'tstats_settings_advanced_callback' ), // Function that fills the section with the desired content.
-				'tstats_settings_advanced'                           // The menu page on which to display this section. Should match $menu_slug.
+				array( $this, 'tstats_settings__tools__settings__callback' ), // Function that fills the section with the desired content.
+				'tstats_settings__tools__settings'                           // The menu page on which to display this section. Should match $menu_slug.
 			);
 
 			add_settings_section(
-				'tstats_settings_advanced_transients',                          // String for use in the 'id' attribute of tags.
+				'tstats_settings__tools__transients',                          // String for use in the 'id' attribute of tags.
 				__( 'Cache', 'translation-stats' ),                             // Title of the section.
-				array( $this, 'tstats_settings_advanced_transients_callback' ), // Function that fills the section with the desired content.
-				'tstats_settings_advanced_transients'                           // The menu page on which to display this section. Should match $menu_slug.
-			);
-
-			add_settings_section(
-				'tstats_settings_advanced_debug',                          // String for use in the 'id' attribute of tags.
-				__( 'Debug', 'translation-stats' ),                        // Title of the section.
-				array( $this, 'tstats_settings_advanced_debug_callback' ), // Function that fills the section with the desired content.
-				'tstats_settings_advanced_debug'                           // The menu page on which to display this section. Should match $menu_slug.
+				array( $this, 'tstats_settings__tools__transients__callback' ), // Function that fills the section with the desired content.
+				'tstats_settings__tools__transients'                           // The menu page on which to display this section. Should match $menu_slug.
 			);
 
 			register_setting(
-				'tstats_settings_advanced', // The menu page on which to display this section. Should match $menu_slug.
+				'tstats_settings__tools__settings', // The menu page on which to display this section. Should match $menu_slug.
 				TSTATS_WP_OPTION            // The WordPress option to store Translation Stats settings.
 			);
 
 			register_setting(
-				'tstats_settings_advanced_transients', // The menu page on which to display this section. Should match $menu_slug.
+				'tstats_settings__tools__transients', // The menu page on which to display this section. Should match $menu_slug.
 				TSTATS_WP_OPTION                       // The WordPress option to store Translation Stats settings.
 			);
 
@@ -150,13 +160,13 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 
 
 		/**
-		 * Callback function for section "General Settings".
+		 * Callback function for section "Settings".
 		 *
 		 * @since 0.8.0
 		 */
-		public function tstats_settings_general_callback() {
+		public function tstats_settings__general__callback() {
 
-			$section = 'tstats_settings_general';
+			$section = 'tstats_settings__general';
 
 			/*
 			Section description.
@@ -197,13 +207,13 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 
 
 		/**
-		 * Callback function for section "Settings".
+		 * Callback function for section "Tools > Settings".
 		 *
 		 * @since 0.8.0
 		 */
-		public function tstats_settings_advanced_callback() {
+		public function tstats_settings__tools__settings__callback() {
 
-			$section = 'tstats_settings_advanced';
+			$section = 'tstats_settings__tools__settings';
 
 			/*
 			Section description.
@@ -247,13 +257,13 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 
 
 		/**
-		 * Callback function for section "Cache".
+		 * Callback function for section "Tools > Cache".
 		 *
 		 * @since 0.8.0
 		 */
-		public function tstats_settings_advanced_transients_callback() {
+		public function tstats_settings__tools__transients__callback() {
 
-			$section = 'tstats_settings_advanced_transients';
+			$section = 'tstats_settings__tools__transients';
 
 			/*
 			Section description.
@@ -302,27 +312,6 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 
 
 		/**
-		 * Callback function for section "Debug".
-		 *
-		 * @since 0.8.0
-		 */
-		public function tstats_settings_advanced_debug_callback() {
-
-			?>
-			<p class="description">
-				<?php
-				esc_html_e( 'List of settings and transients of Translation Stats.', 'translation-stats' );
-				?>
-			</p>
-			<?php
-
-			// Display debug formated message with plugin options.
-			$this->tstats_debug->tstats_debug( 'info', true, false );
-
-		}
-
-
-		/**
 		 * Callback function for Reset Settings.
 		 *
 		 * @since 0.8.0
@@ -360,6 +349,8 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 			$action = 'delete_transients';
 			if ( isset( $_POST[ $action ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
 				$this->tstats_nonce_verify_callback();
+				// Delete translations stats and available languages transients.
+				// The transient 'translation_stats_plugin_available_translations' will be immediatly rebuilt on tstats_render_settings__plugins_list() loading.
 				$this->tstats_transients->tstats_delete_transients( TSTATS_TRANSIENTS_PREFIX );
 				?>
 				<div class="notice notice-success is-dismissible">
@@ -387,7 +378,7 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 
 
 		/**
-		 * Callback function for section "Plugins Settings".
+		 * Default Translation Stats Settings.
 		 *
 		 * @since 0.8.0
 		 */
@@ -396,7 +387,7 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 				'show_warnings'            => true,
 				'translation_language'     => 'site-default',
 				'delete_data_on_uninstall' => true,
-				'transients_expiration'    => DAY_IN_SECONDS,
+				'transients_expiration'    => TSTATS_TRANSIENTS_TRANSLATIONS_EXPIRATION,
 			);
 			return $defaults;
 		}
@@ -427,70 +418,76 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 				<h1><?php echo esc_html_x( 'Translation Stats', 'Options Page Title', 'translation-stats' ); ?></h1>
 				<p><?php esc_html_e( 'Customize the translation stats you want to show.', 'translation-stats' ); ?></p>
 
-				<div id="tstats-settings">
+				<div class="tstats-settings-wrapper">
 
-					<h2 class="nav-tab-wrapper">
-						<a class="nav-tab nav-tab-active" href="#plugins"><?php esc_html_e( 'Plugins', 'translation-stats' ); ?></a>
-						<a class="nav-tab" href="#settings"><?php esc_html_e( 'Settings', 'translation-stats' ); ?></a>
-						<a class="nav-tab" href="#tools"><?php esc_html_e( 'Tools', 'translation-stats' ); ?></a>
-						<?php if ( TSTATS_DEBUG ) { ?>
-						<a class="nav-tab" href="#debug"><?php esc_html_e( 'Debug', 'translation-stats' ); ?></a>
-						<?php } ?>
-						<span class="tstats-version-info">
+					<?php
+					// Add before Translation Stats settings.
+					do_action( 'tstats_settings__before' );
+					?>
+
+					<div class="tstats-settings__content">
+
+						<h2 class="nav-tab-wrapper">
+							<a class="nav-tab nav-tab-active" href="#plugins"><?php esc_html_e( 'Plugins', 'translation-stats' ); ?></a>
+							<a class="nav-tab" href="#settings"><?php esc_html_e( 'Settings', 'translation-stats' ); ?></a>
+							<a class="nav-tab" href="#tools"><?php esc_html_e( 'Tools', 'translation-stats' ); ?></a>
+
 							<?php
-							printf(
-								/* translators: Plugin Name and version - Do not translate! */
-								esc_html__( 'Translation Stats %s', 'translation-stats' ),
-								'<small>v.' . esc_html( TSTATS_VERSION ) . '</small>'
-							);
+							// Add after Translation Stats settings tabs items.
+							do_action( 'tstats_settings_tab__after' );
 							?>
-						</span>
-					</h2>
 
-					<div class="tabs-content">
-						<form action='options.php' method='post'>
+						</h2>
 
-							<div id="tab-plugins" class="tab-content">
-								<?php
-								$section = 'tstats_settings_plugins';
-								do_settings_sections( $section );
-								settings_fields( $section );
-								?>
-							</div>
-							<div id="tab-settings" class="tab-content hidden">
-								<?php
-								$section = 'tstats_settings_general';
-								do_settings_sections( $section );
-								settings_fields( $section );
-								?>
-							</div>
-							<div id="tab-tools" class="tab-content hidden">
-								<?php
-								$section = 'tstats_settings_advanced';
-								do_settings_sections( $section );
-								settings_fields( $section );
-								$section = 'tstats_settings_advanced_transients';
-								do_settings_sections( $section );
-								settings_fields( $section );
-								?>
-							</div>
-							<?php if ( TSTATS_DEBUG ) { ?>
-							<div id="tab-debug" class="tab-content hidden">
-								<?php
-								$section = 'tstats_settings_advanced_debug';
-								do_settings_sections( $section );
-								?>
-							</div>
-							<?php } ?>
+						<div class="tabs-content">
+							<form action='options.php' method='post'>
 
-							<?php wp_nonce_field( 'tstats_action', 'tstats_nonce_field' ); ?>
-							<p class="submit">
+								<div id="tab-plugins" class="tab-content">
+									<?php
+									$section = 'tstats_settings__plugins';
+									do_settings_sections( $section );
+									settings_fields( $section );
+									?>
+								</div>
+								<div id="tab-settings" class="tab-content hidden">
+									<?php
+									$section = 'tstats_settings__general';
+									do_settings_sections( $section );
+									settings_fields( $section );
+									?>
+								</div>
+								<div id="tab-tools" class="tab-content hidden">
+									<?php
+									$section = 'tstats_settings__tools__settings';
+									do_settings_sections( $section );
+									settings_fields( $section );
+									$section = 'tstats_settings__tools__transients';
+									do_settings_sections( $section );
+									settings_fields( $section );
+									?>
+								</div>
+
 								<?php
-								submit_button( __( 'Save Changes', 'translation-stats' ), 'primary', 'submit', false );
+								// Add after Translation Stats settings content items.
+								do_action( 'tstats_settings_content__after' );
 								?>
-							</p>
-						</form>
+
+								<?php wp_nonce_field( 'tstats_action', 'tstats_nonce_field' ); ?>
+
+								<p class="submit">
+									<?php
+									submit_button( __( 'Save Changes', 'translation-stats' ), 'primary', 'submit', false );
+									?>
+								</p>
+							</form>
+						</div>
 					</div>
+
+					<?php
+					// Add after Translation Stats settings.
+					do_action( 'tstats_settings__after' );
+					?>
+
 				</div>
 			</div>
 			<?php

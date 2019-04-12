@@ -1,6 +1,6 @@
 === Translation Stats ===
 Contributors: pedromendonca
-Donate link: [paypal.me/pedromendonca](https://paypal.me/pedromendonca/)
+Donate link: https://paypal.me/pedromendonca/
 Tags: internationalization, i18n, localization, l10n, translation, statistics, glotpress, dark mode
 Requires at least: 4.9
 Tested up to: 5.1
@@ -9,7 +9,7 @@ Stable tag: 0.8.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Show the WordPress.org translation stats in your installed plugins list.
+Show plugins translation stats on your WordPress install.
 
 == Description ==
 
@@ -17,7 +17,7 @@ The plugin adds a "Translation Stats" column to the plugin list screen in WordPr
 
 The translation stats are shown only for plugins that exist in [translate.wordpress.org](https://translate.wordpress.org/) and are [prepared for localization](https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/).
 
-If a plugin doesn't have complete translation stats, you'll see a notice with one of the reasons bellow:
+If a plugin doesn't have complete translation stats, you'll see a notice with one of the reasons below:
 
 *   Plugin not found on WordPress.org
 *   Translation project not found on WordPress.org
@@ -61,6 +61,10 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 4. Translation Stats tools tab
 
 == Changelog ==
+
+= Development =
+*   Fix typo
+*   Support new locales
 
 = 0.8.5 =
 *   Tested up to WP 5.1
