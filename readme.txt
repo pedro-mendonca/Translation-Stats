@@ -3,9 +3,9 @@ Contributors: pedromendonca
 Donate link: https://paypal.me/pedromendonca/
 Tags: internationalization, i18n, localization, l10n, translation, statistics, glotpress, dark mode
 Requires at least: 4.9
-Tested up to: 5.1
+Tested up to: 5.1.1
 Requires PHP: 5.4
-Stable tag: 0.8.5
+Stable tag: 0.9.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -44,6 +44,10 @@ This plugin is properly prepared for localization.
 = Should I translate both Stable and Development? =
 Since mid-April 2016, not only new strings but also edits are synced between dev and stable (both ways, only approved translations). When a plugin releases a new version all translations are copied from dev to stable. [Read more...](https://make.wordpress.org/polyglots/handbook/frequently-asked-questions/#should-i-translate-both-stable-and-dev)
 
+= How long does it take for a translation to become available? =
+Translations for the readme are published almost immediately.
+Plugin language packs are generated when 95% of the Stable sub-project strings have been translated.
+
 = Is this plugin compatible with Dark Mode? =
 Yes, Translation Stats includes a color scheme that works specifically with the plugin [Dark Mode](https://wordpress.org/plugins/dark-mode/).
 
@@ -62,9 +66,11 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
 == Changelog ==
 
-= Development =
+= 0.9.0 =
+*   Tested up to WP 5.1.1
 *   Fix typo
 *   Support new locales
+*   Support for all locales in translate.wp.org through WordPress API
 
 = 0.8.5 =
 *   Tested up to WP 5.1
