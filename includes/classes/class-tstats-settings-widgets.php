@@ -40,17 +40,17 @@ if ( ! class_exists( 'TStats_Settings_Widgets' ) ) {
 		 */
 		public function tstats_settings_widget__about() {
 
-			$wp_org_review_link      = 'https://wordpress.org/support/view/plugin-reviews/translation-stats?filter=5';
-			$five_stars_rating       = '<span class="star-rating"><span class="star star-full"></span><span class="star star-full"></span><span class="star star-full"></span><span class="star star-full"></span><span class="star star-full"></span></span>';
-			$external_site_link_url  = 'https://translationstats.com';
-			$external_site_link_icon = '<i aria-hidden="true" class="dashicons dashicons-external"></i>';
+			$wp_org_review_link = 'https://wordpress.org/support/view/plugin-reviews/translation-stats?filter=5';
+			$five_stars_rating  = '<span class="star-rating"><span class="star star-full"></span><span class="star star-full"></span><span class="star star-full"></span><span class="star star-full"></span><span class="star star-full"></span></span>';
+			$external_link_url  = 'https://translationstats.com';
+			$external_link_icon = '<i aria-hidden="true" class="dashicons dashicons-external"></i>';
 			?>
 
 			<div class="postbox" id="tstats_settings_metabox__about">
 				<div class="inside">
 
 					<div class="tstats-logo">
-						<a href="<?php echo esc_url( $this->tstats_globals->tstats_link( $external_site_link_url, rawurlencode( home_url() ), 'link', 'tstats_plugin_logo' ) ); ?>" target="_blank">
+						<a href="<?php echo esc_url( $this->tstats_globals->tstats_link( $external_link_url, rawurlencode( home_url() ), 'link', 'tstats_plugin_logo' ) ); ?>" target="_blank">
 							<img src="<?php echo esc_html( TSTATS_PATH ) . '/img/logo-color-transparent.png'; ?>" alt="<?php esc_attr_e( 'Translation Stats', 'translation-stats' ); ?>">
 						</a>
 					</div>
@@ -58,16 +58,16 @@ if ( ! class_exists( 'TStats_Settings_Widgets' ) ) {
 
 					<h3><?php esc_html_e( 'Resources', 'translation-stats' ); ?></h3>
 					<ul>
-						<li><a href="<?php echo esc_url( $this->tstats_globals->tstats_link( $external_site_link_url, rawurlencode( home_url() ), 'link', 'tstats_plugin_link' ) ); ?>" target="_blank"><?php echo wp_kses_post( $external_site_link_icon ); ?> <?php esc_html_e( 'Site', 'translation-stats' ); ?></a></li>
-						<li><a href="<?php echo esc_url( $this->tstats_globals->tstats_link( $external_site_link_url . '/faq/', rawurlencode( home_url() ), 'link', 'tstats_plugin_link' ) ); ?>" target="_blank"><?php echo wp_kses_post( $external_site_link_icon ); ?> <?php esc_html_e( 'FAQ', 'translation-stats' ); ?></a></li>
-						<li><a href="<?php echo esc_url( $this->tstats_globals->tstats_link( $external_site_link_url . '/changelog/', rawurlencode( home_url() ), 'link', 'tstats_plugin_link' ) ); ?>" target="_blank"><?php echo wp_kses_post( $external_site_link_icon ); ?> <?php esc_html_e( 'Changelog', 'translation-stats' ); ?></a></li>
-						<li><a href="https://wordpress.org/support/plugin/translation-stats/" target="_blank"><?php echo wp_kses_post( $external_site_link_icon ); ?> <?php esc_html_e( 'Support', 'translation-stats' ); ?></a></li>
+						<li><a href="<?php echo esc_url( $this->tstats_globals->tstats_link( $external_link_url, rawurlencode( home_url() ), 'link', 'tstats_plugin_link' ) ); ?>" target="_blank"><?php echo wp_kses_post( $external_link_icon ); ?> <?php esc_html_e( 'Site', 'translation-stats' ); ?></a></li>
+						<li><a href="<?php echo esc_url( $this->tstats_globals->tstats_link( $external_link_url . '/faq/', rawurlencode( home_url() ), 'link', 'tstats_plugin_link' ) ); ?>" target="_blank"><?php echo wp_kses_post( $external_link_icon ); ?> <?php esc_html_e( 'FAQ', 'translation-stats' ); ?></a></li>
+						<li><a href="<?php echo esc_url( $this->tstats_globals->tstats_link( $external_link_url . '/changelog/', rawurlencode( home_url() ), 'link', 'tstats_plugin_link' ) ); ?>" target="_blank"><?php echo wp_kses_post( $external_link_icon ); ?> <?php esc_html_e( 'Changelog', 'translation-stats' ); ?></a></li>
+						<li><a href="https://wordpress.org/support/plugin/translation-stats/" target="_blank"><?php echo wp_kses_post( $external_link_icon ); ?> <?php esc_html_e( 'Support', 'translation-stats' ); ?></a></li>
 					</ul>
 
 					<h3><?php esc_html_e( 'Contact', 'translation-stats' ); ?></h3>
 					<ul>
 						<li><?php esc_html_e( 'Found an issue, have a feature suggestion or just want to send some feedback?', 'translation-stats' ); ?></li>
-						<li><a href="<?php echo esc_url( $this->tstats_globals->tstats_link( $external_site_link_url . '/contact/', rawurlencode( home_url() ), 'link', 'tstats_plugin_link' ) ); ?>" target="_blank"><?php echo wp_kses_post( $external_site_link_icon ); ?> <?php esc_html_e( 'Write me!', 'translation-stats' ); ?></a></li>
+						<li><a href="<?php echo esc_url( $this->tstats_globals->tstats_link( $external_link_url . '/contact/', rawurlencode( home_url() ), 'link', 'tstats_plugin_link' ) ); ?>" target="_blank"><?php echo wp_kses_post( $external_link_icon ); ?> <?php esc_html_e( 'Write me!', 'translation-stats' ); ?></a></li>
 					</ul>
 				</div>
 

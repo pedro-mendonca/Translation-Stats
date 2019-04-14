@@ -48,9 +48,7 @@ if ( ! class_exists( 'TStats_Settings_Footer' ) ) {
 
 			if ( ! empty( $current_screen->id ) && strpos( $current_screen->id, 'translation-stats' ) !== false ) {
 
-				$wp_org_review_link     = 'https://wordpress.org/support/view/plugin-reviews/translation-stats?filter=5';
-				$five_stars_rating      = '<span class="star-rating"><span class="star star-full"></span><span class="star star-full"></span><span class="star star-full"></span><span class="star star-full"></span><span class="star star-full"></span></span>';
-				$external_site_link_url = 'https://translationstats.com';
+				$external_link_url = 'https://translationstats.com';
 
 				$text = sprintf(
 					/* translators: %1$s Translation Stats plugin name. %2$s Plugin version. */
@@ -58,7 +56,7 @@ if ( ! class_exists( 'TStats_Settings_Footer' ) ) {
 						'Thank you for translating with %1$s version %2$s.',
 						'translation-stats'
 					),
-					'<a href="' . esc_url( $this->tstats_globals->tstats_link( $external_site_link_url, rawurlencode( home_url() ), 'link', 'tstats_plugin_link' ) ) . '">' . /* translators: Plugin name, do not translate! */ __( 'Translation Stats', 'translation-stats' ) . '</a>',
+					'<a href="' . esc_url( $this->tstats_globals->tstats_link( $external_link_url, rawurlencode( home_url() ), 'link', 'tstats_plugin_link' ) ) . '">' . /* translators: Plugin name, do not translate! */ __( 'Translation Stats', 'translation-stats' ) . '</a>',
 					TSTATS_VERSION
 				);
 				$text .= ' ' . sprintf(
@@ -67,7 +65,7 @@ if ( ! class_exists( 'TStats_Settings_Footer' ) ) {
 						'By %s',
 						'translation-stats'
 					),
-					'<a href="' . esc_url( $this->tstats_globals->tstats_link( $external_site_link_url, rawurlencode( home_url() ), 'link', 'tstats_plugin_footer_link' ) ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Pedro Mendonça', 'translation-stats' ) . '</a>'
+					'<a href="' . esc_url( $this->tstats_globals->tstats_link( $external_link_url, rawurlencode( home_url() ), 'link', 'tstats_plugin_footer_link' ) ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Pedro Mendonça', 'translation-stats' ) . '</a>'
 				);
 			}
 			return $text;
