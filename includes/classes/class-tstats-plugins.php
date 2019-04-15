@@ -111,17 +111,17 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 */
 		public function tstats_render_plugin_stats( $project_slug ) {
 
-			$variant         = 'default'; // Todo: Add support for non-default variant.
-			$tstats_language = $this->tstats_globals->tstats_translation_language();
-			$locale          = $this->tstats_translations_api->tstats_locale( $tstats_language );
+			// Get Translation Stats Locale data.
+			$locale = $this->tstats_translations_api->tstats_locale( $this->tstats_globals->tstats_translation_language() );
+
 			ob_start();
 			?>
 			<div class="translation-stats-title">
 				<?php
-				$url         = 'https://translate.wordpress.org/locale/' . $locale['slug'] . '/' . $variant . '/wp-plugins/' . $project_slug;
-				$locale_link = '<a href="' . esc_url( $url ) . '" target="_blank">' . $locale['native_name'] . '</a>';
+				$locale_plugin_url  = 'https://translate.wordpress.org/locale/' . $locale['slug']['locale'] . '/' . $locale['slug']['variant'] . '/wp-plugins/' . $project_slug;
+				$locale_plugin_link = '<a href="' . esc_url( $locale_plugin_url ) . '" target="_blank">' . $locale['native_name'] . '</a>';
 				/* translators: %s Language native name. */
-				echo sprintf( wp_kses_post( __( 'Translation for %s', 'translation-stats' ) ), wp_kses_post( $locale_link ) );
+				echo sprintf( wp_kses_post( __( 'Translation for %s', 'translation-stats' ) ), wp_kses_post( $locale_plugin_link ) );
 				?>
 			</div>
 			<div class="translation-stats-content notice-warning notice-alt">
@@ -178,7 +178,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 *
 		 * @since 0.8.0
 		 *
-		 * @param string $locale           Locale (wp_locale), e.g. 'pt_PT' or $this->tstats_globals->tstats_translation_language().
+		 * @param array $locale            Locale array.
 		 * @param string $project_slug     Plugin Slug.
 		 * @param string $subproject       Translation subproject (' Dev', 'Dev Readme', 'Stable', 'Stable Readme' ).
 		 * @param string $subproject_slug  Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).
@@ -192,11 +192,10 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 				return;
 			}
 
-			$variant = 'default'; // Todo: Add support for non-default variant.
-			$url     = 'https://translate.wordpress.org/projects/wp-plugins/' . $project_slug . '/' . $subproject_slug . '/' . $locale['slug'] . '/' . $variant;
+			$stats_bar_link = 'https://translate.wordpress.org/projects/wp-plugins/' . $project_slug . '/' . $subproject_slug . '/' . $locale['slug']['locale'] . '/' . $locale['slug']['variant'];
 
 			// Get plugin subproject translation stats.
-			$translation_stats = $this->tstats_plugin_subproject_stats( $locale['slug'], $variant, $project_slug, $subproject_slug );
+			$translation_stats = $this->tstats_plugin_subproject_stats( $locale, $project_slug, $subproject_slug );
 
 			// If translation stats are not an object, project not found.
 			if ( ! is_object( $translation_stats ) ) {
@@ -226,7 +225,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 			}
 
 			$class = ! $i18n_error ? 'enabled' : 'disabled';
-			$href  = ! $i18n_error ? 'href="' . esc_url( $url ) . '"' : '';
+			$href  = ! $i18n_error ? 'href="' . esc_url( $stats_bar_link ) . '"' : '';
 			ob_start();
 			?>
 			<div class="content__subproject <?php echo esc_attr( $subproject_slug ); ?>">
@@ -269,16 +268,15 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 *
 		 * @since 0.8.0
 		 *
-		 * @param string $locale              Locale (wp_locale), e.g. 'pt_PT' or $this->tstats_globals->tstats_translation_language().
-		 * @param string $variant             Variant ( e.g. 'default', 'formal' ).
+		 * @param array $locale               Locale array.
 		 * @param string $project_slug        Plugin Slug.
 		 * @param string $subproject_slug     Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).
 		 * @return string $translation_stats  Plugin stats.
 		 */
-		public function tstats_plugin_subproject_stats( $locale, $variant, $project_slug, $subproject_slug ) {
+		public function tstats_plugin_subproject_stats( $locale, $project_slug, $subproject_slug ) {
 
 			// Check subproject transients.
-			$translation_stats = get_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug . '_' . $locale );
+			$translation_stats = get_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug . '_' . $locale['slug']['locale'] . '_' . $locale['slug']['variant'] );
 
 			if ( false === $translation_stats ) {
 
@@ -299,7 +297,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 					} else {
 
 						foreach ( $body->translation_sets as $translation_set ) {
-							if ( $translation_set->locale === $locale && $translation_set->slug === $variant ) {
+							if ( $translation_set->locale === $locale['slug']['locale'] && $translation_set->slug === $locale['slug']['variant'] ) {
 								// Set transient value.
 								$translation_stats = $translation_set;
 								continue;
@@ -308,7 +306,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 					}
 				}
 
-				set_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug . '_' . $locale, $translation_stats, get_option( TSTATS_WP_OPTION )['transients_expiration'] );
+				set_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug . '_' . $locale['slug']['locale'] . '_' . $locale['slug']['variant'], $translation_stats, get_option( TSTATS_WP_OPTION )['transients_expiration'] );
 			}
 
 			return $translation_stats;
