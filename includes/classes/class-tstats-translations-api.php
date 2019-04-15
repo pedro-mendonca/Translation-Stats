@@ -292,19 +292,19 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 			$tstats_locale_slug = $tstats_locale['slug'];
 
 			// Check if slug contain '/' and non default variant.
-			if ( false !== strpos ( $tstats_locale_slug, '/' ) ) {
+			if ( false !== strpos( $tstats_locale_slug, '/' ) ) {
 
 				// In case there is a '/' separator, set the slug as an array 'locale' and 'variant'.
 				$tstats_locale_slug = array(
-					'locale'  => substr( $tstats_locale_slug, 0, strpos ( $tstats_locale['slug'], '/' ) ),
-					'variant' => substr( $tstats_locale_slug, 1 + strpos ( $tstats_locale['slug'], '/' ) ),
+					'locale'  => substr( $tstats_locale_slug, 0, strpos( $tstats_locale['slug'], '/' ) ),
+					'variant' => substr( $tstats_locale_slug, 1 + strpos( $tstats_locale['slug'], '/' ) ),
 				);
 
 			} else {
 
 				// In case there is no '/' separator, set slug as array with pseudo-variant as 'default.
 				$tstats_locale_slug = array(
-					'locale' => $tstats_locale_slug,
+					'locale'  => $tstats_locale_slug,
 					'variant' => 'default',
 				);
 

@@ -178,7 +178,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 *
 		 * @since 0.8.0
 		 *
-		 * @param array $locale            Locale array.
+		 * @param array  $locale           Locale array.
 		 * @param string $project_slug     Plugin Slug.
 		 * @param string $subproject       Translation subproject (' Dev', 'Dev Readme', 'Stable', 'Stable Readme' ).
 		 * @param string $subproject_slug  Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).
@@ -268,7 +268,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 *
 		 * @since 0.8.0
 		 *
-		 * @param array $locale               Locale array.
+		 * @param array  $locale              Locale array.
 		 * @param string $project_slug        Plugin Slug.
 		 * @param string $subproject_slug     Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).
 		 * @return string $translation_stats  Plugin stats.
