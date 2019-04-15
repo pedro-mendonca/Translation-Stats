@@ -50,8 +50,8 @@ if ( ! class_exists( 'TStats_Settings_Widgets' ) ) {
 				<div class="inside">
 
 					<div class="tstats-logo">
-						<a href="<?php echo esc_url( $this->tstats_globals->tstats_link( $external_link_url, rawurlencode( home_url() ), 'link', 'tstats_plugin_logo' ) ); ?>" target="_blank">
-							<img src="<?php echo esc_html( TSTATS_PATH ) . '/img/logo-color-transparent.png'; ?>" alt="<?php esc_attr_e( 'Translation Stats', 'translation-stats' ); ?>">
+						<a class="tstats-logo-link" href="<?php echo esc_url( $this->tstats_globals->tstats_link( $external_link_url, rawurlencode( home_url() ), 'link', 'tstats_plugin_logo' ) ); ?>" target="_blank">
+							<div class="tstats-logo-image"></div>
 						</a>
 					</div>
 					<p><?php esc_html_e( 'Show plugins translation stats on your WordPress install.', 'translation-stats' ); ?></p>

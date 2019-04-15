@@ -274,10 +274,18 @@ table.tstats-plugin-list-table tbody .inactive .check-column.plugin-select {
 	margin: 30px 0 0;
 }
 
-.tstats-settings-wrapper .tstats-settings__sidebar .postbox .inside .tstats-logo a img {
+.tstats-settings-wrapper .tstats-settings__sidebar .postbox .inside .tstats-logo a.tstats-logo-link {
 	display: block;
-	width: 200px;
+	width: 100%;
+}
+
+.tstats-settings-wrapper .tstats-settings__sidebar .postbox .inside .tstats-logo a.tstats-logo-link div.tstats-logo-image {
 	margin: auto;
+	background-image: url(../img/logo-color-transparent.svg);
+	background-position: center;
+	background-size: contain;
+	height: 120px;
+	background-repeat: no-repeat;
 }
 
 .tstats-settings-wrapper .tstats-settings__sidebar .postbox .inside a {
