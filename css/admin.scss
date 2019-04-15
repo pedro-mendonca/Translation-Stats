@@ -307,15 +307,21 @@ table.tstats-plugin-list-table {
 				.tstats-logo {
 					//padding: 10px;
 
-					a {
+					a.tstats-logo-link {
+						display: block;
+						width: 100%;
 
-						img {
-							display: block;
-							width: 200px;
+						div.tstats-logo-image {
 							margin: auto;
-
+							background-image: url(../img/logo-color-transparent.svg);
+							background-position: center;
+							background-size: contain;
+							height: 120px;
+							background-repeat: no-repeat;
 						}
+
 					}
+
 				}
 
 				a {

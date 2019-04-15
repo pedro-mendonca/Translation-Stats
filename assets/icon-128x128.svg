@@ -1,0 +1,14 @@
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="128px"
+	 height="128px" viewBox="0 0 128 128" enable-background="new 0 0 128 128" xml:space="preserve">
+	<g id="Background">
+		<rect fill="#FFFFFF" width="128" height="128"/>
+	</g>
+	<g id="Icon">
+		<g>
+			<path fill="#235a28" d="M104,56c0,2.2-1.8,4-4,4H28c-2.2,0-4-1.8-4-4V32c0-2.2,1.8-4,4-4h72c2.2,0,4,1.8,4,4V56z"/>
+		</g>
+		<g>
+			<path fill="#46b450" d="M56,96c0,2.2-1.8,4-4,4H28c-2.2,0-4-1.8-4-4V72c0-2.2,1.8-4,4-4h24c2.2,0,4,1.8,4,4V96z"/>
+		</g>
+	</g>
+</svg>

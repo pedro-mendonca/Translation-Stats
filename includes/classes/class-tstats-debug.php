@@ -27,6 +27,12 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 			// Instantiate Translation Stats Transients.
 			$this->tstats_transients = new TStats_Transients();
 
+			// Instantiate Translation Stats Translations API.
+			$this->tstats_translations_api = new TStats_Translations_API();
+
+			// Instantiate Translation Stats Globals.
+			$this->tstats_globals = new TStats_Globals();
+
 			// Add Translation Stats settings field debug info.
 			add_action( 'tstats_debug_setting_field_info', array( $this, 'tstats_debug_setting_field_info' ), 10, 3 );
 
@@ -224,8 +230,12 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 					esc_html__( 'Translation Stats Locale: %s', 'translation-stats' ),
 					'<code>' . esc_html( $tstats_options['translation_language'] ) . '</code>'
 				);
+				$tstats_locale = $this->tstats_translations_api->tstats_locale( $this->tstats_globals->tstats_translation_language() );
 				?>
 			</p>
+			<div>
+				<pre><code class="tstats-code-block"><?php echo esc_html( print_r( $tstats_locale, true ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r ?></code></pre>
+			</div>
 			<p>
 				<?php
 				printf(

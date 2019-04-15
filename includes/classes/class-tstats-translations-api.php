@@ -263,9 +263,54 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 				if ( $value['wp_locale'] === $wp_locale ) {
 					unset( $key );
 					$tstats_locale = $value;
+
+					// Set an array for slug ( locale, variant ).
+					$tstats_locale['slug'] = $this->tstats_locale_slug( $tstats_locale );
+
 				}
 			}
 			return $tstats_locale;
+
+		}
+
+
+		/**
+		 * Separate Locale slug in array( locale, variant ) to support GlotPress 2.x pseudo-variants.
+		 *
+		 * Example:
+		 * GlotPress Slug: 'slug' => 'pt/ao90'.
+		 * TStats Slug: 'slug' => array( 'locale' => 'pt', 'variant' => 'ao90').
+		 *
+		 * @since 0.9.1
+		 *
+		 * @param array $tstats_locale   Locale array.
+		 *
+		 * @return array $tstats_locale  Returns locale array with slug separated in array.
+		 */
+		public function tstats_locale_slug( $tstats_locale ) {
+
+			$tstats_locale_slug = $tstats_locale['slug'];
+
+			// Check if slug contain '/' and non default variant.
+			if ( false !== strpos( $tstats_locale_slug, '/' ) ) {
+
+				// In case there is a '/' separator, set the slug as an array 'locale' and 'variant'.
+				$tstats_locale_slug = array(
+					'locale'  => substr( $tstats_locale_slug, 0, strpos( $tstats_locale['slug'], '/' ) ),
+					'variant' => substr( $tstats_locale_slug, 1 + strpos( $tstats_locale['slug'], '/' ) ),
+				);
+
+			} else {
+
+				// In case there is no '/' separator, set slug as array with pseudo-variant as 'default.
+				$tstats_locale_slug = array(
+					'locale'  => $tstats_locale_slug,
+					'variant' => 'default',
+				);
+
+			}
+
+			return $tstats_locale_slug;
 
 		}
 

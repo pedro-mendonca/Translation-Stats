@@ -1,16 +1,21 @@
-/* Status bar overlay color */
+/* Status bar overlay color. */
 .translation-stats-wrap a div .subproject {
 	background-color: rgba(0, 0, 0, 0);
 }
 
-/* Status bar overlay hover/focus color */
+/* Status bar overlay hover/focus color. */
 .translation-stats-wrap a:hover div .subproject,
 .translation-stats-wrap a:focus div .subproject {
 	background-color: rgba(0, 0, 0, 0.4);
 }
 
-/* Stats bar generic text color */
+/* Stats bar generic text color. */
 .translation-stats-wrap a div {
 	color: #fff;
 	text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Translation Stats widget logo. */
+.tstats-settings-wrapper .tstats-settings__sidebar .postbox .inside .tstats-logo a.tstats-logo-link div.tstats-logo-image {
+	background-image: url(../img/logo-white-transparent.svg);
 }
