@@ -169,7 +169,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 						$plugin_url  = $this->tstats_translations_api->tstats_plugin_metadata( $key, 'url' );
 						if ( 'en_US' !== $tstats_language ) {
 							// If current locale is not 'en_US', add Locale Slug prefix to plugin URL (eg. https://pt.wordpress.org/plugins/translation-stats/ ).
-							$plugin_url = 'https://' . $locale['slug'] . '.' . substr( $this->tstats_translations_api->tstats_plugin_metadata( $key, 'url' ), strlen( 'https://' ) );
+							$plugin_url = 'https://' . $locale['slug']['locale'] . '.' . substr( $this->tstats_translations_api->tstats_plugin_metadata( $key, 'url' ), strlen( 'https://' ) );
 						}
 						$field_name = TSTATS_WP_OPTION . '[' . $plugin_slug . '][enabled]';
 						if ( empty( $plugin_slug ) ) {
