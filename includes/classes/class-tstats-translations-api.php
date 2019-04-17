@@ -264,8 +264,11 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 					unset( $key );
 					$tstats_locale = $value;
 
-					// Set an array for slug ( locale, variant ).
+					// Set an array for 'slug' to separate 'locale' and 'variant' slugs.
 					$tstats_locale['slug'] = $this->tstats_locale_slug( $tstats_locale );
+
+					// Add 'wporg_subdomain'.
+					$tstats_locale['wporg_subdomain'] = $this->tstats_wporg_subdomain( $tstats_locale );
 
 				}
 			}
@@ -311,6 +314,70 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 			}
 
 			return $tstats_locale_slug;
+
+		}
+
+
+		/**
+		 * Add WordPress.org Locale subdomain to $tstats_locale.
+		 * Defaults to Locale 'slug'.
+		 * Custom subdomains use custom criteria from Translation Teams page (https://make.wordpress.org/polyglots/teams/).
+		 * Updated on 2019-04-17.
+		 *
+		 * Example: 'pt_BR' => 'br'.
+		 *
+		 * @since 0.9.2
+		 *
+		 * @param array $tstats_locale      Locale array.
+		 *
+		 * @return string $wporg_subdomain  Returns WordPress Locale Subdomain.
+		 */
+		public function tstats_wporg_subdomain( $tstats_locale ) {
+
+			// Set default criteria.
+			$wporg_subdomain = $tstats_locale['slug']['locale'];
+
+			/**
+			 * The below Variants aren't included in the array because Translation Stats separates the Locale Slug from the Variant Slug in tstats_locale_slug().
+			 * The subdomain of the Variants fallbacks automatically to its parent subdomain.
+			 *
+			 * 'ca_valencia'    => 'ca',    // Variant. Fallback to parent subdomain.
+			 * 'nl_NL_formal'   => 'nl',    // Variant. Fallback to parent subdomain.
+			 * 'de_DE_formal'   => 'de',    // Variant. Fallback to parent subdomain.
+			 * 'de_CH_informal' => 'de-ch', // Variant. Fallback to parent subdomain.
+			 * 'pt_PT_ao90'     => 'pt',    // Variant. Fallback to parent subdomain.
+			 */
+			$wporg_custom_subdomains = array(
+				'ba'         => null,
+				'bre'        => $tstats_locale['wp_locale'],
+				'zh_CN'      => 'cn',
+				'zh_TW'      => $tstats_locale['country_code'],
+				'art_xemoji' => 'emoji',
+				'ewe'        => null,
+				'fo'         => $tstats_locale['country_code'],
+				'gn'         => null,
+				'haw_US'     => null,
+				'ckb'        => $tstats_locale['lang_code_iso_639_1'],
+				'lb_LU'      => 'ltz',
+				'xmf'        => null,
+				'mn'         => 'khk', // Code 'lang_code_iso_639_3' not present in GlotPress.
+				'pt_BR'      => $tstats_locale['country_code'],
+				'pa_IN'      => $tstats_locale['lang_code_iso_639_2'],
+				'rue'        => null,
+				'sa_IN'      => $tstats_locale['lang_code_iso_639_1'],
+				'es_CL'      => $tstats_locale['country_code'],
+				'es_PE'      => $tstats_locale['country_code'],
+				'es_VE'      => $tstats_locale['country_code'],
+				'gsw'        => null,
+				'wa'         => null,
+			);
+
+			// Check if 'wp_locale' exist in the custom subdomain criteria array.
+			if ( array_key_exists( $tstats_locale['wp_locale'], $wporg_custom_subdomains ) ) {
+				$wporg_subdomain = $wporg_custom_subdomains[ $tstats_locale['wp_locale'] ];
+			}
+
+			return $wporg_subdomain;
 
 		}
 
