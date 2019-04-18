@@ -131,7 +131,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 				$i18n_errors = 0;
 				foreach ( $subprojects as $subproject ) {
 					$subproject = $this->tstats_render_stats_bar( $locale, $project_slug, $subproject['name'], $subproject['slug'] );
-					echo wp_kses( $subproject['stats'], $this->tstats_allowed_html() );
+					echo wp_kses( $subproject['stats'], $this->tstats_globals->tstats_allowed_html() );
 					$i18n_errors = $i18n_errors + $subproject['error'];
 				}
 				?>
@@ -169,7 +169,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 			}
 
 			$plugin_stats = ob_get_clean();
-			echo wp_kses( $plugin_stats, $this->tstats_allowed_html() );
+			echo wp_kses( $plugin_stats, $this->tstats_globals->tstats_allowed_html() );
 		}
 
 
@@ -310,68 +310,6 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 			}
 
 			return $translation_stats;
-		}
-
-
-		/**
-		 * Returns array of allowed HTML elements for use in wp_kses().
-		 *
-		 * @since 0.8.5
-		 *
-		 * @return array  Array of allowed HTML elements.
-		 */
-		public function tstats_allowed_html() {
-			$allowed_html = array(
-				'a'      => array(
-					'href'   => array(),
-					'title'  => array(),
-					'class'  => array(),
-					'data'   => array(),
-					'rel'    => array(),
-					'target' => array(),
-				),
-				'br'     => array(),
-				'em'     => array(),
-				'ul'     => array(
-					'class' => array(),
-				),
-				'ol'     => array(
-					'class' => array(),
-				),
-				'li'     => array(
-					'class' => array(),
-				),
-				'strong' => array(),
-				'div'    => array(
-					'class' => array(),
-					'data'  => array(),
-					'style' => array(),
-				),
-				'span'   => array(
-					'class' => array(),
-					'style' => array(),
-				),
-				'img'    => array(
-					'alt'    => array(),
-					'class'  => array(),
-					'height' => array(),
-					'src'    => array(),
-					'width'  => array(),
-				),
-				'select' => array(
-					'id'    => array(),
-					'class' => array(),
-					'name'  => array(),
-				),
-				'option' => array(
-					'value'    => array(),
-					'selected' => array(),
-				),
-				'style'  => array(),
-				'script' => array(),
-			);
-
-			return $allowed_html;
 		}
 
 	}
