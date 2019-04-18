@@ -368,6 +368,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 					'selected' => array(),
 				),
 				'style'  => array(),
+				'script' => array(),
 			);
 
 			return $allowed_html;
