@@ -14,6 +14,7 @@ branches:
   only:
     - master
     - dev
+    - unit-tests
 
 cache:
   directories:
@@ -81,12 +82,42 @@ before_install:
   - if [[ "$SNIFF" == "1" ]]; then phpenv rehash; fi
   # Set the path/file to the installed coding standards.
   - if [[ "$SNIFF" == "1" ]]; then export CODING_STANDARDS=./phpcs.xml; fi
+  # Set the path/file to composer.
   - if [[ "$SNIFF" == "1" ]]; then export PATH="$HOME/.composer/vendor/bin:$PATH"; fi
+  # Install the specified version of PHPUnit depending on the PHP version:
+  # https://phpunit.de/supported-versions.html
   - |
     if [[ "$SNIFF" == "1" ]]; then
       bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
-      composer global require "phpunit/phpunit=4.8.*|5.7.*"
+      if [[ -n "$TRAVIS_PHP_VERSION" ]]; then
+        case "$TRAVIS_PHP_VERSION" in
+          nightly|7.3|7.2|7.1)
+            # Update this when WordPress tests support phpunit 8.
+            echo "Using PHPUnit 7"
+            composer global require "phpunit/phpunit=7.*"
+            ;;
+          7.0)
+            echo "Using PHPUnit 6"
+            composer global require "phpunit/phpunit=6.*"
+            ;;
+          5.6)
+            echo "Using PHPUnit 5"
+            composer global require "phpunit/phpunit=5.*"
+            ;;
+          5.5|5.4)
+            echo "Using PHPUnit 4"
+            composer global require "phpunit/phpunit=4.*"
+            ;;
+          *)
+            echo "No PHPUnit version handling for PHP version $TRAVIS_PHP_VERSION"
+            exit 1
+            ;;
+        esac
+      fi
     fi
+  - which phpunit
+  # Show phpunit version.
+  - phpunit --version
 
 script:
   # Search for PHP syntax errors.
@@ -95,4 +126,5 @@ script:
   - if [[ "$SNIFF" == "1" ]]; then $PHPCS_DIR/bin/phpcs -i --standard=$CODING_STANDARDS; fi
   # Run against installed coding standards.
   - if [[ "$SNIFF" == "1" ]]; then $PHPCS_DIR/bin/phpcs --standard=$CODING_STANDARDS; fi
-  - if [[ "$SNIFF" == "1" ]]; then phpunit; fi
+  # Run phpunit.
+  - if [[ "$SNIFF" == "1" ]]; then phpunit --verbose; fi
