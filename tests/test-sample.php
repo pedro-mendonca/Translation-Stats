@@ -2,7 +2,7 @@
 /**
  * Class SampleTest
  *
- * @package Sample_Plugin
+ * @package Translation Stats
  */
 
 /**
@@ -13,7 +13,7 @@ class SampleTest extends WP_UnitTestCase {
 	/**
 	 * A single example test.
 	 */
-	function test_sample() {
+	public function test_sample() {
 		// Replace this with some actual testing code.
 		$this->assertTrue( true );
 	}

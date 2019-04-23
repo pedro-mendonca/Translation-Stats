@@ -2,30 +2,30 @@
 /**
  * PHPUnit bootstrap file
  *
- * @package Sample_Plugin
+ * @package Translation Stats
  */
 
-$_tests_dir = getenv( 'WP_TESTS_DIR' );
+$tstats_tests_dir = getenv( 'WP_TESTS_DIR' );
 
-if ( ! $_tests_dir ) {
-	$_tests_dir = rtrim( sys_get_temp_dir(), '/\\' ) . '/wordpress-tests-lib';
+if ( ! $tstats_tests_dir ) {
+	$tstats_tests_dir = rtrim( sys_get_temp_dir(), '/\\' ) . '/wordpress-tests-lib';
 }
 
-if ( ! file_exists( $_tests_dir . '/includes/functions.php' ) ) {
-	echo "Could not find $_tests_dir/includes/functions.php, have you run bin/install-wp-tests.sh ?";
+if ( ! file_exists( $tstats_tests_dir . '/includes/functions.php' ) ) {
+	echo 'Could not find ' . esc_html( $tstats_tests_dir ) . '/includes/functions.php, have you run bin/install-wp-tests.sh ?';
 	exit( 1 );
 }
 
 // Give access to tests_add_filter() function.
-require_once $_tests_dir . '/includes/functions.php';
+require_once $tstats_tests_dir . '/includes/functions.php';
 
 /**
  * Manually load the plugin being tested.
  */
-function _manually_load_plugin() {
-	require dirname( dirname( __FILE__ ) ) . '/sample-plugin.php';
+function tstats_manually_load_plugin() {
+	require dirname( dirname( __FILE__ ) ) . '/translation-stats.php';
 }
-tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
+tests_add_filter( 'muplugins_loaded', 'tstats_manually_load_plugin' );
 
 // Start up the WP testing environment.
-require $_tests_dir . '/includes/bootstrap.php';
+require $tstats_tests_dir . '/includes/bootstrap.php';
