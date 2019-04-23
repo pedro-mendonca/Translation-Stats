@@ -15,6 +15,11 @@ branches:
     - master
     - dev
 
+cache:
+  directories:
+    - vendor
+    - $HOME/.composer/cache
+
 matrix:
   include:
   - name: "PHP 5.4 / Latest WordPress"
@@ -76,6 +81,12 @@ before_install:
   - if [[ "$SNIFF" == "1" ]]; then phpenv rehash; fi
   # Set the path/file to the installed coding standards.
   - if [[ "$SNIFF" == "1" ]]; then export CODING_STANDARDS=./phpcs.xml; fi
+  - if [[ "$SNIFF" == "1" ]]; then export PATH="$HOME/.composer/vendor/bin:$PATH"; fi
+  - |
+    if [[ "$SNIFF" == "1" ]]; then
+      bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+      composer global require "phpunit/phpunit=4.8.*|5.7.*"
+    fi
 
 script:
   # Search for PHP syntax errors.
@@ -84,3 +95,4 @@ script:
   - if [[ "$SNIFF" == "1" ]]; then $PHPCS_DIR/bin/phpcs -i --standard=$CODING_STANDARDS; fi
   # Run against installed coding standards.
   - if [[ "$SNIFF" == "1" ]]; then $PHPCS_DIR/bin/phpcs --standard=$CODING_STANDARDS; fi
+  - if [[ "$SNIFF" == "1" ]]; then phpunit; fi
