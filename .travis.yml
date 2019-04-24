@@ -130,4 +130,4 @@ script:
   - if [[ "$SNIFF" == "1" ]]; then phpunit --verbose --coverage-clover build/coverage/xml; fi
 
 after_script:
-  - php vendor/bin/codacycoverage clover build/coverage/xml
+  - php codacycoverage clover build/coverage/xml
