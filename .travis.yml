@@ -128,3 +128,6 @@ script:
   - if [[ "$SNIFF" == "1" ]]; then $PHPCS_DIR/bin/phpcs --standard=$CODING_STANDARDS; fi
   # Run phpunit.
   - if [[ "$SNIFF" == "1" ]]; then phpunit --verbose --coverage-clover build/coverage/xml; fi
+
+after_script:
+  - php vendor/bin/codacycoverage clover build/coverage/xml
