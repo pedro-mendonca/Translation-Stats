@@ -110,58 +110,6 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 					<?php
 					// Get all installed plugins list.
 					$all_plugins = get_plugins();
-
-					$plugin_item = '';
-					?>
-					<script>
-					jQuery( document ).ready( function( $ ) {
-
-						$( "#all_plugins" ).click( checkbox_all_plugins );
-
-						function checkbox_all_plugins() {
-							$( "tr.inactive" ).addClass( "active" ).removeClass( "inactive" );
-							if ( $( "#all_plugins" ).is( ":checked" ) ) {
-								$( "tr.inactive" ).addClass( "active" ).removeClass( "inactive" );
-							} else {
-								$( "tr.active" ).addClass( "inactive" ).removeClass( "active" );
-							}
-						}
-
-						<?php
-						foreach ( $all_plugins as $plugin ) {
-							$plugin_item++;
-							?>
-
-							$( "#plugin_<?php echo esc_attr( $plugin_item ); ?>" ).click( enable_plugin_<?php echo esc_attr( $plugin_item ); ?> );
-
-							function enable_plugin_<?php echo esc_attr( $plugin_item ); ?>() {
-								$( "input.plugin_<?php echo esc_attr( $plugin_item ); ?>" ).prop( "checked", this.checked);
-								if ( $( "input.plugin_<?php echo esc_attr( $plugin_item ); ?>" ).parents( "tr" ).hasClass( "active" ) ) {
-									$( "input.plugin_<?php echo esc_attr( $plugin_item ); ?>" ).parents( "tr" ).addClass( "inactive" ).removeClass( "active" );
-								} else {
-									$( "input.plugin_<?php echo esc_attr( $plugin_item ); ?>" ).parents( "tr" ).addClass( "active" ).removeClass( "inactive" );
-								}
-							}
-
-							$( "input.plugin_<?php echo esc_attr( $plugin_item ); ?>" ).on( "click", plugin_<?php echo esc_attr( $plugin_item ); ?>_count_subprojects );
-
-							function plugin_<?php echo esc_attr( $plugin_item ); ?>_count_subprojects() {
-								var n_<?php echo esc_attr( $plugin_item ); ?> = $( "input.plugin_<?php echo esc_attr( $plugin_item ); ?>:checked" ).length;
-								if ( n_<?php echo esc_attr( $plugin_item ); ?> === 0 ) {
-									$( "input.plugin_<?php echo esc_attr( $plugin_item ); ?>" ).parents( "tr" ).addClass( "inactive" ).removeClass( "active" );
-									$( "input#plugin_<?php echo esc_attr( $plugin_item ); ?>" ).prop( "checked", false );
-								} else {
-									$( "input.plugin_<?php echo esc_attr( $plugin_item ); ?>" ).parents( "tr" ).addClass( "active" ).removeClass( "inactive" );
-									$( "input#plugin_<?php echo esc_attr( $plugin_item ); ?>" ).prop( "checked", true );
-								}
-							}
-							<?php
-						}
-						?>
-					});
-					</script>
-
-					<?php
 					$plugin_item = '';
 
 					foreach ( $all_plugins as $key => $plugin ) {
