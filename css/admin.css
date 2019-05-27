@@ -270,6 +270,10 @@ table.tstats-plugin-list-table tbody .inactive .check-column.plugin-select {
 	display: none;
 }
 
+.tstats-settings-wrapper .tstats-settings__sidebar .postbox {
+	border-radius: 8px;
+}
+
 .tstats-settings-wrapper .tstats-settings__sidebar .postbox .inside h3 {
 	margin: 30px 0 0;
 }
