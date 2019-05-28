@@ -321,7 +321,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		/**
 		 * Add WordPress.org Locale subdomain to $tstats_locale.
 		 * Defaults to Locale 'slug'.
-		 * Custom subdomains use custom criteria from Translation Teams page (https://make.wordpress.org/polyglots/teams/).
+		 * Custom subdomains use custom criteria from Translation Teams page (https://make.wordpress.org/polyglots/teams/) and 'locales.php' in https://meta.trac.wordpress.org/browser/sites/trunk/wordpress.org/public_html/wp-content/mu-plugins/pub/locales/locales.php.
 		 * Updated on 2019-04-17.
 		 *
 		 * Example: 'pt_BR' => 'br'.
@@ -349,25 +349,25 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 			 */
 			$wporg_custom_subdomains = array(
 				'ba'         => null,
-				'bre'        => $tstats_locale['wp_locale'],
-				'zh_CN'      => 'cn',
-				'zh_TW'      => $tstats_locale['country_code'],
-				'art_xemoji' => 'emoji',
+				'bre'        => 'bre',   // As in 'wp_locale'.
+				'zh_CN'      => 'cn',    // Custom, doesn't exist in GlotPress.
+				'zh_TW'      => 'tw',    // As in 'country_code'.
+				'art_xemoji' => 'emoji', // Custom, doesn't exist in GlotPress.
 				'ewe'        => null,
-				'fo'         => $tstats_locale['country_code'],
+				'fo'         => 'fo',    // As in 'country_code'.
 				'gn'         => null,
 				'haw_US'     => null,
-				'ckb'        => $tstats_locale['lang_code_iso_639_1'],
-				'lb_LU'      => 'ltz',
+				'ckb'        => 'ku',    // As in 'lang_code_iso_639_1'.
+				'lb_LU'      => 'ltz',   // Custom, doesn't exist in GlotPress.
 				'xmf'        => null,
-				'mn'         => 'khk', // Code 'lang_code_iso_639_3' not present in GlotPress.
-				'pt_BR'      => $tstats_locale['country_code'],
-				'pa_IN'      => $tstats_locale['lang_code_iso_639_2'],
+				'mn'         => 'khk',   // As in 'lang_code_iso_639_3', doesn't exist in GlotPress.
+				'pt_BR'      => 'br',    // As in 'country_code'.
+				'pa_IN'      => 'pan',   // As in 'lang_code_iso_639_2'.
 				'rue'        => null,
-				'sa_IN'      => $tstats_locale['lang_code_iso_639_1'],
-				'es_CL'      => $tstats_locale['country_code'],
-				'es_PE'      => $tstats_locale['country_code'],
-				'es_VE'      => $tstats_locale['country_code'],
+				'sa_IN'      => 'sa',    // As in 'lang_code_iso_639_1'.
+				'es_CL'      => 'cl',    // As in 'country_code'.
+				'es_PE'      => 'pe',    // As in 'country_code'.
+				'es_VE'      => 've',    // As in 'country_code'.
 				'gsw'        => null,
 				'wa'         => null,
 			);

@@ -61,10 +61,9 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 		 */
 		public function tstats_register_plugin_styles( $hook ) {
 
-			// Loads plugin style sheets only in the plugins page.
-			if ( 'plugins.php' !== $hook && 'settings_page_' . TSTATS_SETTINGS_PAGE !== $hook ) {
+			if ( ! $this->tstats_allowed_pages( $hook ) ) {
 				return;
-			};
+			}
 
 			wp_register_style(
 				'translation-stats',
@@ -103,8 +102,14 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 		 * Register and enqueue scripts.
 		 *
 		 * @since 0.8.0
+		 *
+		 * @param string $hook  Hook.
 		 */
-		public function tstats_register_plugin_scripts() {
+		public function tstats_register_plugin_scripts( $hook ) {
+
+			if ( ! $this->tstats_allowed_pages( $hook ) ) {
+				return;
+			}
 
 			wp_register_script(
 				'translation-stats',
@@ -115,6 +120,24 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 			);
 
 			wp_enqueue_script( 'translation-stats' );
+
+		}
+
+
+		/**
+		 * Set admin pages where to load Translation Stats styles and scripts.
+		 *
+		 * @since 0.9.3
+		 *
+		 * @param string $hook  Hook.
+		 */
+		public function tstats_allowed_pages( $hook ) {
+
+			// Check for plugins page and Translation Stats settings page.
+			if ( 'plugins.php' === $hook || 'settings_page_' . TSTATS_SETTINGS_PAGE === $hook ) {
+				return true;
+			};
+
 		}
 
 	}
