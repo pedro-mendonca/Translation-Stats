@@ -46,7 +46,7 @@ if ( ! class_exists( 'TStats_Settings_Widgets' ) ) {
 			$external_link_icon = '<i aria-hidden="true" class="dashicons dashicons-external"></i>';
 			?>
 
-			<div class="postbox" id="tstats_settings_metabox__about">
+			<div class="postbox paper-shadow" id="tstats_settings_metabox__about">
 				<div class="inside">
 
 					<div class="tstats-logo">

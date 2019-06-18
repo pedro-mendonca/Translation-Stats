@@ -39,6 +39,18 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 			// Show plugin translation stats content in column.
 			add_action( 'manage_plugins_custom_column', array( $this, 'tstats_render_plugin_stats_column' ), 10, 3 );
 
+			// Add Translation Stats plugin widget title.
+			add_action( 'tstats_stats_plugin_widget_title', array( $this, 'tstats_stats_plugin_widget_title' ), 10, 2 );
+
+			// Add Translation Stats plugin widget title actions.
+			add_action( 'tstats_stats_plugin_widget_title__actions', array( $this, 'tstats_plugin_reload_button' ) );
+
+			// Add Translation Stats plugin widget content.
+			add_action( 'tstats_stats_plugin_widget_content', array( $this, 'tstats_stats_plugin_widget_content' ) );
+
+			// Load plugin subprojects stats.
+			add_action( 'wp_ajax_tstats_stats_plugin_widget_content_load', array( $this, 'tstats_stats_plugin_widget_content_load' ) );
+
 		}
 
 
@@ -86,17 +98,22 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 						return;
 					}
 
+					$plugin_on_wporg             = $this->tstats_translations_api->tstats_plugin_on_wporg( $plugin_file );
+					$plugin_translation_on_wporg = $this->tstats_translations_api->tstats_plugin_project_on_translate_wporg( $project_slug );
 					// Check if plugin is on WordPress.org.
-					if ( ! $this->tstats_translations_api->tstats_plugin_on_wporg( $plugin_file ) ) {
+					if ( ! $plugin_on_wporg ) {
 						$this->tstats_notices->tstats_notice_message( esc_html__( 'Plugin not found on WordPress.org', 'translation-stats' ), 'error' ); // Todo: Add alternative GlotPress API.
 					} else {
 						// Check if translation project is on WordPress.org.
-						if ( ! $this->tstats_translations_api->tstats_plugin_project_on_translate_wporg( $project_slug ) ) {
+						if ( ! $plugin_translation_on_wporg ) {
 							$this->tstats_notices->tstats_notice_message( esc_html__( 'Translation project not found on WordPress.org', 'translation-stats' ), 'error' );
 						} else {
 							$this->tstats_render_plugin_stats( $project_slug );
 						}
 					}
+
+					// Add Translation Stats plugin widget debug.
+					do_action( 'tstats_stats_plugin_widget_debug', $project_slug, $plugin_on_wporg, $plugin_translation_on_wporg );
 				}
 			}
 		}
@@ -115,61 +132,212 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 			$locale = $this->tstats_translations_api->tstats_locale( $this->tstats_globals->tstats_translation_language() );
 
 			ob_start();
-			?>
-			<div class="translation-stats-title">
-				<?php
-				$locale_plugin_url  = 'https://translate.wordpress.org/locale/' . $locale['slug']['locale'] . '/' . $locale['slug']['variant'] . '/wp-plugins/' . $project_slug;
-				$locale_plugin_link = '<a href="' . esc_url( $locale_plugin_url ) . '" target="_blank">' . $locale['native_name'] . '</a>';
-				/* translators: %s Language native name. */
-				echo sprintf( wp_kses_post( __( 'Translation for %s', 'translation-stats' ) ), wp_kses_post( $locale_plugin_link ) );
-				?>
-			</div>
-			<div class="translation-stats-content notice-warning notice-alt">
-				<?php
 
+			// Add before Translation Stats plugin widget title.
+			do_action( 'tstats_stats_plugin_widget_title__before', $project_slug, $locale );
+			?>
+
+			<div class="translation-stats-title">
+
+				<?php
+				// Add Translation Stats plugin widget title.
+				do_action( 'tstats_stats_plugin_widget_title', $project_slug, $locale );
+
+				// Add Translation Stats plugin widget title actions.
+				do_action( 'tstats_stats_plugin_widget_title__actions', $project_slug, $locale );
+				?>
+
+			</div>
+
+			<?php
+			// Add after Translation Stats plugin widget title.
+			do_action( 'tstats_stats_plugin_widget_title__after', $project_slug, $locale );
+
+			// Add before Translation Stats plugin widget content.
+			do_action( 'tstats_stats_plugin_widget_content__before', $project_slug, $locale );
+			?>
+
+			<div class="translation-stats-content">
+
+				<?php
+				// Add Translation Stats plugin widget content.
+				do_action( 'tstats_stats_plugin_widget_content' );
+				?>
+
+			</div>
+
+			<?php
+			// Add after Translation Stats plugin widget content.
+			do_action( 'tstats_stats_plugin_widget_content__after', $project_slug, $locale );
+
+			$plugin_stats = ob_get_clean();
+			echo wp_kses( $plugin_stats, $this->tstats_globals->tstats_allowed_html() );
+
+		}
+
+
+		/**
+		 * Load plugin widget title.
+		 *
+		 * @since 0.9.4
+		 *
+		 * @param string $project_slug  Plugin Slug.
+		 * @param array  $locale        Locale array.
+		 */
+		public function tstats_stats_plugin_widget_title( $project_slug, $locale ) {
+
+			$locale_plugin_url  = 'https://translate.wordpress.org/locale/' . $locale['slug']['locale'] . '/' . $locale['slug']['variant'] . '/wp-plugins/' . $project_slug;
+			$locale_plugin_link = '<a href="' . esc_url( $locale_plugin_url ) . '" target="_blank">' . $locale['native_name'] . '</a>';
+			/* translators: %s Language native name. */
+			echo sprintf( wp_kses_post( __( 'Translation for %s', 'translation-stats' ) ), wp_kses_post( $locale_plugin_link ) );
+
+		}
+
+
+		/**
+		 * Load plugin widget title update button.
+		 *
+		 * @since 0.9.4
+		 */
+		public function tstats_plugin_reload_button() {
+			?>
+
+			<div class="tstats-update-link">
+				<button class="handlediv button-link tstats-update-button" type="button" aria-expanded="true">
+					<span class="dashicons dashicons-update"></span>
+					<span class="screen-reader-text"><?php esc_html_e( 'Reload', 'translation-stats' ); ?></span>
+				</button>
+			</div>
+
+			<br/><br/>
+
+			<?php
+		}
+
+
+		/**
+		 * Load plugin widget loading placeholder.
+		 *
+		 * @since 0.9.4
+		 */
+		public function tstats_stats_plugin_widget_content() {
+			?>
+
+			<div class="translation-stats-loading update-message notice inline notice-warning notice-alt updating-message">
+				<p>
+					<?php esc_html_e( 'Loading...', 'translation-stats' ); ?>
+				</p>
+			</div>
+
+			<?php
+		}
+
+
+		/**
+		 * Load plugin widget content.
+		 *
+		 * @since 0.9.4
+		 */
+		public function tstats_stats_plugin_widget_content_load() {
+
+			if ( isset( $_GET['forceUpdate'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				$force_update = 'true' === sanitize_key( $_GET['forceUpdate'] ) ? true : false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			}
+
+			$locale = $this->tstats_translations_api->tstats_locale( $this->tstats_globals->tstats_translation_language() );
+
+			if ( isset( $_GET['tstatsPlugin'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+				$project_slug = sanitize_key( $_GET['tstatsPlugin'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+
+				$this->tstats_stats_plugin_widget_content_stats( $project_slug, $locale, $force_update );
+
+				if ( true === $force_update ) {
+					?>
+
+					<div class="translation-stats-content-update-notice">
+						<div class="update-message notice inline notice-alt updated-message notice-success">
+							<p>
+								<strong><?php esc_html_e( 'Updated!', 'translation-stats' ); ?></strong>
+							</p>
+						</div>
+					</div>
+
+					<?php
+				}
+			}
+
+			exit;
+
+		}
+
+
+		/**
+		 * Load plugin widget content stats.
+		 *
+		 * @since 0.9.4
+		 *
+		 * @param string $project_slug  Plugin Slug.
+		 * @param array  $locale        Locale array.
+		 * @param string $force_update  True: Force get new stats. False: Use transients.
+		 */
+		public function tstats_stats_plugin_widget_content_stats( $project_slug, $locale, $force_update ) {
+
+			?>
+			<div class="translation-stats-content-stats notice-warning notice-alt">
+				<?php
 				$subprojects = $this->tstats_translations_api->tstats_plugin_subprojects();
 				$i18n_errors = 0;
 				foreach ( $subprojects as $subproject ) {
-					$subproject = $this->tstats_render_stats_bar( $locale, $project_slug, $subproject['name'], $subproject['slug'] );
+					$subproject = $this->tstats_render_stats_bar( $locale, $project_slug, $subproject['name'], $subproject['slug'], $force_update );
 					echo wp_kses( $subproject['stats'], $this->tstats_globals->tstats_allowed_html() );
 					$i18n_errors = $i18n_errors + $subproject['error'];
 				}
 				?>
 			</div>
+
 			<?php
 
 			if ( ! empty( $i18n_errors ) ) {
-				$this->tstats_notices->tstats_notice_message(
-					sprintf(
-						/* translators: %1$s Opening link tag <a href="[link]">. %2$s Closing link tag </a>. */
-						wp_kses_post( __( 'This plugin is not %1$sproperly prepared for localization%2$s.', 'translation-stats' ) ),
-						'<a href="https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/" target="_blank">',
-						'</a>'
-					),
-					'warning'
-				);
-				$this->tstats_notices->tstats_notice_message(
-					sprintf(
-						( '%1$s%2$s%3$s' ),
-						'<a href="https://make.wordpress.org/meta/handbook/documentation/translations/#this-plugin-is-not-properly-prepared-for-localization-%e2%80%93-help" target="_blank">',
-						esc_html__( 'View detailed logs on Slack', 'translation-stats' ),
-						'</a>'
-					),
-					'warning'
-				);
-				$this->tstats_notices->tstats_notice_message(
-					sprintf(
-						/* translators: %1$s Opening link tag <a href="[link]">. %2$s Closing link tag </a>. */
-						wp_kses_post( __( 'If you would like to translate this plugin, %1$splease contact the author%2$s.', 'translation-stats' ) ),
-						'<a href="https://wordpress.org/support/plugin/' . esc_attr( $project_slug ) . '" target="_blank">',
-						'</a>'
-					),
-					'warning'
-				);
+				?>
+
+				<div class="translation-stats-content-errors">
+
+					<?php
+					$this->tstats_notices->tstats_notice_message(
+						sprintf(
+							/* translators: %1$s Opening link tag <a href="[link]">. %2$s Closing link tag </a>. */
+							wp_kses_post( __( 'This plugin is not %1$sproperly prepared for localization%2$s.', 'translation-stats' ) ),
+							'<a href="https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/" target="_blank">',
+							'</a>'
+						),
+						'warning'
+					);
+					$this->tstats_notices->tstats_notice_message(
+						sprintf(
+							( '%1$s%2$s%3$s' ),
+							'<a href="https://make.wordpress.org/meta/handbook/documentation/translations/#this-plugin-is-not-properly-prepared-for-localization-%e2%80%93-help" target="_blank">',
+							esc_html__( 'View detailed logs on Slack', 'translation-stats' ),
+							'</a>'
+						),
+						'warning'
+					);
+					$this->tstats_notices->tstats_notice_message(
+						sprintf(
+							/* translators: %1$s Opening link tag <a href="[link]">. %2$s Closing link tag </a>. */
+							wp_kses_post( __( 'If you would like to translate this plugin, %1$splease contact the author%2$s.', 'translation-stats' ) ),
+							'<a href="https://wordpress.org/support/plugin/' . esc_attr( $project_slug ) . '" target="_blank">',
+							'</a>'
+						),
+						'warning'
+					);
+					?>
+
+				</div>
+
+				<?php
 			}
 
-			$plugin_stats = ob_get_clean();
-			echo wp_kses( $plugin_stats, $this->tstats_globals->tstats_allowed_html() );
 		}
 
 
@@ -182,9 +350,10 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 * @param string $project_slug     Plugin Slug.
 		 * @param string $subproject       Translation subproject (' Dev', 'Dev Readme', 'Stable', 'Stable Readme' ).
 		 * @param string $subproject_slug  Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).
+		 * @param string $force_update     True: Force get new stats. False: Use transients.
 		 * @return string $stats_bar       Subproject stats bar.
 		 */
-		public function tstats_render_stats_bar( $locale, $project_slug, $subproject, $subproject_slug ) {
+		public function tstats_render_stats_bar( $locale, $project_slug, $subproject, $subproject_slug, $force_update ) {
 
 			$options = get_option( TSTATS_WP_OPTION );
 			// Show bar only if subproject is enabled in plugin settings.
@@ -195,7 +364,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 			$stats_bar_link = 'https://translate.wordpress.org/projects/wp-plugins/' . $project_slug . '/' . $subproject_slug . '/' . $locale['slug']['locale'] . '/' . $locale['slug']['variant'];
 
 			// Get plugin subproject translation stats.
-			$translation_stats = $this->tstats_plugin_subproject_stats( $locale, $project_slug, $subproject_slug );
+			$translation_stats = $this->tstats_plugin_subproject_stats( $locale, $project_slug, $subproject_slug, $force_update );
 
 			// If translation stats are not an object, project not found.
 			if ( ! is_object( $translation_stats ) ) {
@@ -246,7 +415,20 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 					<?php
 				} else {
 					?>
-					<div class="subproject-bar"><?php echo wp_kses_post( sprintf( /* translators: %1$s Name of subproject. %2$s Error message. */ __( '%1$s: %2$s', 'translation-stats' ), $subproject, '<strong>' . __( 'Not found', 'translation-stats' ) . '</strong>' ) ); ?></div>
+					<div class="subproject">
+						<div class="subproject-bar">
+							<?php
+							echo wp_kses_post(
+								sprintf(
+									/* translators: %1$s Name of subproject. %2$s Error message. */
+									__( '%1$s: %2$s', 'translation-stats' ),
+									$subproject,
+									'<strong>' . __( 'Not found', 'translation-stats' ) . '</strong>'
+								)
+							);
+							?>
+						</div>
+					</div>
 					<?php
 				}
 				?>
@@ -271,12 +453,18 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 * @param array  $locale              Locale array.
 		 * @param string $project_slug        Plugin Slug.
 		 * @param string $subproject_slug     Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).
+		 * @param string $force_update        True: Force get new stats. False: Use transients.
 		 * @return string $translation_stats  Plugin stats.
 		 */
-		public function tstats_plugin_subproject_stats( $locale, $project_slug, $subproject_slug ) {
+		public function tstats_plugin_subproject_stats( $locale, $project_slug, $subproject_slug, $force_update ) {
 
-			// Check subproject transients.
-			$translation_stats = get_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug . '_' . $locale['slug']['locale'] . '_' . $locale['slug']['variant'] );
+			// Check for force update setting.
+			if ( true === $force_update ) {
+				$translation_stats = false;
+			} else {
+				// Get subproject transients.
+				$translation_stats = get_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug . '_' . $locale['slug']['locale'] . '_' . $locale['slug']['variant'] );
+			}
 
 			if ( false === $translation_stats ) {
 

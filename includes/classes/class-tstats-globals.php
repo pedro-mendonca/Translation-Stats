@@ -79,11 +79,20 @@ if ( ! class_exists( 'TStats_Globals' ) ) {
 					'target' => array(),
 				),
 				'br'     => array(),
+				'button' => array(
+					'aria-expanded' => array(),
+					'class'         => array(),
+					'id'            => array(),
+					'type'          => array(),
+				),
 				'em'     => array(),
 				'ul'     => array(
 					'class' => array(),
 				),
 				'ol'     => array(
+					'class' => array(),
+				),
+				'p'      => array(
 					'class' => array(),
 				),
 				'li'     => array(

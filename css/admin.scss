@@ -6,6 +6,7 @@ table.wp-list-table.plugins {
 
 	th.column-translation-stats { // Translation Stats Column Header.
 		white-space: nowrap;
+		width: 20%;
 	}
 
 	td.column-translation-stats { // Translation Stats Column.
@@ -14,12 +15,33 @@ table.wp-list-table.plugins {
 
 		.translation-stats-title {
 			display: block;
-			margin-bottom: 0.8em;
 			font-size: 14px;
 			white-space: nowrap;
+
+			.tstats-update-link {
+				float: right;
+
+				button.tstats-update-button {
+					box-shadow: none;
+					display: none;
+
+					span {
+						color: $color-primary;
+						// Configuration of easeOutCirc.
+						@include transition-easeOutCubic ( all, 600ms, cubic-bezier(0.075, 0.82, 0.165, 1), 0s );
+
+						&:hover,
+						&:focus {
+							transform: rotateZ(180deg);
+							color: $color-secondary;
+
+						}
+					}
+				}
+			}
 		}
 
-		.translation-stats-content { // Stats grid layout.
+		.translation-stats-content .translation-stats-content-stats { // Stats grid layout.
 			display: grid;
 			grid-row-gap: 6px;
 			padding: 6px;
@@ -54,12 +76,12 @@ table.wp-list-table.plugins {
 				a {
 					display: block;
 
-					&.enabled div { // Stats bar enabled generic text color.
+					&.enabled div.subproject { // Stats bar enabled generic text color.
 						color: #000;
 						text-shadow: 0 0 6px rgba(255, 255, 225, 0.5);
 					}
 
-					&.disabled div { // Stats bar disabled generic text color.
+					&.disabled div.subproject { // Stats bar disabled generic text color.
 						background-color: #ddd;
 						color: #8f98a1;
 					}
@@ -113,6 +135,7 @@ table.wp-list-table.plugins {
 					div.percent0 {
 						background-color: $glotpress-percent0;
 					}
+
 				}
 
 				a,
@@ -133,7 +156,7 @@ table.wp-list-table.plugins {
 				a.enabled div .subproject-bar,
 				a.disabled div .subproject-bar,
 				a:hover div .subproject-bar,
-				a:focus div .subproject-bar { // Configuration of easeOutCirc
+				a:focus div .subproject-bar, { // Configuration of easeOutCirc.
 					@include transition-easeOutCubic ( all, 300ms, cubic-bezier(0.075, 0.82, 0.165, 1), 0s );
 				}
 
@@ -158,6 +181,30 @@ table.wp-list-table.plugins {
 				}
 			}
 		}
+
+		&.tstats-loading {
+
+			.translation-stats-content .translation-stats-content-stats div a div.subproject { /* https://codepen.io/brunjo/pen/azdWjY */
+
+				background-image: repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25) 10px, rgba(0, 0, 0, 0) 10px, rgba(0, 0, 0, 0) 20px); /* determines size */
+				background-size: 28px 28px;
+				animation: tstats_bar_loading 0.5s linear infinite;
+			}
+
+			@keyframes tstats_bar_loading {
+
+				0% {
+					background-position: 0 0;
+				}
+
+				100% {
+					background-position: 28px 0;
+				}
+			}
+
+
+		}
+
 	}
 }
 
@@ -297,12 +344,16 @@ table.tstats-plugin-list-table {
 		}
 
 		.postbox {
-			border-radius: 8px;
+			border-radius: 4px;
 
 			.inside {
 
 				h3 {
 					margin: 30px 0 0;
+				}
+
+				a {
+					text-decoration: none;
 				}
 
 				.tstats-logo {
@@ -325,10 +376,6 @@ table.tstats-plugin-list-table {
 
 				}
 
-				a {
-					text-decoration: none;
-				}
-
 			}
 
 			.footer {
@@ -338,8 +385,32 @@ table.tstats-plugin-list-table {
 
 		}
 
-	}
+		.paper-shadow {
+			position: relative;
 
+			&::before,
+			&::after {
+				z-index: -1;
+				position: absolute;
+				content: "";
+				bottom: 1em;
+				width: 50%;
+				top: 80%;
+				background: $color-shadow;
+				box-shadow: 0 1em 0.5em $color-shadow;
+			}
+
+			&::before {
+				transform: rotate(-3deg);
+				left: 0.5em;
+			}
+
+			&::after {
+				transform: rotate(3deg);
+				right: 0.5em;
+			}
+		}
+	}
 }
 
 .tstats-code-block {
