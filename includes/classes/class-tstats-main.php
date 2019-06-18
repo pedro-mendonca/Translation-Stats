@@ -111,15 +111,55 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 				return;
 			}
 
-			wp_register_script(
-				'translation-stats',
-				TSTATS_PATH . 'js/admin.js',
-				false,
-				TSTATS_VERSION,
-				false
+			$tstats_vars = array(
+				'ajaxurl' => admin_url( 'admin-ajax.php' ),
 			);
 
-			wp_enqueue_script( 'translation-stats' );
+			// Check for Translation Stats settings page.
+			if ( 'settings_page_' . TSTATS_SETTINGS_PAGE === $hook ) {
+
+				wp_register_script(
+					'translation-stats-settings',
+					TSTATS_PATH . 'js/tstats-settings.js',
+					array(
+						'jquery',
+					),
+					TSTATS_VERSION,
+					false
+				);
+
+				wp_enqueue_script( 'translation-stats-settings' );
+
+				wp_localize_script(
+					'translation-stats-settings',
+					'tstats',
+					$tstats_vars
+				);
+
+			}
+
+			// Check for plugins page.
+			if ( 'plugins.php' === $hook ) {
+
+				wp_register_script(
+					'translation-stats-plugins',
+					TSTATS_PATH . 'js/tstats-plugins.js',
+					array(
+						'jquery',
+					),
+					TSTATS_VERSION,
+					false
+				);
+
+				wp_enqueue_script( 'translation-stats-plugins' );
+
+				wp_localize_script(
+					'translation-stats-plugins',
+					'tstats',
+					$tstats_vars
+				);
+
+			}
 
 		}
 
@@ -136,7 +176,7 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 			// Check for plugins page and Translation Stats settings page.
 			if ( 'plugins.php' === $hook || 'settings_page_' . TSTATS_SETTINGS_PAGE === $hook ) {
 				return true;
-			};
+			}
 
 		}
 

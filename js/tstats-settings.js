@@ -15,6 +15,9 @@ jQuery( document ).ready( function( $ ) {
 	// Select single subproject checkbox on Settings plugins table.
 	$( '.tstats-settings__content input.checkbox-subproject' ).on( 'click', tstatsSelectPluginSubproject );
 
+	// Select single subproject checkbox on Settings plugins table.
+	// $( 'table.wp-list-table td.translation-stats button.tstats-update-button' ).on( 'click', tstatsPluginSubprojectsLoadAjax );
+
 
 	/**
 	 * Translation Stats scripts executed on page load.
@@ -42,8 +45,7 @@ jQuery( document ).ready( function( $ ) {
 			var tstatsActiveTabID = tstatsDefaultTabID;
 			console.log( 'Use default tab: ' + tstatsActiveTabID );
 
-		};
-
+		}
 
 		// Check for URL tstatsActiveTabID on Settings page load.
 		if ( tstatsActiveTabID ) {
@@ -57,6 +59,8 @@ jQuery( document ).ready( function( $ ) {
 			$( '.tabs-content form div' + tstatsActiveTabID.replace( '#', '#tab-' ) ).removeClass( 'hidden' );
 
 		}
+
+		console.log( 'Loaded tstats-settings.js' );
 
 	}
 
