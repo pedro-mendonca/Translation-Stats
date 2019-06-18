@@ -19,6 +19,7 @@ if ( ! class_exists( 'TStats_Notices' ) ) {
 	 */
 	class TStats_Notices {
 
+
 		/**
 		 * Display formated notice message.
 		 *
@@ -36,13 +37,11 @@ if ( ! class_exists( 'TStats_Notices' ) ) {
 		public function tstats_notice_message( $notice_message, $notice_type ) {
 			$wp_option = get_option( TSTATS_WP_OPTION );
 			if ( ! empty( $wp_option['show_warnings'] ) ) {
-				ob_start(); ?>
+				?>
 				<div class="notice notice-alt inline notice-<?php echo esc_attr( $notice_type ); ?>">
-					<p class="aria-label"><?php echo wp_kses_post( $notice_message ); ?></p>
+					<p><?php echo wp_kses_post( $notice_message ); ?></p>
 				</div>
 				<?php
-				$display_notice = ob_get_clean();
-				echo wp_kses_post( $display_notice );
 			}
 		}
 

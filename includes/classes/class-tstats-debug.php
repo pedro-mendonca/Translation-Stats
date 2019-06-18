@@ -45,6 +45,9 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 			// Add Translation Stats settings debug content.
 			add_action( 'tstats_settings_content__after', array( $this, 'tstats_settings_content__debug' ) );
 
+			// Add Translation Stats plugin widget debug.
+			add_action( 'tstats_stats_plugin_widget_debug', array( $this, 'tstats_settings_plugin_widget__debug' ), 10, 3 );
+
 		}
 
 
@@ -355,6 +358,60 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 							esc_html__( 'Default: %s', 'translation-stats' ),
 							'<code>' . esc_html( $default ) . '</code>'
 						);
+						?>
+					</p>
+				</div>
+				<?php
+			}
+		}
+
+
+		/**
+		 * Display debug formated message with plugin translation project info.
+		 *
+		 * @since 0.9.4
+		 *
+		 * @param string $project_slug                  Plugin Slug..
+		 * @param string $plugin_on_wporg               Plugin exist on WP.org: True or false.
+		 * @param string $plugin_translation_on_wporg   Plugin translation project exist on WP.org: True or false.
+		 */
+		public function tstats_settings_plugin_widget__debug( $project_slug, $plugin_on_wporg, $plugin_translation_on_wporg ) {
+			if ( TSTATS_DEBUG ) {
+				$subprojects = $this->tstats_translations_api->tstats_plugin_subprojects();
+				?>
+				<div class="tstats-debug-block notice notice-alt inline notice-info">
+					<p>
+						<?php
+						printf(
+							/* translators: %s Plugin slug. */
+							esc_html__( 'Slug: %s', 'translation-stats' ),
+							'<code>' . esc_html( $project_slug ) . '</code>'
+						);
+						?>
+					</p>
+					<p>
+						<?php
+						if ( $plugin_on_wporg ) {
+							esc_html_e( 'Plugin found on WordPress.org', 'translation-stats' );
+						} else {
+							esc_html_e( 'Plugin not found on WordPress.org', 'translation-stats' );
+						}
+						?>
+					</p>
+					<p>
+						<?php
+						if ( $plugin_translation_on_wporg ) {
+							$api_url = $this->tstats_translations_api->tstats_translations_api_url( 'plugins' ) . $project_slug;
+							printf(
+								/* translators: %1$s Opening tag <a>. %2$s: Closing tag </a>. */
+								esc_html__( 'Translation project found on %1$sWordPress.org%2$s', 'translation-stats' ),
+								'<a href="' . esc_url( $api_url ) . '" target="_blank">',
+								'</a>'
+							);
+						} else {
+							esc_html_e( 'Translation project not found on WordPress.org', 'translation-stats' );
+						}
+
 						?>
 					</p>
 				</div>

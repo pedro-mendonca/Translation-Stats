@@ -1,6 +1,7 @@
 /* WordPress Installed Plugins table. */
 table.wp-list-table.plugins th.column-translation-stats {
 	white-space: nowrap;
+	width: 20%;
 }
 
 table.wp-list-table.plugins td.column-translation-stats {
@@ -9,26 +10,47 @@ table.wp-list-table.plugins td.column-translation-stats {
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-title {
 	display: block;
-	margin-bottom: 0.8em;
 	font-size: 14px;
 	white-space: nowrap;
 }
 
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-title .tstats-update-link {
+	float: right;
+}
+
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-title .tstats-update-link button.tstats-update-button {
+	box-shadow: none;
+	display: none;
+}
+
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-title .tstats-update-link button.tstats-update-button span {
+	color: #235a28;
+	-webkit-transition: all 600ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+	-moz-transition: all 600ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+	-o-transition: all 600ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+	transition: all 600ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+}
+
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-title .tstats-update-link button.tstats-update-button span:hover, table.wp-list-table.plugins td.column-translation-stats .translation-stats-title .tstats-update-link button.tstats-update-button span:focus {
+	transform: rotateZ(180deg);
+	color: #46b450;
+}
+
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats {
 	display: grid;
 	grid-row-gap: 6px;
 	padding: 6px;
 	margin: 0 0 10px 0;
 }
 
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject .subproject-bar {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject .subproject-bar {
 	display: block;
 	padding: 5px 10px;
 	background-color: rgba(0, 0, 0, 0);
 	white-space: nowrap;
 }
 
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject .subproject-bar .subproject-bar__percentage {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject .subproject-bar .subproject-bar__percentage {
 	display: inline-block;
 	font-weight: 700;
 	text-align: right;
@@ -36,116 +58,133 @@ table.wp-list-table.plugins td.column-translation-stats .translation-stats-conte
 	margin-right: 10px;
 }
 
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a,
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div,
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div .subproject-bar,
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject .disabled,
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject .disabled .subproject-bar {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div .subproject-bar,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject .disabled,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject .disabled .subproject-bar {
 	border-radius: 3px;
 }
 
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a {
 	display: block;
 }
 
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled div {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a.enabled div.subproject {
 	color: #000;
 	text-shadow: 0 0 6px rgba(255, 255, 225, 0.5);
 }
 
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.disabled div {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a.disabled div.subproject {
 	background-color: #ddd;
 	color: #8f98a1;
 }
 
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent100 {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div.percent100 {
 	background-color: #46b450;
 }
 
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent100 .subproject-bar {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div.percent100 .subproject-bar {
 	color: #fff;
 	text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent90 {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div.percent90 {
 	background-color: #6bc373;
 }
 
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent80 {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div.percent80 {
 	background-color: #90d296;
 }
 
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent70 {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div.percent70 {
 	background-color: #b5e1b9;
 }
 
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent60 {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div.percent60 {
 	background-color: #c7e8ca;
 }
 
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent50 {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div.percent50 {
 	background-color: #ffe399;
 }
 
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent40 {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div.percent40 {
 	background-color: #fbc5a9;
 }
 
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent30 {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div.percent30 {
 	background-color: #f1adad;
 }
 
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent20 {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div.percent20 {
 	background-color: #ea8484;
 }
 
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent10 {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div.percent10 {
 	background-color: #e35b5b;
 }
 
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent0 {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div.percent0 {
 	background-color: #dc3232;
 }
 
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a,
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a:hover,
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a:focus,
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled div,
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.disabled div,
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled:hover div,
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.disabled:hover div,
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled:focus div,
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.disabled:focus div,
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent0,
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a:hover div.percent0,
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a:focus div.percent0,
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a div.percent100,
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a:hover div.percent100,
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a:focus div.percent100,
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled div .subproject-bar,
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.disabled div .subproject-bar,
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a:hover div .subproject-bar,
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a:focus div .subproject-bar {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a:hover,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a:focus,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a.enabled div,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a.disabled div,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a.enabled:hover div,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a.disabled:hover div,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a.enabled:focus div,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a.disabled:focus div,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div.percent0,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a:hover div.percent0,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a:focus div.percent0,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div.percent100,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a:hover div.percent100,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a:focus div.percent100,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a.enabled div .subproject-bar,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a.disabled div .subproject-bar,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a:hover div .subproject-bar,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a:focus div .subproject-bar {
 	-webkit-transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
 	-moz-transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
 	-o-transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
 	transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
 }
 
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled:hover div.subproject,
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled:focus div.subproject {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a.enabled:hover div.subproject,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a.enabled:focus div.subproject {
 	width: 100%;
 }
 
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled:hover div.subproject div.subproject-bar,
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled:focus div.subproject div.subproject-bar {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a.enabled:hover div.subproject div.subproject-bar,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a.enabled:focus div.subproject div.subproject-bar {
 	background-color: rgba(255, 255, 255, 0.2);
 }
 
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled:hover div.percent0 .subproject-bar,
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .content__subproject a.enabled:focus div.percent0 .subproject-bar {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a.enabled:hover div.percent0 .subproject-bar,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a.enabled:focus div.percent0 .subproject-bar {
 	color: #fff;
 	text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+table.wp-list-table.plugins td.column-translation-stats.tstats-loading .translation-stats-content .translation-stats-content-stats div a div.subproject {
+	/* https://codepen.io/brunjo/pen/azdWjY */
+	background-image: repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25) 10px, rgba(0, 0, 0, 0) 10px, rgba(0, 0, 0, 0) 20px);
+	/* determines size */
+	background-size: 28px 28px;
+	animation: tstats_bar_loading 0.5s linear infinite;
+}
+
+@keyframes tstats_bar_loading {
+	0% {
+		background-position: 0 0;
+	}
+	100% {
+		background-position: 28px 0;
+	}
 }
 
 /* Translation Stats Settings Plugins table. */
