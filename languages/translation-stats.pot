@@ -5,7 +5,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.1\n"
+"X-Generator: Poedit 2.2.3\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Textdomain-Support: yes\n"
@@ -19,167 +19,195 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: node_modules\n"
 "X-Poedit-SearchPathExcluded-1: includes/temp\n"
 
-#: includes/classes/class-tstats-debug.php:53
-#: includes/classes/class-tstats-debug.php:89
+#: includes/classes/class-tstats-ajax.php:56
+#: includes/classes/class-tstats-plugins.php:216
+msgid "Reload"
+msgstr ""
+
+#: includes/classes/class-tstats-debug.php:62
+#: includes/classes/class-tstats-debug.php:98
 msgid "Debug"
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:109
+#: includes/classes/class-tstats-debug.php:118
 msgid "List of settings and transients of Translation Stats."
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:153
+#: includes/classes/class-tstats-debug.php:162
 msgid "Server"
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:159
+#: includes/classes/class-tstats-debug.php:168
 #, php-format
 msgid "PHP Version: %s"
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:165
+#: includes/classes/class-tstats-debug.php:174
 msgid "PHP Functions Check:"
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:182
+#: includes/classes/class-tstats-debug.php:191
 msgid "No functions to test."
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:200
+#: includes/classes/class-tstats-debug.php:209
 #: includes/classes/class-tstats-main.php:49
 #: includes/classes/class-tstats-settings.php:137
 #: includes/classes/class-tstats-settings.php:432
 msgid "Settings"
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:206
+#: includes/classes/class-tstats-debug.php:215
 #, php-format
 msgid "Site Locale: %s"
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:215
+#: includes/classes/class-tstats-debug.php:224
 #, php-format
 msgid "User Locale: %s"
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:224
+#: includes/classes/class-tstats-debug.php:233
 #, php-format
 msgid "Translation Stats Locale: %s"
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:233
+#: includes/classes/class-tstats-debug.php:246
 #, php-format
 msgid "Settings Page: %s"
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:242
+#: includes/classes/class-tstats-debug.php:255
 #, php-format
 msgid "WordPress Option: %s"
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:248
+#: includes/classes/class-tstats-debug.php:261
 msgid "Settings List:"
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:258
+#: includes/classes/class-tstats-debug.php:271
 msgid "No settings found."
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:275
+#: includes/classes/class-tstats-debug.php:288
 msgid "Transients"
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:281
+#: includes/classes/class-tstats-debug.php:294
 #, php-format
 msgid "Transients Prefix: %s"
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:287
+#: includes/classes/class-tstats-debug.php:300
 msgid "Transients List:"
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:301
+#: includes/classes/class-tstats-debug.php:314
 msgid "No transients found."
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:327
+#: includes/classes/class-tstats-debug.php:340
 #, php-format
 msgid "ID: %s"
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:336
+#: includes/classes/class-tstats-debug.php:349
 #, php-format
 msgid "Value: %s"
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:345
+#: includes/classes/class-tstats-debug.php:358
 #, php-format
 msgid "Default: %s"
 msgstr ""
 
-#: includes/classes/class-tstats-plugins.php:57
+#: includes/classes/class-tstats-debug.php:387
+#, php-format
+msgid "Slug: %s"
+msgstr ""
+
+#: includes/classes/class-tstats-debug.php:395
+msgid "Plugin found on WordPress.org"
+msgstr ""
+
+#: includes/classes/class-tstats-debug.php:397
+#: includes/classes/class-tstats-plugins.php:105
+msgid "Plugin not found on WordPress.org"
+msgstr ""
+
+#: includes/classes/class-tstats-debug.php:407
+#, php-format
+msgid "Translation project found on %1$sWordPress.org%2$s"
+msgstr ""
+
+#: includes/classes/class-tstats-debug.php:412
+#: includes/classes/class-tstats-plugins.php:109
+msgid "Translation project not found on WordPress.org"
+msgstr ""
+
+#: includes/classes/class-tstats-plugins.php:69
 msgctxt "Column label"
 msgid "Translation Stats"
 msgstr ""
 
-#: includes/classes/class-tstats-plugins.php:91
-msgid "Plugin not found on WordPress.org"
-msgstr ""
-
-#: includes/classes/class-tstats-plugins.php:95
-msgid "Translation project not found on WordPress.org"
-msgstr ""
-
-#: includes/classes/class-tstats-plugins.php:124
+#: includes/classes/class-tstats-plugins.php:198
 #, php-format
 msgid "Translation for %s"
 msgstr ""
 
-#: includes/classes/class-tstats-plugins.php:145
+#: includes/classes/class-tstats-plugins.php:237
+msgid "Loading..."
+msgstr ""
+
+#: includes/classes/class-tstats-plugins.php:280
 #, php-format
 msgid "This plugin is not %1$sproperly prepared for localization%2$s."
 msgstr ""
 
-#: includes/classes/class-tstats-plugins.php:155
+#: includes/classes/class-tstats-plugins.php:290
 msgid "View detailed logs on Slack"
 msgstr ""
 
-#: includes/classes/class-tstats-plugins.php:163
+#: includes/classes/class-tstats-plugins.php:298
 #, php-format
 msgid "If you would like to translate this plugin, %1$splease contact the author%2$s."
 msgstr ""
 
-#: includes/classes/class-tstats-plugins.php:250
+#: includes/classes/class-tstats-plugins.php:339
+msgid "Updated!"
+msgstr ""
+
+#: includes/classes/class-tstats-plugins.php:434
 #, php-format
 msgid "%1$s: %2$s"
 msgstr ""
 
-#: includes/classes/class-tstats-plugins.php:250
+#: includes/classes/class-tstats-plugins.php:436
 msgid "Not found"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-footer.php:58
+#: includes/classes/class-tstats-settings-footer.php:56
 #, php-format
 msgid "Thank you for translating with %1$s version %2$s."
 msgstr ""
 
 #. Plugin Name of the plugin/theme
-#: includes/classes/class-tstats-settings-footer.php:61
-#: includes/classes/class-tstats-settings-widgets.php:54
+#: includes/classes/class-tstats-settings-footer.php:59
 msgid "Translation Stats"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-footer.php:67
+#: includes/classes/class-tstats-settings-footer.php:65
 #, php-format
 msgid "By %s"
 msgstr ""
 
 #. Author of the plugin/theme
-#: includes/classes/class-tstats-settings-footer.php:70
+#: includes/classes/class-tstats-settings-footer.php:68
 msgid "Pedro Mendonça"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-footer.php:90
+#: includes/classes/class-tstats-settings-footer.php:88
 #: includes/classes/class-tstats-settings-sidebar.php:47
 #: includes/classes/class-tstats-settings-widgets.php:89
 #, php-format
@@ -206,11 +234,11 @@ msgstr ""
 msgid "Slug"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-plugins.php:195
+#: includes/classes/class-tstats-settings-plugins.php:144
 msgid "Select Plugin"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-plugins.php:222
+#: includes/classes/class-tstats-settings-plugins.php:171
 msgid "Select Subproject"
 msgstr ""
 
@@ -413,21 +441,25 @@ msgstr ""
 msgid "Save Changes"
 msgstr ""
 
+#: includes/classes/class-tstats-translate-api.php:140
 #: includes/classes/class-tstats-translations-api.php:140
 msgctxt "Subproject name"
 msgid "Development"
 msgstr ""
 
+#: includes/classes/class-tstats-translate-api.php:145
 #: includes/classes/class-tstats-translations-api.php:145
 msgctxt "Subproject name"
 msgid "Development Readme"
 msgstr ""
 
+#: includes/classes/class-tstats-translate-api.php:150
 #: includes/classes/class-tstats-translations-api.php:150
 msgctxt "Subproject name"
 msgid "Stable"
 msgstr ""
 
+#: includes/classes/class-tstats-translate-api.php:155
 #: includes/classes/class-tstats-translations-api.php:155
 msgctxt "Subproject name"
 msgid "Stable Readme"
