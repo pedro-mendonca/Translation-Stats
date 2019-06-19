@@ -43,7 +43,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 			add_action( 'tstats_stats_plugin_widget_title', array( $this, 'tstats_stats_plugin_widget_title' ), 10, 2 );
 
 			// Add Translation Stats plugin widget title actions.
-			add_action( 'tstats_stats_plugin_widget_title__actions', array( $this, 'tstats_plugin_reload_button' ) );
+			add_action( 'tstats_stats_plugin_widget_title__actions', array( $this, 'tstats_plugin_update_button' ) );
 
 			// Add Translation Stats plugin widget content.
 			add_action( 'tstats_stats_plugin_widget_content', array( $this, 'tstats_stats_plugin_widget_content' ) );
@@ -199,13 +199,13 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 *
 		 * @since 0.9.4
 		 */
-		public function tstats_plugin_reload_button() {
+		public function tstats_plugin_update_button() {
 			?>
 
 			<div class="tstats-update-link">
 				<button class="handlediv button-link tstats-update-button" type="button" aria-expanded="true">
 					<span class="dashicons dashicons-update"></span>
-					<span class="screen-reader-text"><?php esc_html_e( 'Reload', 'translation-stats' ); ?></span>
+					<span class="screen-reader-text"><?php esc_html_e( 'Update', 'translation-stats' ); ?></span>
 				</button>
 			</div>
 

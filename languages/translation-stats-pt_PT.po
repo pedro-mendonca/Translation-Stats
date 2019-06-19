@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Translation Stats\n"
-"POT-Creation-Date: 2019-06-18 12:44+0100\n"
-"PO-Revision-Date: 2019-06-18 12:44+0100\n"
+"POT-Creation-Date: 2019-06-19 16:37+0100\n"
+"PO-Revision-Date: 2019-06-19 16:38+0100\n"
 "Last-Translator: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language-Team: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language: pt_PT\n"
@@ -20,11 +20,6 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: node_modules\n"
 "X-Poedit-SearchPathExcluded-1: includes/temp\n"
-
-#: includes/classes/class-tstats-ajax.php:56
-#: includes/classes/class-tstats-plugins.php:216
-msgid "Reload"
-msgstr "Recarregar"
 
 #: includes/classes/class-tstats-debug.php:62
 #: includes/classes/class-tstats-debug.php:98
@@ -166,42 +161,46 @@ msgid "Translation Stats"
 msgstr "Estatísticas de tradução"
 
 #. translators: %s Language native name.
-#: includes/classes/class-tstats-plugins.php:198
+#: includes/classes/class-tstats-plugins.php:192
 #, php-format
 msgid "Translation for %s"
 msgstr "Tradução para %s"
 
-#: includes/classes/class-tstats-plugins.php:237
+#: includes/classes/class-tstats-plugins.php:208
+msgid "Update"
+msgstr "Actualizar"
+
+#: includes/classes/class-tstats-plugins.php:228
 msgid "Loading..."
 msgstr "A carregar..."
 
+#: includes/classes/class-tstats-plugins.php:261
+msgid "Updated!"
+msgstr "Actualizado!"
+
 #. translators: %1$s Opening link tag <a href="[link]">. %2$s Closing link tag </a>.
-#: includes/classes/class-tstats-plugins.php:280
+#: includes/classes/class-tstats-plugins.php:310
 #, php-format
 msgid "This plugin is not %1$sproperly prepared for localization%2$s."
 msgstr "Este plugin não está %1$scorrectamente preparado para localização%2$s."
 
-#: includes/classes/class-tstats-plugins.php:290
+#: includes/classes/class-tstats-plugins.php:320
 msgid "View detailed logs on Slack"
 msgstr "Ver registos detalhados no Slack"
 
 #. translators: %1$s Opening link tag <a href="[link]">. %2$s Closing link tag </a>.
-#: includes/classes/class-tstats-plugins.php:298
+#: includes/classes/class-tstats-plugins.php:328
 #, php-format
 msgid "If you would like to translate this plugin, %1$splease contact the author%2$s."
 msgstr "Se quiser traduzir este plugin, %1$spor favor contacte o autor%2$s."
 
-#: includes/classes/class-tstats-plugins.php:339
-msgid "Updated!"
-msgstr "Actualizado!"
-
 #. translators: %1$s Name of subproject. %2$s Error message.
-#: includes/classes/class-tstats-plugins.php:434
+#: includes/classes/class-tstats-plugins.php:424
 #, php-format
 msgid "%1$s: %2$s"
 msgstr "%1$s: %2$s"
 
-#: includes/classes/class-tstats-plugins.php:436
+#: includes/classes/class-tstats-plugins.php:426
 msgid "Not found"
 msgstr "Não encontrado"
 
@@ -463,28 +462,24 @@ msgid "Save Changes"
 msgstr "Guardar alterações"
 
 #. translators: Subproject name in translate.wordpress.org, do not translate!
-#: includes/classes/class-tstats-translate-api.php:140
 #: includes/classes/class-tstats-translations-api.php:140
 msgctxt "Subproject name"
 msgid "Development"
 msgstr "Development"
 
 #. translators: Subproject name in translate.wordpress.org, do not translate!
-#: includes/classes/class-tstats-translate-api.php:145
 #: includes/classes/class-tstats-translations-api.php:145
 msgctxt "Subproject name"
 msgid "Development Readme"
 msgstr "Development Readme"
 
 #. translators: Subproject name in translate.wordpress.org, do not translate!
-#: includes/classes/class-tstats-translate-api.php:150
 #: includes/classes/class-tstats-translations-api.php:150
 msgctxt "Subproject name"
 msgid "Stable"
 msgstr "Stable"
 
 #. translators: Subproject name in translate.wordpress.org, do not translate!
-#: includes/classes/class-tstats-translate-api.php:155
 #: includes/classes/class-tstats-translations-api.php:155
 msgctxt "Subproject name"
 msgid "Stable Readme"
