@@ -31,7 +31,7 @@ jQuery( document ).ready( function( $ ) {
 		$.ajax({
 
 			url: tstats.ajaxurl,
-			type: 'GET',
+			type: 'POST',
 			data: {
 				action: 'tstats_stats_plugin_widget_content_load',
 				tstatsPlugin: tstatsPlugin,

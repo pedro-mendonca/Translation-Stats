@@ -240,15 +240,15 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 */
 		public function tstats_stats_plugin_widget_content_load() {
 
-			if ( isset( $_GET['forceUpdate'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-				$force_update = 'true' === sanitize_key( $_GET['forceUpdate'] ) ? true : false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			if ( isset( $_POST['forceUpdate'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
+				$force_update = 'true' === sanitize_key( $_POST['forceUpdate'] ) ? true : false; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 			}
 
 			$locale = $this->tstats_translations_api->tstats_locale( $this->tstats_globals->tstats_translation_language() );
 
-			if ( isset( $_GET['tstatsPlugin'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+			if ( isset( $_POST['tstatsPlugin'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
-				$project_slug = sanitize_key( $_GET['tstatsPlugin'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
+				$project_slug = sanitize_key( $_POST['tstatsPlugin'] ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
 				$this->tstats_stats_plugin_widget_content_stats( $project_slug, $locale, $force_update );
 
