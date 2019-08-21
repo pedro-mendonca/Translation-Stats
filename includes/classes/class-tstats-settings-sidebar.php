@@ -40,16 +40,6 @@ if ( ! class_exists( 'TStats_Settings_Sidebar' ) ) {
 
 			<div class="tstats-settings__sidebar">
 
-				<h2 class="tstats-settings__sidebar__title">
-					<?php
-					printf(
-						/* translators: Plugin Name and version - Do not translate! */
-						esc_html__( 'Translation Stats %s', 'translation-stats' ),
-						'<small>v.' . esc_html( TSTATS_VERSION ) . '</small>'
-					);
-					?>
-				</h2>
-
 				<?php
 				// Add content to Translation Stats settings sidebar.
 				do_action( 'tstats_settings__sidebar__content' );
