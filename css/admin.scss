@@ -313,6 +313,28 @@ table.tstats-plugin-list-table {
 	.tstats-settings__content {
 		width: 100%;
 
+		.nav-tab-wrapper {
+
+			a.nav-tab {
+
+				span.dashicons {
+					color: $color-primary;
+
+					vertical-align: text-top;
+				}
+
+			}
+
+			a.nav-tab-active,
+			a.nav-tab:hover,
+			a.nav-tab:focus {
+
+				span.dashicons {
+					color: $color-secondary;
+				}
+			}
+		}
+
 		@media (min-width: $break-large) {
 			order: 1;
 		}
