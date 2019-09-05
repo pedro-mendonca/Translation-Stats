@@ -5,7 +5,7 @@ Tags: internationalization, i18n, localization, l10n, translation, statistics, g
 Requires at least: 4.9
 Tested up to: 5.2.3
 Requires PHP: 5.6
-Stable tag: 0.9.4.1
+Stable tag: 0.9.4.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -65,6 +65,11 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 4. Translation Stats tools tab
 
 == Changelog ==
+
+= 0.9.4.2 =
+*   Tested up to WP 5.2.3
+*   Code optimization
+*   UI improvement
 
 = 0.9.4.1 =
 *   Bump PHP minimum required version
