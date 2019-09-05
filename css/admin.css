@@ -277,6 +277,17 @@ table.tstats-plugin-list-table tbody .inactive .check-column.plugin-select {
 	width: 100%;
 }
 
+.tstats-settings-wrapper .tstats-settings__content .nav-tab-wrapper a.nav-tab span.dashicons {
+	color: #235a28;
+	vertical-align: text-top;
+}
+
+.tstats-settings-wrapper .tstats-settings__content .nav-tab-wrapper a.nav-tab-active span.dashicons,
+.tstats-settings-wrapper .tstats-settings__content .nav-tab-wrapper a.nav-tab:hover span.dashicons,
+.tstats-settings-wrapper .tstats-settings__content .nav-tab-wrapper a.nav-tab:focus span.dashicons {
+	color: #46b450;
+}
+
 @media (min-width: 992px) {
 	.tstats-settings-wrapper .tstats-settings__content {
 		order: 1;

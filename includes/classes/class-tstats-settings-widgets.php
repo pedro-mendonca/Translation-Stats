@@ -40,8 +40,6 @@ if ( ! class_exists( 'TStats_Settings_Widgets' ) ) {
 		 */
 		public function tstats_settings_widget__about() {
 
-			$wp_org_review_link = 'https://wordpress.org/support/view/plugin-reviews/translation-stats?filter=5';
-			$five_stars_rating  = '<span class="star-rating"><span class="star star-full"></span><span class="star star-full"></span><span class="star star-full"></span><span class="star star-full"></span><span class="star star-full"></span></span>';
 			$external_link_url  = 'https://translationstats.com';
 			$external_link_icon = '<i aria-hidden="true" class="dashicons dashicons-external"></i>';
 			?>
@@ -72,15 +70,6 @@ if ( ! class_exists( 'TStats_Settings_Widgets' ) ) {
 				</div>
 
 				<div class="footer">
-					<p>
-						<?php
-						printf(
-							/* translators: %s Five stars icons. */
-							esc_html__( 'Please rate %s on WordPress.org.', 'translation-stats' ),
-							'<a href="' . esc_url( $wp_org_review_link ) . '" target="_blank">' . wp_kses_post( $five_stars_rating ) . '</a>'
-						);
-						?>
-					</p>
 					<p>
 						<?php
 						printf(

@@ -377,7 +377,6 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 */
 		public function tstats_settings_plugin_widget__debug( $project_slug, $plugin_on_wporg, $plugin_translation_on_wporg ) {
 			if ( TSTATS_DEBUG ) {
-				$subprojects = $this->tstats_translations_api->tstats_plugin_subprojects();
 				?>
 				<div class="tstats-debug-block notice notice-alt inline notice-info">
 					<p>
@@ -411,7 +410,6 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 						} else {
 							esc_html_e( 'Translation project not found on WordPress.org', 'translation-stats' );
 						}
-
 						?>
 					</p>
 				</div>

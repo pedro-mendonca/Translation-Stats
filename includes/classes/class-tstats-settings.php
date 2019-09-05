@@ -428,9 +428,9 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 					<div class="tstats-settings__content">
 
 						<h2 class="nav-tab-wrapper">
-							<a class="nav-tab" href="#plugins"><?php esc_html_e( 'Plugins', 'translation-stats' ); ?></a>
-							<a class="nav-tab" href="#settings"><?php esc_html_e( 'Settings', 'translation-stats' ); ?></a>
-							<a class="nav-tab" href="#tools"><?php esc_html_e( 'Tools', 'translation-stats' ); ?></a>
+							<a class="nav-tab" href="#plugins"><span class="dashicons dashicons-admin-plugins"></span> <?php esc_html_e( 'Plugins', 'translation-stats' ); ?></a>
+							<a class="nav-tab" href="#settings"><span class="dashicons dashicons-admin-settings"></span> <?php esc_html_e( 'Settings', 'translation-stats' ); ?></a>
+							<a class="nav-tab" href="#tools"><span class="dashicons dashicons-admin-tools"></span> <?php esc_html_e( 'Tools', 'translation-stats' ); ?></a>
 
 							<?php
 							// Add after Translation Stats settings tabs items.
