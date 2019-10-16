@@ -3,9 +3,9 @@ Contributors: pedromendonca
 Donate link: https://paypal.me/pedromendonca/
 Tags: internationalization, i18n, localization, l10n, translation, statistics, glotpress, dark mode
 Requires at least: 4.9
-Tested up to: 5.2.3
+Tested up to: 5.2.4
 Requires PHP: 5.6
-Stable tag: 0.9.4.2
+Stable tag: 0.9.4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -65,6 +65,10 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 4. Translation Stats tools tab
 
 == Changelog ==
+
+= 0.9.4.3 =
+*   Tested up to WP 5.2.4
+*   Add PHP compatibity check
 
 = 0.9.4.2 =
 *   Tested up to WP 5.2.3
