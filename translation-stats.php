@@ -98,7 +98,7 @@ function tstats_check_version() {
 
 /**
  * Show disabled notice with the minimum required PHP version.
- * Adapted from https://wordpress.org/news/2019/04/minimum-php-version-update/.
+ * Adapted from https://pento.net/2014/02/18/dont-let-your-plugin-be-activated-on-incompatible-sites/.
  *
  * @since 0.9.4.3
  */
@@ -151,7 +151,7 @@ function tstats_disabled_notice() {
 
 /**
  * Check Translation Stats minimum requirements.
- * Adapted from https://wordpress.org/news/2019/04/minimum-php-version-update/.
+ * Adapted from https://pento.net/2014/02/18/dont-let-your-plugin-be-activated-on-incompatible-sites/.
  *
  * @since 0.9.4.3
  *
