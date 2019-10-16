@@ -103,7 +103,7 @@ function tstats_check_version() {
  * @since 0.9.4.3
  */
 function tstats_disabled_notice() {
-	
+
 	// Get plugin data.
 	$plugin_data = get_plugin_data( __FILE__ );
 	?>
@@ -115,10 +115,8 @@ function tstats_disabled_notice() {
 			printf(
 				/* translators: 1: Plugin file, 2: Error message. */
 				wp_kses_post( 'The plugin %1$s has been deactivated due to an error: %2$s', 'translation-stats' ),
-				'<strong>' . $plugin_data['Name'] . '</strong>',
-				//esc_html__( 'This plugin doesn&#8217;t work with your version of PHP.', 'translation-stats' )
-				//wp_kses_post( $php_update_message )
-				esc_html__( 'This plugin doesn’t work with your version of PHP.', 'translation-stats' )
+				'<strong>' . esc_html( $plugin_data['Name'] ) . '</strong>',
+				esc_html__( 'This plugin doesn&#8217;t work with your version of PHP.', 'translation-stats' )
 			);
 			?>
 
@@ -138,7 +136,7 @@ function tstats_disabled_notice() {
 			if ( current_user_can( 'update_php' ) && version_compare( $GLOBALS['wp_version'], '5.1', '>=' ) ) {
 				printf(
 					/* translators: %s: URL to Update PHP page. */
-					' ' . __( '<a href="%s">Learn more about updating PHP</a>.' ),
+					' ' . wp_kses_post( '<a href="%s">Learn more about updating PHP</a>.', 'translation-stats' ),
 					esc_url( wp_get_update_php_url() )
 				);
 			}
