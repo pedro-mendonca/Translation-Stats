@@ -17,6 +17,12 @@ branches:
 
 matrix:
   include:
+  - name: "PHP 5.6 / Minimum supported WordPress 4.9"
+    php: "5.6"
+    env: WP_VERSION=4.9 WP_MULTISITE=0 SNIFF=1
+  - name: "PHP 5.6 / Minimum supported WordPress 4.9 multisite"
+    php: "5.6"
+    env: WP_VERSION=4.9 WP_MULTISITE=1 SNIFF=1
   - name: "PHP 5.6 / Latest WordPress"
     php: "5.6"
     env: WP_VERSION=latest WP_MULTISITE=0 SNIFF=1
