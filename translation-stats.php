@@ -31,7 +31,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 // Set Translation Stats plugin version.
 define( 'TSTATS_VERSION', '0.9.4.2' );
 
-// Set Translation Stats required PHP version.
+// Set Translation Stats required PHP version. Needed for PHP compatibility check for WordPress < 5.1.
 define( 'TSTATS_REQUIRED_PHP', '5.6' );
 
 // Set the WordPress option to store Translation Stats settings.
@@ -60,10 +60,7 @@ define( 'TSTATS_FILE', plugin_basename( __FILE__ ) );
 define( 'TSTATS_DEBUG', apply_filters( 'tstats_enable_debug', false ) );
 
 
-// Activation hook.
-register_activation_hook( __FILE__, 'tstats_activation_check' );
-
-
+// Check for PHP compatibility.
 // Adapted from https://pento.net/2014/02/18/dont-let-your-plugin-be-activated-on-incompatible-sites/.
 add_action( 'admin_init', 'tstats_check_version' );
 
@@ -75,37 +72,8 @@ if ( ! tstats_compatible_version() ) {
 
 
 /**
- * The primary sanity check, automatically disable the plugin on activation if it doesn't meet minimum requirements.
- * Only needed on WordPress older than 5.1.
+ * Backup sanity check, in case the plugin is activated, or the versions change after activation.
  * WordPress 5.1 news: https://wordpress.org/news/2019/04/minimum-php-version-update/.
- *
- * If incompatible, deactivate the plugin and returns admin notice.
- *
- * @since 0.9.4.3
- */
-function tstats_activation_check() {
-
-	if ( ! tstats_compatible_version() ) {
-
-		// Deactivate the plugin.
-		deactivate_plugins( plugin_basename( __FILE__ ) );
-
-		wp_die(
-			sprintf(
-				/* translators: %s Minimum PHP version required. */
-				esc_html__( 'Translation Stats requires PHP version %s or higher.', 'translation-stats' ),
-				esc_html( TSTATS_REQUIRED_PHP )
-			)
-		);
-
-	}
-
-}
-
-
-/**
- * Backup sanity check, in case the plugin is activated in a weird way, or the versions change after activation.
- * Adapted from https://wordpress.org/news/2019/04/minimum-php-version-update/.
  *
  * If incompatible, deactivate the plugin and add an admin notice.
  *
@@ -123,21 +91,21 @@ function tstats_check_version() {
 			// Show disabled admin notice.
 			add_action( 'admin_notices', 'tstats_disabled_notice' );
 
-			if ( isset( $_GET['activate'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-				unset( $_GET['activate'] ); // phpcs:ignore WordPress.Security.NonceVerification.Recommended
-			}
 		}
 	}
 }
 
 
 /**
- * Show disable notice with the minimum required PHP version.
+ * Show disabled notice with the minimum required PHP version.
  * Adapted from https://wordpress.org/news/2019/04/minimum-php-version-update/.
  *
  * @since 0.9.4.3
  */
 function tstats_disabled_notice() {
+	
+	// Get plugin data.
+	$plugin_data = get_plugin_data( __FILE__ );
 	?>
 
 	<div class="notice notice-error is-dismissible">
@@ -145,38 +113,38 @@ function tstats_disabled_notice() {
 
 			<?php
 			printf(
-				/* translators: %s Error message. */
-				wp_kses_post( '<strong>Error:</strong> %s', 'translation-stats' ),
-				sprintf(
-					/* translators: %s Minimum PHP version required. */
-					esc_html__( 'Translation Stats requires PHP version %s or higher.', 'translation-stats' ),
-					esc_html( TSTATS_REQUIRED_PHP )
-				)
+				/* translators: 1: Plugin file, 2: Error message. */
+				wp_kses_post( 'The plugin %1$s has been deactivated due to an error: %2$s', 'translation-stats' ),
+				'<strong>' . $plugin_data['Name'] . '</strong>',
+				//esc_html__( 'This plugin doesn&#8217;t work with your version of PHP.', 'translation-stats' )
+				//wp_kses_post( $php_update_message )
+				esc_html__( 'This plugin doesn’t work with your version of PHP.', 'translation-stats' )
 			);
-
-			// Show aditional link if on version 5.1 or earlier.
-			// Capability added in WP 5.1: https://core.trac.wordpress.org/ticket/44457.
-			if ( current_user_can( 'update_php' ) && version_compare( $GLOBALS['wp_version'], '5.1', '>=' ) ) {
-
-				printf(
-					' <a href="%1$s" target="_blank" >%2$s <span class="screen-reader-text">%3$s</span></a>',
-					esc_url( wp_get_update_php_url() ),
-					esc_html__( 'Learn more about updating PHP', 'translation-stats' ),
-					/* translators: Accessibility text. */
-					esc_html__( '(opens in a new tab)', 'translation-stats' )
-				);
-
-				wp_update_php_annotation( '</p><p><em>', '</em>' );
-
-			} else {
-				?>
+			?>
 
 		</p>
+		<p>
 
-				<?php
+			<?php
+			printf(
+				/* translators: %s Minimum PHP version required. */
+				esc_html__( 'Requires PHP version %s or higher.', 'translation-stats' ),
+				esc_html( TSTATS_REQUIRED_PHP )
+			);
+
+			// Show aditional update link if on WP version 5.1 or higher.
+			// Capability added in WP 5.1: https://core.trac.wordpress.org/ticket/44457.
+			// Introduced in WP 5.1: https://developer.wordpress.org/reference/functions/wp_get_update_php_url/.
+			if ( current_user_can( 'update_php' ) && version_compare( $GLOBALS['wp_version'], '5.1', '>=' ) ) {
+				printf(
+					/* translators: %s: URL to Update PHP page. */
+					' ' . __( '<a href="%s">Learn more about updating PHP</a>.' ),
+					esc_url( wp_get_update_php_url() )
+				);
 			}
 			?>
 
+		</p>
 	</div>
 
 	<?php
@@ -197,8 +165,6 @@ function tstats_compatible_version() {
 	if ( version_compare( PHP_VERSION, TSTATS_REQUIRED_PHP, '<=' ) ) {
 		return false;
 	}
-
-	// Add sanity checks for other version requirements here.
 
 	return true;
 }
