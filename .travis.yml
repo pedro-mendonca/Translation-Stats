@@ -7,8 +7,8 @@ language: php
 
 notifications:
   email:
-    on_success: never
-    on_failure: change
+    on_success: change
+    on_failure: always
 
 branches:
   only:
@@ -17,29 +17,17 @@ branches:
 
 matrix:
   include:
-  - name: "PHP 5.6 / Minimum supported WordPress 4.9"
-    php: "5.6"
-    env: WP_VERSION=4.9 WP_MULTISITE=0 SNIFF=1
-  - name: "PHP 5.6 / Minimum supported WordPress 4.9 multisite"
-    php: "5.6"
-    env: WP_VERSION=4.9 WP_MULTISITE=1 SNIFF=1
-  - name: "PHP 5.6 / Latest WordPress"
-    php: "5.6"
+  - name: "PHP 7.3 / Nightly WordPress"
+    php: "7.3"
+    env: WP_VERSION=nightly WP_MULTISITE=0 SNIFF=1
+  - name: "PHP 7.3 / Nightly WordPress multisite"
+    php: "7.3"
+    env: WP_VERSION=nightly WP_MULTISITE=1 SNIFF=1
+  - name: "PHP 7.3 / Latest WordPress"
+    php: "7.3"
     env: WP_VERSION=latest WP_MULTISITE=0 SNIFF=1
-  - name: "PHP 5.6 / Latest WordPress multisite"
-    php: "5.6"
-    env: WP_VERSION=latest WP_MULTISITE=1 SNIFF=1
-  - name: "PHP 7.0 / Latest WordPress"
-    php: "7.0"
-    env: WP_VERSION=latest WP_MULTISITE=0 SNIFF=1
-  - name: "PHP 7.0 / Latest WordPress multisite"
-    php: "7.0"
-    env: WP_VERSION=latest WP_MULTISITE=1 SNIFF=1
-  - name: "PHP 7.1 / Latest WordPress"
-    php: "7.1"
-    env: WP_VERSION=latest WP_MULTISITE=0 SNIFF=1
-  - name: "PHP 7.1 / Latest WordPress multisite"
-    php: "7.1"
+  - name: "PHP 7.3 / Latest WordPress multisite"
+    php: "7.3"
     env: WP_VERSION=latest WP_MULTISITE=1 SNIFF=1
   - name: "PHP 7.2 / Latest WordPress"
     php: "7.2"
@@ -47,18 +35,30 @@ matrix:
   - name: "PHP 7.2 / Latest WordPress multisite"
     php: "7.2"
     env: WP_VERSION=latest WP_MULTISITE=1 SNIFF=1
-  - name: "PHP 7.3 / Latest WordPress"
-    php: "7.3"
+  - name: "PHP 7.1 / Latest WordPress"
+    php: "7.1"
     env: WP_VERSION=latest WP_MULTISITE=0 SNIFF=1
-  - name: "PHP 7.3 / Latest WordPress multisite"
-    php: "7.3"
+  - name: "PHP 7.1 / Latest WordPress multisite"
+    php: "7.1"
     env: WP_VERSION=latest WP_MULTISITE=1 SNIFF=1
-  - name: "PHP 7.3 / Nightly WordPress"
-    php: "7.3"
-    env: WP_VERSION=nightly WP_MULTISITE=0 SNIFF=1
-  - name: "PHP 7.3 / Nightly WordPress multisite"
-    php: "7.3"
-    env: WP_VERSION=nightly WP_MULTISITE=1 SNIFF=1
+  - name: "PHP 7.0 / Latest WordPress"
+    php: "7.0"
+    env: WP_VERSION=latest WP_MULTISITE=0 SNIFF=1
+  - name: "PHP 7.0 / Latest WordPress multisite"
+    php: "7.0"
+    env: WP_VERSION=latest WP_MULTISITE=1 SNIFF=1
+  - name: "PHP 5.6 / Latest WordPress"
+    php: "5.6"
+    env: WP_VERSION=latest WP_MULTISITE=0 SNIFF=1
+  - name: "PHP 5.6 / Latest WordPress multisite"
+    php: "5.6"
+    env: WP_VERSION=latest WP_MULTISITE=1 SNIFF=1
+  - name: "PHP 5.6 / Minimum supported WordPress 4.9"
+    php: "5.6"
+    env: WP_VERSION=4.9 WP_MULTISITE=0 SNIFF=1
+  - name: "PHP 5.6 / Minimum supported WordPress 4.9 multisite"
+    php: "5.6"
+    env: WP_VERSION=4.9 WP_MULTISITE=1 SNIFF=1
 
 before_install:
   # Speed up build time by disabling Xdebug.
