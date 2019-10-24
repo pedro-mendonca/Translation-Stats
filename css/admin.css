@@ -171,17 +171,17 @@ table.wp-list-table.plugins td.column-translation-stats .translation-stats-conte
 }
 
 table.wp-list-table.plugins td.column-translation-stats.tstats-loading .translation-stats-content .translation-stats-content-stats div a div.subproject {
-	/* https://codepen.io/brunjo/pen/azdWjY */
 	background-image: repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25) 10px, rgba(0, 0, 0, 0) 10px, rgba(0, 0, 0, 0) 20px);
-	/* determines size */
 	background-size: 28px 28px;
 	animation: tstats_bar_loading 0.5s linear infinite;
 }
 
 @keyframes tstats_bar_loading {
+
 	0% {
 		background-position: 0 0;
 	}
+
 	100% {
 		background-position: 28px 0;
 	}
@@ -263,11 +263,10 @@ table.tstats-plugin-list-table tbody .inactive .check-column.plugin-select {
 .tstats-settings-wrapper {
 	display: flex;
 	flex-wrap: wrap;
-	/* Translation Stats Settings Content. */
-	/* Translation Stats Settings Sidebar. */
 }
 
 @media (min-width: 992px) {
+
 	.tstats-settings-wrapper {
 		flex-wrap: nowrap;
 	}
@@ -289,6 +288,7 @@ table.tstats-plugin-list-table tbody .inactive .check-column.plugin-select {
 }
 
 @media (min-width: 992px) {
+
 	.tstats-settings-wrapper .tstats-settings__content {
 		order: 1;
 	}
@@ -300,6 +300,7 @@ table.tstats-plugin-list-table tbody .inactive .check-column.plugin-select {
 }
 
 @media (min-width: 992px) {
+
 	.tstats-settings-wrapper .tstats-settings__sidebar {
 		width: 280px;
 		padding-left: 20px;
@@ -341,7 +342,8 @@ table.tstats-plugin-list-table tbody .inactive .check-column.plugin-select {
 	position: relative;
 }
 
-.tstats-settings-wrapper .tstats-settings__sidebar .paper-shadow::before, .tstats-settings-wrapper .tstats-settings__sidebar .paper-shadow::after {
+.tstats-settings-wrapper .tstats-settings__sidebar .paper-shadow::before,
+.tstats-settings-wrapper .tstats-settings__sidebar .paper-shadow::after {
 	z-index: -1;
 	position: absolute;
 	content: "";
