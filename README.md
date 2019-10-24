@@ -1,12 +1,17 @@
-# Translation Stats #
+# Translation Stats [![Hacktoberfest Label](https://img.shields.io/github/labels/pedro-mendonca/Translation-Stats/hacktoberfest)](https://github.com/pedro-mendonca/Translation-Stats/issues?q=is%3Aopen+is%3Aissue+label%3Ahacktoberfest) #
 
-[![Build Status](https://travis-ci.org/pedro-mendonca/Translation-Stats.svg?branch=master)](https://travis-ci.org/pedro-mendonca/Translation-Stats)
+[![WordPress Plugin Version](https://img.shields.io/wordpress/plugin/v/translation-stats?label=Plugin%20Version&logo=wordpress)](https://wordpress.org/plugins/translation-stats/)
+[![WordPress Plugin Rating](https://img.shields.io/wordpress/plugin/stars/translation-stats?label=Plugin%20Rating&logo=wordpress)](https://wordpress.org/support/plugin/translation-stats/reviews/)
+[![WordPress Plugin Downloads](https://img.shields.io/wordpress/plugin/dt/translation-stats.svg?label=Downloads&logo=wordpress)](https://wordpress.org/plugins/translation-stats/advanced/)
+[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://paypal.me/pedromendonca/)
+
+[![PHP from Travis config](https://img.shields.io/travis/php-v/pedro-mendonca/Translation-Stats.svg?logoColor=white&label=PHP%20Required&logo=php)](https://travis-ci.org/pedro-mendonca/Translation-Stats)
+[![WordPress Plugin: Required WP Version](https://img.shields.io/wordpress/plugin/wp-version/translation-stats?label=WordPress%20Required&logo=wordpress)](https://wordpress.org/plugins/translation-stats/)
+[![WordPress Plugin: Tested WP Version](https://img.shields.io/wordpress/plugin/tested/translation-stats.svg?label=WordPress%20Tested&logo=wordpress)](https://wordpress.org/plugins/translation-stats/)
+
+[![Build Status](https://img.shields.io/travis/pedro-mendonca/translation-stats?label=Build&logo=travis)](https://travis-ci.org/pedro-mendonca/Translation-Stats)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/bcd1b44a1d6542e2b75b7b479ce56804)](https://www.codacy.com/app/pedro-mendonca/Translation-Stats?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=pedro-mendonca/Translation-Stats&amp;utm_campaign=Badge_Grade)
 [![RIPS CodeRisk](https://coderisk.com/wp/plugin/translation-stats/badge "RIPS CodeRisk")](https://coderisk.com/wp/plugin/translation-stats)
-[![PHP from Travis config](https://img.shields.io/travis/php-v/pedro-mendonca/Translation-Stats.svg)](https://travis-ci.org/pedro-mendonca/Translation-Stats)
-[![WordPress Plugin: Tested WP Version](https://img.shields.io/wordpress/plugin/tested/translation-stats.svg)](https://wordpress.org/plugins/translation-stats/advanced/)
-[![WordPress Plugin Downloads](https://img.shields.io/wordpress/plugin/dt/translation-stats.svg)](https://wordpress.org/plugins/translation-stats/advanced/)
-[![Donate](https://img.shields.io/badge/Donate-PayPal-blue.svg)](https://paypal.me/pedromendonca/)
 
 **Contributors:** pedromendonca  
 **Donate link:** [paypal.me/pedromendonca](https://paypal.me/pedromendonca/)  
