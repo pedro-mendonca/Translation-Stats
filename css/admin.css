@@ -31,7 +31,8 @@ table.wp-list-table.plugins td.column-translation-stats .translation-stats-title
 	transition: all 600ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
 }
 
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-title .tstats-update-link button.tstats-update-button span:hover, table.wp-list-table.plugins td.column-translation-stats .translation-stats-title .tstats-update-link button.tstats-update-button span:focus {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-title .tstats-update-link button.tstats-update-button span:hover,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-title .tstats-update-link button.tstats-update-button span:focus {
 	transform: rotateZ(180deg);
 	color: #46b450;
 }
