@@ -172,7 +172,11 @@ table.wp-list-table.plugins td.column-translation-stats .translation-stats-conte
 }
 
 table.wp-list-table.plugins td.column-translation-stats.tstats-loading .translation-stats-content .translation-stats-content-stats div a div.subproject {
+
+	/* https://codepen.io/brunjo/pen/azdWjY */
 	background-image: repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25) 10px, rgba(0, 0, 0, 0) 10px, rgba(0, 0, 0, 0) 20px);
+
+	/* determines size */
 	background-size: 28px 28px;
 	animation: tstats_bar_loading 0.5s linear infinite;
 }
@@ -264,6 +268,10 @@ table.tstats-plugin-list-table tbody .inactive .check-column.plugin-select {
 .tstats-settings-wrapper {
 	display: flex;
 	flex-wrap: wrap;
+
+	/* Translation Stats Settings Content. */
+
+	/* Translation Stats Settings Sidebar. */
 }
 
 @media (min-width: 992px) {
