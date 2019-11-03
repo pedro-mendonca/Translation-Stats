@@ -49,14 +49,16 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		public function tstats_plugin_metadata( $plugin_file, $metadata ) {
 			$plugin_state = get_site_transient( 'update_plugins' );
 			// Check if plugin is on WordPress.org.
-			if ( $this->tstats_plugin_on_wporg( $plugin_file ) ) {
-				if ( isset( $plugin_state->response[ $plugin_file ]->$metadata ) ) {
-					$plugin_metadata = $plugin_state->response[ $plugin_file ]->$metadata;
-				}
-				if ( isset( $plugin_state->no_update[ $plugin_file ]->$metadata ) ) {
-					$plugin_metadata = $plugin_state->no_update[ $plugin_file ]->$metadata;
-				}
-				return $plugin_metadata;
+			if ( ! $this->tstats_plugin_on_wporg( $plugin_file ) ) {
+				return '';
+			}
+
+			if ( isset( $plugin_state->response[ $plugin_file ]->$metadata ) ) {
+				return $plugin_state->response[ $plugin_file ]->$metadata;
+			}
+
+			if ( isset( $plugin_state->no_update[ $plugin_file ]->$metadata ) ) {
+				return $plugin_state->no_update[ $plugin_file ]->$metadata;
 			}
 		}
 
