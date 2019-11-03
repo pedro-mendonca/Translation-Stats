@@ -42,7 +42,7 @@ if ( ! class_exists( 'TStats_Globals' ) ) {
 		 *
 		 * @since 0.9.0
 		 *
-		 * @param string $link      Link to costumize.
+		 * @param string $link      Link to customize.
 		 * @param string $source    Set utm_source, default is site URL.
 		 * @param string $medium    Set utm_medium, default is 'link'.
 		 * @param string $campaign  Set utm_campaign, default is 'tstats_plugin'.
