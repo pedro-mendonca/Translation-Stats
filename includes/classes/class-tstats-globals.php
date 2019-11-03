@@ -47,7 +47,7 @@ if ( ! class_exists( 'TStats_Globals' ) ) {
 		 * @param string $medium    Set utm_medium, default is 'link'.
 		 * @param string $campaign  Set utm_campaign, default is 'tstats_plugin'.
 		 *
-		 * @return $campaign_link  Return link with campaign parameteres.
+		 * @return string  Link with campaign parameters.
 		 */
 		public function tstats_link( $link, $source, $medium, $campaign ) {
 
