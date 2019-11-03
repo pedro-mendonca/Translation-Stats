@@ -1,4 +1,4 @@
-# Translation Stats [![Hacktoberfest Label](https://img.shields.io/github/labels/pedro-mendonca/Translation-Stats/hacktoberfest)](https://github.com/pedro-mendonca/Translation-Stats/issues?q=is%3Aopen+is%3Aissue+label%3Ahacktoberfest) #
+# Translation Stats #
 
 [![WordPress Plugin Version](https://img.shields.io/wordpress/plugin/v/translation-stats?label=Plugin%20Version&logo=wordpress)](https://wordpress.org/plugins/translation-stats/)
 [![WordPress Plugin Rating](https://img.shields.io/wordpress/plugin/stars/translation-stats?label=Plugin%20Rating&logo=wordpress)](https://wordpress.org/support/plugin/translation-stats/reviews/)
