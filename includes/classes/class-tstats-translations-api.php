@@ -25,13 +25,12 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 * @since 0.8.0
 		 *
 		 * @param string $plugin_file  Plugin ID ( e.g. 'slug/plugin-name.php' ).
-		 * @return string              Returns 'true' if the plugin exists on WordPress.org.
+		 * @return bool                Returns 'true' if the plugin exists on WordPress.org.
 		 */
 		public function tstats_plugin_on_wporg( $plugin_file ) {
 			$plugin_state = get_site_transient( 'update_plugins' );
-			if ( isset( $plugin_state->response[ $plugin_file ]->id ) || isset( $plugin_state->no_update[ $plugin_file ]->id ) ) {
-				return true;
-			}
+
+			return ( isset( $plugin_state->response[ $plugin_file ]->id ) || isset( $plugin_state->no_update[ $plugin_file ]->id ) );
 		}
 
 
