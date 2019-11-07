@@ -16,6 +16,6 @@
 }
 
 /* Translation Stats widget logo. */
-.tstats-settings-wrapper .tstats-settings__sidebar .postbox .inside .tstats-logo a.tstats-logo-link div.tstats-logo-image {
+.tstats-settings-wrapper .tstats-settings__sidebar .postbox .inside .tstats-logo .tstats-logo-link .tstats-logo-image {
 	background-image: url(../img/logo-white-transparent.svg);
 }

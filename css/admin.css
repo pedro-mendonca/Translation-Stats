@@ -39,7 +39,7 @@ table.wp-list-table.plugins td.column-translation-stats .translation-stats-title
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats {
 	display: grid;
-	grid-row-gap: 6px;
+	row-gap: 6px;
 	padding: 6px;
 	margin: 0 0 10px 0;
 }
@@ -172,11 +172,7 @@ table.wp-list-table.plugins td.column-translation-stats .translation-stats-conte
 }
 
 table.wp-list-table.plugins td.column-translation-stats.tstats-loading .translation-stats-content .translation-stats-content-stats div a div.subproject {
-
-	/* https://codepen.io/brunjo/pen/azdWjY */
 	background-image: repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25) 10px, rgba(0, 0, 0, 0) 10px, rgba(0, 0, 0, 0) 20px);
-
-	/* determines size */
 	background-size: 28px 28px;
 	animation: tstats_bar_loading 0.5s linear infinite;
 }
@@ -285,14 +281,14 @@ table.tstats-plugin-list-table tbody .inactive .check-column.plugin-select {
 	width: 100%;
 }
 
-.tstats-settings-wrapper .tstats-settings__content .nav-tab-wrapper a.nav-tab span.dashicons {
+.tstats-settings-wrapper .tstats-settings__content .nav-tab-wrapper .nav-tab span.dashicons {
 	color: #235a28;
 	vertical-align: text-top;
 }
 
-.tstats-settings-wrapper .tstats-settings__content .nav-tab-wrapper a.nav-tab-active span.dashicons,
-.tstats-settings-wrapper .tstats-settings__content .nav-tab-wrapper a.nav-tab:hover span.dashicons,
-.tstats-settings-wrapper .tstats-settings__content .nav-tab-wrapper a.nav-tab:focus span.dashicons {
+.tstats-settings-wrapper .tstats-settings__content .nav-tab-wrapper .nav-tab-active span.dashicons,
+.tstats-settings-wrapper .tstats-settings__content .nav-tab-wrapper .nav-tab:hover span.dashicons,
+.tstats-settings-wrapper .tstats-settings__content .nav-tab-wrapper .nav-tab:focus span.dashicons {
 	color: #46b450;
 }
 
@@ -334,7 +330,7 @@ table.tstats-plugin-list-table tbody .inactive .check-column.plugin-select {
 	width: 100%;
 }
 
-.tstats-settings-wrapper .tstats-settings__sidebar .postbox .inside .tstats-logo a.tstats-logo-link div.tstats-logo-image {
+.tstats-settings-wrapper .tstats-settings__sidebar .postbox .inside .tstats-logo a.tstats-logo-link .tstats-logo-image {
 	margin: auto;
 	background-image: url(../img/logo-color-transparent.svg);
 	background-position: center;

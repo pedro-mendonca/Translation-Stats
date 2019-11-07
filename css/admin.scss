@@ -43,7 +43,7 @@ table.wp-list-table.plugins {
 
 		.translation-stats-content .translation-stats-content-stats { // Stats grid layout.
 			display: grid;
-			grid-row-gap: 6px;
+			row-gap: 6px;
 			padding: 6px;
 			margin: 0 0 10px 0;
 
@@ -52,11 +52,11 @@ table.wp-list-table.plugins {
 				.subproject-bar { // Stats bar size.
 
 					display: block;
-					padding: 5px 10px; // Stats bar size
-					background-color: rgba(0, 0, 0, 0); // Status bar overlay color
+					padding: 5px 10px; // Stats bar size.
+					background-color: rgba(0, 0, 0, 0); // Status bar overlay color.
 					white-space: nowrap;
 
-					.subproject-bar__percentage { // Stats percentage value
+					.subproject-bar__percentage { // Stats percentage value.
 						display: inline-block;
 						font-weight: 700;
 						text-align: right;
@@ -184,9 +184,9 @@ table.wp-list-table.plugins {
 
 		&.tstats-loading {
 
-			.translation-stats-content .translation-stats-content-stats div a div.subproject { /* https://codepen.io/brunjo/pen/azdWjY */
+			.translation-stats-content .translation-stats-content-stats div a div.subproject { // https://codepen.io/brunjo/pen/azdWjY
 
-				background-image: repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25) 10px, rgba(0, 0, 0, 0) 10px, rgba(0, 0, 0, 0) 20px); /* determines size */
+				background-image: repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25) 10px, rgba(0, 0, 0, 0) 10px, rgba(0, 0, 0, 0) 20px); // Determines size.
 				background-size: 28px 28px;
 				animation: tstats_bar_loading 0.5s linear infinite;
 			}
@@ -315,7 +315,7 @@ table.tstats-plugin-list-table {
 
 		.nav-tab-wrapper {
 
-			a.nav-tab {
+			.nav-tab {
 
 				span.dashicons {
 					color: $color-primary;
@@ -325,9 +325,9 @@ table.tstats-plugin-list-table {
 
 			}
 
-			a.nav-tab-active,
-			a.nav-tab:hover,
-			a.nav-tab:focus {
+			.nav-tab-active,
+			.nav-tab:hover,
+			.nav-tab:focus {
 
 				span.dashicons {
 					color: $color-secondary;
@@ -372,7 +372,7 @@ table.tstats-plugin-list-table {
 						display: block;
 						width: 100%;
 
-						div.tstats-logo-image {
+						.tstats-logo-image {
 							margin: auto;
 							background-image: url(../img/logo-color-transparent.svg);
 							background-position: center;
