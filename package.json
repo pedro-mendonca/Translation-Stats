@@ -13,7 +13,7 @@
     "browserslist": "^4.7.2",
     "cssnano": "^4.1.10",
     "eslint": "^6.6.0",
-    "npm-check-updates": "^3.2.0",
+    "npm-check-updates": "^3.2.1",
     "postcss": "^7.0.21",
     "prettier": "^1.18.2",
     "remark-lint": "^6.0.5",
