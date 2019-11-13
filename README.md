@@ -1,3 +1,6 @@
+
+![Translation Stats banner](https://repository-images.githubusercontent.com/155401830/8ea42c00-0622-11ea-98ad-019c0efcb737)
+
 # Translation Stats #
 
 [![WordPress Plugin Version](https://img.shields.io/wordpress/plugin/v/translation-stats?label=Plugin%20Version&logo=wordpress)](https://wordpress.org/plugins/translation-stats/)
@@ -17,7 +20,7 @@
 **Donate link:** [paypal.me/pedromendonca](https://paypal.me/pedromendonca/)  
 **Tags:** internationalization, i18n, localization, l10n, translation, statistics, glotpress, dark mode  
 **Requires at least:** 4.9  
-**Tested up to:** 5.2.4  
+**Tested up to:** 5.3  
 **Requires PHP:** 5.6  
 **Stable tag:** 0.9.4.3  
 **License:** GPLv2 or later  
