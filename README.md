@@ -1,3 +1,6 @@
+
+![Translation Stats banner](https://repository-images.githubusercontent.com/155401830/8ea42c00-0622-11ea-98ad-019c0efcb737)
+
 # Translation Stats #
 
 [![Build Status](https://travis-ci.org/pedro-mendonca/Translation-Stats.svg?branch=master)](https://travis-ci.org/pedro-mendonca/Translation-Stats)
@@ -12,7 +15,7 @@
 **Donate link:** [paypal.me/pedromendonca](https://paypal.me/pedromendonca/)  
 **Tags:** internationalization, i18n, localization, l10n, translation, statistics, glotpress, dark mode  
 **Requires at least:** 4.9  
-**Tested up to:** 5.2.4  
+**Tested up to:** 5.3  
 **Requires PHP:** 5.6  
 **Stable tag:** 0.9.4.3  
 **License:** GPLv2 or later  
