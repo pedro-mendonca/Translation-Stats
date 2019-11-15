@@ -1,6 +1,4 @@
 .git
-assets
-node_modules
 .distignore
 .editorconfig
 .eslintrc.json
@@ -8,6 +6,9 @@ node_modules
 .remarkrc
 .stylelintrc
 .travis.yml
-package-lock.json
+assets/
+node_modules/
 phpcs.xml
 README.md
+tests/
+vendor/
