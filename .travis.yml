@@ -16,6 +16,10 @@ branches:
     - dev
     - dev-composer
 
+cache:
+  directories:
+    - $HOME/.composer/cache
+
 matrix:
   include:
   - name: "PHP 7.4 / Nightly WordPress"
