@@ -1,14 +1,35 @@
+# Development files and folders
+assets/
+tests/
+.DS_Store
+Desktop.ini
+Thumbs.db
+*.log
+*.sql
+*.tar.gz
+*.zip
 .git
 .distignore
 .editorconfig
-.eslintrc.json
 .gitignore
+README.md
+
+# Lint
+.eslintignore
+.eslintrc
 .remarkrc
 .stylelintrc
-.travis.yml
-assets/
-node_modules/
 phpcs.xml
-README.md
-tests/
+
+# Travis
+.travis.yml
+
+# Composer
 vendor/
+composer.json
+composer.lock
+
+# Node
+node_modules/
+package-lock.json
+package.json

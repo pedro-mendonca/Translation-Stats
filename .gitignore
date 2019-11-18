@@ -1,6 +1,9 @@
-.DS_Store
-Thumbs.db
+# Development files and folders
 tests/
+.DS_Store
+Desktop.ini
+Thumbs.db
+*.log
 *.sql
 *.tar.gz
 *.zip
@@ -8,5 +11,5 @@ tests/
 # Composer
 vendor/
 
-# npm
+# Node
 node_modules/
