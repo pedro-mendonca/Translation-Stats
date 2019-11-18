@@ -118,9 +118,12 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 			// Check for Translation Stats settings page.
 			if ( 'settings_page_' . TSTATS_SETTINGS_PAGE === $hook ) {
 
+				// Provide minified version if SCRIPT_DEBUG is not set to true.
+				$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+
 				wp_register_script(
 					'translation-stats-settings',
-					TSTATS_PATH . 'js/tstats-settings.js',
+					TSTATS_PATH . 'js/tstats-settings' . $suffix . '.js',
 					array(
 						'jquery',
 					),
@@ -141,9 +144,12 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 			// Check for plugins page.
 			if ( 'plugins.php' === $hook ) {
 
+				// Provide minified version if SCRIPT_DEBUG is not set to true.
+				$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+
 				wp_register_script(
 					'translation-stats-plugins',
-					TSTATS_PATH . 'js/tstats-plugins.js',
+					TSTATS_PATH . 'js/tstats-plugins' . $suffix . '.js',
 					array(
 						'jquery',
 					),

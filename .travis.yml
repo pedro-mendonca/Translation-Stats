@@ -7,74 +7,81 @@ language: php
 
 notifications:
   email:
-    on_success: never
-    on_failure: change
+    on_success: change
+    on_failure: always
 
 branches:
   only:
     - master
     - dev
 
+cache:
+  directories:
+    - $HOME/.composer/cache
+
 matrix:
   include:
-  - name: "PHP 5.6 / Minimum supported WordPress 4.9"
-    php: "5.6"
-    env: WP_VERSION=4.9 WP_MULTISITE=0 SNIFF=1
-  - name: "PHP 5.6 / Minimum supported WordPress 4.9 multisite"
-    php: "5.6"
-    env: WP_VERSION=4.9 WP_MULTISITE=1 SNIFF=1
-  - name: "PHP 5.6 / Latest WordPress"
-    php: "5.6"
-    env: WP_VERSION=latest WP_MULTISITE=0 SNIFF=1
-  - name: "PHP 5.6 / Latest WordPress multisite"
-    php: "5.6"
-    env: WP_VERSION=latest WP_MULTISITE=1 SNIFF=1
-  - name: "PHP 7.0 / Latest WordPress"
-    php: "7.0"
-    env: WP_VERSION=latest WP_MULTISITE=0 SNIFF=1
-  - name: "PHP 7.0 / Latest WordPress multisite"
-    php: "7.0"
-    env: WP_VERSION=latest WP_MULTISITE=1 SNIFF=1
-  - name: "PHP 7.1 / Latest WordPress"
-    php: "7.1"
-    env: WP_VERSION=latest WP_MULTISITE=0 SNIFF=1
-  - name: "PHP 7.1 / Latest WordPress multisite"
-    php: "7.1"
-    env: WP_VERSION=latest WP_MULTISITE=1 SNIFF=1
-  - name: "PHP 7.2 / Latest WordPress"
-    php: "7.2"
-    env: WP_VERSION=latest WP_MULTISITE=0 SNIFF=1
-  - name: "PHP 7.2 / Latest WordPress multisite"
-    php: "7.2"
-    env: WP_VERSION=latest WP_MULTISITE=1 SNIFF=1
+  - name: "PHP 7.4 / Nightly WordPress"
+    php: "7.4snapshot"
+    env: WP_VERSION=nightly WP_MULTISITE=0
+  - name: "PHP 7.4 / Nightly WordPress multisite"
+    php: "7.4snapshot"
+    env: WP_VERSION=nightly WP_MULTISITE=1
+  - name: "PHP 7.4 / Latest WordPress"
+    php: "7.4snapshot"
+    env: WP_VERSION=latest WP_MULTISITE=0
+  - name: "PHP 7.4 / Latest WordPress multisite"
+    php: "7.4snapshot"
+    env: WP_VERSION=latest WP_MULTISITE=1
   - name: "PHP 7.3 / Latest WordPress"
     php: "7.3"
-    env: WP_VERSION=latest WP_MULTISITE=0 SNIFF=1
+    env: WP_VERSION=latest WP_MULTISITE=0
   - name: "PHP 7.3 / Latest WordPress multisite"
     php: "7.3"
-    env: WP_VERSION=latest WP_MULTISITE=1 SNIFF=1
+    env: WP_VERSION=latest WP_MULTISITE=1
+  - name: "PHP 7.2 / Latest WordPress"
+    php: "7.2"
+    env: WP_VERSION=latest WP_MULTISITE=0
+  - name: "PHP 7.2 / Latest WordPress multisite"
+    php: "7.2"
+    env: WP_VERSION=latest WP_MULTISITE=1
+  - name: "PHP 7.1 / Latest WordPress"
+    php: "7.1"
+    env: WP_VERSION=latest WP_MULTISITE=0
+  - name: "PHP 7.1 / Latest WordPress multisite"
+    php: "7.1"
+    env: WP_VERSION=latest WP_MULTISITE=1
+  - name: "PHP 7.0 / Latest WordPress"
+    php: "7.0"
+    env: WP_VERSION=latest WP_MULTISITE=0
+  - name: "PHP 7.0 / Latest WordPress multisite"
+    php: "7.0"
+    env: WP_VERSION=latest WP_MULTISITE=1
+  - name: "PHP 5.6 / Latest WordPress"
+    php: "5.6"
+    env: WP_VERSION=latest WP_MULTISITE=0
+  - name: "PHP 5.6 / Latest WordPress multisite"
+    php: "5.6"
+    env: WP_VERSION=latest WP_MULTISITE=1
+  - name: "PHP 5.6 / Minimum supported WordPress 4.9"
+    php: "5.6"
+    env: WP_VERSION=4.9 WP_MULTISITE=0
+  - name: "PHP 5.6 / Minimum supported WordPress 4.9 multisite"
+    php: "5.6"
+    env: WP_VERSION=4.9 WP_MULTISITE=1
 
 before_install:
   # Speed up build time by disabling Xdebug.
   # https://johnblackbourn.com/reducing-travis-ci-build-times-for-wordpress-projects/
   - phpenv config-rm xdebug.ini || echo "xdebug not available for PHP $TRAVIS_PHP_VERSION"
-  - if [[ "$SNIFF" == "1" ]]; then export PHPCS_DIR=/tmp/phpcs; fi
-  - if [[ "$SNIFF" == "1" ]]; then export SNIFFS_DIR=/tmp/sniffs; fi
-  # Install PHP_CodeSniffer.
-  - if [[ "$SNIFF" == "1" ]]; then git clone -b master --depth 1 https://github.com/squizlabs/PHP_CodeSniffer.git $PHPCS_DIR; fi
-  # Install WordPress Coding Standards.
-  - if [[ "$SNIFF" == "1" ]]; then git clone -b master --depth 1 https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards.git $SNIFFS_DIR; fi
-  # Set install path for WordPress Coding Standards.
-  - if [[ "$SNIFF" == "1" ]]; then $PHPCS_DIR/bin/phpcs --config-set installed_paths $SNIFFS_DIR; fi
-  # After CodeSniffer install you should refresh your path.
-  - if [[ "$SNIFF" == "1" ]]; then phpenv rehash; fi
-  # Set the path/file to the installed coding standards.
-  - if [[ "$SNIFF" == "1" ]]; then export CODING_STANDARDS=./phpcs.xml; fi
+
+install:
+  - composer install
 
 script:
   # Search for PHP syntax errors.
-  - find -L . -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
+  - find -L . -path ./vendor -prune -o -name \*.php -print0 | xargs -0 -n 1 -P 4 php -l
   # Show a list of installed coding standards.
-  - if [[ "$SNIFF" == "1" ]]; then $PHPCS_DIR/bin/phpcs -i --standard=$CODING_STANDARDS; fi
+  - composer lint-i
   # Run against installed coding standards.
-  - if [[ "$SNIFF" == "1" ]]; then $PHPCS_DIR/bin/phpcs --standard=$CODING_STANDARDS; fi
+  - composer lint

@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Translation Stats\n"
-"POT-Creation-Date: 2019-06-19 16:37+0100\n"
-"PO-Revision-Date: 2019-06-19 16:38+0100\n"
+"POT-Creation-Date: 2019-10-16 14:35+0100\n"
+"PO-Revision-Date: 2019-10-16 14:36+0100\n"
 "Last-Translator: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language-Team: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language: pt_PT\n"
@@ -10,7 +10,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.2.3\n"
+"X-Generator: Poedit 2.2.4\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Textdomain-Support: yes\n"
@@ -130,27 +130,27 @@ msgid "Default: %s"
 msgstr "Por omissão: %s"
 
 #. translators: %s Plugin slug.
-#: includes/classes/class-tstats-debug.php:387
+#: includes/classes/class-tstats-debug.php:386
 #, php-format
 msgid "Slug: %s"
 msgstr "Slug: %s"
 
-#: includes/classes/class-tstats-debug.php:395
+#: includes/classes/class-tstats-debug.php:394
 msgid "Plugin found on WordPress.org"
 msgstr "Plugin encontrado em WordPress.org"
 
-#: includes/classes/class-tstats-debug.php:397
+#: includes/classes/class-tstats-debug.php:396
 #: includes/classes/class-tstats-plugins.php:105
 msgid "Plugin not found on WordPress.org"
 msgstr "Plugin não encontrado em WordPress.org"
 
 #. translators: %1$s Opening tag <a>. %2$s: Closing tag </a>.
-#: includes/classes/class-tstats-debug.php:407
+#: includes/classes/class-tstats-debug.php:406
 #, php-format
 msgid "Translation project found on %1$sWordPress.org%2$s"
 msgstr "Projecto de tradução encontrado em %1$sWordPress.org%2$s"
 
-#: includes/classes/class-tstats-debug.php:412
+#: includes/classes/class-tstats-debug.php:411
 #: includes/classes/class-tstats-plugins.php:109
 msgid "Translation project not found on WordPress.org"
 msgstr "Projecto de tradução não encontrado em WordPress.org"
@@ -227,8 +227,7 @@ msgstr "Pedro Mendonça"
 
 #. translators: Plugin Name and version - Do not translate!
 #: includes/classes/class-tstats-settings-footer.php:88
-#: includes/classes/class-tstats-settings-sidebar.php:47
-#: includes/classes/class-tstats-settings-widgets.php:89
+#: includes/classes/class-tstats-settings-widgets.php:78
 #, php-format
 msgid "Translation Stats %s"
 msgstr "Translation Stats %s"
@@ -262,47 +261,41 @@ msgid "Select Subproject"
 msgstr "Seleccionar subprojecto"
 
 #. Description of the plugin/theme
-#: includes/classes/class-tstats-settings-widgets.php:57
+#: includes/classes/class-tstats-settings-widgets.php:55
 msgid "Show plugins translation stats on your WordPress install."
 msgstr "Mostre as estatísticas de tradução dos plugins na sua instalação WordPress."
 
-#: includes/classes/class-tstats-settings-widgets.php:59
+#: includes/classes/class-tstats-settings-widgets.php:57
 msgid "Resources"
 msgstr "Recursos"
 
-#: includes/classes/class-tstats-settings-widgets.php:61
+#: includes/classes/class-tstats-settings-widgets.php:59
 msgid "Site"
 msgstr "Site"
 
-#: includes/classes/class-tstats-settings-widgets.php:62
+#: includes/classes/class-tstats-settings-widgets.php:60
 msgid "FAQ"
 msgstr "Perguntas frequentes"
 
-#: includes/classes/class-tstats-settings-widgets.php:63
+#: includes/classes/class-tstats-settings-widgets.php:61
 msgid "Changelog"
 msgstr "Registo de alterações"
 
-#: includes/classes/class-tstats-settings-widgets.php:64
+#: includes/classes/class-tstats-settings-widgets.php:62
 msgid "Support"
 msgstr "Suporte"
 
-#: includes/classes/class-tstats-settings-widgets.php:67
+#: includes/classes/class-tstats-settings-widgets.php:65
 msgid "Contact"
 msgstr "Contacto"
 
-#: includes/classes/class-tstats-settings-widgets.php:69
+#: includes/classes/class-tstats-settings-widgets.php:67
 msgid "Found an issue, have a feature suggestion or just want to send some feedback?"
 msgstr "Encontrou um erro, tem uma sugestão de funcionalidade ou apenas quer enviar algum feedback?"
 
-#: includes/classes/class-tstats-settings-widgets.php:70
+#: includes/classes/class-tstats-settings-widgets.php:68
 msgid "Write me!"
 msgstr "Escreva-me!"
-
-#. translators: %s Five stars icons.
-#: includes/classes/class-tstats-settings-widgets.php:79
-#, php-format
-msgid "Please rate %s on WordPress.org."
-msgstr "Por favor, classifique com %s em WordPress.org."
 
 #: includes/classes/class-tstats-settings.php:53
 #: includes/classes/class-tstats-settings.php:54
@@ -484,6 +477,16 @@ msgstr "Stable"
 msgctxt "Subproject name"
 msgid "Stable Readme"
 msgstr "Stable Readme"
+
+#: translation-stats.php:119
+msgid "This plugin doesn&#8217;t work with your version of PHP."
+msgstr "Este plugin não funciona com a sua versão do PHP."
+
+#. translators: %s Minimum PHP version required.
+#: translation-stats.php:129
+#, php-format
+msgid "Requires PHP version %s or higher."
+msgstr "Requer o PHP versão %s ou superior."
 
 #. Plugin URI of the plugin/theme
 #. Author URI of the plugin/theme
