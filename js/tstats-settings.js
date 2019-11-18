@@ -1,5 +1,4 @@
 jQuery( document ).ready( function( $ ) {
-
 	// Run scripts on page load.
 	tstatsOnLoad();
 
@@ -18,14 +17,12 @@ jQuery( document ).ready( function( $ ) {
 	// Select single subproject checkbox on Settings plugins table.
 	// $( 'table.wp-list-table td.translation-stats button.tstats-update-button' ).on( 'click', tstatsPluginSubprojectsLoadAjax );
 
-
 	/**
 	 * Translation Stats scripts executed on page load.
 	 *
 	 * @since 0.9.3
 	 */
 	function tstatsOnLoad() {
-
 		// Set default Settings Active tab.
 		var tstatsDefaultTabID = '#plugins';
 
@@ -34,22 +31,17 @@ jQuery( document ).ready( function( $ ) {
 
 		// Check for URL hash.
 		if ( tstatsSettingsURLHash ) {
-
 			// Use Hash tab ID.
 			var tstatsActiveTabID = tstatsSettingsURLHash;
 			console.log( 'Use hash tab: ' + tstatsActiveTabID );
-
 		} else {
-
 			// Use default tab ID.
 			var tstatsActiveTabID = tstatsDefaultTabID;
 			console.log( 'Use default tab: ' + tstatsActiveTabID );
-
 		}
 
 		// Check for URL tstatsActiveTabID on Settings page load.
 		if ( tstatsActiveTabID ) {
-
 			// Set Active Tab on Settings page load.
 			$( '.nav-tab-wrapper' ).children().removeClass( 'nav-tab-active' );
 			$( '.nav-tab-wrapper a[href="' + tstatsActiveTabID + '"]' ).addClass( 'nav-tab-active' );
@@ -57,13 +49,10 @@ jQuery( document ).ready( function( $ ) {
 			// Set Active Tab Content on Settings page load.
 			$( '.tabs-content form' ).children( '.tab-content' ).addClass( 'hidden' );
 			$( '.tabs-content form div' + tstatsActiveTabID.replace( '#', '#tab-' ) ).removeClass( 'hidden' );
-
 		}
 
 		console.log( 'Loaded tstats-settings.js' );
-
 	}
-
 
 	/**
 	 * Change active Settings Navigation Tab.
@@ -71,7 +60,6 @@ jQuery( document ).ready( function( $ ) {
 	 * @since 0.9.3
 	 */
 	function tstatsClickSettingsTab() {
-
 		var tstatsActiveTabContentID = $( this ).attr( 'href' ).replace( '#', '#tab-' );
 		var tstatsActiveTabID = $( this ).attr( 'href' );
 
@@ -82,9 +70,7 @@ jQuery( document ).ready( function( $ ) {
 		// Active tab content.
 		$( '.tabs-content form' ).children( '.tab-content' ).addClass( 'hidden' );
 		$( '.tabs-content form div' + tstatsActiveTabContentID ).removeClass( 'hidden' );
-
 	}
-
 
 	/**
 	 * Enable/disable all plugins in Settings plugins table.
@@ -93,23 +79,16 @@ jQuery( document ).ready( function( $ ) {
 	 * @since 0.9.3
 	 */
 	function tstatsSelectAllPlugins() {
-
 		if ( $( '.tstats-plugin-list-table input#all_plugins' ).is( ':checked' ) ) {
-
 			// Set all plugin rows as active.
 			$( '.tstats-plugin-list-table tr.inactive' ).addClass( 'active' ).removeClass( 'inactive' );
-
 		} else {
-
 			// Set all plugin rows as inactive.
 			$( '.tstats-plugin-list-table tr.active' ).addClass( 'inactive' ).removeClass( 'active' );
-
 		}
 
 		console.log( 'Clicked all plugins checkbox.' );
-
 	}
-
 
 	/**
 	 * Enable/disable single plugin in Settings plugins table.
@@ -118,27 +97,20 @@ jQuery( document ).ready( function( $ ) {
 	 * @since 0.9.3
 	 */
 	function tstatsSelectPlugin() {
-
 		// Get the clicked plugin row ID from Settings plugins table.
 		var id = $( event.target ).attr( 'id' );
 
 		$( 'input.' + id ).prop( 'checked', this.checked );
 		if ( $( 'input.' + id ).parents( 'tr' ).hasClass( 'active' ) ) {
-
 			// Set plugin row as inactive.
 			$( 'input.' + id ).parents( 'tr' ).addClass( 'inactive' ).removeClass( 'active' );
-
 		} else {
-
 			// Set plugin row as active.
 			$( 'input.' + id ).parents( 'tr' ).addClass( 'active' ).removeClass( 'inactive' );
-
 		}
 
 		console.log( 'Clicked single plugin ID #' + id + ' checkbox.' );
-
 	}
-
 
 	/**
 	 * Enable/disable single plugin subproject.
@@ -148,7 +120,6 @@ jQuery( document ).ready( function( $ ) {
 	 * @since 0.9.3
 	 */
 	function tstatsSelectPluginSubproject() {
-
 		var pluginSubprojectsCount = {};
 
 		// Get the clicked plugin subproject class from Settings plugins table.
@@ -162,22 +133,16 @@ jQuery( document ).ready( function( $ ) {
 
 		// Check plugin subprojects count.
 		if ( 0 === pluginSubprojectsCount[ id ] ) {
-
 			// Set plugin row as inactive.
 			$( 'input.plugin_' + id ).parents( 'tr' ).addClass( 'inactive' ).removeClass( 'active' );
 			$( 'input#plugin_' + id ).prop( 'checked', false );
-
 		} else {
-
 			// Set plugin row as active.
 			$( 'input.plugin_' + id ).parents( 'tr' ).addClass( 'active' ).removeClass( 'inactive' );
 			$( 'input#plugin_' + id ).prop( 'checked', true );
-
 		}
 
 		console.log( 'Clicked single plugin ID #' + id + ' subproject checkbox.' );
 		console.log( pluginSubprojectsCount[ id ] + ' subproject(s) of plugin ID#' + id + ' selected.' );
-
 	}
-
-});
+} );
