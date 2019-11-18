@@ -1,0 +1,46 @@
+{
+  "requires": true,
+  "lockfileVersion": 1,
+  "dependencies": {},
+  "name": "translation-stats",
+  "description": "The plugin adds a \"Translation Stats\" column to the plugin list screen in WordPress admin.",
+  "version": "0.9.4",
+  "devDependencies": {
+    "@wordpress/eslint-plugin": "^3.2.0",
+    "eslint": "^6.6.0",
+    "npm-check-updates": "^3.2.1",
+    "remark-lint": "^6.0.5",
+    "remark-preset-lint-recommended": "^3.0.3",
+    "sass-lint": "^1.13.1",
+    "scss": "^0.2.4",
+    "stylelint": "^11.1.1",
+    "stylelint-config-recommended": "^3.0.0",
+    "stylelint-config-recommended-scss": "^4.0.0",
+    "stylelint-config-wordpress": "^15.0.0",
+    "stylelint-scss": "^3.12.1",
+    "uglify-js": "^3.6.9"
+  },
+  "scripts": {
+    "build": "npm run build:js",
+    "build:js": "npm run build:plugins.js && npm run build:settings.js",
+    "build:plugins.js": "uglifyjs js/tstats-plugins.js --compress drop_console=true -o js/tstats-plugins.min.js",
+    "build:settings.js": "uglifyjs js/tstats-settings.js --compress drop_console=true -o js/tstats-settings.min.js",
+    "lint": "eslint .",
+    "update": "npm-check-updates"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pedro-mendonca/Translation-Stats.git"
+  },
+  "keywords": [
+    "WordPress",
+    "i18n",
+    "l10n"
+  ],
+  "author": "Pedro Mendonça",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/pedro-mendonca/Translation-Stats/issues"
+  },
+  "homepage": "https://github.com/pedro-mendonca/Translation-Stats#readme"
+}
