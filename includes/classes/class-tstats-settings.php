@@ -24,6 +24,9 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 */
 		public function __construct() {
 
+			// Instantiate Translation Stats Notices.
+			$this->tstats_notices = new TStats_Notices();
+
 			// Instantiate Translation Stats Transients.
 			$this->tstats_transients = new TStats_Transients();
 
@@ -328,14 +331,13 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 				} elseif ( 'delete' === $action ) {
 					delete_option( TSTATS_WP_OPTION );
 				}
-				?>
-				<div class="notice notice-success is-dismissible">
-					<p><strong><?php esc_html_e( 'Settings restored successfully.', 'translation-stats' ); ?></strong></p>
-					<button type="button" class="notice-dismiss">
-						<span class="screen-reader-text"><?php esc_html_e( 'Dismiss this notice.', 'translation-stats' ); ?></span>
-					</button>
-				</div>
-				<?php
+				$admin_notice = array(
+					'type'        => 'success',
+					'notice-alt'  => false,
+					'message'     => '<strong>' . esc_html__( 'Settings restored successfully.', 'translation-stats' ) . '</strong>',
+					'dismissible' => true,
+				);
+				$this->tstats_notices->tstats_notice_message( $admin_notice );
 			}
 		}
 
@@ -352,14 +354,13 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 				// Delete translations stats and available languages transients.
 				// The transient 'translation_stats_plugin_available_translations' will be immediatly rebuilt on tstats_render_settings__plugins_list() loading.
 				$this->tstats_transients->tstats_delete_transients( TSTATS_TRANSIENTS_PREFIX );
-				?>
-				<div class="notice notice-success is-dismissible">
-					<p><strong><?php esc_html_e( 'Cache cleaned successfully.', 'translation-stats' ); ?></strong></p>
-					<button type="button" class="notice-dismiss">
-						<span class="screen-reader-text"><?php esc_html_e( 'Dismiss this notice.', 'translation-stats' ); ?></span>
-					</button>
-				</div>
-				<?php
+				$admin_notice = array(
+					'type'        => 'success',
+					'notice-alt'  => false,
+					'message'     => '<strong>' . esc_html__( 'Cache cleaned successfully.', 'translation-stats' ) . '</strong>',
+					'dismissible' => true,
+				);
+				$this->tstats_notices->tstats_notice_message( $admin_notice );
 			}
 		}
 
