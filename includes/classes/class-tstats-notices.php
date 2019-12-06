@@ -24,6 +24,7 @@ if ( ! class_exists( 'TStats_Notices' ) ) {
 		 * Display formated admin notice.
 		 *
 		 * WordPress core notice types ( 'error', 'warning', 'success' and 'info' ).
+		 * Use 'force_show' => true to ignore the 'show_warnings' setting.
 		 *
 		 * @since 0.8.0
 		 * @since 0.9.5  Array with all the notice data.
@@ -32,33 +33,44 @@ if ( ! class_exists( 'TStats_Notices' ) ) {
 		 */
 		public function tstats_notice_message( $args ) {
 
-			// Todo: Update icons.
-
+			// Check if 'show_warnings' is true.
 			$wp_option = get_option( TSTATS_WP_OPTION );
-			if ( empty( $wp_option['show_warnings'] ) ) {
+			if ( empty( $wp_option['show_warnings'] ) && empty( $args['force_show'] ) ) {
 				return;
 			}
 
-			$default = array(
-				'type'        => 'info',  // WordPress core notice types: 'error', 'warning', 'success' or 'info'.
-				'notice-alt'  => false,   // Show message alternative color scheme with class 'notice-alt': true or false.
-				'inline'      => false,   // Show message class 'inline': true or false.
-				'dismissible' => false,   // Show message class 'is-dismissible': true or false.
-				'css_class'   => '',      // Some extra CSS classes.
-				'message'     => '',      // Message to show.
+			// Use defaults if properties not set.
+			$notice = array(
+				'type'        => isset( $args['type'] ) ? ' notice-' . $args['type'] : '',                       // WordPress core notice types: 'error', 'warning', 'success' or 'info'. Defaults to none.
+				'notice-alt'  => isset( $args['notice-alt'] ) && $args['notice-alt'] ? ' notice-alt' : '',       // Show message alternative color scheme with class 'notice-alt': true or false. Defaults no false.
+				'inline'      => isset( $args['inline'] ) && ! $args['inline'] ? '' : ' inline',                 // Defaults to true.
+				'dismissible' => isset( $args['dismissible'] ) && $args['dismissible'] ? ' is-dismissible' : '', // Defaults to false.
+				'css-class'   => isset( $args['css-class'] ) ? ' ' . $args['css-class'] : '',                    // Some extra CSS classes.
+				'update-icon' => isset( $args['update-icon'] ) && $args['update-icon'] ? true : '',              // Show update message icons. Defaults to false.
+				'message'     => isset( $args['message'] ) ? $args['message'] : '',                              // Message to show.
 			);
-
-			$type        = empty( $args['type'] ) ? $default['type'] : $args['type'];
-			$notice_alt  = empty( $args['notice-alt'] ) ? '' : ' notice-alt';
-			$inline      = empty( $args['inline'] ) ? '' : ' inline';
-			$dismissible = empty( $args['dismissible'] ) ? '' : ' is-dismissible';
-			$css_class   = empty( $args['css_class'] ) ? $default['css_class'] : ' ' . $args['css_class'];
-			$message     = empty( $args['message'] ) ? $default['message'] : $args['message'];
-
+			if ( $notice['update-icon'] ) {
+				// Defaults to none.
+				$notice['update-icon'] = '';
+				switch ( $args['type'] ) {
+					case 'error':
+						$notice['update-icon'] = ' update-message';
+						break;
+					case 'warning':
+						$notice['update-icon'] = ' update-message updating-message';
+						break;
+					case 'success':
+						$notice['update-icon'] = ' update-message updated-message';
+						break;
+					case 'info':
+						$notice['update-icon'] = '';
+						break;
+				}
+			}
 			?>
 
-			<div class="notice notice-<?php echo esc_attr( $type ) . esc_attr( $notice_alt ) . esc_attr( $inline ) . esc_attr( $css_class ) . esc_attr( $dismissible ); ?>">
-				<p><?php echo wp_kses_post( $message ); ?></p>
+			<div class="notice<?php echo esc_attr( $notice['type'] ) . esc_attr( $notice['notice-alt'] ) . esc_attr( $notice['inline'] ) . esc_attr( $notice['update-icon'] ) . esc_attr( $notice['css-class'] ) . esc_attr( $notice['dismissible'] ); ?>">
+				<p><?php echo wp_kses_post( $notice['message'] ); ?></p>
 			</div>
 
 			<?php
