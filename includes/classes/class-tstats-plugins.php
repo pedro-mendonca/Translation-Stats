@@ -107,7 +107,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 							'notice-alt' => true,
 							'message'    => esc_html__( 'Plugin not found on WordPress.org', 'translation-stats' ),
 						);
-						$this->tstats_notices->tstats_notice_message( $admin_notice ); // Todo: Add alternative GlotPress API.
+						$this->tstats_notices->tstats_notice_message( $admin_notice ); // TODO: Add alternative GlotPress API.
 					} else {
 						// Check if translation project is on WordPress.org.
 						if ( ! $plugin_translation_on_wporg ) {
@@ -233,10 +233,11 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		public function tstats_stats_plugin_widget_content() {
 
 			$admin_notice = array(
-				'type'       => 'warning',
-				'notice-alt' => true,
-				'css_class'  => 'translation-stats-loading update-message inline updating-message',
-				'message'    => esc_html__( 'Loading...', 'translation-stats' ),
+				'type'        => 'warning',
+				'notice-alt'  => true,
+				'css-class'   => 'translation-stats-loading',
+				'update-icon' => true,
+				'message'     => esc_html__( 'Loading...', 'translation-stats' ),
 			);
 			$this->tstats_notices->tstats_notice_message( $admin_notice );
 
@@ -268,10 +269,10 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 					<div class="translation-stats-content-update-notice">
 						<?php
 						$admin_notice = array(
-							'type'       => 'success',
-							'notice-alt' => true,
-							'css_class'  => 'update-message updated-message',
-							'message'    => esc_html__( 'Updated!', 'translation-stats' ),
+							'type'        => 'success',
+							'notice-alt'  => true,
+							'update-icon' => true,
+							'message'     => esc_html__( 'Updated!', 'translation-stats' ),
 						);
 						$this->tstats_notices->tstats_notice_message( $admin_notice );
 						?>
@@ -282,7 +283,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 				}
 			}
 
-			exit;
+			wp_die();
 
 		}
 
@@ -316,7 +317,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 			if ( ! empty( $i18n_errors ) ) {
 				?>
 
-				<div class="translation-stats-content-errors">
+				<div class="translation-stats-content-notices">
 
 					<?php
 					$admin_notice = array(
