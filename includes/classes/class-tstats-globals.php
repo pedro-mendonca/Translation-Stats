@@ -25,7 +25,7 @@ if ( ! class_exists( 'TStats_Globals' ) ) {
 		 *
 		 * @since 0.8.0
 		 *
-		 * @return string $tstats_language  Translation Language.
+		 * @return string $tstats_language  Translation Language as WordPress Locale ( e.g. 'pt_PT' ).
 		 */
 		public function tstats_translation_language() {
 			// Get Translation Language from Settings.
@@ -34,6 +34,24 @@ if ( ! class_exists( 'TStats_Globals' ) ) {
 				$tstats_language = get_locale();
 			}
 			return $tstats_language;
+		}
+
+
+		/**
+		 * Check if Translation Stats language is 'en_US'.
+		 *
+		 * @since 0.9.5
+		 *
+		 * @return bool  Return true if Translation Stats language is 'en_US'.
+		 */
+		public function tstats_language_is_english() {
+
+			// Get Translation Stats language.
+			$tstats_language = $this->tstats_translation_language();
+			// Check if user locale is 'en_US'.
+			if ( 'en_US' === $tstats_language ) {
+				return true;
+			}
 		}
 
 
