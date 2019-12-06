@@ -67,7 +67,7 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 
 			wp_register_style(
 				'translation-stats',
-				TSTATS_PATH . 'css/admin.css',
+				TSTATS_DIR_URL . 'css/admin.css',
 				false,
 				TSTATS_VERSION
 			);
@@ -89,7 +89,7 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 
 			wp_register_style(
 				'translation-stats-dark-mode',
-				TSTATS_PATH . 'css/admin-dark-mode.css',
+				TSTATS_DIR_URL . 'css/admin-dark-mode.css',
 				false,
 				TSTATS_VERSION
 			);
@@ -123,7 +123,7 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 
 				wp_register_script(
 					'translation-stats-settings',
-					TSTATS_PATH . 'js/tstats-settings' . $suffix . '.js',
+					TSTATS_DIR_URL . 'js/tstats-settings' . $suffix . '.js',
 					array(
 						'jquery',
 					),
@@ -141,6 +141,32 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 
 			}
 
+			// Check for updates page.
+			if ( 'update-core.php' === $hook ) {
+
+				// Provide minified version if SCRIPT_DEBUG is not set to true.
+				$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
+
+				wp_register_script(
+					'translation-stats-update-core',
+					TSTATS_DIR_URL . 'js/tstats-update-core' . $suffix . '.js',
+					array(
+						'jquery',
+					),
+					TSTATS_VERSION,
+					false
+				);
+
+				wp_enqueue_script( 'translation-stats-update-core' );
+
+				wp_localize_script(
+					'translation-stats-update-core',
+					'tstats',
+					$tstats_vars
+				);
+
+			}
+
 			// Check for plugins page.
 			if ( 'plugins.php' === $hook ) {
 
@@ -149,7 +175,7 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 
 				wp_register_script(
 					'translation-stats-plugins',
-					TSTATS_PATH . 'js/tstats-plugins' . $suffix . '.js',
+					TSTATS_DIR_URL . 'js/tstats-plugins' . $suffix . '.js',
 					array(
 						'jquery',
 					),
@@ -179,8 +205,8 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 		 */
 		public function tstats_allowed_pages( $hook ) {
 
-			// Check for plugins page and Translation Stats settings page.
-			if ( 'plugins.php' === $hook || 'settings_page_' . TSTATS_SETTINGS_PAGE === $hook ) {
+			// Check for plugins page, updates page and Translation Stats settings page.
+			if ( 'plugins.php' === $hook || 'update-core.php' === $hook || 'settings_page_' . TSTATS_SETTINGS_PAGE === $hook ) {
 				return true;
 			}
 

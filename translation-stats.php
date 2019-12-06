@@ -2,7 +2,7 @@
 /**
  * Translation Stats
  *
- * @package      TranslationStats
+ * @package      Translation Stats
  * @link         https://github.com/pedro-mendonca/Translation-Stats
  * @author       Pedro Mendonça
  * @copyright    2018 Pedro Mendonça
@@ -13,7 +13,7 @@
  * Plugin URI:        https://translationstats.com
  * GitHub Plugin URI: https://github.com/pedro-mendonca/Translation-Stats
  * Description:       Show plugins translation stats on your WordPress install.
- * Version:           0.9.4.3
+ * Version:           0.9.5-beta
  * Author:            Pedro Mendonça
  * Author URI:        https://translationstats.com
  * License:           GPL2
@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 // Set Translation Stats plugin version.
-define( 'TSTATS_VERSION', '0.9.4.3' );
+define( 'TSTATS_VERSION', '0.9.5-beta' );
 
 // Set Translation Stats required PHP version. Needed for PHP compatibility check for WordPress < 5.1.
 define( 'TSTATS_REQUIRED_PHP', '5.6' );
@@ -49,10 +49,13 @@ define( 'TSTATS_TRANSIENTS_TRANSLATIONS_EXPIRATION', DAY_IN_SECONDS );
 // Set Translation Stats transients 1 week expiration for Locales data.
 define( 'TSTATS_TRANSIENTS_LOCALES_EXPIRATION', WEEK_IN_SECONDS );
 
-// Set Translation Stats plugin path.
-define( 'TSTATS_PATH', plugin_dir_url( __FILE__ ) );
+// Set Translation Stats plugin URL.
+define( 'TSTATS_DIR_URL', plugin_dir_url( __FILE__ ) );
 
-// Set Translation Stats plugin path.
+// Set Translation Stats plugin filesystem path.
+define( 'TSTATS_DIR_PATH', plugin_dir_path( __FILE__ ) );
+
+// Set Translation Stats file path.
 define( 'TSTATS_FILE', plugin_basename( __FILE__ ) );
 
 // Set Translation Stats Debug ( true / false ).
@@ -167,8 +170,10 @@ function tstats_compatible_version() {
 	return true;
 }
 
+// Include Composer autoload.
+require_once dirname( __FILE__ ) . '/vendor/autoload.php';
 
-// Include class files used by our plugin.
+// Include class files used by the plugin.
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-main.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-globals.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-notices.php';
@@ -180,5 +185,8 @@ require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-settings-foot
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-settings-api.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-settings-plugins.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-settings.php';
+require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-gettext-jedgenerator.php';
+require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-gettext.php';
+require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-update-core.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-plugins.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-debug.php';

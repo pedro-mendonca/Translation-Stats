@@ -102,11 +102,21 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 					$plugin_translation_on_wporg = $this->tstats_translations_api->tstats_plugin_project_on_translate_wporg( $project_slug );
 					// Check if plugin is on WordPress.org.
 					if ( ! $plugin_on_wporg ) {
-						$this->tstats_notices->tstats_notice_message( esc_html__( 'Plugin not found on WordPress.org', 'translation-stats' ), 'error' ); // Todo: Add alternative GlotPress API.
+						$admin_notice = array(
+							'type'       => 'error',
+							'notice-alt' => true,
+							'message'    => esc_html__( 'Plugin not found on WordPress.org', 'translation-stats' ),
+						);
+						$this->tstats_notices->tstats_notice_message( $admin_notice ); // TODO: Add alternative GlotPress API.
 					} else {
 						// Check if translation project is on WordPress.org.
 						if ( ! $plugin_translation_on_wporg ) {
-							$this->tstats_notices->tstats_notice_message( esc_html__( 'Translation project not found on WordPress.org', 'translation-stats' ), 'error' );
+							$admin_notice = array(
+								'type'       => 'error',
+								'notice-alt' => true,
+								'message'    => esc_html__( 'Translation project not found on WordPress.org', 'translation-stats' ),
+							);
+							$this->tstats_notices->tstats_notice_message( $admin_notice );
 						} else {
 							$this->tstats_render_plugin_stats( $project_slug );
 						}
@@ -221,15 +231,16 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 * @since 0.9.4
 		 */
 		public function tstats_stats_plugin_widget_content() {
-			?>
 
-			<div class="translation-stats-loading update-message notice inline notice-warning notice-alt updating-message">
-				<p>
-					<?php esc_html_e( 'Loading...', 'translation-stats' ); ?>
-				</p>
-			</div>
+			$admin_notice = array(
+				'type'        => 'warning',
+				'notice-alt'  => true,
+				'css-class'   => 'translation-stats-loading',
+				'update-icon' => true,
+				'message'     => esc_html__( 'Loading...', 'translation-stats' ),
+			);
+			$this->tstats_notices->tstats_notice_message( $admin_notice );
 
-			<?php
 		}
 
 
@@ -256,18 +267,23 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 					?>
 
 					<div class="translation-stats-content-update-notice">
-						<div class="update-message notice inline notice-alt updated-message notice-success">
-							<p>
-								<strong><?php esc_html_e( 'Updated!', 'translation-stats' ); ?></strong>
-							</p>
-						</div>
+						<?php
+						$admin_notice = array(
+							'type'        => 'success',
+							'notice-alt'  => true,
+							'update-icon' => true,
+							'message'     => esc_html__( 'Updated!', 'translation-stats' ),
+						);
+						$this->tstats_notices->tstats_notice_message( $admin_notice );
+						?>
 					</div>
 
 					<?php
+
 				}
 			}
 
-			exit;
+			wp_die();
 
 		}
 
@@ -301,36 +317,44 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 			if ( ! empty( $i18n_errors ) ) {
 				?>
 
-				<div class="translation-stats-content-errors">
+				<div class="translation-stats-content-notices">
 
 					<?php
-					$this->tstats_notices->tstats_notice_message(
-						sprintf(
+					$admin_notice = array(
+						'type'       => 'warning',
+						'notice-alt' => true,
+						'message'    => sprintf(
 							/* translators: %1$s Opening link tag <a href="[link]">. %2$s Closing link tag </a>. */
 							wp_kses_post( __( 'This plugin is not %1$sproperly prepared for localization%2$s.', 'translation-stats' ) ),
 							'<a href="https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/" target="_blank">',
 							'</a>'
 						),
-						'warning'
 					);
-					$this->tstats_notices->tstats_notice_message(
-						sprintf(
+					$this->tstats_notices->tstats_notice_message( $admin_notice );
+
+					$admin_notice = array(
+						'type'       => 'warning',
+						'notice-alt' => true,
+						'message'    => sprintf(
 							( '%1$s%2$s%3$s' ),
 							'<a href="https://make.wordpress.org/meta/handbook/documentation/translations/#this-plugin-is-not-properly-prepared-for-localization-%e2%80%93-help" target="_blank">',
 							esc_html__( 'View detailed logs on Slack', 'translation-stats' ),
 							'</a>'
 						),
-						'warning'
 					);
-					$this->tstats_notices->tstats_notice_message(
-						sprintf(
+					$this->tstats_notices->tstats_notice_message( $admin_notice );
+
+					$admin_notice = array(
+						'type'       => 'warning',
+						'notice-alt' => true,
+						'message'    => sprintf(
 							/* translators: %1$s Opening link tag <a href="[link]">. %2$s Closing link tag </a>. */
 							wp_kses_post( __( 'If you would like to translate this plugin, %1$splease contact the author%2$s.', 'translation-stats' ) ),
 							'<a href="https://wordpress.org/support/plugin/' . esc_attr( $project_slug ) . '" target="_blank">',
 							'</a>'
 						),
-						'warning'
 					);
+					$this->tstats_notices->tstats_notice_message( $admin_notice );
 					?>
 
 				</div>
