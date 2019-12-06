@@ -28,9 +28,9 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 * @return bool                Returns 'true' if the plugin exists on WordPress.org.
 		 */
 		public function tstats_plugin_on_wporg( $plugin_file ) {
-			$plugin_state = get_site_transient( 'update_plugins' );
+			$update_plugins = get_site_transient( 'update_plugins' );
 
-			return ( isset( $plugin_state->response[ $plugin_file ]->id ) || isset( $plugin_state->no_update[ $plugin_file ]->id ) );
+			return ( isset( $update_plugins->response[ $plugin_file ]->id ) || isset( $update_plugins->no_update[ $plugin_file ]->id ) );
 		}
 
 
@@ -47,18 +47,16 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 * @return string $plugin_metadata  Returns metadata value from plugin.
 		 */
 		public function tstats_plugin_metadata( $plugin_file, $metadata ) {
-			$plugin_state = get_site_transient( 'update_plugins' );
+			$update_plugins = get_site_transient( 'update_plugins' );
 			// Check if plugin is on WordPress.org.
 			if ( ! $this->tstats_plugin_on_wporg( $plugin_file ) ) {
 				return '';
 			}
-
-			if ( isset( $plugin_state->response[ $plugin_file ]->$metadata ) ) {
-				return $plugin_state->response[ $plugin_file ]->$metadata;
+			if ( isset( $update_plugins->response[ $plugin_file ]->$metadata ) ) {
+				return $update_plugins->response[ $plugin_file ]->$metadata;
 			}
-
-			if ( isset( $plugin_state->no_update[ $plugin_file ]->$metadata ) ) {
-				return $plugin_state->no_update[ $plugin_file ]->$metadata;
+			if ( isset( $update_plugins->no_update[ $plugin_file ]->$metadata ) ) {
+				return $update_plugins->no_update[ $plugin_file ]->$metadata;
 			}
 		}
 
@@ -161,6 +159,81 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 
 
 		/**
+		 * Set the translate.wordpress.org WordPress core subprojects structure with 'slug', 'name' and language file 'domain'.
+		 *
+		 * @since 0.9.5
+		 *
+		 * @return array $subprojects  Returns array of the supported WordPress translation known subprojects.
+		 */
+		public function tstats_wordpress_subprojects() {
+
+			$subprojects = array(
+				array(
+					'slug'   => '',
+					/* translators: Subproject name in translate.wordpress.org, do not translate! */
+					'name'   => _x( 'Development', 'Subproject name', 'translation-stats' ),
+					'domain' => '',
+				),
+				array(
+					'slug'   => 'admin/',
+					/* translators: Subproject name in translate.wordpress.org, do not translate! */
+					'name'   => _x( 'Administration', 'Subproject name', 'translation-stats' ),
+					'domain' => 'admin',
+				),
+				array(
+					'slug'   => 'admin/network/',
+					/* translators: Subproject name in translate.wordpress.org, do not translate! */
+					'name'   => _x( 'Network Admin', 'Subproject name', 'translation-stats' ),
+					'domain' => 'admin-network',
+				),
+				array(
+					'slug'   => 'cc/',
+					/* translators: Subproject name in translate.wordpress.org, do not translate! */
+					'name'   => _x( 'Continents & Cities', 'Subproject name', 'translation-stats' ),
+					'domain' => 'continents-cities',
+				),
+			);
+
+			return $subprojects;
+		}
+
+
+		/**
+		 * Get WordPress core version info.
+		 *
+		 * @since 0.9.5
+		 *
+		 * @return array $wp_version  Array of WordPress installd info.
+		 */
+		public function tstats_wordpress_version() {
+
+			// Get install WordPress version.
+			$current_version = get_bloginfo( 'version' );
+
+			// Get available core updates.
+			$updates = get_core_updates();
+
+			$wp_version = array();
+
+			// Check if WordPress is the latest version.
+			if ( ! isset( $updates[0]->response ) || 'latest' === $updates[0]->response ) {
+				$wp_version['slug']   = 'dev';
+				$wp_version['name']   = substr( $current_version, 0, 3 ) . '.x';
+				$wp_version['number'] = $current_version;
+				$wp_version['latest'] = true;
+			} else {
+				$wp_version['slug']   = substr( $current_version, 0, 3 ) . '.x';
+				$wp_version['name']   = substr( $current_version, 0, 3 ) . '.x';
+				$wp_version['number'] = $current_version;
+				$wp_version['latest'] = false;
+			}
+
+			return $wp_version;
+
+		}
+
+
+		/**
 		 * Get Translate API URL.
 		 *
 		 * Example:
@@ -173,17 +246,76 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 */
 		public function tstats_translations_api_url( $project ) {
 
-			$translations_api = array(
+			$translations_api_url = array(
+				'wp'        => 'https://translate.wordpress.org/api/projects/wp/',         // Translate API WordPress core URL.
 				'languages' => 'https://translate.wordpress.org/api/languages',            // Translate API languages URL.
 				'plugins'   => 'https://translate.wordpress.org/api/projects/wp-plugins/', // Translate API plugins URL.
 				'themes'    => 'https://translate.wordpress.org/api/projects/wp-themes/',  // Translate API themes URL.
-				'wordpress' => 'https://translate.wordpress.org/api/projects/wp/',         // Translate API WordPress core URL.
 			);
 
-			$api_url = $translations_api[ $project ];
+			$api_url = $translations_api_url[ $project ];
 
 			return $api_url;
 
+		}
+
+
+		/**
+		 * Get Translate URL.
+		 *
+		 * Example:
+		 * $url = $this->tstats_translations_api->tstats_translations_url( 'plugins' );
+		 *
+		 * @since 0.9.5
+		 *
+		 * @param string $project  Set the project URL you want to get.
+		 * @return string $url     Returns URL.
+		 */
+		public function tstats_translations_url( $project ) {
+
+			$translations_url = array(
+				'wp'      => 'https://translate.wordpress.org/projects/wp/',         // Translate WordPress core URL.
+				'plugins' => 'https://translate.wordpress.org/projects/wp-plugins/', // Translate plugins URL.
+				'themes'  => 'https://translate.wordpress.org/projects/wp-themes/',  // Translate themes URL.
+			);
+
+			$url = $translations_url[ $project ];
+
+			return $url;
+
+		}
+
+
+		/**
+		 * Set the path to get the translation file.
+		 *
+		 * @since 0.9.5
+		 *
+		 * @param string $wp_version   WordPress version.
+		 * @param string $project      Project.
+		 * @param string $locale       Locale.
+		 *
+		 * @return $translation_path   File path to get source.
+		 */
+		public function tstats_translation_path( $wp_version, $project, $locale ) {
+
+			/**
+			 * TODO:
+			 *
+			 * Let users choose witch filter to use.
+			 * $filters = '?filters[status]=current_or_waiting_or_fuzzy';
+			 * $filters = '?filters[status]=current';
+			 *
+			 * Import from JED format to improve speed.
+			 * $format  = '&format=jed';
+			 */
+			$filters = '?filters[status]=current';
+			$format  = '&format=po';
+			$args    = $filters . $format;
+
+			$translation_path = esc_url_raw( $this->tstats_translations_url( 'wp' ) . $wp_version['slug'] . '/' . $project['slug'] . $locale['slug']['locale'] . '/' . $locale['slug']['variant'] . '/export-translations' . $args );
+
+			return $translation_path;
 		}
 
 
@@ -250,7 +382,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 *
 		 * @since 0.9.0
 		 *
-		 * @param string $wp_locale       WordPress Locale ( e.g. 'pt_PT' ).
+		 * @param string $wp_locale      WordPress Locale ( e.g. 'pt_PT' ).
 		 *
 		 * @return array $tstats_locale  Returns locale array from GlotPress (e.g. 'english_name', 'native_name', 'lang_code_iso_639_1', 'country_code', 'wp_locale', 'slug', etc. ).
 		 */
