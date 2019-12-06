@@ -321,9 +321,11 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 */
 		public function tstats_settings_reset_callback() {
 			$action = 'reset_settings';
-			if ( isset( $_POST[ $action ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
-				$this->tstats_nonce_verify_callback();
-
+			if ( isset( $_POST[ $action ] ) ) {
+				// Check nonce.
+				if ( ! isset( $_POST['tstats_nonce_check'] ) || ! wp_verify_nonce( sanitize_key( $_POST['tstats_nonce_check'] ), 'tstats_action' ) ) {
+					$this->tstats_nonce_fail();
+				}
 				// Choose 'load-defaults' or 'delete'.
 				$action = 'load-defaults';
 				if ( 'load-defaults' === $action ) {
@@ -349,8 +351,11 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 */
 		public function tstats_transients_delete_callback() {
 			$action = 'delete_transients';
-			if ( isset( $_POST[ $action ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
-				$this->tstats_nonce_verify_callback();
+			if ( isset( $_POST[ $action ] ) ) {
+				// Check nonce.
+				if ( ! isset( $_POST['tstats_nonce_check'] ) || ! wp_verify_nonce( sanitize_key( $_POST['tstats_nonce_check'] ), 'tstats_action' ) ) {
+					$this->tstats_nonce_fail();
+				}
 				// Delete translations stats and available languages transients.
 				// The transient 'translation_stats_plugin_available_translations' will be immediatly rebuilt on tstats_render_settings__plugins_list() loading.
 				$this->tstats_transients->tstats_delete_transients( TSTATS_TRANSIENTS_PREFIX );
@@ -366,15 +371,13 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 
 
 		/**
-		 * Callback function for Nonce verification.
+		 * Callback function for Nonce fail.
 		 *
-		 * @since 0.8.0
+		 * @since 0.9.5
 		 */
-		public function tstats_nonce_verify_callback() {
-			if ( ! isset( $_POST['tstats_nonce_field'] ) || ! wp_verify_nonce( sanitize_key( $_POST['tstats_nonce_field'] ), 'tstats_action' ) ) {
-				esc_html_e( 'Sorry, your nonce did not verify.', 'translation-stats' );
-				exit;
-			}
+		public function tstats_nonce_fail() {
+			esc_html_e( 'Sorry, your nonce did not verify.', 'translation-stats' );
+			exit;
 		}
 
 
@@ -473,7 +476,7 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 								do_action( 'tstats_settings_content__after' );
 								?>
 
-								<?php wp_nonce_field( 'tstats_action', 'tstats_nonce_field' ); ?>
+								<?php wp_nonce_field( 'tstats_action', 'tstats_nonce_check' ); ?>
 
 								<p class="submit">
 									<?php
