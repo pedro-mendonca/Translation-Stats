@@ -22,9 +22,10 @@
   },
   "scripts": {
     "build": "npm run build:js",
-    "build:js": "npm run build:plugins.js && npm run build:settings.js",
+    "build:js": "npm run build:plugins.js && npm run build:settings.js && npm run build:update-core.js",
     "build:plugins.js": "uglifyjs js/tstats-plugins.js --compress drop_console=true -o js/tstats-plugins.min.js",
     "build:settings.js": "uglifyjs js/tstats-settings.js --compress drop_console=true -o js/tstats-settings.min.js",
+    "build:update-core.js": "uglifyjs js/tstats-update-core.js --compress drop_console=true -o js/tstats-update-core.min.js",
     "lint": "eslint .",
     "update": "npm-check-updates"
   },

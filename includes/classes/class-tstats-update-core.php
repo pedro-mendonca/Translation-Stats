@@ -191,7 +191,11 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 				'<code>' . esc_html( $translations_date ) . '</code>'
 			);
 
-			$admin_notice_message_forceupdate = __( 'Click the button above to force update the latest approved translations.', 'translation-stats' );
+			$admin_notice_message_forceupdate = sprintf(
+				/* translators: %s: Button label. */
+				esc_html__( 'Click the %s button to force update the latest approved translations.', 'translation-stats' ),
+				'<strong>&#8220;' . __( 'Update WordPress Translation', 'translation-stats' ) . '&#8221;</strong>'
+			);
 
 			// Check if the current translation version is different the WordPress installed version.
 			if ( substr( $available_translations[ $locale['wp_locale'] ]['version'], 0, 3 ) !== substr( $wp_version['number'], 0, 3 ) ) {
@@ -283,9 +287,10 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 				<h4>
 					<?php
 					printf(
-						/* translators: 1: Translation name, 2: Number of the translation, 3: Total number of translations being updated. */
-						esc_html__( 'Updating Translation of %1$s (%2$d/%3$d)', 'translation-stats' ),
+						/* translators: 1: Translation name, 2: WordPress Locale, 3: Number of the translation, 4: Total number of translations being updated. */
+						esc_html__( 'Updating translations for %1$s (%2$s) (%3$d/%4$d)', 'translation-stats' ),
 						'<em>' . esc_html( $project['name'] ) . '</em>',
+						esc_html( $tstats_language ),
 						esc_html( $project_count ),
 						esc_html( count( $projects ) )
 					);
