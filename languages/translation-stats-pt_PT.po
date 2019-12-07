@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Translation Stats\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-06 16:07+0000\n"
-"PO-Revision-Date: 2019-12-06 16:09+0000\n"
+"POT-Creation-Date: 2019-12-07 12:33+0000\n"
+"PO-Revision-Date: 2019-12-07 12:33+0000\n"
 "Last-Translator: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language-Team: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language: pt_PT\n"
@@ -159,15 +159,15 @@ msgstr "Projecto de tradução não encontrado em WordPress.org"
 
 #. translators: %s: File name.
 #: includes/classes/class-tstats-gettext.php:155
-#: includes/classes/class-tstats-update-core.php:492
-#: includes/classes/class-tstats-update-core.php:570
+#: includes/classes/class-tstats-update-core.php:497
+#: includes/classes/class-tstats-update-core.php:575
 #, php-format
 msgid "Saving file %s…"
 msgstr "A guardar o ficheiro %s…"
 
 #: includes/classes/class-tstats-gettext.php:172
-#: includes/classes/class-tstats-update-core.php:504
-#: includes/classes/class-tstats-update-core.php:582
+#: includes/classes/class-tstats-update-core.php:509
+#: includes/classes/class-tstats-update-core.php:587
 msgid "Could not create file."
 msgstr "Não foi possível criar o ficheiro."
 
@@ -466,49 +466,50 @@ msgid "Save Changes"
 msgstr "Guardar alterações"
 
 #. translators: Subproject name in translate.wordpress.org, do not translate!
-#: includes/classes/class-tstats-translations-api.php:138
-#: includes/classes/class-tstats-translations-api.php:173
+#: includes/classes/class-tstats-translations-api.php:139
+#: includes/classes/class-tstats-translations-api.php:174
 msgctxt "Subproject name"
 msgid "Development"
 msgstr "Development"
 
 #. translators: Subproject name in translate.wordpress.org, do not translate!
-#: includes/classes/class-tstats-translations-api.php:143
+#: includes/classes/class-tstats-translations-api.php:144
 msgctxt "Subproject name"
 msgid "Development Readme"
 msgstr "Development Readme"
 
 #. translators: Subproject name in translate.wordpress.org, do not translate!
-#: includes/classes/class-tstats-translations-api.php:148
+#: includes/classes/class-tstats-translations-api.php:149
 msgctxt "Subproject name"
 msgid "Stable"
 msgstr "Stable"
 
 #. translators: Subproject name in translate.wordpress.org, do not translate!
-#: includes/classes/class-tstats-translations-api.php:153
+#: includes/classes/class-tstats-translations-api.php:154
 msgctxt "Subproject name"
 msgid "Stable Readme"
 msgstr "Stable Readme"
 
 #. translators: Subproject name in translate.wordpress.org, do not translate!
-#: includes/classes/class-tstats-translations-api.php:179
+#: includes/classes/class-tstats-translations-api.php:180
 msgctxt "Subproject name"
 msgid "Administration"
 msgstr "Administration"
 
 #. translators: Subproject name in translate.wordpress.org, do not translate!
-#: includes/classes/class-tstats-translations-api.php:185
+#: includes/classes/class-tstats-translations-api.php:186
 msgctxt "Subproject name"
 msgid "Network Admin"
 msgstr "Network Admin"
 
 #. translators: Subproject name in translate.wordpress.org, do not translate!
-#: includes/classes/class-tstats-translations-api.php:191
+#: includes/classes/class-tstats-translations-api.php:192
 msgctxt "Subproject name"
 msgid "Continents & Cities"
 msgstr "Continents & Cities"
 
 #: includes/classes/class-tstats-update-core.php:123
+#: includes/classes/class-tstats-update-core.php:197
 msgid "Update WordPress Translation"
 msgstr "Actualizar tradução do WordPress"
 
@@ -518,71 +519,73 @@ msgstr "Actualizar tradução do WordPress"
 msgid "The translation of WordPress %1$s for %2$s was updated on %3$s."
 msgstr "A tradução do WordPress %1$s para %2$s foi actualizada em %3$s."
 
-#: includes/classes/class-tstats-update-core.php:194
-msgid "Click the button above to force update the latest approved translations."
-msgstr "Clique no botão acima para forçar a actualização das traduções aprovadas mais recentes."
+#. translators: %s: Button label.
+#: includes/classes/class-tstats-update-core.php:196
+#, php-format
+msgid "Click the %s button to force update the latest approved translations."
+msgstr "Clique no botão %s para forçar a actualização das traduções aprovadas mais recentes."
 
 #. translators: 1: WordPress version. 2: Locale name.
-#: includes/classes/class-tstats-update-core.php:205
+#: includes/classes/class-tstats-update-core.php:209
 #, php-format
 msgid "The translation of WordPress %1$s for %2$s is not complete."
 msgstr "A tradução do WordPress %1$s para %2$s está incompleta."
 
 #. translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>. 3: Opening link tag <a href="[link]">. 4: Locale name.
-#: includes/classes/class-tstats-update-core.php:213
+#: includes/classes/class-tstats-update-core.php:217
 #, php-format
 msgid "Please register at %1$sTranslating WordPress%2$s and join the %3$sTranslation Team%2$s to help translating WordPress to %4$s!"
 msgstr "Por favor, registe-se em %1$sTranslating WordPress%2$s e junte-se à %3$sequipa de tradução%2$s para ajudar a traduzir o WordPress para %4$s!"
 
-#: includes/classes/class-tstats-update-core.php:253
+#: includes/classes/class-tstats-update-core.php:257
 msgid "The update process is starting. This process may take a while on some hosts, so please be patient."
 msgstr "A actualização está a começar. Este processo poderá demorar mais tempo em alguns serviços de alojamento, por favor aguarde."
 
-#. translators: 1: Translation name, 2: Number of the translation, 3: Total number of translations being updated.
-#: includes/classes/class-tstats-update-core.php:287
+#. translators: 1: Translation name, 2: WordPress Locale, 3: Number of the translation, 4: Total number of translations being updated.
+#: includes/classes/class-tstats-update-core.php:291
 #, php-format
-msgid "Updating Translation of %1$s (%2$d/%3$d)"
-msgstr "A actualizar a tradução de %1$s (%2$d/%3$d)"
+msgid "Updating translations for %1$s (%2$s) (%3$d/%4$d)"
+msgstr "A actualizar as traduções para %1$s (%2$s) (%3$d/%4$d)"
 
 #. translators: 1: Title of an update, 2: Error message.
-#: includes/classes/class-tstats-update-core.php:303
+#: includes/classes/class-tstats-update-core.php:308
 #, php-format
 msgid "An error occurred while updating %1$s: %2$s"
 msgstr "Ocorreu um erro ao actualizar %1$s: %2$s"
 
 #. translators: %s: Project name.
-#: includes/classes/class-tstats-update-core.php:329
+#: includes/classes/class-tstats-update-core.php:334
 #, php-format
 msgid "%s updated successfully."
 msgstr "%s actualizado com sucesso."
 
-#: includes/classes/class-tstats-update-core.php:333
+#: includes/classes/class-tstats-update-core.php:338
 msgid "Show details."
 msgstr "Mostrar detalhes."
 
-#: includes/classes/class-tstats-update-core.php:343
+#: includes/classes/class-tstats-update-core.php:348
 msgid "Translation updated successfully."
 msgstr "Tradução actualizada com sucesso."
 
-#: includes/classes/class-tstats-update-core.php:356
+#: includes/classes/class-tstats-update-core.php:361
 msgid "All updates have been completed."
 msgstr "Todas as actualizações foram concluídas."
 
 #. translators: %s: URL.
-#: includes/classes/class-tstats-update-core.php:445
+#: includes/classes/class-tstats-update-core.php:450
 #, php-format
 msgid "Downloading translation from %s…"
 msgstr "A descarregar tradução de %s…"
 
-#: includes/classes/class-tstats-update-core.php:459
+#: includes/classes/class-tstats-update-core.php:464
 msgid "Download failed."
 msgstr "Falhou ao descarregar."
 
-#: includes/classes/class-tstats-update-core.php:460
+#: includes/classes/class-tstats-update-core.php:465
 msgid "A valid URL was not provided."
 msgstr "Não foi indicado um URL válido."
 
-#: includes/classes/class-tstats-update-core.php:538
+#: includes/classes/class-tstats-update-core.php:543
 msgid "Could not extract file."
 msgstr "Não foi possível extrair ficheiro."
 
