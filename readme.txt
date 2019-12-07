@@ -3,7 +3,7 @@ Contributors: pedromendonca
 Donate link: https://paypal.me/pedromendonca/
 Tags: internationalization, i18n, localization, l10n, translation, statistics, glotpress, dark mode
 Requires at least: 4.9
-Tested up to: 5.2.4
+Tested up to: 5.3
 Requires PHP: 5.6
 Stable tag: 0.9.5
 License: GPLv2 or later
