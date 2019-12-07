@@ -22,7 +22,7 @@
 **Requires at least:** 4.9  
 **Tested up to:** 5.3  
 **Requires PHP:** 5.6  
-**Stable tag:** 0.9.5  
+**Stable tag:** 0.9.5.1  
 **License:** GPLv2 or later  
 **License URI:** [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html)  
 
@@ -93,6 +93,9 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 ![screenshot-4](./assets/screenshot-4.png)
 
 ## Changelog ##
+
+### 0.9.5.1 ###
+*   Minor code improvements
 
 ### 0.9.5 ###
 *   Now you can update your WordPress translation when you want
