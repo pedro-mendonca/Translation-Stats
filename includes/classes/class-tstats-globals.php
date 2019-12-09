@@ -103,28 +103,17 @@ if ( ! class_exists( 'TStats_Globals' ) ) {
 					'id'            => array(),
 					'type'          => array(),
 				),
-				'em'     => array(),
-				'ul'     => array(
-					'class' => array(),
-				),
-				'ol'     => array(
-					'class' => array(),
-				),
-				'p'      => array(
-					'class' => array(),
-				),
-				'li'     => array(
-					'class' => array(),
-				),
-				'strong' => array(),
 				'div'    => array(
 					'class' => array(),
 					'data'  => array(),
 					'style' => array(),
 				),
-				'span'   => array(
-					'class' => array(),
-					'style' => array(),
+				'em'     => array(),
+				'form'   => array(
+					'action' => array(),
+					'class'  => array(),
+					'method' => array(),
+					'name'   => array(),
 				),
 				'img'    => array(
 					'alt'    => array(),
@@ -133,17 +122,41 @@ if ( ! class_exists( 'TStats_Globals' ) ) {
 					'src'    => array(),
 					'width'  => array(),
 				),
-				'select' => array(
-					'id'    => array(),
+				'input'  => array(
 					'class' => array(),
 					'name'  => array(),
+					'type'  => array(),
+					'value' => array(),
+				),
+				'li'     => array(
+					'class' => array(),
+				),
+				'ol'     => array(
+					'class' => array(),
 				),
 				'option' => array(
 					'value'    => array(),
 					'selected' => array(),
 				),
-				'style'  => array(),
+				'p'      => array(
+					'class' => array(),
+				),
 				'script' => array(),
+				'select' => array(
+					'id'    => array(),
+					'class' => array(),
+					'name'  => array(),
+				),
+				'span'   => array(
+					'class' => array(),
+					'style' => array(),
+				),
+				'strong' => array(),
+				'style'  => array(),
+
+				'ul'     => array(
+					'class' => array(),
+				),
 			);
 
 			return $allowed_html;
