@@ -21,17 +21,17 @@ cache:
 
 matrix:
   include:
-  - name: "PHP 7.4 / Nightly WordPress"
+  - name: "PHP 7.4.1 / Nightly WordPress"
     php: "7.4snapshot"
     env: WP_VERSION=nightly WP_MULTISITE=0
-  - name: "PHP 7.4 / Nightly WordPress multisite"
+  - name: "PHP 7.4.1 / Nightly WordPress multisite"
     php: "7.4snapshot"
     env: WP_VERSION=nightly WP_MULTISITE=1
   - name: "PHP 7.4 / Latest WordPress"
-    php: "7.4snapshot"
+    php: "7.4"
     env: WP_VERSION=latest WP_MULTISITE=0
   - name: "PHP 7.4 / Latest WordPress multisite"
-    php: "7.4snapshot"
+    php: "7.4"
     env: WP_VERSION=latest WP_MULTISITE=1
   - name: "PHP 7.3 / Latest WordPress"
     php: "7.3"
