@@ -19,6 +19,16 @@ if ( ! class_exists( 'TStats_Notices' ) ) {
 	 */
 	class TStats_Notices {
 
+		/**
+		 * Constructor.
+		 */
+		public function __construct() {
+
+			// Instantiate Translation Stats Globals.
+			$this->tstats_globals = new TStats_Globals();
+
+		}
+
 
 		/**
 		 * Display formated admin notice.
@@ -48,6 +58,7 @@ if ( ! class_exists( 'TStats_Notices' ) ) {
 				'css-class'   => isset( $args['css-class'] ) ? ' ' . $args['css-class'] : '',                    // Some extra CSS classes.
 				'update-icon' => isset( $args['update-icon'] ) && $args['update-icon'] ? true : '',              // Show update message icons. Defaults to false.
 				'message'     => isset( $args['message'] ) ? $args['message'] : '',                              // Message to show.
+				'extra-html'  => isset( $args['extra-html'] ) ? $args['extra-html'] : '',                        // Some extra HTMLto show.
 			);
 			if ( $notice['update-icon'] ) {
 				// Defaults to none.
@@ -71,6 +82,10 @@ if ( ! class_exists( 'TStats_Notices' ) ) {
 
 			<div class="notice<?php echo esc_attr( $notice['type'] ) . esc_attr( $notice['notice-alt'] ) . esc_attr( $notice['inline'] ) . esc_attr( $notice['update-icon'] ) . esc_attr( $notice['css-class'] ) . esc_attr( $notice['dismissible'] ); ?>">
 				<p><?php echo wp_kses_post( $notice['message'] ); ?></p>
+				<?php
+				// Extra HTML.
+				echo wp_kses( $notice['extra-html'], $this->tstats_globals->tstats_allowed_html() );
+				?>
 			</div>
 
 			<?php
