@@ -13,7 +13,7 @@
  * Plugin URI:        https://translationstats.com
  * GitHub Plugin URI: https://github.com/pedro-mendonca/Translation-Stats
  * Description:       Show plugins translation stats on your WordPress install.
- * Version:           0.9.5.1
+ * Version:           0.9.5.2
  * Author:            Pedro Mendonça
  * Author URI:        https://translationstats.com
  * License:           GPL2
@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 // Set Translation Stats plugin version.
-define( 'TSTATS_VERSION', '0.9.5.1' );
+define( 'TSTATS_VERSION', '0.9.5.2' );
 
 // Set Translation Stats required PHP version. Needed for PHP compatibility check for WordPress < 5.1.
 define( 'TSTATS_REQUIRED_PHP', '5.6' );
@@ -187,6 +187,7 @@ require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-settings-plug
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-settings.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-gettext-jedgenerator.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-gettext.php';
+require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-update-translations.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-update-core.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-plugins.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-debug.php';
