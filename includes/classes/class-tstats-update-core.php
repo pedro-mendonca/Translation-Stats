@@ -413,9 +413,7 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 							foreach ( $result['log'] as $result_log_item ) {
 								echo wp_kses_post( $result_log_item ) . '<br>';
 							}
-							esc_html_e( 'Translation updated successfully.', 'translation-stats' );
 							?>
-							<br>
 						</p>
 					</div>
 
