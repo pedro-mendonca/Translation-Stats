@@ -77,7 +77,7 @@ if ( ! class_exists( 'TStats_Gettext' ) ) {
 			$domain         = $project['domain'] && $include_domain ? $project['domain'] . '-' : '';
 			$base_file_name = $domain . $locale['wp_locale'];
 
-			foreach ( $translations as $index => $translation ) {
+			foreach ( $translations as $key => $translation ) {
 
 				// Find all unique sources this translation originates from.
 				$sources = array_map(
@@ -147,7 +147,7 @@ if ( ! class_exists( 'TStats_Gettext' ) ) {
 			foreach ( $mapping as $file => $translations ) {
 
 				$hash             = md5( $file );
-				$destination_file = "${destination}/{$base_file_name}-{$hash}.json";
+				$destination_file = "{$destination}/{$base_file_name}-{$hash}.json";
 
 				// Report message.
 				$result['log'][] = sprintf(

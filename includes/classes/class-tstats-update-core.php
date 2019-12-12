@@ -91,7 +91,7 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 				return;
 			}
 
-			$admin_notice_message_status = sprintf(
+			$notice_message_status = sprintf(
 				'%s</br>%s',
 				sprintf(
 					wp_kses_post(
@@ -112,7 +112,7 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 					'<strong>' . esc_html( $locale['native_name'] ) . '</strong>'
 				)
 			);
-			$admin_notice_message_forceupdate = sprintf(
+			$notice_message_forceupdate = sprintf(
 				/* translators: %s: Button label. */
 				esc_html__( 'Click the %s button to force update the latest approved translations.', 'translation-stats' ),
 				'<strong>&#8220;' . __( 'Update WordPress Translation', 'translation-stats' ) . '&#8221;</strong>'
@@ -125,8 +125,8 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 				'force_show'  => true,
 				'message'     => sprintf(
 					'%s</p><p>%s',
-					$admin_notice_message_status,
-					$admin_notice_message_forceupdate
+					$notice_message_status,
+					$notice_message_forceupdate
 				),
 				'extra-html'  => $this->tstats_form_update_wordpress_translation(),
 			);
@@ -248,8 +248,8 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 				$translations_date = $available_translations[ $locale['wp_locale'] ]['updated'];
 			}
 
-			$admin_notice_type           = 'info';
-			$admin_notice_message_status = sprintf(
+			$notice_type           = 'info';
+			$notice_message_status = sprintf(
 				wp_kses_post(
 					/* translators: 1: WordPress version. 2: Locale name. 3: Date the language pack was created. */
 					__( 'The translation of WordPress %1$s for %2$s was updated on %3$s.', 'translation-stats' )
@@ -259,7 +259,7 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 				'<code>' . esc_html( $translations_date ) . '</code>'
 			);
 
-			$admin_notice_message_forceupdate = sprintf(
+			$notice_message_forceupdate = sprintf(
 				/* translators: %s: Button label. */
 				esc_html__( 'Click the %s button to force update the latest approved translations.', 'translation-stats' ),
 				'<strong>&#8220;' . __( 'Update WordPress Translation', 'translation-stats' ) . '&#8221;</strong>'
@@ -268,8 +268,8 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 			// Check if the current translation version is different the WordPress installed version.
 			if ( substr( $available_translations[ $locale['wp_locale'] ]['version'], 0, 3 ) !== substr( $wp_version['number'], 0, 3 ) ) {
 
-				$admin_notice_type           = 'warning';
-				$admin_notice_message_status = sprintf(
+				$notice_type           = 'warning';
+				$notice_message_status = sprintf(
 					'%s</br>%s',
 					sprintf(
 						wp_kses_post(
@@ -294,14 +294,14 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 			}
 
 			$admin_notice = array(
-				'type'        => $admin_notice_type,
+				'type'        => $notice_type,
 				'inline'      => isset( $notice_args['inline'] ) ? $notice_args['inline'] : null,
 				'dismissible' => isset( $notice_args['dismissible'] ) ? $notice_args['dismissible'] : null,
 				'force_show'  => true,
 				'message'     => sprintf(
 					'%s</p><p>%s',
-					$admin_notice_message_status,
-					$admin_notice_message_forceupdate
+					$notice_message_status,
+					$notice_message_forceupdate
 				),
 			);
 			$this->tstats_notices->tstats_notice_message( $admin_notice );
@@ -367,7 +367,23 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 
 				<?php
 				$result = $this->tstats_update_translations->tstats_update_translation( $destination, $project, $tstats_language );
+
+				$log_display = is_wp_error( $result['data'] ) ? 'block' : 'none';
+				?>
+
+				<div class="update-messages hide-if-js" id="progress-<?php echo esc_attr( $project_count ); ?>" style="display: <?php echo esc_attr( $log_display ); ?>;">
+					<p>
+						<?php
+						foreach ( $result['log'] as $result_log_item ) {
+							echo wp_kses_post( $result_log_item ) . '<br>';
+						}
+						?>
+					</p>
+				</div>
+
+				<?php
 				if ( is_wp_error( $result['data'] ) ) {
+
 					$error_message = $result['data']->get_error_message();
 					$admin_notice  = array(
 						'type'    => 'error',
@@ -378,22 +394,11 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 							'<strong>' . esc_html( $error_message ) . '</strong>'
 						),
 					);
-					?>
-
-					<p>
-						<?php
-						foreach ( $result['log'] as $result_log_item ) {
-							echo wp_kses_post( $result_log_item ) . '<br>';
-						}
-						?>
-					</p>
-
-					<?php
 					$this->tstats_notices->tstats_notice_message( $admin_notice );
+
 				} else {
 					?>
 
-					<script type="text/javascript">jQuery('.waiting-<?php echo esc_attr( $project_count ); ?>').css("display", "inline-block");</script>
 					<div class="updated js-update-details" data-update-details="progress-<?php echo esc_attr( $project_count ); ?>">
 						<p>
 							<?php
@@ -404,18 +409,6 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 							);
 							?>
 							<button type="button" class="hide-if-no-js button-link js-update-details-toggle" aria-expanded="false"><?php esc_attr_e( 'Show details.', 'translation-stats' ); ?></button>
-						</p>
-					</div>
-
-					<div class="update-messages hide-if-js update-details-moved" id="progress-<?php echo esc_attr( $project_count ); ?>" style="display: none;">
-						<p>
-							<?php
-							foreach ( $result['log'] as $result_log_item ) {
-								echo wp_kses_post( $result_log_item ) . '<br>';
-							}
-							esc_html_e( 'Translation updated successfully.', 'translation-stats' );
-							?>
-							<br>
 						</p>
 					</div>
 

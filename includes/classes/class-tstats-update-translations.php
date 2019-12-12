@@ -98,6 +98,8 @@ if ( ! class_exists( 'TStats_Update_Translations' ) ) {
 				return $result;
 			}
 
+			array_push( $result['log'], esc_html__( 'Translation updated successfully.', 'translation-stats' ) );
+
 			return $result;
 
 		}
