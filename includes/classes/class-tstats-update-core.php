@@ -393,7 +393,6 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 				} else {
 					?>
 
-					<script type="text/javascript">jQuery('.waiting-<?php echo esc_attr( $project_count ); ?>').css("display", "inline-block");</script>
 					<div class="updated js-update-details" data-update-details="progress-<?php echo esc_attr( $project_count ); ?>">
 						<p>
 							<?php
