@@ -406,7 +406,7 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 						</p>
 					</div>
 
-					<div class="update-messages hide-if-js update-details-moved" id="progress-<?php echo esc_attr( $project_count ); ?>" style="display: none;">
+					<div class="update-messages hide-if-js" id="progress-<?php echo esc_attr( $project_count ); ?>" style="display: none;">
 						<p>
 							<?php
 							foreach ( $result['log'] as $result_log_item ) {
