@@ -367,7 +367,23 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 
 				<?php
 				$result = $this->tstats_update_translations->tstats_update_translation( $destination, $project, $tstats_language );
+
+				$log_display = is_wp_error( $result['data'] ) ? 'block' : 'none';
+				?>
+
+				<div class="update-messages hide-if-js" id="progress-<?php echo esc_attr( $project_count ); ?>" style="display: <?php echo esc_attr( $log_display ); ?>;">
+					<p>
+						<?php
+						foreach ( $result['log'] as $result_log_item ) {
+							echo wp_kses_post( $result_log_item ) . '<br>';
+						}
+						?>
+					</p>
+				</div>
+
+				<?php
 				if ( is_wp_error( $result['data'] ) ) {
+
 					$error_message = $result['data']->get_error_message();
 					$admin_notice  = array(
 						'type'    => 'error',
@@ -378,18 +394,8 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 							'<strong>' . esc_html( $error_message ) . '</strong>'
 						),
 					);
-					?>
-
-					<p>
-						<?php
-						foreach ( $result['log'] as $result_log_item ) {
-							echo wp_kses_post( $result_log_item ) . '<br>';
-						}
-						?>
-					</p>
-
-					<?php
 					$this->tstats_notices->tstats_notice_message( $admin_notice );
+
 				} else {
 					?>
 
@@ -403,16 +409,6 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 							);
 							?>
 							<button type="button" class="hide-if-no-js button-link js-update-details-toggle" aria-expanded="false"><?php esc_attr_e( 'Show details.', 'translation-stats' ); ?></button>
-						</p>
-					</div>
-
-					<div class="update-messages hide-if-js" id="progress-<?php echo esc_attr( $project_count ); ?>" style="display: none;">
-						<p>
-							<?php
-							foreach ( $result['log'] as $result_log_item ) {
-								echo wp_kses_post( $result_log_item ) . '<br>';
-							}
-							?>
 						</p>
 					</div>
 
