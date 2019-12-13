@@ -13,7 +13,7 @@
  * Plugin URI:        https://translationstats.com
  * GitHub Plugin URI: https://github.com/pedro-mendonca/Translation-Stats
  * Description:       Show plugins translation stats on your WordPress install.
- * Version:           0.9.5.2
+ * Version:           0.9.5.3
  * Author:            Pedro Mendonça
  * Author URI:        https://translationstats.com
  * License:           GPL2
