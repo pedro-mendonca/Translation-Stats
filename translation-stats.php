@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 // Set Translation Stats plugin version.
-define( 'TSTATS_VERSION', '0.9.5.2' );
+define( 'TSTATS_VERSION', '0.9.5.3' );
 
 // Set Translation Stats required PHP version. Needed for PHP compatibility check for WordPress < 5.1.
 define( 'TSTATS_REQUIRED_PHP', '5.6' );
