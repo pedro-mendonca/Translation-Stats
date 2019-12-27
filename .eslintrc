@@ -4,10 +4,8 @@
     "jQuery": true
   },
   "rules": {
-    "no-redeclare": "warn",
-    "no-var": "warn",
     "no-console": "off",
-    "no-undef": "warn",
-    "no-unused-vars": "warn"
+    "no-undef": "off",
+    "no-var": "off",
   }
 }
