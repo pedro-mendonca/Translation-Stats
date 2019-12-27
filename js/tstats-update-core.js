@@ -12,7 +12,6 @@ jQuery( document ).ready( function( $ ) {
 	 * @since 0.9.5
 	 */
 	function tstatsWordPressSubprojectsLoadAjax() {
-
 		$.ajax( {
 
 			url: tstats.ajaxurl,
