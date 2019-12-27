@@ -143,15 +143,15 @@ msgid "Translation project not found on WordPress.org"
 msgstr ""
 
 #: includes/classes/class-tstats-gettext.php:155
-#: includes/classes/class-tstats-update-core.php:497
-#: includes/classes/class-tstats-update-core.php:575
+#: includes/classes/class-tstats-update-translations.php:173
+#: includes/classes/class-tstats-update-translations.php:251
 #, php-format
 msgid "Saving file %s…"
 msgstr ""
 
 #: includes/classes/class-tstats-gettext.php:172
-#: includes/classes/class-tstats-update-core.php:509
-#: includes/classes/class-tstats-update-core.php:587
+#: includes/classes/class-tstats-update-translations.php:185
+#: includes/classes/class-tstats-update-translations.php:263
 msgid "Could not create file."
 msgstr ""
 
@@ -479,76 +479,80 @@ msgctxt "Subproject name"
 msgid "Continents & Cities"
 msgstr ""
 
-#: includes/classes/class-tstats-update-core.php:123
-#: includes/classes/class-tstats-update-core.php:197
-msgid "Update WordPress Translation"
-msgstr ""
-
-#: includes/classes/class-tstats-update-core.php:187
-#, php-format
-msgid "The translation of WordPress %1$s for %2$s was updated on %3$s."
-msgstr ""
-
-#: includes/classes/class-tstats-update-core.php:196
-#, php-format
-msgid "Click the %s button to force update the latest approved translations."
-msgstr ""
-
-#: includes/classes/class-tstats-update-core.php:209
+#: includes/classes/class-tstats-update-core.php:99
+#: includes/classes/class-tstats-update-core.php:277
 #, php-format
 msgid "The translation of WordPress %1$s for %2$s is not complete."
 msgstr ""
 
-#: includes/classes/class-tstats-update-core.php:217
+#: includes/classes/class-tstats-update-core.php:107
+#: includes/classes/class-tstats-update-core.php:285
 #, php-format
 msgid "Please register at %1$sTranslating WordPress%2$s and join the %3$sTranslation Team%2$s to help translating WordPress to %4$s!"
 msgstr ""
 
-#: includes/classes/class-tstats-update-core.php:257
+#: includes/classes/class-tstats-update-core.php:117
+#: includes/classes/class-tstats-update-core.php:264
+#, php-format
+msgid "Click the %s button to force update the latest approved translations."
+msgstr ""
+
+#: includes/classes/class-tstats-update-core.php:118
+#: includes/classes/class-tstats-update-core.php:212
+#: includes/classes/class-tstats-update-core.php:265
+msgid "Update WordPress Translation"
+msgstr ""
+
+#: includes/classes/class-tstats-update-core.php:255
+#, php-format
+msgid "The translation <em>language pack</em> of WordPress %1$s for %2$s was updated on %3$s."
+msgstr ""
+
+#: includes/classes/class-tstats-update-core.php:325
 msgid "The update process is starting. This process may take a while on some hosts, so please be patient."
 msgstr ""
 
-#: includes/classes/class-tstats-update-core.php:291
+#: includes/classes/class-tstats-update-core.php:359
 #, php-format
 msgid "Updating translations for %1$s (%2$s) (%3$d/%4$d)"
 msgstr ""
 
-#: includes/classes/class-tstats-update-core.php:308
+#: includes/classes/class-tstats-update-core.php:392
 #, php-format
 msgid "An error occurred while updating %1$s: %2$s"
 msgstr ""
 
-#: includes/classes/class-tstats-update-core.php:334
+#: includes/classes/class-tstats-update-core.php:407
 #, php-format
 msgid "%s updated successfully."
 msgstr ""
 
-#: includes/classes/class-tstats-update-core.php:338
+#: includes/classes/class-tstats-update-core.php:411
 msgid "Show details."
 msgstr ""
 
-#: includes/classes/class-tstats-update-core.php:348
-msgid "Translation updated successfully."
-msgstr ""
-
-#: includes/classes/class-tstats-update-core.php:361
+#: includes/classes/class-tstats-update-core.php:422
 msgid "All updates have been completed."
 msgstr ""
 
-#: includes/classes/class-tstats-update-core.php:450
+#: includes/classes/class-tstats-update-translations.php:101
+msgid "Translation updated successfully."
+msgstr ""
+
+#: includes/classes/class-tstats-update-translations.php:126
 #, php-format
 msgid "Downloading translation from %s…"
 msgstr ""
 
-#: includes/classes/class-tstats-update-core.php:464
+#: includes/classes/class-tstats-update-translations.php:140
 msgid "Download failed."
 msgstr ""
 
-#: includes/classes/class-tstats-update-core.php:465
+#: includes/classes/class-tstats-update-translations.php:141
 msgid "A valid URL was not provided."
 msgstr ""
 
-#: includes/classes/class-tstats-update-core.php:543
+#: includes/classes/class-tstats-update-translations.php:219
 msgid "Could not extract file."
 msgstr ""
 
