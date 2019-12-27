@@ -252,7 +252,7 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 			$notice_message_status = sprintf(
 				wp_kses_post(
 					/* translators: 1: WordPress version. 2: Locale name. 3: Date the language pack was created. */
-					__( 'The translation of WordPress %1$s for %2$s was updated on %3$s.', 'translation-stats' )
+					__( 'The translation <em>language pack</em> of WordPress %1$s for %2$s was updated on %3$s.', 'translation-stats' )
 				),
 				'<strong>' . esc_html( $wp_version['name'] ) . '</strong>',
 				'<strong>' . esc_html( $locale['native_name'] ) . '</strong>',
