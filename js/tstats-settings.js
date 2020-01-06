@@ -29,14 +29,17 @@ jQuery( document ).ready( function( $ ) {
 		// Get URL hash.
 		var tstatsSettingsURLHash = window.location.hash;
 
+		// Declare variable.
+		var tstatsActiveTabID;
+
 		// Check for URL hash.
 		if ( tstatsSettingsURLHash ) {
 			// Use Hash tab ID.
-			var tstatsActiveTabID = tstatsSettingsURLHash;
+			tstatsActiveTabID = tstatsSettingsURLHash;
 			console.log( 'Use hash tab: ' + tstatsActiveTabID );
 		} else {
 			// Use default tab ID.
-			var tstatsActiveTabID = tstatsDefaultTabID;
+			tstatsActiveTabID = tstatsDefaultTabID;
 			console.log( 'Use default tab: ' + tstatsActiveTabID );
 		}
 
@@ -61,7 +64,6 @@ jQuery( document ).ready( function( $ ) {
 	 */
 	function tstatsClickSettingsTab() {
 		var tstatsActiveTabContentID = $( this ).attr( 'href' ).replace( '#', '#tab-' );
-		var tstatsActiveTabID = $( this ).attr( 'href' );
 
 		// Active tab.
 		$( this ).parent().children().removeClass( 'nav-tab-active' );
