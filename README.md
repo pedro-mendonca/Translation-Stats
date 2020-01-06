@@ -20,9 +20,9 @@
 **Donate link:** [paypal.me/pedromendonca](https://paypal.me/pedromendonca/)  
 **Tags:** internationalization, i18n, localization, l10n, translation, statistics, glotpress, dark mode  
 **Requires at least:** 4.9  
-**Tested up to:** 5.3.1  
+**Tested up to:** 5.3.2  
 **Requires PHP:** 5.6  
-**Stable tag:** 0.9.5.3  
+**Stable tag:** 0.9.5.4  
 **License:** GPLv2 or later  
 **License URI:** [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html)  
 
@@ -93,6 +93,10 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 ![screenshot-4](./assets/screenshot-4.png)
 
 ## Changelog ##
+
+### 0.9.5.4 ###
+*   Minor code improvements
+*   Tested up to WP 5.3.2
 
 ### 0.9.5.3 ###
 *   Minor code improvements
