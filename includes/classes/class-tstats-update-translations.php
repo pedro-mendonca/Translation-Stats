@@ -216,7 +216,7 @@ if ( ! class_exists( 'TStats_Update_Translations' ) ) {
 				// Report message.
 				$result['data'] = new WP_Error(
 					'extract-translations',
-					esc_html__( 'Could not extract file.', 'translation-stats' )
+					esc_html__( 'Could not extract translations from file.', 'translation-stats' )
 				);
 
 				return $result;
