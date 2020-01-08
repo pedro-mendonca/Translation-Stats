@@ -76,7 +76,7 @@ if ( ! class_exists( 'TStats_Update_Translations' ) ) {
 			}
 
 			// Extract translations from file.
-			$translations   = $this->tstats_extract_translations( $destination, $project, $locale );
+			$translations = $this->tstats_extract_translations( $destination, $project, $locale );
 			array_push( $result['log'], $translations['log'] );
 			$result['data'] = $translations['data'];
 			if ( is_wp_error( $result['data'] ) ) {
