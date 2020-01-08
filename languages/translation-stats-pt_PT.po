@@ -1,9 +1,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Translation Stats\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-12-27 20:17+0000\n"
-"PO-Revision-Date: 2019-12-27 20:18+0000\n"
+"Report-Msgid-Bugs-To: https://github.com/pedro-mendonca/Translation-Stats/issues\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: 2020-01-08 13:28+0000\n"
 "Last-Translator: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language-Team: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language: pt_PT\n"
@@ -21,7 +21,6 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: node_modules\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
-"X-Poedit-SearchPathExcluded-2: includes/classes/test\n"
 
 #: includes/classes/class-tstats-debug.php:62
 #: includes/classes/class-tstats-debug.php:98
@@ -159,15 +158,15 @@ msgstr "Projecto de tradução não encontrado em WordPress.org"
 
 #. translators: %s: File name.
 #: includes/classes/class-tstats-gettext.php:155
-#: includes/classes/class-tstats-update-translations.php:173
-#: includes/classes/class-tstats-update-translations.php:251
+#: includes/classes/class-tstats-update-translations.php:174
+#: includes/classes/class-tstats-update-translations.php:259
 #, php-format
 msgid "Saving file %s…"
 msgstr "A guardar o ficheiro %s…"
 
 #: includes/classes/class-tstats-gettext.php:172
-#: includes/classes/class-tstats-update-translations.php:185
-#: includes/classes/class-tstats-update-translations.php:263
+#: includes/classes/class-tstats-update-translations.php:186
+#: includes/classes/class-tstats-update-translations.php:271
 msgid "Could not create file."
 msgstr "Não foi possível criar o ficheiro."
 
@@ -571,27 +570,33 @@ msgstr "Mostrar detalhes."
 msgid "All updates have been completed."
 msgstr "Todas as actualizações foram concluídas."
 
-#: includes/classes/class-tstats-update-translations.php:101
+#: includes/classes/class-tstats-update-translations.php:102
 msgid "Translation updated successfully."
 msgstr "Tradução actualizada com sucesso."
 
 #. translators: %s: URL.
-#: includes/classes/class-tstats-update-translations.php:126
+#: includes/classes/class-tstats-update-translations.php:127
 #, php-format
 msgid "Downloading translation from %s…"
 msgstr "A descarregar tradução de %s…"
 
-#: includes/classes/class-tstats-update-translations.php:140
+#: includes/classes/class-tstats-update-translations.php:141
 msgid "Download failed."
 msgstr "Falhou ao descarregar."
 
-#: includes/classes/class-tstats-update-translations.php:141
+#: includes/classes/class-tstats-update-translations.php:142
 msgid "A valid URL was not provided."
 msgstr "Não foi indicado um URL válido."
 
-#: includes/classes/class-tstats-update-translations.php:219
-msgid "Could not extract file."
-msgstr "Não foi possível extrair ficheiro."
+#. translators: %s: File name.
+#: includes/classes/class-tstats-update-translations.php:216
+#, php-format
+msgid "Extracting translations from file %s…"
+msgstr "A extrair traduções do ficheiro %s…"
+
+#: includes/classes/class-tstats-update-translations.php:227
+msgid "Could not extract translations from file."
+msgstr "Não foi possível extrair traduções do ficheiro."
 
 #: translation-stats.php:122
 msgid "This plugin doesn&#8217;t work with your version of PHP."
