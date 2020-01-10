@@ -157,6 +157,7 @@ table.wp-list-table.plugins {
 				a.disabled div .subproject-bar,
 				a:hover div .subproject-bar,
 				a:focus div .subproject-bar, { // Configuration of easeOutCirc.
+
 					@include transition-easeOutCubic ( all, 300ms, cubic-bezier(0.075, 0.82, 0.165, 1), 0s );
 				}
 
@@ -347,7 +348,9 @@ table.tstats-plugin-list-table {
 		padding: 0;
 
 		@media (min-width: $break-large) {
-			width: 280px;
+			width: 25%;
+			min-width: 280px;
+			max-width: 350px;
 			padding-left: 20px;
 			order: 2;
 		}
@@ -378,6 +381,7 @@ table.tstats-plugin-list-table {
 							background-position: center;
 							background-size: contain;
 							height: 120px;
+							width: 230px;
 							background-repeat: no-repeat;
 						}
 
