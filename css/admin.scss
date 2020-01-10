@@ -389,6 +389,32 @@ table.tstats-plugin-list-table {
 
 				}
 
+				.tstats-sponsor {
+
+					h3::after {
+						content: " ☕";
+					}
+
+					ul {
+
+						form {
+
+							button.tstats-github-sponsor {
+
+								span,
+								i {
+									vertical-align: text-top;
+									font-size: large;
+								}
+
+								span {
+									color: #ea4aaa;
+								}
+							}
+						}
+					}
+				}
+
 			}
 
 			.footer {

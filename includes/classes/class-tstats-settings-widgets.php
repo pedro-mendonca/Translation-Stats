@@ -72,6 +72,20 @@ if ( ! class_exists( 'TStats_Settings_Widgets' ) ) {
 						</ul>
 					</div>
 
+					<div class="tstats-sponsor">
+						<h3><?php esc_html_e( 'Coffee', 'translation-stats' ); ?></h3>
+						<ul>
+							<li>
+								<?php esc_html_e( 'Do you enjoy this plugin?', 'translation-stats' ); ?>
+								<br>
+								<?php esc_html_e( 'Support its further development by becoming a sponsor!', 'translation-stats' ); ?>
+							</li>
+							<form action="https://github.com/sponsors/pedro-mendonca" target="_blank">
+								<button type="submit" class="button button-secondary tstats-github-sponsor"><span class="dashicons dashicons-heart"></span> <?php esc_html_e( 'GitHub Sponsors', 'translation-stats' ); ?> <?php echo wp_kses_post( $external_link_icon ); ?></button>
+							</form>
+						</ul>
+					</div>
+
 				</div>
 
 				<div class="footer">
