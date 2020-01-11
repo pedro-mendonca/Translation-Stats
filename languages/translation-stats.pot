@@ -175,46 +175,46 @@ msgid "Translation Stats"
 msgstr ""
 
 #. translators: %s Language native name.
-#: includes/classes/class-tstats-plugins.php:202
+#: includes/classes/class-tstats-plugins.php:205
 #, php-format
 msgid "Translation for %s"
 msgstr ""
 
-#: includes/classes/class-tstats-plugins.php:218
+#: includes/classes/class-tstats-plugins.php:224
 msgid "Update"
 msgstr ""
 
-#: includes/classes/class-tstats-plugins.php:240
+#: includes/classes/class-tstats-plugins.php:246
 msgid "Loading..."
 msgstr ""
 
-#: includes/classes/class-tstats-plugins.php:275
+#: includes/classes/class-tstats-plugins.php:281
 msgid "Updated!"
 msgstr ""
 
 #. translators: %1$s Opening link tag <a href="[link]">. %2$s Closing link tag </a>.
-#: includes/classes/class-tstats-plugins.php:328
+#: includes/classes/class-tstats-plugins.php:334
 #, php-format
 msgid "This plugin is not %1$sproperly prepared for localization%2$s."
 msgstr ""
 
-#: includes/classes/class-tstats-plugins.php:341
+#: includes/classes/class-tstats-plugins.php:347
 msgid "View detailed logs on Slack"
 msgstr ""
 
 #. translators: %1$s Opening link tag <a href="[link]">. %2$s Closing link tag </a>.
-#: includes/classes/class-tstats-plugins.php:352
+#: includes/classes/class-tstats-plugins.php:358
 #, php-format
 msgid "If you would like to translate this plugin, %1$splease contact the author%2$s."
 msgstr ""
 
 #. translators: %1$s Name of subproject. %2$s Error message.
-#: includes/classes/class-tstats-plugins.php:448
+#: includes/classes/class-tstats-plugins.php:454
 #, php-format
 msgid "%1$s: %2$s"
 msgstr ""
 
-#: includes/classes/class-tstats-plugins.php:450
+#: includes/classes/class-tstats-plugins.php:456
 msgid "Not found"
 msgstr ""
 
@@ -241,7 +241,7 @@ msgstr ""
 
 #. translators: Plugin Name and version - Do not translate!
 #: includes/classes/class-tstats-settings-footer.php:88
-#: includes/classes/class-tstats-settings-widgets.php:78
+#: includes/classes/class-tstats-settings-widgets.php:97
 #, php-format
 msgid "Translation Stats %s"
 msgstr ""
@@ -279,36 +279,52 @@ msgstr ""
 msgid "Show plugins translation stats on your WordPress install."
 msgstr ""
 
-#: includes/classes/class-tstats-settings-widgets.php:57
+#: includes/classes/class-tstats-settings-widgets.php:58
 msgid "Resources"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-widgets.php:59
+#: includes/classes/class-tstats-settings-widgets.php:60
 msgid "Site"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-widgets.php:60
+#: includes/classes/class-tstats-settings-widgets.php:61
 msgid "FAQ"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-widgets.php:61
+#: includes/classes/class-tstats-settings-widgets.php:62
 msgid "Changelog"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-widgets.php:62
+#: includes/classes/class-tstats-settings-widgets.php:63
 msgid "Support"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-widgets.php:65
+#: includes/classes/class-tstats-settings-widgets.php:68
 msgid "Contact"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-widgets.php:67
+#: includes/classes/class-tstats-settings-widgets.php:70
 msgid "Found an issue, have a feature suggestion or just want to send some feedback?"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-widgets.php:68
+#: includes/classes/class-tstats-settings-widgets.php:71
 msgid "Write me!"
+msgstr ""
+
+#: includes/classes/class-tstats-settings-widgets.php:76
+msgid "Coffee"
+msgstr ""
+
+#: includes/classes/class-tstats-settings-widgets.php:79
+msgid "Do you enjoy this plugin?"
+msgstr ""
+
+#: includes/classes/class-tstats-settings-widgets.php:81
+msgid "Support its further development by becoming a sponsor!"
+msgstr ""
+
+#: includes/classes/class-tstats-settings-widgets.php:84
+msgid "GitHub Sponsors"
 msgstr ""
 
 #: includes/classes/class-tstats-settings.php:56
@@ -597,14 +613,26 @@ msgstr ""
 msgid "Could not extract translations from file."
 msgstr ""
 
-#: translation-stats.php:122
+#. translators: 1: Plugin file, 2: Error message.
+#: translation-stats.php:121
+#, php-format
+msgid "The plugin %1$s has been deactivated due to an error: %2$s"
+msgstr ""
+
+#: translation-stats.php:124
 msgid "This plugin doesn&#8217;t work with your version of PHP."
 msgstr ""
 
 #. translators: %s Minimum PHP version required.
-#: translation-stats.php:132
+#: translation-stats.php:134
 #, php-format
 msgid "Requires PHP version %s or higher."
+msgstr ""
+
+#. translators: %s: URL to Update PHP page.
+#: translation-stats.php:145
+#, php-format
+msgid "<a href=\"%s\">Learn more about updating PHP</a>."
 msgstr ""
 
 #. Plugin URI of the plugin/theme
