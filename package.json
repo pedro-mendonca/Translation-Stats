@@ -4,7 +4,7 @@
   "dependencies": {},
   "name": "translation-stats",
   "description": "The plugin adds a \"Translation Stats\" column to the plugin list screen in WordPress admin.",
-  "version": "0.9.4",
+  "version": "0.9.5",
   "devDependencies": {
     "@wordpress/eslint-plugin": "^3.3.0",
     "eslint": "^6.8.0",
@@ -18,7 +18,7 @@
     "stylelint-config-recommended-scss": "^4.1.0",
     "stylelint-config-wordpress": "^16.0.0",
     "stylelint-scss": "^3.13.0",
-    "uglify-js": "^3.7.3"
+    "uglify-js": "^3.7.4"
   },
   "scripts": {
     "build": "npm run build:js",

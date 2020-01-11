@@ -1,8 +1,7 @@
 // Import GlotPress Colors
 @import "_global.scss";
 
-/* WordPress Installed Plugins table. */
-table.wp-list-table.plugins {
+table.wp-list-table.plugins { // WordPress Installed Plugins table.
 
 	th.column-translation-stats { // Translation Stats Column Header.
 		white-space: nowrap;
@@ -157,6 +156,7 @@ table.wp-list-table.plugins {
 				a.disabled div .subproject-bar,
 				a:hover div .subproject-bar,
 				a:focus div .subproject-bar, { // Configuration of easeOutCirc.
+
 					@include transition-easeOutCubic ( all, 300ms, cubic-bezier(0.075, 0.82, 0.165, 1), 0s );
 				}
 
@@ -173,7 +173,7 @@ table.wp-list-table.plugins {
 
 					div.percent0 {
 
-						.subproject-bar { // Stats bar 0% hover/focus text color and shadow
+						.subproject-bar { // Stats bar 0% hover/focus text color and shadow.
 							color: #fff;
 							text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
 						}
@@ -184,9 +184,9 @@ table.wp-list-table.plugins {
 
 		&.tstats-loading {
 
-			.translation-stats-content .translation-stats-content-stats div a div.subproject { /* https://codepen.io/brunjo/pen/azdWjY */
+			.translation-stats-content .translation-stats-content-stats div a div.subproject { // https://codepen.io/brunjo/pen/azdWjY
 
-				background-image: repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25) 10px, rgba(0, 0, 0, 0) 10px, rgba(0, 0, 0, 0) 20px); /* determines size */
+				background-image: repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25) 10px, rgba(0, 0, 0, 0) 10px, rgba(0, 0, 0, 0) 20px); // Determines size.
 				background-size: 28px 28px;
 				animation: tstats_bar_loading 0.5s linear infinite;
 			}
@@ -208,8 +208,8 @@ table.wp-list-table.plugins {
 	}
 }
 
-/* Translation Stats Settings Plugins table. */
-table.tstats-plugin-list-table {
+
+table.tstats-plugin-list-table { // Translation Stats Settings Plugins table.
 
 	.check-column {
 		padding-top: 0;
@@ -300,8 +300,7 @@ table.tstats-plugin-list-table {
 	}
 }
 
-/* Translation Stats Settings Layout. */
-.tstats-settings-wrapper {
+.tstats-settings-wrapper { // Translation Stats Settings Layout.
 	display: flex;
 	flex-wrap: wrap;
 
@@ -309,8 +308,7 @@ table.tstats-plugin-list-table {
 		flex-wrap: nowrap;
 	}
 
-	/* Translation Stats Settings Content. */
-	.tstats-settings__content {
+	.tstats-settings__content { // Translation Stats Settings Content.
 		width: 100%;
 
 		.nav-tab-wrapper {
@@ -340,14 +338,15 @@ table.tstats-plugin-list-table {
 		}
 	}
 
-	/* Translation Stats Settings Sidebar. */
-	.tstats-settings__sidebar {
+	.tstats-settings__sidebar { // Translation Stats Settings Sidebar.
 		width: 100%;
 		// flex-shrink: 0;
 		padding: 0;
 
 		@media (min-width: $break-large) {
-			width: 280px;
+			width: 25%;
+			min-width: 280px;
+			max-width: 350px;
 			padding-left: 20px;
 			order: 2;
 		}
@@ -378,11 +377,38 @@ table.tstats-plugin-list-table {
 							background-position: center;
 							background-size: contain;
 							height: 120px;
+							width: 230px;
 							background-repeat: no-repeat;
 						}
 
 					}
 
+				}
+
+				.tstats-sponsor {
+
+					h3::after {
+						content: " ☕";
+					}
+
+					ul {
+
+						form {
+
+							button.tstats-github-sponsor {
+
+								span,
+								i {
+									vertical-align: text-top;
+									font-size: large;
+								}
+
+								span {
+									color: #ea4aaa;
+								}
+							}
+						}
+					}
 				}
 
 			}

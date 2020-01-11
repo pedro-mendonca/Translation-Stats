@@ -1,4 +1,5 @@
-/* WordPress Installed Plugins table. */
+@charset "UTF-8";
+
 table.wp-list-table.plugins th.column-translation-stats {
 	white-space: nowrap;
 	width: 20%;
@@ -31,7 +32,8 @@ table.wp-list-table.plugins td.column-translation-stats .translation-stats-title
 	transition: all 600ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
 }
 
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-title .tstats-update-link button.tstats-update-button span:hover, table.wp-list-table.plugins td.column-translation-stats .translation-stats-title .tstats-update-link button.tstats-update-button span:focus {
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-title .tstats-update-link button.tstats-update-button span:hover,
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-title .tstats-update-link button.tstats-update-button span:focus {
 	transform: rotateZ(180deg);
 	color: #46b450;
 }
@@ -187,7 +189,6 @@ table.wp-list-table.plugins td.column-translation-stats.tstats-loading .translat
 	}
 }
 
-/* Translation Stats Settings Plugins table. */
 table.tstats-plugin-list-table .check-column {
 	padding-top: 0;
 	padding-bottom: 0;
@@ -259,7 +260,6 @@ table.tstats-plugin-list-table tbody .inactive .check-column.plugin-select {
 	padding: 0 0 0 6px;
 }
 
-/* Translation Stats Settings Layout. */
 .tstats-settings-wrapper {
 	display: flex;
 	flex-wrap: wrap;
@@ -302,7 +302,9 @@ table.tstats-plugin-list-table tbody .inactive .check-column.plugin-select {
 @media (min-width: 992px) {
 
 	.tstats-settings-wrapper .tstats-settings__sidebar {
-		width: 280px;
+		width: 25%;
+		min-width: 280px;
+		max-width: 350px;
 		padding-left: 20px;
 		order: 2;
 	}
@@ -331,7 +333,22 @@ table.tstats-plugin-list-table tbody .inactive .check-column.plugin-select {
 	background-position: center;
 	background-size: contain;
 	height: 120px;
+	width: 230px;
 	background-repeat: no-repeat;
+}
+
+.tstats-settings-wrapper .tstats-settings__sidebar .postbox .inside .tstats-sponsor h3::after {
+	content: " ☕";
+}
+
+.tstats-settings-wrapper .tstats-settings__sidebar .postbox .inside .tstats-sponsor ul form button.tstats-github-sponsor span,
+.tstats-settings-wrapper .tstats-settings__sidebar .postbox .inside .tstats-sponsor ul form button.tstats-github-sponsor i {
+	vertical-align: text-top;
+	font-size: large;
+}
+
+.tstats-settings-wrapper .tstats-settings__sidebar .postbox .inside .tstats-sponsor ul form button.tstats-github-sponsor span {
+	color: #ea4aaa;
 }
 
 .tstats-settings-wrapper .tstats-settings__sidebar .postbox .footer {

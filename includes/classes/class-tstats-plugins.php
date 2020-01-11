@@ -198,8 +198,14 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 
 			$locale_plugin_url  = 'https://translate.wordpress.org/locale/' . $locale['slug']['locale'] . '/' . $locale['slug']['variant'] . '/wp-plugins/' . $project_slug;
 			$locale_plugin_link = '<a href="' . esc_url( $locale_plugin_url ) . '" target="_blank">' . $locale['native_name'] . '</a>';
-			/* translators: %s Language native name. */
-			echo sprintf( wp_kses_post( __( 'Translation for %s', 'translation-stats' ) ), wp_kses_post( $locale_plugin_link ) );
+
+			printf(
+				wp_kses_post(
+					/* translators: %s Language native name. */
+					__( 'Translation for %s', 'translation-stats' )
+				),
+				wp_kses_post( $locale_plugin_link )
+			);
 
 		}
 

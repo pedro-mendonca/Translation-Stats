@@ -76,7 +76,8 @@ if ( ! class_exists( 'TStats_Update_Translations' ) ) {
 			}
 
 			// Extract translations from file.
-			$translations   = $this->tstats_extract_translations( $destination, $project, $locale );
+			$translations = $this->tstats_extract_translations( $destination, $project, $locale );
+			array_push( $result['log'], $translations['log'] );
 			$result['data'] = $translations['data'];
 			if ( is_wp_error( $result['data'] ) ) {
 				return $result;
@@ -209,6 +210,13 @@ if ( ! class_exists( 'TStats_Update_Translations' ) ) {
 			$domain    = $project['domain'] ? $project['domain'] . '-' : '';
 			$file_name = $domain . $locale['wp_locale'] . '.po';
 
+			// Report message.
+			$result['log'] = sprintf(
+				/* translators: %s: File name. */
+				esc_html__( 'Extracting translations from file %s…', 'translation-stats' ),
+				'<code>' . esc_html( $file_name ) . '</code>'
+			);
+
 			$translations = Gettext\Translations::fromPoFile( $destination . $file_name );
 
 			if ( ! $translations ) {
@@ -216,7 +224,7 @@ if ( ! class_exists( 'TStats_Update_Translations' ) ) {
 				// Report message.
 				$result['data'] = new WP_Error(
 					'extract-translations',
-					esc_html__( 'Could not extract file.', 'translation-stats' )
+					esc_html__( 'Could not extract translations from file.', 'translation-stats' )
 				);
 
 				return $result;
