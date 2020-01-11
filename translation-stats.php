@@ -116,9 +116,11 @@ function tstats_disabled_notice() {
 
 			<?php
 			printf(
-				/* translators: 1: Plugin file, 2: Error message. */
-				wp_kses_post( 'The plugin %1$s has been deactivated due to an error: %2$s', 'translation-stats' ),
-				'<strong>' . esc_html( $plugin_data['Name'] ) . '</strong>',
+				wp_kses_post(
+					/* translators: 1: Plugin file, 2: Error message. */
+					__( 'The plugin %1$s has been deactivated due to an error: %2$s', 'translation-stats' )
+				),
+				'<code>' . esc_html( $plugin_data['Name'] ) . '</code>',
 				esc_html__( 'This plugin doesn&#8217;t work with your version of PHP.', 'translation-stats' )
 			);
 			?>
@@ -137,9 +139,11 @@ function tstats_disabled_notice() {
 			// Capability added in WP 5.1: https://core.trac.wordpress.org/ticket/44457.
 			// Introduced in WP 5.1: https://developer.wordpress.org/reference/functions/wp_get_update_php_url/.
 			if ( current_user_can( 'update_php' ) && version_compare( $GLOBALS['wp_version'], '5.1', '>=' ) ) {
-				printf(
-					/* translators: %s: URL to Update PHP page. */
-					' ' . wp_kses_post( '<a href="%s">Learn more about updating PHP</a>.', 'translation-stats' ),
+				echo ' ' . sprintf(
+					wp_kses_post(
+						/* translators: %s: URL to Update PHP page. */
+						__( '<a href="%s">Learn more about updating PHP</a>.', 'translation-stats' )
+					),
 					esc_url( wp_get_update_php_url() )
 				);
 			}
