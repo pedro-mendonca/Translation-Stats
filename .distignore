@@ -1,4 +1,5 @@
 # OS
+.github/
 assets/
 tests/
 .DS_Store
@@ -25,7 +26,6 @@ phpcs.xml
 .travis.yml
 
 # Composer
-vendor/
 composer.json
 composer.lock
 
