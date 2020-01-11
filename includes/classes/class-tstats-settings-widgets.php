@@ -106,9 +106,6 @@ if ( ! class_exists( 'TStats_Settings_Widgets' ) ) {
 			<?php
 		}
 
-
-
-
 	}
 
 }
