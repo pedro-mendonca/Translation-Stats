@@ -316,7 +316,7 @@ msgid "Coffee"
 msgstr ""
 
 #: includes/classes/class-tstats-settings-widgets.php:79
-msgid "Do you enjoy this plugin?"
+msgid "Do you like this plugin?"
 msgstr ""
 
 #: includes/classes/class-tstats-settings-widgets.php:81
@@ -613,7 +613,7 @@ msgstr ""
 msgid "Could not extract translations from file."
 msgstr ""
 
-#. translators: 1: Plugin file, 2: Error message.
+#. translators: 1: Plugin name, 2: Error message.
 #: translation-stats.php:121
 #, php-format
 msgid "The plugin %1$s has been deactivated due to an error: %2$s"

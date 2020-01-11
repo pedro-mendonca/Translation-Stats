@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Translation Stats\n"
 "Report-Msgid-Bugs-To: https://github.com/pedro-mendonca/Translation-Stats/issues\n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2020-01-11 12:05+0000\n"
+"PO-Revision-Date: 2020-01-11 13:31+0000\n"
 "Last-Translator: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language-Team: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language: pt_PT\n"
@@ -317,7 +317,7 @@ msgid "Coffee"
 msgstr "Café"
 
 #: includes/classes/class-tstats-settings-widgets.php:79
-msgid "Do you enjoy this plugin?"
+msgid "Do you like this plugin?"
 msgstr "Gosta deste plugin?"
 
 #: includes/classes/class-tstats-settings-widgets.php:81
@@ -608,13 +608,13 @@ msgstr "Não foi indicado um URL válido."
 #: includes/classes/class-tstats-update-translations.php:216
 #, php-format
 msgid "Extracting translations from file %s…"
-msgstr "A extrair traduções do ficheiro %s…"
+msgstr "A extrair as traduções do ficheiro %s…"
 
 #: includes/classes/class-tstats-update-translations.php:227
 msgid "Could not extract translations from file."
 msgstr "Não foi possível extrair traduções do ficheiro."
 
-#. translators: 1: Plugin file, 2: Error message.
+#. translators: 1: Plugin name, 2: Error message.
 #: translation-stats.php:121
 #, php-format
 msgid "The plugin %1$s has been deactivated due to an error: %2$s"

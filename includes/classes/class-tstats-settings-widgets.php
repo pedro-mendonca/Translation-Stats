@@ -76,7 +76,7 @@ if ( ! class_exists( 'TStats_Settings_Widgets' ) ) {
 						<h3><?php esc_html_e( 'Coffee', 'translation-stats' ); ?></h3>
 						<ul>
 							<li>
-								<?php esc_html_e( 'Do you enjoy this plugin?', 'translation-stats' ); ?>
+								<?php esc_html_e( 'Do you like this plugin?', 'translation-stats' ); ?>
 								<br>
 								<?php esc_html_e( 'Support its further development by becoming a sponsor!', 'translation-stats' ); ?>
 							</li>
