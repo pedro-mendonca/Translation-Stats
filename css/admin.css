@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-/* WordPress Installed Plugins table. */
 table.wp-list-table.plugins th.column-translation-stats {
 	white-space: nowrap;
 	width: 20%;
@@ -190,7 +189,6 @@ table.wp-list-table.plugins td.column-translation-stats.tstats-loading .translat
 	}
 }
 
-/* Translation Stats Settings Plugins table. */
 table.tstats-plugin-list-table .check-column {
 	padding-top: 0;
 	padding-bottom: 0;
@@ -262,7 +260,6 @@ table.tstats-plugin-list-table tbody .inactive .check-column.plugin-select {
 	padding: 0 0 0 6px;
 }
 
-/* Translation Stats Settings Layout. */
 .tstats-settings-wrapper {
 	display: flex;
 	flex-wrap: wrap;
