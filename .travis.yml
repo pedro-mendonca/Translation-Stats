@@ -76,8 +76,9 @@ before_install:
   - phpenv config-rm xdebug.ini || echo "xdebug not available for PHP $TRAVIS_PHP_VERSION"
 
 install:
-  # Composer install only for PHP >= 7.
-  - if [ $TRAVIS_PHP_VERSION = '5.6' ]; then composer remove --dev szepeviktor/phpstan-wordpress; fi
+  # Remove PHPStan WordPress for PHP less than 7.1.
+  - if [[ $TRAVIS_PHP_VERSION = "5.6" || $TRAVIS_PHP_VERSION = "7.0" ]]; then composer remove --dev szepeviktor/phpstan-wordpress; fi
+  # Composer install.
   - composer install
 
 script:
@@ -87,6 +88,6 @@ script:
   - composer lint-i
   # Run against installed coding standards.
   - composer lint
-  # Run static analisys only for PHP >= 7.
-  # Suppress temporarily PHPStan from travis.
-  # - if [ $TRAVIS_PHP_VERSION != '5.6' ]; then composer stan; fi
+  # Run PHPStan only for PHP greater or equal to 7.1.
+  # Suppress temporarily from travis.
+  # - if [[ $TRAVIS_PHP_VERSION != "5.6" && $TRAVIS_PHP_VERSION != "7.0" ]]; then composer stan; fi
