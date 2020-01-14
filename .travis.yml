@@ -88,4 +88,5 @@ script:
   # Run against installed coding standards.
   - composer lint
   # Run static analisys only for PHP >= 7.
-  - if [ $TRAVIS_PHP_VERSION != '5.6' ]; then composer stan; fi
+  # Suppress temporarily PHPStan from travis.
+  # - if [ $TRAVIS_PHP_VERSION != '5.6' ]; then composer stan; fi
