@@ -17,11 +17,13 @@
   "require-dev": {
     "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
     "wp-coding-standards/wpcs": "^2.2",
-    "phpcompatibility/phpcompatibility-wp": "^2.1"
+    "phpcompatibility/phpcompatibility-wp": "^2.1",
+    "szepeviktor/phpstan-wordpress": "^0.5.0"
   },
   "scripts": {
     "lint": "phpcs -v --standard=phpcs.xml",
     "lint-fix": "phpcbf -v --standard=phpcs.xml",
-    "lint-i": "phpcs -i"
+    "lint-i": "phpcs -i",
+    "stan": "phpstan analyse -c phpstan.neon --memory-limit=2G"
   }
 }
