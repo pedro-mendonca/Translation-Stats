@@ -92,7 +92,7 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 			}
 
 			$notice_message_status = sprintf(
-				'%s</br>%s',
+				'%s<br>%s',
 				sprintf(
 					wp_kses_post(
 						/* translators: 1: WordPress version. 2: Locale name. */
@@ -270,7 +270,7 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 
 				$notice_type           = 'warning';
 				$notice_message_status = sprintf(
-					'%s</br>%s',
+					'%s<br>%s',
 					sprintf(
 						wp_kses_post(
 							/* translators: 1: WordPress version. 2: Locale name. */

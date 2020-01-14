@@ -225,7 +225,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 				</button>
 			</div>
 
-			<br/><br/>
+			<br><br>
 
 			<?php
 		}

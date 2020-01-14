@@ -134,7 +134,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		public function tstats_debug_info() {
 			if ( TSTATS_DEBUG ) {
 				?>
-				<br/>
+				<br>
 				<div class="tstats-debug-block notice notice-alt inline notice-info">
 					<?php
 					// Show server info.
@@ -144,7 +144,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 					// Show the site transients debug info.
 					$this->tstats_debug_info__transients();
 					?>
-					<br/>
+					<br>
 				</div>
 				<?php
 			}
@@ -184,7 +184,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 					foreach ( $test_functions as $test_function ) {
 						$dashicon = function_exists( $test_function ) ? 'dashicons-yes' : 'dashicons-no';
 						?>
-						<span class="dashicons <?php echo esc_html( $dashicon ); ?>"></span><?php echo esc_html( $test_function . '()' ); ?><br/>
+						<span class="dashicons <?php echo esc_html( $dashicon ); ?>"></span><?php echo esc_html( $test_function . '()' ); ?><br>
 						<?php
 					}
 				} else {
@@ -307,7 +307,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 						foreach ( $tstats_transients as $tstats_transient ) {
 							echo esc_html( substr( $tstats_transient, strlen( '_transient_' ) ) );
 							?>
-							<br/>
+							<br>
 							<?php
 						}
 					} else {

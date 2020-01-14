@@ -44,7 +44,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 				esc_html_e( 'Select the plugins and subprojects you want to show the translation stats from the list of installed plugins.', 'translation-stats' );
 				?>
 			</p>
-			<br/>
+			<br>
 			<?php
 
 			$this->tstats_render_settings__plugins_list();
