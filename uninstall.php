@@ -15,6 +15,7 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 
 // Check if it is a multisite uninstall - if so, run the uninstall function for each blog id.
 if ( is_multisite() ) {
+	global $wpdb;
 	foreach ( $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" ) as $tstats_blog ) { // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
 		switch_to_blog( $tstats_blog );
 		tstats_uninstall();
