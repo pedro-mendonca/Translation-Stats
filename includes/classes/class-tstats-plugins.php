@@ -83,6 +83,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 * @since 0.8.0
 		 *
 		 * @param array $columns   Columns array.
+		 *
 		 * @return array $columns  Columns array with added 'translation-stats'.
 		 */
 		public function tstats_add_translation_stats_column( $columns ) {
@@ -407,6 +408,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 * @param string $subproject       Translation subproject (' Dev', 'Dev Readme', 'Stable', 'Stable Readme' ).
 		 * @param string $subproject_slug  Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).
 		 * @param string $force_update     True: Force get new stats. False: Use transients.
+		 *
 		 * @return array $stats_bar        Subproject stats bar and error boolean.
 		 */
 		public function tstats_render_stats_bar( $locale, $project_slug, $subproject, $subproject_slug, $force_update ) {
@@ -513,6 +515,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 * @param string $project_slug        Plugin Slug.
 		 * @param string $subproject_slug     Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).
 		 * @param string $force_update        True: Force get new stats. False: Use transients.
+		 *
 		 * @return string $translation_stats  Plugin stats.
 		 */
 		public function tstats_plugin_subproject_stats( $locale, $project_slug, $subproject_slug, $force_update ) {

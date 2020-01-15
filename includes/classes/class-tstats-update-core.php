@@ -467,6 +467,7 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 		 * @since 0.9.5
 		 *
 		 * @param object $transient    The 'update_core' transient object.
+		 *
 		 * @return object $transient   The same or a modified version of the transient.
 		 */
 		public function tstats_remove_previous_wp_translation( $transient ) {

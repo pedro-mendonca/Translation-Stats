@@ -73,6 +73,7 @@ if ( ! class_exists( 'TStats_Gettext' ) ) {
 		 * @param array  $locale           Locale array.
 		 * @param object $translations     Extracted translations to export.
 		 * @param bool   $include_domain   Include the ${domain} in the file name. Set to true or false. Defaults to true.
+		 *
 		 * @return array                   List of created JSON files.
 		 */
 		public function tstats_make_json( $destination, $project, $locale, $translations, $include_domain = true ) {

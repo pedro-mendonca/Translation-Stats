@@ -49,6 +49,7 @@ if ( ! class_exists( 'TStats_Settings_Footer' ) ) {
 		 * @since 0.9.0
 		 *
 		 * @param string $text   Footer text.
+		 *
 		 * @return string $text  Return translation stats footer text.
 		 */
 		public function tstats_admin_footer_text( $text ) {
@@ -87,6 +88,7 @@ if ( ! class_exists( 'TStats_Settings_Footer' ) ) {
 		 * @since 0.9.0
 		 *
 		 * @param string $text   Footer version.
+		 *
 		 * @return string $text  Return translation stats footer version.
 		 */
 		public function tstats_admin_footer_version( $text ) {

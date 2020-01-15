@@ -26,6 +26,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 * @since 0.8.0
 		 *
 		 * @param string $plugin_file  Plugin ID ( e.g. 'slug/plugin-name.php' ).
+		 *
 		 * @return bool                Returns 'true' if the plugin exists on WordPress.org.
 		 */
 		public function tstats_plugin_on_wporg( $plugin_file ) {
@@ -45,6 +46,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 *
 		 * @param string $plugin_file       Plugin ID ( e.g. 'slug/plugin-name.php' ).
 		 * @param string $metadata          Metadata field ( e.g. 'slug' ).
+		 *
 		 * @return string $plugin_metadata  Returns metadata value from plugin.
 		 */
 		public function tstats_plugin_metadata( $plugin_file, $metadata ) {
@@ -68,6 +70,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 * @since 0.8.0
 		 *
 		 * @param string $plugin    Plugin slug (project or project/subproject).
+		 *
 		 * @return string $api_get  Returns the response from translate.WordPress.org API URL.
 		 */
 		public function tstats_translations_api_get_plugin( $plugin ) {
@@ -82,6 +85,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 * @since 0.8.0
 		 *
 		 * @param string $project_slug  Plugin Slug (e.g. 'plugin-slug').
+		 *
 		 * @return string $on_wporg     Returns 'true' if the translation project exist on WordPress.org.
 		 */
 		public function tstats_plugin_project_on_translate_wporg( $project_slug ) {
@@ -107,6 +111,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 *
 		 * @param string $project_slug     Plugin Slug (e.g. 'plugin-slug').
 		 * @param string $subproject_slug  Plugin Subproject Slug (e.g. 'dev', 'dev-readme', 'stable', 'stable-readme').
+		 *
 		 * @return string                  Returns 'true' if the translation subproject exist on WordPress.org.
 		 */
 		public function tstats_plugin_subproject_on_translate_wporg( $project_slug, $subproject_slug ) {
@@ -243,6 +248,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 * @since 0.9.0
 		 *
 		 * @param string $project   Set the project API URL you want to get.
+		 *
 		 * @return string $api_url  Returns API URL.
 		 */
 		public function tstats_translations_api_url( $project ) {
@@ -270,6 +276,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 * @since 0.9.5
 		 *
 		 * @param string $project  Set the project URL you want to get.
+		 *
 		 * @return string $url     Returns URL.
 		 */
 		public function tstats_translations_url( $project ) {

@@ -43,6 +43,7 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 		 * @since 0.8.0
 		 *
 		 * @param array $links  Array of plugin action links.
+		 *
 		 * @return array        Array with added Translation Stats action links.
 		 */
 		public function tstats_action_links( $links ) {
