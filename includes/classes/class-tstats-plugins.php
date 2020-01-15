@@ -407,7 +407,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 * @param string $subproject       Translation subproject (' Dev', 'Dev Readme', 'Stable', 'Stable Readme' ).
 		 * @param string $subproject_slug  Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).
 		 * @param string $force_update     True: Force get new stats. False: Use transients.
-		 * @return string $stats_bar       Subproject stats bar.
+		 * @return array $stats_bar        Subproject stats bar and error boolean.
 		 */
 		public function tstats_render_stats_bar( $locale, $project_slug, $subproject, $subproject_slug, $force_update ) {
 
