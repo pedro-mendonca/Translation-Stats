@@ -19,6 +19,7 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 	 */
 	class TStats_Main {
 
+
 		/**
 		 * Constructor.
 		 */

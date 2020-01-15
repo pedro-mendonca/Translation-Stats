@@ -19,6 +19,7 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 	 */
 	class TStats_Settings_API {
 
+
 		/**
 		 * Constructor.
 		 */

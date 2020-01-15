@@ -14,6 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'TStats_Translations_API' ) ) {
 
+
 	/**
 	 * Class TStats_Translations_API.
 	 */

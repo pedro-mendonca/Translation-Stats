@@ -19,6 +19,7 @@ if ( ! class_exists( 'TStats_Transients' ) ) {
 	 */
 	class TStats_Transients {
 
+
 		/**
 		 * Retrieve the site transients.
 		 *
