@@ -295,7 +295,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 * @param string $project      Project.
 		 * @param string $locale       Locale.
 		 *
-		 * @return $translation_path   File path to get source.
+		 * @return string $translation_path   File path to get source.
 		 */
 		public function tstats_translation_path( $wp_version, $project, $locale ) {
 
