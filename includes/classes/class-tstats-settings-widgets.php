@@ -19,6 +19,15 @@ if ( ! class_exists( 'TStats_Settings_Widgets' ) ) {
 	 */
 	class TStats_Settings_Widgets {
 
+
+		/**
+		 * Globals.
+		 *
+		 * @var object
+		 */
+		protected $tstats_globals;
+
+
 		/**
 		 * Constructor.
 		 */

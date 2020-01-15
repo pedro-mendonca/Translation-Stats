@@ -21,6 +21,35 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 
 
 		/**
+		 * Globals.
+		 *
+		 * @var object
+		 */
+		protected $tstats_globals;
+
+		/**
+		 * Notices.
+		 *
+		 * @var object
+		 */
+		protected $tstats_notices;
+
+		/**
+		 * Translations API.
+		 *
+		 * @var object
+		 */
+		protected $tstats_translations_api;
+
+		/**
+		 * Update Translations.
+		 *
+		 * @var object
+		 */
+		protected $tstats_update_translations;
+
+
+		/**
 		 * Constructor.
 		 */
 		public function __construct() {

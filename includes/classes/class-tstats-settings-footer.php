@@ -19,6 +19,15 @@ if ( ! class_exists( 'TStats_Settings_Footer' ) ) {
 	 */
 	class TStats_Settings_Footer {
 
+
+		/**
+		 * Globals.
+		 *
+		 * @var object
+		 */
+		protected $tstats_globals;
+
+
 		/**
 		 * Constructor.
 		 */

@@ -19,6 +19,29 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 	 */
 	class TStats_Plugins {
 
+
+		/**
+		 * Globals.
+		 *
+		 * @var object
+		 */
+		protected $tstats_globals;
+
+		/**
+		 * Notices.
+		 *
+		 * @var object
+		 */
+		protected $tstats_notices;
+
+		/**
+		 * Translations API.
+		 *
+		 * @var object
+		 */
+		protected $tstats_translations_api;
+
+
 		/**
 		 * Constructor.
 		 */

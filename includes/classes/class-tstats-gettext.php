@@ -30,6 +30,14 @@ if ( ! class_exists( 'TStats_Gettext' ) ) {
 
 
 		/**
+		 * Notices.
+		 *
+		 * @var object
+		 */
+		protected $tstats_notices;
+
+
+		/**
 		 * Constructor.
 		 */
 		public function __construct() {

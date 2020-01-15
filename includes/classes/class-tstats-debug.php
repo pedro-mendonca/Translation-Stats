@@ -19,6 +19,29 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 	 */
 	class TStats_Debug {
 
+
+		/**
+		 * Transients.
+		 *
+		 * @var object
+		 */
+		protected $tstats_transients;
+
+		/**
+		 * Translations API.
+		 *
+		 * @var object
+		 */
+		protected $tstats_translations_api;
+
+		/**
+		 * Globals.
+		 *
+		 * @var object
+		 */
+		protected $tstats_globals;
+
+
 		/**
 		 * Constructor.
 		 */

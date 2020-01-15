@@ -19,6 +19,36 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 	 */
 	class TStats_Settings {
 
+
+		/**
+		 * Notices.
+		 *
+		 * @var object
+		 */
+		protected $tstats_notices;
+
+		/**
+		 * Transients.
+		 *
+		 * @var object
+		 */
+		protected $tstats_transients;
+
+		/**
+		 * Settings API.
+		 *
+		 * @var object
+		 */
+		protected $tstats_settings_api;
+
+		/**
+		 * Plugins Settings.
+		 *
+		 * @var object
+		 */
+		protected $tstats_settings_plugins;
+
+
 		/**
 		 * Constructor.
 		 */
