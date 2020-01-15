@@ -271,6 +271,9 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 				$available_translations = get_site_transient( 'available_translations' );
 			}
 
+			// Initialize variable.
+			$translations_date = '';
+
 			// Check for translations update in core update data.
 			if ( isset( $available_translations[ $locale['wp_locale'] ]['updated'] ) ) {
 				// Get language pack creation date.

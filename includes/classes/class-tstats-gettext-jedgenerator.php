@@ -35,6 +35,7 @@ if ( ! class_exists( 'TStats_Gettext_JedGenerator' ) ) {
 		 * @return bool
 		 */
 		public static function toString( Translations $translations, array $options = array() ) {
+			$data     = '';
 			$options += static::$options;
 			$domain   = $translations->getDomain() ? $translations->getDomain() : 'messages';
 			$messages = static::buildMessages( $translations );

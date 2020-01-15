@@ -280,6 +280,9 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 */
 		public function tstats_stats_plugin_widget_content_load() {
 
+			// Initialize variable.
+			$force_update = '';
+
 			if ( isset( $_POST['forceUpdate'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
 				$force_update = 'true' === sanitize_key( $_POST['forceUpdate'] ) ? true : false; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 			}
@@ -418,6 +421,9 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 
 			// Get plugin subproject translation stats.
 			$translation_stats = $this->tstats_plugin_subproject_stats( $locale, $project_slug, $subproject_slug, $force_update );
+
+			// Initializing variable.
+			$percent_translated = '';
 
 			// If translation stats are not an object, project not found.
 			if ( ! is_object( $translation_stats ) ) {
