@@ -174,8 +174,14 @@ function tstats_compatible_version() {
 	return true;
 }
 
-// Register classes autoloader function.
+
+/**
+ * Register classes autoloader function.
+ *
+ * @since 0.9.5.6
+ */
 spl_autoload_register( 'tstats_class_autoload' );
+
 
 /**
  * Class autoloader.
@@ -197,6 +203,7 @@ function tstats_class_autoload( $class_name ) {
 
 	require_once $tstats_class;
 }
+
 
 // Include Composer autoload.
 require_once TSTATS_DIR_PATH . 'vendor/autoload.php';
