@@ -53,5 +53,3 @@ if ( ! class_exists( 'TStats_Settings_Sidebar' ) ) {
 	}
 
 }
-
-new TStats_Settings_Sidebar();

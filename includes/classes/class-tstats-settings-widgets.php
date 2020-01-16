@@ -118,5 +118,3 @@ if ( ! class_exists( 'TStats_Settings_Widgets' ) ) {
 	}
 
 }
-
-new TStats_Settings_Widgets();

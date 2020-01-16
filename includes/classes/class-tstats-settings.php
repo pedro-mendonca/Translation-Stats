@@ -72,6 +72,16 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 			// Add plugin settings sections.
 			add_action( 'admin_init', array( $this, 'tstats_settings_sections' ) );
 
+			// Initialize Settings Sidebar.
+			new TStats_Settings_Sidebar();
+
+			// Initialize Settings Widgets.
+			new TStats_Settings_Widgets();
+
+			// Initialize Settings Footer.
+			new TStats_Settings_Footer();
+
+
 		}
 
 
@@ -530,5 +540,3 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 	}
 
 }
-
-new TStats_Settings();

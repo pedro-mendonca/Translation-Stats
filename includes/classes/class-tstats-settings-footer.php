@@ -106,5 +106,3 @@ if ( ! class_exists( 'TStats_Settings_Footer' ) ) {
 	}
 
 }
-
-new TStats_Settings_Footer();
