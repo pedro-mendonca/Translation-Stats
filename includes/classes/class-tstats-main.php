@@ -217,5 +217,3 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 	}
 
 }
-
-new TStats_Main();

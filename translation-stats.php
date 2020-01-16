@@ -201,8 +201,10 @@ function tstats_class_autoload( $class_name ) {
 // Include Composer autoload.
 require_once TSTATS_DIR_PATH . 'vendor/autoload.php';
 
+// Initialize the plugin.
+new TStats_Main();
+
 // Include class files used by the plugin.
-require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-main.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-globals.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-notices.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-transients.php';
