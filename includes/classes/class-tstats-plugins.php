@@ -565,5 +565,3 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 	}
 
 }
-
-new TStats_Plugins();

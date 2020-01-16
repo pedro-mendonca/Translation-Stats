@@ -37,6 +37,9 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 			// Initialize the plugin settings.
 			new TStats_Settings();
 
+			// Initialize the plugins page metadata view.
+			new TStats_Plugins();
+
 		}
 
 
