@@ -214,4 +214,3 @@ new TStats_Main();
 // Include class files used by the plugin.
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-update-translations.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-update-core.php';
-require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-debug.php';

@@ -443,5 +443,3 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 	}
 
 }
-
-new TStats_Debug();
