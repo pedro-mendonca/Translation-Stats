@@ -327,5 +327,3 @@ if ( ! class_exists( 'TStats_Update_Translations' ) ) {
 	}
 
 }
-
-new TStats_Update_Translations();
