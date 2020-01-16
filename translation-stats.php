@@ -212,18 +212,10 @@ require_once TSTATS_DIR_PATH . 'vendor/autoload.php';
 new TStats_Main();
 
 // Include class files used by the plugin.
-require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-globals.php';
-require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-notices.php';
-require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-transients.php';
-require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-translations-api.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-settings-sidebar.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-settings-widgets.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-settings-footer.php';
-require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-settings-api.php';
-require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-settings-plugins.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-settings.php';
-require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-gettext-jedgenerator.php';
-require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-gettext.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-update-translations.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-update-core.php';
 require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-plugins.php';
