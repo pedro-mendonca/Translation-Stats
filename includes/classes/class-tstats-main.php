@@ -40,6 +40,9 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 			// Initialize the plugins page metadata view.
 			new TStats_Plugins();
 
+			// Initialize the Update Core page metadata view.
+			new TStats_Update_Core();
+
 			// Initialize the plugin debug.
 			new TStats_Debug();
 

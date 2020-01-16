@@ -485,5 +485,3 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 	}
 
 }
-
-new TStats_Update_Core();

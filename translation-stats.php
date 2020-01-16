@@ -210,6 +210,3 @@ require_once TSTATS_DIR_PATH . 'vendor/autoload.php';
 
 // Initialize the plugin.
 new TStats_Main();
-
-// Include class files used by the plugin.
-require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-update-core.php';
