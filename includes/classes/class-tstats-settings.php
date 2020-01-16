@@ -81,7 +81,6 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 			// Initialize Settings Footer.
 			new TStats_Settings_Footer();
 
-
 		}
 
 
