@@ -82,7 +82,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		public function tstats_settings_tab__debug() {
 			if ( TSTATS_DEBUG ) {
 				?>
-				<a class="nav-tab" href="#debug"><?php esc_html_e( 'Debug', 'translation-stats' ); ?></a>
+				<a class="nav-tab" href="#debug"><span class="dashicons dashicons-info"></span> <?php esc_html_e( 'Debug', 'translation-stats' ); ?></a>
 				<?php
 			}
 		}
