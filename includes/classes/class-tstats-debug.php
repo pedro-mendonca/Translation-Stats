@@ -207,7 +207,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 					foreach ( $test_functions as $test_function ) {
 						$dashicon = function_exists( $test_function ) ? 'dashicons-yes' : 'dashicons-no';
 						?>
-						<span class="dashicons <?php echo esc_html( $dashicon ); ?>"></span><?php echo esc_html( $test_function . '()' ); ?><br>
+						<span class="dashicons <?php echo esc_attr( $dashicon ); ?>"></span><?php echo esc_html( $test_function . '()' ); ?><br>
 						<?php
 					}
 				} else {
