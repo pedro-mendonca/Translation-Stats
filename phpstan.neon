@@ -16,6 +16,8 @@ parameters:
 		# Dependencies
 		- %currentWorkingDirectory%/node_modules/*
 		- %currentWorkingDirectory%/vendor/*
+		# Temporarily exlusions:
+		- %currentWorkingDirectory%/uninstall.php
 	autoload_files:
 		# Plugin main file
 		- %currentWorkingDirectory%/translation-stats.php
