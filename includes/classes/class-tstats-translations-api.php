@@ -71,7 +71,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		/**
 		 * Get plugin slug from its file path.
 		 *
-		 * @since 0.9.5.6
+		 * @since 0.9.6
 		 *
 		 * @param string $plugin_file   Plugin ID ( e.g. 'slug/plugin-name.php' ).
 		 *
