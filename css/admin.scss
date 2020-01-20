@@ -209,20 +209,29 @@ table.wp-list-table.plugins { // WordPress Installed Plugins table.
 }
 
 
-table.tstats-plugin-list-table { // Translation Stats Settings Plugins table.
+table.tstats-plugin-list-table.widefat { // Translation Stats Settings Plugins table.
 
-	.check-column {
-		padding-top: 0;
-		padding-bottom: 0;
-	}
+	tr {
 
-	input[type="checkbox"],
-	input[type="radio"] {
-		vertical-align: text-top;
-	}
+		td,
+		th {
 
-	input[type="checkbox"][disabled] {
-		pointer-events: none;
+			&.check-column {
+				vertical-align: middle;
+				padding-top: 0;
+				padding-bottom: 0;
+
+				input[type="checkbox"],
+				input[type="radio"] {
+					vertical-align: middle;
+
+				}
+
+				input[type="checkbox"][disabled] {
+					pointer-events: none;
+				}
+			}
+		}
 	}
 
 	thead {
@@ -240,6 +249,12 @@ table.tstats-plugin-list-table { // Translation Stats Settings Plugins table.
 
 		tr {
 
+			td,
+			th {
+				vertical-align: middle;
+			}
+
+
 			&.disabled {
 
 				background-color: #f1f1f1;
@@ -254,7 +269,7 @@ table.tstats-plugin-list-table { // Translation Stats Settings Plugins table.
 
 				.plugin-name,
 				.plugin-author,
-				.plugin-slug {
+				.plugin-slug-text-domain {
 					opacity: 0.33;
 				}
 			}
@@ -270,8 +285,27 @@ table.tstats-plugin-list-table { // Translation Stats Settings Plugins table.
 
 			td {
 
-				.check-column {
-					padding: 0 0 0 2px;
+				&.plugin-slug-text-domain {
+
+					div {
+						display: inline-block;
+						vertical-align: middle;
+
+						.dashicons-yes {
+							color: #008000;
+						}
+
+						.dashicons-no {
+							color: #f00;
+						}
+
+						.code-error {
+							background-color: rgba(255, 0, 0, 0.07);
+							color: #f00;
+						}
+
+					}
+
 				}
 			}
 		}
@@ -284,17 +318,10 @@ table.tstats-plugin-list-table { // Translation Stats Settings Plugins table.
 		}
 
 		.check-column.plugin-subproject {
-			vertical-align: middle;
 			text-align: center;
 		}
 
-		.check-column.plugin-select {
-			vertical-align: middle;
-			padding: 0 0 0 2px;
-		}
-
 		.inactive .check-column.plugin-select {
-			vertical-align: middle;
 			padding: 0 0 0 6px;
 		}
 	}

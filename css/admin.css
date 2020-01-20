@@ -189,74 +189,91 @@ table.wp-list-table.plugins td.column-translation-stats.tstats-loading .translat
 	}
 }
 
-table.tstats-plugin-list-table .check-column {
+table.tstats-plugin-list-table.widefat tr td.check-column,
+table.tstats-plugin-list-table.widefat tr th.check-column {
+	vertical-align: middle;
 	padding-top: 0;
 	padding-bottom: 0;
 }
 
-table.tstats-plugin-list-table input[type="checkbox"],
-table.tstats-plugin-list-table input[type="radio"] {
-	vertical-align: text-top;
+table.tstats-plugin-list-table.widefat tr td.check-column input[type="checkbox"],
+table.tstats-plugin-list-table.widefat tr td.check-column input[type="radio"],
+table.tstats-plugin-list-table.widefat tr th.check-column input[type="checkbox"],
+table.tstats-plugin-list-table.widefat tr th.check-column input[type="radio"] {
+	vertical-align: middle;
 }
 
-table.tstats-plugin-list-table input[type="checkbox"][disabled] {
+table.tstats-plugin-list-table.widefat tr td.check-column input[type="checkbox"][disabled],
+table.tstats-plugin-list-table.widefat tr th.check-column input[type="checkbox"][disabled] {
 	pointer-events: none;
 }
 
-table.tstats-plugin-list-table thead .column-subproject {
+table.tstats-plugin-list-table.widefat thead .column-subproject {
 	width: 10em;
 	overflow: hidden;
 	text-align: center;
 	vertical-align: text-top;
 }
 
-table.tstats-plugin-list-table tbody tr.disabled {
+table.tstats-plugin-list-table.widefat tbody tr td,
+table.tstats-plugin-list-table.widefat tbody tr th {
+	vertical-align: middle;
+}
+
+table.tstats-plugin-list-table.widefat tbody tr.disabled {
 	background-color: #f1f1f1;
 }
 
-table.tstats-plugin-list-table tbody tr.disabled th {
+table.tstats-plugin-list-table.widefat tbody tr.disabled th {
 	border-left: 4px solid transparent;
 }
 
-table.tstats-plugin-list-table tbody tr.disabled .plugin-name {
+table.tstats-plugin-list-table.widefat tbody tr.disabled .plugin-name {
 	padding: 10px 9px;
 }
 
-table.tstats-plugin-list-table tbody tr.disabled .plugin-name,
-table.tstats-plugin-list-table tbody tr.disabled .plugin-author,
-table.tstats-plugin-list-table tbody tr.disabled .plugin-slug {
+table.tstats-plugin-list-table.widefat tbody tr.disabled .plugin-name,
+table.tstats-plugin-list-table.widefat tbody tr.disabled .plugin-author,
+table.tstats-plugin-list-table.widefat tbody tr.disabled .plugin-slug-text-domain {
 	opacity: 0.33;
 }
 
-table.tstats-plugin-list-table tbody tr .check-column input[type="checkbox"] {
+table.tstats-plugin-list-table.widefat tbody tr .check-column input[type="checkbox"] {
 	margin-top: 0;
 	margin-bottom: 0;
 	margin-right: 0;
 }
 
-table.tstats-plugin-list-table tbody tr td .check-column {
-	padding: 0 0 0 2px;
+table.tstats-plugin-list-table.widefat tbody tr td.plugin-slug-text-domain div {
+	display: inline-block;
+	vertical-align: middle;
 }
 
-table.tstats-plugin-list-table tbody tr.active + tr.inactive td,
-table.tstats-plugin-list-table tbody tr.active + tr.inactive th,
-table.tstats-plugin-list-table tbody tr.active + tr.disabled td,
-table.tstats-plugin-list-table tbody tr.active + tr.disabled th {
+table.tstats-plugin-list-table.widefat tbody tr td.plugin-slug-text-domain div .dashicons-yes {
+	color: #008000;
+}
+
+table.tstats-plugin-list-table.widefat tbody tr td.plugin-slug-text-domain div .dashicons-no {
+	color: #f00;
+}
+
+table.tstats-plugin-list-table.widefat tbody tr td.plugin-slug-text-domain div .code-error {
+	background-color: rgba(255, 0, 0, 0.07);
+	color: #f00;
+}
+
+table.tstats-plugin-list-table.widefat tbody tr.active + tr.inactive td,
+table.tstats-plugin-list-table.widefat tbody tr.active + tr.inactive th,
+table.tstats-plugin-list-table.widefat tbody tr.active + tr.disabled td,
+table.tstats-plugin-list-table.widefat tbody tr.active + tr.disabled th {
 	border-top: 0 solid;
 }
 
-table.tstats-plugin-list-table tbody .check-column.plugin-subproject {
-	vertical-align: middle;
+table.tstats-plugin-list-table.widefat tbody .check-column.plugin-subproject {
 	text-align: center;
 }
 
-table.tstats-plugin-list-table tbody .check-column.plugin-select {
-	vertical-align: middle;
-	padding: 0 0 0 2px;
-}
-
-table.tstats-plugin-list-table tbody .inactive .check-column.plugin-select {
-	vertical-align: middle;
+table.tstats-plugin-list-table.widefat tbody .inactive .check-column.plugin-select {
 	padding: 0 0 0 6px;
 }
 
