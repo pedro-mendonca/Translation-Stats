@@ -15,7 +15,7 @@
     "gettext/gettext": "^4.8.1"
   },
   "require-dev": {
-    "dealerdirect/phpcodesniffer-composer-installer": "^0.5.0",
+    "dealerdirect/phpcodesniffer-composer-installer": "^0.6.0",
     "wp-coding-standards/wpcs": "^2.2",
     "phpcompatibility/phpcompatibility-wp": "^2.1",
     "szepeviktor/phpstan-wordpress": "^0.5.0"
