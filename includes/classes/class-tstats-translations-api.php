@@ -53,6 +53,10 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 			$update_plugins = get_site_transient( 'update_plugins' );
 			// Check if plugin is on WordPress.org.
 			if ( ! $this->tstats_plugin_on_wporg( $plugin_file ) ) {
+				// If plugin doesn't have 'slug' key in metadata, get it from its file path.
+				if ( 'slug' === $metadata ) {
+					return $this->tstats_get_plugin_slug( $plugin_file );
+				}
 				return '';
 			}
 			if ( isset( $update_plugins->response[ $plugin_file ]->$metadata ) ) {
@@ -61,6 +65,25 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 			if ( isset( $update_plugins->no_update[ $plugin_file ]->$metadata ) ) {
 				return $update_plugins->no_update[ $plugin_file ]->$metadata;
 			}
+		}
+
+
+		/**
+		 * Get plugin slug from its file path.
+		 *
+		 * @since 0.9.5.6
+		 *
+		 * @param string $plugin_file   Plugin ID ( e.g. 'slug/plugin-name.php' ).
+		 *
+		 * @return string   Plugin slug.
+		 */
+		public function tstats_get_plugin_slug( $plugin_file ) {
+			if ( false !== strpos( $plugin_file, '/' ) ) {
+				$plugin_file_parts = explode( '/', $plugin_file );
+			} else {
+				$plugin_file_parts = explode( '.', $plugin_file );
+			}
+			return sanitize_title( $plugin_file_parts[0] );
 		}
 
 
