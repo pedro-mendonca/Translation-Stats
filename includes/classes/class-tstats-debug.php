@@ -19,6 +19,29 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 	 */
 	class TStats_Debug {
 
+
+		/**
+		 * Transients.
+		 *
+		 * @var object
+		 */
+		protected $tstats_transients;
+
+		/**
+		 * Translations API.
+		 *
+		 * @var object
+		 */
+		protected $tstats_translations_api;
+
+		/**
+		 * Globals.
+		 *
+		 * @var object
+		 */
+		protected $tstats_globals;
+
+
 		/**
 		 * Constructor.
 		 */
@@ -59,7 +82,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		public function tstats_settings_tab__debug() {
 			if ( TSTATS_DEBUG ) {
 				?>
-				<a class="nav-tab" href="#debug"><?php esc_html_e( 'Debug', 'translation-stats' ); ?></a>
+				<a class="nav-tab" href="#debug"><span class="dashicons dashicons-info"></span> <?php esc_html_e( 'Debug', 'translation-stats' ); ?></a>
 				<?php
 			}
 		}
@@ -134,7 +157,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		public function tstats_debug_info() {
 			if ( TSTATS_DEBUG ) {
 				?>
-				<br/>
+				<br>
 				<div class="tstats-debug-block notice notice-alt inline notice-info">
 					<?php
 					// Show server info.
@@ -144,7 +167,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 					// Show the site transients debug info.
 					$this->tstats_debug_info__transients();
 					?>
-					<br/>
+					<br>
 				</div>
 				<?php
 			}
@@ -184,7 +207,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 					foreach ( $test_functions as $test_function ) {
 						$dashicon = function_exists( $test_function ) ? 'dashicons-yes' : 'dashicons-no';
 						?>
-						<span class="dashicons <?php echo esc_html( $dashicon ); ?>"></span><?php echo esc_html( $test_function . '()' ); ?><br/>
+						<span class="dashicons <?php echo esc_attr( $dashicon ); ?>"></span><?php echo esc_html( $test_function . '()' ); ?><br>
 						<?php
 					}
 				} else {
@@ -307,7 +330,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 						foreach ( $tstats_transients as $tstats_transient ) {
 							echo esc_html( substr( $tstats_transient, strlen( '_transient_' ) ) );
 							?>
-							<br/>
+							<br>
 							<?php
 						}
 					} else {
@@ -420,5 +443,3 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 	}
 
 }
-
-new TStats_Debug();

@@ -117,7 +117,7 @@ function tstats_disabled_notice() {
 			<?php
 			printf(
 				wp_kses_post(
-					/* translators: 1: Plugin file, 2: Error message. */
+					/* translators: 1: Plugin name, 2: Error message. */
 					__( 'The plugin %1$s has been deactivated due to an error: %2$s', 'translation-stats' )
 				),
 				'<code>' . esc_html( $plugin_data['Name'] ) . '</code>',
@@ -174,24 +174,39 @@ function tstats_compatible_version() {
 	return true;
 }
 
-// Include Composer autoload.
-require_once dirname( __FILE__ ) . '/vendor/autoload.php';
 
-// Include class files used by the plugin.
-require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-main.php';
-require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-globals.php';
-require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-notices.php';
-require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-transients.php';
-require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-translations-api.php';
-require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-settings-sidebar.php';
-require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-settings-widgets.php';
-require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-settings-footer.php';
-require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-settings-api.php';
-require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-settings-plugins.php';
-require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-settings.php';
-require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-gettext-jedgenerator.php';
-require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-gettext.php';
-require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-update-translations.php';
-require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-update-core.php';
-require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-plugins.php';
-require_once dirname( __FILE__ ) . '/includes/classes/class-tstats-debug.php';
+/**
+ * Register classes autoloader function.
+ *
+ * @since 0.9.5.6
+ */
+spl_autoload_register( 'tstats_class_autoload' );
+
+
+/**
+ * Class autoloader.
+ *
+ * @since 0.9.5.6
+ *
+ * @param string $class_name   Class name.
+ */
+function tstats_class_autoload( $class_name ) {
+
+	// Set class file path and name.
+	$tstats_class_path = TSTATS_DIR_PATH . 'includes/classes/';
+	$tstats_class_file = 'class-' . str_replace( '_', '-', strtolower( $class_name ) ) . '.php';
+	$tstats_class      = $tstats_class_path . $tstats_class_file;
+
+	if ( ! file_exists( $tstats_class ) ) {
+		return false;
+	}
+
+	require_once $tstats_class;
+}
+
+
+// Include Composer autoload.
+require_once TSTATS_DIR_PATH . 'vendor/autoload.php';
+
+// Initialize the plugin.
+new TStats_Main();

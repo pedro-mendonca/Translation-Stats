@@ -19,6 +19,7 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 	 */
 	class TStats_Main {
 
+
 		/**
 		 * Constructor.
 		 */
@@ -33,6 +34,18 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 			// Add Plugin action links.
 			add_filter( 'plugin_action_links_' . TSTATS_FILE, array( $this, 'tstats_action_links' ) );
 
+			// Initialize the plugin settings.
+			new TStats_Settings();
+
+			// Initialize the plugins page metadata view.
+			new TStats_Plugins();
+
+			// Initialize the Update Core page metadata view.
+			new TStats_Update_Core();
+
+			// Initialize the plugin debug.
+			new TStats_Debug();
+
 		}
 
 
@@ -42,6 +55,7 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 		 * @since 0.8.0
 		 *
 		 * @param array $links  Array of plugin action links.
+		 *
 		 * @return array        Array with added Translation Stats action links.
 		 */
 		public function tstats_action_links( $links ) {
@@ -215,5 +229,3 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 	}
 
 }
-
-new TStats_Main();

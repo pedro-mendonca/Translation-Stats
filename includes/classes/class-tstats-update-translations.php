@@ -23,6 +23,35 @@ if ( ! class_exists( 'TStats_Update_Translations' ) ) {
 
 
 		/**
+		 * Globals.
+		 *
+		 * @var object
+		 */
+		protected $tstats_globals;
+
+		/**
+		 * Notices.
+		 *
+		 * @var object
+		 */
+		protected $tstats_notices;
+
+		/**
+		 * Translations API.
+		 *
+		 * @var object
+		 */
+		protected $tstats_translations_api;
+
+		/**
+		 * Gettext.
+		 *
+		 * @var object
+		 */
+		protected $tstats_gettext;
+
+
+		/**
 		 * Constructor.
 		 */
 		public function __construct() {
@@ -46,9 +75,12 @@ if ( ! class_exists( 'TStats_Update_Translations' ) ) {
 		 * Update project translation.
 		 * Download .po file, extract with Gettext to generate .po and .json files.
 		 *
+		 * @since 0.9.5
+		 *
 		 * @param string $destination   Local destination of the language file. ( e.g: local/site/wp-content/languages/ ).
 		 * @param array  $project       Project array.
 		 * @param string $wp_locale     WP Locale ( e.g.: 'pt_PT' ).
+		 *
 		 * @return array|WP_Error       Array on success, WP_Error on failure.
 		 */
 		public function tstats_update_translation( $destination, $project, $wp_locale ) {
@@ -109,8 +141,11 @@ if ( ! class_exists( 'TStats_Update_Translations' ) ) {
 		/**
 		 * Download file from WordPress.org translation table.
 		 *
+		 * @since 0.9.5
+		 *
 		 * @param array $project    Project array.
 		 * @param array $locale     Locale array.
+		 *
 		 * @return array|WP_Error   Array on success, WP_Error on failure.
 		 */
 		public function tstats_download_translations( $project, $locale ) {
@@ -156,10 +191,13 @@ if ( ! class_exists( 'TStats_Update_Translations' ) ) {
 		/**
 		 * Generate .po from WordPress.org response.
 		 *
+		 * @since 0.9.5
+		 *
 		 * @param string $destination   Local destination of the language file. ( e.g: local/site/wp-content/languages/ ).
 		 * @param array  $project       Project array.
 		 * @param array  $locale        Locale array.
 		 * @param array  $response      HTTP response.
+		 *
 		 * @return array|WP_Error       Array on success, WP_Error on failure.
 		 */
 		public function tstats_generate_po( $destination, $project, $locale, $response ) {
@@ -199,9 +237,12 @@ if ( ! class_exists( 'TStats_Update_Translations' ) ) {
 		/**
 		 * Extract translations from file.
 		 *
+		 * @since 0.9.5
+		 *
 		 * @param string $destination   Local destination of the language file. ( e.g: local/site/wp-content/languages/ ).
 		 * @param array  $project       Project array.
 		 * @param array  $locale        Locale array.
+		 *
 		 * @return array|WP_Error       Array on success, WP_Error on failure.
 		 */
 		public function tstats_extract_translations( $destination, $project, $locale ) {
@@ -241,10 +282,13 @@ if ( ! class_exists( 'TStats_Update_Translations' ) ) {
 		/**
 		 * Generate .mo file from extracted translations.
 		 *
+		 * @since 0.9.5
+		 *
 		 * @param string $destination    Local destination of the language file. ( e.g: local/site/wp-content/languages/ ).
 		 * @param array  $project        Project array.
 		 * @param array  $locale         Locale array.
 		 * @param object $translations   Extracted translations to export.
+		 *
 		 * @return array|WP_Error        Array on success, WP_Error on failure.
 		 */
 		public function tstats_generate_mo( $destination, $project, $locale, $translations ) {
@@ -283,5 +327,3 @@ if ( ! class_exists( 'TStats_Update_Translations' ) ) {
 	}
 
 }
-
-new TStats_Update_Translations();

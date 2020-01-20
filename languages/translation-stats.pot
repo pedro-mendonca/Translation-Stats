@@ -21,599 +21,609 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: node_modules\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
 
-#: includes/classes/class-tstats-debug.php:62
-#: includes/classes/class-tstats-debug.php:98
+#: includes/classes/class-tstats-debug.php:85
+#: includes/classes/class-tstats-debug.php:121
 msgid "Debug"
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:118
+#: includes/classes/class-tstats-debug.php:141
 msgid "List of settings and transients of Translation Stats."
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:162
+#: includes/classes/class-tstats-debug.php:185
 msgid "Server"
 msgstr ""
 
 #. translators: %s Version Number.
-#: includes/classes/class-tstats-debug.php:168
+#: includes/classes/class-tstats-debug.php:191
 #, php-format
 msgid "PHP Version: %s"
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:174
+#: includes/classes/class-tstats-debug.php:197
 msgid "PHP Functions Check:"
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:191
+#: includes/classes/class-tstats-debug.php:214
 msgid "No functions to test."
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:209
-#: includes/classes/class-tstats-main.php:49
-#: includes/classes/class-tstats-settings.php:140
-#: includes/classes/class-tstats-settings.php:436
+#: includes/classes/class-tstats-debug.php:232
+#: includes/classes/class-tstats-main.php:63
+#: includes/classes/class-tstats-settings.php:179
+#: includes/classes/class-tstats-settings.php:475
 msgid "Settings"
 msgstr ""
 
 #. translators: %s WordPress Locale code.
-#: includes/classes/class-tstats-debug.php:215
+#: includes/classes/class-tstats-debug.php:238
 #, php-format
 msgid "Site Locale: %s"
 msgstr ""
 
 #. translators: %s User Locale code.
-#: includes/classes/class-tstats-debug.php:224
+#: includes/classes/class-tstats-debug.php:247
 #, php-format
 msgid "User Locale: %s"
 msgstr ""
 
 #. translators: %s WordPress Locale code.
-#: includes/classes/class-tstats-debug.php:233
+#: includes/classes/class-tstats-debug.php:256
 #, php-format
 msgid "Translation Stats Locale: %s"
 msgstr ""
 
 #. translators: %s Page Name.
-#: includes/classes/class-tstats-debug.php:246
+#: includes/classes/class-tstats-debug.php:269
 #, php-format
 msgid "Settings Page: %s"
 msgstr ""
 
 #. translators: %s Option Name.
-#: includes/classes/class-tstats-debug.php:255
+#: includes/classes/class-tstats-debug.php:278
 #, php-format
 msgid "WordPress Option: %s"
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:261
+#: includes/classes/class-tstats-debug.php:284
 msgid "Settings List:"
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:271
+#: includes/classes/class-tstats-debug.php:294
 msgid "No settings found."
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:288
+#: includes/classes/class-tstats-debug.php:311
 msgid "Transients"
 msgstr ""
 
 #. translators: %s Prefix Name.
-#: includes/classes/class-tstats-debug.php:294
+#: includes/classes/class-tstats-debug.php:317
 #, php-format
 msgid "Transients Prefix: %s"
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:300
+#: includes/classes/class-tstats-debug.php:323
 msgid "Transients List:"
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:314
+#: includes/classes/class-tstats-debug.php:337
 msgid "No transients found."
 msgstr ""
 
 #. translators: %s Setting ID.
-#: includes/classes/class-tstats-debug.php:340
+#: includes/classes/class-tstats-debug.php:363
 #, php-format
 msgid "ID: %s"
 msgstr ""
 
 #. translators: %s Setting Value.
-#: includes/classes/class-tstats-debug.php:349
+#: includes/classes/class-tstats-debug.php:372
 #, php-format
 msgid "Value: %s"
 msgstr ""
 
 #. translators: %s Setting Default.
-#: includes/classes/class-tstats-debug.php:358
+#: includes/classes/class-tstats-debug.php:381
 #, php-format
 msgid "Default: %s"
 msgstr ""
 
 #. translators: %s Plugin slug.
-#: includes/classes/class-tstats-debug.php:386
+#: includes/classes/class-tstats-debug.php:409
 #, php-format
 msgid "Slug: %s"
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:394
+#: includes/classes/class-tstats-debug.php:417
 msgid "Plugin found on WordPress.org"
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:396
-#: includes/classes/class-tstats-plugins.php:108
+#: includes/classes/class-tstats-debug.php:419
+#: includes/classes/class-tstats-plugins.php:132
 msgid "Plugin not found on WordPress.org"
 msgstr ""
 
 #. translators: %1$s Opening tag <a>. %2$s: Closing tag </a>.
-#: includes/classes/class-tstats-debug.php:406
+#: includes/classes/class-tstats-debug.php:429
 #, php-format
 msgid "Translation project found on %1$sWordPress.org%2$s"
 msgstr ""
 
-#: includes/classes/class-tstats-debug.php:411
-#: includes/classes/class-tstats-plugins.php:117
+#: includes/classes/class-tstats-debug.php:434
+#: includes/classes/class-tstats-plugins.php:141
 msgid "Translation project not found on WordPress.org"
 msgstr ""
 
 #. translators: %s: File name.
-#: includes/classes/class-tstats-gettext.php:155
-#: includes/classes/class-tstats-update-translations.php:174
-#: includes/classes/class-tstats-update-translations.php:259
+#: includes/classes/class-tstats-gettext.php:164
+#: includes/classes/class-tstats-update-translations.php:212
+#: includes/classes/class-tstats-update-translations.php:303
 #, php-format
 msgid "Saving file %s…"
 msgstr ""
 
-#: includes/classes/class-tstats-gettext.php:172
-#: includes/classes/class-tstats-update-translations.php:186
-#: includes/classes/class-tstats-update-translations.php:271
+#: includes/classes/class-tstats-gettext.php:181
+#: includes/classes/class-tstats-update-translations.php:224
+#: includes/classes/class-tstats-update-translations.php:315
 msgid "Could not create file."
 msgstr ""
 
-#: includes/classes/class-tstats-plugins.php:69
+#: includes/classes/class-tstats-plugins.php:93
 msgctxt "Column label"
 msgid "Translation Stats"
 msgstr ""
 
 #. translators: %s Language native name.
-#: includes/classes/class-tstats-plugins.php:205
+#: includes/classes/class-tstats-plugins.php:229
 #, php-format
 msgid "Translation for %s"
 msgstr ""
 
-#: includes/classes/class-tstats-plugins.php:224
+#: includes/classes/class-tstats-plugins.php:248
 msgid "Update"
 msgstr ""
 
-#: includes/classes/class-tstats-plugins.php:246
+#: includes/classes/class-tstats-plugins.php:270
 msgid "Loading..."
 msgstr ""
 
-#: includes/classes/class-tstats-plugins.php:281
+#: includes/classes/class-tstats-plugins.php:308
 msgid "Updated!"
 msgstr ""
 
 #. translators: %1$s Opening link tag <a href="[link]">. %2$s Closing link tag </a>.
-#: includes/classes/class-tstats-plugins.php:334
+#: includes/classes/class-tstats-plugins.php:361
 #, php-format
 msgid "This plugin is not %1$sproperly prepared for localization%2$s."
 msgstr ""
 
-#: includes/classes/class-tstats-plugins.php:347
+#: includes/classes/class-tstats-plugins.php:374
 msgid "View detailed logs on Slack"
 msgstr ""
 
 #. translators: %1$s Opening link tag <a href="[link]">. %2$s Closing link tag </a>.
-#: includes/classes/class-tstats-plugins.php:358
+#: includes/classes/class-tstats-plugins.php:385
 #, php-format
 msgid "If you would like to translate this plugin, %1$splease contact the author%2$s."
 msgstr ""
 
 #. translators: %1$s Name of subproject. %2$s Error message.
-#: includes/classes/class-tstats-plugins.php:454
+#: includes/classes/class-tstats-plugins.php:485
 #, php-format
 msgid "%1$s: %2$s"
 msgstr ""
 
-#: includes/classes/class-tstats-plugins.php:456
+#: includes/classes/class-tstats-plugins.php:487
 msgid "Not found"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-footer.php:56
+#: includes/classes/class-tstats-settings-footer.php:66
 #, php-format
 msgid "Thank you for translating with %1$s version %2$s."
 msgstr ""
 
 #. translators: Plugin name, do not translate!
 #. Plugin Name of the plugin/theme
-#: includes/classes/class-tstats-settings-footer.php:59
+#: includes/classes/class-tstats-settings-footer.php:69
 msgid "Translation Stats"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-footer.php:65
+#: includes/classes/class-tstats-settings-footer.php:75
 #, php-format
 msgid "By %s"
 msgstr ""
 
 #. Author of the plugin/theme
-#: includes/classes/class-tstats-settings-footer.php:68
+#: includes/classes/class-tstats-settings-footer.php:78
 msgid "Pedro Mendonça"
 msgstr ""
 
 #. translators: Plugin Name and version - Do not translate!
-#: includes/classes/class-tstats-settings-footer.php:88
-#: includes/classes/class-tstats-settings-widgets.php:97
+#: includes/classes/class-tstats-settings-footer.php:99
+#: includes/classes/class-tstats-settings-widgets.php:106
 #, php-format
 msgid "Translation Stats %s"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-plugins.php:44
+#: includes/classes/class-tstats-settings-plugins.php:60
 msgid "Select the plugins and subprojects you want to show the translation stats from the list of installed plugins."
 msgstr ""
 
-#: includes/classes/class-tstats-settings-plugins.php:78
+#: includes/classes/class-tstats-settings-plugins.php:94
 msgid "Select All"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-plugins.php:82
+#: includes/classes/class-tstats-settings-plugins.php:98
 msgid "Plugin"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-plugins.php:88
+#: includes/classes/class-tstats-settings-plugins.php:104
 msgid "Author"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-plugins.php:95
+#. translators: 1: "Slug", 2: "Text Domain".
+#: includes/classes/class-tstats-settings-plugins.php:114
+#, php-format
+msgid "%1$s and %2$s"
+msgstr ""
+
+#: includes/classes/class-tstats-settings-plugins.php:115
 msgid "Slug"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-plugins.php:144
+#: includes/classes/class-tstats-settings-plugins.php:116
+msgid "Text Domain"
+msgstr ""
+
+#: includes/classes/class-tstats-settings-plugins.php:170
 msgid "Select Plugin"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-plugins.php:171
+#: includes/classes/class-tstats-settings-plugins.php:222
 msgid "Select Subproject"
 msgstr ""
 
 #. Description of the plugin/theme
-#: includes/classes/class-tstats-settings-widgets.php:55
+#: includes/classes/class-tstats-settings-widgets.php:64
 msgid "Show plugins translation stats on your WordPress install."
 msgstr ""
 
-#: includes/classes/class-tstats-settings-widgets.php:58
+#: includes/classes/class-tstats-settings-widgets.php:67
 msgid "Resources"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-widgets.php:60
+#: includes/classes/class-tstats-settings-widgets.php:69
 msgid "Site"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-widgets.php:61
+#: includes/classes/class-tstats-settings-widgets.php:70
 msgid "FAQ"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-widgets.php:62
+#: includes/classes/class-tstats-settings-widgets.php:71
 msgid "Changelog"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-widgets.php:63
+#: includes/classes/class-tstats-settings-widgets.php:72
 msgid "Support"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-widgets.php:68
+#: includes/classes/class-tstats-settings-widgets.php:77
 msgid "Contact"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-widgets.php:70
+#: includes/classes/class-tstats-settings-widgets.php:79
 msgid "Found an issue, have a feature suggestion or just want to send some feedback?"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-widgets.php:71
+#: includes/classes/class-tstats-settings-widgets.php:80
 msgid "Write me!"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-widgets.php:76
+#: includes/classes/class-tstats-settings-widgets.php:85
 msgid "Coffee"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-widgets.php:79
-msgid "Do you enjoy this plugin?"
+#: includes/classes/class-tstats-settings-widgets.php:88
+msgid "Do you like this plugin?"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-widgets.php:81
+#: includes/classes/class-tstats-settings-widgets.php:90
 msgid "Support its further development by becoming a sponsor!"
 msgstr ""
 
-#: includes/classes/class-tstats-settings-widgets.php:84
+#: includes/classes/class-tstats-settings-widgets.php:93
 msgid "GitHub Sponsors"
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:56
-#: includes/classes/class-tstats-settings.php:57
-#: includes/classes/class-tstats-settings.php:422
+#: includes/classes/class-tstats-settings.php:95
+#: includes/classes/class-tstats-settings.php:96
+#: includes/classes/class-tstats-settings.php:461
 msgctxt "Options Page Title"
 msgid "Translation Stats"
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:96
+#: includes/classes/class-tstats-settings.php:135
 msgid "Installed Plugins"
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:118
+#: includes/classes/class-tstats-settings.php:157
 msgid "General Settings"
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:147
+#: includes/classes/class-tstats-settings.php:186
 msgid "Cache"
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:185
+#: includes/classes/class-tstats-settings.php:224
 msgid "Warnings"
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:186
+#: includes/classes/class-tstats-settings.php:225
 msgid "Show translation project warnings"
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:187
+#: includes/classes/class-tstats-settings.php:226
 msgid "Check this to show translation project error messages for selected plugins."
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:188
-#: includes/classes/class-tstats-settings.php:203
-#: includes/classes/class-tstats-settings.php:235
-#: includes/classes/class-tstats-settings.php:251
-#: includes/classes/class-tstats-settings.php:285
-#: includes/classes/class-tstats-settings.php:306
+#: includes/classes/class-tstats-settings.php:227
+#: includes/classes/class-tstats-settings.php:242
+#: includes/classes/class-tstats-settings.php:274
+#: includes/classes/class-tstats-settings.php:290
+#: includes/classes/class-tstats-settings.php:324
+#: includes/classes/class-tstats-settings.php:345
 msgid "Need help?"
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:200
+#: includes/classes/class-tstats-settings.php:239
 msgid "Translation Language"
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:201
+#: includes/classes/class-tstats-settings.php:240
 msgid "Select translation language"
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:202
+#: includes/classes/class-tstats-settings.php:241
 msgid "Select the language for which you want to show the translation stats."
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:232
+#: includes/classes/class-tstats-settings.php:271
 msgid "Uninstall"
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:233
+#: includes/classes/class-tstats-settings.php:272
 msgid "Delete all plugin data on uninstall"
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:234
+#: includes/classes/class-tstats-settings.php:273
 msgid "Check to delete all Translation Stats plugin settings and cache on uninstall."
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:248
+#: includes/classes/class-tstats-settings.php:287
 msgid "Reset Settings"
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:249
+#: includes/classes/class-tstats-settings.php:288
 msgid "Reset"
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:250
+#: includes/classes/class-tstats-settings.php:289
 msgid "Click to restore the default Translation Stats plugin settings."
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:255
+#: includes/classes/class-tstats-settings.php:294
 msgid "Warning! Translation Stats plugin settings will be reset to default! Click 'Cancel' to go back, 'OK' to reset."
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:282
+#: includes/classes/class-tstats-settings.php:321
 msgid "Expiration"
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:283
+#: includes/classes/class-tstats-settings.php:322
 msgid "Select cache expiration"
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:284
+#: includes/classes/class-tstats-settings.php:323
 msgid "Set the cache expiration to update the translation stats."
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:288
+#: includes/classes/class-tstats-settings.php:327
 msgid "60 Minutes"
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:289
+#: includes/classes/class-tstats-settings.php:328
 msgid "24 Hours"
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:290
+#: includes/classes/class-tstats-settings.php:329
 msgid "7 Days"
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:303
+#: includes/classes/class-tstats-settings.php:342
 msgid "Clean Cache"
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:304
+#: includes/classes/class-tstats-settings.php:343
 msgid "Clean"
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:305
+#: includes/classes/class-tstats-settings.php:344
 msgid "Click to delete all Translation Stats cache and force update translation stats."
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:310
+#: includes/classes/class-tstats-settings.php:349
 msgid "Warning! All Translation Stats plugin cache will be deleted! Click 'Cancel' to go back, 'OK' to delete."
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:339
+#: includes/classes/class-tstats-settings.php:378
 msgid "Settings restored successfully."
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:365
+#: includes/classes/class-tstats-settings.php:404
 msgid "Cache cleaned successfully."
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:379
+#: includes/classes/class-tstats-settings.php:418
 msgid "Sorry, your nonce did not verify."
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:408
+#: includes/classes/class-tstats-settings.php:447
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:423
+#: includes/classes/class-tstats-settings.php:462
 msgid "Customize the translation stats you want to show."
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:435
+#: includes/classes/class-tstats-settings.php:474
 msgid "Plugins"
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:437
+#: includes/classes/class-tstats-settings.php:476
 msgid "Tools"
 msgstr ""
 
-#: includes/classes/class-tstats-settings.php:483
+#: includes/classes/class-tstats-settings.php:522
 msgid "Save Changes"
 msgstr ""
 
 #. translators: Subproject name in translate.wordpress.org, do not translate!
-#: includes/classes/class-tstats-translations-api.php:139
-#: includes/classes/class-tstats-translations-api.php:174
+#: includes/classes/class-tstats-translations-api.php:168
+#: includes/classes/class-tstats-translations-api.php:203
 msgctxt "Subproject name"
 msgid "Development"
 msgstr ""
 
 #. translators: Subproject name in translate.wordpress.org, do not translate!
-#: includes/classes/class-tstats-translations-api.php:144
+#: includes/classes/class-tstats-translations-api.php:173
 msgctxt "Subproject name"
 msgid "Development Readme"
 msgstr ""
 
 #. translators: Subproject name in translate.wordpress.org, do not translate!
-#: includes/classes/class-tstats-translations-api.php:149
+#: includes/classes/class-tstats-translations-api.php:178
 msgctxt "Subproject name"
 msgid "Stable"
 msgstr ""
 
 #. translators: Subproject name in translate.wordpress.org, do not translate!
-#: includes/classes/class-tstats-translations-api.php:154
+#: includes/classes/class-tstats-translations-api.php:183
 msgctxt "Subproject name"
 msgid "Stable Readme"
 msgstr ""
 
 #. translators: Subproject name in translate.wordpress.org, do not translate!
-#: includes/classes/class-tstats-translations-api.php:180
+#: includes/classes/class-tstats-translations-api.php:209
 msgctxt "Subproject name"
 msgid "Administration"
 msgstr ""
 
 #. translators: Subproject name in translate.wordpress.org, do not translate!
-#: includes/classes/class-tstats-translations-api.php:186
+#: includes/classes/class-tstats-translations-api.php:215
 msgctxt "Subproject name"
 msgid "Network Admin"
 msgstr ""
 
 #. translators: Subproject name in translate.wordpress.org, do not translate!
-#: includes/classes/class-tstats-translations-api.php:192
+#: includes/classes/class-tstats-translations-api.php:221
 msgctxt "Subproject name"
 msgid "Continents & Cities"
 msgstr ""
 
 #. translators: 1: WordPress version. 2: Locale name.
-#: includes/classes/class-tstats-update-core.php:99
-#: includes/classes/class-tstats-update-core.php:277
+#: includes/classes/class-tstats-update-core.php:128
+#: includes/classes/class-tstats-update-core.php:309
 #, php-format
 msgid "The translation of WordPress %1$s for %2$s is not complete."
 msgstr ""
 
 #. translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>. 3: Opening link tag <a href="[link]">. 4: Locale name.
-#: includes/classes/class-tstats-update-core.php:107
-#: includes/classes/class-tstats-update-core.php:285
+#: includes/classes/class-tstats-update-core.php:136
+#: includes/classes/class-tstats-update-core.php:317
 #, php-format
 msgid "Please register at %1$sTranslating WordPress%2$s and join the %3$sTranslation Team%2$s to help translating WordPress to %4$s!"
 msgstr ""
 
 #. translators: %s: Button label.
-#: includes/classes/class-tstats-update-core.php:117
-#: includes/classes/class-tstats-update-core.php:264
+#: includes/classes/class-tstats-update-core.php:146
+#: includes/classes/class-tstats-update-core.php:296
 #, php-format
 msgid "Click the %s button to force update the latest approved translations."
 msgstr ""
 
-#: includes/classes/class-tstats-update-core.php:118
-#: includes/classes/class-tstats-update-core.php:212
-#: includes/classes/class-tstats-update-core.php:265
+#: includes/classes/class-tstats-update-core.php:147
+#: includes/classes/class-tstats-update-core.php:241
+#: includes/classes/class-tstats-update-core.php:297
 msgid "Update WordPress Translation"
 msgstr ""
 
 #. translators: 1: WordPress version. 2: Locale name. 3: Date the language pack was created.
-#: includes/classes/class-tstats-update-core.php:255
+#: includes/classes/class-tstats-update-core.php:287
 #, php-format
 msgid "The translation <em>language pack</em> of WordPress %1$s for %2$s was updated on %3$s."
 msgstr ""
 
-#: includes/classes/class-tstats-update-core.php:325
+#: includes/classes/class-tstats-update-core.php:357
 msgid "The update process is starting. This process may take a while on some hosts, so please be patient."
 msgstr ""
 
 #. translators: 1: Translation name, 2: WordPress Locale, 3: Number of the translation, 4: Total number of translations being updated.
-#: includes/classes/class-tstats-update-core.php:359
+#: includes/classes/class-tstats-update-core.php:391
 #, php-format
 msgid "Updating translations for %1$s (%2$s) (%3$d/%4$d)"
 msgstr ""
 
 #. translators: 1: Title of an update, 2: Error message.
-#: includes/classes/class-tstats-update-core.php:392
+#: includes/classes/class-tstats-update-core.php:424
 #, php-format
 msgid "An error occurred while updating %1$s: %2$s"
 msgstr ""
 
 #. translators: %s: Project name.
-#: includes/classes/class-tstats-update-core.php:407
+#: includes/classes/class-tstats-update-core.php:439
 #, php-format
 msgid "%s updated successfully."
 msgstr ""
 
-#: includes/classes/class-tstats-update-core.php:411
+#: includes/classes/class-tstats-update-core.php:443
 msgid "Show details."
 msgstr ""
 
-#: includes/classes/class-tstats-update-core.php:422
+#: includes/classes/class-tstats-update-core.php:454
 msgid "All updates have been completed."
 msgstr ""
 
-#: includes/classes/class-tstats-update-translations.php:102
+#: includes/classes/class-tstats-update-translations.php:134
 msgid "Translation updated successfully."
 msgstr ""
 
 #. translators: %s: URL.
-#: includes/classes/class-tstats-update-translations.php:127
+#: includes/classes/class-tstats-update-translations.php:162
 #, php-format
 msgid "Downloading translation from %s…"
 msgstr ""
 
-#: includes/classes/class-tstats-update-translations.php:141
+#: includes/classes/class-tstats-update-translations.php:176
 msgid "Download failed."
 msgstr ""
 
-#: includes/classes/class-tstats-update-translations.php:142
+#: includes/classes/class-tstats-update-translations.php:177
 msgid "A valid URL was not provided."
 msgstr ""
 
 #. translators: %s: File name.
-#: includes/classes/class-tstats-update-translations.php:216
+#: includes/classes/class-tstats-update-translations.php:257
 #, php-format
 msgid "Extracting translations from file %s…"
 msgstr ""
 
-#: includes/classes/class-tstats-update-translations.php:227
+#: includes/classes/class-tstats-update-translations.php:268
 msgid "Could not extract translations from file."
 msgstr ""
 
-#. translators: 1: Plugin file, 2: Error message.
+#. translators: 1: Plugin name, 2: Error message.
 #: translation-stats.php:121
 #, php-format
 msgid "The plugin %1$s has been deactivated due to an error: %2$s"

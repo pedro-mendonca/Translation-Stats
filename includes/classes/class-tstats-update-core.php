@@ -21,6 +21,35 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 
 
 		/**
+		 * Globals.
+		 *
+		 * @var object
+		 */
+		protected $tstats_globals;
+
+		/**
+		 * Notices.
+		 *
+		 * @var object
+		 */
+		protected $tstats_notices;
+
+		/**
+		 * Translations API.
+		 *
+		 * @var object
+		 */
+		protected $tstats_translations_api;
+
+		/**
+		 * Update Translations.
+		 *
+		 * @var object
+		 */
+		protected $tstats_update_translations;
+
+
+		/**
 		 * Constructor.
 		 */
 		public function __construct() {
@@ -92,7 +121,7 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 			}
 
 			$notice_message_status = sprintf(
-				'%s</br>%s',
+				'%s<br>%s',
 				sprintf(
 					wp_kses_post(
 						/* translators: 1: WordPress version. 2: Locale name. */
@@ -242,6 +271,9 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 				$available_translations = get_site_transient( 'available_translations' );
 			}
 
+			// Initialize variable.
+			$translations_date = '';
+
 			// Check for translations update in core update data.
 			if ( isset( $available_translations[ $locale['wp_locale'] ]['updated'] ) ) {
 				// Get language pack creation date.
@@ -270,7 +302,7 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 
 				$notice_type           = 'warning';
 				$notice_message_status = sprintf(
-					'%s</br>%s',
+					'%s<br>%s',
 					sprintf(
 						wp_kses_post(
 							/* translators: 1: WordPress version. 2: Locale name. */
@@ -435,6 +467,7 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 		 * @since 0.9.5
 		 *
 		 * @param object $transient    The 'update_core' transient object.
+		 *
 		 * @return object $transient   The same or a modified version of the transient.
 		 */
 		public function tstats_remove_previous_wp_translation( $transient ) {
@@ -452,5 +485,3 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 	}
 
 }
-
-new TStats_Update_Core();

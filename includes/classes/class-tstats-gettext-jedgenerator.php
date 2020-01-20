@@ -26,6 +26,8 @@ if ( ! class_exists( 'TStats_Gettext_JedGenerator' ) ) {
 	 * Adds some more meta data to JED translation files than the default generator.
 	 */
 	class TStats_Gettext_JedGenerator extends Jed {
+
+
 		/**
 		 * Saves the translations in a file.
 		 *
@@ -35,6 +37,7 @@ if ( ! class_exists( 'TStats_Gettext_JedGenerator' ) ) {
 		 * @return bool
 		 */
 		public static function toString( Translations $translations, array $options = array() ) {
+			$data     = '';
 			$options += static::$options;
 			$domain   = $translations->getDomain() ? $translations->getDomain() : 'messages';
 			$messages = static::buildMessages( $translations );
@@ -89,6 +92,7 @@ if ( ! class_exists( 'TStats_Gettext_JedGenerator' ) ) {
 
 			return wp_json_encode( $data, $options['json'] );
 		}
+
 
 		/**
 		 * Generates an array with all translations.

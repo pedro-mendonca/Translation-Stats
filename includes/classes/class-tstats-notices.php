@@ -19,6 +19,15 @@ if ( ! class_exists( 'TStats_Notices' ) ) {
 	 */
 	class TStats_Notices {
 
+
+		/**
+		 * Globals.
+		 *
+		 * @var object
+		 */
+		protected $tstats_globals;
+
+
 		/**
 		 * Constructor.
 		 */

@@ -19,6 +19,7 @@ if ( ! class_exists( 'TStats_Settings_Sidebar' ) ) {
 	 */
 	class TStats_Settings_Sidebar {
 
+
 		/**
 		 * Constructor.
 		 */
@@ -52,5 +53,3 @@ if ( ! class_exists( 'TStats_Settings_Sidebar' ) ) {
 	}
 
 }
-
-new TStats_Settings_Sidebar();

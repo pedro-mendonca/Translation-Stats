@@ -14,6 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 if ( ! class_exists( 'TStats_Translations_API' ) ) {
 
+
 	/**
 	 * Class TStats_Translations_API.
 	 */
@@ -25,6 +26,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 * @since 0.8.0
 		 *
 		 * @param string $plugin_file  Plugin ID ( e.g. 'slug/plugin-name.php' ).
+		 *
 		 * @return bool                Returns 'true' if the plugin exists on WordPress.org.
 		 */
 		public function tstats_plugin_on_wporg( $plugin_file ) {
@@ -44,12 +46,17 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 *
 		 * @param string $plugin_file       Plugin ID ( e.g. 'slug/plugin-name.php' ).
 		 * @param string $metadata          Metadata field ( e.g. 'slug' ).
+		 *
 		 * @return string $plugin_metadata  Returns metadata value from plugin.
 		 */
 		public function tstats_plugin_metadata( $plugin_file, $metadata ) {
 			$update_plugins = get_site_transient( 'update_plugins' );
 			// Check if plugin is on WordPress.org.
 			if ( ! $this->tstats_plugin_on_wporg( $plugin_file ) ) {
+				// If plugin doesn't have 'slug' key in metadata, get it from its file path.
+				if ( 'slug' === $metadata ) {
+					return $this->tstats_get_plugin_slug( $plugin_file );
+				}
 				return '';
 			}
 			if ( isset( $update_plugins->response[ $plugin_file ]->$metadata ) ) {
@@ -62,11 +69,31 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 
 
 		/**
+		 * Get plugin slug from its file path.
+		 *
+		 * @since 0.9.5.6
+		 *
+		 * @param string $plugin_file   Plugin ID ( e.g. 'slug/plugin-name.php' ).
+		 *
+		 * @return string   Plugin slug.
+		 */
+		public function tstats_get_plugin_slug( $plugin_file ) {
+			if ( false !== strpos( $plugin_file, '/' ) ) {
+				$plugin_file_parts = explode( '/', $plugin_file );
+			} else {
+				$plugin_file_parts = explode( '.', $plugin_file );
+			}
+			return sanitize_title( $plugin_file_parts[0] );
+		}
+
+
+		/**
 		 * Get plugin data from translate.WordPress.org API.
 		 *
 		 * @since 0.8.0
 		 *
 		 * @param string $plugin    Plugin slug (project or project/subproject).
+		 *
 		 * @return string $api_get  Returns the response from translate.WordPress.org API URL.
 		 */
 		public function tstats_translations_api_get_plugin( $plugin ) {
@@ -81,6 +108,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 * @since 0.8.0
 		 *
 		 * @param string $project_slug  Plugin Slug (e.g. 'plugin-slug').
+		 *
 		 * @return string $on_wporg     Returns 'true' if the translation project exist on WordPress.org.
 		 */
 		public function tstats_plugin_project_on_translate_wporg( $project_slug ) {
@@ -106,6 +134,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 *
 		 * @param string $project_slug     Plugin Slug (e.g. 'plugin-slug').
 		 * @param string $subproject_slug  Plugin Subproject Slug (e.g. 'dev', 'dev-readme', 'stable', 'stable-readme').
+		 *
 		 * @return string                  Returns 'true' if the translation subproject exist on WordPress.org.
 		 */
 		public function tstats_plugin_subproject_on_translate_wporg( $project_slug, $subproject_slug ) {
@@ -242,6 +271,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 * @since 0.9.0
 		 *
 		 * @param string $project   Set the project API URL you want to get.
+		 *
 		 * @return string $api_url  Returns API URL.
 		 */
 		public function tstats_translations_api_url( $project ) {
@@ -269,6 +299,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 * @since 0.9.5
 		 *
 		 * @param string $project  Set the project URL you want to get.
+		 *
 		 * @return string $url     Returns URL.
 		 */
 		public function tstats_translations_url( $project ) {
@@ -295,7 +326,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 * @param string $project      Project.
 		 * @param string $locale       Locale.
 		 *
-		 * @return $translation_path   File path to get source.
+		 * @return string $translation_path   File path to get source.
 		 */
 		public function tstats_translation_path( $wp_version, $project, $locale ) {
 

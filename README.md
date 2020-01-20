@@ -95,7 +95,7 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 ## Changelog ##
 
 ### 0.9.5.5 ###
-*   Fixed i18n issue (Thanks @szepeviktor)
+*   Fix i18n issue (Thanks @szepeviktor)
 *   Minor code improvements
 *   Coffee ☕
 
