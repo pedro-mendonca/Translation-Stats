@@ -180,15 +180,14 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 									'textdomain' => $plugin_text_domain,
 								);
 								// Check if Slug is equal to Text Domain.
-								$slug_equal_text_domain = ( $plugin_slug === $plugin_text_domain ) ? true : false;
-								if ( $slug_equal_text_domain ) {
+								$slug_and_text_domain = ( $plugin_slug === $plugin_text_domain ) ? true : false;
+								if ( $slug_and_text_domain ) {
 									$dashicon = 'dashicons-yes';
 									unset( $plugin_data['textdomain'] );
 								} else {
 									$dashicon = 'dashicons-no';
 								}
-								$dashicon   = ( $plugin_slug === $plugin_text_domain ) ? 'dashicons-yes' : 'dashicons-no';
-								$debug_slug = ( $plugin_slug !== $plugin_text_domain ) ? $plugin_slug : '';
+								$dashicon = ( $plugin_slug === $plugin_text_domain ) ? 'dashicons-yes' : 'dashicons-no';
 								?>
 								<td class="plugin-slug-text-domain">
 									<div>
