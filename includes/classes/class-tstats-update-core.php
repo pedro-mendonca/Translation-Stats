@@ -349,7 +349,7 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 		public function tstats_update_core_content() {
 
 			$admin_notice = array(
-				'type'        => 'warning',
+				'type'        => 'warning-spin',
 				'notice-alt'  => false,
 				'inline'      => false,
 				'update-icon' => true,

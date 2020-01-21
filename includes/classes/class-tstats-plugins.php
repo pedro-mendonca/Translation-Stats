@@ -263,7 +263,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		public function tstats_stats_plugin_widget_content() {
 
 			$admin_notice = array(
-				'type'        => 'warning',
+				'type'        => 'warning-spin',
 				'notice-alt'  => true,
 				'css-class'   => 'translation-stats-loading',
 				'update-icon' => true,
