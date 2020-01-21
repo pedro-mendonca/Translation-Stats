@@ -110,7 +110,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 							<th scope="col" id='column-slug-text-domain' class='manage-column column-slug-text-domain'>
 								<?php
 								printf(
-									/* translators: 1: Slug, 2: Text Domain. */
+									/* translators: 1: Slug. 2: Text Domain. */
 									esc_html__( '%1$s and %2$s', 'translation-stats' ),
 									esc_html__( 'Slug', 'translation-stats' ),
 									esc_html__( 'Text Domain', 'translation-stats' )

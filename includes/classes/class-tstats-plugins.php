@@ -225,7 +225,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 
 			printf(
 				wp_kses_post(
-					/* translators: %s Language native name. */
+					/* translators: %s: Language native name. */
 					__( 'Translation for %s', 'translation-stats' )
 				),
 				wp_kses_post( $locale_plugin_link )
@@ -357,7 +357,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 						'type'       => 'warning',
 						'notice-alt' => true,
 						'message'    => sprintf(
-							/* translators: %1$s Opening link tag <a href="[link]">. %2$s Closing link tag </a>. */
+							/* translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>. */
 							wp_kses_post( __( 'This plugin is not %1$sproperly prepared for localization%2$s.', 'translation-stats' ) ),
 							'<a href="https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/" target="_blank">',
 							'</a>'
@@ -381,7 +381,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 						'type'       => 'warning',
 						'notice-alt' => true,
 						'message'    => sprintf(
-							/* translators: %1$s Opening link tag <a href="[link]">. %2$s Closing link tag </a>. */
+							/* translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>. */
 							wp_kses_post( __( 'If you would like to translate this plugin, %1$splease contact the author%2$s.', 'translation-stats' ) ),
 							'<a href="https://wordpress.org/support/plugin/' . esc_attr( $project_slug ) . '" target="_blank">',
 							'</a>'
@@ -481,7 +481,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 							<?php
 							echo wp_kses_post(
 								sprintf(
-									/* translators: %1$s Name of subproject. %2$s Error message. */
+									/* translators: 1: Name of subproject. 2: Error message. */
 									__( '%1$s: %2$s', 'translation-stats' ),
 									$subproject,
 									'<strong>' . __( 'Not found', 'translation-stats' ) . '</strong>'

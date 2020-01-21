@@ -117,7 +117,7 @@ function tstats_disabled_notice() {
 			<?php
 			printf(
 				wp_kses_post(
-					/* translators: 1: Plugin name, 2: Error message. */
+					/* translators: 1: Plugin name. 2: Error message. */
 					__( 'The plugin %1$s has been deactivated due to an error: %2$s', 'translation-stats' )
 				),
 				'<code>' . esc_html( $plugin_data['Name'] ) . '</code>',
@@ -130,7 +130,7 @@ function tstats_disabled_notice() {
 
 			<?php
 			printf(
-				/* translators: %s Minimum PHP version required. */
+				/* translators: %s: Minimum PHP version required. */
 				esc_html__( 'Requires PHP version %s or higher.', 'translation-stats' ),
 				esc_html( TSTATS_REQUIRED_PHP )
 			);

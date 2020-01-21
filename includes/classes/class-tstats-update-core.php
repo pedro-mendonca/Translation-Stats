@@ -387,7 +387,7 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 				<h4>
 					<?php
 					printf(
-						/* translators: 1: Translation name, 2: WordPress Locale, 3: Number of the translation, 4: Total number of translations being updated. */
+						/* translators: 1: Translation name. 2: WordPress Locale. 3: Number of the translation. 4: Total number of translations being updated. */
 						esc_html__( 'Updating translations for %1$s (%2$s) (%3$d/%4$d)', 'translation-stats' ),
 						'<em>' . esc_html( $project['name'] ) . '</em>',
 						esc_html( $tstats_language ),
@@ -420,7 +420,7 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 					$admin_notice  = array(
 						'type'    => 'error',
 						'message' => sprintf(
-							/* translators: 1: Title of an update, 2: Error message. */
+							/* translators: 1: Title of an update. 2: Error message. */
 							esc_html__( 'An error occurred while updating %1$s: %2$s', 'translation-stats' ),
 							'<em>' . esc_html( $project['name'] ) . '</em>',
 							'<strong>' . esc_html( $error_message ) . '</strong>'
