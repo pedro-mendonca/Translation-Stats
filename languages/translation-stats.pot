@@ -34,7 +34,7 @@ msgstr ""
 msgid "Server"
 msgstr ""
 
-#. translators: %s Version Number.
+#. translators: %s: Version Number.
 #: includes/classes/class-tstats-debug.php:191
 #, php-format
 msgid "PHP Version: %s"
@@ -55,31 +55,31 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#. translators: %s WordPress Locale code.
+#. translators: %s: WordPress Locale code.
 #: includes/classes/class-tstats-debug.php:238
 #, php-format
 msgid "Site Locale: %s"
 msgstr ""
 
-#. translators: %s User Locale code.
+#. translators: %s: User Locale code.
 #: includes/classes/class-tstats-debug.php:247
 #, php-format
 msgid "User Locale: %s"
 msgstr ""
 
-#. translators: %s WordPress Locale code.
+#. translators: %s: WordPress Locale code.
 #: includes/classes/class-tstats-debug.php:256
 #, php-format
 msgid "Translation Stats Locale: %s"
 msgstr ""
 
-#. translators: %s Page Name.
+#. translators: %s: Page Name.
 #: includes/classes/class-tstats-debug.php:269
 #, php-format
 msgid "Settings Page: %s"
 msgstr ""
 
-#. translators: %s Option Name.
+#. translators: %s: Option Name.
 #: includes/classes/class-tstats-debug.php:278
 #, php-format
 msgid "WordPress Option: %s"
@@ -97,7 +97,7 @@ msgstr ""
 msgid "Transients"
 msgstr ""
 
-#. translators: %s Prefix Name.
+#. translators: %s: Prefix Name.
 #: includes/classes/class-tstats-debug.php:317
 #, php-format
 msgid "Transients Prefix: %s"
@@ -111,25 +111,25 @@ msgstr ""
 msgid "No transients found."
 msgstr ""
 
-#. translators: %s Setting ID.
+#. translators: %s: Setting ID.
 #: includes/classes/class-tstats-debug.php:363
 #, php-format
 msgid "ID: %s"
 msgstr ""
 
-#. translators: %s Setting Value.
+#. translators: %s: Setting Value.
 #: includes/classes/class-tstats-debug.php:372
 #, php-format
 msgid "Value: %s"
 msgstr ""
 
-#. translators: %s Setting Default.
+#. translators: %s: Setting Default.
 #: includes/classes/class-tstats-debug.php:381
 #, php-format
 msgid "Default: %s"
 msgstr ""
 
-#. translators: %s Plugin slug.
+#. translators: %s: Plugin slug.
 #: includes/classes/class-tstats-debug.php:409
 #, php-format
 msgid "Slug: %s"
@@ -144,7 +144,7 @@ msgstr ""
 msgid "Plugin not found on WordPress.org"
 msgstr ""
 
-#. translators: %1$s Opening tag <a>. %2$s: Closing tag </a>.
+#. translators: 1: Opening tag <a>. 2: Closing tag </a>.
 #: includes/classes/class-tstats-debug.php:429
 #, php-format
 msgid "Translation project found on %1$sWordPress.org%2$s"
@@ -174,7 +174,7 @@ msgctxt "Column label"
 msgid "Translation Stats"
 msgstr ""
 
-#. translators: %s Language native name.
+#. translators: %s: Language native name.
 #: includes/classes/class-tstats-plugins.php:229
 #, php-format
 msgid "Translation for %s"
@@ -192,7 +192,7 @@ msgstr ""
 msgid "Updated!"
 msgstr ""
 
-#. translators: %1$s Opening link tag <a href="[link]">. %2$s Closing link tag </a>.
+#. translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>.
 #: includes/classes/class-tstats-plugins.php:361
 #, php-format
 msgid "This plugin is not %1$sproperly prepared for localization%2$s."
@@ -202,13 +202,13 @@ msgstr ""
 msgid "View detailed logs on Slack"
 msgstr ""
 
-#. translators: %1$s Opening link tag <a href="[link]">. %2$s Closing link tag </a>.
+#. translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>.
 #: includes/classes/class-tstats-plugins.php:385
 #, php-format
 msgid "If you would like to translate this plugin, %1$splease contact the author%2$s."
 msgstr ""
 
-#. translators: %1$s Name of subproject. %2$s Error message.
+#. translators: 1: Name of subproject. 2: Error message.
 #: includes/classes/class-tstats-plugins.php:485
 #, php-format
 msgid "%1$s: %2$s"
@@ -262,7 +262,7 @@ msgstr ""
 msgid "Author"
 msgstr ""
 
-#. translators: 1: "Slug", 2: "Text Domain".
+#. translators: 1: Slug. 2: Text Domain.
 #: includes/classes/class-tstats-settings-plugins.php:114
 #, php-format
 msgid "%1$s and %2$s"
@@ -569,13 +569,13 @@ msgstr ""
 msgid "The update process is starting. This process may take a while on some hosts, so please be patient."
 msgstr ""
 
-#. translators: 1: Translation name, 2: WordPress Locale, 3: Number of the translation, 4: Total number of translations being updated.
+#. translators: 1: Translation name. 2: WordPress Locale. 3: Number of the translation. 4: Total number of translations being updated.
 #: includes/classes/class-tstats-update-core.php:391
 #, php-format
 msgid "Updating translations for %1$s (%2$s) (%3$d/%4$d)"
 msgstr ""
 
-#. translators: 1: Title of an update, 2: Error message.
+#. translators: 1: Title of an update. 2: Error message.
 #: includes/classes/class-tstats-update-core.php:424
 #, php-format
 msgid "An error occurred while updating %1$s: %2$s"
@@ -623,7 +623,7 @@ msgstr ""
 msgid "Could not extract translations from file."
 msgstr ""
 
-#. translators: 1: Plugin name, 2: Error message.
+#. translators: 1: Plugin name. 2: Error message.
 #: translation-stats.php:121
 #, php-format
 msgid "The plugin %1$s has been deactivated due to an error: %2$s"
@@ -633,7 +633,7 @@ msgstr ""
 msgid "This plugin doesn&#8217;t work with your version of PHP."
 msgstr ""
 
-#. translators: %s Minimum PHP version required.
+#. translators: %s: Minimum PHP version required.
 #: translation-stats.php:134
 #, php-format
 msgid "Requires PHP version %s or higher."
