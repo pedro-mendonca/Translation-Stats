@@ -288,24 +288,35 @@ table.tstats-plugin-list-table.widefat { // Translation Stats Settings Plugins t
 				&.plugin-slug-text-domain {
 
 					div {
-						display: inline-block;
+						display: table-cell;
 						vertical-align: middle;
 
-						.dashicons-yes {
-							color: #008000;
+						&.plugin-slug-text-domain-icon {
+
+							span.dashicons {
+
+								&.dashicons-yes {
+									color: #008000;
+								}
+
+								&.dashicons-no {
+									color: #f00;
+								}
+							}
 						}
 
-						.dashicons-no {
-							color: #f00;
-						}
+						&.plugin-slug-text-domain-message {
 
-						.code-error {
-							background-color: rgba(255, 0, 0, 0.07);
-							color: #f00;
-						}
+							code {
+								display: inline-block;
 
+								&.code-error {
+									background-color: rgba(255, 0, 0, 0.07);
+									color: #f00;
+								}
+							}
+						}
 					}
-
 				}
 			}
 		}

@@ -197,10 +197,10 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 								$dashicon = ( $plugin_slug === $plugin_text_domain ) ? 'dashicons-yes' : 'dashicons-no';
 								?>
 								<td class="plugin-slug-text-domain">
-									<div>
+									<div class="plugin-slug-text-domain-icon">
 										<span class="dashicons <?php echo esc_attr( $dashicon ); ?>"></span>
 									</div>
-									<div>
+									<div class="plugin-slug-text-domain-message">
 										<?php
 										foreach ( $plugin_data as $key => $item ) {
 											$code_class = 'textdomain' === $key ? 'code-error' : '';

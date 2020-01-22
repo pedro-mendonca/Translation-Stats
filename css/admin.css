@@ -245,19 +245,23 @@ table.tstats-plugin-list-table.widefat tbody tr .check-column input[type="checkb
 }
 
 table.tstats-plugin-list-table.widefat tbody tr td.plugin-slug-text-domain div {
-	display: inline-block;
+	display: table-cell;
 	vertical-align: middle;
 }
 
-table.tstats-plugin-list-table.widefat tbody tr td.plugin-slug-text-domain div .dashicons-yes {
+table.tstats-plugin-list-table.widefat tbody tr td.plugin-slug-text-domain div.plugin-slug-text-domain-icon span.dashicons.dashicons-yes {
 	color: #008000;
 }
 
-table.tstats-plugin-list-table.widefat tbody tr td.plugin-slug-text-domain div .dashicons-no {
+table.tstats-plugin-list-table.widefat tbody tr td.plugin-slug-text-domain div.plugin-slug-text-domain-icon span.dashicons.dashicons-no {
 	color: #f00;
 }
 
-table.tstats-plugin-list-table.widefat tbody tr td.plugin-slug-text-domain div .code-error {
+table.tstats-plugin-list-table.widefat tbody tr td.plugin-slug-text-domain div.plugin-slug-text-domain-message code {
+	display: inline-block;
+}
+
+table.tstats-plugin-list-table.widefat tbody tr td.plugin-slug-text-domain div.plugin-slug-text-domain-message code.code-error {
 	background-color: rgba(255, 0, 0, 0.07);
 	color: #f00;
 }
