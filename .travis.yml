@@ -1,4 +1,4 @@
-sudo: false
+os: linux
 dist: trusty
 
 # Declare project language.
@@ -19,56 +19,39 @@ cache:
   directories:
     - $HOME/.composer/cache
 
-matrix:
+php:
+  - 7.4
+  - 7.3
+  - 7.2
+  - 7.1
+  - 7.0
+  - 5.6
+
+env:
+  - WP_VERSION=latest WP_MULTISITE=0
+  - WP_VERSION=latest WP_MULTISITE=1
+
+jobs:
   include:
-  - name: "PHP 7.4.1 / Nightly WordPress"
-    php: "7.4snapshot"
+  - name: "PHP (nightly) / WordPress (nightly)"
+    php: nightly
     env: WP_VERSION=nightly WP_MULTISITE=0
-  - name: "PHP 7.4.1 / Nightly WordPress multisite"
-    php: "7.4snapshot"
+  - name: "PHP (nightly) / WordPress Multisite (nightly)"
+    php: nightly
     env: WP_VERSION=nightly WP_MULTISITE=1
-  - name: "PHP 7.4 / Latest WordPress"
-    php: "7.4"
-    env: WP_VERSION=latest WP_MULTISITE=0
-  - name: "PHP 7.4 / Latest WordPress multisite"
-    php: "7.4"
-    env: WP_VERSION=latest WP_MULTISITE=1
-  - name: "PHP 7.3 / Latest WordPress"
-    php: "7.3"
-    env: WP_VERSION=latest WP_MULTISITE=0
-  - name: "PHP 7.3 / Latest WordPress multisite"
-    php: "7.3"
-    env: WP_VERSION=latest WP_MULTISITE=1
-  - name: "PHP 7.2 / Latest WordPress"
-    php: "7.2"
-    env: WP_VERSION=latest WP_MULTISITE=0
-  - name: "PHP 7.2 / Latest WordPress multisite"
-    php: "7.2"
-    env: WP_VERSION=latest WP_MULTISITE=1
-  - name: "PHP 7.1 / Latest WordPress"
-    php: "7.1"
-    env: WP_VERSION=latest WP_MULTISITE=0
-  - name: "PHP 7.1 / Latest WordPress multisite"
-    php: "7.1"
-    env: WP_VERSION=latest WP_MULTISITE=1
-  - name: "PHP 7.0 / Latest WordPress"
-    php: "7.0"
-    env: WP_VERSION=latest WP_MULTISITE=0
-  - name: "PHP 7.0 / Latest WordPress multisite"
-    php: "7.0"
-    env: WP_VERSION=latest WP_MULTISITE=1
-  - name: "PHP 5.6 / Latest WordPress"
-    php: "5.6"
-    env: WP_VERSION=latest WP_MULTISITE=0
-  - name: "PHP 5.6 / Latest WordPress multisite"
-    php: "5.6"
-    env: WP_VERSION=latest WP_MULTISITE=1
-  - name: "PHP 5.6 / Minimum supported WordPress 4.9"
+  - name: "PHP 5.6 (minimum) / WordPress 4.9 (minimum)"
     php: "5.6"
     env: WP_VERSION=4.9 WP_MULTISITE=0
-  - name: "PHP 5.6 / Minimum supported WordPress 4.9 multisite"
+  - name: "PHP 5.6 (minimum) / WordPress 4.9 Multisite (minimum)"
     php: "5.6"
     env: WP_VERSION=4.9 WP_MULTISITE=1
+  allow_failures:
+  - name: "PHP (nightly) / WordPress (nightly)"
+    php: nightly
+    env: WP_VERSION=nightly WP_MULTISITE=0
+  - name: "PHP (nightly) / WordPress Multisite (nightly)"
+    php: nightly
+    env: WP_VERSION=nightly WP_MULTISITE=1
 
 before_install:
   # Speed up build time by disabling Xdebug.
