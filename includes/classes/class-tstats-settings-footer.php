@@ -61,7 +61,7 @@ if ( ! class_exists( 'TStats_Settings_Footer' ) ) {
 				$external_link_url = 'https://translationstats.com';
 
 				$text = sprintf(
-					/* translators: %1$s Translation Stats plugin name. %2$s Plugin version. */
+					/* translators: 1: Translation Stats plugin name. 2: Plugin version. */
 					__(
 						'Thank you for translating with %1$s version %2$s.',
 						'translation-stats'
@@ -70,7 +70,7 @@ if ( ! class_exists( 'TStats_Settings_Footer' ) ) {
 					TSTATS_VERSION
 				);
 				$text .= ' ' . sprintf(
-					/* translators: %s Author name. */
+					/* translators: %s: Author name. */
 					esc_html__(
 						'By %s',
 						'translation-stats'

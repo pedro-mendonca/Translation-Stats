@@ -42,7 +42,8 @@ if ( ! class_exists( 'TStats_Notices' ) ) {
 		/**
 		 * Display formated admin notice.
 		 *
-		 * WordPress core notice types ( 'error', 'warning', 'success' and 'info' ).
+		 * WordPress core notice types ( 'error', 'warning', 'warning-spin', 'success' and 'info' ).
+		 * The child type 'warning-spin' is the spinning variation of main 'warning' icon (if 'update-icon' is set to 'true'). The css class will be kept the parent 'warning'.
 		 * Use 'force_show' => true to ignore the 'show_warnings' setting.
 		 *
 		 * @since 0.8.0
@@ -60,7 +61,7 @@ if ( ! class_exists( 'TStats_Notices' ) ) {
 
 			// Use defaults if properties not set.
 			$notice = array(
-				'type'        => isset( $args['type'] ) ? ' notice-' . $args['type'] : '',                       // WordPress core notice types: 'error', 'warning', 'success' or 'info'. Defaults to none.
+				'type'        => isset( $args['type'] ) ? ' notice-' . $args['type'] : '',                       // WordPress core notice types: 'error', 'warning', 'warning-spin', 'success' or 'info'. Defaults to none.
 				'notice-alt'  => isset( $args['notice-alt'] ) && $args['notice-alt'] ? ' notice-alt' : '',       // Show message alternative color scheme with class 'notice-alt': true or false. Defaults no false.
 				'inline'      => isset( $args['inline'] ) && ! $args['inline'] ? '' : ' inline',                 // Defaults to true.
 				'dismissible' => isset( $args['dismissible'] ) && $args['dismissible'] ? ' is-dismissible' : '', // Defaults to false.
@@ -70,20 +71,25 @@ if ( ! class_exists( 'TStats_Notices' ) ) {
 				'extra-html'  => isset( $args['extra-html'] ) ? $args['extra-html'] : '',                        // Some extra HTMLto show.
 			);
 			if ( $notice['update-icon'] ) {
-				// Defaults to none.
-				$notice['update-icon'] = '';
 				switch ( $args['type'] ) {
 					case 'error':
-						$notice['update-icon'] = ' update-message';
+						$notice['update-icon'] = ' update-message'; // Error icon.
 						break;
 					case 'warning':
-						$notice['update-icon'] = ' update-message updating-message';
+						$notice['update-icon'] = ' update-message'; // Update icon.
+						break;
+					case 'warning-spin':
+						$notice['update-icon'] = ' updating-message'; // Spins the update icon.
+						$notice['type']        = ' notice-warning'; // Set the notice type to the default parent 'warning' class.
 						break;
 					case 'success':
-						$notice['update-icon'] = ' update-message updated-message';
+						$notice['update-icon'] = ' updated-message'; // Updated icon (check mark).
 						break;
 					case 'info':
-						$notice['update-icon'] = '';
+						$notice['update-icon'] = ''; // No icon.
+						break;
+					default:
+						$notice['update-icon'] = ''; // Defaults to none.
 						break;
 				}
 			}

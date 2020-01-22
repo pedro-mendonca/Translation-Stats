@@ -90,4 +90,4 @@ script:
   - composer lint
   # Run PHPStan only for PHP greater or equal to 7.1.
   # Suppress temporarily from travis.
-  # - if [[ $TRAVIS_PHP_VERSION != "5.6" && $TRAVIS_PHP_VERSION != "7.0" ]]; then composer stan; fi
+  - if [[ $TRAVIS_PHP_VERSION != "5.6" && $TRAVIS_PHP_VERSION != "7.0" ]]; then composer stan; fi

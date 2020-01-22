@@ -187,7 +187,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 			<p>
 				<?php
 				printf(
-					/* translators: %s Version Number. */
+					/* translators: %s: Version Number. */
 					esc_html__( 'PHP Version: %s', 'translation-stats' ),
 					'<code>' . esc_html( phpversion() ) . '</code>'
 				);
@@ -234,7 +234,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 			<p>
 				<?php
 				printf(
-					/* translators: %s WordPress Locale code. */
+					/* translators: %s: WordPress Locale code. */
 					esc_html__( 'Site Locale: %s', 'translation-stats' ),
 					'<code>' . esc_html( get_locale() ) . '</code>'
 				);
@@ -243,7 +243,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 			<p>
 				<?php
 				printf(
-					/* translators: %s User Locale code. */
+					/* translators: %s: User Locale code. */
 					esc_html__( 'User Locale: %s', 'translation-stats' ),
 					'<code>' . esc_html( get_user_locale() ) . '</code>'
 				);
@@ -252,7 +252,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 			<p>
 				<?php
 				printf(
-					/* translators: %s WordPress Locale code. */
+					/* translators: %s: WordPress Locale code. */
 					esc_html__( 'Translation Stats Locale: %s', 'translation-stats' ),
 					'<code>' . esc_html( $tstats_options['translation_language'] ) . '</code>'
 				);
@@ -265,7 +265,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 			<p>
 				<?php
 				printf(
-					/* translators: %s Page Name. */
+					/* translators: %s: Page Name. */
 					esc_html__( 'Settings Page: %s', 'translation-stats' ),
 					'<code>' . esc_html( TSTATS_SETTINGS_PAGE ) . '</code>'
 				);
@@ -274,7 +274,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 			<p>
 				<?php
 				printf(
-					/* translators: %s Option Name. */
+					/* translators: %s: Option Name. */
 					esc_html__( 'WordPress Option: %s', 'translation-stats' ),
 					'<code>' . esc_html( TSTATS_WP_OPTION ) . '</code>'
 				);
@@ -313,7 +313,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 			<p>
 				<?php
 				printf(
-					/* translators: %s Prefix Name. */
+					/* translators: %s: Prefix Name. */
 					esc_html__( 'Transients Prefix: %s', 'translation-stats' ),
 					'<code>' . esc_html( TSTATS_TRANSIENTS_PREFIX ) . '</code>'
 				);
@@ -359,7 +359,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 					<p>
 						<?php
 						printf(
-							/* translators: %s Setting ID. */
+							/* translators: %s: Setting ID. */
 							esc_html__( 'ID: %s', 'translation-stats' ),
 							'<code>' . esc_html( $field_id ) . '</code>'
 						);
@@ -368,7 +368,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 					<p>
 						<?php
 						printf(
-							/* translators: %s Setting Value. */
+							/* translators: %s: Setting Value. */
 							esc_html__( 'Value: %s', 'translation-stats' ),
 							'<code>' . esc_html( $value ) . '</code>'
 						);
@@ -377,7 +377,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 					<p>
 						<?php
 						printf(
-							/* translators: %s Setting Default. */
+							/* translators: %s: Setting Default. */
 							esc_html__( 'Default: %s', 'translation-stats' ),
 							'<code>' . esc_html( $default ) . '</code>'
 						);
@@ -405,7 +405,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 					<p>
 						<?php
 						printf(
-							/* translators: %s Plugin slug. */
+							/* translators: %s: Plugin slug. */
 							esc_html__( 'Slug: %s', 'translation-stats' ),
 							'<code>' . esc_html( $project_slug ) . '</code>'
 						);
@@ -425,7 +425,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 						if ( $plugin_translation_on_wporg ) {
 							$api_url = $this->tstats_translations_api->tstats_translations_api_url( 'plugins' ) . $project_slug;
 							printf(
-								/* translators: %1$s Opening tag <a>. %2$s: Closing tag </a>. */
+								/* translators: 1: Opening tag <a>. 2: Closing tag </a>. */
 								esc_html__( 'Translation project found on %1$sWordPress.org%2$s', 'translation-stats' ),
 								'<a href="' . esc_url( $api_url ) . '" target="_blank">',
 								'</a>'

@@ -110,7 +110,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 							<th scope="col" id='column-slug-text-domain' class='manage-column column-slug-text-domain'>
 								<?php
 								printf(
-									/* translators: 1: Slug, 2: Text Domain. */
+									/* translators: 1: Slug. 2: Text Domain. */
 									esc_html__( '%1$s and %2$s', 'translation-stats' ),
 									esc_html__( 'Slug', 'translation-stats' ),
 									esc_html__( 'Text Domain', 'translation-stats' )
@@ -197,10 +197,10 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 								$dashicon = ( $plugin_slug === $plugin_text_domain ) ? 'dashicons-yes' : 'dashicons-no';
 								?>
 								<td class="plugin-slug-text-domain">
-									<div>
+									<div class="plugin-slug-text-domain-icon">
 										<span class="dashicons <?php echo esc_attr( $dashicon ); ?>"></span>
 									</div>
-									<div>
+									<div class="plugin-slug-text-domain-message">
 										<?php
 										foreach ( $plugin_data as $key => $item ) {
 											$code_class = 'textdomain' === $key ? 'code-error' : '';
