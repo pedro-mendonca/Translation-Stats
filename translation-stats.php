@@ -193,7 +193,7 @@ spl_autoload_register( 'tstats_class_autoload' );
 function tstats_class_autoload( $class_name ) {
 
 	// Set class file path and name.
-	$tstats_class_path = TSTATS_DIR_PATH . 'includes/classes/';
+	$tstats_class_path = TSTATS_DIR_PATH . 'includes/';
 	$tstats_class_file = 'class-' . str_replace( '_', '-', strtolower( $class_name ) ) . '.php';
 	$tstats_class      = $tstats_class_path . $tstats_class_file;
 

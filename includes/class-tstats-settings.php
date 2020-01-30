@@ -131,15 +131,15 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		public function tstats_settings_section__plugins() {
 
 			add_settings_section(
-				'tstats_settings__plugins',                                                   // String for use in the 'id' attribute of tags.
-				__( 'Installed Plugins', 'translation-stats' ),                              // Title of the section.
+				'tstats_settings__plugins',                                                    // String for use in the 'id' attribute of tags.
+				__( 'Installed Plugins', 'translation-stats' ),                                // Title of the section.
 				array( $this->tstats_settings_plugins, 'tstats_settings__plugins__callback' ), // Function that fills the section with the desired content.
-				'tstats_settings__plugins'                                                    // The menu page on which to display this section. Should match $menu_slug.
+				'tstats_settings__plugins'                                                     // The menu page on which to display this section. Should match $menu_slug.
 			);
 
 			register_setting(
 				'tstats_settings__plugins', // The menu page on which to display this section. Should match $menu_slug.
-				TSTATS_WP_OPTION           // The WordPress option to store Translation Stats settings.
+				TSTATS_WP_OPTION            // The WordPress option to store Translation Stats settings.
 			);
 
 		}
@@ -153,15 +153,15 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		public function tstats_settings_section__general() {
 
 			add_settings_section(
-				'tstats_settings__general',                          // String for use in the 'id' attribute of tags.
-				__( 'General Settings', 'translation-stats' ),      // Title of the section.
+				'tstats_settings__general',                           // String for use in the 'id' attribute of tags.
+				__( 'General Settings', 'translation-stats' ),        // Title of the section.
 				array( $this, 'tstats_settings__general__callback' ), // Function that fills the section with the desired content.
-				'tstats_settings__general'                           // The menu page on which to display this section. Should match $menu_slug.
+				'tstats_settings__general'                            // The menu page on which to display this section. Should match $menu_slug.
 			);
 
 			register_setting(
 				'tstats_settings__general', // The menu page on which to display this section. Should match $menu_slug.
-				TSTATS_WP_OPTION           // The WordPress option to store Translation Stats settings.
+				TSTATS_WP_OPTION            // The WordPress option to store Translation Stats settings.
 			);
 
 		}
@@ -175,27 +175,27 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		public function tstats_settings_section__tools() {
 
 			add_settings_section(
-				'tstats_settings__tools__settings',                          // String for use in the 'id' attribute of tags.
-				__( 'Settings', 'translation-stats' ),               // Title of the section.
+				'tstats_settings__tools__settings',                           // String for use in the 'id' attribute of tags.
+				__( 'Settings', 'translation-stats' ),                        // Title of the section.
 				array( $this, 'tstats_settings__tools__settings__callback' ), // Function that fills the section with the desired content.
-				'tstats_settings__tools__settings'                           // The menu page on which to display this section. Should match $menu_slug.
+				'tstats_settings__tools__settings'                            // The menu page on which to display this section. Should match $menu_slug.
 			);
 
 			add_settings_section(
-				'tstats_settings__tools__transients',                          // String for use in the 'id' attribute of tags.
+				'tstats_settings__tools__transients',                           // String for use in the 'id' attribute of tags.
 				__( 'Cache', 'translation-stats' ),                             // Title of the section.
 				array( $this, 'tstats_settings__tools__transients__callback' ), // Function that fills the section with the desired content.
-				'tstats_settings__tools__transients'                           // The menu page on which to display this section. Should match $menu_slug.
+				'tstats_settings__tools__transients'                            // The menu page on which to display this section. Should match $menu_slug.
 			);
 
 			register_setting(
 				'tstats_settings__tools__settings', // The menu page on which to display this section. Should match $menu_slug.
-				TSTATS_WP_OPTION            // The WordPress option to store Translation Stats settings.
+				TSTATS_WP_OPTION                    // The WordPress option to store Translation Stats settings.
 			);
 
 			register_setting(
 				'tstats_settings__tools__transients', // The menu page on which to display this section. Should match $menu_slug.
-				TSTATS_WP_OPTION                       // The WordPress option to store Translation Stats settings.
+				TSTATS_WP_OPTION                      // The WordPress option to store Translation Stats settings.
 			);
 
 		}
@@ -446,6 +446,9 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 			if ( ! current_user_can( 'manage_options' ) ) {
 				wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'translation-stats' ) );
 			}
+
+			// Add action on Translation Stats settings init.
+			do_action( 'tstats_settings_init' );
 			?>
 
 			<div class="wrap">

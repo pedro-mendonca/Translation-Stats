@@ -1,6 +1,6 @@
 <?php
 /**
- * Primary class file for the Translation Stats translate.wordpress.org API.
+ * Class file for the Translation Stats translate.wordpress.org API.
  *
  * @package Translation Stats
  *
