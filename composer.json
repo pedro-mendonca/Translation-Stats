@@ -21,9 +21,22 @@
     "szepeviktor/phpstan-wordpress": "^0.5.0"
   },
   "scripts": {
+    "test": [
+      "@lint",
+      "@stan"
+    ],
     "lint": "phpcs -v --standard=phpcs.xml",
     "lint-fix": "phpcbf -v --standard=phpcs.xml",
     "lint-i": "phpcs -i",
-    "stan": "phpstan analyse -c phpstan.neon --memory-limit=2G"
+    "stan": "phpstan analyse -c phpstan.neon --memory-limit=2G",
+    "scripts-list": "composer run-script --list"
+  },
+  "scripts-descriptions": {
+    "test": "Runs all available code tests (PHP_CodeSniffer and PHPStan).",
+    "lint": "Runs the PHP code sniffer.",
+    "lint-fix": "Runs the PHP code sniffer a automatically fix errors.",
+    "lint-i": "List the installed coding standards.",
+    "stan": "Runs the PHPStan code static analysis.",
+    "scripts-list": "List all Composer scripts."
   }
 }
