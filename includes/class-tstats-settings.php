@@ -446,6 +446,9 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 			if ( ! current_user_can( 'manage_options' ) ) {
 				wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'translation-stats' ) );
 			}
+
+			// Add action on Translation Stats settings init.
+			do_action( 'tstats_settings_init' );
 			?>
 
 			<div class="wrap">
