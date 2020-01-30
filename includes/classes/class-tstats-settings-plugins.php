@@ -75,6 +75,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 		 */
 		public function tstats_render_settings__plugins_list() {
 
+			$table_prefix          = 'plugins'; // Set table projects type.
 			$show_author           = true; // Set to 'true' to show Author column.
 			$show_slug_text_domain = true; // Set to 'true' to show Slug and Text Domain column.
 			$tstats_language       = $this->tstats_globals->tstats_translation_language();
@@ -133,13 +134,14 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 					<?php
 					// Get all installed plugins list.
 					$all_plugins = get_plugins();
-					$plugin_item = '';
 
 					foreach ( $all_plugins as $plugin_file => $plugin ) {
-						$plugin_item++;
+
 						$plugin_slug        = $this->tstats_translations_api->tstats_plugin_metadata( $plugin_file, 'slug' );
 						$plugin_url         = $this->tstats_translations_api->tstats_plugin_metadata( $plugin_file, 'url' );
 						$plugin_text_domain = $plugin['TextDomain'];
+						$row_id             = $table_prefix . '_' . $plugin_slug;
+
 						if ( 'en_US' !== $tstats_language ) {
 							// If current locale is not 'en_US', add Locale WP.org subdomain to plugin URL (e.g. https://pt.wordpress.org/plugins/translation-stats/ ).
 							$wporg_subdomain = isset( $locale['wporg_subdomain'] ) ? $locale['wporg_subdomain'] . '.' : '';
@@ -168,7 +170,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 						<tr class="<?php echo esc_html( $status ); ?>">
 							<th scope="row" class="check-column plugin-select">
 								<label class="screen-reader-text"><?php esc_html_e( 'Select Plugin', 'translation-stats' ); ?></label>
-								<input name="<?php echo esc_attr( $field_name ); ?>" <?php checked( $checked, true ); ?> <?php disabled( $disabled, true ); ?> id="<?php echo esc_html( 'plugin_' . $plugin_item ); ?>" class="checkbox-plugin" type="checkbox" value="true"/>
+								<input name="<?php echo esc_attr( $field_name ); ?>" <?php checked( $checked, true ); ?> <?php disabled( $disabled, true ); ?> id="<?php echo esc_html( $row_id ); ?>" class="checkbox-plugin" type="checkbox" value="true"/>
 							</th>
 							<td class="plugin-name">
 								<?php echo wp_kses_post( $plugin_name ); ?>
@@ -216,7 +218,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 							foreach ( $subprojects as $subproject ) {
 								$field_name   = TSTATS_WP_OPTION . '[' . $plugin_slug . '][' . $subproject['slug'] . ']';
 								$checked      = empty( $options[ $plugin_slug ] [ $subproject['slug'] ] ) ? '' : true;
-								$plugin_class = ! $disabled ? 'plugin_' . $plugin_item : '';
+								$plugin_class = ! $disabled ? $row_id : '';
 								?>
 								<td class="check-column plugin-subproject">
 									<label class="screen-reader-text"><?php esc_html_e( 'Select Subproject', 'translation-stats' ); ?></label>
