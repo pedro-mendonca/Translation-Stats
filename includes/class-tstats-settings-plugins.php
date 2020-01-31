@@ -233,7 +233,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 			<tr class="<?php echo esc_html( $status ); ?>">
 				<th scope="row" class="check-column plugin-select">
 					<label class="screen-reader-text"><?php esc_html_e( 'Select Plugin', 'translation-stats' ); ?></label>
-					<input name="<?php echo esc_attr( $field_name ); ?>" <?php checked( $checked, true ); ?> <?php disabled( $disabled, true ); ?> id="<?php echo esc_html( $row_id ); ?>" class="checkbox-plugin" type="checkbox" value="true"/>
+					<input name="<?php echo esc_attr( $field_name ); ?>" <?php checked( $checked, true ); ?> <?php disabled( $disabled, true ); ?> id="<?php echo esc_attr( $row_id ); ?>" class="checkbox-plugin" type="checkbox" value="true"/>
 				</th>
 				<td class="plugin-name">
 					<?php echo wp_kses_post( $plugin_name ); ?>
