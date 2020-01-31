@@ -72,7 +72,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 		 * Render translation projects settings table.
 		 *
 		 * @since 0.8.0
-		 * @since 0.9.7   Added table settings and separated methods for table header and rows.
+		 * @since 0.9.6.2   Added table settings and separated methods for table header and rows.
 		 */
 		public function tstats_render_settings__plugins_list() {
 
@@ -114,7 +114,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 		/**
 		 * Render translation projects settings table header.
 		 *
-		 * @since 0.9.7
+		 * @since 0.9.6.2
 		 *
 		 * @param array $table_args   Array of table settings.
 		 */
@@ -177,7 +177,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 		/**
 		 * Render translation projects settings table row.
 		 *
-		 * @since 0.9.7
+		 * @since 0.9.6.2
 		 *
 		 * @param array $table_args   Array of table settings.
 		 * @param array $plugin       Array of plugin data.
