@@ -111,7 +111,7 @@ jQuery( document ).ready( function( $ ) {
 			$( 'input.' + id ).parents( 'tr' ).addClass( 'active' ).removeClass( 'inactive' );
 		}
 
-		console.log( 'Clicked single plugin ID #' + id + ' checkbox.' );
+		console.log( 'Clicked single plugin ID "' + id + '" checkbox.' );
 	}
 
 	/**
@@ -144,7 +144,7 @@ jQuery( document ).ready( function( $ ) {
 			$( 'input#plugins_' + id ).prop( 'checked', true );
 		}
 
-		console.log( 'Clicked single plugin ID #' + id + ' subproject checkbox.' );
-		console.log( pluginSubprojectsCount[ id ] + ' subproject(s) of plugin ID#' + id + ' selected.' );
+		console.log( 'Clicked single plugin ID "' + id + '" subproject checkbox.' );
+		console.log( pluginSubprojectsCount[ id ] + ' subproject(s) of plugin ID "' + id + '" selected.' );
 	}
 } );
