@@ -128,20 +128,20 @@ jQuery( document ).ready( function( $ ) {
 		var checkboxClass = $( event.target ).attr( 'class' );
 
 		// Get plugin row id.
-		var id = checkboxClass.substring( 'checkbox-subproject plugin_'.length );
+		var id = checkboxClass.substring( 'checkbox-subproject plugins_'.length );
 
 		// Set plugin subprojects count.
-		pluginSubprojectsCount[ id ] = $( 'input.plugin_' + id + ':checked' ).length;
+		pluginSubprojectsCount[ id ] = $( 'input.plugins_' + id + ':checked' ).length;
 
 		// Check plugin subprojects count.
 		if ( 0 === pluginSubprojectsCount[ id ] ) {
 			// Set plugin row as inactive.
-			$( 'input.plugin_' + id ).parents( 'tr' ).addClass( 'inactive' ).removeClass( 'active' );
-			$( 'input#plugin_' + id ).prop( 'checked', false );
+			$( 'input.plugins_' + id ).parents( 'tr' ).addClass( 'inactive' ).removeClass( 'active' );
+			$( 'input#plugins_' + id ).prop( 'checked', false );
 		} else {
 			// Set plugin row as active.
-			$( 'input.plugin_' + id ).parents( 'tr' ).addClass( 'active' ).removeClass( 'inactive' );
-			$( 'input#plugin_' + id ).prop( 'checked', true );
+			$( 'input.plugins_' + id ).parents( 'tr' ).addClass( 'active' ).removeClass( 'inactive' );
+			$( 'input#plugins_' + id ).prop( 'checked', true );
 		}
 
 		console.log( 'Clicked single plugin ID #' + id + ' subproject checkbox.' );
