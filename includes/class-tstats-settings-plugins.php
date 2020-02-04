@@ -203,6 +203,22 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 
 			$row_id = $table_prefix . '_' . $plugin_slug;
 
+			// Set CSS 'indeterminate' property for partially enabled projects.
+			$subprojects_count = 0;
+			foreach ( $subprojects as $subproject ) {
+				if ( ! empty( $options[ $plugin_slug ] [ $subproject['slug'] ] ) ) {
+					$subprojects_count++;
+				}
+			}
+			$indeterminate = ( 0 !== $subprojects_count && $subprojects_count < count( $subprojects ) ) ? 'true' : 'false';
+			?>
+			<script>
+			jQuery( document ).ready( function( $ ) {
+				$( 'input#<?php echo esc_html( $row_id ); ?>' ).prop( 'indeterminate', <?php echo esc_html( $indeterminate ); ?> );
+			} );
+			</script>
+
+			<?php
 			if ( 'en_US' !== $tstats_language ) {
 				// If current locale is not 'en_US', add Locale WP.org subdomain to plugin URL (e.g. https://pt.wordpress.org/plugins/translation-stats/ ).
 				$wporg_subdomain = isset( $locale['wporg_subdomain'] ) ? $locale['wporg_subdomain'] . '.' : '';

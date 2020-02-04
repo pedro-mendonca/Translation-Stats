@@ -81,7 +81,7 @@ jQuery( document ).ready( function( $ ) {
 	 * @since 0.9.3
 	 */
 	function tstatsSelectAllPlugins() {
-		if ( $( '.tstats-plugin-list-table input#all_plugins' ).is( ':checked' ) ) {
+		if ( $( '.tstats-plugin-list-table input#all_plugins' ).prop( 'checked' ) ) {
 			// Set all plugin rows as active.
 			$( '.tstats-plugin-list-table tr.inactive' ).addClass( 'active' ).removeClass( 'inactive' );
 		} else {
@@ -100,15 +100,33 @@ jQuery( document ).ready( function( $ ) {
 	 */
 	function tstatsSelectPlugin() {
 		// Get the clicked plugin row ID from Settings plugins table.
+		var pluginSubprojectsCount = {};
+		var pluginSubprojectsTotal = {};
+
 		var id = $( event.target ).attr( 'id' );
 
-		$( 'input.' + id ).prop( 'checked', this.checked );
-		if ( $( 'input.' + id ).parents( 'tr' ).hasClass( 'active' ) ) {
-			// Set plugin row as inactive.
+		// Set row subprojects count.
+		pluginSubprojectsCount[ id ] = $( 'input.' + id + ':checked' ).length;
+
+		// Set row subprojects total.
+		pluginSubprojectsTotal[ id ] = $( 'input.' + id ).length;
+
+		if ( pluginSubprojectsCount[ id ] === pluginSubprojectsTotal[ id ] ) {
+			// Set project row as inactive.
 			$( 'input.' + id ).parents( 'tr' ).addClass( 'inactive' ).removeClass( 'active' );
+			// Set row subprojects as unselected.
+			$( 'input.' + id ).prop( 'checked', false );
+
+			console.log( 'Project disabled.' );
 		} else {
 			// Set plugin row as active.
 			$( 'input.' + id ).parents( 'tr' ).addClass( 'active' ).removeClass( 'inactive' );
+			// Set project as selected.
+			$( 'input#' + id ).prop( 'checked', true );
+			// Set row subprojects as selected.
+			$( 'input.' + id ).prop( 'checked', true );
+
+			console.log( 'Project fully enabled.' );
 		}
 
 		console.log( 'Clicked single plugin ID "' + id + '" checkbox.' );
@@ -123,25 +141,56 @@ jQuery( document ).ready( function( $ ) {
 	 */
 	function tstatsSelectPluginSubproject() {
 		var pluginSubprojectsCount = {};
+		var pluginSubprojectsTotal = {};
 
 		// Get the clicked plugin subproject class from Settings plugins table.
 		var checkboxClass = $( event.target ).attr( 'class' );
 
 		// Get plugin row id.
-		var id = checkboxClass.substring( 'checkbox-subproject plugins_'.length );
-
 		// Set plugin subprojects count.
-		pluginSubprojectsCount[ id ] = $( 'input.plugins_' + id + ':checked' ).length;
-
 		// Check plugin subprojects count.
-		if ( 0 === pluginSubprojectsCount[ id ] ) {
-			// Set plugin row as inactive.
-			$( 'input.plugins_' + id ).parents( 'tr' ).addClass( 'inactive' ).removeClass( 'active' );
-			$( 'input#plugins_' + id ).prop( 'checked', false );
-		} else {
-			// Set plugin row as active.
-			$( 'input.plugins_' + id ).parents( 'tr' ).addClass( 'active' ).removeClass( 'inactive' );
-			$( 'input#plugins_' + id ).prop( 'checked', true );
+		var id = checkboxClass.substring( 'checkbox-subproject '.length );
+
+		pluginSubprojectsCount[ id ] = $( 'input.' + id + ':checked' ).length;
+
+		pluginSubprojectsTotal[ id ] = $( 'input.' + id ).length;
+
+		switch ( pluginSubprojectsCount[ id ] ) {
+			case pluginSubprojectsTotal[ id ]:
+				// Set project row as active.
+				$( 'input.' + id ).parents( 'tr' ).addClass( 'active' ).removeClass( 'inactive' );
+				// Set project checkbox as unchecked.
+				$( 'input#' + id ).prop(
+					{
+						indeterminate: false,
+						checked: true,
+					}
+				);
+				console.log( 'Project fully enabled.' );
+				break;
+			case 0:
+				// Set project row as inactive.
+				$( 'input.' + id ).parents( 'tr' ).addClass( 'inactive' ).removeClass( 'active' );
+				// Set project checkbox as unchecked.
+				$( 'input#' + id ).prop(
+					{
+						indeterminate: false,
+						checked: false,
+					}
+				);
+				console.log( 'Project disabled.' );
+				break;
+			default:
+				// Set project row as active.
+				$( 'input.' + id ).parents( 'tr' ).addClass( 'active' ).removeClass( 'inactive' );
+				// Set project checkbox as indeterminate.
+				$( 'input#' + id ).prop(
+					{
+						indeterminate: true,
+						checked: true,
+					}
+				);
+				console.log( 'Project partially enabled (css "indeterminate").' );
 		}
 
 		console.log( 'Clicked single plugin ID "' + id + '" subproject checkbox.' );
