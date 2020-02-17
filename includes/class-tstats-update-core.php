@@ -472,7 +472,7 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 		 */
 		public function tstats_remove_previous_wp_translation( $transient ) {
 
-			if ( ! empty( $transient->translations ) ) {
+			if ( ! empty( $transient->translations ) && isset( $transient->version_checked ) ) {
 				if ( $transient->version_checked !== $transient->translations[0]['version'] ) {
 					// Empty update info of language pack for previous WordPress version.
 					$transient->translations = array();
