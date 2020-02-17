@@ -245,8 +245,8 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 
 			$wp_version = array();
 
-			// Check if WordPress is the latest version.
-			if ( ! isset( $updates[0]->response ) || 'latest' === $updates[0]->response ) {
+			// Check if WordPress install is the latest or development version.
+			if ( ! isset( $updates[0]->response ) || 'latest' === $updates[0]->response || 'development' === $updates[0]->response ) {
 				$wp_version['slug']   = 'dev';
 				$wp_version['name']   = substr( $current_version, 0, 3 ) . '.x';
 				$wp_version['number'] = $current_version;
