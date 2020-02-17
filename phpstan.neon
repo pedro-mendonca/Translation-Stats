@@ -7,7 +7,7 @@ includes:
 	# Include this extension
 	- vendor/szepeviktor/phpstan-wordpress/extension.neon
 parameters:
-	level: 0
+	level: 2
 	inferPrivatePropertyTypeFromConstructor: true
 	paths:
 		# Plugin root
