@@ -115,7 +115,7 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 				$available_translations = get_site_transient( 'available_translations' );
 			}
 
-			// Check if the current translation version is different the WordPress installed version.
+			// Check if the current translation version is different from the WordPress installed version.
 			if ( substr( $available_translations[ $locale['wp_locale'] ]['version'], 0, 3 ) === substr( $wp_version['number'], 0, 3 ) ) {
 				return;
 			}
@@ -297,8 +297,8 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 				'<strong>&#8220;' . __( 'Update WordPress Translation', 'translation-stats' ) . '&#8221;</strong>'
 			);
 
-			// Check if the current translation version is different the WordPress installed version.
 			if ( substr( $available_translations[ $locale['wp_locale'] ]['version'], 0, 3 ) !== substr( $wp_version['number'], 0, 3 ) ) {
+			// Check if the current translation version is different from the WordPress installed version.
 
 				$notice_type           = 'warning';
 				$notice_message_status = sprintf(
@@ -474,7 +474,7 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 
 			if ( ! empty( $transient->translations ) ) {
 				if ( $transient->version_checked !== $transient->translations[0]['version'] ) {
-					// Empty update info of language pack for previous WordPress version..
+					// Empty update info of language pack for previous WordPress version.
 					$transient->translations = array();
 				}
 			}
