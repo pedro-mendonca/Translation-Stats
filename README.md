@@ -23,7 +23,7 @@
 **Tested up to:** 5.3.2  
 **Requires PHP:** 5.6  
 **Stable tag:** 0.9.6.3  
-**License:** GPLv2 or later  
+**License:** GPLv2  
 **License URI:** [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html)  
 
 Show plugins translation stats on your WordPress install.

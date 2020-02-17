@@ -6,7 +6,7 @@
  * @link         https://github.com/pedro-mendonca/Translation-Stats
  * @author       Pedro Mendonça
  * @copyright    2018 Pedro Mendonça
- * @license      GPL2
+ * @license      GPLv2
  *
  * @wordpress-plugin
  * Plugin Name:       Translation Stats
@@ -16,7 +16,7 @@
  * Version:           0.9.6.3
  * Author:            Pedro Mendonça
  * Author URI:        https://translationstats.com
- * License:           GPL2
+ * License:           GPLv2
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       translation-stats
  * Domain Path:       /languages
