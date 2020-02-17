@@ -425,7 +425,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 			$translation_stats = $this->tstats_plugin_subproject_stats( $locale, $project_slug, $subproject_slug, $force_update );
 
 			// Initializing variable.
-			$percent_translated = '';
+			$percent_translated = 0;
 
 			// If translation stats are not an object, project not found.
 			if ( ! is_object( $translation_stats ) ) {
