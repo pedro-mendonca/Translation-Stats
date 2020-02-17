@@ -44,10 +44,10 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 *
 		 * @since 0.8.0
 		 *
-		 * @param string $plugin_file       Plugin ID ( e.g. 'slug/plugin-name.php' ).
-		 * @param string $metadata          Metadata field ( e.g. 'slug' ).
+		 * @param string $plugin_file   Plugin ID ( e.g. 'slug/plugin-name.php' ).
+		 * @param string $metadata      Metadata field ( e.g. 'slug' ).
 		 *
-		 * @return string $plugin_metadata  Returns metadata value from plugin.
+		 * @return string|null          Returns metadata value from plugin.
 		 */
 		public function tstats_plugin_metadata( $plugin_file, $metadata ) {
 			$update_plugins = get_site_transient( 'update_plugins' );
@@ -65,6 +65,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 			if ( isset( $update_plugins->no_update[ $plugin_file ]->$metadata ) ) {
 				return $update_plugins->no_update[ $plugin_file ]->$metadata;
 			}
+			return null;
 		}
 
 
