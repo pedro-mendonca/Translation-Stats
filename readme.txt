@@ -5,7 +5,7 @@ Tags: internationalization, i18n, localization, l10n, translation, statistics, g
 Requires at least: 4.9
 Tested up to: 5.3
 Requires PHP: 5.6
-Stable tag: 0.9.6.3
+Stable tag: 0.9.7
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -65,6 +65,10 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 4. Translation Stats tools tab
 
 == Changelog ==
+
+= 0.9.7 =
+*   Add tristate to parent checkboxes with enabled and disabled childs
+*   Minor code improvements
 
 = 0.9.6.3 =
 *   Fix JavaScript bug
