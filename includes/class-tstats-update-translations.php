@@ -150,11 +150,8 @@ if ( ! class_exists( 'TStats_Update_Translations' ) ) {
 		 */
 		public function tstats_download_translations( $project, $locale ) {
 
-			// Get WordPress core version info.
-			$wp_version = $this->tstats_translations_api->tstats_wordpress_version();
-
 			// Set translation data path.
-			$source = $this->tstats_translations_api->tstats_translation_path( $wp_version, $project, $locale );
+			$source = $this->tstats_translations_api->tstats_translation_path( $project, $locale );
 
 			// Report message.
 			$result['log'] = sprintf(

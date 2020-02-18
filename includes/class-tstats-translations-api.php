@@ -323,13 +323,15 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 *
 		 * @since 0.9.5
 		 *
-		 * @param string $wp_version   WordPress version.
-		 * @param string $project      Project.
-		 * @param string $locale       Locale.
+		 * @param array $project   Project array.
+		 * @param array $locale    Locale array.
 		 *
-		 * @return string $translation_path   File path to get source.
+		 * @return string|null     File path to get source.
 		 */
-		public function tstats_translation_path( $wp_version, $project, $locale ) {
+		public function tstats_translation_path( $project, $locale ) {
+
+			// Get WordPress core version info.
+			$wp_version = $this->tstats_wordpress_version();
 
 			/**
 			 * TODO:
