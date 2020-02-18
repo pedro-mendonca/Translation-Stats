@@ -59,7 +59,7 @@ define( 'TSTATS_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'TSTATS_FILE', plugin_basename( __FILE__ ) );
 
 // Set Translation Stats Debug ( true / false ).
-// define( 'TSTATS_DEBUG', true );
+// Example: define( 'TSTATS_DEBUG', true );.
 
 
 // Check for PHP compatibility.
