@@ -384,8 +384,10 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 
 			$project_count = 0;
 
+			WP_Filesystem();
+			global $wp_filesystem;
 			// Destination of translation files.
-			$destination = WP_LANG_DIR . '/';
+			$destination = $wp_filesystem->wp_lang_dir();
 
 			foreach ( $projects as $project ) {
 
