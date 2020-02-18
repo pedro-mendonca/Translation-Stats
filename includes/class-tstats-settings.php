@@ -365,13 +365,10 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 				if ( ! isset( $_POST['tstats_nonce_check'] ) || ! wp_verify_nonce( sanitize_key( $_POST['tstats_nonce_check'] ), 'tstats_action' ) ) {
 					$this->tstats_nonce_fail();
 				}
-				// Choose 'load-defaults' or 'delete'.
-				$action = 'load-defaults';
-				if ( 'load-defaults' === $action ) {
-					update_option( TSTATS_WP_OPTION, $this->tstats_settings_defaults() );
-				} elseif ( 'delete' === $action ) {
-					delete_option( TSTATS_WP_OPTION );
-				}
+
+				// Update to default settings.
+				update_option( TSTATS_WP_OPTION, $this->tstats_settings_defaults() );
+
 				$admin_notice = array(
 					'type'        => 'success',
 					'notice-alt'  => false,
