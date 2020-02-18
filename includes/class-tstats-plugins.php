@@ -507,7 +507,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 
 
 		/**
-		 * Render plugin subproject stat bar.
+		 * Render plugin subproject stats bar.
 		 *
 		 * @since 0.8.0
 		 *
@@ -516,7 +516,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 * @param string $subproject_slug     Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).
 		 * @param string $force_update        True: Force get new stats. False: Use transients.
 		 *
-		 * @return string $translation_stats  Plugin stats.
+		 * @return object $translation_stats  Project stats.
 		 */
 		public function tstats_plugin_subproject_stats( $locale, $project_slug, $subproject_slug, $force_update ) {
 
