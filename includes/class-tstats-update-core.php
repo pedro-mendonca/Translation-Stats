@@ -305,8 +305,8 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 				'<strong>&#8220;' . __( 'Update WordPress Translation', 'translation-stats' ) . '&#8221;</strong>'
 			);
 
-			if ( substr( $available_translations[ $locale['wp_locale'] ]['version'], 0, 3 ) !== substr( $wp_version['number'], 0, 3 ) ) {
-			// Check if the current translation version is different from the WordPress installed version.
+			// Check if the current translation version is different from the WordPress installed version and is not beta.
+			if ( substr( $available_translations[ $locale['wp_locale'] ]['version'], 0, 3 ) !== substr( $wp_version['number'], 0, 3 ) && false === strpos( $wp_version['number'], 'beta' ) ) {
 
 				$notice_type           = 'warning';
 				$notice_message_status = sprintf(
