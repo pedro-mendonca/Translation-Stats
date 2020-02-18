@@ -20,6 +20,9 @@
     "phpcompatibility/phpcompatibility-wp": "^2.1.0",
     "szepeviktor/phpstan-wordpress": "^0.6.0"
   },
+  "config": {
+    "optimize-autoloader": true
+  },
   "scripts": {
     "test": [
       "@lint",
