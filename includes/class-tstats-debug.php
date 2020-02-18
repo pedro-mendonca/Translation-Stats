@@ -80,7 +80,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 * @since 0.9.0
 		 */
 		public function tstats_settings_tab__debug() {
-			if ( TSTATS_DEBUG ) {
+			if ( defined( 'TSTATS_DEBUG' ) && TSTATS_DEBUG ) {
 				?>
 				<a class="nav-tab" href="#debug"><span class="dashicons dashicons-info"></span> <?php esc_html_e( 'Debug', 'translation-stats' ); ?></a>
 				<?php
@@ -94,7 +94,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 * @since 0.9.0
 		 */
 		public function tstats_settings_content__debug() {
-			if ( TSTATS_DEBUG ) {
+			if ( defined( 'TSTATS_DEBUG' ) && TSTATS_DEBUG ) {
 				?>
 				<div id="tab-debug" class="tab-content hidden">
 					<?php
@@ -114,7 +114,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 */
 		public function tstats_settings_section__debug() {
 
-			if ( TSTATS_DEBUG ) {
+			if ( defined( 'TSTATS_DEBUG' ) && TSTATS_DEBUG ) {
 
 				add_settings_section(
 					'tstats_settings_advanced_debug',                          // String for use in the 'id' attribute of tags.
@@ -155,7 +155,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 * @since 0.8.0
 		 */
 		public function tstats_debug_info() {
-			if ( TSTATS_DEBUG ) {
+			if ( defined( 'TSTATS_DEBUG' ) && TSTATS_DEBUG ) {
 				?>
 				<br>
 				<div class="tstats-debug-block notice notice-alt inline notice-info">
@@ -353,7 +353,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 * @param string $default   Setting Default.
 		 */
 		public function tstats_debug_setting_field_info( $field_id, $value, $default ) {
-			if ( TSTATS_DEBUG ) {
+			if ( defined( 'TSTATS_DEBUG' ) && TSTATS_DEBUG ) {
 				?>
 				<div class="tstats-debug-block notice notice-alt inline notice-info">
 					<p>
@@ -399,7 +399,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 * @param string $plugin_translation_on_wporg   Plugin translation project exist on WP.org: True or false.
 		 */
 		public function tstats_settings_plugin_widget__debug( $project_slug, $plugin_on_wporg, $plugin_translation_on_wporg ) {
-			if ( TSTATS_DEBUG ) {
+			if ( defined( 'TSTATS_DEBUG' ) && TSTATS_DEBUG ) {
 				?>
 				<div class="tstats-debug-block notice notice-alt inline notice-info">
 					<p>
