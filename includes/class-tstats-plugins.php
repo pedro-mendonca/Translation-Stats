@@ -409,14 +409,14 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 * @param string $subproject_slug  Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).
 		 * @param string $force_update     True: Force get new stats. False: Use transients.
 		 *
-		 * @return array $stats_bar        Subproject stats bar and error boolean.
+		 * @return array|null $stats_bar   Subproject stats bar and error boolean.
 		 */
 		public function tstats_render_stats_bar( $locale, $project_slug, $subproject, $subproject_slug, $force_update ) {
 
 			$options = get_option( TSTATS_WP_OPTION );
 			// Show bar only if subproject is enabled in plugin settings.
 			if ( empty( $options[ $project_slug ][ $subproject_slug ] ) ) {
-				return;
+				return null;
 			}
 
 			$stats_bar_link = 'https://translate.wordpress.org/projects/wp-plugins/' . $project_slug . '/' . $subproject_slug . '/' . $locale['slug']['locale'] . '/' . $locale['slug']['variant'];
