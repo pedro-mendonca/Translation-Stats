@@ -95,7 +95,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 *
 		 * @param string $plugin    Plugin slug (project or project/subproject).
 		 *
-		 * @return string $api_get  Returns the response from translate.WordPress.org API URL.
+		 * @return array|WP_Error   Returns the response from translate.WordPress.org API URL.
 		 */
 		public function tstats_translations_api_get_plugin( $plugin ) {
 			$api_get = wp_remote_get( $this->tstats_translations_api_url( 'plugins' ) . $plugin );
