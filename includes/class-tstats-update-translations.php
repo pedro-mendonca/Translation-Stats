@@ -257,7 +257,7 @@ if ( ! class_exists( 'TStats_Update_Translations' ) ) {
 
 			$translations = Gettext\Translations::fromPoFile( $destination . $file_name );
 
-			if ( ! $translations ) {
+			if ( ! is_object( $translations ) ) {
 
 				// Report message.
 				$result['data'] = new WP_Error(
