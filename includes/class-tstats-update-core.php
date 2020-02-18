@@ -83,6 +83,9 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 
 		/**
 		 * Show WordPress core translation info message on Dashboard.
+		 * Only show if:
+		 * - WordPress install version is not beta.
+		 * - WordPress install is different from available translation.
 		 *
 		 * @since 0.9.5.2
 		 */
@@ -117,6 +120,11 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 
 			// Check if the current translation version is different from the WordPress installed version.
 			if ( substr( $available_translations[ $locale['wp_locale'] ]['version'], 0, 3 ) === substr( $wp_version['number'], 0, 3 ) ) {
+				return;
+			}
+
+			// Check if the current WordPress install version is beta.
+			if ( false !== strpos( $wp_version['number'], 'beta' ) ) {
 				return;
 			}
 
