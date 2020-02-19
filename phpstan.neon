@@ -7,7 +7,7 @@ includes:
 	# Include this extension
 	- vendor/szepeviktor/phpstan-wordpress/extension.neon
 parameters:
-	level: 4
+	level: 5
 	inferPrivatePropertyTypeFromConstructor: true
 	paths:
 		# Plugin root
@@ -21,3 +21,6 @@ parameters:
 	autoload_files:
 		# Plugin main file
 		- %currentWorkingDirectory%/translation-stats.php
+	ignoreErrors:
+		# Temporarily ignore:
+		- "#Parameter \\#1 \\$autoload_function of function spl_autoload_register expects callable\\(string\\): void, 'tstats_class…' given.#"
