@@ -328,7 +328,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 *
 		 * @param string $project_slug  Plugin Slug.
 		 * @param array  $locale        Locale array.
-		 * @param string $force_update  True: Force get new stats. False: Use transients.
+		 * @param bool   $force_update  True: Force get new stats. False: Use transients.
 		 */
 		public function tstats_stats_plugin_widget_content_stats( $project_slug, $locale, $force_update ) {
 
@@ -407,7 +407,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 * @param string $project_slug     Plugin Slug.
 		 * @param string $subproject       Translation subproject (' Dev', 'Dev Readme', 'Stable', 'Stable Readme' ).
 		 * @param string $subproject_slug  Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).
-		 * @param string $force_update     True: Force get new stats. False: Use transients.
+		 * @param bool   $force_update     True: Force get new stats. False: Use transients.
 		 *
 		 * @return array|null $stats_bar   Subproject stats bar and error boolean.
 		 */
@@ -507,28 +507,26 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 
 
 		/**
-		 * Render plugin subproject stat bar.
+		 * Render plugin subproject stats bar.
 		 *
 		 * @since 0.8.0
 		 *
-		 * @param array  $locale              Locale array.
-		 * @param string $project_slug        Plugin Slug.
-		 * @param string $subproject_slug     Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).
-		 * @param string $force_update        True: Force get new stats. False: Use transients.
+		 * @param array  $locale            Locale array.
+		 * @param string $project_slug      Plugin Slug.
+		 * @param string $subproject_slug   Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).
+		 * @param bool   $force_update      True: Force get new stats. False: Use transients.
 		 *
-		 * @return string $translation_stats  Plugin stats.
+		 * @return object|bool              Project stats if exist, otherwise returns 'false'.
 		 */
 		public function tstats_plugin_subproject_stats( $locale, $project_slug, $subproject_slug, $force_update ) {
 
 			// Check for force update setting.
-			if ( true === $force_update ) {
-				$translation_stats = false;
-			} else {
+			if ( false === $force_update ) {
+
 				// Get subproject transients.
 				$translation_stats = get_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug . '_' . $locale['slug']['locale'] . '_' . $locale['slug']['variant'] );
-			}
 
-			if ( false === $translation_stats ) {
+			} else {
 
 				$json = $this->tstats_translations_api->tstats_translations_api_get_plugin( $project_slug . '/' . $subproject_slug );
 				if ( is_wp_error( $json ) || wp_remote_retrieve_response_code( $json ) !== 200 ) {
@@ -546,17 +544,20 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 
 					} else {
 
+						$translation_stats = false;
+
 						foreach ( $body->translation_sets as $translation_set ) {
 							if ( $translation_set->locale === $locale['slug']['locale'] && $translation_set->slug === $locale['slug']['variant'] ) {
 								// Set transient value.
 								$translation_stats = $translation_set;
+
+								set_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug . '_' . $locale['slug']['locale'] . '_' . $locale['slug']['variant'], $translation_stats, get_option( TSTATS_WP_OPTION )['transients_expiration'] );
+
 								continue;
 							}
 						}
 					}
 				}
-
-				set_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug . '_' . $locale['slug']['locale'] . '_' . $locale['slug']['variant'], $translation_stats, get_option( TSTATS_WP_OPTION )['transients_expiration'] );
 			}
 
 			return $translation_stats;
