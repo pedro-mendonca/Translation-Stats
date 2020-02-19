@@ -521,12 +521,14 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		public function tstats_plugin_subproject_stats( $locale, $project_slug, $subproject_slug, $force_update ) {
 
 			// Check for force update setting.
-			if ( false === $force_update ) {
-
+			if ( true === $force_update ) {
+				$translation_stats = false;
+			} else {
 				// Get subproject transients.
 				$translation_stats = get_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug . '_' . $locale['slug']['locale'] . '_' . $locale['slug']['variant'] );
+			}
 
-			} else {
+			if ( false === $translation_stats ) {
 
 				$json = $this->tstats_translations_api->tstats_translations_api_get_plugin( $project_slug . '/' . $subproject_slug );
 				if ( is_wp_error( $json ) || wp_remote_retrieve_response_code( $json ) !== 200 ) {
@@ -544,20 +546,17 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 
 					} else {
 
-						$translation_stats = false;
-
 						foreach ( $body->translation_sets as $translation_set ) {
 							if ( $translation_set->locale === $locale['slug']['locale'] && $translation_set->slug === $locale['slug']['variant'] ) {
 								// Set transient value.
 								$translation_stats = $translation_set;
-
-								set_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug . '_' . $locale['slug']['locale'] . '_' . $locale['slug']['variant'], $translation_stats, get_option( TSTATS_WP_OPTION )['transients_expiration'] );
-
 								continue;
 							}
 						}
 					}
 				}
+
+				set_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug . '_' . $locale['slug']['locale'] . '_' . $locale['slug']['variant'], $translation_stats, get_option( TSTATS_WP_OPTION )['transients_expiration'] );
 			}
 
 			return $translation_stats;
