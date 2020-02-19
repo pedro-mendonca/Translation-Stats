@@ -82,7 +82,7 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 			wp_register_style(
 				'translation-stats',
 				TSTATS_DIR_URL . 'css/admin.css',
-				false,
+				array(),
 				TSTATS_VERSION
 			);
 
@@ -104,7 +104,7 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 			wp_register_style(
 				'translation-stats-dark-mode',
 				TSTATS_DIR_URL . 'css/admin-dark-mode.css',
-				false,
+				array(),
 				TSTATS_VERSION
 			);
 
