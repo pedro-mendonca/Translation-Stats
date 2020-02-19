@@ -84,12 +84,22 @@ jQuery( document ).ready( function( $ ) {
 		if ( $( '.tstats-plugin-list-table input#all_plugins' ).prop( 'checked' ) ) {
 			// Set all project rows as active.
 			$( '.tstats-plugin-list-table tr.inactive' ).addClass( 'active' ).removeClass( 'inactive' );
+			// Set project as selected.
+			$( 'input.checkbox-plugin' ).prop(
+				{
+					indeterminate: false,
+					checked: true,
+				}
+			);
+
+			console.log( 'Enabled all projects checkbox.' );
 		} else {
 			// Set all project rows as inactive.
 			$( '.tstats-plugin-list-table tr.active' ).addClass( 'inactive' ).removeClass( 'active' );
+
+			console.log( 'Disabled all projects checkbox.' );
 		}
 
-		console.log( 'Clicked all projects checkbox.' );
 	}
 
 	/**
