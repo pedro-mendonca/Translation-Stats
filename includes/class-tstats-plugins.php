@@ -172,6 +172,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 			?>
 
 			<div class="translation-stats-title">
+				<p>
 
 				<?php
 				// Add Translation Stats plugin widget title.
@@ -181,6 +182,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 				do_action( 'tstats_stats_plugin_widget_title__actions', $project_slug, $locale );
 				?>
 
+				</p>
 			</div>
 
 			<?php
@@ -242,14 +244,12 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		public function tstats_plugin_update_button() {
 			?>
 
-			<div class="tstats-update-link">
+			<span class="tstats-update-link">
 				<button class="handlediv button-link tstats-update-button" type="button" aria-expanded="true">
 					<span class="dashicons dashicons-update"></span>
 					<span class="screen-reader-text"><?php esc_html_e( 'Update', 'translation-stats' ); ?></span>
 				</button>
-			</div>
-
-			<br><br>
+			</span>
 
 			<?php
 		}
