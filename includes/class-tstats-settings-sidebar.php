@@ -35,6 +35,8 @@ if ( ! class_exists( 'TStats_Settings_Sidebar' ) ) {
 		 * Show Translation Stats settings sidebar.
 		 *
 		 * @since 0.9.0
+		 *
+		 * @return void
 		 */
 		public function tstats_settings__sidebar() {
 			?>

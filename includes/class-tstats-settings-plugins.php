@@ -52,6 +52,8 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 		 * Callback function for section "Plugins Settings".
 		 *
 		 * @since 0.8.0
+		 *
+		 * @return void
 		 */
 		public function tstats_settings__plugins__callback() {
 			?>
@@ -73,6 +75,8 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 		 *
 		 * @since 0.8.0
 		 * @since 0.9.6.2   Added table settings and separated methods for table header and rows.
+		 *
+		 * @return void
 		 */
 		public function tstats_render_settings__plugins_list() {
 
@@ -117,6 +121,8 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 		 * @since 0.9.6.2
 		 *
 		 * @param array $table_args   Array of table settings.
+		 *
+		 * @return void
 		 */
 		public function tstats_settings_projects_table_header( $table_args ) {
 
@@ -181,6 +187,8 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 		 *
 		 * @param array $table_args   Array of table settings.
 		 * @param array $plugin       Array of plugin data.
+		 *
+		 * @return void
 		 */
 		public function tstats_settings_projects_table_row( $table_args, $plugin ) {
 

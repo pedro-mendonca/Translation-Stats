@@ -26,6 +26,8 @@ if ( ! class_exists( 'TStats_Transients' ) ) {
 		 * @since 0.8.0
 		 *
 		 * @param string $search  Transient search term.
+		 *
+		 * @return array  Search result of transients.
 		 */
 		public function tstats_get_transients( $search ) {
 			global $wpdb;
@@ -53,6 +55,8 @@ if ( ! class_exists( 'TStats_Transients' ) ) {
 		 * @since 0.8.0
 		 *
 		 * @param string $prefix  Transient prefix.
+		 *
+		 * @return void
 		 */
 		public function tstats_delete_transients( $prefix ) {
 			$tstats_transients = $this->tstats_get_transients( $prefix );

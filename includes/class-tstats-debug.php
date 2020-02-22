@@ -78,6 +78,8 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 * Add Translation Stats settings debug tab.
 		 *
 		 * @since 0.9.0
+		 *
+		 * @return void
 		 */
 		public function tstats_settings_tab__debug() {
 			if ( defined( 'TSTATS_DEBUG' ) && TSTATS_DEBUG ) {
@@ -92,6 +94,8 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 * Add Translation Stats settings debug content.
 		 *
 		 * @since 0.9.0
+		 *
+		 * @return void
 		 */
 		public function tstats_settings_content__debug() {
 			if ( defined( 'TSTATS_DEBUG' ) && TSTATS_DEBUG ) {
@@ -111,6 +115,8 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 * Register Settings Page sections Debug.
 		 *
 		 * @since 0.9.0
+		 *
+		 * @return void
 		 */
 		public function tstats_settings_section__debug() {
 
@@ -132,6 +138,8 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 * Callback function for section "Debug".
 		 *
 		 * @since 0.8.0
+		 *
+		 * @return void
 		 */
 		public function tstats_settings_advanced_debug_callback() {
 
@@ -153,6 +161,8 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 * Display debug formated message with plugin options.
 		 *
 		 * @since 0.8.0
+		 *
+		 * @return void
 		 */
 		public function tstats_debug_info() {
 			if ( defined( 'TSTATS_DEBUG' ) && TSTATS_DEBUG ) {
@@ -178,6 +188,8 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 * Show the server debug info.
 		 *
 		 * @since 0.8.0
+		 *
+		 * @return void
 		 */
 		public function tstats_debug_info__server() {
 			?>
@@ -223,6 +235,8 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 * Show the site settings debug info.
 		 *
 		 * @since 0.8.0
+		 *
+		 * @return void
 		 */
 		public function tstats_debug_info__settings() {
 			// Get plugin settings.
@@ -304,6 +318,8 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 * Show the site transients debug info.
 		 *
 		 * @since 0.8.0
+		 *
+		 * @return void
 		 */
 		public function tstats_debug_info__transients() {
 			?>
@@ -351,6 +367,8 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 * @param string $field_id  Setting ID.
 		 * @param string $value     Setting Value.
 		 * @param string $default   Setting Default.
+		 *
+		 * @return void
 		 */
 		public function tstats_debug_setting_field_info( $field_id, $value, $default ) {
 			if ( defined( 'TSTATS_DEBUG' ) && TSTATS_DEBUG ) {
@@ -397,6 +415,8 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 * @param string $project_slug                  Plugin Slug..
 		 * @param string $plugin_on_wporg               Plugin exist on WP.org: True or false.
 		 * @param string $plugin_translation_on_wporg   Plugin translation project exist on WP.org: True or false.
+		 *
+		 * @return void
 		 */
 		public function tstats_settings_plugin_widget__debug( $project_slug, $plugin_on_wporg, $plugin_translation_on_wporg ) {
 			if ( defined( 'TSTATS_DEBUG' ) && TSTATS_DEBUG ) {

@@ -34,6 +34,8 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 		 * @since 0.8.0
 		 *
 		 * @param array $args  Array of field arguments.
+		 *
+		 * @return void
 		 */
 		public function tstats_add_settings_field( $args ) {
 
@@ -61,6 +63,8 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 		 * @since 0.8.0
 		 *
 		 * @param array $field  Array of checkbox field data.
+		 *
+		 * @return void
 		 */
 		public function tstats_add_settings_checkbox( $field ) {
 
@@ -89,6 +93,8 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 		 * @since 0.8.0
 		 *
 		 * @param array $field  Array of select field data.
+		 *
+		 * @return void
 		 */
 		public function tstats_add_settings_select( $field ) {
 
@@ -118,6 +124,8 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 		 * @since 0.8.0
 		 *
 		 * @param array $field  Array of button field data.
+		 *
+		 * @return void
 		 */
 		public function tstats_add_settings_button( $field ) {
 
@@ -149,6 +157,8 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 		 * @since 0.8.0
 		 *
 		 * @param array $args  Array of checkbox field arguments.
+		 *
+		 * @return void
 		 */
 		public function tstats_render_input_checkbox( $args ) {
 			$field_id    = TSTATS_WP_OPTION . '[' . $args['id'] . ']';
@@ -180,6 +190,8 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 		 * @since 0.8.0
 		 *
 		 * @param array $args  Array of select field arguments.
+		 *
+		 * @return void
 		 */
 		public function tstats_render_input_select( $args ) {
 
@@ -219,6 +231,8 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 		 * @since 0.8.0
 		 *
 		 * @param array $args  Array of select field arguments.
+		 *
+		 * @return void
 		 */
 		public function tstats_render_input_select__language( $args ) {
 
@@ -259,6 +273,8 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 		 * @since 0.8.0
 		 *
 		 * @param array $args  Array of button field arguments.
+		 *
+		 * @return void
 		 */
 		public function tstats_render_input_button( $args ) {
 			$field_id     = TSTATS_WP_OPTION . '[' . $args['id'] . ']';
