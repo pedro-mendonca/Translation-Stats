@@ -24,3 +24,5 @@ parameters:
 	ignoreErrors:
 		# Temporarily ignore:
 		- "#Parameter \\#1 \\$autoload_function of function spl_autoload_register expects callable\\(string\\): void, 'tstats_class…' given.#"
+	# Temporarily disable test.
+	checkMissingIterableValueType: false
