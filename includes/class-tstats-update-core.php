@@ -257,7 +257,12 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 			</form>
 
 			<?php
-			return ob_get_clean();
+			$form = ob_get_clean();
+			// Check that string isn't empty.
+			if ( $form ) {
+				return $form;
+			}
+			return '';
 		}
 
 

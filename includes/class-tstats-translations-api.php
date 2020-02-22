@@ -242,6 +242,9 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 
 			// Get available core updates.
 			$updates = get_core_updates();
+			if ( ! is_array( $updates ) ) {
+				return array();
+			}
 
 			$wp_version = array();
 
@@ -466,8 +469,8 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 
 				// In case there is a '/' separator, set the slug as an array 'locale' and 'variant'.
 				$tstats_locale_slug = array(
-					'locale'  => substr( $tstats_locale_slug, 0, strpos( $tstats_locale['slug'], '/' ) ),
-					'variant' => substr( $tstats_locale_slug, 1 + strpos( $tstats_locale['slug'], '/' ) ),
+					'locale'  => substr( $tstats_locale_slug, 0, strpos( $tstats_locale_slug, '/' ) ),
+					'variant' => substr( $tstats_locale_slug, 1 + strpos( $tstats_locale_slug, '/' ) ),
 				);
 
 			} else {
