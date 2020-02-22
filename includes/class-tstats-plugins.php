@@ -103,6 +103,8 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 *
 		 * @param string $column_name  Column Slug ( e.g. 'translation-stats' ).
 		 * @param string $plugin_file  Plugin ID ( e.g. 'slug/plugin-name.php' ).
+		 *
+		 * @return void
 		 */
 		public function tstats_render_plugin_stats_column( $column_name, $plugin_file ) {
 
@@ -159,6 +161,8 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 * @since 0.8.0
 		 *
 		 * @param string $project_slug   Plugin Slug.
+		 *
+		 * @return void
 		 */
 		public function tstats_render_plugin_stats( $project_slug ) {
 
@@ -219,6 +223,8 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 *
 		 * @param string $project_slug  Plugin Slug.
 		 * @param array  $locale        Locale array.
+		 *
+		 * @return void
 		 */
 		public function tstats_stats_plugin_widget_title( $project_slug, $locale ) {
 
@@ -240,6 +246,8 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 * Load plugin widget title update button.
 		 *
 		 * @since 0.9.4
+		 *
+		 * @return void
 		 */
 		public function tstats_plugin_update_button() {
 			?>
@@ -259,6 +267,8 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 * Load plugin widget loading placeholder.
 		 *
 		 * @since 0.9.4
+		 *
+		 * @return void
 		 */
 		public function tstats_stats_plugin_widget_content() {
 
@@ -278,6 +288,8 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 * Load plugin widget content.
 		 *
 		 * @since 0.9.4
+		 *
+		 * @return void
 		 */
 		public function tstats_stats_plugin_widget_content_load() {
 
@@ -329,6 +341,8 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 * @param string $project_slug  Plugin Slug.
 		 * @param array  $locale        Locale array.
 		 * @param bool   $force_update  True: Force get new stats. False: Use transients.
+		 *
+		 * @return void
 		 */
 		public function tstats_stats_plugin_widget_content_stats( $project_slug, $locale, $force_update ) {
 

@@ -80,6 +80,8 @@ if ( ! tstats_compatible_version() ) {
  * If incompatible, deactivate the plugin and add an admin notice.
  *
  * @since 0.9.4.3
+ *
+ * @return void
  */
 function tstats_check_version() {
 
@@ -103,6 +105,8 @@ function tstats_check_version() {
  * Adapted from https://pento.net/2014/02/18/dont-let-your-plugin-be-activated-on-incompatible-sites/.
  *
  * @since 0.9.4.3
+ *
+ * @return void
  */
 function tstats_disabled_notice() {
 
@@ -188,6 +192,8 @@ spl_autoload_register( 'tstats_class_autoload' );
  * @since 0.9.6
  *
  * @param string $class_name   Class name.
+ *
+ * @return bool  True if class found, false if not found.
  */
 function tstats_class_autoload( $class_name ) {
 
@@ -200,7 +206,7 @@ function tstats_class_autoload( $class_name ) {
 		return false;
 	}
 
-	require_once $tstats_class;
+	return require_once $tstats_class;
 }
 
 

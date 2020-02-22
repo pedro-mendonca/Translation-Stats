@@ -88,6 +88,8 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 		 * - WordPress install is different from available translation.
 		 *
 		 * @since 0.9.5.2
+		 *
+		 * @return void
 		 */
 		public function tstats_dashboard_wp_translation_notice() {
 
@@ -176,6 +178,8 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 		 * Add WordPress core info and update button on the Updates page bottom.
 		 *
 		 * @since 0.9.5.2
+		 *
+		 * @return void
 		 */
 		public function tstats_updates_wp_translation_notice() {
 
@@ -235,6 +239,8 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 		 * Add form with action button to update WordPress core translation.
 		 *
 		 * @since 0.9.5.2
+		 *
+		 * @return string  HTML of button to update core translation.
 		 */
 		public function tstats_form_update_wordpress_translation() {
 
@@ -261,6 +267,8 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 		 * @since 0.9.5.2
 		 *
 		 * @param array $notice_args  Arguments for admin notice.
+		 *
+		 * @return void
 		 */
 		public function tstats_updates_wp_translation_notice_message( $notice_args ) {
 
@@ -353,6 +361,8 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 		 * Load WordPress core update loading placeholder.
 		 *
 		 * @since 0.9.5
+		 *
+		 * @return void
 		 */
 		public function tstats_update_core_content() {
 
@@ -373,6 +383,8 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 		 * Load WordPress core update content.
 		 *
 		 * @since 0.9.5
+		 *
+		 * @return void
 		 */
 		public function tstats_update_core_content_load() {
 
