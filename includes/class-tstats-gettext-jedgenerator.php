@@ -34,7 +34,7 @@ if ( ! class_exists( 'TStats_Gettext_JedGenerator' ) ) {
 		 * @param Translations $translations  Array with all translations.
 		 * @param array        $options       Options.
 		 *
-		 * @return bool
+		 * @return string|false
 		 */
 		public static function toString( Translations $translations, array $options = array() ) {
 			$data     = '';
