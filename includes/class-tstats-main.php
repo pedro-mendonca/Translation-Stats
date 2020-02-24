@@ -72,6 +72,8 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 		 * @since 0.8.0
 		 *
 		 * @param string $hook  Hook.
+		 *
+		 * @return void
 		 */
 		public function tstats_register_plugin_styles( $hook ) {
 
@@ -82,7 +84,7 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 			wp_register_style(
 				'translation-stats',
 				TSTATS_DIR_URL . 'css/admin.css',
-				false,
+				array(),
 				TSTATS_VERSION
 			);
 
@@ -98,13 +100,15 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 		 * Register and enqueue Dark Mode style sheet.
 		 *
 		 * @since 0.8.0
+		 *
+		 * @return void
 		 */
 		public function tstats_register_plugin_styles_dark_mode() {
 
 			wp_register_style(
 				'translation-stats-dark-mode',
 				TSTATS_DIR_URL . 'css/admin-dark-mode.css',
-				false,
+				array(),
 				TSTATS_VERSION
 			);
 
@@ -118,6 +122,8 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 		 * @since 0.8.0
 		 *
 		 * @param string $hook  Hook.
+		 *
+		 * @return void
 		 */
 		public function tstats_register_plugin_scripts( $hook ) {
 
@@ -216,6 +222,8 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 		 * @since 0.9.3
 		 *
 		 * @param string $hook  Hook.
+		 *
+		 * @return bool  Return true if current page is allowed, false if isn't allowed.
 		 */
 		public function tstats_allowed_pages( $hook ) {
 
@@ -223,6 +231,8 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 			if ( 'plugins.php' === $hook || 'update-core.php' === $hook || 'settings_page_' . TSTATS_SETTINGS_PAGE === $hook ) {
 				return true;
 			}
+
+			return false;
 
 		}
 

@@ -42,16 +42,19 @@ if ( ! class_exists( 'TStats_Globals' ) ) {
 		 *
 		 * @since 0.9.5
 		 *
-		 * @return bool  Return true if Translation Stats language is 'en_US'.
+		 * @return bool  True if Translation Stats language is 'en_US', false otherwise.
 		 */
 		public function tstats_language_is_english() {
 
 			// Get Translation Stats language.
 			$tstats_language = $this->tstats_translation_language();
+
 			// Check if user locale is 'en_US'.
 			if ( 'en_US' === $tstats_language ) {
 				return true;
 			}
+
+			return false;
 		}
 
 

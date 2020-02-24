@@ -44,10 +44,10 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 *
 		 * @since 0.8.0
 		 *
-		 * @param string $plugin_file       Plugin ID ( e.g. 'slug/plugin-name.php' ).
-		 * @param string $metadata          Metadata field ( e.g. 'slug' ).
+		 * @param string $plugin_file   Plugin ID ( e.g. 'slug/plugin-name.php' ).
+		 * @param string $metadata      Metadata field ( e.g. 'slug' ).
 		 *
-		 * @return string $plugin_metadata  Returns metadata value from plugin.
+		 * @return string|null          Returns metadata value from plugin.
 		 */
 		public function tstats_plugin_metadata( $plugin_file, $metadata ) {
 			$update_plugins = get_site_transient( 'update_plugins' );
@@ -65,6 +65,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 			if ( isset( $update_plugins->no_update[ $plugin_file ]->$metadata ) ) {
 				return $update_plugins->no_update[ $plugin_file ]->$metadata;
 			}
+			return null;
 		}
 
 
@@ -94,7 +95,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 *
 		 * @param string $plugin    Plugin slug (project or project/subproject).
 		 *
-		 * @return string $api_get  Returns the response from translate.WordPress.org API URL.
+		 * @return array|WP_Error   Returns the response from translate.WordPress.org API URL.
 		 */
 		public function tstats_translations_api_get_plugin( $plugin ) {
 			$api_get = wp_remote_get( $this->tstats_translations_api_url( 'plugins' ) . $plugin );
@@ -244,8 +245,8 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 
 			$wp_version = array();
 
-			// Check if WordPress is the latest version.
-			if ( ! isset( $updates[0]->response ) || 'latest' === $updates[0]->response ) {
+			// Check if WordPress install is the latest or development version.
+			if ( ! isset( $updates[0]->response ) || 'latest' === $updates[0]->response || 'development' === $updates[0]->response ) {
 				$wp_version['slug']   = 'dev';
 				$wp_version['name']   = substr( $current_version, 0, 3 ) . '.x';
 				$wp_version['number'] = $current_version;
@@ -322,13 +323,15 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 *
 		 * @since 0.9.5
 		 *
-		 * @param string $wp_version   WordPress version.
-		 * @param string $project      Project.
-		 * @param string $locale       Locale.
+		 * @param array $project   Project array.
+		 * @param array $locale    Locale array.
 		 *
-		 * @return string $translation_path   File path to get source.
+		 * @return string|null     File path to get source.
 		 */
-		public function tstats_translation_path( $wp_version, $project, $locale ) {
+		public function tstats_translation_path( $project, $locale ) {
+
+			// Get WordPress core version info.
+			$wp_version = $this->tstats_wordpress_version();
 
 			/**
 			 * TODO:

@@ -59,8 +59,7 @@ define( 'TSTATS_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'TSTATS_FILE', plugin_basename( __FILE__ ) );
 
 // Set Translation Stats Debug ( true / false ).
-// Use 'tstats_enable_debug' to enable debug ( e.g. add_filter( 'tstats_enable_debug', '__return_true' ) ).
-define( 'TSTATS_DEBUG', apply_filters( 'tstats_enable_debug', false ) );
+// Example: define( 'TSTATS_DEBUG', true );.
 
 
 // Check for PHP compatibility.
@@ -81,6 +80,8 @@ if ( ! tstats_compatible_version() ) {
  * If incompatible, deactivate the plugin and add an admin notice.
  *
  * @since 0.9.4.3
+ *
+ * @return void
  */
 function tstats_check_version() {
 
@@ -104,6 +105,8 @@ function tstats_check_version() {
  * Adapted from https://pento.net/2014/02/18/dont-let-your-plugin-be-activated-on-incompatible-sites/.
  *
  * @since 0.9.4.3
+ *
+ * @return void
  */
 function tstats_disabled_notice() {
 
@@ -189,6 +192,8 @@ spl_autoload_register( 'tstats_class_autoload' );
  * @since 0.9.6
  *
  * @param string $class_name   Class name.
+ *
+ * @return bool  True if class found, false if not found.
  */
 function tstats_class_autoload( $class_name ) {
 
@@ -201,7 +206,7 @@ function tstats_class_autoload( $class_name ) {
 		return false;
 	}
 
-	require_once $tstats_class;
+	return require_once $tstats_class;
 }
 
 

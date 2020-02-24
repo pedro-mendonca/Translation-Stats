@@ -88,6 +88,8 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 * Registers a new Translation Stats Settings Page.
 		 *
 		 * @since 0.8.0
+		 *
+		 * @return void
 		 */
 		public function tstats_admin_menu() {
 			// Add submenu page to the Settings main menu.
@@ -105,6 +107,8 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 * Add Settings Sections.
 		 *
 		 * @since 0.9.0
+		 *
+		 * @return void
 		 */
 		public function tstats_settings_sections() {
 
@@ -127,6 +131,8 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 * Registers Settings Plugins page section.
 		 *
 		 * @since 0.8.0
+		 *
+		 * @return void
 		 */
 		public function tstats_settings_section__plugins() {
 
@@ -149,6 +155,8 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 * Registers Settings General page section.
 		 *
 		 * @since 0.8.0
+		 *
+		 * @return void
 		 */
 		public function tstats_settings_section__general() {
 
@@ -171,6 +179,8 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 * Registers Settings Tools page section.
 		 *
 		 * @since 0.8.0
+		 *
+		 * @return void
 		 */
 		public function tstats_settings_section__tools() {
 
@@ -205,6 +215,8 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 * Callback function for section "Settings".
 		 *
 		 * @since 0.8.0
+		 *
+		 * @return void
 		 */
 		public function tstats_settings__general__callback() {
 
@@ -252,6 +264,8 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 * Callback function for section "Tools > Settings".
 		 *
 		 * @since 0.8.0
+		 *
+		 * @return void
 		 */
 		public function tstats_settings__tools__settings__callback() {
 
@@ -302,6 +316,8 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 * Callback function for section "Tools > Cache".
 		 *
 		 * @since 0.8.0
+		 *
+		 * @return void
 		 */
 		public function tstats_settings__tools__transients__callback() {
 
@@ -357,6 +373,8 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 * Callback function for Reset Settings.
 		 *
 		 * @since 0.8.0
+		 *
+		 * @return void
 		 */
 		public function tstats_settings_reset_callback() {
 			$action = 'reset_settings';
@@ -365,13 +383,10 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 				if ( ! isset( $_POST['tstats_nonce_check'] ) || ! wp_verify_nonce( sanitize_key( $_POST['tstats_nonce_check'] ), 'tstats_action' ) ) {
 					$this->tstats_nonce_fail();
 				}
-				// Choose 'load-defaults' or 'delete'.
-				$action = 'load-defaults';
-				if ( 'load-defaults' === $action ) {
-					update_option( TSTATS_WP_OPTION, $this->tstats_settings_defaults() );
-				} elseif ( 'delete' === $action ) {
-					delete_option( TSTATS_WP_OPTION );
-				}
+
+				// Update to default settings.
+				update_option( TSTATS_WP_OPTION, $this->tstats_settings_defaults() );
+
 				$admin_notice = array(
 					'type'        => 'success',
 					'notice-alt'  => false,
@@ -387,6 +402,8 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 * Callback function for Delete Transients.
 		 *
 		 * @since 0.8.0
+		 *
+		 * @return void
 		 */
 		public function tstats_transients_delete_callback() {
 			$action = 'delete_transients';
@@ -413,6 +430,8 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 * Callback function for Nonce fail.
 		 *
 		 * @since 0.9.5
+		 *
+		 * @return void
 		 */
 		public function tstats_nonce_fail() {
 			esc_html_e( 'Sorry, your nonce did not verify.', 'translation-stats' );
@@ -424,6 +443,8 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 * Default Translation Stats Settings.
 		 *
 		 * @since 0.8.0
+		 *
+		 * @return array  Array of default settings.
 		 */
 		public function tstats_settings_defaults() {
 			$defaults = array(
@@ -440,6 +461,8 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 * Callback function for the options page.
 		 *
 		 * @since 0.8.0
+		 *
+		 * @return void
 		 */
 		public function tstats_options_page() {
 			// Check required user capability.

@@ -83,8 +83,13 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 
 		/**
 		 * Show WordPress core translation info message on Dashboard.
+		 * Only show if:
+		 * - WordPress install version is not beta.
+		 * - WordPress install is different from available translation.
 		 *
 		 * @since 0.9.5.2
+		 *
+		 * @return void
 		 */
 		public function tstats_dashboard_wp_translation_notice() {
 
@@ -115,8 +120,13 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 				$available_translations = get_site_transient( 'available_translations' );
 			}
 
-			// Check if the current translation version is different the WordPress installed version.
+			// Check if the current translation version is different from the WordPress installed version.
 			if ( substr( $available_translations[ $locale['wp_locale'] ]['version'], 0, 3 ) === substr( $wp_version['number'], 0, 3 ) ) {
+				return;
+			}
+
+			// Check if the current WordPress install version is beta.
+			if ( false !== strpos( $wp_version['number'], 'beta' ) ) {
 				return;
 			}
 
@@ -168,6 +178,8 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 		 * Add WordPress core info and update button on the Updates page bottom.
 		 *
 		 * @since 0.9.5.2
+		 *
+		 * @return void
 		 */
 		public function tstats_updates_wp_translation_notice() {
 
@@ -227,6 +239,8 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 		 * Add form with action button to update WordPress core translation.
 		 *
 		 * @since 0.9.5.2
+		 *
+		 * @return string  HTML of button to update core translation.
 		 */
 		public function tstats_form_update_wordpress_translation() {
 
@@ -253,6 +267,8 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 		 * @since 0.9.5.2
 		 *
 		 * @param array $notice_args  Arguments for admin notice.
+		 *
+		 * @return void
 		 */
 		public function tstats_updates_wp_translation_notice_message( $notice_args ) {
 
@@ -297,8 +313,8 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 				'<strong>&#8220;' . __( 'Update WordPress Translation', 'translation-stats' ) . '&#8221;</strong>'
 			);
 
-			// Check if the current translation version is different the WordPress installed version.
-			if ( substr( $available_translations[ $locale['wp_locale'] ]['version'], 0, 3 ) !== substr( $wp_version['number'], 0, 3 ) ) {
+			// Check if the current translation version is different from the WordPress installed version and is not beta.
+			if ( substr( $available_translations[ $locale['wp_locale'] ]['version'], 0, 3 ) !== substr( $wp_version['number'], 0, 3 ) && false === strpos( $wp_version['number'], 'beta' ) ) {
 
 				$notice_type           = 'warning';
 				$notice_message_status = sprintf(
@@ -345,6 +361,8 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 		 * Load WordPress core update loading placeholder.
 		 *
 		 * @since 0.9.5
+		 *
+		 * @return void
 		 */
 		public function tstats_update_core_content() {
 
@@ -365,6 +383,8 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 		 * Load WordPress core update content.
 		 *
 		 * @since 0.9.5
+		 *
+		 * @return void
 		 */
 		public function tstats_update_core_content_load() {
 
@@ -376,8 +396,10 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 
 			$project_count = 0;
 
+			WP_Filesystem();
+			global $wp_filesystem;
 			// Destination of translation files.
-			$destination = WP_LANG_DIR . '/';
+			$destination = $wp_filesystem->wp_lang_dir();
 
 			foreach ( $projects as $project ) {
 
@@ -391,8 +413,8 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 						esc_html__( 'Updating translations for %1$s (%2$s) (%3$d/%4$d)', 'translation-stats' ),
 						'<em>' . esc_html( $project['name'] ) . '</em>',
 						esc_html( $tstats_language ),
-						esc_html( $project_count ),
-						esc_html( count( $projects ) )
+						intval( $project_count ),
+						intval( count( $projects ) )
 					);
 					?>
 				</h4>
@@ -403,7 +425,7 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 				$log_display = is_wp_error( $result['data'] ) ? 'block' : 'none';
 				?>
 
-				<div class="update-messages hide-if-js" id="progress-<?php echo esc_attr( $project_count ); ?>" style="display: <?php echo esc_attr( $log_display ); ?>;">
+				<div class="update-messages hide-if-js" id="progress-<?php echo intval( $project_count ); ?>" style="display: <?php echo esc_attr( $log_display ); ?>;">
 					<p>
 						<?php
 						foreach ( $result['log'] as $result_log_item ) {
@@ -431,7 +453,7 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 				} else {
 					?>
 
-					<div class="updated js-update-details" data-update-details="progress-<?php echo esc_attr( $project_count ); ?>">
+					<div class="updated js-update-details" data-update-details="progress-<?php echo intval( $project_count ); ?>">
 						<p>
 							<?php
 							printf(
@@ -472,9 +494,9 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 		 */
 		public function tstats_remove_previous_wp_translation( $transient ) {
 
-			if ( ! empty( $transient->translations ) ) {
+			if ( ! empty( $transient->translations ) && isset( $transient->version_checked ) ) {
 				if ( $transient->version_checked !== $transient->translations[0]['version'] ) {
-					// Empty update info of language pack for previous WordPress version..
+					// Empty update info of language pack for previous WordPress version.
 					$transient->translations = array();
 				}
 			}

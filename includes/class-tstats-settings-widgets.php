@@ -46,6 +46,8 @@ if ( ! class_exists( 'TStats_Settings_Widgets' ) ) {
 		 * Show plugin info widget.
 		 *
 		 * @since 0.9.0
+		 *
+		 * @return void
 		 */
 		public function tstats_settings_widget__about() {
 

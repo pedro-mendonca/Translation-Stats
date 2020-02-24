@@ -103,6 +103,8 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 *
 		 * @param string $column_name  Column Slug ( e.g. 'translation-stats' ).
 		 * @param string $plugin_file  Plugin ID ( e.g. 'slug/plugin-name.php' ).
+		 *
+		 * @return void
 		 */
 		public function tstats_render_plugin_stats_column( $column_name, $plugin_file ) {
 
@@ -159,6 +161,8 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 * @since 0.8.0
 		 *
 		 * @param string $project_slug   Plugin Slug.
+		 *
+		 * @return void
 		 */
 		public function tstats_render_plugin_stats( $project_slug ) {
 
@@ -172,6 +176,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 			?>
 
 			<div class="translation-stats-title">
+				<p>
 
 				<?php
 				// Add Translation Stats plugin widget title.
@@ -181,6 +186,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 				do_action( 'tstats_stats_plugin_widget_title__actions', $project_slug, $locale );
 				?>
 
+				</p>
 			</div>
 
 			<?php
@@ -217,6 +223,8 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 *
 		 * @param string $project_slug  Plugin Slug.
 		 * @param array  $locale        Locale array.
+		 *
+		 * @return void
 		 */
 		public function tstats_stats_plugin_widget_title( $project_slug, $locale ) {
 
@@ -238,18 +246,18 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 * Load plugin widget title update button.
 		 *
 		 * @since 0.9.4
+		 *
+		 * @return void
 		 */
 		public function tstats_plugin_update_button() {
 			?>
 
-			<div class="tstats-update-link">
+			<span class="tstats-update-link">
 				<button class="handlediv button-link tstats-update-button" type="button" aria-expanded="true">
 					<span class="dashicons dashicons-update"></span>
 					<span class="screen-reader-text"><?php esc_html_e( 'Update', 'translation-stats' ); ?></span>
 				</button>
-			</div>
-
-			<br><br>
+			</span>
 
 			<?php
 		}
@@ -259,6 +267,8 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 * Load plugin widget loading placeholder.
 		 *
 		 * @since 0.9.4
+		 *
+		 * @return void
 		 */
 		public function tstats_stats_plugin_widget_content() {
 
@@ -278,6 +288,8 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 * Load plugin widget content.
 		 *
 		 * @since 0.9.4
+		 *
+		 * @return void
 		 */
 		public function tstats_stats_plugin_widget_content_load() {
 
@@ -328,7 +340,9 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 *
 		 * @param string $project_slug  Plugin Slug.
 		 * @param array  $locale        Locale array.
-		 * @param string $force_update  True: Force get new stats. False: Use transients.
+		 * @param bool   $force_update  True: Force get new stats. False: Use transients.
+		 *
+		 * @return void
 		 */
 		public function tstats_stats_plugin_widget_content_stats( $project_slug, $locale, $force_update ) {
 
@@ -407,16 +421,16 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 * @param string $project_slug     Plugin Slug.
 		 * @param string $subproject       Translation subproject (' Dev', 'Dev Readme', 'Stable', 'Stable Readme' ).
 		 * @param string $subproject_slug  Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).
-		 * @param string $force_update     True: Force get new stats. False: Use transients.
+		 * @param bool   $force_update     True: Force get new stats. False: Use transients.
 		 *
-		 * @return array $stats_bar        Subproject stats bar and error boolean.
+		 * @return array|null $stats_bar   Subproject stats bar and error boolean.
 		 */
 		public function tstats_render_stats_bar( $locale, $project_slug, $subproject, $subproject_slug, $force_update ) {
 
 			$options = get_option( TSTATS_WP_OPTION );
 			// Show bar only if subproject is enabled in plugin settings.
 			if ( empty( $options[ $project_slug ][ $subproject_slug ] ) ) {
-				return;
+				return null;
 			}
 
 			$stats_bar_link = 'https://translate.wordpress.org/projects/wp-plugins/' . $project_slug . '/' . $subproject_slug . '/' . $locale['slug']['locale'] . '/' . $locale['slug']['variant'];
@@ -425,7 +439,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 			$translation_stats = $this->tstats_plugin_subproject_stats( $locale, $project_slug, $subproject_slug, $force_update );
 
 			// Initializing variable.
-			$percent_translated = '';
+			$percent_translated = 0;
 
 			// If translation stats are not an object, project not found.
 			if ( ! is_object( $translation_stats ) ) {
@@ -507,16 +521,16 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 
 
 		/**
-		 * Render plugin subproject stat bar.
+		 * Render plugin subproject stats bar.
 		 *
 		 * @since 0.8.0
 		 *
-		 * @param array  $locale              Locale array.
-		 * @param string $project_slug        Plugin Slug.
-		 * @param string $subproject_slug     Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).
-		 * @param string $force_update        True: Force get new stats. False: Use transients.
+		 * @param array  $locale            Locale array.
+		 * @param string $project_slug      Plugin Slug.
+		 * @param string $subproject_slug   Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).
+		 * @param bool   $force_update      True: Force get new stats. False: Use transients.
 		 *
-		 * @return string $translation_stats  Plugin stats.
+		 * @return object|bool              Project stats if exist, otherwise returns 'false'.
 		 */
 		public function tstats_plugin_subproject_stats( $locale, $project_slug, $subproject_slug, $force_update ) {
 

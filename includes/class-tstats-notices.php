@@ -50,6 +50,8 @@ if ( ! class_exists( 'TStats_Notices' ) ) {
 		 * @since 0.9.5  Array with all the notice data.
 		 *
 		 * @param array $args  Array of message data.
+		 *
+		 * @return void
 		 */
 		public function tstats_notice_message( $args ) {
 

@@ -11,8 +11,11 @@ table.wp-list-table.plugins td.column-translation-stats {
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-title {
 	display: block;
-	font-size: 14px;
 	white-space: nowrap;
+}
+
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-title p {
+	margin-top: 0;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-title .tstats-update-link {

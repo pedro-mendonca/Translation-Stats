@@ -14,8 +14,11 @@ table.wp-list-table.plugins { // WordPress Installed Plugins table.
 
 		.translation-stats-title {
 			display: block;
-			font-size: 14px;
 			white-space: nowrap;
+
+			p {
+				margin-top: 0;
+			}
 
 			.tstats-update-link {
 				float: right;
