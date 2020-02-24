@@ -15,6 +15,7 @@
 [![Build Status](https://img.shields.io/travis/pedro-mendonca/translation-stats?label=Build&logo=travis)](https://travis-ci.org/pedro-mendonca/Translation-Stats)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/bcd1b44a1d6542e2b75b7b479ce56804)](https://www.codacy.com/app/pedro-mendonca/Translation-Stats?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=pedro-mendonca/Translation-Stats&amp;utm_campaign=Badge_Grade)
 [![RIPS CodeRisk](https://coderisk.com/wp/plugin/translation-stats/badge "RIPS CodeRisk")](https://coderisk.com/wp/plugin/translation-stats)
+[![PHPStan Level](https://img.shields.io/badge/PHPStan%20Level-6-brightgreen)](https://travis-ci.org/pedro-mendonca/Translation-Stats)
 
 **Contributors:** pedromendonca  
 **Donate link:** [github.com/sponsors/pedro-mendonca](https://github.com/sponsors/pedro-mendonca)  
@@ -22,7 +23,7 @@
 **Requires at least:** 4.9  
 **Tested up to:** 5.3  
 **Requires PHP:** 5.6  
-**Stable tag:** 0.9.7  
+**Stable tag:** 0.9.8  
 **License:** GPLv2  
 **License URI:** [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html)  
 
@@ -93,6 +94,12 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 ![screenshot-4](./assets/screenshot-4.png)
 
 ## Changelog ##
+
+### 0.9.8 ###
+*   Fix settings checkboxes tristate bug
+*   Remove filter 'tstats_enable_debug'
+*   Fix WP core update translation notice on Beta install
+*   Refactoring with PHPStan (Level 6)
 
 ### 0.9.7 ###
 *   Add tristate to parent checkboxes with enabled and disabled childs
