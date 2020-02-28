@@ -362,7 +362,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 *
 		 * @since 0.9.0
 		 *
-		 * @return object $tstats_locales  Returns all the locales with 'wp_locale' available in translate.WordPress.org.
+		 * @return array $tstats_locales  Returns all the locales with 'wp_locale' available in translate.WordPress.org.
 		 */
 		public function tstats_locales() {
 			// Translate API languages URL.
