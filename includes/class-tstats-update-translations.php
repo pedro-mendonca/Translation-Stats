@@ -30,25 +30,18 @@ if ( ! class_exists( 'TStats_Update_Translations' ) ) {
 		protected $tstats_globals;
 
 		/**
-		 * Notices.
-		 *
-		 * @var object
-		 */
-		protected $tstats_notices;
-
-		/**
 		 * Translations API.
 		 *
 		 * @var object
 		 */
-		protected $tstats_translations_api;
+		protected $translations_api;
 
 		/**
 		 * Gettext.
 		 *
 		 * @var object
 		 */
-		protected $tstats_gettext;
+		protected $gettext;
 
 
 		/**
@@ -59,14 +52,11 @@ if ( ! class_exists( 'TStats_Update_Translations' ) ) {
 			// Instantiate Translation Stats Globals.
 			$this->tstats_globals = new TStats_Globals();
 
-			// Instantiate Translation Stats Notices.
-			$this->tstats_notices = new TStats_Notices();
-
 			// Instantiate Translation Stats Translations API.
-			$this->tstats_translations_api = new TStats_Translations_API();
+			$this->translations_api = new TStats_Translations_API();
 
 			// Instantiate Translation Stats Gettext.
-			$this->tstats_gettext = new TStats_Gettext();
+			$this->gettext = new TStats_Gettext();
 
 		}
 
@@ -89,7 +79,7 @@ if ( ! class_exists( 'TStats_Update_Translations' ) ) {
 			$result['log'] = array();
 
 			// Get Translation Stats Locale data.
-			$locale = $this->tstats_translations_api->tstats_locale( $wp_locale );
+			$locale = $this->translations_api->tstats_locale( $wp_locale );
 
 			// Download file from WordPress.org translation table.
 			$download = $this->tstats_download_translations( $project, $locale );
@@ -124,7 +114,7 @@ if ( ! class_exists( 'TStats_Update_Translations' ) ) {
 			}
 
 			// Generate .json files from extracted translations.
-			$generate_jsons = $this->tstats_gettext->tstats_make_json( $destination, $project, $locale, $translations['data'], false );
+			$generate_jsons = $this->gettext->tstats_make_json( $destination, $project, $locale, $translations['data'], false );
 			$result['log']  = array_merge( $result['log'], $generate_jsons['log'] );
 			$result['data'] = $generate_jsons['data'];
 			if ( is_wp_error( $result['data'] ) ) {
@@ -151,7 +141,7 @@ if ( ! class_exists( 'TStats_Update_Translations' ) ) {
 		public function tstats_download_translations( $project, $locale ) {
 
 			// Set translation data path.
-			$source = $this->tstats_translations_api->tstats_translation_path( $project, $locale );
+			$source = $this->translations_api->tstats_translation_path( $project, $locale );
 
 			// Report message.
 			$result['log'] = sprintf(

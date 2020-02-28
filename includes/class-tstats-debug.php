@@ -25,14 +25,14 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 *
 		 * @var object
 		 */
-		protected $tstats_transients;
+		protected $transients;
 
 		/**
 		 * Translations API.
 		 *
 		 * @var object
 		 */
-		protected $tstats_translations_api;
+		protected $translations_api;
 
 		/**
 		 * Globals.
@@ -48,10 +48,10 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		public function __construct() {
 
 			// Instantiate Translation Stats Transients.
-			$this->tstats_transients = new TStats_Transients();
+			$this->transients = new TStats_Transients();
 
 			// Instantiate Translation Stats Translations API.
-			$this->tstats_translations_api = new TStats_Translations_API();
+			$this->translations_api = new TStats_Translations_API();
 
 			// Instantiate Translation Stats Globals.
 			$this->tstats_globals = new TStats_Globals();
@@ -270,11 +270,17 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 					esc_html__( 'Translation Stats Locale: %s', 'translation-stats' ),
 					'<code>' . esc_html( $tstats_options['translation_language'] ) . '</code>'
 				);
-				$tstats_locale = $this->tstats_translations_api->tstats_locale( $this->tstats_globals->tstats_translation_language() );
+				$tstats_locale = $this->translations_api->tstats_locale( $this->tstats_globals->tstats_translation_language() );
 				?>
 			</p>
 			<div>
-				<pre><code class="tstats-code-block"><?php echo esc_html( print_r( $tstats_locale, true ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r ?></code></pre>
+				<pre>
+					<code class="tstats-code-block">
+						<?php
+						echo esc_html( print_r( $tstats_locale, true ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r
+						?>
+					</code>
+				</pre>
 			</div>
 			<p>
 				<?php
@@ -301,7 +307,13 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 				<?php
 				if ( $tstats_options ) {
 					?>
-					<pre><code class="tstats-code-block"><?php echo esc_html( print_r( $tstats_options, true ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r ?></code></pre>
+					<pre>
+						<code class="tstats-code-block">
+							<?php
+							echo esc_html( print_r( $tstats_options, true ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r
+							?>
+						</code>
+					</pre>
 					<?php
 				} else {
 					?>
@@ -341,10 +353,10 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 			<div>
 				<code class="tstats-code-block">
 					<?php
-					$tstats_transients = $this->tstats_transients->tstats_get_transients( TSTATS_TRANSIENTS_PREFIX );
-					if ( ! empty( $tstats_transients ) ) {
-						foreach ( $tstats_transients as $tstats_transient ) {
-							echo esc_html( substr( $tstats_transient, strlen( '_transient_' ) ) );
+					$transients = $this->transients->tstats_get_transients( TSTATS_TRANSIENTS_PREFIX );
+					if ( ! empty( $transients ) ) {
+						foreach ( $transients as $transient ) {
+							echo esc_html( substr( $transient, strlen( '_transient_' ) ) );
 							?>
 							<br>
 							<?php
@@ -443,7 +455,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 					<p>
 						<?php
 						if ( $plugin_translation_on_wporg ) {
-							$api_url = $this->tstats_translations_api->tstats_translations_api_url( 'plugins' ) . $project_slug;
+							$api_url = $this->translations_api->tstats_translations_api_url( 'plugins' ) . $project_slug;
 							printf(
 								/* translators: 1: Opening tag <a>. 2: Closing tag </a>. */
 								esc_html__( 'Translation project found on %1$sWordPress.org%2$s', 'translation-stats' ),

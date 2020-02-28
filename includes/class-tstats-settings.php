@@ -25,42 +25,35 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 *
 		 * @var object
 		 */
-		protected $tstats_notices;
+		protected $notices;
 
 		/**
 		 * Transients.
 		 *
 		 * @var object
 		 */
-		protected $tstats_transients;
-
-		/**
-		 * Settings API.
-		 *
-		 * @var object
-		 */
-		protected $tstats_settings_api;
+		protected $transients;
 
 		/**
 		 * Plugins Settings.
 		 *
 		 * @var object
 		 */
-		protected $tstats_settings_plugins;
+		protected $settings_plugins;
 
 		/**
 		 * General Settings.
 		 *
 		 * @var object
 		 */
-		protected $tstats_settings_general;
+		protected $settings_general;
 
 		/**
 		 * Tools Settings.
 		 *
 		 * @var object
 		 */
-		protected $tstats_settings_tools;
+		protected $settings_tools;
 
 
 		/**
@@ -69,22 +62,19 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		public function __construct() {
 
 			// Instantiate Translation Stats Notices.
-			$this->tstats_notices = new TStats_Notices();
+			$this->notices = new TStats_Notices();
 
 			// Instantiate Translation Stats Transients.
-			$this->tstats_transients = new TStats_Transients();
-
-			// Instantiate Translation Stats Settings API.
-			$this->tstats_settings_api = new TStats_Settings_API();
+			$this->transients = new TStats_Transients();
 
 			// Instantiate Translation Stats Plugins Settings.
-			$this->tstats_settings_plugins = new TStats_Settings_Plugins();
+			$this->settings_plugins = new TStats_Settings_Plugins();
 
 			// Instantiate Translation Stats General Settings.
-			$this->tstats_settings_general = new TStats_Settings_General();
+			$this->settings_general = new TStats_Settings_General();
 
 			// Instantiate Translation Stats Tools Settings.
-			$this->tstats_settings_tools = new TStats_Settings_Tools();
+			$this->settings_tools = new TStats_Settings_Tools();
 
 			// Add admin menu item.
 			add_action( 'admin_menu', array( $this, 'admin_menu' ) );
@@ -135,13 +125,13 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		public function settings_sections() {
 
 			// Plugins settings section.
-			$this->tstats_settings_plugins->settings_section();
+			$this->settings_plugins->settings_section();
 
 			// General settings section.
-			$this->tstats_settings_general->settings_section();
+			$this->settings_general->settings_section();
 
 			// Tools settings section.
-			$this->tstats_settings_tools->settings_section();
+			$this->settings_tools->settings_section();
 
 			// Add section after Translation settings sections.
 			do_action( 'tstats_settings_section__after' );
@@ -174,7 +164,7 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 					'message'     => '<strong>' . esc_html__( 'Settings restored successfully.', 'translation-stats' ) . '</strong>',
 					'dismissible' => true,
 				);
-				$this->tstats_notices->tstats_notice_message( $admin_notice );
+				$this->notices->tstats_notice_message( $admin_notice );
 			}
 		}
 
@@ -196,14 +186,14 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 				}
 				// Delete translations stats and available languages transients.
 				// The transient 'translation_stats_plugin_available_translations' will be immediatly rebuilt on tstats_render_settings__plugins_list() loading.
-				$this->tstats_transients->tstats_delete_transients( TSTATS_TRANSIENTS_PREFIX );
+				$this->transients->tstats_delete_transients( TSTATS_TRANSIENTS_PREFIX );
 				$admin_notice = array(
 					'type'        => 'success',
 					'notice-alt'  => false,
 					'message'     => '<strong>' . esc_html__( 'Cache cleaned successfully.', 'translation-stats' ) . '</strong>',
 					'dismissible' => true,
 				);
-				$this->tstats_notices->tstats_notice_message( $admin_notice );
+				$this->notices->tstats_notice_message( $admin_notice );
 			}
 		}
 

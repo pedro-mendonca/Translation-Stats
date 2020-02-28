@@ -25,7 +25,7 @@ if ( ! class_exists( 'TStats_Settings_General' ) ) {
 		 *
 		 * @var object
 		 */
-		protected $tstats_settings_api;
+		protected $settings_api;
 
 
 		/**
@@ -34,7 +34,7 @@ if ( ! class_exists( 'TStats_Settings_General' ) ) {
 		public function __construct() {
 
 			// Instantiate Translation Stats Settings API.
-			$this->tstats_settings_api = new TStats_Settings_API();
+			$this->settings_api = new TStats_Settings_API();
 
 		}
 
@@ -83,7 +83,7 @@ if ( ! class_exists( 'TStats_Settings_General' ) ) {
 			esc_html_e( 'General settings for Translation Stats', 'translation-stats' );
 			*/
 
-			$this->tstats_settings_api->tstats_add_settings_field(
+			$this->settings_api->tstats_add_settings_field(
 				array(
 					'section'     => $section,
 					'id'          => 'show_warnings',
@@ -98,7 +98,7 @@ if ( ! class_exists( 'TStats_Settings_General' ) ) {
 				)
 			);
 
-			$this->tstats_settings_api->tstats_add_settings_field(
+			$this->settings_api->tstats_add_settings_field(
 				array(
 					'section'        => $section,
 					'id'             => 'translation_language',
@@ -134,7 +134,7 @@ if ( ! class_exists( 'TStats_Settings_General' ) ) {
 			esc_html_e( 'Advanced settings for Translation Stats', 'translation-stats' );
 			*/
 
-			$this->tstats_settings_api->tstats_add_settings_field(
+			$this->settings_api->tstats_add_settings_field(
 				array(
 					'section'     => $section,
 					'id'          => 'delete_data_on_uninstall',
@@ -149,7 +149,7 @@ if ( ! class_exists( 'TStats_Settings_General' ) ) {
 				)
 			);
 
-			$this->tstats_settings_api->tstats_add_settings_field(
+			$this->settings_api->tstats_add_settings_field(
 				array(
 					'section'      => $section,
 					'id'           => 'reset_settings',

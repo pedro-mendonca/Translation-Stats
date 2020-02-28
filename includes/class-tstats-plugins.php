@@ -32,14 +32,14 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 *
 		 * @var object
 		 */
-		protected $tstats_notices;
+		protected $notices;
 
 		/**
 		 * Translations API.
 		 *
 		 * @var object
 		 */
-		protected $tstats_translations_api;
+		protected $translations_api;
 
 
 		/**
@@ -51,10 +51,10 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 			$this->tstats_globals = new TStats_Globals();
 
 			// Instantiate Translation Stats Notices.
-			$this->tstats_notices = new TStats_Notices();
+			$this->notices = new TStats_Notices();
 
 			// Instantiate Translation Stats Translations API.
-			$this->tstats_translations_api = new TStats_Translations_API();
+			$this->translations_api = new TStats_Translations_API();
 
 			// Add plugin translation stats column.
 			add_filter( 'manage_plugins_columns', array( $this, 'tstats_add_translation_stats_column' ) );
@@ -116,7 +116,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 				// Check if user locale is not 'en_US'.
 				if ( 'en_US' !== $tstats_language ) {
 
-					$project_slug = $this->tstats_translations_api->tstats_plugin_metadata( $plugin_file, 'slug' );
+					$project_slug = $this->translations_api->tstats_plugin_metadata( $plugin_file, 'slug' );
 					$options      = get_option( TSTATS_WP_OPTION );
 
 					// Show Stats only if plugin is enabled in plugin settings.
@@ -124,8 +124,8 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 						return;
 					}
 
-					$plugin_on_wporg             = $this->tstats_translations_api->tstats_plugin_on_wporg( $plugin_file );
-					$plugin_translation_on_wporg = $this->tstats_translations_api->tstats_plugin_project_on_translate_wporg( $project_slug );
+					$plugin_on_wporg             = $this->translations_api->tstats_plugin_on_wporg( $plugin_file );
+					$plugin_translation_on_wporg = $this->translations_api->tstats_plugin_project_on_translate_wporg( $project_slug );
 					// Check if plugin is on WordPress.org.
 					if ( ! $plugin_on_wporg ) {
 						$admin_notice = array(
@@ -133,7 +133,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 							'notice-alt' => true,
 							'message'    => esc_html__( 'Plugin not found on WordPress.org', 'translation-stats' ),
 						);
-						$this->tstats_notices->tstats_notice_message( $admin_notice ); // TODO: Add alternative GlotPress API.
+						$this->notices->tstats_notice_message( $admin_notice ); // TODO: Add alternative GlotPress API.
 					} else {
 						// Check if translation project is on WordPress.org.
 						if ( ! $plugin_translation_on_wporg ) {
@@ -142,7 +142,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 								'notice-alt' => true,
 								'message'    => esc_html__( 'Translation project not found on WordPress.org', 'translation-stats' ),
 							);
-							$this->tstats_notices->tstats_notice_message( $admin_notice );
+							$this->notices->tstats_notice_message( $admin_notice );
 						} else {
 							$this->tstats_render_plugin_stats( $project_slug );
 						}
@@ -167,7 +167,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		public function tstats_render_plugin_stats( $project_slug ) {
 
 			// Get Translation Stats Locale data.
-			$locale = $this->tstats_translations_api->tstats_locale( $this->tstats_globals->tstats_translation_language() );
+			$locale = $this->translations_api->tstats_locale( $this->tstats_globals->tstats_translation_language() );
 
 			ob_start();
 
@@ -279,7 +279,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 				'update-icon' => true,
 				'message'     => esc_html__( 'Loading...', 'translation-stats' ),
 			);
-			$this->tstats_notices->tstats_notice_message( $admin_notice );
+			$this->notices->tstats_notice_message( $admin_notice );
 
 		}
 
@@ -300,7 +300,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 				$force_update = 'true' === sanitize_key( $_POST['forceUpdate'] ) ? true : false; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 			}
 
-			$locale = $this->tstats_translations_api->tstats_locale( $this->tstats_globals->tstats_translation_language() );
+			$locale = $this->translations_api->tstats_locale( $this->tstats_globals->tstats_translation_language() );
 
 			if ( isset( $_POST['tstatsPlugin'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
@@ -319,7 +319,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 							'update-icon' => true,
 							'message'     => esc_html__( 'Updated!', 'translation-stats' ),
 						);
-						$this->tstats_notices->tstats_notice_message( $admin_notice );
+						$this->notices->tstats_notice_message( $admin_notice );
 						?>
 					</div>
 
@@ -349,7 +349,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 			?>
 			<div class="translation-stats-content-stats notice-warning notice-alt">
 				<?php
-				$subprojects = $this->tstats_translations_api->tstats_plugin_subprojects();
+				$subprojects = $this->translations_api->tstats_plugin_subprojects();
 				$i18n_errors = 0;
 				foreach ( $subprojects as $subproject ) {
 					$subproject = $this->tstats_render_stats_bar( $locale, $project_slug, $subproject['name'], $subproject['slug'], $force_update );
@@ -377,7 +377,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 							'</a>'
 						),
 					);
-					$this->tstats_notices->tstats_notice_message( $admin_notice );
+					$this->notices->tstats_notice_message( $admin_notice );
 
 					$admin_notice = array(
 						'type'       => 'warning',
@@ -389,7 +389,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 							'</a>'
 						),
 					);
-					$this->tstats_notices->tstats_notice_message( $admin_notice );
+					$this->notices->tstats_notice_message( $admin_notice );
 
 					$admin_notice = array(
 						'type'       => 'warning',
@@ -401,7 +401,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 							'</a>'
 						),
 					);
-					$this->tstats_notices->tstats_notice_message( $admin_notice );
+					$this->notices->tstats_notice_message( $admin_notice );
 					?>
 
 				</div>
@@ -544,7 +544,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 
 			if ( false === $translation_stats ) {
 
-				$json = $this->tstats_translations_api->tstats_translations_api_get_plugin( $project_slug . '/' . $subproject_slug );
+				$json = $this->translations_api->tstats_translations_api_get_plugin( $project_slug . '/' . $subproject_slug );
 				if ( is_wp_error( $json ) || wp_remote_retrieve_response_code( $json ) !== 200 ) {
 
 					// Subproject not found (Error 404) - Plugin is not properly prepared for localization.
