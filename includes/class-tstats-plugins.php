@@ -74,6 +74,12 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 			// Load plugin subprojects stats.
 			add_action( 'wp_ajax_tstats_stats_plugin_widget_content_load', array( $this, 'tstats_stats_plugin_widget_content_load' ) );
 
+			// Filter plugins list to show only Translation Stats enabled plugins.
+			add_action( 'pre_current_active_plugins', array( $this, 'tstats_plugins_filter_by_translation_stats' ) );
+
+			// Add status link to Translation Stats enabled plugins View.
+			add_action( is_multisite() ? 'views_plugins-network' : 'views_plugins', array( $this, 'tstats_plugins_status_link' ) );
+
 		}
 
 
@@ -574,6 +580,142 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 			}
 
 			return $translation_stats;
+		}
+
+
+		/**
+		 * Filter plugins list to show only Translation Stats enabled plugins.
+		 *
+		 * @since 0.9.9
+		 *
+		 * @param array $plugins   Array of arrays containing information on all installed plugins.
+		 *
+		 * @return void
+		 */
+		public function tstats_plugins_filter_by_translation_stats( $plugins ) {
+			// Get WP_Plugins_List_Table and page number.
+			global $wp_list_table, $page;
+
+			// Check if user locale is not 'en_US'.
+			$tstats_language = $this->tstats_globals->tstats_translation_language();
+			if ( 'en_US' === $tstats_language ) {
+				return;
+			}
+
+			// Set the status type.
+			$status = 'translation_stats';
+
+			if ( ! ( isset( $_REQUEST['plugin_status'] ) && $status === $_REQUEST['plugin_status'] ) ) { // phpcs:ignore
+				// If current status is not 'translation_stats', do nothing.
+				return;
+			}
+
+			$options        = get_site_option( TSTATS_WP_OPTION );
+			$tstats_plugins = array();
+
+			foreach ( $plugins as $plugin_file => $plugin_data ) {
+
+				// Check if the plugin is enabled in the Translation Stats settings.
+				$project_slug = $this->translations_api->tstats_plugin_metadata( $plugin_file, 'slug' );
+				if ( empty( $options[ $project_slug ]['enabled'] ) ) {
+					// Skip to next loop iteration.
+					continue;
+				}
+
+				// Add plugin to list.
+				$tstats_plugins[ $plugin_file ] = $plugin_data;
+			}
+
+			// Set the table list items array to just the Translation Stats enabled plugins.
+			$wp_list_table->items = $tstats_plugins;
+
+			// Count Translation Stats enabled plugins.
+			$count = count( $tstats_plugins );
+
+			// Get plugins_per_page setting.
+			$plugins_per_page = $wp_list_table->get_items_per_page( str_replace( '-', '_', $wp_list_table->screen->id . '_per_page' ), 999 );
+
+			// Slice plugin list array to show only current page items.
+			$start = ( $page - 1 ) * $plugins_per_page;
+			if ( $count > $plugins_per_page ) {
+				$wp_list_table->items = array_slice( $wp_list_table->items, $start, $plugins_per_page );
+			}
+
+			// Set pagination arguments.
+			$wp_list_table->set_pagination_args(
+				array(
+					'total_items' => $count,
+					'per_page'    => $plugins_per_page,
+				)
+			);
+
+		}
+
+
+		/**
+		 * Add status link to Translation Stats enabled plugins View.
+		 *
+		 * @since 0.9.9
+		 *
+		 * @param array $status_links   Array of status links.
+		 *
+		 * @return array                Array of status links.
+		 */
+		public function tstats_plugins_status_link( $status_links ) {
+			$tstats_language = $this->tstats_globals->tstats_translation_language();
+			// Check if user locale is not 'en_US'.
+			if ( 'en_US' === $tstats_language ) {
+				return $status_links;
+			}
+
+			if ( ! current_user_can( 'update_plugins' ) ) {
+				return $status_links;
+			}
+
+			$options = get_site_option( TSTATS_WP_OPTION );
+
+			$tstats_plugins = array();
+
+			foreach ( $options as $key => $option ) {
+				// Currently enabled plugins are just root arrays with 'enabled' set to true. TODO: Move to 'plugins' sub-array.
+				if ( is_array( $option ) && 'true' === $option['enabled'] ) {
+					$tstats_plugins[ $key ] = true;
+				}
+			}
+
+			$count = count( $tstats_plugins );
+
+			// Set the status type.
+			$status = 'translation_stats';
+
+			$current_status = isset( $_REQUEST[ 'plugin_status' ] ) ? $_REQUEST[ 'plugin_status' ] : 'all'; // phpcs:ignore
+
+			// Don't show link if count is 0.
+			if ( 0 === $count ) {
+				return $status_links;
+			}
+
+			$text = sprintf(
+				/* translators: %s: Number of plugins. */
+				'%s <span class="count">(%s)</span>',
+				_x( 'Translation Stats', 'Plugin status filter', 'translation-stats' ),
+				$count
+			);
+
+			// Set the link HTML.
+			$status_links[ $status ] = sprintf(
+				"<a href='%s'%s>%s</a>",
+				add_query_arg( 'plugin_status', $status, 'plugins.php' ),
+				( $status === $current_status ) ? ' class="current" aria-current="page"' : '',
+				$text
+			);
+
+			// Make the 'all' status link not current if current status is "translation_stats".
+			if ( $status === $current_status ) {
+				$status_links['all'] = str_replace( ' class="current" aria-current="page"', '', $status_links['all'] );
+			}
+
+			return $status_links;
 		}
 
 	}
