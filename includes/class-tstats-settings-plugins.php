@@ -32,7 +32,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 		 *
 		 * @var object
 		 */
-		protected $tstats_translations_api;
+		protected $translations_api;
 
 
 		/**
@@ -44,18 +44,47 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 			$this->tstats_globals = new TStats_Globals();
 
 			// Instantiate Translation Stats Translate API.
-			$this->tstats_translations_api = new TStats_Translations_API();
+			$this->translations_api = new TStats_Translations_API();
 
 		}
+
+
+		/**
+		 * Registers Settings Plugins page section.
+		 *
+		 * @since 0.8.0
+		 * @since 0.9.9   Moved from class TStats_Settings() to TStats_Settings_Plugins().
+		 *                Renamed from tstats_settings_section__plugins() to settings_section().
+		 *
+		 * @return void
+		 */
+		public function settings_section() {
+
+			add_settings_section(
+				'tstats_settings__plugins',                                                    // String for use in the 'id' attribute of tags.
+				__( 'Installed Plugins', 'translation-stats' ),                                // Title of the section.
+				array( $this, 'settings_section__callback' ), // Function that fills the section with the desired content.
+				'tstats_settings__plugins'                                                     // The menu page on which to display this section. Should match $menu_slug.
+			);
+
+			register_setting(
+				'tstats_settings__plugins', // The menu page on which to display this section. Should match $menu_slug.
+				TSTATS_WP_OPTION            // The WordPress option to store Translation Stats settings.
+			);
+
+		}
+
 
 		/**
 		 * Callback function for section "Plugins Settings".
 		 *
 		 * @since 0.8.0
+		 * @since 0.9.9   Moved from class TStats_Settings() to TStats_Settings_Plugins().
+		 *                Renamed from tstats_settings__plugins__callback() to settings_section__callback().
 		 *
 		 * @return void
 		 */
-		public function tstats_settings__plugins__callback() {
+		public function settings_section__callback() {
 			?>
 			<p class="description">
 				<?php
@@ -65,7 +94,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 			<br>
 			<?php
 
-			$this->tstats_render_settings__plugins_list();
+			$this->settings__plugins_list();
 
 		}
 
@@ -75,10 +104,11 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 		 *
 		 * @since 0.8.0
 		 * @since 0.9.6.2   Added table settings and separated methods for table header and rows.
+		 * @since 0.9.9     Renamed from tstats_render_settings__plugins_list() to settings__plugins_list().
 		 *
 		 * @return void
 		 */
-		public function tstats_render_settings__plugins_list() {
+		public function settings__plugins_list() {
 
 			// Configure projects table.
 			$table_args = array(
@@ -92,7 +122,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 				<thead>
 
 					<?php
-					$this->tstats_settings_projects_table_header( $table_args );
+					$this->settings_projects_table_header( $table_args );
 					?>
 
 				</thead>
@@ -104,7 +134,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 
 					foreach ( $all_plugins as $plugin_file => $plugin ) {
 						$plugin['plugin_file'] = $plugin_file;
-						$this->tstats_settings_projects_table_row( $table_args, $plugin );
+						$this->settings_projects_table_row( $table_args, $plugin );
 					}
 					?>
 
@@ -119,17 +149,18 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 		 * Render translation projects settings table header.
 		 *
 		 * @since 0.9.6.2
+		 * @since 0.9.9     Renamed from tstats_settings_projects_table_header() to settings_projects_table_header().
 		 *
 		 * @param array $table_args   Array of table settings.
 		 *
 		 * @return void
 		 */
-		public function tstats_settings_projects_table_header( $table_args ) {
+		public function settings_projects_table_header( $table_args ) {
 
 			$options               = get_option( TSTATS_WP_OPTION );
 			$show_author           = $table_args['show_author'];
 			$show_slug_text_domain = $table_args['show_slug_text_domain'];
-			$subprojects           = $this->tstats_translations_api->tstats_plugin_subprojects();
+			$subprojects           = $this->translations_api->tstats_plugin_subprojects();
 
 			?>
 			<tr>
@@ -184,18 +215,19 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 		 * Render translation projects settings table row.
 		 *
 		 * @since 0.9.6.2
+		 * @since 0.9.9     Renamed from tstats_settings_projects_table_row() to settings_projects_table_row().
 		 *
 		 * @param array $table_args   Array of table settings.
 		 * @param array $plugin       Array of plugin data.
 		 *
 		 * @return void
 		 */
-		public function tstats_settings_projects_table_row( $table_args, $plugin ) {
+		public function settings_projects_table_row( $table_args, $plugin ) {
 
 			// Get general options.
 			$options         = get_option( TSTATS_WP_OPTION );
 			$tstats_language = $this->tstats_globals->tstats_translation_language();
-			$locale          = $this->tstats_translations_api->tstats_locale( $tstats_language );
+			$locale          = $this->translations_api->tstats_locale( $tstats_language );
 
 			// Table options.
 			$table_prefix          = $table_args['table_prefix'];
@@ -204,10 +236,10 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 
 			// Plugin data.
 			$plugin_file        = $plugin['plugin_file'];
-			$plugin_slug        = $this->tstats_translations_api->tstats_plugin_metadata( $plugin_file, 'slug' );
-			$plugin_url         = $this->tstats_translations_api->tstats_plugin_metadata( $plugin_file, 'url' );
+			$plugin_slug        = $this->translations_api->tstats_plugin_metadata( $plugin_file, 'slug' );
+			$plugin_url         = $this->translations_api->tstats_plugin_metadata( $plugin_file, 'url' );
 			$plugin_text_domain = $plugin['TextDomain'];
-			$subprojects        = $this->tstats_translations_api->tstats_plugin_subprojects();
+			$subprojects        = $this->translations_api->tstats_plugin_subprojects();
 
 			$row_id = $table_prefix . '_' . $plugin_slug;
 
@@ -230,13 +262,13 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 			if ( 'en_US' !== $tstats_language ) {
 				// If current locale is not 'en_US', add Locale WP.org subdomain to plugin URL (e.g. https://pt.wordpress.org/plugins/translation-stats/ ).
 				$wporg_subdomain = isset( $locale['wporg_subdomain'] ) ? $locale['wporg_subdomain'] . '.' : '';
-				$plugin_url      = 'https://' . $wporg_subdomain . substr( $this->tstats_translations_api->tstats_plugin_metadata( $plugin_file, 'url' ), strlen( 'https://' ) );
+				$plugin_url      = 'https://' . $wporg_subdomain . substr( $this->translations_api->tstats_plugin_metadata( $plugin_file, 'url' ), strlen( 'https://' ) );
 			}
-			$plugin_name   = $this->tstats_translations_api->tstats_plugin_on_wporg( $plugin_file ) ? '<a href="' . $plugin_url . '" target="_blank">' . $plugin['Name'] . '</a>' : $plugin['Name'];
-			$plugin_author = $this->tstats_translations_api->tstats_plugin_on_wporg( $plugin_file ) && $plugin['AuthorURI'] ? '<a href="' . $plugin['AuthorURI'] . '" target="_blank">' . $plugin['AuthorName'] . '</a>' : $plugin['AuthorName'];
+			$plugin_name   = $this->translations_api->tstats_plugin_on_wporg( $plugin_file ) ? '<a href="' . $plugin_url . '" target="_blank">' . $plugin['Name'] . '</a>' : $plugin['Name'];
+			$plugin_author = $this->translations_api->tstats_plugin_on_wporg( $plugin_file ) && $plugin['AuthorURI'] ? '<a href="' . $plugin['AuthorURI'] . '" target="_blank">' . $plugin['AuthorName'] . '</a>' : $plugin['AuthorName'];
 
 			// Check if plugin exist on WordPress.org.
-			if ( ! $this->tstats_translations_api->tstats_plugin_on_wporg( $plugin_file ) ) {
+			if ( ! $this->translations_api->tstats_plugin_on_wporg( $plugin_file ) ) {
 				$status   = 'disabled';
 				$checked  = false;
 				$disabled = true;

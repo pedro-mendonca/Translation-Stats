@@ -21,7 +21,7 @@
 **Donate link:** [github.com/sponsors/pedro-mendonca](https://github.com/sponsors/pedro-mendonca)  
 **Tags:** internationalization, i18n, localization, l10n, translation, statistics, glotpress, dark mode  
 **Requires at least:** 4.9  
-**Tested up to:** 5.3  
+**Tested up to:** 5.4  
 **Requires PHP:** 5.6  
 **Stable tag:** 0.9.8  
 **License:** GPLv2  
@@ -94,6 +94,11 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 ![screenshot-4](./assets/screenshot-4.png)
 
 ## Changelog ##
+
+### Unreleased ###
+*   New plugins View to show only Translation Stats enabled plugins
+*   Minor code improvements
+*   Tested up to WP 5.4
 
 ### 0.9.8 ###
 *   Fix settings checkboxes tristate bug

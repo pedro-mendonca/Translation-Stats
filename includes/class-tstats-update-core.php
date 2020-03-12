@@ -32,21 +32,21 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 		 *
 		 * @var object
 		 */
-		protected $tstats_notices;
+		protected $notices;
 
 		/**
 		 * Translations API.
 		 *
 		 * @var object
 		 */
-		protected $tstats_translations_api;
+		protected $translations_api;
 
 		/**
 		 * Update Translations.
 		 *
 		 * @var object
 		 */
-		protected $tstats_update_translations;
+		protected $update_translations;
 
 
 		/**
@@ -58,13 +58,13 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 			$this->tstats_globals = new TStats_Globals();
 
 			// Instantiate Translation Stats Notices.
-			$this->tstats_notices = new TStats_Notices();
+			$this->notices = new TStats_Notices();
 
 			// Instantiate Translation Stats Translations API.
-			$this->tstats_translations_api = new TStats_Translations_API();
+			$this->translations_api = new TStats_Translations_API();
 
 			// Instantiate Translation Stats Update Translations.
-			$this->tstats_update_translations = new TStats_Update_Translations();
+			$this->update_translations = new TStats_Update_Translations();
 
 			// Add WordPress translation info and update button to updates page.
 			add_action( 'core_upgrade_preamble', array( $this, 'tstats_updates_wp_translation_notice' ) );
@@ -107,10 +107,10 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 
 			// Get Translation Stats Locale data.
 			$tstats_language = $this->tstats_globals->tstats_translation_language();
-			$locale          = $this->tstats_translations_api->tstats_locale( $tstats_language );
+			$locale          = $this->translations_api->tstats_locale( $tstats_language );
 
 			// Get WordPress core version info.
-			$wp_version = $this->tstats_translations_api->tstats_wordpress_version();
+			$wp_version = $this->translations_api->tstats_wordpress_version();
 
 			// Get available translations transient data.
 			$available_translations = get_site_transient( 'available_translations' );
@@ -169,7 +169,7 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 				),
 				'extra-html'  => $this->tstats_form_update_wordpress_translation(),
 			);
-			$this->tstats_notices->tstats_notice_message( $admin_notice );
+			$this->notices->tstats_notice_message( $admin_notice );
 
 		}
 
@@ -257,7 +257,12 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 			</form>
 
 			<?php
-			return ob_get_clean();
+			$form = ob_get_clean();
+			// Check that string isn't empty.
+			if ( $form ) {
+				return $form;
+			}
+			return '';
 		}
 
 
@@ -274,10 +279,10 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 
 			// Get Translation Stats Locale data.
 			$tstats_language = $this->tstats_globals->tstats_translation_language();
-			$locale          = $this->tstats_translations_api->tstats_locale( $tstats_language );
+			$locale          = $this->translations_api->tstats_locale( $tstats_language );
 
 			// Get WordPress core version info.
-			$wp_version = $this->tstats_translations_api->tstats_wordpress_version();
+			$wp_version = $this->translations_api->tstats_wordpress_version();
 
 			// Get available translations transient data.
 			$available_translations = get_site_transient( 'available_translations' );
@@ -352,7 +357,7 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 					$notice_message_forceupdate
 				),
 			);
-			$this->tstats_notices->tstats_notice_message( $admin_notice );
+			$this->notices->tstats_notice_message( $admin_notice );
 
 		}
 
@@ -374,7 +379,7 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 				'css-class'   => 'translation-stats-loading update-core',
 				'message'     => esc_html__( 'The update process is starting. This process may take a while on some hosts, so please be patient.', 'translation-stats' ),
 			);
-			$this->tstats_notices->tstats_notice_message( $admin_notice );
+			$this->notices->tstats_notice_message( $admin_notice );
 
 		}
 
@@ -390,7 +395,7 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 
 			$result = array();
 
-			$projects = $this->tstats_translations_api->tstats_wordpress_subprojects();
+			$projects = $this->translations_api->tstats_wordpress_subprojects();
 
 			$tstats_language = $this->tstats_globals->tstats_translation_language();
 
@@ -420,7 +425,7 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 				</h4>
 
 				<?php
-				$result = $this->tstats_update_translations->tstats_update_translation( $destination, $project, $tstats_language );
+				$result = $this->update_translations->tstats_update_translation( $destination, $project, $tstats_language );
 
 				$log_display = is_wp_error( $result['data'] ) ? 'block' : 'none';
 				?>
@@ -448,7 +453,7 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 							'<strong>' . esc_html( $error_message ) . '</strong>'
 						),
 					);
-					$this->tstats_notices->tstats_notice_message( $admin_notice );
+					$this->notices->tstats_notice_message( $admin_notice );
 
 				} else {
 					?>
