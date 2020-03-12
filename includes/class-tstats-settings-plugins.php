@@ -86,9 +86,18 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 		 */
 		public function settings_section__callback() {
 			?>
-			<p class="description">
+			<p>
 				<?php
-				esc_html_e( 'Select the plugins and subprojects you want to show the translation stats from the list of installed plugins.', 'translation-stats' );
+				printf(
+					'<span class="description">%s</span> %s',
+					esc_html__( 'Select the plugins and subprojects you want to show the translation stats from the list of installed plugins.', 'translation-stats' ),
+					sprintf(
+						'<a href="%1$s" aria-label="%2$s">%3$s</a>',
+						esc_url( add_query_arg( 'plugin_status', 'translation_stats', admin_url( 'plugins.php' ) ) ),
+						esc_attr__( 'View selected plugins', 'translation-stats' ),
+						esc_html__( 'View selected plugins', 'translation-stats' )
+					)
+				);
 				?>
 			</p>
 			<br>
