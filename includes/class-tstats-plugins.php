@@ -283,6 +283,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 				'notice-alt'  => true,
 				'css-class'   => 'translation-stats-loading',
 				'update-icon' => true,
+				'force_show'  => true,
 				'message'     => esc_html__( 'Loading...', 'translation-stats' ),
 			);
 			$this->notices->tstats_notice_message( $admin_notice );
