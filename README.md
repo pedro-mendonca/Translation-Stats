@@ -97,6 +97,7 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
 ### Unreleased ###
 *   New plugins View to show only Translation Stats enabled plugins
+*   Fix translation stats not showing when "Warnings" settings was disabled
 *   Minor code improvements
 *   Tested up to WP 5.4
 
