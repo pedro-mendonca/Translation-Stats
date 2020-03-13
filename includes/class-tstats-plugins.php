@@ -94,9 +94,14 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 */
 		public function tstats_add_translation_stats_column( $columns ) {
 			$tstats_language = $this->tstats_globals->tstats_translation_language();
+			$settings_link   = sprintf(
+				'<a href="%s"><span class="dashicons dashicons-admin-settings"></span><span class="screen-reader-text">%s</span></a>',
+				esc_url( add_query_arg( 'page', 'translation-stats#plugins', admin_url( 'options-general.php' ) ) ),
+				esc_html__( 'Plugins settings', 'translation-stats' )
+			);
 			// Check if user locale is not 'en_US'.
 			if ( 'en_US' !== $tstats_language ) {
-				$columns['translation-stats'] = _x( 'Translation Stats', 'Column label', 'translation-stats' );
+				$columns['translation-stats'] = _x( 'Translation Stats', 'Column label', 'translation-stats' ) . ' ' . $settings_link;
 			}
 			return $columns;
 		}
