@@ -5,7 +5,7 @@ Tags: internationalization, i18n, localization, l10n, translation, statistics, g
 Requires at least: 4.9
 Tested up to: 5.4
 Requires PHP: 5.6
-Stable tag: 0.9.8
+Stable tag: 0.9.9
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -66,8 +66,10 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
 == Changelog ==
 
-= Unreleased =
+= 0.9.9 =
 *   New plugins View to show only Translation Stats enabled plugins
+*   New link to filtered plugins list in settings page
+*   New link to settings page in plugins page
 *   Fix translation stats not showing when "Warnings" settings was disabled
 *   Minor code improvements
 *   Tested up to WP 5.4
