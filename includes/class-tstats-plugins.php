@@ -680,6 +680,11 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 
 			$options = get_site_option( TSTATS_WP_OPTION );
 
+			// Check if Translation Stats settings exist.
+			if ( empty( $options ) ) {
+				return $status_links;
+			}
+
 			$tstats_plugins = array();
 
 			foreach ( $options as $key => $option ) {
