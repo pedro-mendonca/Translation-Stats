@@ -115,60 +115,6 @@ if ( ! class_exists( 'TStats_Settings_General' ) ) {
 			);
 		}
 
-
-		/**
-		 * Callback function for section "Tools > Settings".
-		 *
-		 * @since 0.8.0
-		 * @since 0.9.9   Moved from class TStats_Settings() to TStats_Settings_General().
-		 *                Renamed from tstats_settings__tools__settings__callback() to settings__tools__settings__callback().
-		 *
-		 * @return void
-		 */
-		public function settings__tools__settings__callback() {
-
-			$section = 'tstats_settings__tools__settings';
-
-			/*
-			Section description.
-			esc_html_e( 'Advanced settings for Translation Stats', 'translation-stats' );
-			*/
-
-			$this->settings_api->tstats_add_settings_field(
-				array(
-					'section'     => $section,
-					'id'          => 'delete_data_on_uninstall',
-					'type'        => 'checkbox',
-					'class'       => '',
-					'title'       => __( 'Uninstall', 'translation-stats' ),
-					'label'       => __( 'Delete all plugin data on uninstall', 'translation-stats' ),
-					'description' => __( 'Check to delete all Translation Stats plugin settings and cache on uninstall.', 'translation-stats' ),
-					'helper'      => __( 'Need help?', 'translation-stats' ),
-					'callback'    => 'tstats_render_input_checkbox',
-					'default'     => true,
-				)
-			);
-
-			$this->settings_api->tstats_add_settings_field(
-				array(
-					'section'      => $section,
-					'id'           => 'reset_settings',
-					'name'         => 'reset_settings',
-					'type'         => 'button',
-					'class'        => 'primary',
-					'title'        => __( 'Reset Settings', 'translation-stats' ),
-					'label'        => __( 'Reset', 'translation-stats' ),
-					'description'  => __( 'Click to restore the default Translation Stats plugin settings.', 'translation-stats' ),
-					'helper'       => __( 'Need help?', 'translation-stats' ),
-					'callback'     => 'tstats_render_input_button',
-					'wrap'         => false,
-					'formaction'   => '',
-					'confirmation' => __( 'Warning! Translation Stats plugin settings will be reset to default! Click \'Cancel\' to go back, \'OK\' to reset.', 'translation-stats' ),
-				)
-			);
-
-		}
-
 	}
 
 }
