@@ -175,8 +175,8 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 			<tr>
 				<td scope="col" id="cb" class="manage-column column-cb check-column">
 					<?php
-					$input_id = TSTATS_WP_OPTION . '[all_plugins]';
-					$checked  = empty( $options['all_plugins'] ) ? '' : true;
+					$input_id = TSTATS_WP_OPTION . '[plugins][all_plugins]';
+					$checked  = empty( $options['plugins']['all_plugins'] ) ? '' : true;
 					?>
 					<label class="screen-reader-text"><?php esc_html_e( 'Select All', 'translation-stats' ); ?></label>
 					<input name="<?php echo esc_attr( $input_id ); ?>" <?php checked( $checked, true ); ?> class="all_plugins" id="all_plugins" type="checkbox" value="true"/>
@@ -255,7 +255,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 			// Set CSS 'indeterminate' property for partially enabled projects.
 			$subprojects_count = 0;
 			foreach ( $subprojects as $subproject ) {
-				if ( ! empty( $options[ $plugin_slug ] [ $subproject['slug'] ] ) ) {
+				if ( ! empty( $options['plugins'][ $plugin_slug ][ $subproject['slug'] ] ) ) {
 					$subprojects_count++;
 				}
 			}
@@ -283,7 +283,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 				$disabled = true;
 			} else {
 				$disabled = false;
-				if ( empty( $options[ $plugin_slug ] ['enabled'] ) ) {
+				if ( empty( $options['plugins'][ $plugin_slug ]['enabled'] ) ) {
 					$status  = 'inactive';
 					$checked = false;
 				} else {
@@ -292,7 +292,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 				}
 			}
 
-			$field_name = TSTATS_WP_OPTION . '[' . $plugin_slug . '][enabled]';
+			$field_name = TSTATS_WP_OPTION . '[plugins][' . $plugin_slug . '][enabled]';
 			?>
 
 			<tr class="<?php echo esc_html( $status ); ?>">
@@ -344,8 +344,8 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 					<?php
 				}
 				foreach ( $subprojects as $subproject ) {
-					$field_name   = TSTATS_WP_OPTION . '[' . $plugin_slug . '][' . $subproject['slug'] . ']';
-					$checked      = empty( $options[ $plugin_slug ] [ $subproject['slug'] ] ) ? '' : true;
+					$field_name   = TSTATS_WP_OPTION . '[plugins][' . $plugin_slug . '][' . $subproject['slug'] . ']';
+					$checked      = empty( $options['plugins'][ $plugin_slug ][ $subproject['slug'] ] ) ? '' : true;
 					$plugin_class = ! $disabled ? $row_id : '';
 					?>
 					<td class="check-column plugin-subproject">

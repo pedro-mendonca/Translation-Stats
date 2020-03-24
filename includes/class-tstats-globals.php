@@ -29,7 +29,7 @@ if ( ! class_exists( 'TStats_Globals' ) ) {
 		 */
 		public function tstats_translation_language() {
 			// Get Translation Language from Settings.
-			$tstats_language = get_option( TSTATS_WP_OPTION )['translation_language'];
+			$tstats_language = get_option( TSTATS_WP_OPTION )['settings']['translation_language'];
 			if ( ! $tstats_language || 'site-default' === $tstats_language ) {
 				$tstats_language = get_locale();
 			}

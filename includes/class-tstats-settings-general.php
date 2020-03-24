@@ -86,6 +86,7 @@ if ( ! class_exists( 'TStats_Settings_General' ) ) {
 			$this->settings_api->tstats_add_settings_field(
 				array(
 					'section'     => $section,
+					'path'        => 'settings',
 					'id'          => 'show_warnings',
 					'type'        => 'checkbox',
 					'class'       => '',
@@ -101,6 +102,7 @@ if ( ! class_exists( 'TStats_Settings_General' ) ) {
 			$this->settings_api->tstats_add_settings_field(
 				array(
 					'section'        => $section,
+					'path'           => 'settings',
 					'id'             => 'translation_language',
 					'type'           => 'select',
 					'class'          => '',

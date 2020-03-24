@@ -57,7 +57,7 @@ if ( ! class_exists( 'TStats_Notices' ) ) {
 
 			// Check if 'show_warnings' is true.
 			$wp_option = get_option( TSTATS_WP_OPTION );
-			if ( empty( $wp_option['show_warnings'] ) && empty( $args['force_show'] ) ) {
+			if ( empty( $wp_option['settings']['show_warnings'] ) && empty( $args['force_show'] ) ) {
 				return;
 			}
 

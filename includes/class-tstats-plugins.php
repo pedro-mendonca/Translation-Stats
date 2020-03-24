@@ -131,7 +131,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 					$options      = get_option( TSTATS_WP_OPTION );
 
 					// Show Stats only if plugin is enabled in plugin settings.
-					if ( empty( $options[ $project_slug ]['enabled'] ) ) {
+					if ( empty( $options['plugins'][ $project_slug ]['enabled'] ) ) {
 						return;
 					}
 
@@ -441,7 +441,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 
 			$options = get_option( TSTATS_WP_OPTION );
 			// Show bar only if subproject is enabled in plugin settings.
-			if ( empty( $options[ $project_slug ][ $subproject_slug ] ) ) {
+			if ( empty( $options['plugins'][ $project_slug ][ $subproject_slug ] ) ) {
 				return null;
 			}
 
@@ -582,7 +582,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 					}
 				}
 
-				set_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug . '_' . $locale['slug']['locale'] . '_' . $locale['slug']['variant'], $translation_stats, get_option( TSTATS_WP_OPTION )['transients_expiration'] );
+				set_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug . '_' . $locale['slug']['locale'] . '_' . $locale['slug']['variant'], $translation_stats, get_option( TSTATS_WP_OPTION )['settings']['transients_expiration'] );
 			}
 
 			return $translation_stats;
@@ -623,7 +623,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 
 				// Check if the plugin is enabled in the Translation Stats settings.
 				$project_slug = $this->translations_api->tstats_plugin_metadata( $plugin_file, 'slug' );
-				if ( empty( $options[ $project_slug ]['enabled'] ) ) {
+				if ( empty( $options['plugins'][ $project_slug ]['enabled'] ) ) {
 					// Skip to next loop iteration.
 					continue;
 				}
@@ -687,8 +687,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 
 			$tstats_plugins = array();
 
-			foreach ( $options as $key => $option ) {
-				// Currently enabled plugins are just root arrays with 'enabled' set to true. TODO: Move to 'plugins' sub-array.
+			foreach ( $options['plugins'] as $key => $option ) {
 				if ( is_array( $option ) && 'true' === $option['enabled'] ) {
 					$tstats_plugins[ $key ] = true;
 				}
