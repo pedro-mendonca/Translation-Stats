@@ -139,9 +139,9 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 
 					<?php
 					// Get all installed plugins list.
-					$all_plugins = get_plugins();
+					$plugins = get_plugins();
 
-					foreach ( $all_plugins as $plugin_file => $plugin ) {
+					foreach ( $plugins as $plugin_file => $plugin ) {
 						$plugin['plugin_file'] = $plugin_file;
 						$this->settings_projects_table_row( $table_args, $plugin );
 					}
