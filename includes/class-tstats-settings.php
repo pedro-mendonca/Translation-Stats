@@ -222,10 +222,13 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 */
 		public function settings_defaults() {
 			$defaults = array(
-				'show_warnings'            => true,
-				'translation_language'     => 'site-default',
-				'delete_data_on_uninstall' => true,
-				'transients_expiration'    => TSTATS_TRANSIENTS_TRANSLATIONS_EXPIRATION,
+				'settings' => array(
+					'show_warnings'            => true,
+					'translation_language'     => 'site-default',
+					'delete_data_on_uninstall' => true,
+					'transients_expiration'    => TSTATS_TRANSIENTS_TRANSLATIONS_EXPIRATION,
+					'settings_version'         => TSTATS_SETTINGS_VERSION,
+				),
 			);
 			return $defaults;
 		}
