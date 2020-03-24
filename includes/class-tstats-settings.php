@@ -55,6 +55,13 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 */
 		protected $settings_tools;
 
+		/**
+		 * Hidden Settings.
+		 *
+		 * @var object
+		 */
+		protected $settings_hidden;
+
 
 		/**
 		 * Constructor.
@@ -75,6 +82,9 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 
 			// Instantiate Translation Stats Tools Settings.
 			$this->settings_tools = new TStats_Settings_Tools();
+
+			// Instantiate Translation Stats Hidden Settings.
+			$this->settings_hidden = new TStats_Settings_Hidden();
 
 			// Add admin menu item.
 			add_action( 'admin_menu', array( $this, 'admin_menu' ) );
@@ -132,6 +142,9 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 
 			// Tools settings section.
 			$this->settings_tools->settings_section();
+
+			// Hidden settings section.
+			$this->settings_hidden->settings_section();
 
 			// Add section after Translation settings sections.
 			do_action( 'tstats_settings_section__after' );
@@ -311,6 +324,12 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 									$section = 'tstats_settings__tools__transients';
 									do_settings_sections( $section );
 									settings_fields( $section );
+									?>
+								</div>
+								<div class="hidden">
+									<?php
+									$section = 'tstats_settings__hidden';
+									do_settings_sections( $section );
 									?>
 								</div>
 

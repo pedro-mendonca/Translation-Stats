@@ -304,5 +304,28 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 			<p class='description'><?php echo esc_html( $description ); ?></p>
 			<?php
 		}
+
+
+		/**
+		 * Add setting hidden field type.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $args  Array of hidden field arguments.
+		 *
+		 * @return void
+		 */
+		public function tstats_render_input_hidden( $args ) {
+			$field_id = TSTATS_WP_OPTION . '[' . $args['path'] . '][' . $args['id'] . ']';
+			$default  = $args['default'];
+			$options  = get_option( TSTATS_WP_OPTION );
+			$option   = empty( $options[ $args['path'] ][ $args['id'] ] ) ? '' : $options[ $args['path'] ][ $args['id'] ];
+			$value    = is_array( $options ) ? $option : $default;
+			?>
+			<input name="<?php echo esc_attr( $field_id ); ?>" id="<?php echo esc_attr( $field_id ); ?>" type="hidden" value="<?php echo esc_attr( $value ); ?>">
+			<?php
+		}
+
+
 	}
 }
