@@ -141,9 +141,29 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 					// Get all installed plugins list.
 					$plugins = get_plugins();
 
+					$all_selected = true;
+
 					foreach ( $plugins as $plugin_file => $plugin ) {
+
 						$plugin['plugin_file'] = $plugin_file;
-						$this->settings_projects_table_row( $table_args, $plugin );
+
+						$row_status = $this->settings_projects_table_row( $table_args, $plugin );
+
+						// Check if project row is active but not all 4 subprojects are enabled.
+						if ( false !== $row_status && 4 !== $row_status ) {
+							$all_selected = false;
+						}
+					}
+
+					// Check if all enabled rows are active.
+					if ( $all_selected ) {
+						?>
+						<script>
+						jQuery( document ).ready( function( $ ) {
+							$( 'input#all_plugins' ).prop( 'checked', true );
+						} );
+						</script>
+						<?php
 					}
 					?>
 
@@ -166,7 +186,6 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 		 */
 		public function settings_projects_table_header( $table_args ) {
 
-			$options               = get_option( TSTATS_WP_OPTION );
 			$show_author           = $table_args['show_author'];
 			$show_slug_text_domain = $table_args['show_slug_text_domain'];
 			$subprojects           = $this->translations_api->tstats_plugin_subprojects();
@@ -174,12 +193,8 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 			?>
 			<tr>
 				<td scope="col" id="cb" class="manage-column column-cb check-column">
-					<?php
-					$input_id = TSTATS_WP_OPTION . '[plugins][all_plugins]';
-					$checked  = empty( $options['plugins']['all_plugins'] ) ? '' : true;
-					?>
 					<label class="screen-reader-text"><?php esc_html_e( 'Select All', 'translation-stats' ); ?></label>
-					<input name="<?php echo esc_attr( $input_id ); ?>" <?php checked( $checked, true ); ?> class="all_plugins" id="all_plugins" type="checkbox" value="true"/>
+					<input class="all_plugins" id="all_plugins" type="checkbox" value="true"/>
 				</td>
 				<th scope="col" id='column-name' class='manage-column column-name column-primary'>
 					<?php esc_html_e( 'Plugin', 'translation-stats' ); ?>
@@ -225,11 +240,12 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 		 *
 		 * @since 0.9.6.2
 		 * @since 0.9.9     Renamed from tstats_settings_projects_table_row() to settings_projects_table_row().
+		 * @since 1.0.0     Return row status.
 		 *
-		 * @param array $table_args   Array of table settings.
-		 * @param array $plugin       Array of plugin data.
+		 * @param array $table_args        Array of table settings.
+		 * @param array $plugin            Array of plugin data.
 		 *
-		 * @return void
+		 * @return int|false  Row status   Return number of active subprojects, or false if plugin doesn't exist on WP.org.
 		 */
 		public function settings_projects_table_row( $table_args, $plugin ) {
 
@@ -343,6 +359,13 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 					</td>
 					<?php
 				}
+
+				if ( $disabled ) {
+					$row_status = false;
+				} else {
+					$row_status = 0;
+				}
+
 				foreach ( $subprojects as $subproject ) {
 					$field_name   = TSTATS_WP_OPTION . '[plugins][' . $plugin_slug . '][' . $subproject['slug'] . ']';
 					$checked      = empty( $options['plugins'][ $plugin_slug ][ $subproject['slug'] ] ) ? '' : true;
@@ -359,11 +382,19 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 						?>
 					</td>
 					<?php
+
+					// If subproject is selected, increase $row_status.
+					if ( $checked ) {
+						$row_status++;
+					}
 				}
 				?>
 			</tr>
 
 			<?php
+
+			// Return row status.
+			return $row_status;
 		}
 	}
 }
