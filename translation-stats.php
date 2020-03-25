@@ -35,7 +35,7 @@ define( 'TSTATS_VERSION', '0.9.9' );
 define( 'TSTATS_REQUIRED_PHP', '5.6' );
 
 // Set Translation Stats settings database version.
-define( 'TSTATS_SETTINGS_VERSION', '1' );
+define( 'TSTATS_SETTINGS_VERSION', '1.0' );
 
 // Set the WordPress option to store Translation Stats settings.
 define( 'TSTATS_WP_OPTION', 'tstats_settings' );
