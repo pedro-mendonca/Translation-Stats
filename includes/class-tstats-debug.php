@@ -173,6 +173,8 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 					// Show server info.
 					$this->tstats_debug_info__server();
 					// Show the site settings debug info.
+					$this->tstats_debug_info__site();
+					// Show the Translation Stats settings debug info.
 					$this->tstats_debug_info__settings();
 					// Show the site transients debug info.
 					$this->tstats_debug_info__transients();
@@ -234,16 +236,14 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		/**
 		 * Show the site settings debug info.
 		 *
-		 * @since 0.8.0
+		 * @since 1.0.0
 		 *
 		 * @return void
 		 */
-		public function tstats_debug_info__settings() {
-			// Get plugin settings.
-			$tstats_options = get_option( TSTATS_WP_OPTION );
+		public function tstats_debug_info__site() {
 			?>
 			<h3>
-				<?php esc_html_e( 'Settings', 'translation-stats' ); ?>
+				<?php esc_html_e( 'Site', 'translation-stats' ); ?>
 			</h3>
 			<p>
 				<?php
@@ -263,24 +263,54 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 				);
 				?>
 			</p>
+			<?php
+		}
+
+
+		/**
+		 * Show the Translation Stats settings debug info.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @return void
+		 */
+		public function tstats_debug_info__settings() {
+			// Get plugin settings.
+			$tstats_options = get_option( TSTATS_WP_OPTION );
+			?>
+			<h3>
+				<?php esc_html_e( 'Translation Stats', 'translation-stats' ); ?>
+			</h3>
+			<p>
+				<?php
+				printf(
+					/* translators: %s: User Locale code. */
+					esc_html__( 'Version: %s', 'translation-stats' ),
+					'<code>' . esc_html( TSTATS_VERSION ) . '</code>'
+				);
+				?>
+			</p>
+			<p>
+				<?php
+				printf(
+					/* translators: %s: User Locale code. */
+					esc_html__( 'Settings database version: %s', 'translation-stats' ),
+					'<code>' . esc_html( TSTATS_SETTINGS_VERSION ) . '</code>'
+				);
+				?>
+			</p>
 			<p>
 				<?php
 				printf(
 					/* translators: %s: WordPress Locale code. */
 					esc_html__( 'Translation Stats Locale: %s', 'translation-stats' ),
-					'<code>' . esc_html( $tstats_options['translation_language'] ) . '</code>'
+					'<code>' . esc_html( $tstats_options['settings']['translation_language'] ) . '</code>'
 				);
 				$tstats_locale = $this->translations_api->tstats_locale( $this->tstats_globals->tstats_translation_language() );
 				?>
 			</p>
 			<div>
-				<pre>
-					<code class="tstats-code-block">
-						<?php
-						echo esc_html( print_r( $tstats_locale, true ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r
-						?>
-					</code>
-				</pre>
+				<pre><code class="tstats-code-block"><?php echo esc_html( var_export( $tstats_locale, true ) ); // phpcs:ignore ?></code></pre>
 			</div>
 			<p>
 				<?php
@@ -301,19 +331,29 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 				?>
 			</p>
 			<p>
-				<?php esc_html_e( 'Settings List:', 'translation-stats' ); ?>
+				<?php esc_html_e( 'Translation Stats settings:', 'translation-stats' ); ?>
 			</p>
 			<div>
 				<?php
-				if ( $tstats_options ) {
+				if ( isset( $tstats_options['settings'] ) ) {
 					?>
-					<pre>
-						<code class="tstats-code-block">
-							<?php
-							echo esc_html( print_r( $tstats_options, true ) ); // phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_print_r
-							?>
-						</code>
-					</pre>
+					<pre><code class="tstats-code-block"><?php echo esc_html( var_export( $tstats_options['settings'], true ) ); // phpcs:ignore ?></code></pre>
+					<?php
+				} else {
+					?>
+					<code><?php esc_html_e( 'No settings found.', 'translation-stats' ); ?></code>
+					<?php
+				}
+				?>
+			</div>
+			<p>
+				<?php esc_html_e( 'Installed plugins settings:', 'translation-stats' ); ?>
+			</p>
+			<div>
+				<?php
+				if ( isset( $tstats_options['plugins'] ) ) {
+					?>
+					<pre><code class="tstats-code-block"><?php echo esc_html( var_export( $tstats_options['plugins'], true ) ); // phpcs:ignore ?></code></pre>
 					<?php
 				} else {
 					?>
