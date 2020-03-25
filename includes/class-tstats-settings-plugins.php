@@ -61,10 +61,10 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 		public function settings_section() {
 
 			add_settings_section(
-				'tstats_settings__plugins',                                                    // String for use in the 'id' attribute of tags.
-				__( 'Installed Plugins', 'translation-stats' ),                                // Title of the section.
-				array( $this, 'settings_section__callback' ), // Function that fills the section with the desired content.
-				'tstats_settings__plugins'                                                     // The menu page on which to display this section. Should match $menu_slug.
+				'tstats_settings__plugins',                     // String for use in the 'id' attribute of tags.
+				__( 'Installed Plugins', 'translation-stats' ), // Title of the section.
+				array( $this, 'settings_section__callback' ),   // Function that fills the section with the desired content.
+				'tstats_settings__plugins'                      // The menu page on which to display this section. Should match $menu_slug.
 			);
 
 			register_setting(
