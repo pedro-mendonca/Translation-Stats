@@ -349,8 +349,14 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 					$plugin_class = ! $disabled ? $row_id : '';
 					?>
 					<td class="check-column plugin-subproject">
-						<label class="screen-reader-text"><?php esc_html_e( 'Select Subproject', 'translation-stats' ); ?></label>
-						<input name="<?php echo esc_attr( $field_name ); ?>" <?php checked( $checked, true ); ?> <?php disabled( $disabled, true ); ?> class="checkbox-subproject <?php echo esc_attr( $plugin_class ); ?>" type="checkbox" value="true" />
+						<?php
+						if ( ! $disabled ) {
+							?>
+							<label class="screen-reader-text"><?php esc_html_e( 'Select Subproject', 'translation-stats' ); ?></label>
+							<input name="<?php echo esc_attr( $field_name ); ?>" <?php checked( $checked, true ); ?> <?php disabled( $disabled, true ); ?> class="checkbox-subproject <?php echo esc_attr( $plugin_class ); ?>" type="checkbox" value="true" />
+							<?php
+						}
+						?>
 					</td>
 					<?php
 				}
