@@ -37,6 +37,9 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 			// Initialize the plugin activation.
 			new TStats_Activation();
 
+			// Initialize the plugin database update check.
+			new TStats_DB_Update();
+
 			// Initialize the plugin settings.
 			new TStats_Settings();
 
