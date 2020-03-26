@@ -216,7 +216,7 @@ msgid "Could not create file."
 msgstr ""
 
 #: includes/class-tstats-plugins.php:100
-msgid "Plugins settings"
+msgid "Edit plugins settings"
 msgstr ""
 
 #: includes/class-tstats-plugins.php:104
@@ -670,23 +670,23 @@ msgid "Could not extract translations from file."
 msgstr ""
 
 #. translators: 1: Plugin name. 2: Error message.
-#: translation-stats.php:131
+#: translation-stats.php:127
 #, php-format
 msgid "The plugin %1$s has been deactivated due to an error: %2$s"
 msgstr ""
 
-#: translation-stats.php:134
+#: translation-stats.php:130
 msgid "This plugin doesn&#8217;t work with your version of PHP."
 msgstr ""
 
 #. translators: %s: Minimum PHP version required.
-#: translation-stats.php:144
+#: translation-stats.php:140
 #, php-format
 msgid "Requires PHP version %s or higher."
 msgstr ""
 
 #. translators: %s: URL to Update PHP page.
-#: translation-stats.php:155
+#: translation-stats.php:151
 #, php-format
 msgid "<a href=\"%s\">Learn more about updating PHP</a>."
 msgstr ""
