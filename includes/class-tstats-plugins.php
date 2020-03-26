@@ -383,8 +383,10 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 						'type'       => 'warning',
 						'notice-alt' => true,
 						'message'    => sprintf(
-							/* translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>. */
-							wp_kses_post( __( 'This plugin is not %1$sproperly prepared for localization%2$s.', 'translation-stats' ) ),
+							wp_kses_post(
+								/* translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>. */
+								__( 'This plugin is not %1$sproperly prepared for localization%2$s.', 'translation-stats' )
+							),
 							'<a href="https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/" target="_blank">',
 							'</a>'
 						),
@@ -407,8 +409,10 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 						'type'       => 'warning',
 						'notice-alt' => true,
 						'message'    => sprintf(
-							/* translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>. */
-							wp_kses_post( __( 'If you would like to translate this plugin, %1$splease contact the author%2$s.', 'translation-stats' ) ),
+							wp_kses_post(
+								/* translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>. */
+								__( 'If you would like to translate this plugin, %1$splease contact the author%2$s.', 'translation-stats' )
+							),
 							'<a href="https://wordpress.org/support/plugin/' . esc_attr( $project_slug ) . '" target="_blank">',
 							'</a>'
 						),
