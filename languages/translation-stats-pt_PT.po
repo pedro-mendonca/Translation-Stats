@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Translation Stats\n"
 "Report-Msgid-Bugs-To: https://github.com/pedro-mendonca/Translation-Stats/issues\n"
-"POT-Creation-Date: 2020-03-25 11:53+0000\n"
-"PO-Revision-Date: 2020-03-25 11:55+0000\n"
+"POT-Creation-Date: 2020-03-26 00:25+0000\n"
+"PO-Revision-Date: 2020-03-26 00:26+0000\n"
 "Last-Translator: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language-Team: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language: pt_PT\n"
@@ -22,16 +22,37 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: node_modules\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
 
-#. translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>.
 #: includes/class-tstats-activation.php:76
-#, php-format
-msgid "Thank you for installing Translation Stats. Go to %1$ssettings%2$s to configure."
-msgstr "Obrigado por instalar o Translation Stats. Vá às %1$sopções%2$s para configurar."
+msgid "Thank you for installing Translation Stats."
+msgstr "Obrigado por instalar o Translation Stats."
 
-#: includes/class-tstats-db-update.php:77 includes/class-tstats-debug.php:344
+#. translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>.
+#: includes/class-tstats-activation.php:80
+#, php-format
+msgid "Go to %1$ssettings%2$s to start selecting some of your favorite plugins."
+msgstr "Vá às %1$sopções%2$s e comece por seleccionar alguns dos seus plugins favoritos."
+
+#: includes/class-tstats-db-update.php:58 includes/class-tstats-debug.php:344
 #: includes/class-tstats-debug.php:360
 msgid "No settings found."
 msgstr "Nenhuma opção encontrada."
+
+#. translators: 1: Old settings version. 2: New settings version.
+#: includes/class-tstats-db-update.php:128
+#, php-format
+msgid "Translation Stats settings database successfully updated from version %1$s to version %2$s."
+msgstr "A base de dados das opções do Translation Stats foi actualizada com sucesso da versão %1$s para a versão %2$s."
+
+#: includes/class-tstats-db-update.php:194 includes/class-tstats-main.php:69
+#: includes/class-tstats-settings-tools.php:55
+#: includes/class-tstats-settings.php:296
+msgid "Settings"
+msgstr "Opções"
+
+#: includes/class-tstats-db-update.php:210
+#: includes/class-tstats-settings.php:295
+msgid "Plugins"
+msgstr "Plugins"
 
 #: includes/class-tstats-debug.php:87 includes/class-tstats-debug.php:127
 msgid "Debug"
@@ -195,12 +216,6 @@ msgstr "A guardar o ficheiro %s…"
 msgid "Could not create file."
 msgstr "Não foi possível criar o ficheiro."
 
-#: includes/class-tstats-main.php:69
-#: includes/class-tstats-settings-tools.php:55
-#: includes/class-tstats-settings.php:292
-msgid "Settings"
-msgstr "Opções"
-
 #: includes/class-tstats-plugins.php:100
 msgid "Plugins settings"
 msgstr "Opções dos plugins"
@@ -229,32 +244,32 @@ msgid "Updated!"
 msgstr "Actualizado!"
 
 #. translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>.
-#: includes/class-tstats-plugins.php:387
+#: includes/class-tstats-plugins.php:388
 #, php-format
 msgid "This plugin is not %1$sproperly prepared for localization%2$s."
 msgstr "Este plugin não está %1$scorrectamente preparado para localização%2$s."
 
-#: includes/class-tstats-plugins.php:400
+#: includes/class-tstats-plugins.php:402
 msgid "View detailed logs on Slack"
 msgstr "Ver registos detalhados no Slack"
 
 #. translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>.
-#: includes/class-tstats-plugins.php:411
+#: includes/class-tstats-plugins.php:414
 #, php-format
 msgid "If you would like to translate this plugin, %1$splease contact the author%2$s."
 msgstr "Se quiser traduzir este plugin, %1$spor favor contacte o autor%2$s."
 
 #. translators: 1: Name of subproject. 2: Error message.
-#: includes/class-tstats-plugins.php:511
+#: includes/class-tstats-plugins.php:515
 #, php-format
 msgid "%1$s: %2$s"
 msgstr "%1$s: %2$s"
 
-#: includes/class-tstats-plugins.php:513
+#: includes/class-tstats-plugins.php:517
 msgid "Not found"
 msgstr "Não encontrado"
 
-#: includes/class-tstats-plugins.php:711
+#: includes/class-tstats-plugins.php:715
 msgctxt "Plugin status filter"
 msgid "Translation Stats"
 msgstr "Estatísticas de tradução"
@@ -357,11 +372,11 @@ msgstr "Slug"
 msgid "Text Domain"
 msgstr "Text Domain"
 
-#: includes/class-tstats-settings-plugins.php:316
+#: includes/class-tstats-settings-plugins.php:319
 msgid "Select Plugin"
 msgstr "Seleccionar plugin"
 
-#: includes/class-tstats-settings-plugins.php:378
+#: includes/class-tstats-settings-plugins.php:384
 msgid "Select Subproject"
 msgstr "Seleccionar subprojecto"
 
@@ -488,40 +503,36 @@ msgstr "GitHub Sponsors"
 
 #: includes/class-tstats-settings.php:118
 #: includes/class-tstats-settings.php:119
-#: includes/class-tstats-settings.php:278
+#: includes/class-tstats-settings.php:282
 msgctxt "Options Page Title"
 msgid "Translation Stats"
 msgstr "Estatísticas de tradução"
 
-#: includes/class-tstats-settings.php:177
+#: includes/class-tstats-settings.php:180
 msgid "Settings restored successfully."
 msgstr "Opções repostas com sucesso."
 
-#: includes/class-tstats-settings.php:206
+#: includes/class-tstats-settings.php:211
 msgid "Cache cleaned successfully."
 msgstr "Cache limpa com sucesso."
 
-#: includes/class-tstats-settings.php:223
+#: includes/class-tstats-settings.php:227
 msgid "Sorry, your nonce did not verify."
 msgstr "Desculpe, o nonce não foi verificado."
 
-#: includes/class-tstats-settings.php:261
+#: includes/class-tstats-settings.php:265
 msgid "You do not have sufficient permissions to access this page."
 msgstr "Não tem permissões suficientes para aceder a esta página."
 
-#: includes/class-tstats-settings.php:279
+#: includes/class-tstats-settings.php:283
 msgid "Customize the translation stats you want to show."
 msgstr "Personalize as estatísticas de tradução que quer mostrar."
 
-#: includes/class-tstats-settings.php:291
-msgid "Plugins"
-msgstr "Plugins"
-
-#: includes/class-tstats-settings.php:293
+#: includes/class-tstats-settings.php:297
 msgid "Tools"
 msgstr "Ferramentas"
 
-#: includes/class-tstats-settings.php:345
+#: includes/class-tstats-settings.php:349
 msgid "Save Changes"
 msgstr "Guardar alterações"
 

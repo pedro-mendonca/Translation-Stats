@@ -21,15 +21,36 @@ msgstr ""
 "X-Poedit-SearchPathExcluded-0: node_modules\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
 
-#. translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>.
 #: includes/class-tstats-activation.php:76
-#, php-format
-msgid "Thank you for installing Translation Stats. Go to %1$ssettings%2$s to configure."
+msgid "Thank you for installing Translation Stats."
 msgstr ""
 
-#: includes/class-tstats-db-update.php:77 includes/class-tstats-debug.php:344
+#. translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>.
+#: includes/class-tstats-activation.php:80
+#, php-format
+msgid "Go to %1$ssettings%2$s to start selecting some of your favorite plugins."
+msgstr ""
+
+#: includes/class-tstats-db-update.php:58 includes/class-tstats-debug.php:344
 #: includes/class-tstats-debug.php:360
 msgid "No settings found."
+msgstr ""
+
+#. translators: 1: Old settings version. 2: New settings version.
+#: includes/class-tstats-db-update.php:128
+#, php-format
+msgid "Translation Stats settings database successfully updated from version %1$s to version %2$s."
+msgstr ""
+
+#: includes/class-tstats-db-update.php:194 includes/class-tstats-main.php:69
+#: includes/class-tstats-settings-tools.php:55
+#: includes/class-tstats-settings.php:296
+msgid "Settings"
+msgstr ""
+
+#: includes/class-tstats-db-update.php:210
+#: includes/class-tstats-settings.php:295
+msgid "Plugins"
 msgstr ""
 
 #: includes/class-tstats-debug.php:87 includes/class-tstats-debug.php:127
@@ -194,12 +215,6 @@ msgstr ""
 msgid "Could not create file."
 msgstr ""
 
-#: includes/class-tstats-main.php:69
-#: includes/class-tstats-settings-tools.php:55
-#: includes/class-tstats-settings.php:292
-msgid "Settings"
-msgstr ""
-
 #: includes/class-tstats-plugins.php:100
 msgid "Plugins settings"
 msgstr ""
@@ -228,32 +243,32 @@ msgid "Updated!"
 msgstr ""
 
 #. translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>.
-#: includes/class-tstats-plugins.php:387
+#: includes/class-tstats-plugins.php:388
 #, php-format
 msgid "This plugin is not %1$sproperly prepared for localization%2$s."
 msgstr ""
 
-#: includes/class-tstats-plugins.php:400
+#: includes/class-tstats-plugins.php:402
 msgid "View detailed logs on Slack"
 msgstr ""
 
 #. translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>.
-#: includes/class-tstats-plugins.php:411
+#: includes/class-tstats-plugins.php:414
 #, php-format
 msgid "If you would like to translate this plugin, %1$splease contact the author%2$s."
 msgstr ""
 
 #. translators: 1: Name of subproject. 2: Error message.
-#: includes/class-tstats-plugins.php:511
+#: includes/class-tstats-plugins.php:515
 #, php-format
 msgid "%1$s: %2$s"
 msgstr ""
 
-#: includes/class-tstats-plugins.php:513
+#: includes/class-tstats-plugins.php:517
 msgid "Not found"
 msgstr ""
 
-#: includes/class-tstats-plugins.php:711
+#: includes/class-tstats-plugins.php:715
 msgctxt "Plugin status filter"
 msgid "Translation Stats"
 msgstr ""
@@ -356,11 +371,11 @@ msgstr ""
 msgid "Text Domain"
 msgstr ""
 
-#: includes/class-tstats-settings-plugins.php:316
+#: includes/class-tstats-settings-plugins.php:319
 msgid "Select Plugin"
 msgstr ""
 
-#: includes/class-tstats-settings-plugins.php:378
+#: includes/class-tstats-settings-plugins.php:384
 msgid "Select Subproject"
 msgstr ""
 
@@ -487,40 +502,36 @@ msgstr ""
 
 #: includes/class-tstats-settings.php:118
 #: includes/class-tstats-settings.php:119
-#: includes/class-tstats-settings.php:278
+#: includes/class-tstats-settings.php:282
 msgctxt "Options Page Title"
 msgid "Translation Stats"
 msgstr ""
 
-#: includes/class-tstats-settings.php:177
+#: includes/class-tstats-settings.php:180
 msgid "Settings restored successfully."
 msgstr ""
 
-#: includes/class-tstats-settings.php:206
+#: includes/class-tstats-settings.php:211
 msgid "Cache cleaned successfully."
 msgstr ""
 
-#: includes/class-tstats-settings.php:223
+#: includes/class-tstats-settings.php:227
 msgid "Sorry, your nonce did not verify."
 msgstr ""
 
-#: includes/class-tstats-settings.php:261
+#: includes/class-tstats-settings.php:265
 msgid "You do not have sufficient permissions to access this page."
 msgstr ""
 
-#: includes/class-tstats-settings.php:279
+#: includes/class-tstats-settings.php:283
 msgid "Customize the translation stats you want to show."
 msgstr ""
 
-#: includes/class-tstats-settings.php:291
-msgid "Plugins"
-msgstr ""
-
-#: includes/class-tstats-settings.php:293
+#: includes/class-tstats-settings.php:297
 msgid "Tools"
 msgstr ""
 
-#: includes/class-tstats-settings.php:345
+#: includes/class-tstats-settings.php:349
 msgid "Save Changes"
 msgstr ""
 
