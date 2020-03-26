@@ -131,7 +131,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 					$options      = get_option( TSTATS_WP_OPTION );
 
 					// Show Stats only if plugin is enabled in plugin settings.
-					if ( empty( $options[ $project_slug ]['enabled'] ) ) {
+					if ( empty( $options['plugins'][ $project_slug ]['enabled'] ) ) {
 						return;
 					}
 
@@ -383,8 +383,10 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 						'type'       => 'warning',
 						'notice-alt' => true,
 						'message'    => sprintf(
-							/* translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>. */
-							wp_kses_post( __( 'This plugin is not %1$sproperly prepared for localization%2$s.', 'translation-stats' ) ),
+							wp_kses_post(
+								/* translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>. */
+								__( 'This plugin is not %1$sproperly prepared for localization%2$s.', 'translation-stats' )
+							),
 							'<a href="https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/" target="_blank">',
 							'</a>'
 						),
@@ -407,8 +409,10 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 						'type'       => 'warning',
 						'notice-alt' => true,
 						'message'    => sprintf(
-							/* translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>. */
-							wp_kses_post( __( 'If you would like to translate this plugin, %1$splease contact the author%2$s.', 'translation-stats' ) ),
+							wp_kses_post(
+								/* translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>. */
+								__( 'If you would like to translate this plugin, %1$splease contact the author%2$s.', 'translation-stats' )
+							),
 							'<a href="https://wordpress.org/support/plugin/' . esc_attr( $project_slug ) . '" target="_blank">',
 							'</a>'
 						),
@@ -441,7 +445,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 
 			$options = get_option( TSTATS_WP_OPTION );
 			// Show bar only if subproject is enabled in plugin settings.
-			if ( empty( $options[ $project_slug ][ $subproject_slug ] ) ) {
+			if ( empty( $options['plugins'][ $project_slug ][ $subproject_slug ] ) ) {
 				return null;
 			}
 
@@ -582,7 +586,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 					}
 				}
 
-				set_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug . '_' . $locale['slug']['locale'] . '_' . $locale['slug']['variant'], $translation_stats, get_option( TSTATS_WP_OPTION )['transients_expiration'] );
+				set_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug . '_' . $locale['slug']['locale'] . '_' . $locale['slug']['variant'], $translation_stats, get_option( TSTATS_WP_OPTION )['settings']['transients_expiration'] );
 			}
 
 			return $translation_stats;
@@ -623,7 +627,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 
 				// Check if the plugin is enabled in the Translation Stats settings.
 				$project_slug = $this->translations_api->tstats_plugin_metadata( $plugin_file, 'slug' );
-				if ( empty( $options[ $project_slug ]['enabled'] ) ) {
+				if ( empty( $options['plugins'][ $project_slug ]['enabled'] ) ) {
 					// Skip to next loop iteration.
 					continue;
 				}
@@ -680,10 +684,14 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 
 			$options = get_site_option( TSTATS_WP_OPTION );
 
+			// Check if Translation Stats settings exist.
+			if ( empty( $options ) ) {
+				return $status_links;
+			}
+
 			$tstats_plugins = array();
 
-			foreach ( $options as $key => $option ) {
-				// Currently enabled plugins are just root arrays with 'enabled' set to true. TODO: Move to 'plugins' sub-array.
+			foreach ( $options['plugins'] as $key => $option ) {
 				if ( is_array( $option ) && 'true' === $option['enabled'] ) {
 					$tstats_plugins[ $key ] = true;
 				}

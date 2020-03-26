@@ -81,6 +81,7 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 					'helper'      => $field['helper'],       // Settings field helper.
 					'class'       => $field['class'],        // Settings field class.
 					'section'     => $field['section'],      // Settings field section.
+					'path'        => $field['path'],         // Settings field path.
 					'default'     => $field['default'],      // Settings field default.
 				)
 			);
@@ -111,6 +112,7 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 					'helper'         => $field['helper'],          // Settings field helper.
 					'class'          => $field['class'],           // Settings field class.
 					'section'        => $field['section'],         // Settings field section.
+					'path'           => $field['path'],            // Settings field path.
 					'select_options' => $field['select_options'],  // Settings field options.
 					'default'        => $field['default'],         // Settings field default.
 				)
@@ -146,6 +148,7 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 					'confirmation' => $field['confirmation'],  // Settings field confirmation.
 					'class'        => $field['class'],         // Settings field class.
 					'section'      => $field['section'],       // Settings field section.
+					'path'         => $field['path'],          // Settings field path.
 				)
 			);
 		}
@@ -161,13 +164,13 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 		 * @return void
 		 */
 		public function tstats_render_input_checkbox( $args ) {
-			$field_id    = TSTATS_WP_OPTION . '[' . $args['id'] . ']';
+			$field_id    = TSTATS_WP_OPTION . '[' . $args['path'] . '][' . $args['id'] . ']';
 			$label       = $args['label'];
 			$description = $args['description'];
 			$class       = $args['class'];
 			$default     = $args['default'];
 			$options     = get_option( TSTATS_WP_OPTION );
-			$option      = empty( $options[ $args['id'] ] ) ? '' : true;
+			$option      = empty( $options[ $args['path'] ][ $args['id'] ] ) ? '' : true;
 			$value       = is_array( $options ) ? $option : $default;
 			?>
 			<label>
@@ -195,14 +198,14 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 		 */
 		public function tstats_render_input_select( $args ) {
 
-			$field_id       = TSTATS_WP_OPTION . '[' . $args['id'] . ']';
+			$field_id       = TSTATS_WP_OPTION . '[' . $args['path'] . '][' . $args['id'] . ']';
 			$label          = $args['label'];
 			$description    = $args['description'];
 			$select_options = $args['select_options'];
 			$default        = $args['default'];
 			$size           = isset( $args['size'] ) && ! is_null( $args['size'] ) ? $args['size'] : 'regular';
 			$options        = get_option( TSTATS_WP_OPTION );
-			$option         = empty( $options[ $args['id'] ] ) ? '' : $options[ $args['id'] ];
+			$option         = empty( $options[ $args['path'] ][ $args['id'] ] ) ? '' : $options[ $args['path'] ][ $args['id'] ];
 			$value          = is_array( $options ) ? $option : $default;
 			?>
 			<label>
@@ -236,12 +239,12 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 		 */
 		public function tstats_render_input_select__language( $args ) {
 
-			$field_id    = TSTATS_WP_OPTION . '[' . $args['id'] . ']';
+			$field_id    = TSTATS_WP_OPTION . '[' . $args['path'] . '][' . $args['id'] . ']';
 			$label       = $args['label'];
 			$description = $args['description'];
 			$default     = $args['default'];
 			$options     = get_option( TSTATS_WP_OPTION );
-			$option      = empty( $options[ $args['id'] ] ) ? '' : $options[ $args['id'] ];
+			$option      = empty( $options[ $args['path'] ][ $args['id'] ] ) ? '' : $options[ $args['path'] ][ $args['id'] ];
 			$value       = is_array( $options ) ? $option : $default;
 			?>
 			<label>
@@ -277,7 +280,7 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 		 * @return void
 		 */
 		public function tstats_render_input_button( $args ) {
-			$field_id     = TSTATS_WP_OPTION . '[' . $args['id'] . ']';
+			$field_id     = TSTATS_WP_OPTION . '[' . $args['path'] . '][' . $args['id'] . ']';
 			$name         = $args['name'];
 			$label        = $args['label'];
 			$description  = $args['description'];
@@ -301,5 +304,28 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 			<p class='description'><?php echo esc_html( $description ); ?></p>
 			<?php
 		}
+
+
+		/**
+		 * Add setting hidden field type.
+		 *
+		 * @since 1.0.0
+		 *
+		 * @param array $args  Array of hidden field arguments.
+		 *
+		 * @return void
+		 */
+		public function tstats_render_input_hidden( $args ) {
+			$field_id = TSTATS_WP_OPTION . '[' . $args['path'] . '][' . $args['id'] . ']';
+			$default  = $args['default'];
+			$options  = get_option( TSTATS_WP_OPTION );
+			$option   = empty( $options[ $args['path'] ][ $args['id'] ] ) ? '' : $options[ $args['path'] ][ $args['id'] ];
+			$value    = is_array( $options ) ? $option : $default;
+			?>
+			<input name="<?php echo esc_attr( $field_id ); ?>" id="<?php echo esc_attr( $field_id ); ?>" type="hidden" value="<?php echo esc_attr( $value ); ?>">
+			<?php
+		}
+
+
 	}
 }

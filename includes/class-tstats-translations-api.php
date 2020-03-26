@@ -122,7 +122,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 				} else {
 					$on_wporg = true;
 				}
-				set_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug, $on_wporg, get_option( TSTATS_WP_OPTION )['transients_expiration'] );
+				set_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug, $on_wporg, get_option( TSTATS_WP_OPTION )['settings']['transients_expiration'] );
 			}
 			return $on_wporg;
 		}
@@ -148,7 +148,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 				} else {
 					$on_wporg = true;
 				}
-				set_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug, $on_wporg, get_option( TSTATS_WP_OPTION )['transients_expiration'] );
+				set_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug, $on_wporg, get_option( TSTATS_WP_OPTION )['settings']['transients_expiration'] );
 			}
 			return $on_wporg;
 		}

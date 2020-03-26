@@ -376,6 +376,7 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 				'notice-alt'  => false,
 				'inline'      => false,
 				'update-icon' => true,
+				'force_show'  => true,
 				'css-class'   => 'translation-stats-loading update-core',
 				'message'     => esc_html__( 'The update process is starting. This process may take a while on some hosts, so please be patient.', 'translation-stats' ),
 			);

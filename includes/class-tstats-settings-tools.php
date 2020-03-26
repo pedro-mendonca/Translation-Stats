@@ -98,6 +98,7 @@ if ( ! class_exists( 'TStats_Settings_Tools' ) ) {
 			$this->settings_api->tstats_add_settings_field(
 				array(
 					'section'     => $section,
+					'path'        => 'settings',
 					'id'          => 'delete_data_on_uninstall',
 					'type'        => 'checkbox',
 					'class'       => '',
@@ -113,6 +114,7 @@ if ( ! class_exists( 'TStats_Settings_Tools' ) ) {
 			$this->settings_api->tstats_add_settings_field(
 				array(
 					'section'      => $section,
+					'path'         => 'settings',
 					'id'           => 'reset_settings',
 					'name'         => 'reset_settings',
 					'type'         => 'button',
@@ -152,6 +154,7 @@ if ( ! class_exists( 'TStats_Settings_Tools' ) ) {
 			$this->settings_api->tstats_add_settings_field(
 				array(
 					'section'        => $section,
+					'path'           => 'settings',
 					'id'             => 'transients_expiration',
 					'type'           => 'select',
 					'class'          => '',
@@ -172,6 +175,7 @@ if ( ! class_exists( 'TStats_Settings_Tools' ) ) {
 			$this->settings_api->tstats_add_settings_field(
 				array(
 					'section'      => $section,
+					'path'         => 'settings',
 					'id'           => 'delete_transients',
 					'name'         => 'delete_transients',
 					'type'         => 'button',

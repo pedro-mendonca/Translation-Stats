@@ -55,6 +55,13 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 */
 		protected $settings_tools;
 
+		/**
+		 * Hidden Settings.
+		 *
+		 * @var object
+		 */
+		protected $settings_hidden;
+
 
 		/**
 		 * Constructor.
@@ -75,6 +82,9 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 
 			// Instantiate Translation Stats Tools Settings.
 			$this->settings_tools = new TStats_Settings_Tools();
+
+			// Instantiate Translation Stats Hidden Settings.
+			$this->settings_hidden = new TStats_Settings_Hidden();
 
 			// Add admin menu item.
 			add_action( 'admin_menu', array( $this, 'admin_menu' ) );
@@ -133,6 +143,9 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 			// Tools settings section.
 			$this->settings_tools->settings_section();
 
+			// Hidden settings section.
+			$this->settings_hidden->settings_section();
+
 			// Add section after Translation settings sections.
 			do_action( 'tstats_settings_section__after' );
 
@@ -161,8 +174,10 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 				$admin_notice = array(
 					'type'        => 'success',
 					'notice-alt'  => false,
-					'message'     => '<strong>' . esc_html__( 'Settings restored successfully.', 'translation-stats' ) . '</strong>',
+					'inline'      => false,
 					'dismissible' => true,
+					'force_show'  => true,
+					'message'     => '<strong>' . esc_html__( 'Settings restored successfully.', 'translation-stats' ) . '</strong>',
 				);
 				$this->notices->tstats_notice_message( $admin_notice );
 			}
@@ -190,8 +205,10 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 				$admin_notice = array(
 					'type'        => 'success',
 					'notice-alt'  => false,
-					'message'     => '<strong>' . esc_html__( 'Cache cleaned successfully.', 'translation-stats' ) . '</strong>',
+					'inline'      => false,
 					'dismissible' => true,
+					'force_show'  => true,
+					'message'     => '<strong>' . esc_html__( 'Cache cleaned successfully.', 'translation-stats' ) . '</strong>',
 				);
 				$this->notices->tstats_notice_message( $admin_notice );
 			}
@@ -222,10 +239,13 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		 */
 		public function settings_defaults() {
 			$defaults = array(
-				'show_warnings'            => true,
-				'translation_language'     => 'site-default',
-				'delete_data_on_uninstall' => true,
-				'transients_expiration'    => TSTATS_TRANSIENTS_TRANSLATIONS_EXPIRATION,
+				'settings' => array(
+					'show_warnings'            => true,
+					'translation_language'     => 'site-default',
+					'delete_data_on_uninstall' => true,
+					'transients_expiration'    => TSTATS_TRANSIENTS_TRANSLATIONS_EXPIRATION,
+					'settings_version'         => TSTATS_SETTINGS_VERSION,
+				),
 			);
 			return $defaults;
 		}
@@ -308,6 +328,12 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 									$section = 'tstats_settings__tools__transients';
 									do_settings_sections( $section );
 									settings_fields( $section );
+									?>
+								</div>
+								<div class="hidden">
+									<?php
+									$section = 'tstats_settings__hidden';
+									do_settings_sections( $section );
 									?>
 								</div>
 
