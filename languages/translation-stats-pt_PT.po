@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Translation Stats\n"
 "Report-Msgid-Bugs-To: https://github.com/pedro-mendonca/Translation-Stats/issues\n"
-"POT-Creation-Date: 2020-03-26 00:25+0000\n"
-"PO-Revision-Date: 2020-03-26 00:26+0000\n"
+"POT-Creation-Date: 2020-03-26 12:44+0000\n"
+"PO-Revision-Date: 2020-03-26 12:45+0000\n"
 "Last-Translator: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language-Team: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language: pt_PT\n"
@@ -217,8 +217,8 @@ msgid "Could not create file."
 msgstr "Não foi possível criar o ficheiro."
 
 #: includes/class-tstats-plugins.php:100
-msgid "Plugins settings"
-msgstr "Opções dos plugins"
+msgid "Edit plugins settings"
+msgstr "Editar opções dos plugins"
 
 #: includes/class-tstats-plugins.php:104
 msgctxt "Column label"
@@ -671,23 +671,23 @@ msgid "Could not extract translations from file."
 msgstr "Não foi possível extrair traduções do ficheiro."
 
 #. translators: 1: Plugin name. 2: Error message.
-#: translation-stats.php:131
+#: translation-stats.php:127
 #, php-format
 msgid "The plugin %1$s has been deactivated due to an error: %2$s"
 msgstr "O plugin %1$s foi desactivado devido a um erro: %2$s"
 
-#: translation-stats.php:134
+#: translation-stats.php:130
 msgid "This plugin doesn&#8217;t work with your version of PHP."
 msgstr "Este plugin não funciona com a sua versão do PHP."
 
 #. translators: %s: Minimum PHP version required.
-#: translation-stats.php:144
+#: translation-stats.php:140
 #, php-format
 msgid "Requires PHP version %s or higher."
 msgstr "Requer o PHP versão %s ou superior."
 
 #. translators: %s: URL to Update PHP page.
-#: translation-stats.php:155
+#: translation-stats.php:151
 #, php-format
 msgid "<a href=\"%s\">Learn more about updating PHP</a>."
 msgstr "<a href=\"%s\">Saiba mais sobre como actualizar o PHP</a>."
