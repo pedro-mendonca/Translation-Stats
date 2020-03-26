@@ -86,7 +86,7 @@ if ( ! class_exists( 'TStats_Gettext' ) ) {
 			$domain         = $project['domain'] && $include_domain ? $project['domain'] . '-' : '';
 			$base_file_name = $domain . $locale['wp_locale'];
 
-			foreach ( $translations as $key => $translation ) {
+			foreach ( $translations as $translation ) {
 
 				// Find all unique sources this translation originates from.
 				$sources = array_map(
