@@ -23,7 +23,7 @@
 **Requires at least:** 4.9  
 **Tested up to:** 5.4  
 **Requires PHP:** 5.6  
-**Stable tag:** 0.9.9  
+**Stable tag:** 1.0.0  
 **License:** GPLv2  
 **License URI:** [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html)  
 
@@ -94,6 +94,15 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 ![screenshot-4](./assets/screenshot-4.png)
 
 ## Changelog ##
+
+### 1.0.0 ###
+*   Version 1.0! 🎉
+*   New settings database structure and version
+*   New settings database updater
+*   New activation class
+*   Optimized plugins settings table
+*   Fix notices not showing when "Warnings" settings was disabled
+*   Minor code improvements
 
 ### 0.9.9 ###
 *   New plugins View to show only Translation Stats enabled plugins
