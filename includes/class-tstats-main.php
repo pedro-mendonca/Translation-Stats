@@ -34,6 +34,9 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 			// Add Plugin action links.
 			add_filter( 'plugin_action_links_' . TSTATS_FILE, array( $this, 'tstats_action_links' ) );
 
+			// Initialize the plugin activation.
+			new TStats_Activation();
+
 			// Initialize the plugin settings.
 			new TStats_Settings();
 
