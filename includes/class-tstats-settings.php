@@ -174,8 +174,10 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 				$admin_notice = array(
 					'type'        => 'success',
 					'notice-alt'  => false,
-					'message'     => '<strong>' . esc_html__( 'Settings restored successfully.', 'translation-stats' ) . '</strong>',
+					'inline'      => false,
 					'dismissible' => true,
+					'force_show'  => true,
+					'message'     => '<strong>' . esc_html__( 'Settings restored successfully.', 'translation-stats' ) . '</strong>',
 				);
 				$this->notices->tstats_notice_message( $admin_notice );
 			}
@@ -203,8 +205,10 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 				$admin_notice = array(
 					'type'        => 'success',
 					'notice-alt'  => false,
-					'message'     => '<strong>' . esc_html__( 'Cache cleaned successfully.', 'translation-stats' ) . '</strong>',
+					'inline'      => false,
 					'dismissible' => true,
+					'force_show'  => true,
+					'message'     => '<strong>' . esc_html__( 'Cache cleaned successfully.', 'translation-stats' ) . '</strong>',
 				);
 				$this->notices->tstats_notice_message( $admin_notice );
 			}
