@@ -99,7 +99,6 @@ jQuery( document ).ready( function( $ ) {
 
 			console.log( 'Disabled all projects checkbox.' );
 		}
-
 	}
 
 	/**
