@@ -1,5 +1,5 @@
 {
-  "extends": [ "plugin:@wordpress/eslint-plugin/recommended" ],
+  "extends": [ "plugin:@wordpress/eslint-plugin/recommended-with-formatting" ],
   "globals": {
     "jQuery": true
   },
@@ -7,5 +7,6 @@
     "no-console": "off",
     "no-undef": "off",
     "no-var": "off",
+    "object-shorthand": 'off',
   }
 }
