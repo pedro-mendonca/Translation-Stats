@@ -44,12 +44,6 @@
 		</properties>
 	</rule>
 
-	<!-- Throws errors if spaces are used for indentation other than precision indentation. -->
-	<rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/>
-
-	<!-- Excludes errors if spaces are used for indentation other than precision indentation. -->
-	<exclude name="Generic.WhiteSpace.DisallowSpaceIndent"/>
-
 	<!--
 	To get the optimal benefits of using WPCS, we should add a couple of custom properties.
 	For information on additional custom properties available, check out
