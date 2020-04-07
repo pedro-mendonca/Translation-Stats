@@ -165,6 +165,18 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 					$tstats_vars
 				);
 
+				wp_register_script(
+					'tablesorter-combined',
+					TSTATS_DIR_URL . 'js/vendor/jquery.tablesorter.combined' . $suffix . '.js',
+					array(
+						'jquery',
+					),
+					'2.31.3',
+					false
+				);
+
+				wp_enqueue_script( 'tablesorter-combined' );
+
 			}
 
 			// Check for updates page.
