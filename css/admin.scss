@@ -214,6 +214,16 @@ table.wp-list-table.plugins { // WordPress Installed Plugins table.
 
 table.tstats-plugin-list-table.widefat { // Translation Stats Settings Plugins table.
 
+
+	&.tablesorter {
+
+		tr.filtered {
+
+			/* Rows hidden by filtering (needed for child rows). */
+			display: none;
+		}
+	}
+
 	tr {
 
 		td,
@@ -238,6 +248,108 @@ table.tstats-plugin-list-table.widefat { // Translation Stats Settings Plugins t
 	}
 
 	thead {
+
+		/* Tablesorter */
+		.tablesorter-header {
+
+
+			&:not(.sorter-false) {
+
+				.tablesorter-header-inner {
+
+					&::after {
+						font: normal 20px/1 dashicons;
+						vertical-align: bottom;
+						color: rgba($color-primary, 1);
+					}
+				}
+
+				&:hover,
+				&:focus {
+					cursor: pointer;
+
+					.tablesorter-header-inner {
+
+						&::after {
+							color: rgba($color-secondary, 1);
+						}
+					}
+				}
+
+
+				&.tablesorter-headerUnSorted {
+
+					&:hover,
+					&:focus {
+
+						.tablesorter-header-inner {
+
+							&::after {
+
+								/* Arrow up. */
+								content: "\f142";
+
+							}
+						}
+					}
+				}
+
+				&.tablesorter-headerAsc {
+					//background-color: rgba($color-primary, 0.2);
+
+					.tablesorter-header-inner {
+
+						&::after {
+
+							/* Arrow up. */
+							content: "\f142";
+
+						}
+					}
+
+					&:hover,
+					&:focus {
+
+						.tablesorter-header-inner {
+
+							&::after {
+
+								/* Arrow down. */
+								content: "\f140";
+							}
+						}
+					}
+				}
+
+				&.tablesorter-headerDesc {
+
+					.tablesorter-header-inner {
+
+						&::after {
+
+							/* Arrow down. */
+							content: "\f140";
+
+						}
+					}
+
+					&:hover,
+					&:focus {
+
+						.tablesorter-header-inner {
+
+							&::after {
+
+								/* Arrow up. */
+								content: "\f142";
+							}
+						}
+					}
+				}
+
+			}
+
+		}
 
 		.column-subproject {
 
