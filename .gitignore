@@ -9,7 +9,7 @@ Thumbs.db
 *.zip
 
 # Composer
-vendor/
+/vendor/
 
 # Node
-node_modules/
+/node_modules/
