@@ -11,7 +11,7 @@
 	<exclude-pattern>*/tests/*</exclude-pattern>
 
 	<!-- A comma separated list of file extensions to check. -->
-	<arg name="extensions" value="php,css"/>
+	<arg name="extensions" value="php"/>
 
 	<!-- The report types to print. -->
 	<arg name="report" value="summary,source,full"/>
@@ -22,7 +22,7 @@
 	<!-- Show progress of the run. -->
 	<arg value="p"/>
 
-	<!-- Enable colors in report -->
+	<!-- Enable colors in report. -->
 	<arg name="colors"/>
 
 	<!-- Include the PHPCompatibilityWP. -->
