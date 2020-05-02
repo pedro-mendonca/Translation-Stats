@@ -109,6 +109,12 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 			$tstats_language = $this->tstats_globals->tstats_translation_language();
 			$locale          = $this->translations_api->tstats_locale( $tstats_language );
 
+			// Check if $tstats_language is set.
+			if ( empty( $locale ) ) {
+				// Do nothing.
+				return;
+			}
+
 			// Get WordPress core version info.
 			$wp_version = $this->translations_api->tstats_wordpress_version();
 
@@ -199,6 +205,16 @@ if ( ! class_exists( 'TStats_Update_Core' ) ) {
 			$update_core = get_site_transient( 'update_core' );
 			// Check if there is a core translation available to autoupdate.
 			if ( isset( $update_core->translations[0]['autoupdate'] ) ) {
+				// Do nothing.
+				return;
+			}
+
+			// Get Translation Stats Locale data.
+			$tstats_language = $this->tstats_globals->tstats_translation_language();
+			$locale          = $this->translations_api->tstats_locale( $tstats_language );
+
+			// Check if $tstats_language is set.
+			if ( empty( $locale ) ) {
 				// Do nothing.
 				return;
 			}

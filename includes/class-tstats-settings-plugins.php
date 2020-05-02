@@ -284,7 +284,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 			</script>
 
 			<?php
-			if ( 'en_US' !== $tstats_language ) {
+			if ( 'en_US' !== $tstats_language && ! empty( $locale ) ) {
 				// If current locale is not 'en_US', add Locale WP.org subdomain to plugin URL (e.g. https://pt.wordpress.org/plugins/translation-stats/ ).
 				$wporg_subdomain = isset( $locale['wporg_subdomain'] ) ? $locale['wporg_subdomain'] . '.' : '';
 				$plugin_url      = 'https://' . $wporg_subdomain . substr( $this->translations_api->tstats_plugin_metadata( $plugin_file, 'url' ), strlen( 'https://' ) );

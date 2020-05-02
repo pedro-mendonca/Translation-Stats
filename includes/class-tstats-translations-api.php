@@ -374,12 +374,16 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 			// Check languages transients.
 			$tstats_locales = get_transient( TSTATS_TRANSIENTS_PREFIX . $transient_name );
 
-			if ( false === $tstats_locales ) {
+			if ( empty( $tstats_locales ) ) {
 
-				$json = wp_remote_get( $url );
+				// Increase remote request timeout from default 5 to 15 seconds.
+				$args['timeout'] = 15;
+
+				$json = wp_remote_get( $url, $args );
+
 				if ( is_wp_error( $json ) || wp_remote_retrieve_response_code( $json ) !== 200 ) {
 
-					// API Unreachable (Error 404).
+					// API Unreachable: Error 404 or timeout.
 					$tstats_locales = false;
 
 				} else {
@@ -401,11 +405,13 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 								$tstats_locales[ $tstats_locale['wp_locale'] ] = $tstats_locale;
 							}
 						}
+
+						// Only set transient if $tstats_locales remote request is succesfull.
+						set_transient( TSTATS_TRANSIENTS_PREFIX . $transient_name, $tstats_locales, TSTATS_TRANSIENTS_LOCALES_EXPIRATION );
 					}
 				}
-
-				set_transient( TSTATS_TRANSIENTS_PREFIX . $transient_name, $tstats_locales, TSTATS_TRANSIENTS_LOCALES_EXPIRATION );
 			}
+
 			return $tstats_locales;
 		}
 
@@ -419,15 +425,19 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 *
 		 * @since 0.9.0
 		 *
-		 * @param string $wp_locale      WordPress Locale ( e.g. 'pt_PT' ).
+		 * @param string $wp_locale   WordPress Locale ( e.g. 'pt_PT' ).
 		 *
-		 * @return array $tstats_locale  Returns locale array from GlotPress (e.g. 'english_name', 'native_name', 'lang_code_iso_639_1', 'country_code', 'wp_locale', 'slug', etc. ).
+		 * @return false|array        Returns false if translate API is unreachable, or locale array from GlotPress (e.g. 'english_name', 'native_name', 'lang_code_iso_639_1', 'country_code', 'wp_locale', 'slug', etc. ).
 		 */
 		public function tstats_locale( $wp_locale ) {
 
 			$tstats_locales = $this->tstats_locales();
 
 			$tstats_locale = null;
+
+			if ( empty( $tstats_locales ) ) {
+				return false;
+			}
 
 			foreach ( $tstats_locales as $key => $value ) {
 				if ( $value['wp_locale'] === $wp_locale ) {
