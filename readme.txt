@@ -66,6 +66,10 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
 == Changelog ==
 
+= 1.0.2 =
+*   New sort and filter in the settings plugins table
+*   Fix timeout error on get languages list from translate.wp.org API
+
 = 1.0.1 =
 *   Fix custom column title icon and screen reader text
 
