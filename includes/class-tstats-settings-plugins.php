@@ -86,6 +86,14 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 		 */
 		public function settings_section__callback() {
 			?>
+
+			<p class="search-box">
+				<label class="screen-reader-text"><?php esc_html_e( 'Search plugins...', 'translation-stats' ); ?></label>
+				<input id="plugins-search-input" class="search" type="search" data-column="all" placeholder="<?php esc_html_e( 'Search plugins...', 'translation-stats' ); ?>">
+				<!-- targeted by the "filter_reset" option -->
+				<button type="button" id="plugins-search-reset" class="button reset"><?php esc_html_e( 'Clean', 'translation-stats' ); ?></button>
+			</p>
+
 			<p>
 				<?php
 				printf(
@@ -127,7 +135,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 			);
 			?>
 
-			<table class="tstats-plugin-list-table widefat plugins">
+			<table id="tstats-table-plugins" class="tstats-plugin-list-table widefat plugins tablesorter">
 				<thead>
 
 					<?php
@@ -192,7 +200,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 
 			?>
 			<tr>
-				<td scope="col" id="cb" class="manage-column column-cb check-column">
+				<td scope="col" id="cb" class="manage-column column-cb check-column" data-sorter="false">
 					<label class="screen-reader-text"><?php esc_html_e( 'Select All', 'translation-stats' ); ?></label>
 					<input class="all_plugins" id="all_plugins" type="checkbox" value="true"/>
 				</td>
@@ -223,7 +231,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 				}
 				foreach ( $subprojects as $subproject ) {
 					?>
-					<th scope="col" id="column-<?php echo esc_attr( $subproject['slug'] ); ?>" class="manage-column column-<?php echo esc_attr( $subproject['slug'] ); ?> column-subproject">
+					<th scope="col" id="column-<?php echo esc_attr( $subproject['slug'] ); ?>" class="manage-column column-<?php echo esc_attr( $subproject['slug'] ); ?> column-subproject" data-sorter="false">
 						<?php echo esc_html( $subproject['name'] ); ?>
 					</th>
 					<?php
