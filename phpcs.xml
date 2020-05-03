@@ -11,7 +11,7 @@
 	<exclude-pattern>*/tests/*</exclude-pattern>
 
 	<!-- A comma separated list of file extensions to check. -->
-	<arg name="extensions" value="php,css"/>
+	<arg name="extensions" value="php"/>
 
 	<!-- The report types to print. -->
 	<arg name="report" value="summary,source,full"/>
@@ -22,7 +22,13 @@
 	<!-- Show progress of the run. -->
 	<arg value="p"/>
 
-	<!-- Enable colors in report -->
+	<!-- Check up to 20 files simultaneously. -->
+	<arg name="parallel" value="20"/>
+
+	<!-- Whenever possible, cache the scan results and re-use those for unchanged files on the next scan. -->
+	<arg name="cache"/>
+
+	<!-- Enable colors in report. -->
 	<arg name="colors"/>
 
 	<!-- Include the PHPCompatibilityWP. -->
@@ -43,12 +49,6 @@
 			<property name="minimum_supported_version" value="4.9"/>
 		</properties>
 	</rule>
-
-	<!-- Throws errors if spaces are used for indentation other than precision indentation. -->
-	<rule ref="Generic.WhiteSpace.DisallowSpaceIndent"/>
-
-	<!-- Excludes errors if spaces are used for indentation other than precision indentation. -->
-	<exclude name="Generic.WhiteSpace.DisallowSpaceIndent"/>
 
 	<!--
 	To get the optimal benefits of using WPCS, we should add a couple of custom properties.

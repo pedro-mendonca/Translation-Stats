@@ -192,6 +192,12 @@ table.wp-list-table.plugins td.column-translation-stats.tstats-loading .translat
 	}
 }
 
+table.tstats-plugin-list-table.widefat.tablesorter tr.filtered {
+
+	/* Rows hidden by filtering (needed for child rows). */
+	display: none;
+}
+
 table.tstats-plugin-list-table.widefat tr td.check-column,
 table.tstats-plugin-list-table.widefat tr th.check-column {
 	vertical-align: middle;
@@ -209,6 +215,60 @@ table.tstats-plugin-list-table.widefat tr th.check-column input[type="radio"] {
 table.tstats-plugin-list-table.widefat tr td.check-column input[type="checkbox"][disabled],
 table.tstats-plugin-list-table.widefat tr th.check-column input[type="checkbox"][disabled] {
 	pointer-events: none;
+}
+
+table.tstats-plugin-list-table.widefat thead {
+
+	/* Tablesorter */
+}
+
+table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false) .tablesorter-header-inner::after {
+	font: normal 20px/1 dashicons;
+	vertical-align: bottom;
+	color: #235a28;
+}
+
+table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false):hover,
+table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false):focus {
+	cursor: pointer;
+}
+
+table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false):hover .tablesorter-header-inner::after,
+table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false):focus .tablesorter-header-inner::after {
+	color: #46b450;
+}
+
+table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false).tablesorter-headerUnSorted:hover .tablesorter-header-inner::after,
+table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false).tablesorter-headerUnSorted:focus .tablesorter-header-inner::after {
+
+	/* Arrow up. */
+	content: "\f142";
+}
+
+table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false).tablesorter-headerAsc .tablesorter-header-inner::after {
+
+	/* Arrow up. */
+	content: "\f142";
+}
+
+table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false).tablesorter-headerAsc:hover .tablesorter-header-inner::after,
+table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false).tablesorter-headerAsc:focus .tablesorter-header-inner::after {
+
+	/* Arrow down. */
+	content: "\f140";
+}
+
+table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false).tablesorter-headerDesc .tablesorter-header-inner::after {
+
+	/* Arrow down. */
+	content: "\f140";
+}
+
+table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false).tablesorter-headerDesc:hover .tablesorter-header-inner::after,
+table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false).tablesorter-headerDesc:focus .tablesorter-header-inner::after {
+
+	/* Arrow up. */
+	content: "\f142";
 }
 
 table.tstats-plugin-list-table.widefat thead .column-subproject {

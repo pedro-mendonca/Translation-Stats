@@ -336,46 +336,56 @@ msgstr ""
 msgid "Installed Plugins"
 msgstr ""
 
-#: includes/class-tstats-settings-plugins.php:93
+#: includes/class-tstats-settings-plugins.php:91
+#: includes/class-tstats-settings-plugins.php:92
+msgid "Search plugins..."
+msgstr ""
+
+#: includes/class-tstats-settings-plugins.php:94
+#: includes/class-tstats-settings-tools.php:184
+msgid "Clean"
+msgstr ""
+
+#: includes/class-tstats-settings-plugins.php:101
 msgid "Select the plugins and subprojects you want to show the translation stats from the list of installed plugins."
 msgstr ""
 
-#: includes/class-tstats-settings-plugins.php:97
-#: includes/class-tstats-settings-plugins.php:98
+#: includes/class-tstats-settings-plugins.php:105
+#: includes/class-tstats-settings-plugins.php:106
 msgid "View selected plugins"
 msgstr ""
 
-#: includes/class-tstats-settings-plugins.php:196
+#: includes/class-tstats-settings-plugins.php:204
 msgid "Select All"
 msgstr ""
 
-#: includes/class-tstats-settings-plugins.php:200
+#: includes/class-tstats-settings-plugins.php:208
 msgid "Plugin"
 msgstr ""
 
-#: includes/class-tstats-settings-plugins.php:206
+#: includes/class-tstats-settings-plugins.php:214
 msgid "Author"
 msgstr ""
 
 #. translators: 1: Slug. 2: Text Domain.
-#: includes/class-tstats-settings-plugins.php:216
+#: includes/class-tstats-settings-plugins.php:224
 #, php-format
 msgid "%1$s and %2$s"
 msgstr ""
 
-#: includes/class-tstats-settings-plugins.php:217
+#: includes/class-tstats-settings-plugins.php:225
 msgid "Slug"
 msgstr ""
 
-#: includes/class-tstats-settings-plugins.php:218
+#: includes/class-tstats-settings-plugins.php:226
 msgid "Text Domain"
 msgstr ""
 
-#: includes/class-tstats-settings-plugins.php:319
+#: includes/class-tstats-settings-plugins.php:327
 msgid "Select Plugin"
 msgstr ""
 
-#: includes/class-tstats-settings-plugins.php:384
+#: includes/class-tstats-settings-plugins.php:392
 msgid "Select Subproject"
 msgstr ""
 
@@ -437,10 +447,6 @@ msgstr ""
 
 #: includes/class-tstats-settings-tools.php:183
 msgid "Clean Cache"
-msgstr ""
-
-#: includes/class-tstats-settings-tools.php:184
-msgid "Clean"
 msgstr ""
 
 #: includes/class-tstats-settings-tools.php:185

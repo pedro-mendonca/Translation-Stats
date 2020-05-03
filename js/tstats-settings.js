@@ -2,6 +2,9 @@ jQuery( document ).ready( function( $ ) {
 	// Run scripts on page load.
 	tstatsOnLoad();
 
+	// Sort and filter plugins settings list.
+	tstatsPluginsSort();
+
 	// Click on Settings Navigation Tab.
 	$( '.tstats-settings__content > .nav-tab-wrapper a' ).on( 'click', tstatsClickSettingsTab );
 
@@ -13,6 +16,9 @@ jQuery( document ).ready( function( $ ) {
 
 	// Select single subproject checkbox on Settings projects table.
 	$( '.tstats-settings__content input.checkbox-subproject' ).on( 'click', tstatsSelectPluginSubproject );
+
+	// Click plugins table header.
+	$( '.tablesorter-header:not(.sorter-false)' ).on( 'mouseup', tstatsClickPluginsSort );
 
 	// Select single subproject checkbox on Settings projects table.
 	// $( 'table.wp-list-table td.translation-stats button.tstats-update-button' ).on( 'click', tstatsPluginSubprojectsLoadAjax );
@@ -58,6 +64,42 @@ jQuery( document ).ready( function( $ ) {
 	}
 
 	/**
+	 * Translation Stats plugins list table sorting.
+	 *
+	 * @since 1.0.2
+	 */
+	function tstatsPluginsSort() {
+		// Sort table.
+		$( '#tstats-table-plugins' ).tablesorter( {
+			// Initial sort column (2nd column).
+			sortList: [
+				[ 1, 0 ],
+			],
+
+			// Resets the sort direction so that clicking on an unsorted column will sort in the sortInitialOrder direction.
+			sortRestart: true,
+			// Default order.
+			sortInitialOrder: 'asc',
+
+			widgets: [
+				'filter',
+			],
+			widgetOptions: {
+
+				// External filter input selector.
+				filter_external: '#plugins-search-input',
+				// Don't include column filters.
+				filter_columnFilters: false,
+				// Save last used filter.
+				filter_saveFilters: false,
+				// Filter reset selector.
+				filter_reset: '#plugins-search-reset',
+
+			},
+		} );
+	}
+
+	/**
 	 * Change active Settings Navigation Tab.
 	 *
 	 * @since 0.9.3
@@ -99,7 +141,6 @@ jQuery( document ).ready( function( $ ) {
 
 			console.log( 'Disabled all projects checkbox.' );
 		}
-
 	}
 
 	/**
@@ -205,5 +246,15 @@ jQuery( document ).ready( function( $ ) {
 
 		console.log( 'Clicked single project ID "' + id + '" subproject checkbox.' );
 		console.log( pluginSubprojectsCount[ id ] + ' subproject(s) of project ID "' + id + '" selected.' );
+	}
+
+	/**
+	 * Click plugins table header.
+	 *
+	 * @since 1.0.2
+	 */
+	function tstatsClickPluginsSort() {
+		// Unfocus element.
+		$( this ).blur();
 	}
 } );
