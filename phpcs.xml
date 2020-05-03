@@ -22,6 +22,12 @@
 	<!-- Show progress of the run. -->
 	<arg value="p"/>
 
+	<!-- Check up to 20 files simultaneously. -->
+	<arg name="parallel" value="20"/>
+
+	<!-- Whenever possible, cache the scan results and re-use those for unchanged files on the next scan. -->
+	<arg name="cache"/>
+
 	<!-- Enable colors in report. -->
 	<arg name="colors"/>
 
