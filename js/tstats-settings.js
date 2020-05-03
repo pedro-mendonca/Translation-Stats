@@ -91,7 +91,7 @@ jQuery( document ).ready( function( $ ) {
 				// Don't include column filters.
 				filter_columnFilters: false,
 				// Save last used filter.
-				filter_saveFilters: true,
+				filter_saveFilters: false,
 				// Filter reset selector.
 				filter_reset: '#plugins-search-reset',
 
