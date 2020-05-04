@@ -64,17 +64,17 @@ if ( ! class_exists( 'TStats_Globals' ) ) {
 		 * @since 0.9.0
 		 *
 		 * @param string $link      Link to customize.
-		 * @param string $source    Set utm_source, default is site URL.
+		 * @param string $source    Set utm_source, default is 'tstats'.
 		 * @param string $medium    Set utm_medium, default is 'link'.
-		 * @param string $campaign  Set utm_campaign, default is 'tstats_plugin'.
+		 * @param string $campaign  Set utm_campaign, default is 'tstats_link'.
 		 *
 		 * @return string  Link with campaign parameters.
 		 */
 		public function tstats_link( $link, $source, $medium, $campaign ) {
 
-			$utm_source   = ! empty( $source ) ? $source : rawurlencode( home_url() );
+			$utm_source   = ! empty( $source ) ? $source : 'tstats';
 			$utm_medium   = ! empty( $medium ) ? $medium : 'link';
-			$utm_campaign = ! empty( $campaign ) ? $campaign : 'tstats_plugin';
+			$utm_campaign = ! empty( $campaign ) ? $campaign : 'tstats_link';
 
 			$campaign_link = $link . '?utm_source=' . $utm_source . '&amp;utm_medium=' . $utm_medium . '&amp;utm_campaign=' . $utm_campaign;
 
