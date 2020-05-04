@@ -104,10 +104,7 @@ if ( ! class_exists( 'TStats_Settings_Widgets' ) ) {
 						<?php
 						printf(
 							/* translators: Plugin name and version - Do not translate! */
-							esc_html__(
-								'Translation Stats %s',
-								'translation-stats'
-							),
+							esc_html__( 'Translation Stats %s', 'translation-stats' ),
 							'<small>v.' . esc_html( TSTATS_VERSION ) . '</small>'
 						);
 						?>
