@@ -62,11 +62,8 @@ if ( ! class_exists( 'TStats_Settings_Footer' ) ) {
 
 				$text = sprintf(
 					/* translators: 1: Translation Stats plugin name. 2: Plugin version. */
-					__(
-						'Thank you for translating with %1$s version %2$s.',
-						'translation-stats'
-					),
-					'<a href="' . esc_url( $this->tstats_globals->tstats_link( $external_link_url, rawurlencode( home_url() ), 'link', 'tstats_plugin_link' ) ) . '">' . /* translators: Plugin name, do not translate! */ __( 'Translation Stats', 'translation-stats' ) . '</a>',
+					__( 'Thank you for translating with %1$s version %2$s.', 'translation-stats' ),
+					'<a href="' . esc_url( $this->tstats_globals->tstats_link( $external_link_url, 'tstats', 'link', 'tstats_footer_link' ) ) . '">' . /* translators: Plugin name, do not translate! */ __( 'Translation Stats', 'translation-stats' ) . '</a>',
 					TSTATS_VERSION
 				);
 				$text .= ' ' . sprintf(
@@ -75,7 +72,7 @@ if ( ! class_exists( 'TStats_Settings_Footer' ) ) {
 						'By %s',
 						'translation-stats'
 					),
-					'<a href="' . esc_url( $this->tstats_globals->tstats_link( $external_link_url, rawurlencode( home_url() ), 'link', 'tstats_plugin_footer_link' ) ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Pedro Mendonça', 'translation-stats' ) . '</a>'
+					'<a href="' . esc_url( $this->tstats_globals->tstats_link( $external_link_url, 'tstats', 'link', 'tstats_footer_link' ) ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Pedro Mendonça', 'translation-stats' ) . '</a>'
 				);
 			}
 			return $text;
