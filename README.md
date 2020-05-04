@@ -23,7 +23,7 @@
 **Requires at least:** 4.9  
 **Tested up to:** 5.4  
 **Requires PHP:** 5.6  
-**Stable tag:** 1.0.2  
+**Stable tag:** 1.0.3  
 **License:** GPLv2  
 **License URI:** [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html)  
 
@@ -94,6 +94,10 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 ![screenshot-4](./assets/screenshot-4.png)
 
 ## Changelog ##
+
+### 1.0.3 ###
+*   Add footer custom message
+*   Fix utm parameters
 
 ### 1.0.2 ###
 *   New sort and filter in the settings plugins table
