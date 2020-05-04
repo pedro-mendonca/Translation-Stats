@@ -36,21 +36,22 @@ if ( ! class_exists( 'TStats_Settings_Footer' ) ) {
 			// Instantiate Translation Stats Globals.
 			$this->tstats_globals = new TStats_Globals();
 
-			// Replace admin footer text with invitation to rate the plugin on WordPress.org.
-			// Uncomment the following to add admin footer text: add_filter( 'admin_footer_text',  array( $this, 'tstats_admin_footer_text' ), 1, 2 );.
+			// Replace admin footer text with customized message.
+			add_filter( 'admin_footer_text', array( $this, 'tstats_admin_footer_text' ), 1, 2 );
+
 			// Replace admin footer WordPress version with plugin version.
-			// Uncomment the following to add admin footer version: add_filter( 'update_footer',  array( $this, 'tstats_admin_footer_version' ), 11 );.
+			// add_filter( 'update_footer', array( $this, 'tstats_admin_footer_version' ), 11 ); // phpcs: ignore.
 		}
 
 
 		/**
-		 * Replace admin footer text with invitation to rate the plugin on WordPress.org.
+		 * Replace admin footer text with customized message.
 		 *
 		 * @since 0.9.0
 		 *
 		 * @param string $text   Footer text.
 		 *
-		 * @return string $text  Return translation stats footer text.
+		 * @return string   Return translation stats footer text.
 		 */
 		public function tstats_admin_footer_text( $text ) {
 
@@ -62,17 +63,23 @@ if ( ! class_exists( 'TStats_Settings_Footer' ) ) {
 
 				$text = sprintf(
 					/* translators: 1: Translation Stats plugin name. 2: Plugin version. */
-					__( 'Thank you for translating with %1$s version %2$s.', 'translation-stats' ),
-					'<a href="' . esc_url( $this->tstats_globals->tstats_link( $external_link_url, 'tstats', 'link', 'tstats_footer_link' ) ) . '">' . /* translators: Plugin name, do not translate! */ __( 'Translation Stats', 'translation-stats' ) . '</a>',
+					esc_html__( 'Thank you for translating with %1$s version %2$s.', 'translation-stats' ),
+					sprintf(
+						'<a href="%1$s">%2$s</a>',
+						esc_url( $this->tstats_globals->tstats_link( $external_link_url, 'tstats', 'link', 'tstats_footer_link' ) ),
+						/* translators: Plugin name, do not translate! */
+						esc_html__( 'Translation Stats', 'translation-stats' )
+					),
 					TSTATS_VERSION
 				);
 				$text .= ' ' . sprintf(
 					/* translators: %s: Author name. */
-					esc_html__(
-						'By %s',
-						'translation-stats'
-					),
-					'<a href="' . esc_url( $this->tstats_globals->tstats_link( $external_link_url, 'tstats', 'link', 'tstats_footer_link' ) ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Pedro Mendonça', 'translation-stats' ) . '</a>'
+					esc_html__( 'By %s', 'translation-stats' ),
+					sprintf(
+						'<a href="%1$s" target="_blank" rel="noopener noreferrer">%2$s</a>',
+						esc_url( $this->tstats_globals->tstats_link( $external_link_url, 'tstats', 'link', 'tstats_footer_link' ) ),
+						esc_html__( 'Pedro Mendonça', 'translation-stats' )
+					)
 				);
 			}
 			return $text;
