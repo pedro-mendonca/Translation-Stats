@@ -689,6 +689,11 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 				return $status_links;
 			}
 
+			// Check if Translation Stats settings plugins array is set.
+			if ( ! isset( $options['plugins'] ) ) {
+				return $status_links;
+			}
+
 			$tstats_plugins = array();
 
 			foreach ( $options['plugins'] as $key => $option ) {
