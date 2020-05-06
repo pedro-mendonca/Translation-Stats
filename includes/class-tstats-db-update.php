@@ -55,17 +55,7 @@ if ( ! class_exists( 'TStats_DB_Update' ) ) {
 
 			if ( false === $installed_version ) {
 
-				$message = esc_html__( 'No settings found.', 'translation-stats' );
-
-				$admin_notice = array(
-					'type'       => 'info',
-					'notice-alt' => false,
-					'inline'     => false,
-					'force_show' => true,
-					'message'    => $message,
-				);
-				$this->notices->tstats_notice_message( $admin_notice );
-
+				// If no settings found, do nothing.
 				return;
 			}
 
@@ -90,7 +80,7 @@ if ( ! class_exists( 'TStats_DB_Update' ) ) {
 
 			$options = get_site_option( TSTATS_WP_OPTION );
 
-			// Check if Translation Stats exist.
+			// Check if Translation Stats settings exist.
 			if ( empty( $options ) ) {
 				return false;
 			}
