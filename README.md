@@ -23,7 +23,7 @@
 **Requires at least:** 4.9  
 **Tested up to:** 5.4  
 **Requires PHP:** 5.6  
-**Stable tag:** 1.0.4  
+**Stable tag:** 1.0.5  
 **License:** GPLv2  
 **License URI:** [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html)  
 
@@ -94,6 +94,9 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 ![screenshot-4](./assets/screenshot-4.png)
 
 ## Changelog ##
+
+### 1.0.5 ###
+*   Add WPLANG and available languages to the settings languages dropdown
 
 ### 1.0.4 ###
 *   Fix admin notices

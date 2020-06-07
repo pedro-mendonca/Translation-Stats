@@ -1,6 +1,7 @@
 {
   "name": "pedro-mendonca/translation-stats",
   "description": "Show plugins translation stats on your WordPress install.",
+  "version": "1.0.5",
   "type": "wordpress-plugin",
   "license": "GPL-2.0-or-later",
   "authors": [
