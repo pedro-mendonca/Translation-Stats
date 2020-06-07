@@ -246,6 +246,15 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 			$options     = get_option( TSTATS_WP_OPTION );
 			$option      = empty( $options[ $args['path'] ][ $args['id'] ] ) ? '' : $options[ $args['path'] ][ $args['id'] ];
 			$value       = is_array( $options ) ? $option : $default;
+
+			// Get installed languages.
+			$languages = get_available_languages();
+
+			// Add WPLANG to installed languages.
+			if ( ! is_multisite() && defined( 'WPLANG' ) && '' !== WPLANG && 'en_US' !== WPLANG && ! in_array( WPLANG, $languages, true ) ) {
+				$languages[] = WPLANG;
+			}
+
 			?>
 			<label>
 				<?php
@@ -257,6 +266,7 @@ if ( ! class_exists( 'TStats_Settings_API' ) ) {
 					'show_available_translations' => true,      // Whether to show available translations. Default true.
 					'show_option_site_default'    => true,      // Whether to show an option to fall back to the site's locale. Default false.
 					'show_option_en_us'           => false,     // Whether to show an option for English (United States). Default true.
+					'languages'                   => $languages, // Array of available languages.
 				);
 				wp_dropdown_languages( $args );
 				echo ' ' . esc_html( $label );
