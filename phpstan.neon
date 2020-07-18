@@ -18,7 +18,7 @@ parameters:
 		- %currentWorkingDirectory%/vendor/*
 		# Temporarily exlusions:
 		- %currentWorkingDirectory%/uninstall.php
-	autoload_files:
+	bootstrapFiles:
 		# Plugin main file
 		- %currentWorkingDirectory%/translation-stats.php
 	ignoreErrors:
