@@ -13,7 +13,7 @@
     "remark-preset-lint-recommended": "^4.0.1",
     "sass-lint": "^1.13.1",
     "scss": "^0.2.4",
-    "stylelint": "^12.0.0",
+    "stylelint": "^13.6.1",
     "stylelint-config-wordpress": "^17.0.0",
     "tablesorter": "^2.31.3",
     "uglify-js": "^3.9.4"
