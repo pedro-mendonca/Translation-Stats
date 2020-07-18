@@ -13,13 +13,13 @@
   ],
   "require": {
     "php": ">=5.6",
-    "gettext/gettext": "^4.8.1"
+    "gettext/gettext": "^4.8.2"
   },
   "require-dev": {
     "dealerdirect/phpcodesniffer-composer-installer": "^0.7.0",
-    "wp-coding-standards/wpcs": "^2.2.0",
+    "wp-coding-standards/wpcs": "^2.3.0",
     "phpcompatibility/phpcompatibility-wp": "^2.1.0",
-    "szepeviktor/phpstan-wordpress": "^0.6.0"
+    "szepeviktor/phpstan-wordpress": "^0.6.2"
   },
   "config": {
     "optimize-autoloader": true
