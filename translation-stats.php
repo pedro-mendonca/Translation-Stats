@@ -185,6 +185,8 @@ function tstats_compatible_version() {
  * Register classes autoloader function.
  *
  * @since 0.9.6
+ *
+ * @param callable(string): void
  */
 spl_autoload_register( 'tstats_class_autoload' );
 
@@ -196,7 +198,7 @@ spl_autoload_register( 'tstats_class_autoload' );
  *
  * @param string $class_name   Class name.
  *
- * @return bool  True if class found, false if not found.
+ * @return void
  */
 function tstats_class_autoload( $class_name ) {
 
@@ -206,10 +208,10 @@ function tstats_class_autoload( $class_name ) {
 	$tstats_class      = $tstats_class_path . $tstats_class_file;
 
 	if ( ! file_exists( $tstats_class ) ) {
-		return false;
+		return;
 	}
 
-	return require_once $tstats_class;
+	require_once $tstats_class;
 }
 
 
