@@ -227,8 +227,5 @@ function tstats_class_autoload( $class_name ) {
 }
 
 
-// Include Composer autoload.
-require_once TSTATS_DIR_PATH . 'vendor/autoload.php';
-
 // Initialize the plugin.
 new TStats_Main();
