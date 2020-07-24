@@ -65,6 +65,15 @@ define( 'TSTATS_FILE', plugin_basename( __FILE__ ) );
 // Example: define( 'TSTATS_DEBUG', true );.
 
 
+/**
+ * Require wordpress.org Locales list since translate.wp.org Languages API (https://translate.wordpress.org/api/languages/) was disabled on meta changeset #10056 (https://meta.trac.wordpress.org/changeset/10056).
+ * Copy of https://meta.trac.wordpress.org/browser/sites/trunk/wordpress.org/public_html/wp-content/mu-plugins/pub/locales/locales.php
+ *
+ * Updated on 2020-06-28.
+ */
+require_once 'lib/wp.org/locales.php';
+
+
 // Check for PHP compatibility.
 // Adapted from https://pento.net/2014/02/18/dont-let-your-plugin-be-activated-on-incompatible-sites/.
 add_action( 'admin_init', 'tstats_check_version' );
