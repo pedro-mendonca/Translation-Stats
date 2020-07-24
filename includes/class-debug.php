@@ -14,12 +14,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'TStats_Debug' ) ) {
+if ( ! class_exists( 'Debug' ) ) {
 
 	/**
-	 * Class TStats_Debug.
+	 * Class Debug.
 	 */
-	class TStats_Debug {
+	class Debug {
 
 
 		/**
@@ -35,7 +35,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 *
 		 * @var object
 		 */
-		protected $tstats_globals;
+		protected $globals;
 
 
 		/**
@@ -44,10 +44,10 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		public function __construct() {
 
 			// Instantiate Translation Stats Transients.
-			$this->transients = new TStats_Transients();
+			$this->transients = new Transients();
 
 			// Instantiate Translation Stats Globals.
-			$this->tstats_globals = new TStats_Globals();
+			$this->globals = new Globals();
 
 			// Add Translation Stats settings field debug info.
 			add_action( 'tstats_debug_setting_field_info', array( $this, 'tstats_debug_setting_field_info' ), 10, 3 );
@@ -299,7 +299,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 					esc_html__( 'Translation Stats Locale: %s', 'translation-stats' ),
 					'<code>' . esc_html( $tstats_options['settings']['translation_language'] ) . '</code>'
 				);
-				$tstats_locale = Translations_API::locale( $this->tstats_globals->tstats_translation_language() );
+				$tstats_locale = Translations_API::locale( $this->globals->tstats_translation_language() );
 				?>
 			</p>
 			<div>

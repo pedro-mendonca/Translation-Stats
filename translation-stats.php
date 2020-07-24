@@ -228,4 +228,4 @@ function tstats_class_autoload( $class_name ) {
 
 
 // Initialize the plugin.
-new TStats_Main();
+new Translation_Stats();

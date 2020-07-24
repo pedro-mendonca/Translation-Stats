@@ -14,12 +14,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'TStats_Settings_General' ) ) {
+if ( ! class_exists( 'Settings_General' ) ) {
 
 	/**
-	 * Class TStats_Settings_General.
+	 * Class Settings_General.
 	 */
-	class TStats_Settings_General {
+	class Settings_General {
 
 
 		/**
@@ -36,7 +36,7 @@ if ( ! class_exists( 'TStats_Settings_General' ) ) {
 		public function __construct() {
 
 			// Instantiate Translation Stats Settings API.
-			$this->settings_api = new TStats_Settings_API();
+			$this->settings_api = new Settings_API();
 
 		}
 
@@ -45,7 +45,7 @@ if ( ! class_exists( 'TStats_Settings_General' ) ) {
 		 * Registers Settings General page section.
 		 *
 		 * @since 0.8.0
-		 * @since 0.9.9   Moved from class TStats_Settings() to TStats_Settings_General().
+		 * @since 0.9.9   Moved from class Settings() to Settings_General().
 		 *                Renamed from tstats_settings_section__general() to settings_section().
 		 *
 		 * @return void
@@ -71,7 +71,7 @@ if ( ! class_exists( 'TStats_Settings_General' ) ) {
 		 * Callback function for section "Settings".
 		 *
 		 * @since 0.8.0
-		 * @since 0.9.9   Moved from class TStats_Settings() to TStats_Settings_General().
+		 * @since 0.9.9   Moved from class Settings() to Settings_General().
 		 *                Renamed from tstats_settings__general__callback() to settings__general__callback().
 		 *
 		 * @return void

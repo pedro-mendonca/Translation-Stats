@@ -14,12 +14,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'TStats_Settings' ) ) {
+if ( ! class_exists( 'Settings' ) ) {
 
 	/**
-	 * Class TStats_Settings.
+	 * Class Settings.
 	 */
-	class TStats_Settings {
+	class Settings {
 
 
 		/**
@@ -71,22 +71,22 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 		public function __construct() {
 
 			// Instantiate Translation Stats Notices.
-			$this->notices = new TStats_Notices();
+			$this->notices = new Notices();
 
 			// Instantiate Translation Stats Transients.
-			$this->transients = new TStats_Transients();
+			$this->transients = new Transients();
 
 			// Instantiate Translation Stats Plugins Settings.
-			$this->settings_plugins = new TStats_Settings_Plugins();
+			$this->settings_plugins = new Settings_Plugins();
 
 			// Instantiate Translation Stats General Settings.
-			$this->settings_general = new TStats_Settings_General();
+			$this->settings_general = new Settings_General();
 
 			// Instantiate Translation Stats Tools Settings.
-			$this->settings_tools = new TStats_Settings_Tools();
+			$this->settings_tools = new Settings_Tools();
 
 			// Instantiate Translation Stats Hidden Settings.
-			$this->settings_hidden = new TStats_Settings_Hidden();
+			$this->settings_hidden = new Settings_Hidden();
 
 			// Add admin menu item.
 			add_action( 'admin_menu', array( $this, 'admin_menu' ) );
@@ -95,13 +95,13 @@ if ( ! class_exists( 'TStats_Settings' ) ) {
 			add_action( 'admin_init', array( $this, 'settings_sections' ) );
 
 			// Initialize Settings Sidebar.
-			new TStats_Settings_Sidebar();
+			new Settings_Sidebar();
 
 			// Initialize Settings Widgets.
-			new TStats_Settings_Widgets();
+			new Settings_Widgets();
 
 			// Initialize Settings Footer.
-			new TStats_Settings_Footer();
+			new Settings_Footer();
 
 		}
 

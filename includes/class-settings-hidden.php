@@ -14,12 +14,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'TStats_Settings_Hidden' ) ) {
+if ( ! class_exists( 'Settings_Hidden' ) ) {
 
 	/**
-	 * Class TStats_Settings_Hidden.
+	 * Class Settings_Hidden.
 	 */
-	class TStats_Settings_Hidden {
+	class Settings_Hidden {
 
 
 		/**
@@ -36,7 +36,7 @@ if ( ! class_exists( 'TStats_Settings_Hidden' ) ) {
 		public function __construct() {
 
 			// Instantiate Translation Stats Settings API.
-			$this->settings_api = new TStats_Settings_API();
+			$this->settings_api = new Settings_API();
 
 		}
 

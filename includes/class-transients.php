@@ -14,12 +14,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'TStats_Transients' ) ) {
+if ( ! class_exists( 'Transients' ) ) {
 
 	/**
-	 * Class TStats_Transients.
+	 * Class Transients.
 	 */
-	class TStats_Transients {
+	class Transients {
 
 
 		/**

@@ -14,12 +14,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'TStats_Main' ) ) {
+if ( ! class_exists( 'Translation_Stats' ) ) {
 
 	/**
-	 * Class TStats_Main.
+	 * Class Translation_Stats.
 	 */
-	class TStats_Main {
+	class Translation_Stats {
 
 
 		/**
@@ -37,19 +37,19 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 			add_filter( 'plugin_action_links_' . TSTATS_FILE, array( $this, 'tstats_action_links' ) );
 
 			// Initialize the plugin activation.
-			new TStats_Activation();
+			new Activation();
 
 			// Initialize the plugin database update check.
-			new TStats_DB_Update();
+			new DB_Update();
 
 			// Initialize the plugin settings.
-			new TStats_Settings();
+			new Settings();
 
 			// Initialize the plugins page metadata view.
-			new TStats_Plugins();
+			new Plugins();
 
 			// Initialize the plugin debug.
-			new TStats_Debug();
+			new Debug();
 
 		}
 

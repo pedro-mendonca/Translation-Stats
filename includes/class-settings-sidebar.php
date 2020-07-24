@@ -14,12 +14,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'TStats_Settings_Sidebar' ) ) {
+if ( ! class_exists( 'Settings_Sidebar' ) ) {
 
 	/**
-	 * Class TStats_Settings_Sidebar.
+	 * Class Settings_Sidebar.
 	 */
-	class TStats_Settings_Sidebar {
+	class Settings_Sidebar {
 
 
 		/**

@@ -14,12 +14,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'TStats_Notices' ) ) {
+if ( ! class_exists( 'Notices' ) ) {
 
 	/**
-	 * Class TStats_Notices.
+	 * Class Notices.
 	 */
-	class TStats_Notices {
+	class Notices {
 
 
 		/**
@@ -27,7 +27,7 @@ if ( ! class_exists( 'TStats_Notices' ) ) {
 		 *
 		 * @var object
 		 */
-		protected $tstats_globals;
+		protected $globals;
 
 
 		/**
@@ -36,7 +36,7 @@ if ( ! class_exists( 'TStats_Notices' ) ) {
 		public function __construct() {
 
 			// Instantiate Translation Stats Globals.
-			$this->tstats_globals = new TStats_Globals();
+			$this->globals = new Globals();
 
 		}
 
@@ -103,7 +103,7 @@ if ( ! class_exists( 'TStats_Notices' ) ) {
 				<p><?php echo wp_kses_post( $notice['message'] ); ?></p>
 				<?php
 				// Extra HTML.
-				echo wp_kses( $notice['extra-html'], $this->tstats_globals->tstats_allowed_html() );
+				echo wp_kses( $notice['extra-html'], $this->globals->tstats_allowed_html() );
 				?>
 			</div>
 

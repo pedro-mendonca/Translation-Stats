@@ -14,12 +14,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
+if ( ! class_exists( 'Settings_Plugins' ) ) {
 
 	/**
-	 * Class TStats_Settings_Plugins.
+	 * Class Settings_Plugins.
 	 */
-	class TStats_Settings_Plugins {
+	class Settings_Plugins {
 
 
 		/**
@@ -27,7 +27,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 		 *
 		 * @var object
 		 */
-		protected $tstats_globals;
+		protected $globals;
 
 
 		/**
@@ -36,7 +36,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 		public function __construct() {
 
 			// Instantiate Translation Stats Globals.
-			$this->tstats_globals = new TStats_Globals();
+			$this->globals = new Globals();
 
 		}
 
@@ -45,7 +45,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 		 * Registers Settings Plugins page section.
 		 *
 		 * @since 0.8.0
-		 * @since 0.9.9   Moved from class TStats_Settings() to TStats_Settings_Plugins().
+		 * @since 0.9.9   Moved from class Settings() to Settings_Plugins().
 		 *                Renamed from tstats_settings_section__plugins() to settings_section().
 		 *
 		 * @return void
@@ -71,7 +71,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 		 * Callback function for section "Plugins Settings".
 		 *
 		 * @since 0.8.0
-		 * @since 0.9.9   Moved from class TStats_Settings() to TStats_Settings_Plugins().
+		 * @since 0.9.9   Moved from class Settings() to Settings_Plugins().
 		 *                Renamed from tstats_settings__plugins__callback() to settings_section__callback().
 		 *
 		 * @return void
@@ -251,7 +251,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 
 			// Get general options.
 			$options         = get_option( TSTATS_WP_OPTION );
-			$tstats_language = $this->tstats_globals->tstats_translation_language();
+			$tstats_language = $this->globals->tstats_translation_language();
 			$locale          = Translations_API::locale( $tstats_language );
 
 			// Table options.
