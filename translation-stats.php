@@ -78,7 +78,7 @@ require_once 'lib/wp.org/locales.php';
 
 // Check for PHP compatibility.
 // Adapted from https://pento.net/2014/02/18/dont-let-your-plugin-be-activated-on-incompatible-sites/.
-add_action( 'admin_init', 'tstats_check_version' );
+add_action( 'admin_init', __NAMESPACE__ . '\tstats_check_version' );
 
 
 // Stop running the plugin if on an incompatible PHP version.
@@ -107,7 +107,7 @@ function tstats_check_version() {
 			deactivate_plugins( plugin_basename( __FILE__ ) );
 
 			// Show disabled admin notice.
-			add_action( 'admin_notices', 'tstats_disabled_notice' );
+			add_action( 'admin_notices', __NAMESPACE__ . '\tstats_disabled_notice' );
 
 		}
 	}
