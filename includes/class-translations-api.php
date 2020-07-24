@@ -16,24 +16,25 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'TStats_Translations_API' ) ) {
+if ( ! class_exists( 'Translations_API' ) ) {
 
 
 	/**
-	 * Class TStats_Translations_API.
+	 * Class Translations_API.
 	 */
-	class TStats_Translations_API {
+	class Translations_API {
 
 		/**
 		 * Check if plugin is on WordPress.org by checking if ID (from Plugin wp.org info) exists in 'response' or 'no_update' in 'update_plugins' transient.
 		 *
 		 * @since 0.8.0
+		 * @since 1.1.0  Remove method prefix.
 		 *
 		 * @param string $plugin_file  Plugin ID ( e.g. 'slug/plugin-name.php' ).
 		 *
 		 * @return bool                Returns 'true' if the plugin exists on WordPress.org.
 		 */
-		public function tstats_plugin_on_wporg( $plugin_file ) {
+		public static function plugin_on_wporg( $plugin_file ) {
 			$update_plugins = get_site_transient( 'update_plugins' );
 
 			return ( isset( $update_plugins->response[ $plugin_file ]->id ) || isset( $update_plugins->no_update[ $plugin_file ]->id ) );
@@ -44,22 +45,23 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 * Get plugin metadata, if the plugin exists on WordPress.org.
 		 *
 		 * Example:
-		 * $plugin_metadata = $this->tstats_translations_api->tstats_plugin_metadata( $plugin_file, 'metadata' ) (e.g. 'slug').
+		 * $plugin_metadata = Translations_API::plugin_metadata( $plugin_file, 'metadata' ) (e.g. 'slug').
 		 *
 		 * @since 0.8.0
+		 * @since 1.1.0  Remove method prefix.
 		 *
 		 * @param string $plugin_file   Plugin ID ( e.g. 'slug/plugin-name.php' ).
 		 * @param string $metadata      Metadata field ( e.g. 'slug' ).
 		 *
 		 * @return string|null          Returns metadata value from plugin.
 		 */
-		public function tstats_plugin_metadata( $plugin_file, $metadata ) {
+		public static function plugin_metadata( $plugin_file, $metadata ) {
 			$update_plugins = get_site_transient( 'update_plugins' );
 			// Check if plugin is on WordPress.org.
-			if ( ! $this->tstats_plugin_on_wporg( $plugin_file ) ) {
+			if ( ! self::plugin_on_wporg( $plugin_file ) ) {
 				// If plugin doesn't have 'slug' key in metadata, get it from its file path.
 				if ( 'slug' === $metadata ) {
-					return $this->tstats_get_plugin_slug( $plugin_file );
+					return self::get_plugin_slug( $plugin_file );
 				}
 				return '';
 			}
@@ -77,12 +79,13 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 * Get plugin slug from its file path.
 		 *
 		 * @since 0.9.6
+		 * @since 1.1.0  Remove method prefix.
 		 *
 		 * @param string $plugin_file  Plugin ID ( e.g. 'slug/plugin-name.php' ).
 		 *
 		 * @return string              Plugin slug.
 		 */
-		public function tstats_get_plugin_slug( $plugin_file ) {
+		public static function get_plugin_slug( $plugin_file ) {
 			if ( false !== strpos( $plugin_file, '/' ) ) {
 				$plugin_file_parts = explode( '/', $plugin_file );
 			} else {
@@ -96,13 +99,14 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 * Get plugin data from translate.WordPress.org API.
 		 *
 		 * @since 0.8.0
+		 * @since 1.1.0  Remove method prefix.
 		 *
 		 * @param string $plugin   Plugin slug (project or project/subproject).
 		 *
 		 * @return array|WP_Error  Returns the response from translate.WordPress.org API URL.
 		 */
-		public function tstats_translations_api_get_plugin( $plugin ) {
-			$api_get = wp_remote_get( $this->tstats_translations_api_url( 'plugins' ) . $plugin );
+		public static function translations_api_get_plugin( $plugin ) {
+			$api_get = wp_remote_get( self::translations_api_url( 'plugins' ) . $plugin );
 			return $api_get;
 		}
 
@@ -111,16 +115,17 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 * Check if translation project exist without /subproject slug (e.g. https://translate.wordpress.org/api/projects/wp-plugins/wp-seo-acf-content-analysis).
 		 *
 		 * @since 0.8.0
+		 * @since 1.1.0  Remove method prefix.
 		 *
 		 * @param string $project_slug  Plugin Slug (e.g. 'plugin-slug').
 		 *
 		 * @return string $on_wporg     Returns 'true' if the translation project exist on WordPress.org.
 		 */
-		public function tstats_plugin_project_on_translate_wporg( $project_slug ) {
+		public static function plugin_project_on_translate_wporg( $project_slug ) {
 			// Check project transients.
 			$on_wporg = get_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug );
 			if ( false === $on_wporg ) {
-				$json = $this->tstats_translations_api_get_plugin( $project_slug );
+				$json = self::translations_api_get_plugin( $project_slug );
 				if ( is_wp_error( $json ) || wp_remote_retrieve_response_code( $json ) !== 200 ) {
 					$on_wporg = false;
 				} else {
@@ -136,17 +141,18 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 * Check if translation subproject exist (e.g. https://translate.wordpress.org/api/projects/wp-plugins/wp-seo-acf-content-analysis/stable).
 		 *
 		 * @since 0.8.0
+		 * @since 1.1.0  Remove method prefix.
 		 *
 		 * @param string $project_slug     Plugin Slug (e.g. 'plugin-slug').
 		 * @param string $subproject_slug  Plugin Subproject Slug (e.g. 'dev', 'dev-readme', 'stable', 'stable-readme').
 		 *
 		 * @return string                  Returns 'true' if the translation subproject exist on WordPress.org.
 		 */
-		public function tstats_plugin_subproject_on_translate_wporg( $project_slug, $subproject_slug ) {
+		public function plugin_subproject_on_translate_wporg( $project_slug, $subproject_slug ) {
 			// Check subproject transients.
 			$on_wporg = get_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug );
 			if ( false === $on_wporg ) {
-				$json = $this->tstats_translations_api_get_plugin( $project_slug . '/' . $subproject_slug );
+				$json = self::translations_api_get_plugin( $project_slug . '/' . $subproject_slug );
 				if ( is_wp_error( $json ) || wp_remote_retrieve_response_code( $json ) !== 200 ) {
 					$on_wporg = false;
 				} else {
@@ -162,10 +168,11 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 * Set the translate.wordpress.org plugins subprojects structure with 'slug' and 'name'.
 		 *
 		 * @since 0.8.0
+		 * @since 1.1.0  Remove method prefix.
 		 *
 		 * @return array $subprojects  Returns array of the plugins translation subprojects structure.
 		 */
-		public function tstats_plugin_subprojects() {
+		public static function plugin_subprojects() {
 			$subprojects = array(
 				array(
 					'slug' => 'dev',
@@ -236,7 +243,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 * Get Translate API URL.
 		 *
 		 * Example:
-		 * $api_url = $this->tstats_translations_api->tstats_translations_api_url( 'plugins' );
+		 * $api_url = Translations_API::translations_api_url( 'plugins' );
 		 *
 		 * @since 0.9.0
 		 *
@@ -244,7 +251,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 *
 		 * @return string $api_url  Returns API URL.
 		 */
-		public function tstats_translations_api_url( $project ) {
+		public static function translations_api_url( $project = null ) {
 
 			$translations_api_url = array(
 				'wp'        => 'https://translate.wordpress.org/api/projects/wp/',         // Translate API WordPress core URL.
@@ -264,7 +271,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 * Get Translate URL.
 		 *
 		 * Example:
-		 * $url = $this->tstats_translations_api->tstats_translations_url( 'plugins' );
+		 * $url = Translations_API::translations_api->tstats_translations_url( 'plugins' );
 		 *
 		 * @since 0.9.5
 		 *
@@ -272,7 +279,7 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 *
 		 * @return string $url     Returns URL.
 		 */
-		public function tstats_translations_url( $project ) {
+		public static function translations_url( $project ) {
 
 			$translations_url = array(
 				'wp'      => 'https://translate.wordpress.org/projects/wp/',         // Translate WordPress core URL.
@@ -288,77 +295,18 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 
 
 		/**
-		 * Get available translations locales data from translate.WordPress.org API.
-		 * Store the available translation locales in transient.
-		 *
-		 * @since 0.9.0
-		 *
-		 * @return array $tstats_locales  Returns all the locales with 'wp_locale' available in translate.WordPress.org.
-		 */
-		public function tstats_locales() {
-			// Translate API languages URL.
-			$url = $this->tstats_translations_api_url( 'languages' );
-
-			// Translation Stats languages transient name.
-			$transient_name = 'available_translations';
-
-			// Check languages transients.
-			$tstats_locales = get_transient( TSTATS_TRANSIENTS_PREFIX . $transient_name );
-
-			if ( empty( $tstats_locales ) ) {
-
-				// Increase remote request timeout from default 5 to 15 seconds.
-				$args['timeout'] = 15;
-
-				$json = wp_remote_get( $url, $args );
-
-				if ( is_wp_error( $json ) || wp_remote_retrieve_response_code( $json ) !== 200 ) {
-
-					// API Unreachable: Error 404 or timeout.
-					$tstats_locales = false;
-
-				} else {
-
-					$body = json_decode( $json['body'], true );
-					if ( empty( $body ) ) {
-
-						// No languages found.
-						$tstats_locales = false;
-
-					} else {
-
-						$tstats_locales = array();
-						foreach ( $body as $key => $tstats_locale ) {
-
-							// List locales based on existent 'wp_locale'.
-							if ( $tstats_locale['wp_locale'] ) {
-								unset( $key );
-								$tstats_locales[ $tstats_locale['wp_locale'] ] = $tstats_locale;
-							}
-						}
-
-						// Only set transient if $tstats_locales remote request is succesfull.
-						set_transient( TSTATS_TRANSIENTS_PREFIX . $transient_name, $tstats_locales, TSTATS_TRANSIENTS_LOCALES_EXPIRATION );
-					}
-				}
-			}
-
-			return $tstats_locales;
-		}
-
-
-		/**
 		 * Get locale data from wordpress.org and Translation Stats.
 		 *
 		 * Example:
 		 * $locale = Translations_API::locale('pt_PT' );
-		 * $locale_english_name = $locale['english_name'].
+		 * $locale_english_name = $locale->english_name.
 		 *
 		 * @since 0.9.0
+		 * @since 1.1.0  Use Locale object.
 		 *
-		 * @param string $wp_locale   WordPress Locale ( e.g. 'pt_PT' ).
+		 * @param string $wp_locale  Locale ( e.g. 'pt_PT' ).
 		 *
-		 * @return false|array        Returns false if translate API is unreachable, or locale array from GlotPress (e.g. 'english_name', 'native_name', 'lang_code_iso_639_1', 'country_code', 'wp_locale', 'slug', etc. ).
+		 * @return object            Return selected Locale object data from Translation Tools and wordpress.org (e.g. 'english_name', 'native_name', 'lang_code_iso_639_1', 'country_code', 'wp_locale', 'slug', etc. ).
 		 */
 		public static function locale( $wp_locale ) {
 
@@ -378,111 +326,6 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 			}
 
 			return $current_locale;
-
-		}
-
-
-		/**
-		 * Separate Locale slug in array( locale, variant ) to support GlotPress 2.x pseudo-variants.
-		 *
-		 * Example:
-		 * GlotPress Slug: 'slug' => 'pt/ao90'.
-		 * TStats Slug: 'slug' => array( 'locale' => 'pt', 'variant' => 'ao90').
-		 *
-		 * @since 0.9.1
-		 *
-		 * @param array $tstats_locale   Locale array.
-		 *
-		 * @return array $tstats_locale  Returns locale array with slug separated in array.
-		 */
-		public function tstats_locale_slug( $tstats_locale ) {
-
-			$tstats_locale_slug = $tstats_locale['slug'];
-
-			// Check if slug contain '/' and non default variant.
-			if ( false !== strpos( $tstats_locale_slug, '/' ) ) {
-
-				// In case there is a '/' separator, set the slug as an array 'locale' and 'variant'.
-				$tstats_locale_slug = array(
-					'locale'  => substr( $tstats_locale_slug, 0, strpos( $tstats_locale_slug, '/' ) ),
-					'variant' => substr( $tstats_locale_slug, 1 + strpos( $tstats_locale_slug, '/' ) ),
-				);
-
-			} else {
-
-				// In case there is no '/' separator, set slug as array with pseudo-variant as 'default.
-				$tstats_locale_slug = array(
-					'locale'  => $tstats_locale_slug,
-					'variant' => 'default',
-				);
-
-			}
-
-			return $tstats_locale_slug;
-
-		}
-
-
-		/**
-		 * Add WordPress.org Locale subdomain to $tstats_locale.
-		 * Defaults to Locale 'slug'.
-		 * Custom subdomains use custom criteria from Translation Teams page (https://make.wordpress.org/polyglots/teams/) and 'locales.php' in https://meta.trac.wordpress.org/browser/sites/trunk/wordpress.org/public_html/wp-content/mu-plugins/pub/locales/locales.php.
-		 * Updated on 2019-04-17.
-		 *
-		 * Example: 'pt_BR' => 'br'.
-		 *
-		 * @since 0.9.2
-		 *
-		 * @param array $tstats_locale      Locale array.
-		 *
-		 * @return string $wporg_subdomain  Returns WordPress Locale Subdomain.
-		 */
-		public function tstats_wporg_subdomain( $tstats_locale ) {
-
-			// Set default criteria.
-			$wporg_subdomain = $tstats_locale['slug']['locale'];
-
-			/**
-			 * The below Variants aren't included in the array because Translation Stats separates the Locale Slug from the Variant Slug in tstats_locale_slug().
-			 * The subdomain of the Variants fallbacks automatically to its parent subdomain.
-			 *
-			 * 'ca_valencia'    => 'ca',    // Variant. Fallback to parent subdomain.
-			 * 'nl_NL_formal'   => 'nl',    // Variant. Fallback to parent subdomain.
-			 * 'de_DE_formal'   => 'de',    // Variant. Fallback to parent subdomain.
-			 * 'de_CH_informal' => 'de-ch', // Variant. Fallback to parent subdomain.
-			 * 'pt_PT_ao90'     => 'pt',    // Variant. Fallback to parent subdomain.
-			 */
-			$wporg_custom_subdomains = array(
-				'ba'         => null,
-				'bre'        => 'bre',   // As in 'wp_locale'.
-				'zh_CN'      => 'cn',    // Custom, doesn't exist in GlotPress.
-				'zh_TW'      => 'tw',    // As in 'country_code'.
-				'art_xemoji' => 'emoji', // Custom, doesn't exist in GlotPress.
-				'ewe'        => null,
-				'fo'         => 'fo',    // As in 'country_code'.
-				'gn'         => null,
-				'haw_US'     => null,
-				'ckb'        => 'ku',    // As in 'lang_code_iso_639_1'.
-				'lb_LU'      => 'ltz',   // Custom, doesn't exist in GlotPress.
-				'xmf'        => null,
-				'mn'         => 'khk',   // As in 'lang_code_iso_639_3', doesn't exist in GlotPress.
-				'pt_BR'      => 'br',    // As in 'country_code'.
-				'pa_IN'      => 'pan',   // As in 'lang_code_iso_639_2'.
-				'rue'        => null,
-				'sa_IN'      => 'sa',    // As in 'lang_code_iso_639_1'.
-				'es_CL'      => 'cl',    // As in 'country_code'.
-				'es_PE'      => 'pe',    // As in 'country_code'.
-				'es_VE'      => 've',    // As in 'country_code'.
-				'gsw'        => null,
-				'wa'         => null,
-			);
-
-			// Check if 'wp_locale' exist in the custom subdomain criteria array.
-			if ( array_key_exists( $tstats_locale['wp_locale'], $wporg_custom_subdomains ) ) {
-				$wporg_subdomain = $wporg_custom_subdomains[ $tstats_locale['wp_locale'] ];
-			}
-
-			return $wporg_subdomain;
 
 		}
 
