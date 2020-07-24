@@ -9,6 +9,8 @@
 
 namespace Translation_Stats;
 
+use WP_Error;
+
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -76,9 +78,9 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 *
 		 * @since 0.9.6
 		 *
-		 * @param string $plugin_file   Plugin ID ( e.g. 'slug/plugin-name.php' ).
+		 * @param string $plugin_file  Plugin ID ( e.g. 'slug/plugin-name.php' ).
 		 *
-		 * @return string   Plugin slug.
+		 * @return string              Plugin slug.
 		 */
 		public function tstats_get_plugin_slug( $plugin_file ) {
 			if ( false !== strpos( $plugin_file, '/' ) ) {
@@ -95,9 +97,9 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 *
 		 * @since 0.8.0
 		 *
-		 * @param string $plugin    Plugin slug (project or project/subproject).
+		 * @param string $plugin   Plugin slug (project or project/subproject).
 		 *
-		 * @return array|WP_Error   Returns the response from translate.WordPress.org API URL.
+		 * @return array|WP_Error  Returns the response from translate.WordPress.org API URL.
 		 */
 		public function tstats_translations_api_get_plugin( $plugin ) {
 			$api_get = wp_remote_get( $this->tstats_translations_api_url( 'plugins' ) . $plugin );
