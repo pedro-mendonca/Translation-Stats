@@ -233,44 +233,6 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 
 
 		/**
-		 * Get WordPress core version info.
-		 *
-		 * @since 0.9.5
-		 *
-		 * @return array $wp_version  Array of WordPress installd info.
-		 */
-		public function tstats_wordpress_version() {
-
-			// Get install WordPress version.
-			$current_version = get_bloginfo( 'version' );
-
-			// Get available core updates.
-			$updates = get_core_updates();
-			if ( ! is_array( $updates ) ) {
-				return array();
-			}
-
-			$wp_version = array();
-
-			// Check if WordPress install is the latest or development version.
-			if ( ! isset( $updates[0]->response ) || 'latest' === $updates[0]->response || 'development' === $updates[0]->response ) {
-				$wp_version['slug']   = 'dev';
-				$wp_version['name']   = substr( $current_version, 0, 3 ) . '.x';
-				$wp_version['number'] = $current_version;
-				$wp_version['latest'] = true;
-			} else {
-				$wp_version['slug']   = substr( $current_version, 0, 3 ) . '.x';
-				$wp_version['name']   = substr( $current_version, 0, 3 ) . '.x';
-				$wp_version['number'] = $current_version;
-				$wp_version['latest'] = false;
-			}
-
-			return $wp_version;
-
-		}
-
-
-		/**
 		 * Get Translate API URL.
 		 *
 		 * Example:
@@ -322,41 +284,6 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 
 			return $url;
 
-		}
-
-
-		/**
-		 * Set the path to get the translation file.
-		 *
-		 * @since 0.9.5
-		 *
-		 * @param array $project   Project array.
-		 * @param array $locale    Locale array.
-		 *
-		 * @return string|null     File path to get source.
-		 */
-		public function tstats_translation_path( $project, $locale ) {
-
-			// Get WordPress core version info.
-			$wp_version = $this->tstats_wordpress_version();
-
-			/**
-			 * TODO:
-			 *
-			 * Let users choose witch filter to use.
-			 * $filters = '?filters[status]=current_or_waiting_or_fuzzy';
-			 * $filters = '?filters[status]=current';
-			 *
-			 * Import from JED format to improve speed.
-			 * $format  = '&format=jed';
-			 */
-			$filters = '?filters[status]=current';
-			$format  = '&format=po';
-			$args    = $filters . $format;
-
-			$translation_path = esc_url_raw( $this->tstats_translations_url( 'wp' ) . $wp_version['slug'] . '/' . $project['slug'] . $locale['slug']['locale'] . '/' . $locale['slug']['variant'] . '/export-translations' . $args );
-
-			return $translation_path;
 		}
 
 
