@@ -188,7 +188,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 
 			$show_author           = $table_args['show_author'];
 			$show_slug_text_domain = $table_args['show_slug_text_domain'];
-			$subprojects           = $this->translations_api->tstats_plugin_subprojects();
+			$subprojects           = Translations_API::plugin_subprojects();
 
 			?>
 			<tr>
@@ -261,10 +261,10 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 
 			// Plugin data.
 			$plugin_file        = $plugin['plugin_file'];
-			$plugin_slug        = $this->translations_api->tstats_plugin_metadata( $plugin_file, 'slug' );
-			$plugin_url         = $this->translations_api->tstats_plugin_metadata( $plugin_file, 'url' );
+			$plugin_slug        = Translations_API::plugin_metadata( $plugin_file, 'slug' );
+			$plugin_url         = Translations_API::plugin_metadata( $plugin_file, 'url' );
 			$plugin_text_domain = $plugin['TextDomain'];
-			$subprojects        = $this->translations_api->tstats_plugin_subprojects();
+			$subprojects        = Translations_API::plugin_subprojects();
 
 			$row_id = $table_prefix . '_' . $plugin_slug;
 
@@ -286,14 +286,14 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 			<?php
 			if ( 'en_US' !== $tstats_language && ! empty( $locale ) ) {
 				// If current locale is not 'en_US', add Locale WP.org subdomain to plugin URL (e.g. https://pt.wordpress.org/plugins/translation-stats/ ).
-				$wporg_subdomain = isset( $locale['wporg_subdomain'] ) ? $locale['wporg_subdomain'] . '.' : '';
-				$plugin_url      = 'https://' . $wporg_subdomain . substr( $this->translations_api->tstats_plugin_metadata( $plugin_file, 'url' ), strlen( 'https://' ) );
+				$wporg_subdomain = isset( $locale->wporg_subdomain ) ? $locale->wporg_subdomain . '.' : '';
+				$plugin_url      = 'https://' . $wporg_subdomain . substr( Translations_API::plugin_metadata( $plugin_file, 'url' ), strlen( 'https://' ) );
 			}
-			$plugin_name   = $this->translations_api->tstats_plugin_on_wporg( $plugin_file ) ? '<a href="' . $plugin_url . '" target="_blank">' . $plugin['Name'] . '</a>' : $plugin['Name'];
-			$plugin_author = $this->translations_api->tstats_plugin_on_wporg( $plugin_file ) && $plugin['AuthorURI'] ? '<a href="' . $plugin['AuthorURI'] . '" target="_blank">' . $plugin['AuthorName'] . '</a>' : $plugin['AuthorName'];
+			$plugin_name   = Translations_API::plugin_on_wporg( $plugin_file ) ? '<a href="' . $plugin_url . '" target="_blank">' . $plugin['Name'] . '</a>' : $plugin['Name'];
+			$plugin_author = Translations_API::plugin_on_wporg( $plugin_file ) && $plugin['AuthorURI'] ? '<a href="' . $plugin['AuthorURI'] . '" target="_blank">' . $plugin['AuthorName'] . '</a>' : $plugin['AuthorName'];
 
 			// Check if plugin exist on WordPress.org.
-			if ( ! $this->translations_api->tstats_plugin_on_wporg( $plugin_file ) ) {
+			if ( ! Translations_API::plugin_on_wporg( $plugin_file ) ) {
 				$status   = 'disabled';
 				$checked  = false;
 				$disabled = true;
