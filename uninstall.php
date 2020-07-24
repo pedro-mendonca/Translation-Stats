@@ -66,20 +66,20 @@ function tstats_uninstall_delete_transients( $search ) {
 			'%_transient_' . $search . '%'
 		)
 	);
-	$tstats_transients = array_map(
+	$transients = array_map(
 		function( $object ) {
 			return $object->name;
 		},
-		$tstats_transients
+		$transients
 	);
-	if ( is_array( $tstats_transients ) ) {
-		foreach ( $tstats_transients as $tstats_transient ) {
+	if ( is_array( $transients ) ) {
+		foreach ( $transients as $transient ) {
 			if ( is_multisite() ) {
 				// Delete transients in Multisite.
-				delete_site_transient( substr( $tstats_transient, strlen( '_transient_' ) ) );
+				delete_site_transient( substr( $transient, strlen( '_transient_' ) ) );
 			} else {
 				// Delete transients.
-				delete_transient( substr( $tstats_transient, strlen( '_transient_' ) ) );
+				delete_transient( substr( $transient, strlen( '_transient_' ) ) );
 			}
 		}
 	}
