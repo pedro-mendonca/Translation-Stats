@@ -29,13 +29,6 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 		 */
 		protected $tstats_globals;
 
-		/**
-		 * Translations API.
-		 *
-		 * @var object
-		 */
-		protected $translations_api;
-
 
 		/**
 		 * Constructor.
@@ -44,9 +37,6 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 
 			// Instantiate Translation Stats Globals.
 			$this->tstats_globals = new TStats_Globals();
-
-			// Instantiate Translation Stats Translate API.
-			$this->translations_api = new TStats_Translations_API();
 
 		}
 
@@ -262,7 +252,7 @@ if ( ! class_exists( 'TStats_Settings_Plugins' ) ) {
 			// Get general options.
 			$options         = get_option( TSTATS_WP_OPTION );
 			$tstats_language = $this->tstats_globals->tstats_translation_language();
-			$locale          = $this->translations_api->tstats_locale( $tstats_language );
+			$locale          = Translations_API::locale( $tstats_language );
 
 			// Table options.
 			$table_prefix          = $table_args['table_prefix'];

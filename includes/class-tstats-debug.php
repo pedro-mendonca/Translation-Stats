@@ -29,12 +29,6 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 */
 		protected $transients;
 
-		/**
-		 * Translations API.
-		 *
-		 * @var object
-		 */
-		protected $translations_api;
 
 		/**
 		 * Globals.
@@ -51,9 +45,6 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 
 			// Instantiate Translation Stats Transients.
 			$this->transients = new TStats_Transients();
-
-			// Instantiate Translation Stats Translations API.
-			$this->translations_api = new TStats_Translations_API();
 
 			// Instantiate Translation Stats Globals.
 			$this->tstats_globals = new TStats_Globals();
@@ -308,7 +299,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 					esc_html__( 'Translation Stats Locale: %s', 'translation-stats' ),
 					'<code>' . esc_html( $tstats_options['settings']['translation_language'] ) . '</code>'
 				);
-				$tstats_locale = $this->translations_api->tstats_locale( $this->tstats_globals->tstats_translation_language() );
+				$tstats_locale = Translations_API::locale( $this->tstats_globals->tstats_translation_language() );
 				?>
 			</p>
 			<div>

@@ -36,13 +36,6 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		 */
 		protected $notices;
 
-		/**
-		 * Translations API.
-		 *
-		 * @var object
-		 */
-		protected $translations_api;
-
 
 		/**
 		 * Constructor.
@@ -54,9 +47,6 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 
 			// Instantiate Translation Stats Notices.
 			$this->notices = new TStats_Notices();
-
-			// Instantiate Translation Stats Translations API.
-			$this->translations_api = new TStats_Translations_API();
 
 			// Add plugin translation stats column.
 			add_filter( 'manage_plugins_columns', array( $this, 'tstats_add_translation_stats_column' ) );
@@ -180,7 +170,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 		public function tstats_render_plugin_stats( $project_slug ) {
 
 			// Get Translation Stats Locale data.
-			$locale = $this->translations_api->tstats_locale( $this->tstats_globals->tstats_translation_language() );
+			$locale = Translations_API::locale( $this->tstats_globals->tstats_translation_language() );
 
 			ob_start();
 
@@ -314,7 +304,7 @@ if ( ! class_exists( 'TStats_Plugins' ) ) {
 				$force_update = 'true' === sanitize_key( $_POST['forceUpdate'] ) ? true : false; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 			}
 
-			$locale = $this->translations_api->tstats_locale( $this->tstats_globals->tstats_translation_language() );
+			$locale = Translations_API::locale( $this->tstats_globals->tstats_translation_language() );
 
 			if ( isset( $_POST['tstatsPlugin'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
 

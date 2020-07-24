@@ -348,10 +348,10 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 
 
 		/**
-		 * Get locale data.
+		 * Get locale data from wordpress.org and Translation Stats.
 		 *
 		 * Example:
-		 * $locale = $this->tstats_translations_api->tstats_locale( 'pt_PT' );
+		 * $locale = Translations_API::locale('pt_PT' );
 		 * $locale_english_name = $locale['english_name'].
 		 *
 		 * @since 0.9.0
@@ -360,30 +360,24 @@ if ( ! class_exists( 'TStats_Translations_API' ) ) {
 		 *
 		 * @return false|array        Returns false if translate API is unreachable, or locale array from GlotPress (e.g. 'english_name', 'native_name', 'lang_code_iso_639_1', 'country_code', 'wp_locale', 'slug', etc. ).
 		 */
-		public function tstats_locale( $wp_locale ) {
+		public static function locale( $wp_locale ) {
 
-			$tstats_locales = $this->tstats_locales();
+			// Get wordpress.org Locales.
+			$locales = Locales::locales();
 
-			$tstats_locale = null;
+			$current_locale = null;
 
-			if ( empty( $tstats_locales ) ) {
-				return false;
-			}
+			foreach ( $locales as $locale ) {
 
-			foreach ( $tstats_locales as $key => $value ) {
-				if ( $value['wp_locale'] === $wp_locale ) {
-					unset( $key );
-					$tstats_locale = $value;
+				if ( $locale->wp_locale === $wp_locale ) {
 
-					// Set an array for 'slug' to separate 'locale' and 'variant' slugs.
-					$tstats_locale['slug'] = $this->tstats_locale_slug( $tstats_locale );
-
-					// Add 'wporg_subdomain'.
-					$tstats_locale['wporg_subdomain'] = $this->tstats_wporg_subdomain( $tstats_locale );
+					$current_locale = $locale;
+					break;
 
 				}
 			}
-			return $tstats_locale;
+
+			return $current_locale;
 
 		}
 
