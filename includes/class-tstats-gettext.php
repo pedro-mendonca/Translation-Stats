@@ -14,6 +14,8 @@
  * @since 0.9.5
  */
 
+namespace Translation_Stats;
+
 use Gettext\Translations;
 
 // Exit if accessed directly.

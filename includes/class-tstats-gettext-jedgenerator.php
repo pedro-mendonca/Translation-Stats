@@ -10,6 +10,8 @@
  * @since 0.9.5
  */
 
+namespace Translation_Stats;
+
 use Gettext\Generators\Jed;
 use Gettext\Translations;
 

@@ -22,6 +22,8 @@
  * Domain Path:       /languages
  */
 
+namespace Translation_Stats;
+
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -197,13 +199,14 @@ function tstats_compatible_version() {
  *
  * @param callable(string): void
  */
-spl_autoload_register( 'tstats_class_autoload' );
+spl_autoload_register( __NAMESPACE__ . '\tstats_class_autoload' );
 
 
 /**
  * Class autoloader.
  *
  * @since 0.9.6
+ * @since 1.2.0  Remove namespace from class name.
  *
  * @param string $class_name   Class name.
  *
@@ -213,7 +216,7 @@ function tstats_class_autoload( $class_name ) {
 
 	// Set class file path and name.
 	$class_path = TSTATS_DIR_PATH . 'includes/';
-	$class_file = 'class-' . str_replace( '_', '-', strtolower( $class_name ) ) . '.php';
+	$class_file = 'class-' . str_replace( '_', '-', strtolower( str_replace( __NAMESPACE__ . '\\', '', $class_name ) ) ) . '.php';
 	$class      = $class_path . $class_file;
 
 	if ( ! file_exists( $class ) ) {
