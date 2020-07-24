@@ -13,6 +13,8 @@ parameters:
 		# Plugin root
 		- %currentWorkingDirectory%/
 	excludes_analyse:
+		# Libraries
+		- %currentWorkingDirectory%/lib/*
 		# Dependencies
 		- %currentWorkingDirectory%/node_modules/*
 		- %currentWorkingDirectory%/vendor/*
