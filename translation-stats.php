@@ -206,7 +206,7 @@ spl_autoload_register( __NAMESPACE__ . '\tstats_class_autoload' );
  * Class autoloader.
  *
  * @since 0.9.6
- * @since 1.2.0  Remove namespace from class name.
+ * @since 1.1.0  Remove namespace from class name.
  *
  * @param string $class_name   Class name.
  *
