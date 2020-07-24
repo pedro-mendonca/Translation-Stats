@@ -30,6 +30,8 @@ if ( is_multisite() ) {
  * Removes ALL plugin data if set in the settings.
  *
  * @since 0.8.0
+ *
+ * @return void
  */
 function tstats_uninstall() {
 	$option = get_option( 'tstats_settings' );
@@ -56,6 +58,8 @@ function tstats_uninstall() {
  * @since 0.8.0
  *
  * @param string $search  Transient search term.
+ *
+ * @return void
  */
 function tstats_uninstall_delete_transients( $search ) {
 	global $wpdb;
