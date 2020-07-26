@@ -28,6 +28,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Locales' ) ) {
 		/**
 		 * Set custom 'translation_stats_locales' global variable.
 		 * This avoids conficts with other plugins that might use the 'gp_locales' global.
+		 *
+		 * @return object  Object with all the GP_Locales.
 		 */
 		public static function &instance() {
 
