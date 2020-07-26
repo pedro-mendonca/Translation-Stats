@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Translations_API' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 
 
 	/**

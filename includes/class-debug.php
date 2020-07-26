@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Debug' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 
 	/**
 	 * Class Debug.

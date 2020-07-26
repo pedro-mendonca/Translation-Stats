@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Settings_Sidebar' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Settings_Sidebar' ) ) {
 
 	/**
 	 * Class Settings_Sidebar.

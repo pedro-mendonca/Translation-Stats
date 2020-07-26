@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'DB_Update' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 
 	/**
 	 * Class DB_Update.

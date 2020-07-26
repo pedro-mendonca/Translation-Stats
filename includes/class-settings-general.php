@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Settings_General' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Settings_General' ) ) {
 
 	/**
 	 * Class Settings_General.

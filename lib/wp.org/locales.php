@@ -10,7 +10,7 @@
 
 namespace Translation_Stats;
 
-if ( ! class_exists( '\Translation_Stats\GP_Locale' ) ) :
+if ( ! class_exists( __NAMESPACE__ . '\GP_Locale' ) ) :
 
 class GP_Locale {
 	public $english_name;
@@ -131,7 +131,7 @@ class GP_Locale {
 
 endif;
 
-if ( ! class_exists( '\Translation_Stats\GP_Locales' ) ) :
+if ( ! class_exists( __NAMESPACE__ . '\GP_Locales' ) ) :
 
 class GP_Locales {
 

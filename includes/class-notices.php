@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Notices' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Notices' ) ) {
 
 	/**
 	 * Class Notices.

@@ -17,7 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Locales' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Locales' ) ) {
 
 	/**
 	 * Class Locales.

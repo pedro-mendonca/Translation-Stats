@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Transients' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Transients' ) ) {
 
 	/**
 	 * Class Transients.

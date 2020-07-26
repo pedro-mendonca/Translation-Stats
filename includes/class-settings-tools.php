@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Settings_Tools' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Settings_Tools' ) ) {
 
 	/**
 	 * Class Settings_Tools.

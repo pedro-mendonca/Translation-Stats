@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Activation' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Activation' ) ) {
 
 	/**
 	 * Class Activation.

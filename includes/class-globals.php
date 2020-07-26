@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Globals' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Globals' ) ) {
 
 	/**
 	 * Class Globals.

@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Settings_Footer' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Settings_Footer' ) ) {
 
 	/**
 	 * Class Settings_Footer.

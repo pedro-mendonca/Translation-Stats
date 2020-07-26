@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Plugins' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 
 	/**
 	 * Class Plugins.

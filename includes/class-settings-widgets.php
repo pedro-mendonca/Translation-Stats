@@ -14,7 +14,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'Settings_Widgets' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Settings_Widgets' ) ) {
 
 	/**
 	 * Class Settings_Widgets.
