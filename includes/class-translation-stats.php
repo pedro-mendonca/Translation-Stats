@@ -178,32 +178,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 
 			}
 
-			// Check for updates page.
-			if ( 'update-core.php' === $hook ) {
-
-				// Provide minified version if SCRIPT_DEBUG is not set to true.
-				$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-
-				wp_register_script(
-					'translation-stats-update-core',
-					TSTATS_DIR_URL . 'js/tstats-update-core' . $suffix . '.js',
-					array(
-						'jquery',
-					),
-					TSTATS_VERSION,
-					false
-				);
-
-				wp_enqueue_script( 'translation-stats-update-core' );
-
-				wp_localize_script(
-					'translation-stats-update-core',
-					'tstats',
-					$tstats_vars
-				);
-
-			}
-
 			// Check for plugins page.
 			if ( 'plugins.php' === $hook ) {
 
