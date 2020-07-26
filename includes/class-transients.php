@@ -7,17 +7,19 @@
  * @since 0.8.0
  */
 
+namespace Translation_Stats;
+
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'TStats_Transients' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Transients' ) ) {
 
 	/**
-	 * Class TStats_Transients.
+	 * Class Transients.
 	 */
-	class TStats_Transients {
+	class Transients {
 
 
 		/**

@@ -7,17 +7,19 @@
  * @since 0.9.0
  */
 
+namespace Translation_Stats;
+
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'TStats_Globals' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Globals' ) ) {
 
 	/**
-	 * Class TStats_Globals.
+	 * Class Globals.
 	 */
-	class TStats_Globals {
+	class Globals {
 
 
 		/**

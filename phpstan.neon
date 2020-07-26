@@ -13,11 +13,11 @@ parameters:
 		# Plugin root
 		- %currentWorkingDirectory%/
 	excludes_analyse:
+		# Libraries
+		- %currentWorkingDirectory%/lib/*
 		# Dependencies
 		- %currentWorkingDirectory%/node_modules/*
 		- %currentWorkingDirectory%/vendor/*
-		# Temporarily exlusions:
-		- %currentWorkingDirectory%/uninstall.php
 	bootstrapFiles:
 		# Plugin main file
 		- %currentWorkingDirectory%/translation-stats.php

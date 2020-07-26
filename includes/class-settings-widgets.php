@@ -7,17 +7,19 @@
  * @package Translation Stats
  */
 
+namespace Translation_Stats;
+
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'TStats_Settings_Widgets' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Settings_Widgets' ) ) {
 
 	/**
-	 * Class TStats_Settings_Widgets.
+	 * Class Settings_Widgets.
 	 */
-	class TStats_Settings_Widgets {
+	class Settings_Widgets {
 
 
 		/**
@@ -25,7 +27,7 @@ if ( ! class_exists( 'TStats_Settings_Widgets' ) ) {
 		 *
 		 * @var object
 		 */
-		protected $tstats_globals;
+		protected $globals;
 
 
 		/**
@@ -34,7 +36,7 @@ if ( ! class_exists( 'TStats_Settings_Widgets' ) ) {
 		public function __construct() {
 
 			// Instantiate Translation Stats Globals.
-			$this->tstats_globals = new TStats_Globals();
+			$this->globals = new Globals();
 
 			// Add Sidebar before Translation Stats settings.
 			add_action( 'tstats_settings__sidebar__content', array( $this, 'tstats_settings_widget__about' ) );
@@ -59,7 +61,7 @@ if ( ! class_exists( 'TStats_Settings_Widgets' ) ) {
 				<div class="inside">
 
 					<div class="tstats-logo">
-						<a class="tstats-logo-link" href="<?php echo esc_url( $this->tstats_globals->tstats_link( $external_link_url, 'tstats', 'link', 'tstats_plugin_logo' ) ); ?>" target="_blank">
+						<a class="tstats-logo-link" href="<?php echo esc_url( $this->globals->tstats_link( $external_link_url, 'tstats', 'link', 'tstats_plugin_logo' ) ); ?>" target="_blank">
 							<div class="tstats-logo-image"></div>
 						</a>
 					</div>
@@ -68,9 +70,9 @@ if ( ! class_exists( 'TStats_Settings_Widgets' ) ) {
 					<div class="tstats-resources">
 						<h3><?php esc_html_e( 'Resources', 'translation-stats' ); ?></h3>
 						<ul>
-							<li><a href="<?php echo esc_url( $this->tstats_globals->tstats_link( $external_link_url, 'tstats', 'link', 'tstats_link_site' ) ); ?>" target="_blank"><?php echo wp_kses_post( $external_link_icon ); ?> <?php esc_html_e( 'Site', 'translation-stats' ); ?></a></li>
-							<li><a href="<?php echo esc_url( $this->tstats_globals->tstats_link( $external_link_url . '/faq/', 'tstats', 'link', 'tstats_link_faq' ) ); ?>" target="_blank"><?php echo wp_kses_post( $external_link_icon ); ?> <?php esc_html_e( 'FAQ', 'translation-stats' ); ?></a></li>
-							<li><a href="<?php echo esc_url( $this->tstats_globals->tstats_link( $external_link_url . '/changelog/', 'tstats', 'link', 'tstats_link_changelog' ) ); ?>" target="_blank"><?php echo wp_kses_post( $external_link_icon ); ?> <?php esc_html_e( 'Changelog', 'translation-stats' ); ?></a></li>
+							<li><a href="<?php echo esc_url( $this->globals->tstats_link( $external_link_url, 'tstats', 'link', 'tstats_link_site' ) ); ?>" target="_blank"><?php echo wp_kses_post( $external_link_icon ); ?> <?php esc_html_e( 'Site', 'translation-stats' ); ?></a></li>
+							<li><a href="<?php echo esc_url( $this->globals->tstats_link( $external_link_url . '/faq/', 'tstats', 'link', 'tstats_link_faq' ) ); ?>" target="_blank"><?php echo wp_kses_post( $external_link_icon ); ?> <?php esc_html_e( 'FAQ', 'translation-stats' ); ?></a></li>
+							<li><a href="<?php echo esc_url( $this->globals->tstats_link( $external_link_url . '/changelog/', 'tstats', 'link', 'tstats_link_changelog' ) ); ?>" target="_blank"><?php echo wp_kses_post( $external_link_icon ); ?> <?php esc_html_e( 'Changelog', 'translation-stats' ); ?></a></li>
 							<li><a href="https://wordpress.org/support/plugin/translation-stats/" target="_blank"><?php echo wp_kses_post( $external_link_icon ); ?> <?php esc_html_e( 'Support', 'translation-stats' ); ?></a></li>
 						</ul>
 					</div>
@@ -79,7 +81,7 @@ if ( ! class_exists( 'TStats_Settings_Widgets' ) ) {
 						<h3><?php esc_html_e( 'Contact', 'translation-stats' ); ?></h3>
 						<ul>
 							<li><?php esc_html_e( 'Found an issue, have a feature suggestion or just want to send some feedback?', 'translation-stats' ); ?></li>
-							<li><a href="<?php echo esc_url( $this->tstats_globals->tstats_link( $external_link_url . '/contact/', 'tstats', 'link', 'tstats_link_contact' ) ); ?>" target="_blank"><?php echo wp_kses_post( $external_link_icon ); ?> <?php esc_html_e( 'Write me!', 'translation-stats' ); ?></a></li>
+							<li><a href="<?php echo esc_url( $this->globals->tstats_link( $external_link_url . '/contact/', 'tstats', 'link', 'tstats_link_contact' ) ); ?>" target="_blank"><?php echo wp_kses_post( $external_link_icon ); ?> <?php esc_html_e( 'Write me!', 'translation-stats' ); ?></a></li>
 						</ul>
 					</div>
 

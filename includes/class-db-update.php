@@ -7,17 +7,19 @@
  * @since 1.0.0
  */
 
+namespace Translation_Stats;
+
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'TStats_DB_Update' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 
 	/**
-	 * Class TStats_DB_Update.
+	 * Class DB_Update.
 	 */
-	class TStats_DB_Update {
+	class DB_Update {
 
 
 		/**
@@ -34,7 +36,7 @@ if ( ! class_exists( 'TStats_DB_Update' ) ) {
 		public function __construct() {
 
 			// Instantiate Translation Stats Notices.
-			$this->notices = new TStats_Notices();
+			$this->notices = new Notices();
 
 			// Add database update check.
 			add_action( 'plugins_loaded', array( $this, 'settings_db_check' ) );

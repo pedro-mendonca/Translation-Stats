@@ -7,17 +7,19 @@
  * @since 1.0.0
  */
 
+namespace Translation_Stats;
+
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'TStats_Activation' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Activation' ) ) {
 
 	/**
-	 * Class TStats_Activation.
+	 * Class Activation.
 	 */
-	class TStats_Activation {
+	class Activation {
 
 
 		/**
@@ -34,7 +36,7 @@ if ( ! class_exists( 'TStats_Activation' ) ) {
 		public function __construct() {
 
 			// Instantiate Translation Stats Notices.
-			$this->notices = new TStats_Notices();
+			$this->notices = new Notices();
 
 			// Register activation hook.
 			register_activation_hook( 'translation-stats/translation-stats.php', array( $this, 'tstats_activate' ) );
