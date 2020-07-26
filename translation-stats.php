@@ -22,6 +22,8 @@
  * Domain Path:       /languages
  */
 
+namespace Translation_Stats;
+
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
@@ -65,9 +67,18 @@ define( 'TSTATS_FILE', plugin_basename( __FILE__ ) );
 // Example: define( 'TSTATS_DEBUG', true );.
 
 
+/**
+ * Require wordpress.org Locales list since translate.wp.org Languages API (https://translate.wordpress.org/api/languages/) was disabled on meta changeset #10056 (https://meta.trac.wordpress.org/changeset/10056).
+ * Copy of https://meta.trac.wordpress.org/browser/sites/trunk/wordpress.org/public_html/wp-content/mu-plugins/pub/locales/locales.php
+ *
+ * Updated on 2020-06-28.
+ */
+require_once 'lib/wp.org/locales.php';
+
+
 // Check for PHP compatibility.
 // Adapted from https://pento.net/2014/02/18/dont-let-your-plugin-be-activated-on-incompatible-sites/.
-add_action( 'admin_init', 'tstats_check_version' );
+add_action( 'admin_init', __NAMESPACE__ . '\tstats_check_version' );
 
 
 // Stop running the plugin if on an incompatible PHP version.
@@ -96,7 +107,7 @@ function tstats_check_version() {
 			deactivate_plugins( plugin_basename( __FILE__ ) );
 
 			// Show disabled admin notice.
-			add_action( 'admin_notices', 'tstats_disabled_notice' );
+			add_action( 'admin_notices', __NAMESPACE__ . '\tstats_disabled_notice' );
 
 		}
 	}
@@ -188,13 +199,14 @@ function tstats_compatible_version() {
  *
  * @param callable(string): void
  */
-spl_autoload_register( 'tstats_class_autoload' );
+spl_autoload_register( __NAMESPACE__ . '\tstats_class_autoload' );
 
 
 /**
  * Class autoloader.
  *
  * @since 0.9.6
+ * @since 1.1.0  Remove namespace from class name.
  *
  * @param string $class_name   Class name.
  *
@@ -204,7 +216,7 @@ function tstats_class_autoload( $class_name ) {
 
 	// Set class file path and name.
 	$class_path = TSTATS_DIR_PATH . 'includes/';
-	$class_file = 'class-' . str_replace( '_', '-', strtolower( $class_name ) ) . '.php';
+	$class_file = 'class-' . str_replace( '_', '-', strtolower( str_replace( __NAMESPACE__ . '\\', '', $class_name ) ) ) . '.php';
 	$class      = $class_path . $class_file;
 
 	if ( ! file_exists( $class ) ) {
@@ -215,8 +227,5 @@ function tstats_class_autoload( $class_name ) {
 }
 
 
-// Include Composer autoload.
-require_once TSTATS_DIR_PATH . 'vendor/autoload.php';
-
 // Initialize the plugin.
-new TStats_Main();
+new Translation_Stats();

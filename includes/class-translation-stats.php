@@ -7,17 +7,19 @@
  * @since 0.8.0
  */
 
+namespace Translation_Stats;
+
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'TStats_Main' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 
 	/**
-	 * Class TStats_Main.
+	 * Class Translation_Stats.
 	 */
-	class TStats_Main {
+	class Translation_Stats {
 
 
 		/**
@@ -35,22 +37,19 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 			add_filter( 'plugin_action_links_' . TSTATS_FILE, array( $this, 'tstats_action_links' ) );
 
 			// Initialize the plugin activation.
-			new TStats_Activation();
+			new Activation();
 
 			// Initialize the plugin database update check.
-			new TStats_DB_Update();
+			new DB_Update();
 
 			// Initialize the plugin settings.
-			new TStats_Settings();
+			new Settings();
 
 			// Initialize the plugins page metadata view.
-			new TStats_Plugins();
-
-			// Initialize the Update Core page metadata view.
-			new TStats_Update_Core();
+			new Plugins();
 
 			// Initialize the plugin debug.
-			new TStats_Debug();
+			new Debug();
 
 		}
 
@@ -176,32 +175,6 @@ if ( ! class_exists( 'TStats_Main' ) ) {
 				);
 
 				wp_enqueue_script( 'tablesorter-combined' );
-
-			}
-
-			// Check for updates page.
-			if ( 'update-core.php' === $hook ) {
-
-				// Provide minified version if SCRIPT_DEBUG is not set to true.
-				$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-
-				wp_register_script(
-					'translation-stats-update-core',
-					TSTATS_DIR_URL . 'js/tstats-update-core' . $suffix . '.js',
-					array(
-						'jquery',
-					),
-					TSTATS_VERSION,
-					false
-				);
-
-				wp_enqueue_script( 'translation-stats-update-core' );
-
-				wp_localize_script(
-					'translation-stats-update-core',
-					'tstats',
-					$tstats_vars
-				);
 
 			}
 

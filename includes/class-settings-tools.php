@@ -7,17 +7,19 @@
  * @package Translation Stats
  */
 
+namespace Translation_Stats;
+
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'TStats_Settings_Tools' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Settings_Tools' ) ) {
 
 	/**
-	 * Class TStats_Settings_Tools.
+	 * Class Settings_Tools.
 	 */
-	class TStats_Settings_Tools {
+	class Settings_Tools {
 
 
 		/**
@@ -34,7 +36,7 @@ if ( ! class_exists( 'TStats_Settings_Tools' ) ) {
 		public function __construct() {
 
 			// Instantiate Translation Stats Settings API.
-			$this->settings_api = new TStats_Settings_API();
+			$this->settings_api = new Settings_API();
 
 		}
 
@@ -43,7 +45,7 @@ if ( ! class_exists( 'TStats_Settings_Tools' ) ) {
 		 * Registers Settings Tools page section.
 		 *
 		 * @since 0.8.0
-		 * @since 0.9.9   Moved from class TStats_Settings() to TStats_Settings_Tools().
+		 * @since 0.9.9   Moved from class Settings() to Settings_Tools().
 		 *                Renamed from tstats_settings_section__tools() to settings_section().
 		 *
 		 * @return void
@@ -81,7 +83,7 @@ if ( ! class_exists( 'TStats_Settings_Tools' ) ) {
 		 * Callback function for section "Tools > Settings".
 		 *
 		 * @since 0.8.0
-		 * @since 0.9.9   Moved from class TStats_Settings() to TStats_Settings_Tools().
+		 * @since 0.9.9   Moved from class Settings() to Settings_Tools().
 		 *                Renamed from tstats_settings__tools__settings__callback() to settings__tools__settings__callback().
 		 *
 		 * @return void
@@ -137,7 +139,7 @@ if ( ! class_exists( 'TStats_Settings_Tools' ) ) {
 		 * Callback function for section "Tools > Cache".
 		 *
 		 * @since 0.8.0
-		 * @since 0.9.9   Moved from class TStats_Settings() to TStats_Settings_Tools().
+		 * @since 0.9.9   Moved from class Settings() to Settings_Tools().
 		 *                Renamed from tstats_settings__tools__settings__callback() to settings__tools__transients__callback().
 		 *
 		 * @return void

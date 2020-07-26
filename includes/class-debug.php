@@ -7,17 +7,19 @@
  * @since 0.8.0
  */
 
+namespace Translation_Stats;
+
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'TStats_Debug' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 
 	/**
-	 * Class TStats_Debug.
+	 * Class Debug.
 	 */
-	class TStats_Debug {
+	class Debug {
 
 
 		/**
@@ -27,19 +29,13 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		 */
 		protected $transients;
 
-		/**
-		 * Translations API.
-		 *
-		 * @var object
-		 */
-		protected $translations_api;
 
 		/**
 		 * Globals.
 		 *
 		 * @var object
 		 */
-		protected $tstats_globals;
+		protected $globals;
 
 
 		/**
@@ -48,13 +44,10 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 		public function __construct() {
 
 			// Instantiate Translation Stats Transients.
-			$this->transients = new TStats_Transients();
-
-			// Instantiate Translation Stats Translations API.
-			$this->translations_api = new TStats_Translations_API();
+			$this->transients = new Transients();
 
 			// Instantiate Translation Stats Globals.
-			$this->tstats_globals = new TStats_Globals();
+			$this->globals = new Globals();
 
 			// Add Translation Stats settings field debug info.
 			add_action( 'tstats_debug_setting_field_info', array( $this, 'tstats_debug_setting_field_info' ), 10, 3 );
@@ -306,7 +299,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 					esc_html__( 'Translation Stats Locale: %s', 'translation-stats' ),
 					'<code>' . esc_html( $tstats_options['settings']['translation_language'] ) . '</code>'
 				);
-				$tstats_locale = $this->translations_api->tstats_locale( $this->tstats_globals->tstats_translation_language() );
+				$tstats_locale = Translations_API::locale( $this->globals->tstats_translation_language() );
 				?>
 			</p>
 			<div>
@@ -495,7 +488,7 @@ if ( ! class_exists( 'TStats_Debug' ) ) {
 					<p>
 						<?php
 						if ( $plugin_translation_on_wporg ) {
-							$api_url = $this->translations_api->tstats_translations_api_url( 'plugins' ) . $project_slug;
+							$api_url = Translations_API::translations_api_url( 'plugins' ) . $project_slug;
 							printf(
 								/* translators: 1: Opening tag <a>. 2: Closing tag </a>. */
 								esc_html__( 'Translation project found on %1$sWordPress.org%2$s', 'translation-stats' ),

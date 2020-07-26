@@ -7,17 +7,19 @@
  * @since 0.9.0
  */
 
+namespace Translation_Stats;
+
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( 'TStats_Settings_Footer' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Settings_Footer' ) ) {
 
 	/**
-	 * Class TStats_Settings_Footer.
+	 * Class Settings_Footer.
 	 */
-	class TStats_Settings_Footer {
+	class Settings_Footer {
 
 
 		/**
@@ -25,7 +27,7 @@ if ( ! class_exists( 'TStats_Settings_Footer' ) ) {
 		 *
 		 * @var object
 		 */
-		protected $tstats_globals;
+		protected $globals;
 
 
 		/**
@@ -34,7 +36,7 @@ if ( ! class_exists( 'TStats_Settings_Footer' ) ) {
 		public function __construct() {
 
 			// Instantiate Translation Stats Globals.
-			$this->tstats_globals = new TStats_Globals();
+			$this->globals = new Globals();
 
 			// Replace admin footer text with customized message.
 			add_filter( 'admin_footer_text', array( $this, 'tstats_admin_footer_text' ), 1, 2 );
@@ -66,7 +68,7 @@ if ( ! class_exists( 'TStats_Settings_Footer' ) ) {
 					esc_html__( 'Thank you for translating with %1$s version %2$s.', 'translation-stats' ),
 					sprintf(
 						'<a href="%1$s">%2$s</a>',
-						esc_url( $this->tstats_globals->tstats_link( $external_link_url, 'tstats', 'link', 'tstats_footer_link' ) ),
+						esc_url( $this->globals->tstats_link( $external_link_url, 'tstats', 'link', 'tstats_footer_link' ) ),
 						/* translators: Plugin name, do not translate! */
 						esc_html__( 'Translation Stats', 'translation-stats' )
 					),
@@ -77,7 +79,7 @@ if ( ! class_exists( 'TStats_Settings_Footer' ) ) {
 					esc_html__( 'By %s', 'translation-stats' ),
 					sprintf(
 						'<a href="%1$s" target="_blank" rel="noopener noreferrer">%2$s</a>',
-						esc_url( $this->tstats_globals->tstats_link( $external_link_url, 'tstats', 'link', 'tstats_footer_link' ) ),
+						esc_url( $this->globals->tstats_link( $external_link_url, 'tstats', 'link', 'tstats_footer_link' ) ),
 						esc_html__( 'Pedro Mendonça', 'translation-stats' )
 					)
 				);
