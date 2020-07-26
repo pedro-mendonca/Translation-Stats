@@ -97,7 +97,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Activation' ) ) {
 				$this->notices->tstats_notice_message( $admin_notice );
 
 				// Delete transient, only display this notice once.
-				delete_transient( 'tstats_activate' );
+				delete_transient( 'translation_stats_activate' );
 			}
 
 		}
