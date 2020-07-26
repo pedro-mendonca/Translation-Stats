@@ -21,9 +21,9 @@
 **Donate link:** [github.com/sponsors/pedro-mendonca](https://github.com/sponsors/pedro-mendonca)  
 **Tags:** internationalization, i18n, localization, l10n, translation, statistics, glotpress, dark mode  
 **Requires at least:** 4.9  
-**Tested up to:** 5.4  
+**Tested up to:** 5.5  
 **Requires PHP:** 5.6  
-**Stable tag:** 1.0.5  
+**Stable tag:** 1.1.0  
 **License:** GPLv2  
 **License URI:** [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html)  
 
@@ -94,6 +94,12 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 ![screenshot-4](./assets/screenshot-4.png)
 
 ## Changelog ##
+
+### 1.1.0 ###
+*   Include Locales list since [translate.wp.org Languages API](https://translate.wordpress.org/api/languages/) was disabled on meta [changeset #10056](https://meta.trac.wordpress.org/changeset/10056)
+*   Remove recent feature to Update WordPress Translation, feature moved to the new spin-off plugin [Translation Tools](https://wordpress.org/plugins/translation-tools/), created specifically to deal with translations updates, with many related features out of the scope of this plugin
+*   Tested up to WP 5.5
+*   Code optimization
 
 ### 1.0.5 ###
 *   Add WPLANG and available languages to the settings languages dropdown
