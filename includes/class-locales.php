@@ -26,6 +26,20 @@ if ( ! class_exists( __NAMESPACE__ . '\Locales' ) ) {
 
 
 		/**
+		 * Set custom 'translation_stats_locales' global variable.
+		 * This avoids conficts with other plugins that might use the 'gp_locales' global.
+		 */
+		public static function &instance() {
+
+			if ( ! isset( $GLOBALS['translation_stats_locales'] ) ) {
+				$GLOBALS['translation_stats_locales'] = new GP_Locales();
+			}
+
+			return $GLOBALS['translation_stats_locales'];
+		}
+
+
+		/**
 		 * Locales from WordPress.org extended with Transaltion Stats data.
 		 *
 		 * @since 1.1.0
