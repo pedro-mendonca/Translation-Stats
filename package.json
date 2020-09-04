@@ -6,7 +6,7 @@
   "description": "The plugin adds a \"Translation Stats\" column to the plugin list screen in WordPress admin.",
   "version": "1.0.5",
   "devDependencies": {
-    "@wordpress/eslint-plugin": "^7.1.0",
+    "@wordpress/eslint-plugin": "^7.2.0",
     "eslint": "^7.8.1",
     "npm-check-updates": "^8.0.5",
     "remark-lint": "^7.0.1",
