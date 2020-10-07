@@ -40,27 +40,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Globals' ) ) {
 
 
 		/**
-		 * Check if Translation Stats language is 'en_US'.
-		 *
-		 * @since 0.9.5
-		 *
-		 * @return bool  True if Translation Stats language is 'en_US', false otherwise.
-		 */
-		public function tstats_language_is_english() {
-
-			// Get Translation Stats language.
-			$wp_locale = $this->translation_language();
-
-			// Check if user locale is 'en_US'.
-			if ( 'en_US' === $wp_locale ) {
-				return true;
-			}
-
-			return false;
-		}
-
-
-		/**
 		 * Add campaign information to URL.
 		 *
 		 * @since 0.9.0
