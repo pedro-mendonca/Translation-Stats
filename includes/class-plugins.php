@@ -626,8 +626,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				return;
 			}
 
-			$options        = get_site_option( TSTATS_WP_OPTION );
-			$tstats_plugins = array();
+			$options = get_site_option( TSTATS_WP_OPTION );
+
+			$translationstats_plugins = array();
 
 			foreach ( $plugins as $plugin_file => $plugin_data ) {
 
@@ -639,14 +640,14 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				}
 
 				// Add plugin to list.
-				$tstats_plugins[ $plugin_file ] = $plugin_data;
+				$translationstats_plugins[ $plugin_file ] = $plugin_data;
 			}
 
 			// Set the table list items array to just the Translation Stats enabled plugins.
-			$wp_list_table->items = $tstats_plugins;
+			$wp_list_table->items = $translationstats_plugins;
 
 			// Count Translation Stats enabled plugins.
-			$count = count( $tstats_plugins );
+			$count = count( $translationstats_plugins );
 
 			// Get plugins_per_page setting.
 			$plugins_per_page = $wp_list_table->get_items_per_page( str_replace( '-', '_', $wp_list_table->screen->id . '_per_page' ), 999 );
@@ -703,15 +704,15 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				return $status_links;
 			}
 
-			$tstats_plugins = array();
+			$translationstats_plugins = array();
 
 			foreach ( $options['plugins'] as $key => $option ) {
 				if ( is_array( $option ) && 'true' === $option['enabled'] ) {
-					$tstats_plugins[ $key ] = true;
+					$translationstats_plugins[ $key ] = true;
 				}
 			}
 
-			$count = count( $tstats_plugins );
+			$count = count( $translationstats_plugins );
 
 			// Set the status type.
 			$status = 'translation_stats';
