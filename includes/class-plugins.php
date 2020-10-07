@@ -136,7 +136,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 							'notice-alt' => true,
 							'message'    => esc_html__( 'Plugin not found on WordPress.org', 'translation-stats' ),
 						);
-						$this->notices->tstats_notice_message( $admin_notice ); // TODO: Add alternative GlotPress API.
+						$this->notices->notice_message( $admin_notice ); // TODO: Add alternative GlotPress API.
 					} else {
 						// Check if translation project is on WordPress.org.
 						if ( ! $plugin_translation_on_wporg ) {
@@ -145,7 +145,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 								'notice-alt' => true,
 								'message'    => esc_html__( 'Translation project not found on WordPress.org', 'translation-stats' ),
 							);
-							$this->notices->tstats_notice_message( $admin_notice );
+							$this->notices->notice_message( $admin_notice );
 						} else {
 							$this->tstats_render_plugin_stats( $project_slug );
 						}
@@ -284,7 +284,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				'force_show'  => true,
 				'message'     => esc_html__( 'Loading...', 'translation-stats' ),
 			);
-			$this->notices->tstats_notice_message( $admin_notice );
+			$this->notices->notice_message( $admin_notice );
 
 		}
 
@@ -324,7 +324,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 							'update-icon' => true,
 							'message'     => esc_html__( 'Updated!', 'translation-stats' ),
 						);
-						$this->notices->tstats_notice_message( $admin_notice );
+						$this->notices->notice_message( $admin_notice );
 						?>
 					</div>
 
@@ -385,7 +385,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 							'</a>'
 						),
 					);
-					$this->notices->tstats_notice_message( $admin_notice );
+					$this->notices->notice_message( $admin_notice );
 
 					$admin_notice = array(
 						'type'       => 'warning',
@@ -397,7 +397,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 							'</a>'
 						),
 					);
-					$this->notices->tstats_notice_message( $admin_notice );
+					$this->notices->notice_message( $admin_notice );
 
 					$admin_notice = array(
 						'type'       => 'warning',
@@ -411,7 +411,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 							'</a>'
 						),
 					);
-					$this->notices->tstats_notice_message( $admin_notice );
+					$this->notices->notice_message( $admin_notice );
 					?>
 
 				</div>

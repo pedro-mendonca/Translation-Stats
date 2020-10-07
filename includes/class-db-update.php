@@ -131,7 +131,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 				'force_show'  => true,
 				'message'     => $update_message,
 			);
-			$this->notices->tstats_notice_message( $admin_notice );
+			$this->notices->notice_message( $admin_notice );
 
 		}
 
@@ -195,7 +195,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 					'force_show'  => true,
 					'message'     => $message,
 				);
-				$this->notices->tstats_notice_message( $admin_notice );
+				$this->notices->notice_message( $admin_notice );
 
 				$message = sprintf(
 					'<h3>%s</h3><pre>%s</pre>',
@@ -211,7 +211,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 					'force_show'  => true,
 					'message'     => $message,
 				);
-				$this->notices->tstats_notice_message( $admin_notice );
+				$this->notices->notice_message( $admin_notice );
 			}
 
 		}
