@@ -55,7 +55,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Notices' ) ) {
 		 *
 		 * @return void
 		 */
-		public function tstats_notice_message( $args ) {
+		public function notice_message( $args ) {
 
 			// Check if 'show_warnings' is true.
 			$wp_option = get_option( TSTATS_WP_OPTION );

@@ -181,7 +181,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 					'force_show'  => true,
 					'message'     => '<strong>' . esc_html__( 'Settings restored successfully.', 'translation-stats' ) . '</strong>',
 				);
-				$this->notices->tstats_notice_message( $admin_notice );
+				$this->notices->notice_message( $admin_notice );
 			}
 		}
 
@@ -212,7 +212,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 					'force_show'  => true,
 					'message'     => '<strong>' . esc_html__( 'Cache cleaned successfully.', 'translation-stats' ) . '</strong>',
 				);
-				$this->notices->tstats_notice_message( $admin_notice );
+				$this->notices->notice_message( $admin_notice );
 			}
 		}
 
