@@ -269,7 +269,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 		 */
 		public function tstats_debug_info__settings() {
 			// Get plugin settings.
-			$tstats_options = get_option( TSTATS_WP_OPTION );
+			$options = get_option( TSTATS_WP_OPTION );
 			?>
 			<h3>
 				<?php esc_html_e( 'Translation Stats', 'translation-stats' ); ?>
@@ -297,13 +297,13 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 				printf(
 					/* translators: %s: WordPress Locale code. */
 					esc_html__( 'Translation Stats Locale: %s', 'translation-stats' ),
-					'<code>' . esc_html( $tstats_options['settings']['translation_language'] ) . '</code>'
+					'<code>' . esc_html( $options['settings']['translation_language'] ) . '</code>'
 				);
-				$tstats_locale = Translations_API::locale( $this->globals->translation_language() );
+				$translationstats_locale = Translations_API::locale( $this->globals->translation_language() );
 				?>
 			</p>
 			<div>
-				<pre><code class="tstats-code-block"><?php echo esc_html( var_export( $tstats_locale, true ) ); // phpcs:ignore ?></code></pre>
+				<pre><code class="tstats-code-block"><?php echo esc_html( var_export( $translationstats_locale, true ) ); // phpcs:ignore ?></code></pre>
 			</div>
 			<p>
 				<?php
@@ -328,9 +328,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 			</p>
 			<div>
 				<?php
-				if ( isset( $tstats_options['settings'] ) ) {
+				if ( isset( $options['settings'] ) ) {
 					?>
-					<pre><code class="tstats-code-block"><?php echo esc_html( var_export( $tstats_options['settings'], true ) ); // phpcs:ignore ?></code></pre>
+					<pre><code class="tstats-code-block"><?php echo esc_html( var_export( $options['settings'], true ) ); // phpcs:ignore ?></code></pre>
 					<?php
 				} else {
 					?>
@@ -344,9 +344,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 			</p>
 			<div>
 				<?php
-				if ( isset( $tstats_options['plugins'] ) ) {
+				if ( isset( $options['plugins'] ) ) {
 					?>
-					<pre><code class="tstats-code-block"><?php echo esc_html( var_export( $tstats_options['plugins'], true ) ); // phpcs:ignore ?></code></pre>
+					<pre><code class="tstats-code-block"><?php echo esc_html( var_export( $options['plugins'], true ) ); // phpcs:ignore ?></code></pre>
 					<?php
 				} else {
 					?>
