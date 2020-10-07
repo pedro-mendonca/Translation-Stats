@@ -35,20 +35,20 @@ if ( ! class_exists( __NAMESPACE__ . '\Transients' ) ) {
 		public function get_transients( $search ) {
 			global $wpdb;
 
-			$tstats_transients = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
+			$transients = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
 				$wpdb->prepare(
 					"SELECT option_name AS name FROM $wpdb->options WHERE option_name LIKE %s",
 					'%_transient_' . $search . '%'
 				)
 			);
-			$tstats_transients = array_map(
+			$transients = array_map(
 				function( $object ) {
 					return $object->name;
 				},
-				$tstats_transients
+				$transients
 			);
 
-			return $tstats_transients;
+			return $transients;
 		}
 
 
@@ -63,15 +63,15 @@ if ( ! class_exists( __NAMESPACE__ . '\Transients' ) ) {
 		 * @return void
 		 */
 		public function delete_transients( $prefix ) {
-			$tstats_transients = $this->get_transients( $prefix );
-			if ( is_array( $tstats_transients ) ) {
-				foreach ( $tstats_transients as $tstats_transient ) {
+			$transients = $this->get_transients( $prefix );
+			if ( is_array( $transients ) ) {
+				foreach ( $transients as $transient ) {
 					if ( is_multisite() ) {
 						// Delete transients in Multisite.
-						delete_site_transient( substr( $tstats_transient, strlen( '_transient_' ) ) );
+						delete_site_transient( substr( $transient, strlen( '_transient_' ) ) );
 					} else {
 						// Delete transients.
-						delete_transient( substr( $tstats_transient, strlen( '_transient_' ) ) );
+						delete_transient( substr( $transient, strlen( '_transient_' ) ) );
 					}
 				}
 			}
