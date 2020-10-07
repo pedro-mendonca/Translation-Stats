@@ -47,15 +47,15 @@ if ( ! class_exists( __NAMESPACE__ . '\Globals' ) ) {
 		 * @param string $link      Link to customize.
 		 * @param string $source    Set utm_source, default is 'tstats'.
 		 * @param string $medium    Set utm_medium, default is 'link'.
-		 * @param string $campaign  Set utm_campaign, default is 'tstats_link'.
+		 * @param string $campaign  Set utm_campaign, default is 'plugin_link'.
 		 *
 		 * @return string  Link with campaign parameters.
 		 */
-		public function tstats_link( $link, $source, $medium, $campaign ) {
+		public function campaign_link( $link, $source, $medium, $campaign ) {
 
-			$utm_source   = ! empty( $source ) ? $source : 'tstats';
+			$utm_source   = ! empty( $source ) ? $source : 'plugin';
 			$utm_medium   = ! empty( $medium ) ? $medium : 'link';
-			$utm_campaign = ! empty( $campaign ) ? $campaign : 'tstats_link';
+			$utm_campaign = ! empty( $campaign ) ? $campaign : 'plugin_link';
 
 			$campaign_link = $link . '?utm_source=' . $utm_source . '&amp;utm_medium=' . $utm_medium . '&amp;utm_campaign=' . $utm_campaign;
 
