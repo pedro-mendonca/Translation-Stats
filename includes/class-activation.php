@@ -42,7 +42,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Activation' ) ) {
 			register_activation_hook( 'translation-stats/translation-stats.php', array( $this, 'activate' ) );
 
 			// Add activation admin notice.
-			add_action( 'admin_notices', array( $this, 'tstats_activate_notice' ) );
+			add_action( 'admin_notices', array( $this, 'activate_notice' ) );
 
 		}
 
@@ -68,7 +68,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Activation' ) ) {
 		 *
 		 * @return void
 		 */
-		public function tstats_activate_notice() {
+		public function activate_notice() {
 
 			// Check transient, if available display notice.
 			if ( get_transient( 'translation_stats_activate' ) ) {
