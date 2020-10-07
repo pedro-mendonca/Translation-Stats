@@ -299,7 +299,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 					esc_html__( 'Translation Stats Locale: %s', 'translation-stats' ),
 					'<code>' . esc_html( $tstats_options['settings']['translation_language'] ) . '</code>'
 				);
-				$tstats_locale = Translations_API::locale( $this->globals->tstats_translation_language() );
+				$tstats_locale = Translations_API::locale( $this->globals->translation_language() );
 				?>
 			</p>
 			<div>
