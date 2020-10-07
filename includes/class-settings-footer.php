@@ -39,10 +39,10 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Footer' ) ) {
 			$this->globals = new Globals();
 
 			// Replace admin footer text with customized message.
-			add_filter( 'admin_footer_text', array( $this, 'tstats_admin_footer_text' ), 1, 2 );
+			add_filter( 'admin_footer_text', array( $this, 'admin_footer_text' ), 1, 2 );
 
 			// Replace admin footer WordPress version with plugin version.
-			// add_filter( 'update_footer', array( $this, 'tstats_admin_footer_version' ), 11 ); // phpcs: ignore.
+			// add_filter( 'update_footer', array( $this, 'admin_footer_version' ), 11 ); // phpcs: ignore.
 		}
 
 
@@ -55,7 +55,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Footer' ) ) {
 		 *
 		 * @return string   Return translation stats footer text.
 		 */
-		public function tstats_admin_footer_text( $text ) {
+		public function admin_footer_text( $text ) {
 
 			global $current_screen;
 
@@ -68,7 +68,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Footer' ) ) {
 					esc_html__( 'Thank you for translating with %1$s version %2$s.', 'translation-stats' ),
 					sprintf(
 						'<a href="%1$s">%2$s</a>',
-						esc_url( $this->globals->campaign_link( $external_link_url, 'tstats', 'link', 'tstats_footer_link' ) ),
+						esc_url( $this->globals->campaign_link( $external_link_url, 'tstats', 'link', 'plugin_footer_link' ) ),
 						/* translators: Plugin name, do not translate! */
 						esc_html__( 'Translation Stats', 'translation-stats' )
 					),
@@ -79,7 +79,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Footer' ) ) {
 					esc_html__( 'By %s', 'translation-stats' ),
 					sprintf(
 						'<a href="%1$s" target="_blank" rel="noopener noreferrer">%2$s</a>',
-						esc_url( $this->globals->campaign_link( $external_link_url, 'tstats', 'link', 'tstats_footer_link' ) ),
+						esc_url( $this->globals->campaign_link( $external_link_url, 'tstats', 'link', 'plugin_footer_link' ) ),
 						esc_html__( 'Pedro Mendonça', 'translation-stats' )
 					)
 				);
@@ -97,7 +97,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Footer' ) ) {
 		 *
 		 * @return string $text  Return translation stats footer version.
 		 */
-		public function tstats_admin_footer_version( $text ) {
+		public function admin_footer_version( $text ) {
 			global $current_screen;
 			if ( ! empty( $current_screen->id ) && strpos( $current_screen->id, 'translation-stats' ) !== false ) {
 				$text = sprintf(
