@@ -251,7 +251,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Plugins' ) ) {
 
 			// Get general options.
 			$options         = get_option( TSTATS_WP_OPTION );
-			$tstats_language = $this->globals->tstats_translation_language();
+			$tstats_language = $this->globals->translation_language();
 			$locale          = Translations_API::locale( $tstats_language );
 
 			// Table options.

@@ -85,7 +85,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * @return array $columns  Columns array with added 'translation-stats'.
 		 */
 		public function tstats_add_translation_stats_column( $columns ) {
-			$tstats_language = $this->globals->tstats_translation_language();
+			$tstats_language = $this->globals->translation_language();
 			$settings_link   = sprintf(
 				'<a href="%s" aria-label="%s"><span class="dashicons dashicons-edit"></span></a>',
 				esc_url( add_query_arg( 'page', 'translation-stats#plugins', admin_url( 'options-general.php' ) ) ),
@@ -115,7 +115,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			// Check if is in column 'translation-stats'.
 			if ( 'translation-stats' === $column_name ) {
 
-				$tstats_language = $this->globals->tstats_translation_language();
+				$tstats_language = $this->globals->translation_language();
 				// Check if user locale is not 'en_US'.
 				if ( 'en_US' !== $tstats_language ) {
 
@@ -170,7 +170,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		public function tstats_render_plugin_stats( $project_slug ) {
 
 			// Get Translation Stats Locale data.
-			$locale = Translations_API::locale( $this->globals->tstats_translation_language() );
+			$locale = Translations_API::locale( $this->globals->translation_language() );
 
 			ob_start();
 
@@ -305,7 +305,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				$force_update = 'true' === sanitize_key( $_POST['forceUpdate'] ) ? true : false; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 			}
 
-			$locale = Translations_API::locale( $this->globals->tstats_translation_language() );
+			$locale = Translations_API::locale( $this->globals->translation_language() );
 
 			if ( isset( $_POST['tstatsPlugin'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
@@ -606,7 +606,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			global $wp_list_table, $page;
 
 			// Check if user locale is not 'en_US'.
-			$tstats_language = $this->globals->tstats_translation_language();
+			$tstats_language = $this->globals->translation_language();
 			if ( 'en_US' === $tstats_language ) {
 				return;
 			}
@@ -671,7 +671,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * @return array                Array of status links.
 		 */
 		public function tstats_plugins_status_link( $status_links ) {
-			$tstats_language = $this->globals->tstats_translation_language();
+			$tstats_language = $this->globals->translation_language();
 			// Check if user locale is not 'en_US'.
 			if ( 'en_US' === $tstats_language ) {
 				return $status_links;

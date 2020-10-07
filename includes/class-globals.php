@@ -27,9 +27,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Globals' ) ) {
 		 *
 		 * @since 0.8.0
 		 *
-		 * @return string $tstats_language  Translation Language as WordPress Locale ( e.g. 'pt_PT' ).
+		 * @return string   Translation Language as WordPress Locale ( e.g. 'pt_PT' ).
 		 */
-		public function tstats_translation_language() {
+		public function translation_language() {
 			// Get Translation Language from Settings.
 			$tstats_language = get_option( TSTATS_WP_OPTION )['settings']['translation_language'];
 			if ( ! $tstats_language || 'site-default' === $tstats_language ) {
@@ -49,7 +49,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Globals' ) ) {
 		public function tstats_language_is_english() {
 
 			// Get Translation Stats language.
-			$tstats_language = $this->tstats_translation_language();
+			$tstats_language = $this->translation_language();
 
 			// Check if user locale is 'en_US'.
 			if ( 'en_US' === $tstats_language ) {
