@@ -70,7 +70,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Globals' ) ) {
 		 *
 		 * @return array  Array of allowed HTML elements.
 		 */
-		public function tstats_allowed_html() {
+		public function allowed_html() {
 			$allowed_html = array(
 				'a'      => array(
 					'href'   => array(),

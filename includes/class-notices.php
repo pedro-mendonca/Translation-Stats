@@ -103,7 +103,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Notices' ) ) {
 				<p><?php echo wp_kses_post( $notice['message'] ); ?></p>
 				<?php
 				// Extra HTML.
-				echo wp_kses( $notice['extra-html'], $this->globals->tstats_allowed_html() );
+				echo wp_kses( $notice['extra-html'], $this->globals->allowed_html() );
 				?>
 			</div>
 
