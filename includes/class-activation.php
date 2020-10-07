@@ -39,7 +39,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Activation' ) ) {
 			$this->notices = new Notices();
 
 			// Register activation hook.
-			register_activation_hook( 'translation-stats/translation-stats.php', array( $this, 'tstats_activate' ) );
+			register_activation_hook( 'translation-stats/translation-stats.php', array( $this, 'activate' ) );
 
 			// Add activation admin notice.
 			add_action( 'admin_notices', array( $this, 'tstats_activate_notice' ) );
@@ -53,7 +53,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Activation' ) ) {
 		 *
 		 * @return void
 		 */
-		public function tstats_activate() {
+		public function activate() {
 
 			// Cache plugin activation data.
 			set_transient( 'translation_stats_activate', true, 5 );
