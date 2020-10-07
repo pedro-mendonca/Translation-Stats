@@ -200,46 +200,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 
 
 		/**
-		 * Set the translate.wordpress.org WordPress core subprojects structure with 'slug', 'name' and language file 'domain'.
-		 *
-		 * @since 0.9.5
-		 *
-		 * @return array $subprojects  Returns array of the supported WordPress translation known subprojects.
-		 */
-		public function tstats_wordpress_subprojects() {
-
-			$subprojects = array(
-				array(
-					'slug'   => '',
-					/* translators: Subproject name in translate.wordpress.org, do not translate! */
-					'name'   => _x( 'Development', 'Subproject name', 'translation-stats' ),
-					'domain' => '',
-				),
-				array(
-					'slug'   => 'admin/',
-					/* translators: Subproject name in translate.wordpress.org, do not translate! */
-					'name'   => _x( 'Administration', 'Subproject name', 'translation-stats' ),
-					'domain' => 'admin',
-				),
-				array(
-					'slug'   => 'admin/network/',
-					/* translators: Subproject name in translate.wordpress.org, do not translate! */
-					'name'   => _x( 'Network Admin', 'Subproject name', 'translation-stats' ),
-					'domain' => 'admin-network',
-				),
-				array(
-					'slug'   => 'cc/',
-					/* translators: Subproject name in translate.wordpress.org, do not translate! */
-					'name'   => _x( 'Continents & Cities', 'Subproject name', 'translation-stats' ),
-					'domain' => 'continents-cities',
-				),
-			);
-
-			return $subprojects;
-		}
-
-
-		/**
 		 * Get Translate API URL.
 		 *
 		 * Example:
@@ -263,33 +223,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 			$api_url = $translations_api_url[ $project ];
 
 			return $api_url;
-
-		}
-
-
-		/**
-		 * Get Translate URL.
-		 *
-		 * Example:
-		 * $url = Translations_API::translations_api->tstats_translations_url( 'plugins' );
-		 *
-		 * @since 0.9.5
-		 *
-		 * @param string $project  Set the project URL you want to get.
-		 *
-		 * @return string $url     Returns URL.
-		 */
-		public static function translations_url( $project ) {
-
-			$translations_url = array(
-				'wp'      => 'https://translate.wordpress.org/projects/wp/',         // Translate WordPress core URL.
-				'plugins' => 'https://translate.wordpress.org/projects/wp-plugins/', // Translate plugins URL.
-				'themes'  => 'https://translate.wordpress.org/projects/wp-themes/',  // Translate themes URL.
-			);
-
-			$url = $translations_url[ $project ];
-
-			return $url;
 
 		}
 

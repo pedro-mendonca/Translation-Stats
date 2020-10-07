@@ -147,37 +147,37 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 
 			$options = get_site_option( TSTATS_WP_OPTION );
 
-			$tstats_settings_v0 = array(
+			$settings_v0 = array(
 				'show_warnings',
 				'translation_language',
 				'delete_data_on_uninstall',
 				'transients_expiration',
 			);
 
-			$tstats_settings_v0_deprecated = array(
+			$settings_v0_deprecated = array(
 				'all_plugins',
 			);
 
 			// Check for existing settings to move to sub array.
-			foreach ( $tstats_settings_v0 as $option ) {
+			foreach ( $settings_v0 as $option ) {
 				if ( array_key_exists( $option, $options ) ) {
-					$tstats_settings_v1['settings'][ $option ] = $options[ $option ];
+					$settings_v1['settings'][ $option ] = $options[ $option ];
 					unset( $options[ $option ] );
 				}
 			}
 
 			// Check for existing deprecated settings to remove.
-			foreach ( $tstats_settings_v0_deprecated as $option ) {
+			foreach ( $settings_v0_deprecated as $option ) {
 				if ( array_key_exists( $option, $options ) ) {
 					unset( $options[ $option ] );
 				}
 			}
 
-			$tstats_settings_v1['settings']['settings_version'] = '1.0';
+			$settings_v1['settings']['settings_version'] = '1.0';
 
-			$tstats_settings_v1['plugins'] = $options;
+			$settings_v1['plugins'] = $options;
 
-			update_site_option( TSTATS_WP_OPTION, $tstats_settings_v1 );
+			update_site_option( TSTATS_WP_OPTION, $settings_v1 );
 
 			if ( defined( 'TSTATS_DEBUG' ) && TSTATS_DEBUG ) {
 
