@@ -31,11 +31,11 @@ if ( ! class_exists( __NAMESPACE__ . '\Globals' ) ) {
 		 */
 		public function translation_language() {
 			// Get Translation Language from Settings.
-			$tstats_language = get_option( TSTATS_WP_OPTION )['settings']['translation_language'];
-			if ( ! $tstats_language || 'site-default' === $tstats_language ) {
-				$tstats_language = get_locale();
+			$wp_locale = get_option( TSTATS_WP_OPTION )['settings']['translation_language'];
+			if ( ! $wp_locale || 'site-default' === $wp_locale ) {
+				$wp_locale = get_locale();
 			}
-			return $tstats_language;
+			return $wp_locale;
 		}
 
 
@@ -49,10 +49,10 @@ if ( ! class_exists( __NAMESPACE__ . '\Globals' ) ) {
 		public function tstats_language_is_english() {
 
 			// Get Translation Stats language.
-			$tstats_language = $this->translation_language();
+			$wp_locale = $this->translation_language();
 
 			// Check if user locale is 'en_US'.
-			if ( 'en_US' === $tstats_language ) {
+			if ( 'en_US' === $wp_locale ) {
 				return true;
 			}
 
