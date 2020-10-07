@@ -271,7 +271,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 		 * Get Translate URL.
 		 *
 		 * Example:
-		 * $url = Translations_API::translations_api->tstats_translations_url( 'plugins' );
+		 * $url = Translations_API::translations_api->translations_url( 'plugins' );
 		 *
 		 * @since 0.9.5
 		 *
