@@ -214,7 +214,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			do_action( 'tstats_stats_plugin_widget_content__after', $project_slug, $locale );
 
 			$plugin_stats = ob_get_clean();
-			echo wp_kses( $plugin_stats, $this->globals->tstats_allowed_html() );
+			echo wp_kses( $plugin_stats, $this->globals->allowed_html() );
 
 		}
 
@@ -359,7 +359,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				$i18n_errors = 0;
 				foreach ( $subprojects as $subproject ) {
 					$subproject = $this->tstats_render_stats_bar( $locale, $project_slug, $subproject['name'], $subproject['slug'], $force_update );
-					echo wp_kses( $subproject['stats'], $this->globals->tstats_allowed_html() );
+					echo wp_kses( $subproject['stats'], $this->globals->allowed_html() );
 					$i18n_errors = $i18n_errors + $subproject['error'];
 				}
 				?>

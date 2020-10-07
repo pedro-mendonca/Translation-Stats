@@ -64,10 +64,10 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 		 * @return array        Array with added Translation Stats action links.
 		 */
 		public function tstats_action_links( $links ) {
-			$tstats_links = array(
+			$translationstats_links = array(
 				'<a href="' . admin_url( 'options-general.php?page=' . TSTATS_SETTINGS_PAGE ) . '">' . __( 'Settings', 'translation-stats' ) . '</a>',
 			);
-			return array_merge( $tstats_links, $links );
+			return array_merge( $translationstats_links, $links );
 		}
 
 

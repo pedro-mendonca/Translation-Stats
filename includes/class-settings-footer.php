@@ -68,7 +68,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Footer' ) ) {
 					esc_html__( 'Thank you for translating with %1$s version %2$s.', 'translation-stats' ),
 					sprintf(
 						'<a href="%1$s">%2$s</a>',
-						esc_url( $this->globals->tstats_link( $external_link_url, 'tstats', 'link', 'tstats_footer_link' ) ),
+						esc_url( $this->globals->campaign_link( $external_link_url, 'tstats', 'link', 'tstats_footer_link' ) ),
 						/* translators: Plugin name, do not translate! */
 						esc_html__( 'Translation Stats', 'translation-stats' )
 					),
@@ -79,7 +79,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Footer' ) ) {
 					esc_html__( 'By %s', 'translation-stats' ),
 					sprintf(
 						'<a href="%1$s" target="_blank" rel="noopener noreferrer">%2$s</a>',
-						esc_url( $this->globals->tstats_link( $external_link_url, 'tstats', 'link', 'tstats_footer_link' ) ),
+						esc_url( $this->globals->campaign_link( $external_link_url, 'tstats', 'link', 'tstats_footer_link' ) ),
 						esc_html__( 'Pedro Mendonça', 'translation-stats' )
 					)
 				);
