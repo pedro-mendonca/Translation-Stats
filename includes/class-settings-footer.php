@@ -50,6 +50,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Footer' ) ) {
 		 * Replace admin footer text with customized message.
 		 *
 		 * @since 0.9.0
+		 * @since 1.1.1   Renamed from tstats_admin_footer_text() to admin_footer_text().
 		 *
 		 * @param string $text   Footer text.
 		 *
@@ -92,6 +93,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Footer' ) ) {
 		 * Replace admin footer WordPress version with plugin version.
 		 *
 		 * @since 0.9.0
+		 * @since 1.1.1   Renamed from tstats_admin_footer_version() to admin_footer_version().
 		 *
 		 * @param string $text   Footer version.
 		 *

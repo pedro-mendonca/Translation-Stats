@@ -58,6 +58,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 		 * Add action links to the settings on the Plugins screen.
 		 *
 		 * @since 0.8.0
+		 * @since 1.1.1   Renamed from tstats_action_links() to plugin_action_links().
 		 *
 		 * @param array $links  Array of plugin action links.
 		 *
@@ -75,6 +76,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 		 * Register and enqueue style sheet.
 		 *
 		 * @since 0.8.0
+		 * @since 1.1.1   Renamed from tstats_register_plugin_styles() to register_plugin_styles().
 		 *
 		 * @param string $hook  Hook.
 		 *
@@ -105,6 +107,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 		 * Register and enqueue Dark Mode style sheet.
 		 *
 		 * @since 0.8.0
+		 * @since 1.1.1   Renamed from tstats_register_plugin_styles_dark_mode() to register_plugin_styles_dark_mode().
 		 *
 		 * @return void
 		 */
@@ -125,6 +128,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 		 * Register and enqueue scripts.
 		 *
 		 * @since 0.8.0
+		 * @since 1.1.1   Renamed from tstats_register_plugin_scripts() to register_plugin_scripts().
 		 *
 		 * @param string $hook  Hook.
 		 *

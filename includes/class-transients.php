@@ -26,6 +26,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Transients' ) ) {
 		 * Retrieve the site transients.
 		 *
 		 * @since 0.8.0
+		 * @since 1.1.1   Renamed from tstats_get_transients() to get_transients().
 		 *
 		 * @param string $search  Transient search term.
 		 *
@@ -55,6 +56,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Transients' ) ) {
 		 * Delete the site transients.
 		 *
 		 * @since 0.8.0
+		 * @since 1.1.1   Renamed from tstats_delete_transients() to delete_transients().
 		 *
 		 * @param string $prefix  Transient prefix.
 		 *
