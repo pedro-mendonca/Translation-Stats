@@ -228,33 +228,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 
 
 		/**
-		 * Get Translate URL.
-		 *
-		 * Example:
-		 * $url = Translations_API::translations_api->translations_url( 'plugins' );
-		 *
-		 * @since 0.9.5
-		 *
-		 * @param string $project  Set the project URL you want to get.
-		 *
-		 * @return string $url     Returns URL.
-		 */
-		public static function translations_url( $project ) {
-
-			$translations_url = array(
-				'wp'      => 'https://translate.wordpress.org/projects/wp/',         // Translate WordPress core URL.
-				'plugins' => 'https://translate.wordpress.org/projects/wp-plugins/', // Translate plugins URL.
-				'themes'  => 'https://translate.wordpress.org/projects/wp-themes/',  // Translate themes URL.
-			);
-
-			$url = $translations_url[ $project ];
-
-			return $url;
-
-		}
-
-
-		/**
 		 * Get locale data from wordpress.org and Translation Stats.
 		 *
 		 * Example:
