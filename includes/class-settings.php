@@ -203,7 +203,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 				}
 				// Delete translations stats and available languages transients.
 				// The transient 'translation_stats_plugin_available_translations' will be immediatly rebuilt on tstats_render_settings__plugins_list() loading.
-				$this->transients->tstats_delete_transients( TSTATS_TRANSIENTS_PREFIX );
+				$this->transients->delete_transients( TSTATS_TRANSIENTS_PREFIX );
 				$admin_notice = array(
 					'type'        => 'success',
 					'notice-alt'  => false,

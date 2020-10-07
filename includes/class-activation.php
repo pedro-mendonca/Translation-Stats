@@ -50,6 +50,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Activation' ) ) {
 		 * Runs only when the plugin is activated.
 		 *
 		 * @since 1.0.0
+		 * @since 1.1.1   Renamed from tstats_activate() to activate().
 		 *
 		 * @return void
 		 */
@@ -65,6 +66,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Activation' ) ) {
 		 * Admin notice on activation.
 		 *
 		 * @since 1.0.0
+		 * @since 1.1.1   Renamed from tstats_activate_notice() to activate_notice().
 		 *
 		 * @return void
 		 */

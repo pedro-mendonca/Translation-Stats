@@ -386,7 +386,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 			<div>
 				<code class="tstats-code-block">
 					<?php
-					$transients = $this->transients->tstats_get_transients( TSTATS_TRANSIENTS_PREFIX );
+					$transients = $this->transients->get_transients( TSTATS_TRANSIENTS_PREFIX );
 					if ( ! empty( $transients ) ) {
 						foreach ( $transients as $transient ) {
 							echo esc_html( substr( $transient, strlen( '_transient_' ) ) );

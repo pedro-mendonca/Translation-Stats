@@ -28,13 +28,13 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 		public function __construct() {
 
 			// Register and enqueue plugin style sheet.
-			add_action( 'admin_enqueue_scripts', array( $this, 'tstats_register_plugin_styles' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'register_plugin_styles' ) );
 
 			// Register and enqueue plugin style sheet.
-			add_action( 'admin_enqueue_scripts', array( $this, 'tstats_register_plugin_scripts' ) );
+			add_action( 'admin_enqueue_scripts', array( $this, 'register_plugin_scripts' ) );
 
 			// Add Plugin action links.
-			add_filter( 'plugin_action_links_' . TSTATS_FILE, array( $this, 'tstats_action_links' ) );
+			add_filter( 'plugin_action_links_' . TSTATS_FILE, array( $this, 'plugin_action_links' ) );
 
 			// Initialize the plugin activation.
 			new Activation();
@@ -58,12 +58,13 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 		 * Add action links to the settings on the Plugins screen.
 		 *
 		 * @since 0.8.0
+		 * @since 1.1.1   Renamed from tstats_action_links() to plugin_action_links().
 		 *
 		 * @param array $links  Array of plugin action links.
 		 *
 		 * @return array        Array with added Translation Stats action links.
 		 */
-		public function tstats_action_links( $links ) {
+		public function plugin_action_links( $links ) {
 			$translationstats_links = array(
 				'<a href="' . admin_url( 'options-general.php?page=' . TSTATS_SETTINGS_PAGE ) . '">' . __( 'Settings', 'translation-stats' ) . '</a>',
 			);
@@ -75,14 +76,15 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 		 * Register and enqueue style sheet.
 		 *
 		 * @since 0.8.0
+		 * @since 1.1.1   Renamed from tstats_register_plugin_styles() to register_plugin_styles().
 		 *
 		 * @param string $hook  Hook.
 		 *
 		 * @return void
 		 */
-		public function tstats_register_plugin_styles( $hook ) {
+		public function register_plugin_styles( $hook ) {
 
-			if ( ! $this->tstats_allowed_pages( $hook ) ) {
+			if ( ! $this->allowed_pages( $hook ) ) {
 				return;
 			}
 
@@ -97,7 +99,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 
 			// Add Dark Mode style sheet.
 			// https://github.com/danieltj27/Dark-Mode/wiki/Help:-Plugin-Compatibility-Guide.
-			add_action( 'doing_dark_mode', array( $this, 'tstats_register_plugin_styles_dark_mode' ) );
+			add_action( 'doing_dark_mode', array( $this, 'register_plugin_styles_dark_mode' ) );
 		}
 
 
@@ -105,10 +107,11 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 		 * Register and enqueue Dark Mode style sheet.
 		 *
 		 * @since 0.8.0
+		 * @since 1.1.1   Renamed from tstats_register_plugin_styles_dark_mode() to register_plugin_styles_dark_mode().
 		 *
 		 * @return void
 		 */
-		public function tstats_register_plugin_styles_dark_mode() {
+		public function register_plugin_styles_dark_mode() {
 
 			wp_register_style(
 				'translation-stats-dark-mode',
@@ -125,18 +128,19 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 		 * Register and enqueue scripts.
 		 *
 		 * @since 0.8.0
+		 * @since 1.1.1   Renamed from tstats_register_plugin_scripts() to register_plugin_scripts().
 		 *
 		 * @param string $hook  Hook.
 		 *
 		 * @return void
 		 */
-		public function tstats_register_plugin_scripts( $hook ) {
+		public function register_plugin_scripts( $hook ) {
 
-			if ( ! $this->tstats_allowed_pages( $hook ) ) {
+			if ( ! $this->allowed_pages( $hook ) ) {
 				return;
 			}
 
-			$tstats_vars = array(
+			$translationstats_vars = array(
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
 			);
 
@@ -161,7 +165,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 				wp_localize_script(
 					'translation-stats-settings',
 					'tstats',
-					$tstats_vars
+					$translationstats_vars
 				);
 
 				wp_register_script(
@@ -199,7 +203,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 				wp_localize_script(
 					'translation-stats-plugins',
 					'tstats',
-					$tstats_vars
+					$translationstats_vars
 				);
 
 			}
@@ -216,7 +220,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 		 *
 		 * @return bool  Return true if current page is allowed, false if isn't allowed.
 		 */
-		public function tstats_allowed_pages( $hook ) {
+		public function allowed_pages( $hook ) {
 
 			// Check for plugins page, updates page and Translation Stats settings page.
 			if ( 'plugins.php' === $hook || 'update-core.php' === $hook || 'settings_page_' . TSTATS_SETTINGS_PAGE === $hook ) {

@@ -26,6 +26,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Globals' ) ) {
 		 * Set the Translation Language.
 		 *
 		 * @since 0.8.0
+		 * @since 1.1.1   Renamed from tstats_translation_language() to translation_language().
 		 *
 		 * @return string   Translation Language as WordPress Locale ( e.g. 'pt_PT' ).
 		 */
@@ -43,6 +44,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Globals' ) ) {
 		 * Add campaign information to URL.
 		 *
 		 * @since 0.9.0
+		 * @since 1.1.1   Renamed from tstats_link() to campaign_link().
 		 *
 		 * @param string $link      Link to customize.
 		 * @param string $source    Set utm_source, default is 'tstats'.
@@ -67,6 +69,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Globals' ) ) {
 		 * Returns array of allowed HTML elements for use in wp_kses().
 		 *
 		 * @since 0.8.5
+		 * @since 1.1.1   Renamed from tstats_allowed_html() to allowed_html().
 		 *
 		 * @return array  Array of allowed HTML elements.
 		 */

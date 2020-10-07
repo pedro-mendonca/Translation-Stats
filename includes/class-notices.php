@@ -49,9 +49,10 @@ if ( ! class_exists( __NAMESPACE__ . '\Notices' ) ) {
 		 * Use 'force_show' => true to ignore the 'show_warnings' setting.
 		 *
 		 * @since 0.8.0
-		 * @since 0.9.5  Array with all the notice data.
+		 * @since 0.9.5   Array with all the notice data.
+		 * @since 1.1.1   Renamed from tstats_notice_message() to notice_message().
 		 *
-		 * @param array $args  Array of message data.
+		 * @param array $args   Array of message data.
 		 *
 		 * @return void
 		 */
