@@ -60,7 +60,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Transients' ) ) {
 		 *
 		 * @return void
 		 */
-		public function tstats_delete_transients( $prefix ) {
+		public function delete_transients( $prefix ) {
 			$tstats_transients = $this->get_transients( $prefix );
 			if ( is_array( $tstats_transients ) ) {
 				foreach ( $tstats_transients as $tstats_transient ) {
