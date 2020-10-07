@@ -200,46 +200,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 
 
 		/**
-		 * Set the translate.wordpress.org WordPress core subprojects structure with 'slug', 'name' and language file 'domain'.
-		 *
-		 * @since 0.9.5
-		 *
-		 * @return array $subprojects  Returns array of the supported WordPress translation known subprojects.
-		 */
-		public function tstats_wordpress_subprojects() {
-
-			$subprojects = array(
-				array(
-					'slug'   => '',
-					/* translators: Subproject name in translate.wordpress.org, do not translate! */
-					'name'   => _x( 'Development', 'Subproject name', 'translation-stats' ),
-					'domain' => '',
-				),
-				array(
-					'slug'   => 'admin/',
-					/* translators: Subproject name in translate.wordpress.org, do not translate! */
-					'name'   => _x( 'Administration', 'Subproject name', 'translation-stats' ),
-					'domain' => 'admin',
-				),
-				array(
-					'slug'   => 'admin/network/',
-					/* translators: Subproject name in translate.wordpress.org, do not translate! */
-					'name'   => _x( 'Network Admin', 'Subproject name', 'translation-stats' ),
-					'domain' => 'admin-network',
-				),
-				array(
-					'slug'   => 'cc/',
-					/* translators: Subproject name in translate.wordpress.org, do not translate! */
-					'name'   => _x( 'Continents & Cities', 'Subproject name', 'translation-stats' ),
-					'domain' => 'continents-cities',
-				),
-			);
-
-			return $subprojects;
-		}
-
-
-		/**
 		 * Get Translate API URL.
 		 *
 		 * Example:
