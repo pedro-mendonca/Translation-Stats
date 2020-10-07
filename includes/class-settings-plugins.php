@@ -250,9 +250,13 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Plugins' ) ) {
 		public function settings_projects_table_row( $table_args, $plugin ) {
 
 			// Get general options.
-			$options         = get_option( TSTATS_WP_OPTION );
+			$options = get_option( TSTATS_WP_OPTION );
+
+			// Get the Translation Stats configured language.
 			$translationstats_language = $this->globals->translation_language();
-			$locale          = Translations_API::locale( $translationstats_language );
+
+			// Get locale data.
+			$locale = Translations_API::locale( $translationstats_language );
 
 			// Table options.
 			$table_prefix          = $table_args['table_prefix'];
