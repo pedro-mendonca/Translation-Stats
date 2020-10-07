@@ -85,14 +85,17 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * @return array $columns  Columns array with added 'translation-stats'.
 		 */
 		public function tstats_add_translation_stats_column( $columns ) {
-			$tstats_language = $this->globals->translation_language();
-			$settings_link   = sprintf(
+
+			// Get the Translation Stats configured language.
+			$translationstats_language = $this->globals->translation_language();
+
+			$settings_link = sprintf(
 				'<a href="%s" aria-label="%s"><span class="dashicons dashicons-edit"></span></a>',
 				esc_url( add_query_arg( 'page', 'translation-stats#plugins', admin_url( 'options-general.php' ) ) ),
 				esc_html__( 'Edit plugins settings', 'translation-stats' )
 			);
 			// Check if user locale is not 'en_US'.
-			if ( 'en_US' !== $tstats_language ) {
+			if ( 'en_US' !== $translationstats_language ) {
 				$columns['translation-stats'] = _x( 'Translation Stats', 'Column label', 'translation-stats' ) . ' ' . $settings_link;
 			}
 			return $columns;
@@ -115,9 +118,11 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			// Check if is in column 'translation-stats'.
 			if ( 'translation-stats' === $column_name ) {
 
-				$tstats_language = $this->globals->translation_language();
+				// Get the Translation Stats configured language.
+				$translationstats_language = $this->globals->translation_language();
+
 				// Check if user locale is not 'en_US'.
-				if ( 'en_US' !== $tstats_language ) {
+				if ( 'en_US' !== $translationstats_language ) {
 
 					$project_slug = Translations_API::plugin_metadata( $plugin_file, 'slug' );
 					$options      = get_option( TSTATS_WP_OPTION );
@@ -605,9 +610,11 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			// Get WP_Plugins_List_Table and page number.
 			global $wp_list_table, $page;
 
+			// Get the Translation Stats configured language.
+			$translationstats_language = $this->globals->translation_language();
+
 			// Check if user locale is not 'en_US'.
-			$tstats_language = $this->globals->translation_language();
-			if ( 'en_US' === $tstats_language ) {
+			if ( 'en_US' === $translationstats_language ) {
 				return;
 			}
 
@@ -671,9 +678,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * @return array                Array of status links.
 		 */
 		public function tstats_plugins_status_link( $status_links ) {
-			$tstats_language = $this->globals->translation_language();
+
+			// Get the Translation Stats configured language.
+			$translationstats_language = $this->globals->translation_language();
+
 			// Check if user locale is not 'en_US'.
-			if ( 'en_US' === $tstats_language ) {
+			if ( 'en_US' === $translationstats_language ) {
 				return $status_links;
 			}
 
