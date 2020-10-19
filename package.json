@@ -16,7 +16,7 @@
     "stylelint": "^13.7.2",
     "stylelint-config-wordpress": "^17.0.0",
     "tablesorter": "^2.31.3",
-    "uglify-js": "^3.11.2"
+    "uglify-js": "^3.11.3"
   },
   "scripts": {
     "build": "npm run build:js",
