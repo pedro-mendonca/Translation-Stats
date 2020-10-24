@@ -44,8 +44,12 @@ jobs:
   allow_failures:
   - php: nightly
     env: WP_VERSION=nightly WP_MULTISITE=0
+    install:
+    - composer install --ignore-platform-reqs
   - php: nightly
     env: WP_VERSION=nightly WP_MULTISITE=1
+    install:
+    - composer install --ignore-platform-reqs
 
 before_install:
   # Speed up build time by disabling Xdebug.
