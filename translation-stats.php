@@ -214,12 +214,20 @@ spl_autoload_register( __NAMESPACE__ . '\tstats_class_autoload' );
  */
 function tstats_class_autoload( $class_name ) {
 
-	// Set class file path and name.
-	$class_path = TSTATS_DIR_PATH . 'includes/';
-	$class_file = 'class-' . str_replace( '_', '-', strtolower( str_replace( __NAMESPACE__ . '\\', '', $class_name ) ) ) . '.php';
-	$class      = $class_path . $class_file;
+	$project_namespace = __NAMESPACE__ . '\\';
+	// Class is not in our namespace.
+	if ( 0 !== strncmp( $project_namespace, $class_name, strlen( $project_namespace ) ) ) {
+		return;
+	}
 
-	if ( ! file_exists( $class ) ) {
+	// Set class file's full path.
+	$class = sprintf(
+		'%sincludes/class-%s.php',
+		TSTATS_DIR_PATH,
+		str_replace( '_', '-', strtolower( str_replace( $project_namespace, '', $class_name ) ) )
+	);
+
+	if ( ! is_file( $class ) ) {
 		return;
 	}
 
