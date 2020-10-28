@@ -39,7 +39,8 @@ jobs:
 
     # PHP versions 7.4 and 8.0 already supported by the Focal dist.
     # https://docs.travis-ci.com/user/reference/focal/#php-support
-  - php: nightly # Nightly is PHP 8.0 since Feb 2019.
+  - name: "PHP: 8.0" # Nightly is PHP 8.0 since Feb 2019.
+    php: nightly
     dist: focal
     env: WP_VERSION=nightly WP_MULTISITE=0
     # install:
