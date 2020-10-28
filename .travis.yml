@@ -1,5 +1,5 @@
 os: linux
-dist: trusty
+dist: bionic
 
 # Declare project language.
 # @link http://about.travis-ci.org/docs/user/languages/php/
@@ -19,17 +19,17 @@ cache:
   directories:
     - $HOME/.composer/cache
 
+########################
+# Default dist builds. #
+########################
 php:
-  - 7.4
   - 7.3
   - 7.2
   - 7.1
-  - 7.0
-  - 5.6
 
 env:
   - WP_VERSION=latest WP_MULTISITE=0
-#  - WP_VERSION=latest WP_MULTISITE=1
+  # - WP_VERSION=latest WP_MULTISITE=1
 
 jobs:
   include:
