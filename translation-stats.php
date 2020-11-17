@@ -215,12 +215,13 @@ spl_autoload_register( __NAMESPACE__ . '\tstats_class_autoload' );
 function tstats_class_autoload( $class_name ) {
 
 	$project_namespace = __NAMESPACE__ . '\\';
-	// Class is not in our namespace.
+
+	// Check if class is in the project namespace.
 	if ( 0 !== strncmp( $project_namespace, $class_name, strlen( $project_namespace ) ) ) {
 		return;
 	}
 
-	// Set class file's full path.
+	// Set class file full path.
 	$class = sprintf(
 		'%sincludes/class-%s.php',
 		TSTATS_DIR_PATH,
