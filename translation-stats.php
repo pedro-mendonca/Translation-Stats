@@ -207,6 +207,7 @@ spl_autoload_register( __NAMESPACE__ . '\tstats_class_autoload' );
  *
  * @since 0.9.6
  * @since 1.1.0  Remove namespace from class name.
+ * @since 1.1.1  Check if class exist in project namespace.
  *
  * @param string $class_name   Class name.
  *
