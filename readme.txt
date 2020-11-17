@@ -3,9 +3,9 @@ Contributors: pedromendonca
 Donate link: https://github.com/sponsors/pedro-mendonca
 Tags: internationalization, i18n, localization, l10n, translation, statistics, glotpress, dark mode
 Requires at least: 4.9
-Tested up to: 5.5
+Tested up to: 5.6
 Requires PHP: 5.6
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -65,6 +65,10 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 4. Translation Stats tools tab
 
 == Changelog ==
+
+= 1.1.1 =
+*   Tested up to WP 5.6
+*   Minor code improvements
 
 = 1.1.0 =
 *   Include Locales list since [translate.wp.org Languages API](https://translate.wordpress.org/api/languages/) was disabled on meta [changeset #10056](https://meta.trac.wordpress.org/changeset/10056)
