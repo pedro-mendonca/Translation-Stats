@@ -12,6 +12,7 @@ parameters:
 		# Plugin main file.
 		- translation-stats.php
 	ignoreErrors:
+		# GlotPress locales file.
 		-
 			path: lib/wp.org/locales.php
 			message: '#typehint specified\.$#'
