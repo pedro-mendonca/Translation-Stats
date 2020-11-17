@@ -10,6 +10,8 @@
 
 namespace Translation_Stats;
 
+use Gettext_Translations;
+
 if ( ! class_exists( __NAMESPACE__ . '\GP_Locale' ) ) :
 
 class GP_Locale {
@@ -22,6 +24,7 @@ class GP_Locale {
 	public $country_code;
 	public $wp_locale;
 	public $slug;
+	public $root_slug;
 	public $nplurals = 2;
 	public $plural_expression = 'n != 1';
 	public $google_code = null;
@@ -70,6 +73,7 @@ class GP_Locale {
 		if ( 'rtl' == $name ) {
 			return isset( $this->text_direction );
 		}
+		return false;
 	}
 
 	/**
