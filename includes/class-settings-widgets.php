@@ -107,7 +107,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Widgets' ) ) {
 						printf(
 							/* translators: Plugin name and version - Do not translate! */
 							esc_html__( 'Translation Stats %s', 'translation-stats' ),
-							'<small>v.' . esc_html( TSTATS_VERSION ) . '</small>'
+							'<small>v.' . esc_html( TRANSLATION_STATS_VERSION ) . '</small>'
 						);
 						?>
 					</p>

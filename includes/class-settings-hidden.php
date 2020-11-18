@@ -75,7 +75,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Hidden' ) ) {
 					'id'      => 'settings_version',
 					'path'    => 'settings',
 					'type'    => 'hidden',
-					'default' => TSTATS_SETTINGS_VERSION,
+					'default' => TRANSLATION_STATS_SETTINGS_VERSION,
 				)
 			);
 

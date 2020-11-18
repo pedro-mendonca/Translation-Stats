@@ -125,7 +125,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				if ( 'en_US' !== $translationstats_language ) {
 
 					$project_slug = Translations_API::plugin_metadata( $plugin_file, 'slug' );
-					$options      = get_option( TSTATS_WP_OPTION );
+					$options      = get_option( TRANSLATION_STATS_WP_OPTION );
 
 					// Show Stats only if plugin is enabled in plugin settings.
 					if ( empty( $options['plugins'][ $project_slug ]['enabled'] ) ) {
@@ -443,7 +443,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 */
 		public function tstats_render_stats_bar( $locale, $project_slug, $subproject, $subproject_slug, $force_update ) {
 
-			$options = get_option( TSTATS_WP_OPTION );
+			$options = get_option( TRANSLATION_STATS_WP_OPTION );
 			// Show bar only if subproject is enabled in plugin settings.
 			if ( empty( $options['plugins'][ $project_slug ][ $subproject_slug ] ) ) {
 				return null;
@@ -556,7 +556,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				$translation_stats = false;
 			} else {
 				// Get subproject transients.
-				$translation_stats = get_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug . '_' . $locale->wp_locale );
+				$translation_stats = get_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug . '_' . $locale->wp_locale );
 			}
 
 			if ( false === $translation_stats ) {
@@ -590,7 +590,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 					}
 				}
 
-				set_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug . '_' . $locale->wp_locale, $translation_stats, get_option( TSTATS_WP_OPTION )['settings']['transients_expiration'] );
+				set_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug . '_' . $locale->wp_locale, $translation_stats, get_option( TRANSLATION_STATS_WP_OPTION )['settings']['transients_expiration'] );
 			}
 
 			return $translation_stats;
@@ -626,7 +626,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				return;
 			}
 
-			$options = get_site_option( TSTATS_WP_OPTION );
+			$options = get_site_option( TRANSLATION_STATS_WP_OPTION );
 
 			$translationstats_plugins = array();
 
@@ -692,7 +692,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				return $status_links;
 			}
 
-			$options = get_site_option( TSTATS_WP_OPTION );
+			$options = get_site_option( TRANSLATION_STATS_WP_OPTION );
 
 			// Check if Translation Stats settings exist.
 			if ( empty( $options ) ) {

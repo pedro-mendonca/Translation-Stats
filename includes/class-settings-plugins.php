@@ -61,7 +61,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Plugins' ) ) {
 
 			register_setting(
 				'tstats_settings__plugins', // The menu page on which to display this section. Should match $menu_slug.
-				TSTATS_WP_OPTION            // The WordPress option to store Translation Stats settings.
+				TRANSLATION_STATS_WP_OPTION // The WordPress option to store Translation Stats settings.
 			);
 
 		}
@@ -250,7 +250,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Plugins' ) ) {
 		public function settings_projects_table_row( $table_args, $plugin ) {
 
 			// Get general options.
-			$options = get_option( TSTATS_WP_OPTION );
+			$options = get_option( TRANSLATION_STATS_WP_OPTION );
 
 			// Get the Translation Stats configured language.
 			$translationstats_language = $this->globals->translation_language();
@@ -312,7 +312,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Plugins' ) ) {
 				}
 			}
 
-			$field_name = TSTATS_WP_OPTION . '[plugins][' . $plugin_slug . '][enabled]';
+			$field_name = TRANSLATION_STATS_WP_OPTION . '[plugins][' . $plugin_slug . '][enabled]';
 			?>
 
 			<tr class="<?php echo esc_html( $status ); ?>">
@@ -377,7 +377,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Plugins' ) ) {
 				}
 
 				foreach ( $subprojects as $subproject ) {
-					$field_name   = TSTATS_WP_OPTION . '[plugins][' . $plugin_slug . '][' . $subproject['slug'] . ']';
+					$field_name   = TRANSLATION_STATS_WP_OPTION . '[plugins][' . $plugin_slug . '][' . $subproject['slug'] . ']';
 					$checked      = empty( $options['plugins'][ $plugin_slug ][ $subproject['slug'] ] ) ? '' : true;
 					$plugin_class = ! $disabled ? $row_id : '';
 					?>

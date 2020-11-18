@@ -59,7 +59,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Notices' ) ) {
 		public function notice_message( $args ) {
 
 			// Check if 'show_warnings' is true.
-			$wp_option = get_option( TSTATS_WP_OPTION );
+			$wp_option = get_option( TRANSLATION_STATS_WP_OPTION );
 			if ( empty( $wp_option['settings']['show_warnings'] ) && empty( $args['force_show'] ) ) {
 				return;
 			}

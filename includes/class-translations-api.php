@@ -123,7 +123,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 		 */
 		public static function plugin_project_on_translate_wporg( $project_slug ) {
 			// Check project transients.
-			$on_wporg = get_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug );
+			$on_wporg = get_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . $project_slug );
 			if ( false === $on_wporg ) {
 				$json = self::translations_api_get_plugin( $project_slug );
 				if ( is_wp_error( $json ) || wp_remote_retrieve_response_code( $json ) !== 200 ) {
@@ -131,7 +131,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 				} else {
 					$on_wporg = true;
 				}
-				set_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug, $on_wporg, get_option( TSTATS_WP_OPTION )['settings']['transients_expiration'] );
+				set_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . $project_slug, $on_wporg, get_option( TRANSLATION_STATS_WP_OPTION )['settings']['transients_expiration'] );
 			}
 			return $on_wporg;
 		}
@@ -150,7 +150,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 		 */
 		public function plugin_subproject_on_translate_wporg( $project_slug, $subproject_slug ) {
 			// Check subproject transients.
-			$on_wporg = get_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug );
+			$on_wporg = get_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug );
 			if ( false === $on_wporg ) {
 				$json = self::translations_api_get_plugin( $project_slug . '/' . $subproject_slug );
 				if ( is_wp_error( $json ) || wp_remote_retrieve_response_code( $json ) !== 200 ) {
@@ -158,7 +158,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 				} else {
 					$on_wporg = true;
 				}
-				set_transient( TSTATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug, $on_wporg, get_option( TSTATS_WP_OPTION )['settings']['transients_expiration'] );
+				set_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug, $on_wporg, get_option( TRANSLATION_STATS_WP_OPTION )['settings']['transients_expiration'] );
 			}
 			return $on_wporg;
 		}

@@ -61,7 +61,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 				return;
 			}
 
-			if ( TSTATS_SETTINGS_VERSION !== $installed_version ) {
+			if ( TRANSLATION_STATS_SETTINGS_VERSION !== $installed_version ) {
 
 				// Update settings data version.
 				$this->update_settings_version( $installed_version );
@@ -80,7 +80,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 		 */
 		public function installed_settings_version() {
 
-			$options = get_site_option( TSTATS_WP_OPTION );
+			$options = get_site_option( TRANSLATION_STATS_WP_OPTION );
 
 			// Check if Translation Stats settings exist.
 			if ( empty( $options ) ) {
@@ -120,7 +120,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 					__( 'Translation Stats settings database successfully updated from version %1$s to version %2$s.', 'translation-stats' )
 				),
 				'<code>' . esc_html( $installed_version ) . '</code>',
-				'<code>' . esc_html( TSTATS_SETTINGS_VERSION ) . '</code>'
+				'<code>' . esc_html( TRANSLATION_STATS_SETTINGS_VERSION ) . '</code>'
 			);
 
 			$admin_notice = array(
@@ -145,7 +145,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 		 */
 		public function settings_update_v0_to_v1() {
 
-			$options = get_site_option( TSTATS_WP_OPTION );
+			$options = get_site_option( TRANSLATION_STATS_WP_OPTION );
 
 			$settings_v0 = array(
 				'show_warnings',
@@ -177,14 +177,14 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 
 			$settings_v1['plugins'] = $options;
 
-			update_site_option( TSTATS_WP_OPTION, $settings_v1 );
+			update_site_option( TRANSLATION_STATS_WP_OPTION, $settings_v1 );
 
-			if ( defined( 'TSTATS_DEBUG' ) && TSTATS_DEBUG ) {
+			if ( defined( 'TRANSLATION_STATS_DEBUG' ) && TRANSLATION_STATS_DEBUG ) {
 
 				$message = sprintf(
 					'<h3>%s</h3><pre>%s</pre>',
 					esc_html__( 'Settings', 'translation-stats' ),
-					var_export( get_site_option( TSTATS_WP_OPTION )['settings'], true ) // phpcs:ignore
+					var_export( get_site_option( TRANSLATION_STATS_WP_OPTION )['settings'], true ) // phpcs:ignore
 				);
 
 				$admin_notice = array(
@@ -200,7 +200,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 				$message = sprintf(
 					'<h3>%s</h3><pre>%s</pre>',
 					esc_html__( 'Plugins', 'translation-stats' ),
-					var_export( get_site_option( TSTATS_WP_OPTION )['plugins'], true ) // phpcs:ignore
+					var_export( get_site_option( TRANSLATION_STATS_WP_OPTION )['plugins'], true ) // phpcs:ignore
 				);
 
 				$admin_notice = array(
