@@ -75,16 +75,16 @@
         },
         {
             "name": "php-stubs/wordpress-stubs",
-            "version": "v5.5.3",
+            "version": "v5.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-stubs/wordpress-stubs.git",
-                "reference": "7a8d0009b38c5fdec777a0a5333552ff6e445065"
+                "reference": "ed446cce304cd49f13900274b3ed60d1b526297e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-stubs/wordpress-stubs/zipball/7a8d0009b38c5fdec777a0a5333552ff6e445065",
-                "reference": "7a8d0009b38c5fdec777a0a5333552ff6e445065",
+                "url": "https://api.github.com/repos/php-stubs/wordpress-stubs/zipball/ed446cce304cd49f13900274b3ed60d1b526297e",
+                "reference": "ed446cce304cd49f13900274b3ed60d1b526297e",
                 "shasum": ""
             },
             "replace": {
@@ -111,7 +111,7 @@
                 "static analysis",
                 "wordpress"
             ],
-            "time": "2020-10-31T01:42:05+00:00"
+            "time": "2020-12-09T00:38:16+00:00"
         },
         {
             "name": "phpcompatibility/php-compatibility",
@@ -275,16 +275,16 @@
         },
         {
             "name": "phpstan/phpstan",
-            "version": "0.12.56",
+            "version": "0.12.64",
             "source": {
                 "type": "git",
                 "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "007fd5d700c41e1bb27795fae15a2383f8fa4ba1"
+                "reference": "23eb1cb7ae125f45f1d0e48051bcf67a9a9b08aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/007fd5d700c41e1bb27795fae15a2383f8fa4ba1",
-                "reference": "007fd5d700c41e1bb27795fae15a2383f8fa4ba1",
+                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/23eb1cb7ae125f45f1d0e48051bcf67a9a9b08aa",
+                "reference": "23eb1cb7ae125f45f1d0e48051bcf67a9a9b08aa",
                 "shasum": ""
             },
             "require": {
@@ -327,7 +327,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2020-11-16T22:59:18+00:00"
+            "time": "2020-12-21T11:59:02+00:00"
         },
         {
             "name": "squizlabs/php_codesniffer",
@@ -458,16 +458,16 @@
         },
         {
             "name": "szepeviktor/phpstan-wordpress",
-            "version": "v0.7.1",
+            "version": "v0.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/szepeviktor/phpstan-wordpress.git",
-                "reference": "6195a6a19830d5ad187df0a3fb350e77cd571a5f"
+                "reference": "191eafa7283497645de920d262133cf17de5353f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/szepeviktor/phpstan-wordpress/zipball/6195a6a19830d5ad187df0a3fb350e77cd571a5f",
-                "reference": "6195a6a19830d5ad187df0a3fb350e77cd571a5f",
+                "url": "https://api.github.com/repos/szepeviktor/phpstan-wordpress/zipball/191eafa7283497645de920d262133cf17de5353f",
+                "reference": "191eafa7283497645de920d262133cf17de5353f",
                 "shasum": ""
             },
             "require": {
@@ -514,7 +514,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2020-11-05T00:12:19+00:00"
+            "time": "2021-01-03T13:45:42+00:00"
         },
         {
             "name": "wp-coding-standards/wpcs",
