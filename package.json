@@ -8,7 +8,7 @@
   "devDependencies": {
     "@wordpress/eslint-plugin": "^7.4.0",
     "eslint": "^7.18.0",
-    "npm-check-updates": "^10.2.5",
+    "npm-check-updates": "^11.0.0",
     "remark-lint": "^8.0.0",
     "remark-preset-lint-recommended": "^5.0.0",
     "sass-lint": "^1.13.1",
