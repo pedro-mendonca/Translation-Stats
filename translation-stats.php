@@ -2,11 +2,11 @@
 /**
  * Translation Stats
  *
- * @package      Translation Stats
- * @link         https://github.com/pedro-mendonca/Translation-Stats
- * @author       Pedro Mendonça
- * @copyright    2018 Pedro Mendonça
- * @license      GPLv2
+ * @package           Translation Stats
+ * @link              https://github.com/pedro-mendonca/Translation-Stats
+ * @author            Pedro Mendonça
+ * @copyright         2018 Pedro Mendonça
+ * @license           GPL-2.0-or-later
  *
  * @wordpress-plugin
  * Plugin Name:       Translation Stats
@@ -14,9 +14,11 @@
  * GitHub Plugin URI: https://github.com/pedro-mendonca/Translation-Stats
  * Description:       Show plugins translation stats on your WordPress install.
  * Version:           1.1.1
+ * Requires at least: 4.9
+ * Requires PHP:      5.6
  * Author:            Pedro Mendonça
  * Author URI:        https://translationstats.com
- * License:           GPLv2
+ * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       translation-stats
  * Domain Path:       /languages
