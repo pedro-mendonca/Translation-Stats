@@ -68,12 +68,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Tools' ) ) {
 
 			register_setting(
 				'tstats_settings__tools__settings', // The menu page on which to display this section. Should match $menu_slug.
-				TSTATS_WP_OPTION                    // The WordPress option to store Translation Stats settings.
+				TRANSLATION_STATS_WP_OPTION         // The WordPress option to store Translation Stats settings.
 			);
 
 			register_setting(
 				'tstats_settings__tools__transients', // The menu page on which to display this section. Should match $menu_slug.
-				TSTATS_WP_OPTION                      // The WordPress option to store Translation Stats settings.
+				TRANSLATION_STATS_WP_OPTION           // The WordPress option to store Translation Stats settings.
 			);
 
 		}

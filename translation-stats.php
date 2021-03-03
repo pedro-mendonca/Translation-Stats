@@ -2,11 +2,11 @@
 /**
  * Translation Stats
  *
- * @package      Translation Stats
- * @link         https://github.com/pedro-mendonca/Translation-Stats
- * @author       Pedro Mendonça
- * @copyright    2018 Pedro Mendonça
- * @license      GPLv2
+ * @package           Translation Stats
+ * @link              https://github.com/pedro-mendonca/Translation-Stats
+ * @author            Pedro Mendonça
+ * @copyright         2018 Pedro Mendonça
+ * @license           GPL-2.0-or-later
  *
  * @wordpress-plugin
  * Plugin Name:       Translation Stats
@@ -14,9 +14,11 @@
  * GitHub Plugin URI: https://github.com/pedro-mendonca/Translation-Stats
  * Description:       Show plugins translation stats on your WordPress install.
  * Version:           1.1.1
+ * Requires at least: 4.9
+ * Requires PHP:      5.6
  * Author:            Pedro Mendonça
  * Author URI:        https://translationstats.com
- * License:           GPLv2
+ * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain:       translation-stats
  * Domain Path:       /languages
@@ -31,40 +33,40 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 // Set Translation Stats plugin version.
-define( 'TSTATS_VERSION', '1.1.1' );
+define( 'TRANSLATION_STATS_VERSION', '1.1.1' );
 
 // Set Translation Stats required PHP version. Needed for PHP compatibility check for WordPress < 5.1.
-define( 'TSTATS_REQUIRED_PHP', '5.6' );
+define( 'TRANSLATION_STATS_REQUIRED_PHP', '5.6' );
 
 // Set Translation Stats settings database version.
-define( 'TSTATS_SETTINGS_VERSION', '1.0' );
+define( 'TRANSLATION_STATS_SETTINGS_VERSION', '1.0' );
 
 // Set the WordPress option to store Translation Stats settings.
-define( 'TSTATS_WP_OPTION', 'tstats_settings' );
+define( 'TRANSLATION_STATS_WP_OPTION', 'tstats_settings' );
 
 // Set Translation Stats settings page slug.
-define( 'TSTATS_SETTINGS_PAGE', 'translation-stats' );
+define( 'TRANSLATION_STATS_SETTINGS_PAGE', 'translation-stats' );
 
 // Set Translation Stats transients prefix.
-define( 'TSTATS_TRANSIENTS_PREFIX', 'translation_stats_plugin_' );
+define( 'TRANSLATION_STATS_TRANSIENTS_PREFIX', 'translation_stats_plugin_' );
 
 // Set Translation Stats transients default 24h expiration for Translations data.
-define( 'TSTATS_TRANSIENTS_TRANSLATIONS_EXPIRATION', DAY_IN_SECONDS );
+define( 'TRANSLATION_STATS_TRANSIENTS_TRANSLATIONS_EXPIRATION', DAY_IN_SECONDS );
 
 // Set Translation Stats transients 1 week expiration for Locales data.
-define( 'TSTATS_TRANSIENTS_LOCALES_EXPIRATION', WEEK_IN_SECONDS );
+define( 'TRANSLATION_STATS_TRANSIENTS_LOCALES_EXPIRATION', WEEK_IN_SECONDS );
 
 // Set Translation Stats plugin URL.
-define( 'TSTATS_DIR_URL', plugin_dir_url( __FILE__ ) );
+define( 'TRANSLATION_STATS_DIR_URL', plugin_dir_url( __FILE__ ) );
 
 // Set Translation Stats plugin filesystem path.
-define( 'TSTATS_DIR_PATH', plugin_dir_path( __FILE__ ) );
+define( 'TRANSLATION_STATS_DIR_PATH', plugin_dir_path( __FILE__ ) );
 
 // Set Translation Stats file path.
-define( 'TSTATS_FILE', plugin_basename( __FILE__ ) );
+define( 'TRANSLATION_STATS_FILE', plugin_basename( __FILE__ ) );
 
 // Set Translation Stats Debug ( true / false ).
-// Example: define( 'TSTATS_DEBUG', true );.
+// Example: define( 'TRANSLATION_STATS_DEBUG', true );.
 
 
 /**
@@ -149,7 +151,7 @@ function tstats_disabled_notice() {
 			printf(
 				/* translators: %s: Minimum PHP version required. */
 				esc_html__( 'Requires PHP version %s or higher.', 'translation-stats' ),
-				esc_html( TSTATS_REQUIRED_PHP )
+				esc_html( TRANSLATION_STATS_REQUIRED_PHP )
 			);
 
 			// Show aditional update link if on WP version 5.1 or higher.
@@ -184,7 +186,7 @@ function tstats_disabled_notice() {
 function tstats_compatible_version() {
 
 	// Check minimum required PHP version.
-	if ( version_compare( PHP_VERSION, TSTATS_REQUIRED_PHP, '<=' ) ) {
+	if ( version_compare( PHP_VERSION, TRANSLATION_STATS_REQUIRED_PHP, '<=' ) ) {
 		return false;
 	}
 
@@ -225,7 +227,7 @@ function tstats_class_autoload( $class_name ) {
 	// Set class file full path.
 	$class = sprintf(
 		'%sincludes/class-%s.php',
-		TSTATS_DIR_PATH,
+		TRANSLATION_STATS_DIR_PATH,
 		str_replace( '_', '-', strtolower( str_replace( $project_namespace, '', $class_name ) ) )
 	);
 

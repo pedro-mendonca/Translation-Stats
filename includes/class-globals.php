@@ -32,7 +32,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Globals' ) ) {
 		 */
 		public function translation_language() {
 			// Get Translation Language from Settings.
-			$wp_locale = get_option( TSTATS_WP_OPTION )['settings']['translation_language'];
+			$wp_locale = get_option( TRANSLATION_STATS_WP_OPTION )['settings']['translation_language'];
 			if ( ! $wp_locale || 'site-default' === $wp_locale ) {
 				$wp_locale = get_locale();
 			}

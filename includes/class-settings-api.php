@@ -166,12 +166,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_API' ) ) {
 		 * @return void
 		 */
 		public function tstats_render_input_checkbox( $args ) {
-			$field_id    = TSTATS_WP_OPTION . '[' . $args['path'] . '][' . $args['id'] . ']';
+			$field_id    = TRANSLATION_STATS_WP_OPTION . '[' . $args['path'] . '][' . $args['id'] . ']';
 			$label       = $args['label'];
 			$description = $args['description'];
 			$class       = $args['class'];
 			$default     = $args['default'];
-			$options     = get_option( TSTATS_WP_OPTION );
+			$options     = get_option( TRANSLATION_STATS_WP_OPTION );
 			$option      = empty( $options[ $args['path'] ][ $args['id'] ] ) ? '' : true;
 			$value       = is_array( $options ) ? $option : $default;
 			?>
@@ -200,13 +200,13 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_API' ) ) {
 		 */
 		public function tstats_render_input_select( $args ) {
 
-			$field_id       = TSTATS_WP_OPTION . '[' . $args['path'] . '][' . $args['id'] . ']';
+			$field_id       = TRANSLATION_STATS_WP_OPTION . '[' . $args['path'] . '][' . $args['id'] . ']';
 			$label          = $args['label'];
 			$description    = $args['description'];
 			$select_options = $args['select_options'];
 			$default        = $args['default'];
 			$size           = isset( $args['size'] ) && ! is_null( $args['size'] ) ? $args['size'] : 'regular';
-			$options        = get_option( TSTATS_WP_OPTION );
+			$options        = get_option( TRANSLATION_STATS_WP_OPTION );
 			$option         = empty( $options[ $args['path'] ][ $args['id'] ] ) ? '' : $options[ $args['path'] ][ $args['id'] ];
 			$value          = is_array( $options ) ? $option : $default;
 			?>
@@ -241,11 +241,11 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_API' ) ) {
 		 */
 		public function tstats_render_input_select__language( $args ) {
 
-			$field_id    = TSTATS_WP_OPTION . '[' . $args['path'] . '][' . $args['id'] . ']';
+			$field_id    = TRANSLATION_STATS_WP_OPTION . '[' . $args['path'] . '][' . $args['id'] . ']';
 			$label       = $args['label'];
 			$description = $args['description'];
 			$default     = $args['default'];
-			$options     = get_option( TSTATS_WP_OPTION );
+			$options     = get_option( TRANSLATION_STATS_WP_OPTION );
 			$option      = empty( $options[ $args['path'] ][ $args['id'] ] ) ? '' : $options[ $args['path'] ][ $args['id'] ];
 			$value       = is_array( $options ) ? $option : $default;
 
@@ -292,7 +292,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_API' ) ) {
 		 * @return void
 		 */
 		public function tstats_render_input_button( $args ) {
-			$field_id     = TSTATS_WP_OPTION . '[' . $args['path'] . '][' . $args['id'] . ']';
+			$field_id     = TRANSLATION_STATS_WP_OPTION . '[' . $args['path'] . '][' . $args['id'] . ']';
 			$name         = $args['name'];
 			$label        = $args['label'];
 			$description  = $args['description'];
@@ -328,9 +328,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_API' ) ) {
 		 * @return void
 		 */
 		public function tstats_render_input_hidden( $args ) {
-			$field_id = TSTATS_WP_OPTION . '[' . $args['path'] . '][' . $args['id'] . ']';
+			$field_id = TRANSLATION_STATS_WP_OPTION . '[' . $args['path'] . '][' . $args['id'] . ']';
 			$default  = $args['default'];
-			$options  = get_option( TSTATS_WP_OPTION );
+			$options  = get_option( TRANSLATION_STATS_WP_OPTION );
 			$option   = empty( $options[ $args['path'] ][ $args['id'] ] ) ? '' : $options[ $args['path'] ][ $args['id'] ];
 			$value    = is_array( $options ) ? $option : $default;
 			?>

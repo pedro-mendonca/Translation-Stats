@@ -60,7 +60,7 @@
 	<rule ref="WordPress.WP.I18n">
 		<properties>
 			<!-- Set the Text Domain. -->
-			<property name="text_domain" type="string" value="translation-stats"/>
+			<property name="text_domain" type="array" value="translation-stats"/>
 		</properties>
 	</rule>
 

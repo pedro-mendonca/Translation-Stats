@@ -34,7 +34,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 			add_action( 'admin_enqueue_scripts', array( $this, 'register_plugin_scripts' ) );
 
 			// Add Plugin action links.
-			add_filter( 'plugin_action_links_' . TSTATS_FILE, array( $this, 'plugin_action_links' ) );
+			add_filter( 'plugin_action_links_' . TRANSLATION_STATS_FILE, array( $this, 'plugin_action_links' ) );
 
 			// Initialize the plugin activation.
 			new Activation();
@@ -66,7 +66,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 		 */
 		public function plugin_action_links( $links ) {
 			$translationstats_links = array(
-				'<a href="' . admin_url( 'options-general.php?page=' . TSTATS_SETTINGS_PAGE ) . '">' . __( 'Settings', 'translation-stats' ) . '</a>',
+				'<a href="' . admin_url( 'options-general.php?page=' . TRANSLATION_STATS_SETTINGS_PAGE ) . '">' . __( 'Settings', 'translation-stats' ) . '</a>',
 			);
 			return array_merge( $translationstats_links, $links );
 		}
@@ -90,9 +90,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 
 			wp_register_style(
 				'translation-stats',
-				TSTATS_DIR_URL . 'css/admin.css',
+				TRANSLATION_STATS_DIR_URL . 'css/admin.css',
 				array(),
-				TSTATS_VERSION
+				TRANSLATION_STATS_VERSION
 			);
 
 			wp_enqueue_style( 'translation-stats' );
@@ -115,9 +115,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 
 			wp_register_style(
 				'translation-stats-dark-mode',
-				TSTATS_DIR_URL . 'css/admin-dark-mode.css',
+				TRANSLATION_STATS_DIR_URL . 'css/admin-dark-mode.css',
 				array(),
-				TSTATS_VERSION
+				TRANSLATION_STATS_VERSION
 			);
 
 			wp_enqueue_style( 'translation-stats-dark-mode' );
@@ -145,18 +145,18 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 			);
 
 			// Check for Translation Stats settings page.
-			if ( 'settings_page_' . TSTATS_SETTINGS_PAGE === $hook ) {
+			if ( 'settings_page_' . TRANSLATION_STATS_SETTINGS_PAGE === $hook ) {
 
 				// Provide minified version if SCRIPT_DEBUG is not set to true.
 				$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
 
 				wp_register_script(
 					'translation-stats-settings',
-					TSTATS_DIR_URL . 'js/tstats-settings' . $suffix . '.js',
+					TRANSLATION_STATS_DIR_URL . 'js/tstats-settings' . $suffix . '.js',
 					array(
 						'jquery',
 					),
-					TSTATS_VERSION,
+					TRANSLATION_STATS_VERSION,
 					false
 				);
 
@@ -170,7 +170,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 
 				wp_register_script(
 					'tablesorter-combined',
-					TSTATS_DIR_URL . 'js/vendor/jquery.tablesorter.combined' . $suffix . '.js',
+					TRANSLATION_STATS_DIR_URL . 'js/vendor/jquery.tablesorter.combined' . $suffix . '.js',
 					array(
 						'jquery',
 					),
@@ -190,11 +190,11 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 
 				wp_register_script(
 					'translation-stats-plugins',
-					TSTATS_DIR_URL . 'js/tstats-plugins' . $suffix . '.js',
+					TRANSLATION_STATS_DIR_URL . 'js/tstats-plugins' . $suffix . '.js',
 					array(
 						'jquery',
 					),
-					TSTATS_VERSION,
+					TRANSLATION_STATS_VERSION,
 					false
 				);
 
@@ -223,7 +223,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 		public function allowed_pages( $hook ) {
 
 			// Check for plugins page, updates page and Translation Stats settings page.
-			if ( 'plugins.php' === $hook || 'update-core.php' === $hook || 'settings_page_' . TSTATS_SETTINGS_PAGE === $hook ) {
+			if ( 'plugins.php' === $hook || 'update-core.php' === $hook || 'settings_page_' . TRANSLATION_STATS_SETTINGS_PAGE === $hook ) {
 				return true;
 			}
 

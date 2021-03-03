@@ -61,7 +61,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_General' ) ) {
 
 			register_setting(
 				'tstats_settings__general', // The menu page on which to display this section. Should match $menu_slug.
-				TSTATS_WP_OPTION            // The WordPress option to store Translation Stats settings.
+				TRANSLATION_STATS_WP_OPTION // The WordPress option to store Translation Stats settings.
 			);
 
 		}

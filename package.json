@@ -1,22 +1,21 @@
 {
   "requires": true,
   "lockfileVersion": 1,
-  "dependencies": {},
   "name": "translation-stats",
   "description": "The plugin adds a \"Translation Stats\" column to the plugin list screen in WordPress admin.",
   "version": "1.1.0",
   "devDependencies": {
-    "@wordpress/eslint-plugin": "^7.3.0",
-    "eslint": "^7.13.0",
-    "npm-check-updates": "^10.2.1",
+    "@wordpress/eslint-plugin": "^8.0.2",
+    "eslint": "^7.21.0",
+    "npm-check-updates": "^11.1.10",
     "remark-lint": "^8.0.0",
     "remark-preset-lint-recommended": "^5.0.0",
-    "sass-lint": "^1.13.1",
+    "sass-lint": "^1.13.0",
     "scss": "^0.2.4",
-    "stylelint": "^13.7.2",
+    "stylelint": "^13.11.0",
     "stylelint-config-wordpress": "^17.0.0",
     "tablesorter": "^2.31.3",
-    "uglify-js": "^3.11.6"
+    "uglify-js": "^3.13.0"
   },
   "scripts": {
     "build": "npm run build:js",

@@ -75,7 +75,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 		 * @return void
 		 */
 		public function tstats_settings_tab__debug() {
-			if ( defined( 'TSTATS_DEBUG' ) && TSTATS_DEBUG ) {
+			if ( defined( 'TRANSLATION_STATS_DEBUG' ) && TRANSLATION_STATS_DEBUG ) {
 				?>
 				<a class="nav-tab" href="#debug"><span class="dashicons dashicons-info"></span> <?php esc_html_e( 'Debug', 'translation-stats' ); ?></a>
 				<?php
@@ -91,7 +91,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 		 * @return void
 		 */
 		public function tstats_settings_content__debug() {
-			if ( defined( 'TSTATS_DEBUG' ) && TSTATS_DEBUG ) {
+			if ( defined( 'TRANSLATION_STATS_DEBUG' ) && TRANSLATION_STATS_DEBUG ) {
 				?>
 				<div id="tab-debug" class="tab-content hidden">
 					<?php
@@ -113,7 +113,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 		 */
 		public function tstats_settings_section__debug() {
 
-			if ( defined( 'TSTATS_DEBUG' ) && TSTATS_DEBUG ) {
+			if ( defined( 'TRANSLATION_STATS_DEBUG' ) && TRANSLATION_STATS_DEBUG ) {
 
 				add_settings_section(
 					'tstats_settings_advanced_debug',                          // String for use in the 'id' attribute of tags.
@@ -158,7 +158,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 		 * @return void
 		 */
 		public function tstats_debug_info() {
-			if ( defined( 'TSTATS_DEBUG' ) && TSTATS_DEBUG ) {
+			if ( defined( 'TRANSLATION_STATS_DEBUG' ) && TRANSLATION_STATS_DEBUG ) {
 				?>
 				<br>
 				<div class="tstats-debug-block notice notice-alt inline notice-info">
@@ -269,7 +269,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 		 */
 		public function tstats_debug_info__settings() {
 			// Get plugin settings.
-			$options = get_option( TSTATS_WP_OPTION );
+			$options = get_option( TRANSLATION_STATS_WP_OPTION );
 			?>
 			<h3>
 				<?php esc_html_e( 'Translation Stats', 'translation-stats' ); ?>
@@ -279,7 +279,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 				printf(
 					/* translators: %s: User Locale code. */
 					esc_html__( 'Version: %s', 'translation-stats' ),
-					'<code>' . esc_html( TSTATS_VERSION ) . '</code>'
+					'<code>' . esc_html( TRANSLATION_STATS_VERSION ) . '</code>'
 				);
 				?>
 			</p>
@@ -288,7 +288,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 				printf(
 					/* translators: %s: User Locale code. */
 					esc_html__( 'Settings database version: %s', 'translation-stats' ),
-					'<code>' . esc_html( TSTATS_SETTINGS_VERSION ) . '</code>'
+					'<code>' . esc_html( TRANSLATION_STATS_SETTINGS_VERSION ) . '</code>'
 				);
 				?>
 			</p>
@@ -310,7 +310,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 				printf(
 					/* translators: %s: Page Name. */
 					esc_html__( 'Settings Page: %s', 'translation-stats' ),
-					'<code>' . esc_html( TSTATS_SETTINGS_PAGE ) . '</code>'
+					'<code>' . esc_html( TRANSLATION_STATS_SETTINGS_PAGE ) . '</code>'
 				);
 				?>
 			</p>
@@ -319,7 +319,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 				printf(
 					/* translators: %s: Option Name. */
 					esc_html__( 'WordPress Option: %s', 'translation-stats' ),
-					'<code>' . esc_html( TSTATS_WP_OPTION ) . '</code>'
+					'<code>' . esc_html( TRANSLATION_STATS_WP_OPTION ) . '</code>'
 				);
 				?>
 			</p>
@@ -376,7 +376,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 				printf(
 					/* translators: %s: Prefix Name. */
 					esc_html__( 'Transients Prefix: %s', 'translation-stats' ),
-					'<code>' . esc_html( TSTATS_TRANSIENTS_PREFIX ) . '</code>'
+					'<code>' . esc_html( TRANSLATION_STATS_TRANSIENTS_PREFIX ) . '</code>'
 				);
 				?>
 			</p>
@@ -386,7 +386,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 			<div>
 				<code class="tstats-code-block">
 					<?php
-					$transients = $this->transients->get_transients( TSTATS_TRANSIENTS_PREFIX );
+					$transients = $this->transients->get_transients( TRANSLATION_STATS_TRANSIENTS_PREFIX );
 					if ( ! empty( $transients ) ) {
 						foreach ( $transients as $transient ) {
 							echo esc_html( substr( $transient, strlen( '_transient_' ) ) );
@@ -416,7 +416,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 		 * @return void
 		 */
 		public function tstats_debug_setting_field_info( $field_id, $value, $default ) {
-			if ( defined( 'TSTATS_DEBUG' ) && TSTATS_DEBUG ) {
+			if ( defined( 'TRANSLATION_STATS_DEBUG' ) && TRANSLATION_STATS_DEBUG ) {
 				?>
 				<div class="tstats-debug-block notice notice-alt inline notice-info">
 					<p>
@@ -464,7 +464,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 		 * @return void
 		 */
 		public function tstats_settings_plugin_widget__debug( $project_slug, $plugin_on_wporg, $plugin_translation_on_wporg ) {
-			if ( defined( 'TSTATS_DEBUG' ) && TSTATS_DEBUG ) {
+			if ( defined( 'TRANSLATION_STATS_DEBUG' ) && TRANSLATION_STATS_DEBUG ) {
 				?>
 				<div class="tstats-debug-block notice notice-alt inline notice-info">
 					<p>

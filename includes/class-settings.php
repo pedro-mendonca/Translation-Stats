@@ -120,7 +120,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 				esc_html_x( 'Translation Stats', 'Options Page Title', 'translation-stats' ), // The text to be displayed in the title tag.
 				esc_html_x( 'Translation Stats', 'Options Page Title', 'translation-stats' ), // The text to be used for the menu.
 				'manage_options',                                                             // The capability required to display this menu.
-				TSTATS_SETTINGS_PAGE,                                                         // The unique slug name to refer to this menu.
+				TRANSLATION_STATS_SETTINGS_PAGE,                                              // The unique slug name to refer to this menu.
 				array( $this, 'options_page' )                                                // The function to output the page content.
 			);
 		}
@@ -171,7 +171,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 				}
 
 				// Update to default settings.
-				update_option( TSTATS_WP_OPTION, $this->settings_defaults() );
+				update_option( TRANSLATION_STATS_WP_OPTION, $this->settings_defaults() );
 
 				$admin_notice = array(
 					'type'        => 'success',
@@ -203,7 +203,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 				}
 				// Delete translations stats and available languages transients.
 				// The transient 'translation_stats_plugin_available_translations' will be immediatly rebuilt on tstats_render_settings__plugins_list() loading.
-				$this->transients->delete_transients( TSTATS_TRANSIENTS_PREFIX );
+				$this->transients->delete_transients( TRANSLATION_STATS_TRANSIENTS_PREFIX );
 				$admin_notice = array(
 					'type'        => 'success',
 					'notice-alt'  => false,
@@ -245,8 +245,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 					'show_warnings'            => true,
 					'translation_language'     => 'site-default',
 					'delete_data_on_uninstall' => true,
-					'transients_expiration'    => TSTATS_TRANSIENTS_TRANSLATIONS_EXPIRATION,
-					'settings_version'         => TSTATS_SETTINGS_VERSION,
+					'transients_expiration'    => TRANSLATION_STATS_TRANSIENTS_TRANSLATIONS_EXPIRATION,
+					'settings_version'         => TRANSLATION_STATS_SETTINGS_VERSION,
 				),
 			);
 			return $defaults;
