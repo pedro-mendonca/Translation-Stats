@@ -9,11 +9,11 @@
 .gitignore          export-ignore
 .remarkrc           export-ignore
 .stylelintrc        export-ignore
-.travis.yml         export-ignore
 composer.json       export-ignore
 composer.lock       export-ignore
 package-lock.json   export-ignore
 package.json        export-ignore
+phpcompat.xml       export-ignore
 phpcs.xml           export-ignore
 phpstan.neon        export-ignore
 readme.txt          export-ignore

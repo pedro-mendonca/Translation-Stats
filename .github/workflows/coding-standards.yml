@@ -1,0 +1,59 @@
+name: Coding Standards
+
+on: [push, pull_request ]
+
+jobs:
+  # Runs PHP coding standards checks.
+  #
+  # Violations are reported inline with annotations.
+  #
+  # Performs the following steps:
+  # - Checks out the repository.
+  # - Sets up PHP.
+  # - Logs debug information.
+  # - Installs Composer dependencies (use cache if possible).
+  # - Make Composer packages available globally.
+  # - Logs PHP_CodeSniffer debug information.
+  # - Runs PHPCS on the full codebase.
+  phpcs:
+    name: PHP coding standards
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4' # Results are the same across all versions, check only in the last stable version.
+          tools: cs2pr
+        env:
+          fail-fast: false
+
+      - name: Log debug information
+        run: |
+          php --version
+          composer --version
+
+      - name: Check syntax error in sources
+        run: find -L . -path ./vendor -prune -o -name \*.php -print0 | xargs -0 -n 1 -P 4 php -l
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
+
+      - name: Install Composer dependencies
+        uses: ramsey/composer-install@v1
+
+      - name: Make Composer packages available globally
+        run: echo "${PWD}/vendor/bin" >> $GITHUB_PATH
+
+      - name: Log PHPCS debug information
+        run: composer phpcs-i
+
+      - name: Run the PHP code sniffer
+        continue-on-error: true
+        run: phpcs --report-full --report-checkstyle=./phpcs-report.xml
+
+      - name: Show PHPCS results in PR
+        run: cs2pr ./phpcs-report.xml
