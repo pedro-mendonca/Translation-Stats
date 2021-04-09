@@ -2,7 +2,7 @@
 /**
  * Translation Stats
  *
- * @package           Translation Stats
+ * @package           TranslationStats
  * @link              https://github.com/pedro-mendonca/Translation-Stats
  * @author            Pedro Mendonça
  * @copyright         2018 Pedro Mendonça
@@ -15,6 +15,7 @@
  * Description:       Show plugins translation stats on your WordPress install.
  * Version:           1.1.2
  * Requires at least: 4.9
+ * Tested up to:      5.7
  * Requires PHP:      5.6
  * Author:            Pedro Mendonça
  * Author URI:        https://translationstats.com
@@ -236,6 +237,7 @@ function tstats_class_autoload( $class_name ) {
 	}
 
 	require_once $class;
+
 }
 
 
