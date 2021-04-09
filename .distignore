@@ -20,10 +20,8 @@ README.md
 .eslintrc
 .remarkrc
 .stylelintrc
+phpcompat.xml
 phpcs.xml
-
-# Travis
-.travis.yml
 
 # Composer
 composer.json

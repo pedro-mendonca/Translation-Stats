@@ -8,13 +8,13 @@
 [![WordPress Plugin Downloads](https://img.shields.io/wordpress/plugin/dt/translation-stats.svg?label=Downloads&logo=wordpress)](https://wordpress.org/plugins/translation-stats/advanced/)
 [![Sponsor](https://img.shields.io/badge/GitHub-🤍%20Sponsor-ea4aaa?logo=github)](https://github.com/sponsors/pedro-mendonca)
 
-[![PHP from Travis config](https://img.shields.io/travis/php-v/pedro-mendonca/Translation-Stats.svg?logoColor=white&label=PHP%20Required&logo=php)](https://travis-ci.org/pedro-mendonca/Translation-Stats)
+[![WordPress Plugin Required PHP Version](https://img.shields.io/wordpress/plugin/required-php/translation-stats?label=PHP%20Required&logo=php&logoColor=white)](https://wordpress.org/plugins/translation-stats/)
 [![WordPress Plugin: Required WP Version](https://img.shields.io/wordpress/plugin/wp-version/translation-stats?label=WordPress%20Required&logo=wordpress)](https://wordpress.org/plugins/translation-stats/)
 [![WordPress Plugin: Tested WP Version](https://img.shields.io/wordpress/plugin/tested/translation-stats.svg?label=WordPress%20Tested&logo=wordpress)](https://wordpress.org/plugins/translation-stats/)
 
-[![Build Status](https://img.shields.io/travis/com/pedro-mendonca/Translation-Stats?label=Build&logo=travis)](https://travis-ci.com/github/pedro-mendonca/Translation-Stats)
+[![Coding Standards](https://github.com/pedro-mendonca/Translation-Stats/actions/workflows/coding-standards.yml/badge.svg)](https://github.com/pedro-mendonca/Translation-Stats/actions/workflows/coding-standards.yml)
+[![Static Analysis](https://github.com/pedro-mendonca/Translation-Stats/actions/workflows/static-analysis.yml/badge.svg)](https://github.com/pedro-mendonca/Translation-Stats/actions/workflows/static-analysis.yml)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/bcd1b44a1d6542e2b75b7b479ce56804)](https://www.codacy.com/app/pedro-mendonca/Translation-Stats?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=pedro-mendonca/Translation-Stats&amp;utm_campaign=Badge_Grade)
-[![PHPStan Level](https://img.shields.io/badge/PHPStan%20Level-6-brightgreen)](https://travis-ci.org/pedro-mendonca/Translation-Stats)
 
 **Contributors:** pedromendonca  
 **Donate link:** [github.com/sponsors/pedro-mendonca](https://github.com/sponsors/pedro-mendonca)  

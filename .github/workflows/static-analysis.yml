@@ -1,0 +1,51 @@
+name: Static Analysis
+
+on: [push, pull_request ]
+
+jobs:
+  # Runs PHPStan Static Analysis.
+  #
+  # Violations are reported inline with annotations.
+  #
+  # Performs the following steps:
+  # - Checks out the repository.
+  # - Sets up PHP.
+  # - Logs debug information.
+  # - Installs Composer dependencies (use cache if possible).
+  # - Make Composer packages available globally.
+  # - Runs PHPStan on the full codebase.
+  phpstan:
+    name: Static Analysis (PHP ${{ matrix.php-versions }})
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php-versions: ['7.1', '7.2', '7.3', '7.4', '8.0'] # 5.6 and 7.0 not supported by PHPStan.
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php-versions }}
+          tools: cs2pr, phpstan
+
+      - name: Log debug information
+        run: |
+          php --version
+          composer --version
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
+
+      - name: Install Composer dependencies
+        uses: ramsey/composer-install@v1
+
+      - name: Make Composer packages available globally
+        run: echo "${PWD}/vendor/bin" >> $GITHUB_PATH
+
+      - name: Run PHPStan static analysis (PHP ${{ matrix.php-versions }})
+        run: phpstan analyse -c phpstan.neon --error-format=checkstyle --memory-limit=1G | cs2pr

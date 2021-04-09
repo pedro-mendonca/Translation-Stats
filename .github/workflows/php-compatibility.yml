@@ -1,0 +1,44 @@
+name: PHP Compatibility
+
+on: [push, pull_request ]
+
+jobs:
+  # Runs PHP compatibility check.
+  #
+  # Violations are reported inline with annotations.
+  #
+  # Performs the following steps:
+  # - Checks out the repository.
+  # - Sets up PHP.
+  # - Logs debug information about the runner container.
+  # - Installs Composer dependencies (use cache if possible).
+  # - Logs PHP_CodeSniffer debug information.
+  # - Runs the PHP compatibility tests.
+  php-compatibility:
+    name: Check PHP compatibility
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4' # Results are the same across all versions, check only in the last stable version.
+        env:
+          fail-fast: false
+
+      - name: Log debug information
+        run: |
+          php --version
+          composer --version
+
+      - name: Install Composer dependencies
+        uses: ramsey/composer-install@v1
+
+      - name: Log PHPCS debug information
+        run: composer phpcs-i
+
+      - name: Run PHP compatibility tests
+        run: composer compat
