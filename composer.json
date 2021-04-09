@@ -1,46 +1,46 @@
 {
-  "name": "pedro-mendonca/translation-stats",
-  "description": "Show plugins translation stats on your WordPress install.",
-  "type": "wordpress-plugin",
-  "license": "GPL-2.0-or-later",
-  "authors": [
-    {
-      "name": "Pedro Mendonça",
-      "email": "ped.gaspar@gmail.com",
-      "homepage": "https://pedromendonca.pt"
-    }
-  ],
-  "require": {
-    "php": ">=5.6"
-  },
-  "require-dev": {
-    "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
-    "wp-coding-standards/wpcs": "^2.3.0",
-    "phpcompatibility/phpcompatibility-wp": "^2.1.1",
-    "szepeviktor/phpstan-wordpress": "^0.7.5"
-  },
-  "config": {
-    "optimize-autoloader": true
-  },
-  "scripts": {
-    "test": [
-      "@lint",
-      "@analyse"
-    ],
-    "phpcs-i": "phpcs -i",
-    "lint": "phpcs -v --standard=phpcs.xml",
-    "format": "phpcbf -v --standard=phpcs.xml",
-    "compat": "phpcs -v --standard=phpcompat.xml",
-    "analyse": "phpstan analyse -c phpstan.neon --memory-limit=1G",
-    "scripts-list": "composer run-script --list"
-  },
-  "scripts-descriptions": {
-    "test": "Runs all available code tests (PHP_CodeSniffer and PHPStan).",
-    "phpcs-i": "Log PHPCS debug information.",
-    "lint": "Runs the PHP code sniffer.",
-    "format": "Runs the PHP code sniffer and automatically fix errors.",
-    "compat": "Runs the PHPCompatibilityWP code sniffer.",
-    "analyse": "Runs the PHPStan code static analysis.",
-    "scripts-list": "List all Composer scripts."
-  }
+	"name": "pedro-mendonca/translation-stats",
+	"description": "Show plugins translation stats on your WordPress install.",
+	"type": "wordpress-plugin",
+	"license": "GPL-2.0-or-later",
+	"authors": [
+		{
+			"name": "Pedro Mendonça",
+			"email": "ped.gaspar@gmail.com",
+			"homepage": "https://pedromendonca.pt"
+		}
+	],
+	"require": {
+		"php": ">=5.6"
+	},
+	"require-dev": {
+		"dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
+		"wp-coding-standards/wpcs": "^2.3.0",
+		"phpcompatibility/phpcompatibility-wp": "^2.1.1",
+		"szepeviktor/phpstan-wordpress": "^0.7.5"
+	},
+	"config": {
+		"optimize-autoloader": true
+	},
+	"scripts": {
+		"test": [
+			"@lint",
+			"@analyse"
+		],
+		"phpcs-i": "phpcs -i",
+		"lint": "phpcs -v --standard=phpcs.xml",
+		"format": "phpcbf -v --standard=phpcs.xml",
+		"compat": "phpcs -v --standard=phpcompat.xml",
+		"analyse": "phpstan analyse -c phpstan.neon --memory-limit=1G",
+		"scripts-list": "composer run-script --list"
+	},
+	"scripts-descriptions": {
+		"test": "Runs all available code tests (PHP_CodeSniffer and PHPStan).",
+		"phpcs-i": "Log PHPCS debug information.",
+		"lint": "Runs the PHP code sniffer.",
+		"format": "Runs the PHP code sniffer and automatically fix errors.",
+		"compat": "Runs the PHPCompatibilityWP code sniffer.",
+		"analyse": "Runs the PHPStan code static analysis.",
+		"scripts-list": "List all Composer scripts."
+	}
 }
