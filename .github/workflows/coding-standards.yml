@@ -1,6 +1,12 @@
 name: Coding Standards
 
-on: [push, pull_request ]
+on:
+  push:
+    branches: [ master, dev ]
+  pull_request:
+    branches: [ master, dev ]
+  # Allows you to run this workflow manually from the Actions tab.
+  workflow_dispatch:
 
 jobs:
   # Runs PHP coding standards checks.
@@ -27,6 +33,7 @@ jobs:
         uses: shivammathur/setup-php@v2
         with:
           php-version: '7.4' # Results are the same across all versions, check only in the last stable version.
+          coverage: none
           tools: cs2pr
         env:
           fail-fast: false
