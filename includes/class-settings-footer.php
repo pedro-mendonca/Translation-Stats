@@ -2,7 +2,7 @@
 /**
  * Class file for registering Translation Stats settings footer.
  *
- * @package Translation Stats
+ * @package Translation_Stats
  *
  * @since 0.9.0
  */

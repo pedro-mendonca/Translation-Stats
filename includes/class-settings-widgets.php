@@ -2,9 +2,9 @@
 /**
  * Class file for registering Translation Stats settings widgets.
  *
- * @since 0.9.0
+ * @package Translation_Stats
  *
- * @package Translation Stats
+ * @since 0.9.0
  */
 
 namespace Translation_Stats;

@@ -2,7 +2,7 @@
 /**
  * Translation Stats
  *
- * @package           TranslationStats
+ * @package           Translation_Stats
  * @link              https://github.com/pedro-mendonca/Translation-Stats
  * @author            Pedro Mendonça
  * @copyright         2018 Pedro Mendonça

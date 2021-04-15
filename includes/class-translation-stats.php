@@ -2,7 +2,7 @@
 /**
  * Primary class file for the Translation Stats plugin.
  *
- * @package Translation Stats
+ * @package Translation_Stats
  *
  * @since 0.8.0
  */
