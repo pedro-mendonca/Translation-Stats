@@ -2,9 +2,9 @@
 /**
  * Class file for registering Translation Stats Hidden Settings.
  *
- * @since 1.0.0
+ * @package Translation_Stats
  *
- * @package Translation Stats
+ * @since 1.0.0
  */
 
 namespace Translation_Stats;

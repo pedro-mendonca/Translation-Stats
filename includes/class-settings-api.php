@@ -2,7 +2,7 @@
 /**
  * Class file for registering Translation Stats Settings API.
  *
- * @package Translation Stats
+ * @package Translation_Stats
  *
  * @since 0.8.0
  */

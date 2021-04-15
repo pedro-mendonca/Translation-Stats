@@ -2,7 +2,7 @@
 /**
  * Class file for registering Translation Stats Debug.
  *
- * @package Translation Stats
+ * @package Translation_Stats
  *
  * @since 0.8.0
  */
