@@ -44,7 +44,7 @@ jobs:
           composer --version
 
       - name: Check syntax error in sources
-        run: find -L . -path ./vendor -prune -o -name \*.php -print0 | xargs -0 -n 1 -P 4 php -l
+        run: find -L . -path ./vendor -prune -o -name '*.php' -print0 | xargs -0 -n 1 -P 4 php -l
 
       - name: Validate composer.json and composer.lock
         run: composer validate --strict
