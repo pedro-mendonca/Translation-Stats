@@ -25,7 +25,7 @@
 		"lint": "eslint .",
 		"lint-fix": "eslint . --fix",
 		"update": "npm-check-updates",
-		"lint:css": "wp-scripts lint-style ./css/*.scss",
+		"lint:css": "wp-scripts lint-style ./css/*.*css",
 		"lint:js": "wp-scripts lint-js ./js/*.js"
 	},
 	"repository": {
