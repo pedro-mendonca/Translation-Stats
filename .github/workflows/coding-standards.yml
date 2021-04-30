@@ -64,3 +64,41 @@ jobs:
 
       - name: Show PHPCS results in PR
         run: cs2pr ./phpcs-report.xml
+
+  # Runs the JavaScript and CSS coding standards checks.
+  #
+  # JS and CSS violations are not currently reported inline with annotations.
+  #
+  # Performs the following steps:
+  # - Checks out the repository.
+  # - Installs NodeJS 16.
+  # - Sets up caching for NPM.
+  # - Logs updated debug information.
+  # _ Installs NPM dependencies using install-changed to hash the `package.json` file.
+  # - Run the WordPress ESLint checks.
+  js-css-cs:
+    name: JavaScript and CSS coding standards
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 15
+
+      - name: Log debug information
+        run: |
+          npm --version
+          node --version
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Run JS Lint
+        run: npm run lint:js
+
+      - name: Run CSS Lint
+        run: npm run lint:css
