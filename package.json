@@ -15,7 +15,7 @@
 		"sass-lint": "^1.13.1",
 		"scss": "^0.2.4",
 		"tablesorter": "^2.31.3",
-		"uglify-js": "^3.13.5"
+		"uglify-js": "^3.13.6"
 	},
 	"scripts": {
 		"build": "npm run build:js",
