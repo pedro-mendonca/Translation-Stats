@@ -6,7 +6,7 @@
 	"version": "1.1.2",
 	"devDependencies": {
 		"@wordpress/eslint-plugin": "^9.0.4",
-		"@wordpress/scripts": "^16.0.0",
+		"@wordpress/scripts": "^16.1.1",
 		"eslint": "^7.26.0",
 		"node-sass": "^6.0.0",
 		"npm-check-updates": "^11.5.13",
