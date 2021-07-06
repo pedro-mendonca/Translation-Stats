@@ -1,7 +1,7 @@
 === Translation Stats ===
 Contributors: pedromendonca
 Donate link: https://github.com/sponsors/pedro-mendonca
-Tags: internationalization, i18n, localization, l10n, translation, statistics, glotpress, dark mode
+Tags: internationalization, i18n, localization, l10n, translation, statistics, glotpress
 Requires at least: 4.9
 Tested up to: 5.7
 Requires PHP: 5.6
@@ -48,9 +48,6 @@ Since mid-April 2016, not only new strings but also edits are synced between dev
 Translations for the readme are published almost immediately.
 The language pack for a plugin will be generated when 90% of the Stable (latest release) sub-project strings have been translated and approved.
 
-= Is this plugin compatible with Dark Mode? =
-Yes, Translation Stats includes a color scheme that works specifically with the plugin [Dark Mode](https://wordpress.org/plugins/dark-mode/).
-
 = Can I help translating this plugin to my own language? =
 Yes you can! If you want to translate this plugin to your language, please [click here](https://translate.wordpress.org/projects/wp-plugins/translation-stats).
 
@@ -65,6 +62,10 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 4. Translation Stats tools tab
 
 == Changelog ==
+
+= Unreleased =
+*   Tested up to WP 5.8
+*   Remove deprecated dark-mode compatibility
 
 = 1.1.2 =
 *   Tested up to WP 5.7

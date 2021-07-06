@@ -97,30 +97,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 
 			wp_enqueue_style( 'translation-stats' );
 
-			// Add Dark Mode style sheet.
-			// https://github.com/danieltj27/Dark-Mode/wiki/Help:-Plugin-Compatibility-Guide.
-			add_action( 'doing_dark_mode', array( $this, 'register_plugin_styles_dark_mode' ) );
-		}
-
-
-		/**
-		 * Register and enqueue Dark Mode style sheet.
-		 *
-		 * @since 0.8.0
-		 * @since 1.1.1   Renamed from tstats_register_plugin_styles_dark_mode() to register_plugin_styles_dark_mode().
-		 *
-		 * @return void
-		 */
-		public function register_plugin_styles_dark_mode() {
-
-			wp_register_style(
-				'translation-stats-dark-mode',
-				TRANSLATION_STATS_DIR_URL . 'css/admin-dark-mode.css',
-				array(),
-				TRANSLATION_STATS_VERSION
-			);
-
-			wp_enqueue_style( 'translation-stats-dark-mode' );
 		}
 
 
