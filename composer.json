@@ -17,30 +17,53 @@
 		"dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
 		"wp-coding-standards/wpcs": "^2.3.0",
 		"phpcompatibility/phpcompatibility-wp": "^2.1.1",
-		"szepeviktor/phpstan-wordpress": "^0.7.5"
+		"szepeviktor/phpstan-wordpress": "^0.7.6"
 	},
 	"config": {
 		"optimize-autoloader": true
 	},
 	"scripts": {
 		"test": [
-			"@lint",
-			"@analyse"
+			"@lint:php",
+			"@analyse:php",
+			"@lint:css",
+			"@lint:js"
 		],
 		"phpcs-i": "phpcs -i",
-		"lint": "phpcs -v --standard=phpcs.xml",
-		"format": "phpcbf -v --standard=phpcs.xml",
-		"compat": "phpcs -v --standard=phpcompat.xml",
-		"analyse": "phpstan analyse -c phpstan.neon --memory-limit=1G",
-		"scripts-list": "composer run-script --list"
+		"lint:php": "phpcs -v --standard=phpcs.xml",
+		"format:php": "phpcbf -v --standard=phpcs.xml",
+		"compat:php": "phpcs -v --standard=phpcompat.xml",
+		"analyse:php": "phpstan analyse -c phpstan.neon --memory-limit=1G",
+		"lint:css": "npm run lint:css",
+		"lint:js": "npm run lint:js",
+		"build:js": "npm run build:js",
+		"scripts-list": "composer run-script --list",
+		"build": [
+			"@lint:php",
+			"@analyse:php",
+			"@lint:css",
+			"@lint:js",
+			"@build:js",
+			"composer archive --file=translation-stats --format=zip"
+		]
 	},
 	"scripts-descriptions": {
-		"test": "Runs all available code tests (PHP_CodeSniffer and PHPStan).",
+		"test": "Runs all available code tests (PHP_CodeSniffer, PHPStan, CSS and JS lint).",
 		"phpcs-i": "Log PHPCS debug information.",
-		"lint": "Runs the PHP code sniffer.",
-		"format": "Runs the PHP code sniffer and automatically fix errors.",
-		"compat": "Runs the PHPCompatibilityWP code sniffer.",
-		"analyse": "Runs the PHPStan code static analysis.",
-		"scripts-list": "List all Composer scripts."
-	}
+		"lint:php": "Runs the PHP code sniffer.",
+		"format:php": "Runs the PHP code sniffer and automatically fix errors.",
+		"compat:php": "Runs the PHPCompatibilityWP code sniffer.",
+		"analyse:php": "Runs the PHPStan code static analysis.",
+		"lint:css": "Run npm CSS lint.",
+		"lint:js": "Run npm JS lint.",
+		"build:js": "npm run JS uglify and build.",
+		"scripts-list": "List all Composer scripts.",
+		"build": "Lint and test PHP, lint and build JS, build zip archive."
+	},
+	"funding": [
+		{
+			"type": "github",
+			"url": "https://github.com/sponsors/pedro-mendonca"
+		}
+	]
 }

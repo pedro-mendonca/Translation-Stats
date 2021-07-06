@@ -4,11 +4,11 @@
 .distignore         export-ignore
 .editorconfig       export-ignore
 .eslintignore       export-ignore
-.eslintrc           export-ignore
+.eslintrc.json      export-ignore
 .gitattributes      export-ignore
 .gitignore          export-ignore
-.remarkrc           export-ignore
-.stylelintrc        export-ignore
+.remarkrc.json      export-ignore
+.stylelintrc.json   export-ignore
 composer.json       export-ignore
 composer.lock       export-ignore
 package-lock.json   export-ignore
@@ -16,4 +16,4 @@ package.json        export-ignore
 phpcompat.xml       export-ignore
 phpcs.xml           export-ignore
 phpstan.neon        export-ignore
-readme.txt          export-ignore
+README.md           export-ignore
