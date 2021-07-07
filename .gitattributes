@@ -1,5 +1,6 @@
 # Exclude files from export
 /.github            export-ignore
+/.wordpress-org     export-ignore
 /assets             export-ignore
 .distignore         export-ignore
 .editorconfig       export-ignore
