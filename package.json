@@ -8,7 +8,7 @@
 		"@wordpress/scripts": "^16.1.4",
 		"eslint": "^7.30.0",
 		"node-sass": "^6.0.1",
-		"npm-check-updates": "^11.8.1",
+		"npm-check-updates": "^11.8.2",
 		"remark-lint": "^8.0.0",
 		"remark-preset-lint-recommended": "^5.0.0",
 		"sass-lint": "^1.13.1",
