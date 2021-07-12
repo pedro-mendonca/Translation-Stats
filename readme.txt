@@ -64,7 +64,6 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 == Changelog ==
 
 = 1.1.4 =
-
 *   Remove unnecessary development files
 
 = 1.1.3 =
