@@ -6,7 +6,7 @@ on:
     - master
     paths:
       # Any change on the WordPress.org plugin repository-specific assets that belong in the top-level assets directory.
-      - '.wordpress-org'
+      - '.wordpress-org/**'
       # The readme.txt.
       - 'readme.txt'
       # Changes to workflow files should always verify all workflows are successful.
