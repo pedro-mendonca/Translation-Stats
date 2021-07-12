@@ -64,7 +64,6 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 == Changelog ==
 
 = 1.1.3 =
-*
 *   Tested up to WP 5.8
 *   Remove deprecated dark-mode compatibility
 
