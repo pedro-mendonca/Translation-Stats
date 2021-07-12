@@ -10,7 +10,6 @@
 .gitignore            export-ignore
 .markdownlint.json    export-ignore
 .markdownlintignore   export-ignore
-.remarkrc.json        export-ignore
 .stylelintrc.json     export-ignore
 composer.json         export-ignore
 composer.lock         export-ignore
