@@ -2,43 +2,41 @@
 	"requires": true,
 	"lockfileVersion": 1,
 	"name": "translation-stats",
-	"description": "The plugin adds a \"Translation Stats\" column to the plugin list screen in WordPress admin.",
 	"version": "1.1.2",
+	"description": "The plugin adds a \"Translation Stats\" column to the plugin list screen in WordPress admin.",
+	"author": "Pedro Mendonça",
+	"license": "GPL-2.0-or-later",
+	"keywords": [
+		"WordPress",
+		"i18n",
+		"l10n"
+	],
+	"homepage": "https://github.com/pedro-mendonca/Translation-Stats#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/pedro-mendonca/Translation-Stats.git"
+	},
+	"bugs": {
+		"url": "https://github.com/pedro-mendonca/Translation-Stats/issues"
+	},
 	"devDependencies": {
 		"@wordpress/scripts": "^16.1.4",
-		"eslint": "^7.30.0",
 		"node-sass": "^6.0.1",
 		"npm-check-updates": "^11.8.1",
-		"remark-lint": "^8.0.0",
-		"remark-preset-lint-recommended": "^5.0.0",
 		"sass-lint": "^1.13.1",
 		"scss": "^0.2.4",
 		"tablesorter": "^2.31.3",
 		"uglify-js": "^3.13.10"
 	},
 	"scripts": {
-		"build:js": "npm run build:plugins.js && npm run build:settings.js",
-		"build:plugins.js": "uglifyjs js/tstats-plugins.js --compress drop_console=true -o js/tstats-plugins.min.js",
-		"build:settings.js": "uglifyjs js/tstats-settings.js --compress drop_console=true -o js/tstats-settings.min.js",
-		"eslint": "eslint .",
-		"eslint-fix": "eslint . --fix",
-		"update": "npm-check-updates",
-		"lint:css": "wp-scripts lint-style ./css/*.*css",
-		"lint:js": "wp-scripts lint-js ./js/*.js"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/pedro-mendonca/Translation-Stats.git"
-	},
-	"keywords": [
-		"WordPress",
-		"i18n",
-		"l10n"
-	],
-	"author": "Pedro Mendonça",
-	"license": "GPL-3.0-or-later",
-	"bugs": {
-		"url": "https://github.com/pedro-mendonca/Translation-Stats/issues"
-	},
-	"homepage": "https://github.com/pedro-mendonca/Translation-Stats#readme"
+		"compile:js": "npm run compile:js:plugins && npm run compile:js:settings",
+		"compile:js:plugins": "uglifyjs js/tstats-plugins.js --compress drop_console=true -o js/tstats-plugins.min.js",
+		"compile:js:settings": "uglifyjs js/tstats-settings.js --compress drop_console=true -o js/tstats-settings.min.js",
+		"compile:css": "node-sass css/scss/ -o css/ && stylelint 'css/*.css' --fix || exit 0 && stylelint 'css/*.css' --fix",
+		"lint:css": "wp-scripts lint-style css/**/*.*css",
+		"lint:js": "wp-scripts lint-js js/*.js",
+		"lint:md:docs": "wp-scripts lint-md-docs",
+		"lint:pkg-json": "wp-scripts lint-pkg-json",
+		"update": "npm-check-updates"
+	}
 }

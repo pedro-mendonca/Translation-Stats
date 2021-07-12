@@ -25,9 +25,12 @@
 	"scripts": {
 		"test": [
 			"@lint:php",
+			"@compat:php",
 			"@analyse:php",
 			"@lint:css",
-			"@lint:js"
+			"@lint:js",
+			"@lint:md:docs",
+			"@lint:pkg-json"
 		],
 		"phpcs-i": "phpcs -i",
 		"lint:php": "phpcs -v --standard=phpcs.xml",
@@ -36,29 +39,33 @@
 		"analyse:php": "phpstan analyse -c phpstan.neon --memory-limit=1G",
 		"lint:css": "npm run lint:css",
 		"lint:js": "npm run lint:js",
-		"build:js": "npm run build:js",
+		"lint:md:docs": "npm run lint:md:docs",
+		"lint:pkg-json": "npm run lint:pkg-json",
+		"compile:css": "npm run compile:css",
+		"compile:js": "npm run compile:js",
 		"scripts-list": "composer run-script --list",
 		"build": [
-			"@lint:php",
-			"@analyse:php",
-			"@lint:css",
-			"@lint:js",
-			"@build:js",
+			"@test",
+			"@compile:css",
+			"@compile:js",
 			"composer archive --file=translation-stats --format=zip"
 		]
 	},
 	"scripts-descriptions": {
-		"test": "Runs all available code tests (PHP_CodeSniffer, PHPStan, CSS and JS lint).",
+		"test": "Runs all available code tests (PHP_CodeSniffer, PHPStan, CSS/SCSS, JS and MD lint).",
 		"phpcs-i": "Log PHPCS debug information.",
 		"lint:php": "Runs the PHP code sniffer.",
 		"format:php": "Runs the PHP code sniffer and automatically fix errors.",
 		"compat:php": "Runs the PHPCompatibilityWP code sniffer.",
 		"analyse:php": "Runs the PHPStan code static analysis.",
-		"lint:css": "Run npm CSS lint.",
-		"lint:js": "Run npm JS lint.",
-		"build:js": "npm run JS uglify and build.",
+		"lint:css": "Run npm CSS linter.",
+		"lint:js": "Run npm JS linter.",
+		"lint:md:docs": "Run npm MD linter.",
+		"lint:pkg-json": "Run npm package.json linter.",
+		"compile:css": "Run npm Node Sass and Stylelint to compile CSS.",
+		"compile:js": "Run npm UglifyJS to compile minified JS.",
 		"scripts-list": "List all Composer scripts.",
-		"build": "Lint and test PHP, lint and build JS, build zip archive."
+		"build": "Lint and test PHP, lint and build JS, lint and compile CSS/SCSS, lint MD, build zip archive."
 	},
 	"funding": [
 		{
