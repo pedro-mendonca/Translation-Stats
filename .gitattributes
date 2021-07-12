@@ -2,6 +2,8 @@
 /.github            export-ignore
 /.wordpress-org     export-ignore
 /assets             export-ignore
+/css/scss           export-ignore
+*.scss              export-ignore
 .distignore         export-ignore
 .editorconfig       export-ignore
 .eslintignore       export-ignore

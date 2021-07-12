@@ -11,7 +11,7 @@
 	<exclude-pattern>*/vendor/*</exclude-pattern>
 	<exclude-pattern>*/tests/*</exclude-pattern>
 
-	<!-- A comma separated list of file extensions to check. -->
+	<!-- Only scan PHP files. -->
 	<arg name="extensions" value="php"/>
 
 	<!-- The report types to print. -->

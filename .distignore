@@ -18,9 +18,9 @@ README.md
 
 # Lint
 .eslintignore
-.eslintrc
-.remarkrc
-.stylelintrc
+.eslintrc.json
+.remarkrc.json
+.stylelintrc.json
 phpcompat.xml
 phpcs.xml
 

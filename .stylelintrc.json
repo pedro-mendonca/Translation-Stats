@@ -1,9 +1,8 @@
 {
 	"extends": [
-		"@wordpress/stylelint-config"
+		"@wordpress/stylelint-config/scss"
 	],
 	"rules": {
-		"at-rule-no-unknown": null,
 		"font-family-no-missing-generic-family-keyword": [
 			true,
 			{
