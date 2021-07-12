@@ -21,7 +21,7 @@
 **Requires at least:** 4.9  
 **Tested up to:** 5.8  
 **Requires PHP:** 5.6  
-**Stable tag:** 1.1.3  
+**Stable tag:** 1.1.4  
 **License:** GPLv2  
 **License URI:** [http://www.gnu.org/licenses/gpl-2.0.html](http://www.gnu.org/licenses/gpl-2.0.html)  
 
@@ -93,6 +93,10 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 ![screenshot-4](./.wordpress-org/screenshot-4.png)
 
 ## Changelog
+
+### 1.1.4
+
+*   Remove unnecessary files
 
 ### 1.1.3
 

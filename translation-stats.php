@@ -13,7 +13,7 @@
  * Plugin URI:        https://translationstats.com
  * GitHub Plugin URI: https://github.com/pedro-mendonca/Translation-Stats
  * Description:       Show plugins translation stats on your WordPress install.
- * Version:           1.1.3
+ * Version:           1.1.4
  * Requires at least: 4.9
  * Tested up to:      5.8
  * Requires PHP:      5.6
@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 
 // Set Translation Stats plugin version.
-define( 'TRANSLATION_STATS_VERSION', '1.1.3' );
+define( 'TRANSLATION_STATS_VERSION', '1.1.4' );
 
 // Set Translation Stats required PHP version. Needed for PHP compatibility check for WordPress < 5.1.
 define( 'TRANSLATION_STATS_REQUIRED_PHP', '5.6' );
