@@ -90,7 +90,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 
 			wp_register_style(
 				'translation-stats',
-				TRANSLATION_STATS_DIR_URL . 'css/admin.css',
+				TRANSLATION_STATS_DIR_URL . 'assets/css/admin.css',
 				array(),
 				TRANSLATION_STATS_VERSION
 			);
@@ -128,7 +128,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 
 				wp_register_script(
 					'translation-stats-settings',
-					TRANSLATION_STATS_DIR_URL . 'js/tstats-settings' . $suffix . '.js',
+					TRANSLATION_STATS_DIR_URL . 'assets/js/tstats-settings' . $suffix . '.js',
 					array(
 						'jquery',
 					),
@@ -146,7 +146,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 
 				wp_register_script(
 					'tablesorter-combined',
-					TRANSLATION_STATS_DIR_URL . 'js/vendor/jquery.tablesorter.combined' . $suffix . '.js',
+					TRANSLATION_STATS_DIR_URL . 'assets/js/vendor/jquery.tablesorter.combined' . $suffix . '.js',
 					array(
 						'jquery',
 					),
@@ -166,7 +166,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 
 				wp_register_script(
 					'translation-stats-plugins',
-					TRANSLATION_STATS_DIR_URL . 'js/tstats-plugins' . $suffix . '.js',
+					TRANSLATION_STATS_DIR_URL . 'assets/js/tstats-plugins' . $suffix . '.js',
 					array(
 						'jquery',
 					),

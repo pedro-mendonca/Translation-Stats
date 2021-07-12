@@ -30,11 +30,11 @@
 	},
 	"scripts": {
 		"compile:js": "npm run compile:js:plugins && npm run compile:js:settings",
-		"compile:js:plugins": "uglifyjs js/tstats-plugins.js --compress drop_console=true -o js/tstats-plugins.min.js",
-		"compile:js:settings": "uglifyjs js/tstats-settings.js --compress drop_console=true -o js/tstats-settings.min.js",
-		"compile:css": "node-sass css/scss/ -o css/ && stylelint 'css/*.css' --fix || exit 0 && stylelint 'css/*.css' --fix",
-		"lint:css": "wp-scripts lint-style css/**/*.*css",
-		"lint:js": "wp-scripts lint-js js/*.js",
+		"compile:js:plugins": "uglifyjs assets/js/tstats-plugins.js --compress drop_console=true -o assets/js/tstats-plugins.min.js",
+		"compile:js:settings": "uglifyjs assets/js/tstats-settings.js --compress drop_console=true -o assets/js/tstats-settings.min.js",
+		"compile:css": "node-sass assets/css/scss/ -o assets/css/ && stylelint 'assets/css/*.css' --fix || exit 0 && stylelint 'assets/css/*.css' --fix",
+		"lint:css": "wp-scripts lint-style assets/css/**/*.*css",
+		"lint:js": "wp-scripts lint-js assets/js/**/*.js",
 		"lint:md:docs": "wp-scripts lint-md-docs",
 		"lint:pkg-json": "wp-scripts lint-pkg-json",
 		"update": "npm-check-updates"

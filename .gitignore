@@ -1,5 +1,4 @@
 # OS
-tests/
 .DS_Store
 Desktop.ini
 Thumbs.db
@@ -7,6 +6,7 @@ Thumbs.db
 *.sql
 *.tar.gz
 *.zip
+/tests/
 
 # Composer
 /vendor/

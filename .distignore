@@ -1,7 +1,6 @@
 # OS
 .github/
 .wordpress-org/
-assets/
 tests/
 .DS_Store
 Desktop.ini
