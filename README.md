@@ -33,8 +33,6 @@ The plugin adds a "Translation Stats" column to the plugin list screen in WordPr
 
 The translation stats are shown only for plugins that exist in [translate.wordpress.org](https://translate.wordpress.org/) and are [prepared for localization](https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/).
 
-![GlotPress](./assets/banner-772x250.png)
-
 If a plugin doesn't have complete translation stats, you'll see a notice with one of the reasons below:
 
 *   Plugin not found on WordPress.org
@@ -83,16 +81,16 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 ## Screenshots
 
 1.  Translation Stats shown in WordPress plugins page
-![screenshot-1](./assets/screenshot-1.png)
+![screenshot-1](./.wordpress-org/screenshot-1.png)
 
 2.  Translation Stats installed plugins list
-![screenshot-2](./assets/screenshot-2.png)
+![screenshot-2](./.wordpress-org/screenshot-2.png)
 
 3.  Translation Stats settings tab
-![screenshot-3](./assets/screenshot-3.png)
+![screenshot-3](./.wordpress-org/screenshot-3.png)
 
 4.  Translation Stats tools tab
-![screenshot-4](./assets/screenshot-4.png)
+![screenshot-4](./.wordpress-org/screenshot-4.png)
 
 ## Changelog
 
