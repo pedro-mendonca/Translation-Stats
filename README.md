@@ -88,10 +88,11 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
 ## Changelog
 
-### Unreleased
+### 1.1.5
 
-* Consolidate assets
-* Optimize GitHub release process
+* GitHub release process optimization
+* Assets optimization
+* Minor code improvements
 
 ### 1.1.4
 

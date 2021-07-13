@@ -63,9 +63,10 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
 == Changelog ==
 
-= Unreleased =
-*   Consolidate assets
-*   Optimize GitHub release process
+= 1.1.5 =
+*   GitHub release process optimization
+*   Assets folders optimization
+*   Minor code improvements
 
 = 1.1.4 =
 *   Remove unnecessary development files
