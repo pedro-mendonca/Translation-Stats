@@ -17,7 +17,7 @@
 
 **Contributors:** pedromendonca  
 **Donate link:** [github.com/sponsors/pedro-mendonca](https://github.com/sponsors/pedro-mendonca)  
-**Tags:** internationalization, i18n, localization, l10n, translation, statistics, glotpress
+**Tags:** internationalization, i18n, localization, l10n, translation, statistics, glotpress  
 **Requires at least:** 4.9  
 **Tested up to:** 5.8  
 **Requires PHP:** 5.6  
