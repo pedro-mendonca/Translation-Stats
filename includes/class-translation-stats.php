@@ -145,7 +145,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 				);
 
 				wp_register_script(
-					'tablesorter-combined',
+					'translation-stats-tablesorter',
 					TRANSLATION_STATS_DIR_URL . 'assets/lib/tablesorter/jquery.tablesorter.combined' . $suffix . '.js',
 					array(
 						'jquery',
@@ -154,7 +154,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 					false
 				);
 
-				wp_enqueue_script( 'tablesorter-combined' );
+				wp_enqueue_script( 'translation-stats-tablesorter' );
 
 			}
 
