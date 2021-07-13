@@ -23,15 +23,27 @@
 		"optimize-autoloader": true
 	},
 	"scripts": {
-		"test": [
+		"lint": [
 			"@lint:php",
 			"@compat:php",
-			"@analyse:php",
 			"@lint:css",
 			"@lint:js",
 			"@lint:md:docs",
 			"@lint:pkg-json"
 		],
+		"test": [
+			"@analyse:php"
+		],
+		"compile": [
+			"@compile:css",
+			"@compile:js"
+		],
+		"build": [
+			"@lint",
+			"@test",
+			"@compile"
+		],
+		"zip": "composer archive --file=translation-stats --format=zip",
 		"phpcs-i": "phpcs -i",
 		"lint:php": "phpcs -v --standard=phpcs.xml",
 		"format:php": "phpcbf -v --standard=phpcs.xml",
@@ -43,16 +55,12 @@
 		"lint:pkg-json": "npm run lint:pkg-json",
 		"compile:css": "npm run compile:css",
 		"compile:js": "npm run compile:js",
-		"scripts-list": "composer run-script --list",
-		"build": [
-			"@test",
-			"@compile:css",
-			"@compile:js",
-			"composer archive --file=translation-stats --format=zip"
-		]
+		"scripts-list": "composer run-script --list"
 	},
 	"scripts-descriptions": {
-		"test": "Runs all available code tests (PHP_CodeSniffer, PHPStan, CSS/SCSS, JS and MD lint).",
+		"lint": "Runs all available code linting (PHP_CodeSniffer, CSS/SASS, JS and MD lint).",
+		"test": "Runs all available code static analysis (PHPStan).",
+		"compile": "Compile all CSS and JavaScript",
 		"phpcs-i": "Log PHPCS debug information.",
 		"lint:php": "Runs the PHP code sniffer.",
 		"format:php": "Runs the PHP code sniffer and automatically fix errors.",
@@ -65,7 +73,8 @@
 		"compile:css": "Run npm Node Sass and Stylelint to compile CSS.",
 		"compile:js": "Run npm UglifyJS to compile minified JS.",
 		"scripts-list": "List all Composer scripts.",
-		"build": "Lint and test PHP, lint and build JS, lint and compile CSS/SCSS, lint MD, build zip archive."
+		"build": "Lint, test and compile all PHP, CSS, JS and MD.",
+		"zip": "Build production zip archive."
 	},
 	"funding": [
 		{
