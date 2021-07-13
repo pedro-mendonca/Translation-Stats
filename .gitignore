@@ -6,10 +6,12 @@ Thumbs.db
 *.sql
 *.tar.gz
 *.zip
-/tests/
+
+# Node
+/node_modules/
 
 # Composer
 /vendor/
 
-# Node
-/node_modules/
+# Tests
+/tests/

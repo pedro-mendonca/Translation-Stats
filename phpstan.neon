@@ -7,14 +7,14 @@ parameters:
 		- translation-stats.php
 		- uninstall.php
 		- includes/
-		- lib/
+		- assets/
 	bootstrapFiles:
 		# Plugin main file.
 		- translation-stats.php
 	ignoreErrors:
 		# GlotPress locales file.
 		-
-			path: lib/wp.org/locales.php
+			path: assets/lib/locales/locales.php
 			message: '#typehint specified\.$#'
 			count: 35
 	# TODO Tell PHPStan what is inside arrays.

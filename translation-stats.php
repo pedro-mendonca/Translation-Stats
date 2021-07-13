@@ -76,7 +76,7 @@ define( 'TRANSLATION_STATS_FILE', plugin_basename( __FILE__ ) );
  *
  * Updated on 2020-06-28.
  */
-require_once 'lib/wp.org/locales.php';
+require_once 'assets/lib/locales/locales.php';
 
 
 // Check for PHP compatibility.
