@@ -494,16 +494,16 @@
         },
         {
             "name": "szepeviktor/phpstan-wordpress",
-            "version": "v0.7.6",
+            "version": "v0.7.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/szepeviktor/phpstan-wordpress.git",
-                "reference": "3721127a9ddc62c8dc14fc8726cbfb3e47529bbe"
+                "reference": "bdbea69b2ba4a69998c3b6fe2b7106d78a23bd72"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/szepeviktor/phpstan-wordpress/zipball/3721127a9ddc62c8dc14fc8726cbfb3e47529bbe",
-                "reference": "3721127a9ddc62c8dc14fc8726cbfb3e47529bbe",
+                "url": "https://api.github.com/repos/szepeviktor/phpstan-wordpress/zipball/bdbea69b2ba4a69998c3b6fe2b7106d78a23bd72",
+                "reference": "bdbea69b2ba4a69998c3b6fe2b7106d78a23bd72",
                 "shasum": ""
             },
             "require": {
@@ -529,7 +529,7 @@
             },
             "autoload": {
                 "psr-4": {
-                    "PHPStan\\WordPress\\": "src/"
+                    "SzepeViktor\\PHPStan\\WordPress\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -546,7 +546,7 @@
             ],
             "support": {
                 "issues": "https://github.com/szepeviktor/phpstan-wordpress/issues",
-                "source": "https://github.com/szepeviktor/phpstan-wordpress/tree/v0.7.6"
+                "source": "https://github.com/szepeviktor/phpstan-wordpress/tree/v0.7.7"
             },
             "funding": [
                 {
@@ -554,7 +554,7 @@
                     "type": "custom"
                 }
             ],
-            "time": "2021-06-19T15:51:50+00:00"
+            "time": "2021-07-14T09:19:15+00:00"
         },
         {
             "name": "wp-coding-standards/wpcs",
