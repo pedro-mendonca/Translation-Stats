@@ -202,7 +202,7 @@ function tstats_compatible_version() {
  *
  * @param callable(string): void
  */
-spl_autoload_register( __NAMESPACE__ . '\tstats_class_autoload' );
+spl_autoload_register( __NAMESPACE__ . '\class_autoload' );
 
 
 /**
@@ -216,7 +216,7 @@ spl_autoload_register( __NAMESPACE__ . '\tstats_class_autoload' );
  *
  * @return void
  */
-function tstats_class_autoload( $class_name ) {
+function class_autoload( $class_name ) {
 
 	$project_namespace = __NAMESPACE__ . '\\';
 
