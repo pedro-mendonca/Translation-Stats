@@ -48,6 +48,7 @@ table.wp-list-table.plugins { // WordPress Installed Plugins table.
 			grid-row-gap: 6px;
 			padding: 6px;
 			margin: 0 0 10px 0;
+			border-radius: $border-radius-outside;
 
 			.content__subproject {
 
@@ -72,7 +73,7 @@ table.wp-list-table.plugins { // WordPress Installed Plugins table.
 				a div .subproject-bar,
 				.disabled,
 				.disabled .subproject-bar { // Border radius.
-					border-radius: $global-radius;
+					border-radius: $border-radius-inside;
 				}
 
 				a {
@@ -513,7 +514,7 @@ table.tstats-plugin-list-table.widefat { // Translation Stats Settings Plugins t
 		}
 
 		.postbox {
-			border-radius: 4px;
+			border-radius: $border-radius-outside;
 
 			.inside {
 

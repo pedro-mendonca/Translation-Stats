@@ -46,6 +46,7 @@ table.wp-list-table.plugins td.column-translation-stats .translation-stats-conte
 	grid-row-gap: 6px;
 	padding: 6px;
 	margin: 0 0 10px 0;
+	border-radius: 4px;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject .subproject-bar {
@@ -68,7 +69,7 @@ table.wp-list-table.plugins td.column-translation-stats .translation-stats-conte
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div .subproject-bar,
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject .disabled,
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject .disabled .subproject-bar {
-	border-radius: 3px;
+	border-radius: 2px;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a {

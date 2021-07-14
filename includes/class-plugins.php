@@ -358,7 +358,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		public function tstats_stats_plugin_widget_content_stats( $project_slug, $locale, $force_update ) {
 
 			?>
-			<div class="translation-stats-content-stats notice-warning notice-alt">
+			<div class="translation-stats-content-stats widget-inside">
 				<?php
 				$subprojects = Translations_API::plugin_subprojects();
 				$i18n_errors = 0;
