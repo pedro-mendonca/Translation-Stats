@@ -158,6 +158,8 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 				'all_plugins',
 			);
 
+			$settings_v1 = array();
+
 			// Check for existing settings to move to sub array.
 			foreach ( $settings_v0 as $option ) {
 				if ( array_key_exists( $option, $options ) ) {
