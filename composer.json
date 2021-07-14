@@ -17,6 +17,7 @@
 		"dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
 		"wp-coding-standards/wpcs": "^2.3.0",
 		"phpcompatibility/phpcompatibility-wp": "^2.1.1",
+		"phpmd/phpmd": "^2.10.1",
 		"szepeviktor/phpstan-wordpress": "^0.7.6"
 	},
 	"config": {
@@ -49,6 +50,7 @@
 		"format:php": "phpcbf -v --standard=phpcs.xml",
 		"compat:php": "phpcs -v --standard=phpcompat.xml",
 		"analyse:php": "phpstan analyse -c phpstan.neon --memory-limit=1G",
+		"lint:phpmd": "phpmd . text phpmd.xml",
 		"lint:css": "npm run lint:css",
 		"lint:js": "npm run lint:js",
 		"lint:md:docs": "npm run lint:md:docs",
@@ -66,6 +68,7 @@
 		"format:php": "Runs the PHP code sniffer and automatically fix errors.",
 		"compat:php": "Runs the PHPCompatibilityWP code sniffer.",
 		"analyse:php": "Runs the PHPStan code static analysis.",
+		"lint:phpmd": "Runs the PHPMD code static analysis.",
 		"lint:css": "Run npm CSS linter.",
 		"lint:js": "Run npm JS linter.",
 		"lint:md:docs": "Run npm MD linter.",
