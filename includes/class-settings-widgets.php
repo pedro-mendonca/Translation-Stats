@@ -39,7 +39,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Widgets' ) ) {
 			$this->globals = new Globals();
 
 			// Add Sidebar before Translation Stats settings.
-			add_action( 'tstats_settings__sidebar__content', array( $this, 'tstats_settings_widget__about' ) );
+			add_action( 'translation_stats_settings_sidebar__content', array( $this, 'settings_widget__about' ) );
 
 		}
 
@@ -48,10 +48,11 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Widgets' ) ) {
 		 * Show plugin info widget.
 		 *
 		 * @since 0.9.0
+		 * @since 1.1.6   Renamed from tstats_settings_widget__about() to settings_widget__about().
 		 *
 		 * @return void
 		 */
-		public function tstats_settings_widget__about() {
+		public function settings_widget__about() {
 
 			$external_link_url  = 'https://translationstats.com';
 			$external_link_icon = '<i aria-hidden="true" class="dashicons dashicons-external"></i>';

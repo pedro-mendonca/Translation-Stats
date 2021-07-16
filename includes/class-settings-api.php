@@ -184,8 +184,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_API' ) ) {
 			<p class='description'><?php echo esc_html( $description ); ?></p>
 			<?php
 
-			// Add Translation Stats debug setting field info.
-			do_action( 'tstats_debug_setting_field_info', $field_id, $option, $default );
+			// Add setting field info action hook for debugging.
+			do_action( 'translation_stats_setting_field__after', $field_id, $option, $default );
 		}
 
 
@@ -225,8 +225,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_API' ) ) {
 			<p class='description'><?php echo esc_html( $description ); ?></p>
 			<?php
 
-			// Add Translation Stats debug setting field info.
-			do_action( 'tstats_debug_setting_field_info', $field_id, $option, $default );
+			// Add setting field info action hook for debugging.
+			do_action( 'translation_stats_setting_field__after', $field_id, $option, $default );
 		}
 
 
@@ -277,8 +277,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_API' ) ) {
 			<p class='description'><?php echo esc_html( $description ); ?></p>
 			<?php
 
-			// Add Translation Stats debug setting field info.
-			do_action( 'tstats_debug_setting_field_info', $field_id, $option, $default );
+			// Add setting field info action hook for debugging.
+			do_action( 'translation_stats_setting_field__after', $field_id, $option, $default );
 		}
 
 

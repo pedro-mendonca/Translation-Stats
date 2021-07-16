@@ -149,7 +149,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 			$this->settings_hidden->settings_section();
 
 			// Add section after Translation settings sections.
-			do_action( 'tstats_settings_section__after' );
+			do_action( 'translation_stats_settings_section__after' );
 
 		}
 
@@ -267,8 +267,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 				wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'translation-stats' ) );
 			}
 
-			// Add action on Translation Stats settings init.
-			do_action( 'tstats_settings_init' );
 			?>
 
 			<div class="wrap">
@@ -288,7 +286,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 
 					<?php
 					// Add before Translation Stats settings.
-					do_action( 'tstats_settings__before' );
+					do_action( 'translation_stats_settings__before' );
 					?>
 
 					<div class="tstats-settings__content">
@@ -300,7 +298,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 
 							<?php
 							// Add after Translation Stats settings tabs items.
-							do_action( 'tstats_settings_tab__after' );
+							do_action( 'translation_stats_settings_tab__after' );
 							?>
 
 						</h2>
@@ -341,7 +339,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 
 								<?php
 								// Add after Translation Stats settings content items.
-								do_action( 'tstats_settings_content__after' );
+								do_action( 'translation_stats_settings_content__after' );
 								?>
 
 								<?php wp_nonce_field( 'tstats_action', 'tstats_nonce_check' ); ?>
@@ -357,7 +355,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 
 					<?php
 					// Add after Translation Stats settings.
-					do_action( 'tstats_settings__after' );
+					do_action( 'translation_stats_settings__after' );
 					?>
 
 				</div>

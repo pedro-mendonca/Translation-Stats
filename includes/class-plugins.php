@@ -49,28 +49,28 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			$this->notices = new Notices();
 
 			// Add plugin translation stats column.
-			add_filter( 'manage_plugins_columns', array( $this, 'tstats_add_translation_stats_column' ) );
+			add_filter( 'manage_plugins_columns', array( $this, 'add_translation_stats_column' ) );
 
 			// Show plugin translation stats content in column.
-			add_action( 'manage_plugins_custom_column', array( $this, 'tstats_render_plugin_stats_column' ), 10, 3 );
+			add_action( 'manage_plugins_custom_column', array( $this, 'render_plugin_stats_column' ), 10, 3 );
 
 			// Add Translation Stats plugin widget title.
-			add_action( 'tstats_stats_plugin_widget_title', array( $this, 'tstats_stats_plugin_widget_title' ), 10, 2 );
+			add_action( 'translation_stats_plugin_widget_title', array( $this, 'plugin_widget_title' ), 10, 2 );
 
 			// Add Translation Stats plugin widget title actions.
-			add_action( 'tstats_stats_plugin_widget_title__actions', array( $this, 'tstats_plugin_update_button' ) );
+			add_action( 'translation_stats_plugin_widget_title__actions', array( $this, 'plugin_update_button' ) );
 
 			// Add Translation Stats plugin widget content.
-			add_action( 'tstats_stats_plugin_widget_content', array( $this, 'tstats_stats_plugin_widget_content' ) );
+			add_action( 'translation_stats_plugin_widget_content', array( $this, 'plugin_widget_content' ) );
 
 			// Load plugin subprojects stats.
-			add_action( 'wp_ajax_tstats_stats_plugin_widget_content_load', array( $this, 'tstats_stats_plugin_widget_content_load' ) );
+			add_action( 'wp_ajax_translation_stats_plugin_widget_content_load', array( $this, 'plugin_widget_content_load' ) );
 
 			// Filter plugins list to show only Translation Stats enabled plugins.
-			add_action( 'pre_current_active_plugins', array( $this, 'tstats_plugins_filter_by_translation_stats' ) );
+			add_action( 'pre_current_active_plugins', array( $this, 'plugins_filter_by_translation_stats' ) );
 
 			// Add status link to Translation Stats enabled plugins View.
-			add_action( is_multisite() ? 'views_plugins-network' : 'views_plugins', array( $this, 'tstats_plugins_status_link' ) );
+			add_action( is_multisite() ? 'views_plugins-network' : 'views_plugins', array( $this, 'plugins_status_link' ) );
 
 		}
 
@@ -79,12 +79,13 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * Set the plugin translation stats column if user locale is not 'en_US'.
 		 *
 		 * @since 0.8.0
+		 * @since 1.1.6   Renamed from tstats_add_translation_stats_column() to add_translation_stats_column().
 		 *
 		 * @param array $columns   Columns array.
 		 *
 		 * @return array $columns  Columns array with added 'translation-stats'.
 		 */
-		public function tstats_add_translation_stats_column( $columns ) {
+		public function add_translation_stats_column( $columns ) {
 
 			// Get the Translation Stats configured language.
 			$translationstats_language = $this->globals->translation_language();
@@ -106,13 +107,14 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * Show Plugin Translation Stats Content if the plugin is in WP.org and if Locale isn´t 'en_US'.
 		 *
 		 * @since 0.8.0
+		 * @since 1.1.6   Renamed from tstats_render_plugin_stats_column() to render_plugin_stats_column().
 		 *
 		 * @param string $column_name  Column Slug ( e.g. 'translation-stats' ).
 		 * @param string $plugin_file  Plugin ID ( e.g. 'slug/plugin-name.php' ).
 		 *
 		 * @return void
 		 */
-		public function tstats_render_plugin_stats_column( $column_name, $plugin_file ) {
+		public function render_plugin_stats_column( $column_name, $plugin_file ) {
 
 			// Add Translation Stats if plugin is on wordpress.org and if user Locale isn't 'en_US'.
 			// Check if is in column 'translation-stats'.
@@ -152,12 +154,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 							);
 							$this->notices->notice_message( $admin_notice );
 						} else {
-							$this->tstats_render_plugin_stats( $project_slug );
+							$this->render_plugin_stats( $project_slug );
 						}
 					}
 
-					// Add Translation Stats plugin widget debug.
-					do_action( 'tstats_stats_plugin_widget_debug', $project_slug, $plugin_on_wporg, $plugin_translation_on_wporg );
+					// Add Stats widget action for debugging.
+					do_action( 'translation_stats_plugins_stats_widget__after', $project_slug, $plugin_on_wporg, $plugin_translation_on_wporg );
 				}
 			}
 		}
@@ -167,12 +169,13 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * Render Plugin Translation Stats for current locale.
 		 *
 		 * @since 0.8.0
+		 * @since 1.1.6   Renamed from tstats_render_plugin_stats() to render_plugin_stats().
 		 *
 		 * @param string $project_slug   Plugin Slug.
 		 *
 		 * @return void
 		 */
-		public function tstats_render_plugin_stats( $project_slug ) {
+		public function render_plugin_stats( $project_slug ) {
 
 			// Get Translation Stats Locale data.
 			$locale = Translations_API::locale( $this->globals->translation_language() );
@@ -180,7 +183,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			ob_start();
 
 			// Add before Translation Stats plugin widget title.
-			do_action( 'tstats_stats_plugin_widget_title__before', $project_slug, $locale );
+			do_action( 'translation_stats_plugin_widget_title__before', $project_slug, $locale );
 			?>
 
 			<div class="translation-stats-title">
@@ -188,10 +191,10 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 
 				<?php
 				// Add Translation Stats plugin widget title.
-				do_action( 'tstats_stats_plugin_widget_title', $project_slug, $locale );
+				do_action( 'translation_stats_plugin_widget_title', $project_slug, $locale );
 
 				// Add Translation Stats plugin widget title actions.
-				do_action( 'tstats_stats_plugin_widget_title__actions', $project_slug, $locale );
+				do_action( 'translation_stats_plugin_widget_title__actions', $project_slug, $locale );
 				?>
 
 				</p>
@@ -199,24 +202,24 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 
 			<?php
 			// Add after Translation Stats plugin widget title.
-			do_action( 'tstats_stats_plugin_widget_title__after', $project_slug, $locale );
+			do_action( 'translation_stats_plugin_widget_title__after', $project_slug, $locale );
 
 			// Add before Translation Stats plugin widget content.
-			do_action( 'tstats_stats_plugin_widget_content__before', $project_slug, $locale );
+			do_action( 'translation_stats_plugin_widget_content__before', $project_slug, $locale );
 			?>
 
 			<div class="translation-stats-content">
 
 				<?php
 				// Add Translation Stats plugin widget content.
-				do_action( 'tstats_stats_plugin_widget_content' );
+				do_action( 'translation_stats_plugin_widget_content' );
 				?>
 
 			</div>
 
 			<?php
 			// Add after Translation Stats plugin widget content.
-			do_action( 'tstats_stats_plugin_widget_content__after', $project_slug, $locale );
+			do_action( 'translation_stats_plugin_widget_content__after', $project_slug, $locale );
 
 			$plugin_stats = ob_get_clean();
 			echo wp_kses( $plugin_stats, $this->globals->allowed_html() );
@@ -229,13 +232,14 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 *
 		 * @since 0.9.4
 		 * @since 1.1.0  Use Locale object.
+		 * @since 1.1.6  Renamed from tstats_stats_plugin_widget_title() to plugin_widget_title().
 		 *
 		 * @param string $project_slug  Plugin Slug.
 		 * @param object $locale        Locale object.
 		 *
 		 * @return void
 		 */
-		public function tstats_stats_plugin_widget_title( $project_slug, $locale ) {
+		public function plugin_widget_title( $project_slug, $locale ) {
 
 			$locale_plugin_url  = 'https://translate.wordpress.org/locale/' . $locale->locale_slug . '/wp-plugins/' . $project_slug;
 			$locale_plugin_link = '<a href="' . esc_url( $locale_plugin_url ) . '" target="_blank">' . $locale->native_name . '</a>';
@@ -255,10 +259,11 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * Load plugin widget title update button.
 		 *
 		 * @since 0.9.4
+		 * @since 1.1.6   Renamed from tstats_plugin_update_button() to plugin_update_button().
 		 *
 		 * @return void
 		 */
-		public function tstats_plugin_update_button() {
+		public function plugin_update_button() {
 			?>
 
 			<span class="tstats-update-link">
@@ -276,10 +281,11 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * Load plugin widget loading placeholder.
 		 *
 		 * @since 0.9.4
+		 * @since 1.1.6   Renamed from tstats_stats_plugin_widget_content() to plugin_widget_content().
 		 *
 		 * @return void
 		 */
-		public function tstats_stats_plugin_widget_content() {
+		public function plugin_widget_content() {
 
 			$admin_notice = array(
 				'type'        => 'warning-spin',
@@ -298,10 +304,11 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * Load plugin widget content.
 		 *
 		 * @since 0.9.4
+		 * @since 1.1.6   Renamed from tstats_stats_plugin_widget_content_load() to plugin_widget_content_load().
 		 *
 		 * @return void
 		 */
-		public function tstats_stats_plugin_widget_content_load() {
+		public function plugin_widget_content_load() {
 
 			// Initialize variable.
 			$force_update = '';
@@ -316,7 +323,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 
 				$project_slug = sanitize_key( $_POST['tstatsPlugin'] ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
-				$this->tstats_stats_plugin_widget_content_stats( $project_slug, $locale, $force_update );
+				$this->plugin_widget_content_stats( $project_slug, $locale, $force_update );
 
 				if ( true === $force_update ) {
 					?>
@@ -347,15 +354,16 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * Load plugin widget content stats.
 		 *
 		 * @since 0.9.4
-		 * @since 1.1.0  Use Locale object.
+		 * @since 1.1.0   Use Locale object.
+		 * @since 1.1.6   Renamed from tstats_stats_plugin_widget_content_stats() to plugin_widget_content_stats().
 		 *
-		 * @param string $project_slug  Plugin Slug.
-		 * @param object $locale        Locale object.
-		 * @param bool   $force_update  True: Force get new stats. False: Use transients.
+		 * @param string $project_slug   Plugin Slug.
+		 * @param object $locale         Locale object.
+		 * @param bool   $force_update   True: Force get new stats. False: Use transients.
 		 *
 		 * @return void
 		 */
-		public function tstats_stats_plugin_widget_content_stats( $project_slug, $locale, $force_update ) {
+		public function plugin_widget_content_stats( $project_slug, $locale, $force_update ) {
 
 			?>
 			<div class="translation-stats-content-stats widget-inside">
@@ -363,8 +371,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				$subprojects = Translations_API::plugin_subprojects();
 				$i18n_errors = 0;
 				foreach ( $subprojects as $subproject ) {
-					$subproject = $this->tstats_render_stats_bar( $locale, $project_slug, $subproject['name'], $subproject['slug'], $force_update );
 					echo wp_kses( $subproject['stats'], $this->globals->allowed_html() );
+					$subproject = $this->render_stats_bar( $locale, $project_slug, $subproject['name'], $subproject['slug'], $force_update );
 					$i18n_errors = $i18n_errors + $subproject['error'];
 				}
 				?>
@@ -431,7 +439,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * Render plugin subproject stat bar.
 		 *
 		 * @since 0.8.0
-		 * @since 1.1.0  Use Locale object.
+		 * @since 1.1.0   Use Locale object.
+		 * @since 1.1.6   Renamed from tstats_render_stats_bar() to render_stats_bar().
 		 *
 		 * @param object $locale           Locale object.
 		 * @param string $project_slug     Plugin Slug.
@@ -441,7 +450,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 *
 		 * @return array|null $stats_bar   Subproject stats bar and error boolean.
 		 */
-		public function tstats_render_stats_bar( $locale, $project_slug, $subproject, $subproject_slug, $force_update ) {
+		public function render_stats_bar( $locale, $project_slug, $subproject, $subproject_slug, $force_update ) {
 
 			$options = get_option( TRANSLATION_STATS_WP_OPTION );
 			// Show bar only if subproject is enabled in plugin settings.
@@ -452,7 +461,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			$stats_bar_link = 'https://translate.wordpress.org/projects/wp-plugins/' . $project_slug . '/' . $subproject_slug . '/' . $locale->locale_slug;
 
 			// Get plugin subproject translation stats.
-			$translation_stats = $this->tstats_plugin_subproject_stats( $locale, $project_slug, $subproject_slug, $force_update );
+			$translation_stats = $this->plugin_subproject_stats( $locale, $project_slug, $subproject_slug, $force_update );
 
 			// Initializing variable.
 			$percent_translated = 0;
@@ -540,7 +549,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * Render plugin subproject stats bar.
 		 *
 		 * @since 0.8.0
-		 * @since 1.1.0  Use Locale object.
+		 * @since 1.1.0   Use Locale object.
+		 * @since 1.1.6   Renamed from tstats_plugin_subproject_stats() to plugin_subproject_stats().
 		 *
 		 * @param object $locale            Locale object.
 		 * @param string $project_slug      Plugin Slug.
@@ -549,7 +559,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 *
 		 * @return object|bool              Project stats if exist, otherwise returns 'false'.
 		 */
-		public function tstats_plugin_subproject_stats( $locale, $project_slug, $subproject_slug, $force_update ) {
+		public function plugin_subproject_stats( $locale, $project_slug, $subproject_slug, $force_update ) {
 
 			// Check for force update setting.
 			if ( true === $force_update ) {
@@ -601,12 +611,13 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * Filter plugins list to show only Translation Stats enabled plugins.
 		 *
 		 * @since 0.9.9
+		 * @since 1.1.6   Renamed from tstats_plugins_filter_by_translation_stats() to plugins_filter_by_translation_stats().
 		 *
 		 * @param array $plugins   Array of arrays containing information on all installed plugins.
 		 *
 		 * @return void
 		 */
-		public function tstats_plugins_filter_by_translation_stats( $plugins ) {
+		public function plugins_filter_by_translation_stats( $plugins ) {
 			// Get WP_Plugins_List_Table and page number.
 			global $wp_list_table, $page;
 
@@ -673,12 +684,13 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * Add status link to Translation Stats enabled plugins View.
 		 *
 		 * @since 0.9.9
+		 * @since 1.1.6   Renamed from tstats_plugins_status_link() to plugins_status_link().
 		 *
 		 * @param array $status_links   Array of status links.
 		 *
 		 * @return array                Array of status links.
 		 */
-		public function tstats_plugins_status_link( $status_links ) {
+		public function plugins_status_link( $status_links ) {
 
 			// Get the Translation Stats configured language.
 			$translationstats_language = $this->globals->translation_language();

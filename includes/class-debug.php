@@ -48,21 +48,40 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 
 			// Instantiate Translation Stats Globals.
 			$this->globals = new Globals();
-
-			// Add Translation Stats settings field debug info.
-			add_action( 'tstats_debug_setting_field_info', array( $this, 'tstats_debug_setting_field_info' ), 10, 3 );
-
-			// Add Translation Stats settings debug section.
-			add_action( 'tstats_settings_section__after', array( $this, 'tstats_settings_section__debug' ) );
-
 			// Add Translation Stats settings debug tab.
-			add_action( 'tstats_settings_tab__after', array( $this, 'tstats_settings_tab__debug' ) );
+			add_action( 'translation_stats_settings_tab__after', array( $this, 'settings_tab__debug' ) );
 
 			// Add Translation Stats settings debug content.
-			add_action( 'tstats_settings_content__after', array( $this, 'tstats_settings_content__debug' ) );
+			add_action( 'translation_stats_settings_content__after', array( $this, 'settings_content__debug' ) );
 
-			// Add Translation Stats plugin widget debug.
-			add_action( 'tstats_stats_plugin_widget_debug', array( $this, 'tstats_settings_plugin_widget__debug' ), 10, 3 );
+			// Add Translation Stats plugin stats widget debug.
+			add_action( 'translation_stats_plugins_stats_widget__after', array( $this, 'plugin_stats_widget__debug' ), 10, 3 );
+
+			// Add Translation Stats settings field debug info.
+			add_action( 'translation_stats_setting_field__after', array( $this, 'setting_field__debug' ), 10, 3 );
+
+			// Add Translation Stats settings debug section.
+			add_action( 'translation_stats_settings_section__after', array( $this, 'settings_section__debug' ) );
+
+		}
+
+
+		/**
+		 * Register Settings Page sections Debug.
+		 *
+		 * @since 0.9.0
+		 * @since 1.1.6   Renamed from tstats_settings_section__debug() to settings_section__debug().
+		 *
+		 * @return void
+		 */
+		public function settings_section__debug() {
+
+			add_settings_section(
+				'tstats_settings_advanced_debug',                   // String for use in the 'id' attribute of tags.
+				__( 'Debug', 'translation-stats' ),                 // Title of the section.
+				array( $this, 'settings_advanced_debug_callback' ), // Function that fills the section with the desired content.
+				'tstats_settings_advanced_debug'                    // The menu page on which to display this section. Should match $menu_slug.
+			);
 
 		}
 
@@ -71,15 +90,16 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 		 * Add Translation Stats settings debug tab.
 		 *
 		 * @since 0.9.0
+		 * @since 1.1.6   Renamed from tstats_settings_tab__debug() to settings_tab__debug().
 		 *
 		 * @return void
 		 */
-		public function tstats_settings_tab__debug() {
-			if ( defined( 'TRANSLATION_STATS_DEBUG' ) && TRANSLATION_STATS_DEBUG ) {
-				?>
-				<a class="nav-tab" href="#debug"><span class="dashicons dashicons-info"></span> <?php esc_html_e( 'Debug', 'translation-stats' ); ?></a>
-				<?php
-			}
+		public function settings_tab__debug() {
+
+			?>
+			<a class="nav-tab" href="#debug"><span class="dashicons dashicons-info"></span> <?php esc_html_e( 'Debug', 'translation-stats' ); ?></a>
+			<?php
+
 		}
 
 
@@ -87,42 +107,20 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 		 * Add Translation Stats settings debug content.
 		 *
 		 * @since 0.9.0
+		 * @since 1.1.6   Renamed from tstats_settings_content__debug() to settings_content__debug().
 		 *
 		 * @return void
 		 */
-		public function tstats_settings_content__debug() {
-			if ( defined( 'TRANSLATION_STATS_DEBUG' ) && TRANSLATION_STATS_DEBUG ) {
-				?>
-				<div id="tab-debug" class="tab-content hidden">
-					<?php
-					$section = 'tstats_settings_advanced_debug';
-					do_settings_sections( $section );
-					?>
-				</div>
+		public function settings_content__debug() {
+
+			?>
+			<div id="tab-debug" class="tab-content hidden">
 				<?php
-			}
-		}
-
-
-		/**
-		 * Register Settings Page sections Debug.
-		 *
-		 * @since 0.9.0
-		 *
-		 * @return void
-		 */
-		public function tstats_settings_section__debug() {
-
-			if ( defined( 'TRANSLATION_STATS_DEBUG' ) && TRANSLATION_STATS_DEBUG ) {
-
-				add_settings_section(
-					'tstats_settings_advanced_debug',                          // String for use in the 'id' attribute of tags.
-					__( 'Debug', 'translation-stats' ),                        // Title of the section.
-					array( $this, 'tstats_settings_advanced_debug_callback' ), // Function that fills the section with the desired content.
-					'tstats_settings_advanced_debug'                           // The menu page on which to display this section. Should match $menu_slug.
-				);
-
-			}
+				$section = 'tstats_settings_advanced_debug';
+				do_settings_sections( $section );
+				?>
+			</div>
+			<?php
 
 		}
 
@@ -131,10 +129,11 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 		 * Callback function for section "Debug".
 		 *
 		 * @since 0.8.0
+		 * @since 1.1.6   Renamed from tstats_settings_advanced_debug_callback() to settings_advanced_debug_callback().
 		 *
 		 * @return void
 		 */
-		public function tstats_settings_advanced_debug_callback() {
+		public function settings_advanced_debug_callback() {
 
 			?>
 			<p class="description">
@@ -145,7 +144,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 			<?php
 
 			// Display plugin options and transients debug information.
-			$this->tstats_debug_info();
+			$this->debug_info();
 
 		}
 
@@ -154,28 +153,29 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 		 * Display debug formated message with plugin options.
 		 *
 		 * @since 0.8.0
+		 * @since 1.1.6   Renamed from tstats_debug_info() to debug_info().
 		 *
 		 * @return void
 		 */
-		public function tstats_debug_info() {
-			if ( defined( 'TRANSLATION_STATS_DEBUG' ) && TRANSLATION_STATS_DEBUG ) {
+		public function debug_info() {
+
+			?>
+			<br>
+			<div class="tstats-debug-block notice notice-alt inline notice-info">
+				<?php
+				// Show server info.
+				$this->debug_info__server();
+				// Show the site settings debug info.
+				$this->debug_info__site();
+				// Show the Translation Stats settings debug info.
+				$this->debug_info__settings();
+				// Show the site transients debug info.
+				$this->debug_info__transients();
 				?>
 				<br>
-				<div class="tstats-debug-block notice notice-alt inline notice-info">
-					<?php
-					// Show server info.
-					$this->tstats_debug_info__server();
-					// Show the site settings debug info.
-					$this->tstats_debug_info__site();
-					// Show the Translation Stats settings debug info.
-					$this->tstats_debug_info__settings();
-					// Show the site transients debug info.
-					$this->tstats_debug_info__transients();
-					?>
-					<br>
-				</div>
-				<?php
-			}
+			</div>
+			<?php
+
 		}
 
 
@@ -183,10 +183,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 		 * Show the server debug info.
 		 *
 		 * @since 0.8.0
+		 * @since 1.1.6   Renamed from tstats_debug_info__server() to debug_info__server().
 		 *
 		 * @return void
 		 */
-		public function tstats_debug_info__server() {
+		public function debug_info__server() {
+
 			?>
 			<h3>
 				<?php esc_html_e( 'Server', 'translation-stats' ); ?>
@@ -223,6 +225,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 				?>
 			</code>
 			<?php
+
 		}
 
 
@@ -230,10 +233,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 		 * Show the site settings debug info.
 		 *
 		 * @since 1.0.0
+		 * @since 1.1.6   Renamed from tstats_debug_info__site() to debug_info__site().
 		 *
 		 * @return void
 		 */
-		public function tstats_debug_info__site() {
+		public function debug_info__site() {
+
 			?>
 			<h3>
 				<?php esc_html_e( 'Site', 'translation-stats' ); ?>
@@ -257,6 +262,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 				?>
 			</p>
 			<?php
+
 		}
 
 
@@ -264,10 +270,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 		 * Show the Translation Stats settings debug info.
 		 *
 		 * @since 1.0.0
+		 * @since 1.1.6   Renamed from tstats_debug_info__settings() to debug_info__settings().
 		 *
 		 * @return void
 		 */
-		public function tstats_debug_info__settings() {
+		public function debug_info__settings() {
+
 			// Get plugin settings.
 			$options = get_option( TRANSLATION_STATS_WP_OPTION );
 			?>
@@ -299,7 +307,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 					esc_html__( 'Translation Stats Locale: %s', 'translation-stats' ),
 					'<code>' . esc_html( $options['settings']['translation_language'] ) . '</code>'
 				);
-				$translationstats_locale = Translations_API::locale( $this->globals->translation_language() );
+				$translationstats_locale = Translations_API::locale( Utils::translation_language() );
 				?>
 			</p>
 			<div>
@@ -356,6 +364,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 				?>
 			</div>
 			<?php
+
 		}
 
 
@@ -363,10 +372,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 		 * Show the site transients debug info.
 		 *
 		 * @since 0.8.0
+		 * @since 1.1.6   Renamed from tstats_debug_info__transients() to debug_info__transients().
 		 *
 		 * @return void
 		 */
-		public function tstats_debug_info__transients() {
+		public function debug_info__transients() {
+
 			?>
 			<h3>
 				<?php esc_html_e( 'Transients', 'translation-stats' ); ?>
@@ -401,6 +412,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 				</code>
 			</div>
 			<?php
+
 		}
 
 
@@ -408,6 +420,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 		 * Display debug formated message with plugin setting info.
 		 *
 		 * @since 0.8.0
+		 * @since 1.1.6   Renamed from tstats_debug_setting_field_info() to setting_field__debug().
 		 *
 		 * @param string $field_id  Setting ID.
 		 * @param string $value     Setting Value.
@@ -415,40 +428,40 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 		 *
 		 * @return void
 		 */
-		public function tstats_debug_setting_field_info( $field_id, $value, $default ) {
-			if ( defined( 'TRANSLATION_STATS_DEBUG' ) && TRANSLATION_STATS_DEBUG ) {
-				?>
-				<div class="tstats-debug-block notice notice-alt inline notice-info">
-					<p>
-						<?php
-						printf(
-							/* translators: %s: Setting ID. */
-							esc_html__( 'ID: %s', 'translation-stats' ),
-							'<code>' . esc_html( $field_id ) . '</code>'
-						);
-						?>
-					</p>
-					<p>
-						<?php
-						printf(
-							/* translators: %s: Setting Value. */
-							esc_html__( 'Value: %s', 'translation-stats' ),
-							'<code>' . esc_html( $value ) . '</code>'
-						);
-						?>
-					</p>
-					<p>
-						<?php
-						printf(
-							/* translators: %s: Setting Default. */
-							esc_html__( 'Default: %s', 'translation-stats' ),
-							'<code>' . esc_html( $default ) . '</code>'
-						);
-						?>
-					</p>
-				</div>
-				<?php
-			}
+		public function setting_field__debug( $field_id, $value, $default ) {
+
+			?>
+			<div class="tstats-debug-block notice notice-alt inline notice-info">
+				<p>
+					<?php
+					printf(
+						/* translators: %s: Setting ID. */
+						esc_html__( 'ID: %s', 'translation-stats' ),
+						'<code>' . esc_html( $field_id ) . '</code>'
+					);
+					?>
+				</p>
+				<p>
+					<?php
+					printf(
+						/* translators: %s: Setting Value. */
+						esc_html__( 'Value: %s', 'translation-stats' ),
+						'<code>' . esc_html( $value ) . '</code>'
+					);
+					?>
+				</p>
+				<p>
+					<?php
+					printf(
+						/* translators: %s: Setting Default. */
+						esc_html__( 'Default: %s', 'translation-stats' ),
+						'<code>' . esc_html( $default ) . '</code>'
+					);
+					?>
+				</p>
+			</div>
+			<?php
+
 		}
 
 
@@ -456,6 +469,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 		 * Display debug formated message with plugin translation project info.
 		 *
 		 * @since 0.9.4
+		 * @since 1.1.6   Renamed from tstats_settings_plugin_widget__debug() to plugin_stats_widget__debug().
 		 *
 		 * @param string $project_slug                  Plugin Slug..
 		 * @param string $plugin_on_wporg               Plugin exist on WP.org: True or false.
@@ -463,46 +477,46 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 		 *
 		 * @return void
 		 */
-		public function tstats_settings_plugin_widget__debug( $project_slug, $plugin_on_wporg, $plugin_translation_on_wporg ) {
-			if ( defined( 'TRANSLATION_STATS_DEBUG' ) && TRANSLATION_STATS_DEBUG ) {
-				?>
-				<div class="tstats-debug-block notice notice-alt inline notice-info">
-					<p>
-						<?php
+		public function plugin_stats_widget__debug( $project_slug, $plugin_on_wporg, $plugin_translation_on_wporg ) {
+
+			?>
+			<div class="tstats-debug-block notice notice-alt inline notice-info">
+				<p>
+					<?php
+					printf(
+						/* translators: %s: Plugin slug. */
+						esc_html__( 'Slug: %s', 'translation-stats' ),
+						'<code>' . esc_html( $project_slug ) . '</code>'
+					);
+					?>
+				</p>
+				<p>
+					<?php
+					if ( $plugin_on_wporg ) {
+						esc_html_e( 'Plugin found on WordPress.org', 'translation-stats' );
+					} else {
+						esc_html_e( 'Plugin not found on WordPress.org', 'translation-stats' );
+					}
+					?>
+				</p>
+				<p>
+					<?php
+					if ( $plugin_translation_on_wporg ) {
+						$api_url = Translations_API::translations_api_url( 'plugins' ) . $project_slug;
 						printf(
-							/* translators: %s: Plugin slug. */
-							esc_html__( 'Slug: %s', 'translation-stats' ),
-							'<code>' . esc_html( $project_slug ) . '</code>'
+							/* translators: 1: Opening tag <a>. 2: Closing tag </a>. */
+							esc_html__( 'Translation project found on %1$sWordPress.org%2$s', 'translation-stats' ),
+							'<a href="' . esc_url( $api_url ) . '" target="_blank">',
+							'</a>'
 						);
-						?>
-					</p>
-					<p>
-						<?php
-						if ( $plugin_on_wporg ) {
-							esc_html_e( 'Plugin found on WordPress.org', 'translation-stats' );
-						} else {
-							esc_html_e( 'Plugin not found on WordPress.org', 'translation-stats' );
-						}
-						?>
-					</p>
-					<p>
-						<?php
-						if ( $plugin_translation_on_wporg ) {
-							$api_url = Translations_API::translations_api_url( 'plugins' ) . $project_slug;
-							printf(
-								/* translators: 1: Opening tag <a>. 2: Closing tag </a>. */
-								esc_html__( 'Translation project found on %1$sWordPress.org%2$s', 'translation-stats' ),
-								'<a href="' . esc_url( $api_url ) . '" target="_blank">',
-								'</a>'
-							);
-						} else {
-							esc_html_e( 'Translation project not found on WordPress.org', 'translation-stats' );
-						}
-						?>
-					</p>
-				</div>
-				<?php
-			}
+					} else {
+						esc_html_e( 'Translation project not found on WordPress.org', 'translation-stats' );
+					}
+					?>
+				</p>
+			</div>
+			<?php
+
 		}
 
 	}
