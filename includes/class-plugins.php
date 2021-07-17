@@ -23,13 +23,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 
 
 		/**
-		 * Globals.
-		 *
-		 * @var object
-		 */
-		protected $globals;
-
-		/**
 		 * Notices.
 		 *
 		 * @var object
@@ -41,9 +34,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * Constructor.
 		 */
 		public function __construct() {
-
-			// Instantiate Translation Stats Globals.
-			$this->globals = new Globals();
 
 			// Instantiate Translation Stats Notices.
 			$this->notices = new Notices();
@@ -88,7 +78,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		public function add_translation_stats_column( $columns ) {
 
 			// Get the Translation Stats configured language.
-			$translationstats_language = $this->globals->translation_language();
+			$translationstats_language = Utils::translation_language();
 
 			$settings_link = sprintf(
 				'<a href="%s" aria-label="%s"><span class="dashicons dashicons-edit"></span></a>',
@@ -121,7 +111,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			if ( 'translation-stats' === $column_name ) {
 
 				// Get the Translation Stats configured language.
-				$translationstats_language = $this->globals->translation_language();
+				$translationstats_language = Utils::translation_language();
 
 				// Check if user locale is not 'en_US'.
 				if ( 'en_US' !== $translationstats_language ) {
@@ -178,7 +168,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		public function render_plugin_stats( $project_slug ) {
 
 			// Get Translation Stats Locale data.
-			$locale = Translations_API::locale( $this->globals->translation_language() );
+			$locale = Translations_API::locale( Utils::translation_language() );
 
 			ob_start();
 
@@ -222,7 +212,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			do_action( 'translation_stats_plugin_widget_content__after', $project_slug, $locale );
 
 			$plugin_stats = ob_get_clean();
-			echo wp_kses( $plugin_stats, $this->globals->allowed_html() );
+			echo wp_kses( $plugin_stats, Utils::allowed_html() );
 
 		}
 
@@ -317,7 +307,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				$force_update = 'true' === sanitize_key( $_POST['forceUpdate'] ) ? true : false; // phpcs:ignore WordPress.Security.NonceVerification.Missing
 			}
 
-			$locale = Translations_API::locale( $this->globals->translation_language() );
+			$locale = Translations_API::locale( Utils::translation_language() );
 
 			if ( isset( $_POST['tstatsPlugin'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
 
@@ -371,8 +361,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				$subprojects = Translations_API::plugin_subprojects();
 				$i18n_errors = 0;
 				foreach ( $subprojects as $subproject ) {
-					echo wp_kses( $subproject['stats'], $this->globals->allowed_html() );
 					$subproject = $this->render_stats_bar( $locale, $project_slug, $subproject['name'], $subproject['slug'], $force_update );
+					echo wp_kses( $subproject['stats'], Utils::allowed_html() );
 					$i18n_errors = $i18n_errors + $subproject['error'];
 				}
 				?>
@@ -622,7 +612,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			global $wp_list_table, $page;
 
 			// Get the Translation Stats configured language.
-			$translationstats_language = $this->globals->translation_language();
+			$translationstats_language = Utils::translation_language();
 
 			// Check if user locale is not 'en_US'.
 			if ( 'en_US' === $translationstats_language ) {
@@ -693,7 +683,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		public function plugins_status_link( $status_links ) {
 
 			// Get the Translation Stats configured language.
-			$translationstats_language = $this->globals->translation_language();
+			$translationstats_language = Utils::translation_language();
 
 			// Check if user locale is not 'en_US'.
 			if ( 'en_US' === $translationstats_language ) {

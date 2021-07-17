@@ -31,14 +31,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 
 
 		/**
-		 * Globals.
-		 *
-		 * @var object
-		 */
-		protected $globals;
-
-
-		/**
 		 * Constructor.
 		 */
 		public function __construct() {
@@ -46,8 +38,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 			// Instantiate Translation Stats Transients.
 			$this->transients = new Transients();
 
-			// Instantiate Translation Stats Globals.
-			$this->globals = new Globals();
 			// Add Translation Stats settings debug tab.
 			add_action( 'translation_stats_settings_tab__after', array( $this, 'settings_tab__debug' ) );
 

@@ -23,25 +23,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Plugins' ) ) {
 
 
 		/**
-		 * Globals.
-		 *
-		 * @var object
-		 */
-		protected $globals;
-
-
-		/**
-		 * Constructor.
-		 */
-		public function __construct() {
-
-			// Instantiate Translation Stats Globals.
-			$this->globals = new Globals();
-
-		}
-
-
-		/**
 		 * Registers Settings Plugins page section.
 		 *
 		 * @since 0.8.0
@@ -253,7 +234,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Plugins' ) ) {
 			$options = get_option( TRANSLATION_STATS_WP_OPTION );
 
 			// Get the Translation Stats configured language.
-			$translationstats_language = $this->globals->translation_language();
+			$translationstats_language = Utils::translation_language();
 
 			// Get locale data.
 			$locale = Translations_API::locale( $translationstats_language );

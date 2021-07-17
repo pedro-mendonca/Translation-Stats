@@ -23,25 +23,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Notices' ) ) {
 
 
 		/**
-		 * Globals.
-		 *
-		 * @var object
-		 */
-		protected $globals;
-
-
-		/**
-		 * Constructor.
-		 */
-		public function __construct() {
-
-			// Instantiate Translation Stats Globals.
-			$this->globals = new Globals();
-
-		}
-
-
-		/**
 		 * Display formated admin notice.
 		 *
 		 * WordPress core notice types ( 'error', 'warning', 'warning-spin', 'success' and 'info' ).
@@ -104,7 +85,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Notices' ) ) {
 				<p><?php echo wp_kses_post( $notice['message'] ); ?></p>
 				<?php
 				// Extra HTML.
-				echo wp_kses( $notice['extra-html'], $this->globals->allowed_html() );
+				echo wp_kses( $notice['extra-html'], Utils::allowed_html() );
 				?>
 			</div>
 
