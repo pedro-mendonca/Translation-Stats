@@ -24,6 +24,71 @@ if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 
 
 		/**
+		 * Determine if Translation Stats is in development mode.
+		 *
+		 * Inspired by Yoast (https://github.com/Yoast/wordpress-seo/blob/f174ad88636f9115a8c25f66daafbf84c747679b/inc/class-wpseo-utils.php#L716).
+		 *
+		 * @since 1.1.6
+		 *
+		 * @return bool
+		 */
+		public static function is_development_mode() {
+
+			$development_mode = false;
+
+			if ( defined( 'TRANSLATION_STATS_DEBUG' ) ) {
+				$development_mode = TRANSLATION_STATS_DEBUG;
+			}
+
+			/**
+			 * Filter the Translation Stats development mode status.
+			 *
+			 * @since 1.1.6
+			 *
+			 * @param bool $development_mode   Set development mode to true or false.
+			 */
+			return apply_filters( 'translation_stats_development_mode', $development_mode );
+
+		}
+
+
+		/**
+		 * Get asset URL, according the minification status.
+		 *
+		 * @since 1.1.6
+		 *
+		 * @param string $asset    Name of asset excluding the extension.
+		 * @param bool   $minify   Determine if the asset has a minified version.
+		 *
+		 * @return string|false   Complete URL for the asset. Return false if extension is not suported.
+		 */
+		public static function get_asset_url( $asset, $minify ) {
+
+			$path = pathinfo( $asset );
+
+			// Supported asset types and folders.
+			$types = array(
+				'css',
+				'js',
+				'jpg',
+				'png',
+				'svg',
+			);
+
+			// Check if type is supported.
+			if ( ! in_array( $path['extension'], $types, true ) ) {
+				return false;
+			}
+
+			// Only provide minified assets if in development mode or SCRIPT_DEBUG is set to true.
+			$suffix = $minify && ! self::is_development_mode() && ( ! defined( 'SCRIPT_DEBUG' ) || ! SCRIPT_DEBUG ) ? '.min' : '';
+
+			return TRANSLATION_STATS_DIR_URL . 'assets/' . $path['dirname'] . '/' . $path['filename'] . $suffix . '.' . $path['extension'];
+
+		}
+
+
+		/**
 		 * Set the Translation Language.
 		 *
 		 * @since 0.8.0

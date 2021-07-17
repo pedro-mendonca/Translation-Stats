@@ -60,7 +60,7 @@ jQuery( document ).ready( function( $ ) {
 			$( '.tabs-content form div' + tstatsActiveTabID.replace( '#', '#tab-' ) ).removeClass( 'hidden' );
 		}
 
-		console.log( 'Loaded tstats-settings.js' );
+		console.log( 'Loaded admin-settings.js' );
 	}
 
 	/**

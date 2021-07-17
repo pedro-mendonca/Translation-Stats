@@ -181,7 +181,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 
 			update_site_option( TRANSLATION_STATS_WP_OPTION, $settings_v1 );
 
-			if ( defined( 'TRANSLATION_STATS_DEBUG' ) && TRANSLATION_STATS_DEBUG ) {
+			if ( Utils::is_development_mode() ) {
 
 				$message = sprintf(
 					'<h3>%s</h3><pre>%s</pre>',

@@ -1,5 +1,5 @@
 jQuery( document ).ready( function( $ ) {
-	console.log( 'Loaded tstats-plugins.js' );
+	console.log( 'Loaded admin-plugins.js' );
 
 	// Action on click update button.
 	$( 'table.wp-list-table td.translation-stats button.tstats-update-button' ).on( 'click', function() {
@@ -33,7 +33,7 @@ jQuery( document ).ready( function( $ ) {
 			url: tstats.ajaxurl,
 			type: 'POST',
 			data: {
-				action: 'tstats_stats_plugin_widget_content_load',
+				action: 'translation_stats_plugin_widget_content_load',
 				tstatsPlugin: tstatsPlugin,
 				forceUpdate: forceUpdate,
 			},
