@@ -49,7 +49,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 			new Plugins();
 
 			// Initialize the plugin debug.
-			new Debug();
+			if ( Utils::is_development_mode() ) {
+				new Debug();
+			}
 
 		}
 
