@@ -32,12 +32,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// Check if get_plugin_data() function exists.
+if ( ! function_exists( 'get_plugin_data' ) ) {
+	require_once ABSPATH . 'wp-admin/includes/plugin.php';
+}
+
+// Get plugin headers data.
+$translation_stats_data = get_plugin_data( __FILE__, false, false );
 
 // Set Translation Stats plugin version.
-define( 'TRANSLATION_STATS_VERSION', '1.1.5' );
+if ( ! defined( 'TRANSLATION_STATS_VERSION' ) ) {
+	define( 'TRANSLATION_STATS_VERSION', $translation_stats_data['Version'] );
+}
 
 // Set Translation Stats required PHP version. Needed for PHP compatibility check for WordPress < 5.1.
-define( 'TRANSLATION_STATS_REQUIRED_PHP', '5.6' );
+if ( ! defined( 'TRANSLATION_STATS_REQUIRED_PHP' ) ) {
+	define( 'TRANSLATION_STATS_REQUIRED_PHP', $translation_stats_data['RequiresPHP'] );
+}
 
 // Set Translation Stats settings database version.
 define( 'TRANSLATION_STATS_SETTINGS_VERSION', '1.0' );
