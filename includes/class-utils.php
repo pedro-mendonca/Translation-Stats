@@ -1,10 +1,11 @@
 <?php
 /**
- * Class file for the Translation Stats Globals.
+ * Class file for the Translation Stats Utils.
  *
  * @package Translation_Stats
  *
  * @since 0.9.0
+ * @since 1.1.6   Renamed from Globals to Utils.
  */
 
 namespace Translation_Stats;
@@ -14,12 +15,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( __NAMESPACE__ . '\Globals' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 
 	/**
-	 * Class Globals.
+	 * Class Utils.
 	 */
-	class Globals {
+	class Utils {
 
 
 		/**
@@ -27,10 +28,11 @@ if ( ! class_exists( __NAMESPACE__ . '\Globals' ) ) {
 		 *
 		 * @since 0.8.0
 		 * @since 1.1.1   Renamed from tstats_translation_language() to translation_language().
+		 * @since 1.1.6   Moved to Utils class.
 		 *
 		 * @return string   Translation Language as WordPress Locale ( e.g. 'pt_PT' ).
 		 */
-		public function translation_language() {
+		public static function translation_language() {
 			// Get Translation Language from Settings.
 			$wp_locale = get_option( TRANSLATION_STATS_WP_OPTION )['settings']['translation_language'];
 			if ( ! $wp_locale || 'site-default' === $wp_locale ) {
@@ -45,6 +47,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Globals' ) ) {
 		 *
 		 * @since 0.9.0
 		 * @since 1.1.1   Renamed from tstats_link() to campaign_link().
+		 * @since 1.1.6   Moved to Utils class.
 		 *
 		 * @param string $link      Link to customize.
 		 * @param string $source    Set utm_source, default is 'tstats'.
@@ -53,15 +56,14 @@ if ( ! class_exists( __NAMESPACE__ . '\Globals' ) ) {
 		 *
 		 * @return string  Link with campaign parameters.
 		 */
-		public function campaign_link( $link, $source, $medium, $campaign ) {
+		public static function campaign_link( $link, $source, $medium, $campaign ) {
 
 			$utm_source   = ! empty( $source ) ? $source : 'plugin';
 			$utm_medium   = ! empty( $medium ) ? $medium : 'link';
 			$utm_campaign = ! empty( $campaign ) ? $campaign : 'plugin_link';
 
-			$campaign_link = $link . '?utm_source=' . $utm_source . '&amp;utm_medium=' . $utm_medium . '&amp;utm_campaign=' . $utm_campaign;
+			return $link . '?utm_source=' . $utm_source . '&amp;utm_medium=' . $utm_medium . '&amp;utm_campaign=' . $utm_campaign;
 
-			return $campaign_link;
 		}
 
 
@@ -70,10 +72,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Globals' ) ) {
 		 *
 		 * @since 0.8.5
 		 * @since 1.1.1   Renamed from tstats_allowed_html() to allowed_html().
+		 * @since 1.1.6   Moved to Utils class.
 		 *
 		 * @return array  Array of allowed HTML elements.
 		 */
-		public function allowed_html() {
+		public static function allowed_html() {
+
 			$allowed_html = array(
 				'a'      => array(
 					'href'   => array(),
@@ -147,6 +151,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Globals' ) ) {
 			);
 
 			return $allowed_html;
+
 		}
 
 	}
