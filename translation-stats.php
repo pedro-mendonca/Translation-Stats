@@ -77,9 +77,6 @@ define( 'TRANSLATION_STATS_DIR_PATH', plugin_dir_path( __FILE__ ) );
 // Set Translation Stats file path.
 define( 'TRANSLATION_STATS_FILE', plugin_basename( __FILE__ ) );
 
-// Set Translation Stats Debug ( true / false ).
-// Example: define( 'TRANSLATION_STATS_DEBUG', true );.
-
 
 /**
  * Require wordpress.org Locales list since translate.wp.org Languages API (https://translate.wordpress.org/api/languages/) was disabled on meta changeset #10056 (https://meta.trac.wordpress.org/changeset/10056).
