@@ -115,7 +115,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 		 * @since 1.1.6   Moved to Utils class.
 		 *
 		 * @param string $link      Link to customize.
-		 * @param string $source    Set utm_source, default is 'tstats'.
+		 * @param string $source    Set utm_source, default is 'plugin'.
 		 * @param string $medium    Set utm_medium, default is 'link'.
 		 * @param string $campaign  Set utm_campaign, default is 'plugin_link'.
 		 *
