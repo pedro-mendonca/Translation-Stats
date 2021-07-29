@@ -58,7 +58,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * Set the plugin translation stats column if user locale is not 'en_US'.
 		 *
 		 * @since 0.8.0
-		 * @since 1.1.6   Renamed from tstats_add_translation_stats_column() to add_translation_stats_column().
+		 * @since 1.2.0   Renamed from tstats_add_translation_stats_column() to add_translation_stats_column().
 		 *
 		 * @param array $columns   Columns array.
 		 *
@@ -86,7 +86,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * Show Plugin Translation Stats Content if the plugin is in WP.org and if Locale isn´t 'en_US'.
 		 *
 		 * @since 0.8.0
-		 * @since 1.1.6   Renamed from tstats_render_plugin_stats_column() to render_plugin_stats_column().
+		 * @since 1.2.0   Renamed from tstats_render_plugin_stats_column() to render_plugin_stats_column().
 		 *
 		 * @param string $column_name  Column Slug ( e.g. 'translation-stats' ).
 		 * @param string $plugin_file  Plugin ID ( e.g. 'slug/plugin-name.php' ).
@@ -148,7 +148,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * Render Plugin Translation Stats for current locale.
 		 *
 		 * @since 0.8.0
-		 * @since 1.1.6   Renamed from tstats_render_plugin_stats() to render_plugin_stats().
+		 * @since 1.2.0   Renamed from tstats_render_plugin_stats() to render_plugin_stats().
 		 *
 		 * @param string $project_slug   Plugin Slug.
 		 *
@@ -211,7 +211,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 *
 		 * @since 0.9.4
 		 * @since 1.1.0  Use Locale object.
-		 * @since 1.1.6  Renamed from tstats_stats_plugin_widget_title() to plugin_widget_title().
+		 * @since 1.2.0  Renamed from tstats_stats_plugin_widget_title() to plugin_widget_title().
 		 *
 		 * @param string $project_slug  Plugin Slug.
 		 * @param object $locale        Locale object.
@@ -238,7 +238,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * Load plugin widget title update button.
 		 *
 		 * @since 0.9.4
-		 * @since 1.1.6   Renamed from tstats_plugin_update_button() to plugin_update_button().
+		 * @since 1.2.0   Renamed from tstats_plugin_update_button() to plugin_update_button().
 		 *
 		 * @return void
 		 */
@@ -260,7 +260,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * Load plugin widget loading placeholder.
 		 *
 		 * @since 0.9.4
-		 * @since 1.1.6   Renamed from tstats_stats_plugin_widget_content() to plugin_widget_content().
+		 * @since 1.2.0   Renamed from tstats_stats_plugin_widget_content() to plugin_widget_content().
 		 *
 		 * @return void
 		 */
@@ -283,7 +283,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * Load plugin widget content.
 		 *
 		 * @since 0.9.4
-		 * @since 1.1.6   Renamed from tstats_stats_plugin_widget_content_load() to plugin_widget_content_load().
+		 * @since 1.2.0   Renamed from tstats_stats_plugin_widget_content_load() to plugin_widget_content_load().
 		 *
 		 * @return void
 		 */
@@ -334,7 +334,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 *
 		 * @since 0.9.4
 		 * @since 1.1.0   Use Locale object.
-		 * @since 1.1.6   Renamed from tstats_stats_plugin_widget_content_stats() to plugin_widget_content_stats().
+		 * @since 1.2.0   Renamed from tstats_stats_plugin_widget_content_stats() to plugin_widget_content_stats().
 		 *
 		 * @param string $project_slug   Plugin Slug.
 		 * @param object $locale         Locale object.
@@ -419,7 +419,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 *
 		 * @since 0.8.0
 		 * @since 1.1.0   Use Locale object.
-		 * @since 1.1.6   Renamed from tstats_render_stats_bar() to render_stats_bar().
+		 * @since 1.2.0   Renamed from tstats_render_stats_bar() to render_stats_bar().
 		 *
 		 * @param object $locale           Locale object.
 		 * @param string $project_slug     Plugin Slug.
@@ -529,7 +529,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 *
 		 * @since 0.8.0
 		 * @since 1.1.0   Use Locale object.
-		 * @since 1.1.6   Renamed from tstats_plugin_subproject_stats() to plugin_subproject_stats().
+		 * @since 1.2.0   Renamed from tstats_plugin_subproject_stats() to plugin_subproject_stats().
 		 *
 		 * @param object $locale            Locale object.
 		 * @param string $project_slug      Plugin Slug.
@@ -590,7 +590,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * Filter plugins list to show only Translation Stats enabled plugins.
 		 *
 		 * @since 0.9.9
-		 * @since 1.1.6   Renamed from tstats_plugins_filter_by_translation_stats() to plugins_filter_by_translation_stats().
+		 * @since 1.2.0   Renamed from tstats_plugins_filter_by_translation_stats() to plugins_filter_by_translation_stats().
 		 *
 		 * @param array $plugins   Array of arrays containing information on all installed plugins.
 		 *
@@ -663,7 +663,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * Add status link to Translation Stats enabled plugins View.
 		 *
 		 * @since 0.9.9
-		 * @since 1.1.6   Renamed from tstats_plugins_status_link() to plugins_status_link().
+		 * @since 1.2.0   Renamed from tstats_plugins_status_link() to plugins_status_link().
 		 *
 		 * @param array $status_links   Array of status links.
 		 *

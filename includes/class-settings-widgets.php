@@ -37,7 +37,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Widgets' ) ) {
 		 * Show plugin info widget.
 		 *
 		 * @since 0.9.0
-		 * @since 1.1.6   Renamed from tstats_settings_widget__about() to settings_widget__about().
+		 * @since 1.2.0   Renamed from tstats_settings_widget__about() to settings_widget__about().
 		 *
 		 * @return void
 		 */

@@ -5,7 +5,7 @@
  * @package Translation_Stats
  *
  * @since 0.9.0
- * @since 1.1.6   Renamed from Globals to Utils.
+ * @since 1.2.0   Renamed from Globals to Utils.
  */
 
 namespace Translation_Stats;
@@ -28,7 +28,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 		 *
 		 * Inspired by Yoast (https://github.com/Yoast/wordpress-seo/blob/f174ad88636f9115a8c25f66daafbf84c747679b/inc/class-wpseo-utils.php#L716).
 		 *
-		 * @since 1.1.6
+		 * @since 1.2.0
 		 *
 		 * @return bool
 		 */
@@ -43,7 +43,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 			/**
 			 * Filter the Translation Stats development mode status.
 			 *
-			 * @since 1.1.6
+			 * @since 1.2.0
 			 *
 			 * @param bool $development_mode   Set development mode to true or false.
 			 */
@@ -55,7 +55,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 		/**
 		 * Get asset URL, according the minification status.
 		 *
-		 * @since 1.1.6
+		 * @since 1.2.0
 		 *
 		 * @param string $asset    Name of asset excluding the extension.
 		 * @param bool   $minify   Determine if the asset has a minified version.
@@ -93,7 +93,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 		 *
 		 * @since 0.8.0
 		 * @since 1.1.1   Renamed from tstats_translation_language() to translation_language().
-		 * @since 1.1.6   Moved to Utils class.
+		 * @since 1.2.0   Moved to Utils class.
 		 *
 		 * @return string   Translation Language as WordPress Locale ( e.g. 'pt_PT' ).
 		 */
@@ -112,7 +112,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 		 *
 		 * @since 0.9.0
 		 * @since 1.1.1   Renamed from tstats_link() to campaign_link().
-		 * @since 1.1.6   Moved to Utils class.
+		 * @since 1.2.0   Moved to Utils class.
 		 *
 		 * @param string $link      Link to customize.
 		 * @param string $source    Set utm_source, default is 'plugin'.
@@ -137,7 +137,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 		 *
 		 * @since 0.8.5
 		 * @since 1.1.1   Renamed from tstats_allowed_html() to allowed_html().
-		 * @since 1.1.6   Moved to Utils class.
+		 * @since 1.2.0   Moved to Utils class.
 		 *
 		 * @return array  Array of allowed HTML elements.
 		 */

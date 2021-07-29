@@ -37,7 +37,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Sidebar' ) ) {
 		 * Show Translation Stats settings sidebar.
 		 *
 		 * @since 0.9.0
-		 * @since 1.1.6   Renamed from tstats_settings__sidebar() to settings__sidebar().
+		 * @since 1.2.0   Renamed from tstats_settings__sidebar() to settings__sidebar().
 		 *
 		 * @return void
 		 */
