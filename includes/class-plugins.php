@@ -23,20 +23,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 
 
 		/**
-		 * Notices.
-		 *
-		 * @var object
-		 */
-		protected $notices;
-
-
-		/**
 		 * Constructor.
 		 */
 		public function __construct() {
-
-			// Instantiate Translation Stats Notices.
-			$this->notices = new Notices();
 
 			// Add plugin translation stats column.
 			add_filter( 'manage_plugins_columns', array( $this, 'add_translation_stats_column' ) );
@@ -133,7 +122,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 							'notice-alt' => true,
 							'message'    => esc_html__( 'Plugin not found on WordPress.org', 'translation-stats' ),
 						);
-						$this->notices->notice_message( $admin_notice ); // TODO: Add alternative GlotPress API.
+						Admin_Notice::message( $admin_notice ); // TODO: Add alternative GlotPress API.
 					} else {
 						// Check if translation project is on WordPress.org.
 						if ( ! $plugin_translation_on_wporg ) {
@@ -142,7 +131,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 								'notice-alt' => true,
 								'message'    => esc_html__( 'Translation project not found on WordPress.org', 'translation-stats' ),
 							);
-							$this->notices->notice_message( $admin_notice );
+							Admin_Notice::message( $admin_notice );
 						} else {
 							$this->render_plugin_stats( $project_slug );
 						}
@@ -285,7 +274,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				'force_show'  => true,
 				'message'     => esc_html__( 'Loading...', 'translation-stats' ),
 			);
-			$this->notices->notice_message( $admin_notice );
+			Admin_Notice::message( $admin_notice );
 
 		}
 
@@ -326,7 +315,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 							'update-icon' => true,
 							'message'     => esc_html__( 'Updated!', 'translation-stats' ),
 						);
-						$this->notices->notice_message( $admin_notice );
+						Admin_Notice::message( $admin_notice );
 						?>
 					</div>
 
@@ -388,7 +377,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 							'</a>'
 						),
 					);
-					$this->notices->notice_message( $admin_notice );
+					Admin_Notice::message( $admin_notice );
 
 					$admin_notice = array(
 						'type'       => 'warning',
@@ -400,7 +389,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 							'</a>'
 						),
 					);
-					$this->notices->notice_message( $admin_notice );
+					Admin_Notice::message( $admin_notice );
 
 					$admin_notice = array(
 						'type'       => 'warning',
@@ -414,7 +403,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 							'</a>'
 						),
 					);
-					$this->notices->notice_message( $admin_notice );
+					Admin_Notice::message( $admin_notice );
 					?>
 
 				</div>

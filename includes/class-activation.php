@@ -35,9 +35,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Activation' ) ) {
 		 */
 		public function __construct() {
 
-			// Instantiate Translation Stats Notices.
-			$this->notices = new Notices();
-
 			// Register activation hook.
 			register_activation_hook( 'translation-stats/translation-stats.php', array( $this, 'activate' ) );
 
@@ -96,7 +93,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Activation' ) ) {
 					'dismissible' => true,
 					'message'     => $activation_message,
 				);
-				$this->notices->notice_message( $admin_notice );
+				Admin_Notice::message( $admin_notice );
 
 				// Delete transient, only display this notice once.
 				delete_transient( 'translation_stats_activate' );

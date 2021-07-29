@@ -1,10 +1,11 @@
 <?php
 /**
- * Class file for the Translation Stats notices.
+ * Class file for the Translation Stats admin notices.
  *
  * @package Translation_Stats
  *
  * @since 0.8.0
+ * @since 1.2.0   Renamed from Notices to Admin_Notice.
  */
 
 namespace Translation_Stats;
@@ -14,12 +15,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( __NAMESPACE__ . '\Notices' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Admin_Notice' ) ) {
 
 	/**
-	 * Class Notices.
+	 * Class Admin_Notice.
 	 */
-	class Notices {
+	class Admin_Notice {
 
 
 		/**
@@ -32,12 +33,13 @@ if ( ! class_exists( __NAMESPACE__ . '\Notices' ) ) {
 		 * @since 0.8.0
 		 * @since 0.9.5   Array with all the notice data.
 		 * @since 1.1.1   Renamed from tstats_notice_message() to notice_message().
+		 * @since 1.2.0   Renamed from notice_message() to message().
 		 *
 		 * @param array $args   Array of message data.
 		 *
 		 * @return void
 		 */
-		public function notice_message( $args ) {
+		public static function message( $args ) {
 
 			// Check if 'show_warnings' is true.
 			$wp_option = get_option( TRANSLATION_STATS_WP_OPTION );
