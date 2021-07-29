@@ -59,6 +59,9 @@ define( 'TRANSLATION_STATS_WP_OPTION', 'tstats_settings' );
 // Set Translation Stats settings page slug.
 define( 'TRANSLATION_STATS_SETTINGS_PAGE', 'translation-stats' );
 
+// Set Translation Stats settings sections prefix.
+define( 'TRANSLATION_STATS_SETTINGS_SECTIONS_PREFIX', 'translation_stats_' );
+
 // Set Translation Stats transients prefix.
 define( 'TRANSLATION_STATS_TRANSIENTS_PREFIX', 'translation_stats_plugin_' );
 

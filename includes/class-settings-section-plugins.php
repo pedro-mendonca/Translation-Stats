@@ -1,10 +1,10 @@
 <?php
 /**
- * Class file for registering Translation Stats Plugin Settings.
+ * Class file for registering Translation Stats plugins settings.
  *
  * @package Translation_Stats
  *
- * @since 0.8.0
+ * @since 1.2.0
  */
 
 namespace Translation_Stats;
@@ -14,35 +14,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( __NAMESPACE__ . '\Settings_Plugins' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Plugins' ) ) {
 
 	/**
-	 * Class Settings_Plugins.
+	 * Class Settings_Section_Plugins.
 	 */
-	class Settings_Plugins {
+	class Settings_Section_Plugins extends Settings_Section {
 
 
 		/**
-		 * Registers Settings Plugins page section.
+		 * Data for the plugins section.
 		 *
-		 * @since 0.8.0
-		 * @since 0.9.9   Moved from class Settings() to Settings_Plugins().
-		 *                Renamed from tstats_settings_section__plugins() to settings_section().
+		 * @since 1.2.0
 		 *
-		 * @return void
+		 * @return array   Array of settings section data.
 		 */
-		public function settings_section() {
+		public function section() {
 
-			add_settings_section(
-				'tstats_settings__plugins',                     // String for use in the 'id' attribute of tags.
-				__( 'Installed Plugins', 'translation-stats' ), // Title of the section.
-				array( $this, 'settings_section__callback' ),   // Function that fills the section with the desired content.
-				'tstats_settings__plugins'                      // The menu page on which to display this section. Should match $menu_slug.
-			);
-
-			register_setting(
-				'tstats_settings__plugins', // The menu page on which to display this section. Should match $menu_slug.
-				TRANSLATION_STATS_WP_OPTION // The WordPress option to store Translation Stats settings.
+			return array(
+				'id'          => 'plugins', // Match the section ID from the settings pages of get_settings_pages().
+				'title'       => __( 'Installed Plugins', 'translation-stats' ),
+				'description' => null,  // Added below with custom HTML.
+				'page'        => TRANSLATION_STATS_SETTINGS_SECTIONS_PREFIX . 'plugins',
 			);
 
 		}
@@ -51,13 +44,11 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Plugins' ) ) {
 		/**
 		 * Callback function for section "Plugins Settings".
 		 *
-		 * @since 0.8.0
-		 * @since 0.9.9   Moved from class Settings() to Settings_Plugins().
-		 *                Renamed from tstats_settings__plugins__callback() to settings_section__callback().
+		 * @since 1.2.0
 		 *
-		 * @return void
+		 * @return callable|void
 		 */
-		public function settings_section__callback() {
+		public function render_custom_section() {
 			?>
 
 			<p class="search-box">
@@ -70,7 +61,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Plugins' ) ) {
 			<p>
 				<?php
 				printf(
-					'<span class="description">%s</span> %s',
+					'%s %s',
 					esc_html__( 'Select the plugins and subprojects you want to show the translation stats from the list of installed plugins.', 'translation-stats' ),
 					sprintf(
 						'<a href="%1$s" aria-label="%2$s">%3$s</a>',
@@ -84,7 +75,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Plugins' ) ) {
 			<br>
 			<?php
 
-			$this->settings__plugins_list();
+			$this->plugins_list();
 
 		}
 
@@ -92,13 +83,11 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Plugins' ) ) {
 		/**
 		 * Render translation projects settings table.
 		 *
-		 * @since 0.8.0
-		 * @since 0.9.6.2   Added table settings and separated methods for table header and rows.
-		 * @since 0.9.9     Renamed from tstats_render_settings__plugins_list() to settings__plugins_list().
+		 * @since 1.2.0
 		 *
 		 * @return void
 		 */
-		public function settings__plugins_list() {
+		public function plugins_list() {
 
 			// Configure projects table.
 			$table_args = array(
@@ -158,8 +147,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Plugins' ) ) {
 		/**
 		 * Render translation projects settings table header.
 		 *
-		 * @since 0.9.6.2
-		 * @since 0.9.9     Renamed from tstats_settings_projects_table_header() to settings_projects_table_header().
+		 * @since 1.2.0
 		 *
 		 * @param array $table_args   Array of table settings.
 		 *
@@ -219,16 +207,14 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Plugins' ) ) {
 		/**
 		 * Render translation projects settings table row.
 		 *
-		 * @since 0.9.6.2
-		 * @since 0.9.9     Renamed from tstats_settings_projects_table_row() to settings_projects_table_row().
-		 * @since 1.0.0     Return row status.
+		 * @since 1.2.0
 		 *
 		 * @param array $table_args        Array of table settings.
 		 * @param array $plugin            Array of plugin data.
 		 *
 		 * @return int|false  Row status   Return number of active subprojects, or false if plugin doesn't exist on WP.org.
 		 */
-		public function settings_projects_table_row( $table_args, $plugin ) {
+		public static function settings_projects_table_row( $table_args, $plugin ) {
 
 			// Get general options.
 			$options = get_option( TRANSLATION_STATS_WP_OPTION );
@@ -387,5 +373,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Plugins' ) ) {
 			// Return row status.
 			return $row_status;
 		}
+
 	}
+
 }

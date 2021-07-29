@@ -23,46 +23,11 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 
 
 		/**
-		 * Notices.
-		 *
-		 * @var object
-		 */
-		protected $notices;
-
-		/**
 		 * Transients.
 		 *
 		 * @var object
 		 */
 		protected $transients;
-
-		/**
-		 * Plugins Settings.
-		 *
-		 * @var object
-		 */
-		protected $settings_plugins;
-
-		/**
-		 * General Settings.
-		 *
-		 * @var object
-		 */
-		protected $settings_general;
-
-		/**
-		 * Tools Settings.
-		 *
-		 * @var object
-		 */
-		protected $settings_tools;
-
-		/**
-		 * Hidden Settings.
-		 *
-		 * @var object
-		 */
-		protected $settings_hidden;
 
 
 		/**
@@ -70,23 +35,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 		 */
 		public function __construct() {
 
-			// Instantiate Translation Stats Notices.
-			$this->notices = new Notices();
-
 			// Instantiate Translation Stats Transients.
 			$this->transients = new Transients();
-
-			// Instantiate Translation Stats Plugins Settings.
-			$this->settings_plugins = new Settings_Plugins();
-
-			// Instantiate Translation Stats General Settings.
-			$this->settings_general = new Settings_General();
-
-			// Instantiate Translation Stats Tools Settings.
-			$this->settings_tools = new Settings_Tools();
-
-			// Instantiate Translation Stats Hidden Settings.
-			$this->settings_hidden = new Settings_Hidden();
 
 			// Add admin menu item.
 			add_action( 'admin_menu', array( $this, 'admin_menu' ) );
@@ -121,7 +71,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 				esc_html_x( 'Translation Stats', 'Options Page Title', 'translation-stats' ), // The text to be used for the menu.
 				'manage_options',                                                             // The capability required to display this menu.
 				TRANSLATION_STATS_SETTINGS_PAGE,                                              // The unique slug name to refer to this menu.
-				array( $this, 'options_page' )                                                // The function to output the page content.
+				array( $this, 'add_options_page' )                                            // The function to output the page content.
 			);
 		}
 
@@ -136,21 +86,26 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 		 */
 		public function settings_sections() {
 
-			// Plugins settings section.
-			$this->settings_plugins->settings_section();
+			// Get the settings pages tabs and sections.
+			$settings_pages = self::get_settings_pages();
 
-			// General settings section.
-			$this->settings_general->settings_section();
+			// Loop through settings sections.
+			foreach ( $settings_pages as $page ) {
 
-			// Tools settings section.
-			$this->settings_tools->settings_section();
+				// Loop through settings page sections.
+				foreach ( $page['sections'] as $section ) {
 
-			// Hidden settings section.
-			$this->settings_hidden->settings_section();
+					// First letter uppercase to match class names.
+					$section = ucfirst( $section );
 
-			// Add section after Translation settings sections.
-			do_action( 'translation_stats_settings_section__after' );
+					// Class name with namespace and sction sufix to load the mathing class.
+					$class = __NAMESPACE__ . "\Settings_Section_{$section}";
 
+					// Actual section instantiation.
+					new $class();
+
+				}
+			}
 		}
 
 
@@ -166,7 +121,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 			$action = 'reset_settings';
 			if ( isset( $_POST[ $action ] ) ) {
 				// Check nonce.
-				if ( ! isset( $_POST['tstats_nonce_check'] ) || ! wp_verify_nonce( sanitize_key( $_POST['tstats_nonce_check'] ), 'tstats_action' ) ) {
+				if ( ! isset( $_POST['translation_stats_nonce_check'] ) || ! wp_verify_nonce( sanitize_key( $_POST['translation_stats_nonce_check'] ), 'translation_stats_action' ) ) {
 					$this->nonce_fail();
 				}
 
@@ -181,7 +136,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 					'force_show'  => true,
 					'message'     => '<strong>' . esc_html__( 'Settings restored successfully.', 'translation-stats' ) . '</strong>',
 				);
-				$this->notices->notice_message( $admin_notice );
+				Admin_Notice::message( $admin_notice );
 			}
 		}
 
@@ -198,7 +153,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 			$action = 'delete_transients';
 			if ( isset( $_POST[ $action ] ) ) {
 				// Check nonce.
-				if ( ! isset( $_POST['tstats_nonce_check'] ) || ! wp_verify_nonce( sanitize_key( $_POST['tstats_nonce_check'] ), 'tstats_action' ) ) {
+				if ( ! isset( $_POST['translation_stats_nonce_check'] ) || ! wp_verify_nonce( sanitize_key( $_POST['translation_stats_nonce_check'] ), 'translation_stats_action' ) ) {
 					$this->nonce_fail();
 				}
 				// Delete translations stats and available languages transients.
@@ -212,7 +167,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 					'force_show'  => true,
 					'message'     => '<strong>' . esc_html__( 'Cache cleaned successfully.', 'translation-stats' ) . '</strong>',
 				);
-				$this->notices->notice_message( $admin_notice );
+				Admin_Notice::message( $admin_notice );
 			}
 		}
 
@@ -254,21 +209,79 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 
 
 		/**
+		 * Get the tabs and content sections for the settings pages.
+		 *
+		 * The sections keys match the Section IDs from the section classes.
+		 *
+		 * @since 1.2.0
+		 *
+		 * @return array  Array of settings pages tabs and content sections.
+		 */
+		public static function get_settings_pages() {
+
+			$settings_pages = array(
+				'plugins'  => array(
+					'tab'      => array(
+						'title' => esc_html__( 'Plugins', 'translation-stats' ),
+						'icon'  => 'dashicons dashicons-admin-plugins',
+					),
+					'sections' => array(
+						'plugins',
+					),
+				),
+				'settings' => array(
+					'tab'      => array(
+						'title' => esc_html__( 'Settings', 'translation-stats' ),
+						'icon'  => 'dashicons dashicons-admin-settings',
+					),
+					'sections' => array(
+						'general',
+					),
+				),
+				'tools'    => array(
+					'tab'      => array(
+						'title' => esc_html__( 'Tools', 'translation-stats' ),
+						'icon'  => 'dashicons dashicons-admin-tools',
+					),
+					'sections' => array(
+						'tools_data',
+						'tools_transients',
+					),
+				),
+				'hidden'   => array(
+					'tab'      => null,
+					'sections' => array(
+						'hidden',
+					),
+				),
+			);
+
+			/**
+			 * Action hook to filter the settings pages.
+			 *
+			 * @since 1.2.0
+			 */
+			return apply_filters( 'translation_stats_settings_pages', $settings_pages );
+
+		}
+
+
+		/**
 		 * Callback function for the options page.
 		 *
 		 * @since 0.8.0
 		 * @since 0.9.9   Renamed from tstats_options_page() to options_page().
+		 * @since 1.2.0   Renamed from options_page() to add_options_page().
 		 *
 		 * @return void
 		 */
-		public function options_page() {
+		public function add_options_page() {
 			// Check required user capability.
 			if ( ! current_user_can( 'manage_options' ) ) {
 				wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'translation-stats' ) );
 			}
 
 			?>
-
 			<div class="wrap">
 				<?php
 
@@ -278,72 +291,65 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 				// Delete Transients Callback.
 				$this->transients_delete_callback();
 
+				// Get the settings pages tabs and sections.
+				$settings_pages = self::get_settings_pages();
+
 				?>
 				<h1><?php echo esc_html_x( 'Translation Stats', 'Options Page Title', 'translation-stats' ); ?></h1>
 				<p><?php esc_html_e( 'Customize the translation stats you want to show.', 'translation-stats' ); ?></p>
 
 				<div class="tstats-settings-wrapper">
-
 					<?php
+
 					// Add before Translation Stats settings.
 					do_action( 'translation_stats_settings__before' );
-					?>
 
+					?>
 					<div class="tstats-settings__content">
 
 						<h2 class="nav-tab-wrapper">
-							<a class="nav-tab" href="#plugins"><span class="dashicons dashicons-admin-plugins"></span> <?php esc_html_e( 'Plugins', 'translation-stats' ); ?></a>
-							<a class="nav-tab" href="#settings"><span class="dashicons dashicons-admin-settings"></span> <?php esc_html_e( 'Settings', 'translation-stats' ); ?></a>
-							<a class="nav-tab" href="#tools"><span class="dashicons dashicons-admin-tools"></span> <?php esc_html_e( 'Tools', 'translation-stats' ); ?></a>
-
 							<?php
-							// Add after Translation Stats settings tabs items.
-							do_action( 'translation_stats_settings_tab__after' );
-							?>
 
+							// Render settings pages tabs navigation.
+							foreach ( $settings_pages as $key => $page ) {
+								// Check if tab exist.
+								if ( ! is_null( $page['tab'] ) ) {
+									?>
+									<a class="nav-tab" href="#<?php echo esc_attr( $key ); ?>"><span class="<?php echo esc_attr( $page['tab']['icon'] ); ?>"></span> <?php echo esc_html( $page['tab']['title'] ); ?></a>
+									<?php
+								}
+							}
+
+							?>
 						</h2>
 
 						<div class="tabs-content">
 							<form action='options.php' method='post'>
-
-								<div id="tab-plugins" class="tab-content hidden">
-									<?php
-									$section = 'tstats_settings__plugins';
-									do_settings_sections( $section );
-									settings_fields( $section );
-									?>
-								</div>
-								<div id="tab-settings" class="tab-content hidden">
-									<?php
-									$section = 'tstats_settings__general';
-									do_settings_sections( $section );
-									settings_fields( $section );
-									?>
-								</div>
-								<div id="tab-tools" class="tab-content hidden">
-									<?php
-									$section = 'tstats_settings__tools__settings';
-									do_settings_sections( $section );
-									settings_fields( $section );
-									$section = 'tstats_settings__tools__transients';
-									do_settings_sections( $section );
-									settings_fields( $section );
-									?>
-								</div>
-								<div class="hidden">
-									<?php
-									$section = 'tstats_settings__hidden';
-									do_settings_sections( $section );
-									?>
-								</div>
-
 								<?php
+
+								// Render settings sections content.
+								foreach ( $settings_pages as $key => $page ) {
+									?>
+									<div id="tab-<?php echo esc_attr( $key ); ?>" class="tab-content hidden">
+										<?php
+
+										// Prefix settings section.
+										$key = TRANSLATION_STATS_SETTINGS_SECTIONS_PREFIX . $key;
+										do_settings_sections( $key );
+										settings_fields( $key );
+
+										?>
+									</div>
+									<?php
+								}
+
 								// Add after Translation Stats settings content items.
 								do_action( 'translation_stats_settings_content__after' );
+
+								// Add nonce check.
+								wp_nonce_field( 'translation_stats_action', 'translation_stats_nonce_check' );
+
 								?>
-
-								<?php wp_nonce_field( 'tstats_action', 'tstats_nonce_check' ); ?>
-
 								<p class="submit">
 									<?php
 									submit_button( __( 'Save Changes', 'translation-stats' ), 'primary', 'submit', false );
@@ -361,6 +367,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 				</div>
 			</div>
 			<?php
+
 		}
 
 	}
