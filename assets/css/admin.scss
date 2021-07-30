@@ -497,6 +497,7 @@ table.tstats-plugin-list-table.widefat { // Translation Stats Settings Plugins t
 
 		@media (min-width: $break-large) {
 			order: 1;
+			overflow: auto;
 		}
 	}
 
@@ -610,16 +611,27 @@ table.tstats-plugin-list-table.widefat { // Translation Stats Settings Plugins t
 	}
 }
 
-.tstats-code-block {
-	display: inline-block;
+#tab-debug {
 
-	.dashicons-yes {
-		color: #008000;
+	.tstats-code-block {
+		overflow: auto;
+		display: block;
+
+		.dashicons-yes {
+			color: #008000;
+		}
+
+		.dashicons-no {
+			color: #f00;
+		}
 	}
 
-	.dashicons-no {
-		color: #f00;
+	.tstats-debug-block {
+		width: calc(100% - 29px);
+		height: 60vh;
+		overflow: auto;
 	}
+
 }
 
 .tstats-debug-block {

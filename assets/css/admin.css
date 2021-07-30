@@ -383,6 +383,7 @@ table.tstats-plugin-list-table.widefat tbody .inactive .check-column.plugin-sele
 
 	.tstats-settings-wrapper .tstats-settings__content {
 		order: 1;
+		overflow: auto;
 	}
 }
 
@@ -473,16 +474,23 @@ table.tstats-plugin-list-table.widefat tbody .inactive .check-column.plugin-sele
 	right: 0.5em;
 }
 
-.tstats-code-block {
-	display: inline-block;
+#tab-debug .tstats-code-block {
+	overflow: auto;
+	display: block;
 }
 
-.tstats-code-block .dashicons-yes {
+#tab-debug .tstats-code-block .dashicons-yes {
 	color: #008000;
 }
 
-.tstats-code-block .dashicons-no {
+#tab-debug .tstats-code-block .dashicons-no {
 	color: #f00;
+}
+
+#tab-debug .tstats-debug-block {
+	width: calc(100% - 29px);
+	height: 60vh;
+	overflow: auto;
 }
 
 .tstats-debug-block {
