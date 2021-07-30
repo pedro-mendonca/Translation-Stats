@@ -19,9 +19,8 @@ jQuery( document ).ready( function( $ ) {
 	 * Load subprojects stats.
 	 *
 	 * @since 0.9.4
-	 *
-	 * @param {string} tstatsPlugin - Project slug.
-	 * @param {boolean} forceUpdate - True or false.
+	 * @param {string}  tstatsPlugin Project slug.
+	 * @param {boolean} forceUpdate  True or false.
 	 */
 	function tstatsPluginSubprojectsLoadAjax( tstatsPlugin, forceUpdate ) {
 		// TODO: Cancel last request, if exist, to avoid multiple requests queue.
