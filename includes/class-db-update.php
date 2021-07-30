@@ -184,6 +184,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 					'inline'      => false,
 					'dismissible' => true,
 					'force_show'  => true,
+					'wrap'        => false,
 					'message'     => $message,
 				);
 				Admin_Notice::message( $admin_notice );
@@ -200,6 +201,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 					'inline'      => false,
 					'dismissible' => true,
 					'force_show'  => true,
+					'wrap'        => false,
 					'message'     => $message,
 				);
 				Admin_Notice::message( $admin_notice );
