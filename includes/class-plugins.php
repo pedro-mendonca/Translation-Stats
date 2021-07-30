@@ -344,19 +344,37 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 */
 		public function plugin_widget_content_stats( $project_slug, $locale, $force_update ) {
 
+			// Get options.
+			$options = get_option( TRANSLATION_STATS_WP_OPTION );
+
 			?>
 			<div class="translation-stats-content-stats widget-inside">
 				<?php
+
+				// Get standard WP.org subprojects.
 				$subprojects = Translations_API::plugin_subprojects();
+
+				// Start from 0 errors.
 				$i18n_errors = 0;
+
 				foreach ( $subprojects as $subproject ) {
-					$subproject = $this->render_stats_bar( $locale, $project_slug, $subproject['name'], $subproject['slug'], $force_update );
-					echo wp_kses( $subproject['stats'], Utils::allowed_html() );
-					$i18n_errors = $i18n_errors + $subproject['error'];
+
+					// Show bar only if subproject is enabled on its settings.
+					if ( isset( $options['plugins'][ $project_slug ][ $subproject['slug'] ] ) ) {
+
+						// get subproject stats data.
+						$subproject = $this->render_stats_bar( $locale, $project_slug, $subproject['name'], $subproject['slug'], $force_update );
+
+						// Actual render of the stats bar.
+						echo wp_kses( $subproject['stats'], Utils::allowed_html() );
+
+						// Add +1 error if subproject don't exist.
+						$i18n_errors = $i18n_errors + $subproject['error'];
+					}
 				}
+
 				?>
 			</div>
-
 			<?php
 
 			if ( ! empty( $i18n_errors ) ) {
@@ -427,15 +445,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * @param string $subproject_slug  Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).
 		 * @param bool   $force_update     True: Force get new stats. False: Use transients.
 		 *
-		 * @return array|null $stats_bar   Subproject stats bar and error boolean.
+		 * @return array $stats_bar  Return stats bar data for the subproject.
 		 */
 		public function render_stats_bar( $locale, $project_slug, $subproject, $subproject_slug, $force_update ) {
-
-			$options = get_option( TRANSLATION_STATS_WP_OPTION );
-			// Show bar only if subproject is enabled in plugin settings.
-			if ( empty( $options['plugins'][ $project_slug ][ $subproject_slug ] ) ) {
-				return null;
-			}
 
 			$stats_bar_link = 'https://translate.wordpress.org/projects/wp-plugins/' . $project_slug . '/' . $subproject_slug . '/' . $locale->locale_slug;
 
