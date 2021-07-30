@@ -32,12 +32,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+// Check if get_plugin_data() function exists.
+if ( ! function_exists( 'get_plugin_data' ) ) {
+	require_once ABSPATH . 'wp-admin/includes/plugin.php';
+}
+
+// Get plugin headers data.
+$translation_stats_data = get_plugin_data( __FILE__, false, false );
 
 // Set Translation Stats plugin version.
-define( 'TRANSLATION_STATS_VERSION', '1.1.5' );
+if ( ! defined( 'TRANSLATION_STATS_VERSION' ) ) {
+	define( 'TRANSLATION_STATS_VERSION', $translation_stats_data['Version'] );
+}
 
 // Set Translation Stats required PHP version. Needed for PHP compatibility check for WordPress < 5.1.
-define( 'TRANSLATION_STATS_REQUIRED_PHP', '5.6' );
+if ( ! defined( 'TRANSLATION_STATS_REQUIRED_PHP' ) ) {
+	define( 'TRANSLATION_STATS_REQUIRED_PHP', $translation_stats_data['RequiresPHP'] );
+}
 
 // Set Translation Stats settings database version.
 define( 'TRANSLATION_STATS_SETTINGS_VERSION', '1.0' );
@@ -47,6 +58,9 @@ define( 'TRANSLATION_STATS_WP_OPTION', 'tstats_settings' );
 
 // Set Translation Stats settings page slug.
 define( 'TRANSLATION_STATS_SETTINGS_PAGE', 'translation-stats' );
+
+// Set Translation Stats settings sections prefix.
+define( 'TRANSLATION_STATS_SETTINGS_SECTIONS_PREFIX', 'translation_stats_' );
 
 // Set Translation Stats transients prefix.
 define( 'TRANSLATION_STATS_TRANSIENTS_PREFIX', 'translation_stats_plugin_' );
@@ -65,9 +79,6 @@ define( 'TRANSLATION_STATS_DIR_PATH', plugin_dir_path( __FILE__ ) );
 
 // Set Translation Stats file path.
 define( 'TRANSLATION_STATS_FILE', plugin_basename( __FILE__ ) );
-
-// Set Translation Stats Debug ( true / false ).
-// Example: define( 'TRANSLATION_STATS_DEBUG', true );.
 
 
 /**
@@ -202,7 +213,7 @@ function tstats_compatible_version() {
  *
  * @param callable(string): void
  */
-spl_autoload_register( __NAMESPACE__ . '\tstats_class_autoload' );
+spl_autoload_register( __NAMESPACE__ . '\class_autoload' );
 
 
 /**
@@ -216,7 +227,7 @@ spl_autoload_register( __NAMESPACE__ . '\tstats_class_autoload' );
  *
  * @return void
  */
-function tstats_class_autoload( $class_name ) {
+function class_autoload( $class_name ) {
 
 	$project_namespace = __NAMESPACE__ . '\\';
 

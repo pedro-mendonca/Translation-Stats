@@ -46,6 +46,7 @@ table.wp-list-table.plugins td.column-translation-stats .translation-stats-conte
 	grid-row-gap: 6px;
 	padding: 6px;
 	margin: 0 0 10px 0;
+	border-radius: 4px;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject .subproject-bar {
@@ -68,7 +69,7 @@ table.wp-list-table.plugins td.column-translation-stats .translation-stats-conte
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div .subproject-bar,
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject .disabled,
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject .disabled .subproject-bar {
-	border-radius: 3px;
+	border-radius: 2px;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a {
@@ -382,6 +383,7 @@ table.tstats-plugin-list-table.widefat tbody .inactive .check-column.plugin-sele
 
 	.tstats-settings-wrapper .tstats-settings__content {
 		order: 1;
+		overflow: auto;
 	}
 }
 
@@ -472,16 +474,23 @@ table.tstats-plugin-list-table.widefat tbody .inactive .check-column.plugin-sele
 	right: 0.5em;
 }
 
-.tstats-code-block {
-	display: inline-block;
+#tab-debug .tstats-code-block {
+	overflow: auto;
+	display: block;
 }
 
-.tstats-code-block .dashicons-yes {
+#tab-debug .tstats-code-block .dashicons-yes {
 	color: #008000;
 }
 
-.tstats-code-block .dashicons-no {
+#tab-debug .tstats-code-block .dashicons-no {
 	color: #f00;
+}
+
+#tab-debug .tstats-debug-block {
+	width: calc(100% - 29px);
+	height: 60vh;
+	overflow: auto;
 }
 
 .tstats-debug-block {

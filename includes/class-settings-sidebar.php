@@ -28,7 +28,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Sidebar' ) ) {
 		public function __construct() {
 
 			// Add Sidebar before Translation Stats settings.
-			add_action( 'tstats_settings__before', array( $this, 'tstats_settings__sidebar' ) );
+			add_action( 'translation_stats_settings__before', array( $this, 'settings__sidebar' ) );
 
 		}
 
@@ -37,17 +37,18 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Sidebar' ) ) {
 		 * Show Translation Stats settings sidebar.
 		 *
 		 * @since 0.9.0
+		 * @since 1.2.0   Renamed from tstats_settings__sidebar() to settings__sidebar().
 		 *
 		 * @return void
 		 */
-		public function tstats_settings__sidebar() {
+		public function settings__sidebar() {
 			?>
 
 			<div class="tstats-settings__sidebar">
 
 				<?php
 				// Add content to Translation Stats settings sidebar.
-				do_action( 'tstats_settings__sidebar__content' );
+				do_action( 'translation_stats_settings_sidebar__content' );
 				?>
 
 			</div>

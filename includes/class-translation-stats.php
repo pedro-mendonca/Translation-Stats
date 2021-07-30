@@ -49,7 +49,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 			new Plugins();
 
 			// Initialize the plugin debug.
-			new Debug();
+			if ( Utils::is_development_mode() ) {
+				new Debug();
+			}
 
 		}
 
@@ -90,7 +92,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 
 			wp_register_style(
 				'translation-stats',
-				TRANSLATION_STATS_DIR_URL . 'assets/css/admin.css',
+				Utils::get_asset_url( 'css/admin.css', false ),
 				array(),
 				TRANSLATION_STATS_VERSION
 			);
@@ -123,12 +125,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 			// Check for Translation Stats settings page.
 			if ( 'settings_page_' . TRANSLATION_STATS_SETTINGS_PAGE === $hook ) {
 
-				// Provide minified version if SCRIPT_DEBUG is not set to true.
-				$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-
 				wp_register_script(
 					'translation-stats-settings',
-					TRANSLATION_STATS_DIR_URL . 'assets/js/tstats-settings' . $suffix . '.js',
+					Utils::get_asset_url( 'js/admin-settings.js', true ),
 					array(
 						'jquery',
 					),
@@ -146,7 +145,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 
 				wp_register_script(
 					'translation-stats-tablesorter',
-					TRANSLATION_STATS_DIR_URL . 'assets/lib/tablesorter/jquery.tablesorter.combined' . $suffix . '.js',
+					Utils::get_asset_url( 'lib/tablesorter/jquery.tablesorter.combined.js', true ),
 					array(
 						'jquery',
 					),
@@ -161,12 +160,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 			// Check for plugins page.
 			if ( 'plugins.php' === $hook ) {
 
-				// Provide minified version if SCRIPT_DEBUG is not set to true.
-				$suffix = ( defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ) ? '' : '.min';
-
 				wp_register_script(
 					'translation-stats-plugins',
-					TRANSLATION_STATS_DIR_URL . 'assets/js/tstats-plugins' . $suffix . '.js',
+					Utils::get_asset_url( 'js/admin-plugins.js', true ),
 					array(
 						'jquery',
 					),

@@ -9,8 +9,8 @@ parameters:
 		- includes/
 		- assets/
 	bootstrapFiles:
-		# Plugin main file.
-		- translation-stats.php
+		# PHPStan bootstrap file.
+		- tests/phpstan/bootstrap.php
 	ignoreErrors:
 		# GlotPress locales file.
 		-

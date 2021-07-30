@@ -16,13 +16,13 @@ if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {
 // Check if it is a multisite uninstall - if so, run the uninstall function for each blog id.
 if ( is_multisite() ) {
 	global $wpdb;
-	foreach ( $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" ) as $tstats_blog ) { // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
-		switch_to_blog( $tstats_blog );
-		tstats_uninstall();
+	foreach ( $wpdb->get_col( "SELECT blog_id FROM $wpdb->blogs" ) as $translation_stats_blog ) { // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
+		switch_to_blog( $translation_stats_blog );
+		translation_stats_uninstall();
 	}
 	restore_current_blog();
 } else {
-	tstats_uninstall();
+	translation_stats_uninstall();
 }
 
 
@@ -33,7 +33,7 @@ if ( is_multisite() ) {
  *
  * @return void
  */
-function tstats_uninstall() {
+function translation_stats_uninstall() {
 	$option = get_option( 'tstats_settings' );
 	// Check if Delete Data on Uninstall is set.
 	if ( empty( $option['delete_data_on_uninstall'] ) ) {
@@ -47,7 +47,7 @@ function tstats_uninstall() {
 			delete_option( 'tstats_settings' );
 		}
 		// Delete transients.
-		tstats_uninstall_delete_transients( 'translation_stats_plugin_' );
+		translation_stats_uninstall_delete_transients( 'translation_stats_plugin_' );
 	}
 }
 
@@ -61,7 +61,7 @@ function tstats_uninstall() {
  *
  * @return void
  */
-function tstats_uninstall_delete_transients( $search ) {
+function translation_stats_uninstall_delete_transients( $search ) {
 	global $wpdb;
 
 	$transients = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching

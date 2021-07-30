@@ -23,20 +23,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Footer' ) ) {
 
 
 		/**
-		 * Globals.
-		 *
-		 * @var object
-		 */
-		protected $globals;
-
-
-		/**
 		 * Constructor.
 		 */
 		public function __construct() {
-
-			// Instantiate Translation Stats Globals.
-			$this->globals = new Globals();
 
 			// Replace admin footer text with customized message.
 			add_filter( 'admin_footer_text', array( $this, 'admin_footer_text' ), 1, 2 );
@@ -69,7 +58,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Footer' ) ) {
 					esc_html__( 'Thank you for translating with %1$s version %2$s.', 'translation-stats' ),
 					sprintf(
 						'<a href="%1$s">%2$s</a>',
-						esc_url( $this->globals->campaign_link( $external_link_url, 'tstats', 'link', 'plugin_footer_link' ) ),
+						esc_url( Utils::campaign_link( $external_link_url, 'tstats', 'link', 'plugin_footer_link' ) ),
 						/* translators: Plugin name, do not translate! */
 						esc_html__( 'Translation Stats', 'translation-stats' )
 					),
@@ -80,7 +69,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Footer' ) ) {
 					esc_html__( 'By %s', 'translation-stats' ),
 					sprintf(
 						'<a href="%1$s" target="_blank" rel="noopener noreferrer">%2$s</a>',
-						esc_url( $this->globals->campaign_link( $external_link_url, 'tstats', 'link', 'plugin_footer_link' ) ),
+						esc_url( Utils::campaign_link( $external_link_url, 'tstats', 'link', 'plugin_footer_link' ) ),
 						esc_html__( 'Pedro Mendonça', 'translation-stats' )
 					)
 				);

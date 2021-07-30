@@ -23,20 +23,9 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 
 
 		/**
-		 * Notices.
-		 *
-		 * @var object
-		 */
-		protected $notices;
-
-
-		/**
 		 * Constructor.
 		 */
 		public function __construct() {
-
-			// Instantiate Translation Stats Notices.
-			$this->notices = new Notices();
 
 			// Add database update check.
 			add_action( 'plugins_loaded', array( $this, 'settings_db_check' ) );
@@ -131,7 +120,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 				'force_show'  => true,
 				'message'     => $update_message,
 			);
-			$this->notices->notice_message( $admin_notice );
+			Admin_Notice::message( $admin_notice );
 
 		}
 
@@ -181,7 +170,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 
 			update_site_option( TRANSLATION_STATS_WP_OPTION, $settings_v1 );
 
-			if ( defined( 'TRANSLATION_STATS_DEBUG' ) && TRANSLATION_STATS_DEBUG ) {
+			if ( Utils::is_development_mode() ) {
 
 				$message = sprintf(
 					'<h3>%s</h3><pre>%s</pre>',
@@ -197,7 +186,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 					'force_show'  => true,
 					'message'     => $message,
 				);
-				$this->notices->notice_message( $admin_notice );
+				Admin_Notice::message( $admin_notice );
 
 				$message = sprintf(
 					'<h3>%s</h3><pre>%s</pre>',
@@ -213,7 +202,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 					'force_show'  => true,
 					'message'     => $message,
 				);
-				$this->notices->notice_message( $admin_notice );
+				Admin_Notice::message( $admin_notice );
 			}
 
 		}
