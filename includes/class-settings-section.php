@@ -203,9 +203,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 		 * @return void
 		 */
 		public function render_custom_section() {
-
 			// Intentionally left empy.
-
 		}
 
 
