@@ -20,5 +20,6 @@
 /package.json          export-ignore
 /phpcompat.xml         export-ignore
 /phpcs.xml             export-ignore
+/phpmd.xml             export-ignore
 /phpstan.neon          export-ignore
 /README.md             export-ignore
