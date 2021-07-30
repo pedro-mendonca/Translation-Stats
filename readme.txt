@@ -5,7 +5,7 @@ Tags: internationalization, i18n, localization, l10n, translation, statistics, g
 Requires at least: 4.9
 Tested up to: 5.8
 Requires PHP: 5.6
-Stable tag: 1.1.5
+Stable tag: 1.2.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -62,6 +62,16 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 4. Translation Stats tools tab
 
 == Changelog ==
+
+= 1.2.0 =
+
+*   Stats widget color and border improvements
+*   Stats widget notices improved for translation projects issues
+*   Code revamp of settings sections and fields for easy management and extension
+*   Fix code prefixes
+*   Fix CSS issues
+*   Debug mode improvements
+*   Linting and compiling improved
 
 = 1.1.5 =
 *   GitHub release process optimization
