@@ -198,7 +198,7 @@ function tstats_disabled_notice() {
 function tstats_compatible_version() {
 
 	// Check minimum required PHP version.
-	return version_compare( PHP_VERSION, TRANSLATION_STATS_REQUIRED_PHP, '>' ) );
+	return version_compare( PHP_VERSION, TRANSLATION_STATS_REQUIRED_PHP, '>=' );
 
 }
 
