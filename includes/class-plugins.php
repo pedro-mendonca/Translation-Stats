@@ -536,26 +536,26 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * @param string $subproject_slug   Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).
 		 * @param bool   $force_update      True: Force get new stats. False: Use transients.
 		 *
-		 * @return object|bool              Project stats if exist, otherwise returns 'false'.
+		 * @return object|false              Project stats if exist, otherwise returns 'false'.
 		 */
 		public function plugin_subproject_stats( $locale, $project_slug, $subproject_slug, $force_update ) {
 
 			// Check for force update setting.
 			if ( true === $force_update ) {
-				$translation_stats = false;
+				$stats = false;
 			} else {
 				// Get subproject transients.
-				$translation_stats = get_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug . '_' . $locale->wp_locale );
+				$stats = get_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug . '_' . $locale->wp_locale );
 			}
 
-			if ( false === $translation_stats ) {
+			if ( false === $stats ) {
 
 				$json = Translations_API::translations_api_get_plugin( $project_slug . '/' . $subproject_slug );
 
 				if ( is_wp_error( $json ) || wp_remote_retrieve_response_code( $json ) !== 200 ) {
 
 					// Subproject not found (Error 404) - Plugin is not properly prepared for localization.
-					$translation_stats = false;
+					$stats = false;
 
 				} else {
 
@@ -563,7 +563,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 					if ( empty( $body->translation_sets ) ) {
 
 						// No translation sets found.
-						$translation_stats = false;
+						$stats = false;
 
 					} else {
 
@@ -572,17 +572,17 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 							// Check for exact match of locale/variant (translation set variant/slug).
 							if ( $translation_set->locale . '/' . $translation_set->slug === $locale->locale_slug ) {
 								// Set transient value.
-								$translation_stats = $translation_set;
+								$stats = $translation_set;
 								continue;
 							}
 						}
 					}
 				}
 
-				set_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug . '_' . $locale->wp_locale, $translation_stats, get_option( TRANSLATION_STATS_WP_OPTION )['settings']['transients_expiration'] );
+				set_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug . '_' . $locale->wp_locale, $stats, get_option( TRANSLATION_STATS_WP_OPTION )['settings']['transients_expiration'] );
 			}
 
-			return $translation_stats;
+			return $stats;
 		}
 
 
