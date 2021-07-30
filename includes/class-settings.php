@@ -157,7 +157,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 					$this->nonce_fail();
 				}
 				// Delete translations stats and available languages transients.
-				// The transient 'translation_stats_plugin_available_translations' will be immediatly rebuilt on tstats_render_settings__plugins_list() loading.
+				// The transient 'translation_stats_plugin_available_translations' will be immediatly rebuilt on Settings_Section_Plugins->plugins_list() loading.
 				$this->transients->delete_transients( TRANSLATION_STATS_TRANSIENTS_PREFIX );
 				$admin_notice = array(
 					'type'        => 'success',
