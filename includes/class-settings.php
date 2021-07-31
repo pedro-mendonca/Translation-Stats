@@ -276,6 +276,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 		 * @return void
 		 */
 		public function add_options_page() {
+
 			// Check required user capability.
 			if ( ! current_user_can( 'manage_options' ) ) {
 				wp_die( esc_html__( 'You do not have sufficient permissions to access this page.', 'translation-stats' ) );

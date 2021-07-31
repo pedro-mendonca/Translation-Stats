@@ -92,11 +92,11 @@ require_once 'assets/lib/locales/locales.php';
 
 // Check for PHP compatibility.
 // Adapted from https://pento.net/2014/02/18/dont-let-your-plugin-be-activated-on-incompatible-sites/.
-add_action( 'admin_init', __NAMESPACE__ . '\tstats_check_version' );
+add_action( 'admin_init', __NAMESPACE__ . '\translation_stats_check_version' );
 
 
 // Stop running the plugin if on an incompatible PHP version.
-if ( ! tstats_compatible_version() ) {
+if ( ! translation_stats_compatible_version() ) {
 	return;
 }
 
@@ -108,12 +108,13 @@ if ( ! tstats_compatible_version() ) {
  * If incompatible, deactivate the plugin and add an admin notice.
  *
  * @since 0.9.4.3
+ * @since 1.2.0   Renamed from tstats_check_version() to translation_stats_check_version().
  *
  * @return void
  */
-function tstats_check_version() {
+function translation_stats_check_version() {
 
-	if ( ! tstats_compatible_version() ) {
+	if ( ! translation_stats_compatible_version() ) {
 
 		if ( is_plugin_active( plugin_basename( __FILE__ ) ) ) {
 
@@ -121,7 +122,7 @@ function tstats_check_version() {
 			deactivate_plugins( plugin_basename( __FILE__ ) );
 
 			// Show disabled admin notice.
-			add_action( 'admin_notices', __NAMESPACE__ . '\tstats_disabled_notice' );
+			add_action( 'admin_notices', __NAMESPACE__ . '\translation_stats_disabled_notice' );
 
 		}
 	}
@@ -133,10 +134,11 @@ function tstats_check_version() {
  * Adapted from https://pento.net/2014/02/18/dont-let-your-plugin-be-activated-on-incompatible-sites/.
  *
  * @since 0.9.4.3
+ * @since 1.2.0   Renamed from tstats_disabled_notice() to translation_stats_disabled_notice().
  *
  * @return void
  */
-function tstats_disabled_notice() {
+function translation_stats_disabled_notice() {
 
 	// Get plugin data.
 	$plugin_data = get_plugin_data( __FILE__ );
@@ -192,10 +194,11 @@ function tstats_disabled_notice() {
  * Adapted from https://pento.net/2014/02/18/dont-let-your-plugin-be-activated-on-incompatible-sites/.
  *
  * @since 0.9.4.3
+ * @since 1.2.0   Renamed from tstats_compatible_version() to translation_stats_compatible_version().
  *
  * @return bool
  */
-function tstats_compatible_version() {
+function translation_stats_compatible_version() {
 
 	// Check minimum required PHP version.
 	return version_compare( PHP_VERSION, TRANSLATION_STATS_REQUIRED_PHP, '>=' );

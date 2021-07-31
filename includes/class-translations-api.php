@@ -106,7 +106,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 		 * @return array|WP_Error  Returns the response from translate.WordPress.org API URL.
 		 */
 		public static function translations_api_get_plugin( $plugin ) {
-			$api_get = wp_remote_get( self::translations_api_url( 'plugins' ) . $plugin );
+			$api_get = wp_remote_get( self::translate_url( 'plugins', true ) . $plugin );
 			return $api_get;
 		}
 
@@ -200,29 +200,55 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 
 
 		/**
-		 * Get Translate API URL.
+		 * Get the translate site URL.
 		 *
-		 * Example:
-		 * $api_url = Translations_API::translations_api_url( 'plugins' );
+		 * Example for WordPress.org plugins URL (normal URL, not API URL):
+		 * $url = Translations_API::translate_url( 'plugins', false );
 		 *
 		 * @since 0.9.0
+		 * @since 1.2.0   Renamed from translations_api_url() to translate_url().
+		 *                Added 'api' parameter to allow choose 'api' or normal URL.
 		 *
-		 * @param string $project   Set the project API URL you want to get.
+		 * @param string $project   Set the project URL you want to get. Defaults to null.
+		 * @param bool   $api       Set to 'true' to get the API URL. Defaults to false.
 		 *
-		 * @return string $api_url  Returns API URL.
+		 * @return string           Returns URL.
 		 */
-		public static function translations_api_url( $project = null ) {
+		public static function translate_url( $project = null, $api = false ) {
 
-			$translations_api_url = array(
-				'wp'        => 'https://translate.wordpress.org/api/projects/wp/',         // Translate API WordPress core URL.
-				'languages' => 'https://translate.wordpress.org/api/languages',            // Translate API languages URL.
-				'plugins'   => 'https://translate.wordpress.org/api/projects/wp-plugins/', // Translate API plugins URL.
-				'themes'    => 'https://translate.wordpress.org/api/projects/wp-themes/',  // Translate API themes URL.
+			// Set WordPress.org translate site URL.
+			$translate_url = 'https://translate.wordpress.org/';
+
+			/**
+			 * Filters the translate site URL. Defaults to Translating WordPress.org site.
+			 * This allows to override with a private GlotPress install with the same exact WP core structure as https://translate.w.org/projects/wp/
+			 * Example: 'https://translate.my-site.com/glotpress/'
+			 *
+			 * @since 1.2.0
+			 */
+			$translate_url = apply_filters( 'translation_stats_translate_url', $translate_url );
+
+			// Check if the request is for an API URL.
+			if ( true === $api ) {
+				// Add the API slug.
+				$translate_url .= 'api/';
+			}
+
+			// WordPress.org translate known projects slugs.
+			$wporg_projects = array(
+				'languages' => 'languages/',           // Translating WordPress languages slug (deprecated).
+				'wp'        => 'projects/wp/',         // Translating WordPress core slug.
+				'plugins'   => 'projects/wp-plugins/', // Translating WordPress plugins slug.
+				'themes'    => 'projects/wp-themes/',  // Translating WordPress themes slug.
 			);
 
-			$api_url = $translations_api_url[ $project ];
+			// Check if project is one of the known ones.
+			if ( array_key_exists( $project, $wporg_projects ) ) {
+				// Add project slug to translate URL.
+				$translate_url .= $wporg_projects[ $project ];
+			}
 
-			return $api_url;
+			return $translate_url;
 
 		}
 

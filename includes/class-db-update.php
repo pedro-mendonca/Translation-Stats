@@ -175,7 +175,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 				$message = sprintf(
 					'<h3>%s</h3><pre>%s</pre>',
 					esc_html__( 'Settings', 'translation-stats' ),
-					var_export( get_site_option( TRANSLATION_STATS_WP_OPTION )['settings'], true ) // phpcs:ignore
+					wp_json_encode( get_site_option( TRANSLATION_STATS_WP_OPTION )['settings'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES )
 				);
 
 				$admin_notice = array(
@@ -184,6 +184,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 					'inline'      => false,
 					'dismissible' => true,
 					'force_show'  => true,
+					'wrap'        => false,
 					'message'     => $message,
 				);
 				Admin_Notice::message( $admin_notice );
@@ -191,7 +192,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 				$message = sprintf(
 					'<h3>%s</h3><pre>%s</pre>',
 					esc_html__( 'Plugins', 'translation-stats' ),
-					var_export( get_site_option( TRANSLATION_STATS_WP_OPTION )['plugins'], true ) // phpcs:ignore
+					wp_json_encode( get_site_option( TRANSLATION_STATS_WP_OPTION )['plugins'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES )
 				);
 
 				$admin_notice = array(
@@ -200,6 +201,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 					'inline'      => false,
 					'dismissible' => true,
 					'force_show'  => true,
+					'wrap'        => false,
 					'message'     => $message,
 				);
 				Admin_Notice::message( $admin_notice );

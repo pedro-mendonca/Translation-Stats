@@ -152,7 +152,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 				<p>
 					<?php
 					if ( $plugin_translation_on_wporg ) {
-						$api_url = Translations_API::translations_api_url( 'plugins' ) . $project_slug;
+						$api_url = Translations_API::translate_url( 'plugins', true ) . $project_slug;
 						printf(
 							/* translators: 1: Opening tag <a>. 2: Closing tag </a>. */
 							esc_html__( 'Translation project found on %1$sWordPress.org%2$s', 'translation-stats' ),
