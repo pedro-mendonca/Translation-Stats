@@ -74,10 +74,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				esc_url( add_query_arg( 'page', 'translation-stats#plugins', admin_url( 'options-general.php' ) ) ),
 				esc_html__( 'Edit plugins settings', 'translation-stats' )
 			);
+
 			// Check if user locale is not 'en_US'.
 			if ( 'en_US' !== $translationstats_language ) {
 				$columns['translation-stats'] = _x( 'Translation Stats', 'Column label', 'translation-stats' ) . ' ' . $settings_link;
 			}
+
 			return $columns;
 		}
 
@@ -115,26 +117,30 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 
 					$plugin_on_wporg             = Translations_API::plugin_on_wporg( $plugin_file );
 					$plugin_translation_on_wporg = Translations_API::plugin_project_on_translate_wporg( $project_slug );
+
 					// Check if plugin is on WordPress.org.
 					if ( ! $plugin_on_wporg ) {
+
 						$admin_notice = array(
 							'type'       => 'error',
 							'notice-alt' => true,
 							'message'    => esc_html__( 'Plugin not found on WordPress.org', 'translation-stats' ),
 						);
 						Admin_Notice::message( $admin_notice ); // TODO: Add alternative GlotPress API.
+
+					} elseif ( ! $plugin_translation_on_wporg ) { // Check if translation project is on WordPress.org.
+
+						$admin_notice = array(
+							'type'       => 'error',
+							'notice-alt' => true,
+							'message'    => esc_html__( 'Translation project not found on WordPress.org', 'translation-stats' ),
+						);
+						Admin_Notice::message( $admin_notice );
+
 					} else {
-						// Check if translation project is on WordPress.org.
-						if ( ! $plugin_translation_on_wporg ) {
-							$admin_notice = array(
-								'type'       => 'error',
-								'notice-alt' => true,
-								'message'    => esc_html__( 'Translation project not found on WordPress.org', 'translation-stats' ),
-							);
-							Admin_Notice::message( $admin_notice );
-						} else {
-							$this->render_plugin_stats( $project_slug );
-						}
+
+						$this->render_plugin_stats( $project_slug );
+
 					}
 
 					// Add Stats widget action for debugging.
@@ -158,8 +164,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 
 			// Get Translation Stats Locale data.
 			$locale = Translations_API::locale( Utils::translation_language() );
-
-			ob_start();
 
 			// Add before Translation Stats plugin widget title.
 			do_action( 'translation_stats_plugin_widget_title__before', $project_slug, $locale );
@@ -199,9 +203,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			<?php
 			// Add after Translation Stats plugin widget content.
 			do_action( 'translation_stats_plugin_widget_content__after', $project_slug, $locale );
-
-			$plugin_stats = ob_get_clean();
-			echo wp_kses( $plugin_stats, Utils::allowed_html() );
 
 		}
 
@@ -347,29 +348,27 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			// Get options.
 			$options = get_option( TRANSLATION_STATS_WP_OPTION );
 
+			// Get standard WP.org subprojects.
+			$subprojects = Translations_API::plugin_subprojects();
+
+			// Define project translation stats.
+			$project_stats = array();
+
 			?>
 			<div class="translation-stats-content-stats widget-inside">
 				<?php
 
-				// Get standard WP.org subprojects.
-				$subprojects = Translations_API::plugin_subprojects();
-
-				// Start from 0 errors.
-				$i18n_errors = 0;
-
 				foreach ( $subprojects as $subproject ) {
+
+					// Get plugin subproject translation stats.
+					$project_stats[ $subproject['slug'] ] = $this->plugin_subproject_stats( $locale, $project_slug, $subproject['slug'], $force_update );
 
 					// Show bar only if subproject is enabled on its settings.
 					if ( isset( $options['plugins'][ $project_slug ][ $subproject['slug'] ] ) ) {
 
-						// get subproject stats data.
-						$subproject = $this->render_stats_bar( $locale, $project_slug, $subproject['name'], $subproject['slug'], $force_update );
+						// Render subproject stats bar.
+						$this->render_stats_bar( $project_stats[ $subproject['slug'] ], $locale, $project_slug, $subproject['name'], $subproject['slug'], $force_update );
 
-						// Actual render of the stats bar.
-						echo wp_kses( $subproject['stats'], Utils::allowed_html() );
-
-						// Add +1 error if subproject don't exist.
-						$i18n_errors = $i18n_errors + $subproject['error'];
 					}
 				}
 
@@ -377,57 +376,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			</div>
 			<?php
 
-			if ( ! empty( $i18n_errors ) ) {
-				?>
-
-				<div class="translation-stats-content-notices">
-
-					<?php
-					$admin_notice = array(
-						'type'       => 'warning',
-						'notice-alt' => true,
-						'message'    => sprintf(
-							wp_kses_post(
-								/* translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>. */
-								__( 'This plugin is not %1$sproperly prepared for localization%2$s.', 'translation-stats' )
-							),
-							'<a href="https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/" target="_blank">',
-							'</a>'
-						),
-					);
-					Admin_Notice::message( $admin_notice );
-
-					$admin_notice = array(
-						'type'       => 'warning',
-						'notice-alt' => true,
-						'message'    => sprintf(
-							( '%1$s%2$s%3$s' ),
-							'<a href="https://make.wordpress.org/meta/handbook/documentation/translations/#this-plugin-is-not-properly-prepared-for-localization-%e2%80%93-help" target="_blank">',
-							esc_html__( 'View detailed logs on Slack', 'translation-stats' ),
-							'</a>'
-						),
-					);
-					Admin_Notice::message( $admin_notice );
-
-					$admin_notice = array(
-						'type'       => 'warning',
-						'notice-alt' => true,
-						'message'    => sprintf(
-							wp_kses_post(
-								/* translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>. */
-								__( 'If you would like to translate this plugin, %1$splease contact the author%2$s.', 'translation-stats' )
-							),
-							'<a href="https://wordpress.org/support/plugin/' . esc_attr( $project_slug ) . '" target="_blank">',
-							'</a>'
-						),
-					);
-					Admin_Notice::message( $admin_notice );
-					?>
-
-				</div>
-
-				<?php
-			}
+			// Show admin notices with aditional information for each plugin.
+			$this->render_notices( $project_stats, $project_slug, $locale );
 
 		}
 
@@ -439,59 +389,47 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * @since 1.1.0   Use Locale object.
 		 * @since 1.2.0   Renamed from tstats_render_stats_bar() to render_stats_bar().
 		 *
-		 * @param object $locale           Locale object.
-		 * @param string $project_slug     Plugin Slug.
-		 * @param string $subproject       Translation subproject ( 'Dev', 'Dev Readme', 'Stable', 'Stable Readme' ).
-		 * @param string $subproject_slug  Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).
-		 * @param bool   $force_update     True: Force get new stats. False: Use transients.
+		 * @param object|string $subproject_stats   Subproject stats. Can be either an object or an empty string.
+		 * @param object        $locale             Locale object.
+		 * @param string        $project_slug       Plugin Slug.
+		 * @param string        $subproject         Translation subproject ( 'Dev', 'Dev Readme', 'Stable', 'Stable Readme' ).
+		 * @param string        $subproject_slug    Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).
+		 * @param bool          $force_update       True: Force get new stats. False: Use transients.
 		 *
-		 * @return array $stats_bar  Return stats bar data for the subproject.
+		 * @return void
 		 */
-		public function render_stats_bar( $locale, $project_slug, $subproject, $subproject_slug, $force_update ) {
+		public function render_stats_bar( $subproject_stats, $locale, $project_slug, $subproject, $subproject_slug, $force_update ) {
+			/*
+			 * Check if subproject is an object.
+			 *
+			 * Example of the object properties:
+			 * [id] => 416518
+			 * [name] => Portuguese (Portugal)
+			 * [slug] => default | ao90 | informal
+			 * [project_id] => 3333
+			 * [locale] => pt
+			 * [current_count] => 136
+			 * [untranslated_count] => 0
+			 * [waiting_count] => 0
+			 * [fuzzy_count] => 0
+			 * [percent_translated] => 100
+			 * [wp_locale] => pt_PT
+			 * [last_modified] => 2018-10-11 10:05:30
+			 */
+			$subproject_exist = is_object( $subproject_stats ) ? true : false;
 
-			$stats_bar_link = 'https://translate.wordpress.org/projects/wp-plugins/' . $project_slug . '/' . $subproject_slug . '/' . $locale->locale_slug;
+			$class = $subproject_exist ? 'enabled' : 'disabled';
+			$href  = $subproject_exist ? 'href="' . esc_url( Translations_API::translate_url( 'plugins', false ) . $project_slug . '/' . $subproject_slug . '/' . $locale->locale_slug ) . '"' : '';
 
-			// Get plugin subproject translation stats.
-			$translation_stats = $this->plugin_subproject_stats( $locale, $project_slug, $subproject_slug, $force_update );
+			// Percent translated.
+			$percent_translated = $subproject_exist && isset( $subproject_stats->percent_translated ) ? $subproject_stats->percent_translated : 0;
 
-			// Initializing variable.
-			$percent_translated = 0;
-
-			// If translation stats are not an object, project not found.
-			if ( ! is_object( $translation_stats ) ) {
-				$i18n_error = true;
-			} else {
-				/*
-				 * Get the 'percent_translated' property from subproject translation stats.
-				 *
-				 * Example of allowed properties:
-				 * [id] => 416518
-				 * [name] => Portuguese (Portugal)
-				 * [slug] => default | ao90 | informal
-				 * [project_id] => 3333
-				 * [locale] => pt
-				 * [current_count] => 136
-				 * [untranslated_count] => 0
-				 * [waiting_count] => 0
-				 * [fuzzy_count] => 0
-				 * [percent_translated] => 100
-				 * [wp_locale] => pt_PT
-				 * [last_modified] => 2018-10-11 10:05:30
-				 */
-
-				// If translation stats are an object, get the percent translated property.
-				$percent_translated = $translation_stats->percent_translated;
-				$i18n_error         = false;
-			}
-
-			$class = ! $i18n_error ? 'enabled' : 'disabled';
-			$href  = ! $i18n_error ? 'href="' . esc_url( $stats_bar_link ) . '"' : '';
-			ob_start();
 			?>
 			<div class="content__subproject <?php echo esc_attr( $subproject_slug ); ?>">
 				<a class="<?php echo esc_attr( $class ); ?>" target="_blank" <?php echo wp_kses_post( $href ); ?>>
 				<?php
-				if ( ! $i18n_error ) {
+				if ( $subproject_exist ) {
+
 					?>
 					<style>
 						tr[data-slug="<?php echo esc_attr( $project_slug ); ?>"] div.subproject.<?php echo esc_attr( $subproject_slug ); ?> {
@@ -504,7 +442,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 						</div>
 					</div>
 					<?php
+
 				} else {
+
 					?>
 					<div class="subproject">
 						<div class="subproject-bar">
@@ -521,18 +461,141 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 						</div>
 					</div>
 					<?php
+
 				}
 				?>
 				</a>
 			</div>
-
 			<?php
-			$stats_bar = ob_get_clean();
-			$stats_bar = array(
-				'stats' => $stats_bar,
-				'error' => $i18n_error,
+
+		}
+
+
+		/**
+		 * Show admin notices with aditional information for each plugin.
+		 *
+		 * 1) Show 'Stable' or 'Development' language packs info if available.
+		 * 2) Check if at least of of the above are enabled to allow check if it's prepared for localization.
+		 * 3) If none, inform that the project isn't ready for localization.
+		 *
+		 * A few projects that by the time this was coded have missing translation sub-projects:
+		 *   - https://translate.wordpress.org/locale/pt/default/wp-plugins/media-library-enable-infinite-scrolling/
+		 *   - https://translate.wordpress.org/locale/pt/default/wp-plugins/wp-seo-acf-content-analysis/
+		 *   - https://translate.wordpress.org/locale/pt/default/wp-plugins/woo-fly-cart/
+		 *
+		 * @since 1.2.0.
+		 *
+		 * @param array  $project_stats   Array of the sub-projects translation stats objects.
+		 * @param string $project_slug    Plugin slug.
+		 * @param object $locale          Locale object.
+		 *
+		 * @return void
+		 */
+		public function render_notices( $project_stats, $project_slug, $locale ) {
+
+			// Current threshold for plugins Language Packs.
+			$language_packs_threshold = 90;
+
+			// Initialize admin notice common settings.
+			$admin_notice = array(
+				'notice-alt' => true,
+				'wrap'       => false,
 			);
-			return $stats_bar;
+
+			if ( isset( $project_stats['stable'] ) && is_object( $project_stats['stable'] ) ) { // First check id 'Stable' stats are enabled and if the subproject exists on WP.org.
+
+				// Loads from Stable (Latest release).
+				$admin_notice['type']    = 'info';
+				$admin_notice['message'] = sprintf(
+					'<p>%s</p>',
+					sprintf(
+						wp_kses_post(
+							/* translators: 1: Translation sub-project name. 2: Threshold value. 3: Current value of percent translated. */
+							esc_html__( 'The initial language pack for the plugin will be generated when %1$d%% of the %2$s sub-project strings have been translated (currently %3$d%%).', 'translation-stats' )
+						),
+						$language_packs_threshold,
+						sprintf(
+							'<a href="%1$s" target="_blank">%2$s</a>',
+							esc_url( Translations_API::translate_url( 'plugins', false ) . $project_slug . '/stable/' . $locale->locale_slug ),
+							esc_html_x( 'Stable (latest release)', 'Subproject name', 'translation-stats' )
+						),
+						$project_stats['stable']->percent_translated
+					)
+				);
+
+			} elseif ( isset( $project_stats['dev'] ) && is_object( $project_stats['dev'] ) ) { // Second check id 'Development' stats are enabled and if the subproject exists on WP.org.
+
+				// Loads from Develompent (trunk).
+				$admin_notice['type']    = 'info';
+				$admin_notice['message'] = sprintf(
+					'<p>%s</p>',
+					sprintf(
+						wp_kses_post(
+							/* translators: 1: Translation sub-project name. 2: Threshold value. 3: Current value of percent translated. */
+							esc_html__( 'The initial language pack for the plugin will be generated when %1$d%% of the %2$s sub-project strings have been translated (currently %3$d%%).', 'translation-stats' )
+						),
+						$language_packs_threshold,
+						sprintf(
+							'<a href="%1$s" target="_blank">%2$s</a>',
+							esc_url( Translations_API::translate_url( 'plugins', false ) . $project_slug . '/dev/' . $locale->locale_slug ),
+							esc_html_x( 'Development (trunk)', 'Subproject name', 'translation-stats' )
+						),
+						$project_stats['dev']->percent_translated
+					)
+				);
+
+			} else { // Third check if both 'Stable' and 'Development' stats are enabled.
+
+				// The project is not correctly prepared for localization.
+				$admin_notice['type']    = 'error';
+				$admin_notice['message'] = sprintf(
+					'<p>%1$s %2$s</p><p>%3$s %4$s</p>',
+					sprintf(
+						wp_kses_post(
+							/* translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>. */
+							__( 'This plugin is not %1$sproperly prepared for localization%2$s.', 'translation-stats' )
+						),
+						'<a href="https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/" target="_blank">',
+						'</a>'
+					),
+					sprintf(
+						wp_kses_post(
+							/* translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>. */
+							__( 'If you would like to translate this plugin, %1$splease contact the author%2$s.', 'translation-stats' )
+						),
+						'<a href="https://wordpress.org/support/plugin/' . esc_attr( $project_slug ) . '" target="_blank">',
+						'</a>'
+					),
+					sprintf(
+						wp_kses_post(
+							/* translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>. */
+							__( 'Import results are logged on Slack in the %1$s#meta-language-packs%2$s channel.', 'translation-stats' )
+						),
+						'<a href="https://wordpress.slack.com/archives/C0E7F4RND" target="_blank">',
+						'</a>'
+					),
+					sprintf(
+						wp_kses_post(
+							/* translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>. */
+							__( 'Please see the %1$shandbook for more information about Slack and possible errors%2$s.', 'translation-stats' )
+						),
+						'<a href="https://make.wordpress.org/meta/handbook/documentation/translations/#how-to-handle-this-plugin-is-not-properly-prepared-for-localization-warning" target="_blank">',
+						'</a>'
+					)
+				);
+
+			}
+
+			?>
+			<div class="translation-stats-content-notices">
+				<?php
+
+				Admin_Notice::message( $admin_notice );
+
+				?>
+			</div>
+			<?php
+
 		}
 
 
