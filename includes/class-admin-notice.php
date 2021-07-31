@@ -88,12 +88,11 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Notice' ) ) {
 			?>
 			<div class="notice<?php echo esc_attr( $notice['type'] ) . esc_attr( $notice['notice-alt'] ) . esc_attr( $notice['inline'] ) . esc_attr( $notice['update-icon'] ) . esc_attr( $notice['css-class'] ) . esc_attr( $notice['dismissible'] ); ?>">
 				<?php
-				printf(
-					'%1$s%2$s%3$s',
-					$opening_tag = $notice['wrap'] ? '<' . $notice['wrap'] . '>' : '',
-					wp_kses_post( $notice['message'] ),
-					$closing_tag = $notice['wrap'] ? '</' . $notice['wrap'] . '>' : ''
-				);
+
+				$opening_tag = $notice['wrap'] ? '<' . esc_html( $notice['wrap'] ) . '>' : '';
+				$closing_tag = $notice['wrap'] ? '</' . esc_html( $notice['wrap'] ) . '>' : '';
+
+				echo wp_kses_post( $opening_tag . $notice['message'] . $closing_tag );
 
 				// Extra HTML.
 				echo wp_kses( $notice['extra-html'], Utils::allowed_html() );
