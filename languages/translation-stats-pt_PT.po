@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Translation Stats\n"
 "Report-Msgid-Bugs-To: https://github.com/pedro-mendonca/Translation-Stats/issues\n"
 "POT-Creation-Date: 2021-07-31 01:39+0100\n"
-"PO-Revision-Date: 2021-07-31 01:54+0100\n"
+"PO-Revision-Date: 2021-07-31 03:08+0100\n"
 "Last-Translator: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language-Team: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language: pt_PT\n"
@@ -522,7 +522,7 @@ msgstr "Gosta deste plugin?"
 
 #: includes/class-settings-widgets.php:84
 msgid "Support its further development by becoming a sponsor!"
-msgstr "Apoio o seu desenvolvimento tornando-se patrocinador!"
+msgstr "Apoie o seu desenvolvimento tornando-se patrocinador!"
 
 #: includes/class-settings-widgets.php:87
 msgid "GitHub Sponsors"
