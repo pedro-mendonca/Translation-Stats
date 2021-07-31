@@ -71,7 +71,7 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 *   Code refactoring of the Stats widget bars and notices
 *   Admin notices custom wrap support
 *   Fix code prefixes
-*   Fix return error on sidabled subproject stats bar
+*   Fix return error on disabled subproject stats bar
 *   Fix CSS issues
 *   Debug mode improvements
 *   Linting and compiling improved
