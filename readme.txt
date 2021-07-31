@@ -66,8 +66,10 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 = 1.2.0 =
 
 *   Stats widget color and border improvements
-*   Stats widget notices improved for translation projects issues
-*   Code revamp of settings sections and fields for easy management and extension
+*   Stats widget notices improved with the WP.org information about translation projects issues
+*   Code refactoring of settings sections and fields for easy management and extension
+*   Code refactoring of the Stats widget bars and notices
+*   Admin notices custom wrap support
 *   Fix code prefixes
 *   Fix return error on sidabled subproject stats bar
 *   Fix CSS issues
