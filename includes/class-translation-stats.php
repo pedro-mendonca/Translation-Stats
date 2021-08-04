@@ -118,7 +118,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 				return;
 			}
 
-			$translationstats_vars = array(
+			// Variables to send to JavaScript.
+			$vars = array(
 				'ajaxurl' => admin_url( 'admin-ajax.php' ),
 			);
 
@@ -140,7 +141,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 				wp_localize_script(
 					'translation-stats-settings',
 					'tstats',
-					$translationstats_vars
+					$vars
 				);
 
 				wp_register_script(
@@ -175,7 +176,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 				wp_localize_script(
 					'translation-stats-plugins',
 					'tstats',
-					$translationstats_vars
+					$vars
 				);
 
 			}
