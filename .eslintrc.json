@@ -1,7 +1,7 @@
 {
 	"extends": [ "plugin:@wordpress/eslint-plugin/recommended-with-formatting" ],
 	"globals": {
-	"jQuery": true
+		"jQuery": true
 	},
 	"rules": {
 		"no-console": "off",
