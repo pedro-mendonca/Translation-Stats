@@ -36,6 +36,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 
 			$development_mode = false;
 
+			// Enable if WP_DEBUG is true.
+			if ( defined( 'WP_DEBUG' ) && WP_DEBUG ) {
+				$development_mode = true;
+			}
+
+			// Enable if TRANSLATION_STATS_DEBUG is true.
 			if ( defined( 'TRANSLATION_STATS_DEBUG' ) ) {
 				$development_mode = TRANSLATION_STATS_DEBUG;
 			}
