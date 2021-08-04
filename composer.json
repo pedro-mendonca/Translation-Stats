@@ -39,7 +39,6 @@
 		],
 		"build": [
 			"@lint",
-			"@test",
 			"@compile"
 		],
 		"zip": "composer archive --file=translation-stats --format=zip",
@@ -59,7 +58,6 @@
 	},
 	"scripts-descriptions": {
 		"lint": "Runs all available code linting (PHP_CodeSniffer, CSS/SASS, JS and MD lint).",
-		"test": "Runs all available code static analysis (PHPStan).",
 		"compile": "Compile all CSS and JavaScript",
 		"phpcs-i": "Log PHPCS debug information.",
 		"lint:php": "Runs the PHP code sniffer.",
