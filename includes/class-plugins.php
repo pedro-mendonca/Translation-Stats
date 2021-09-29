@@ -367,7 +367,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 					if ( isset( $options['plugins'][ $project_slug ][ $subproject['slug'] ] ) ) {
 
 						// Render subproject stats bar.
-						$this->render_stats_bar( $project_stats[ $subproject['slug'] ], $locale, $project_slug, $subproject['name'], $subproject['slug'], $force_update );
+						$this->render_stats_bar( $project_stats[ $subproject['slug'] ], $locale, $project_slug, $subproject['name'], $subproject['slug'] );
 
 					}
 				}
@@ -388,17 +388,17 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * @since 0.8.0
 		 * @since 1.1.0   Use Locale object.
 		 * @since 1.2.0   Renamed from tstats_render_stats_bar() to render_stats_bar().
+		 * @since 1.2.1   Removed unused parameter $force_update.
 		 *
 		 * @param object|string $subproject_stats   Subproject stats. Can be either an object or an empty string.
 		 * @param object        $locale             Locale object.
 		 * @param string        $project_slug       Plugin Slug.
 		 * @param string        $subproject         Translation subproject ( 'Dev', 'Dev Readme', 'Stable', 'Stable Readme' ).
 		 * @param string        $subproject_slug    Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).
-		 * @param bool          $force_update       True: Force get new stats. False: Use transients.
 		 *
 		 * @return void
 		 */
-		public function render_stats_bar( $subproject_stats, $locale, $project_slug, $subproject, $subproject_slug, $force_update ) {
+		public function render_stats_bar( $subproject_stats, $locale, $project_slug, $subproject, $subproject_slug ) {
 			/*
 			 * Check if subproject is an object.
 			 *
