@@ -65,4 +65,7 @@
 		</properties>
 	</rule>
 
+	<!-- VariableAnalysis. -->
+	<rule ref="VariableAnalysis"/>
+
 </ruleset>
