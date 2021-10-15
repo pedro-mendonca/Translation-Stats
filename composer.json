@@ -16,10 +16,10 @@
 	"require-dev": {
 		"dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
 		"wp-coding-standards/wpcs": "^2.3.0",
-		"phpcompatibility/phpcompatibility-wp": "^2.1.1",
-		"phpmd/phpmd": "^2.10.1",
-		"szepeviktor/phpstan-wordpress": "^0.7.6",
-		"sirbrillig/phpcs-variable-analysis": "^2.11"
+		"phpcompatibility/phpcompatibility-wp": "^2.1.2",
+		"phpmd/phpmd": "^2.10.2",
+		"szepeviktor/phpstan-wordpress": "^0.7.7",
+		"sirbrillig/phpcs-variable-analysis": "^2.11.2"
 	},
 	"config": {
 		"optimize-autoloader": true
