@@ -1,3 +1,5 @@
+/* global document, tstats */
+
 jQuery( document ).ready( function( $ ) {
 	console.log( 'Loaded admin-plugins.js' );
 

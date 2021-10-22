@@ -1,3 +1,5 @@
+/* global document, event, window */
+
 jQuery( document ).ready( function( $ ) {
 	// Run scripts on page load.
 	tstatsOnLoad();
