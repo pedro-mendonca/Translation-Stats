@@ -11,11 +11,9 @@ parameters:
 	bootstrapFiles:
 		# PHPStan bootstrap file.
 		- tests/phpstan/bootstrap.php
-	ignoreErrors:
-		# GlotPress locales file.
-		-
-			path: assets/lib/locales/locales.php
-			message: '#typehint specified\.$#'
-			count: 35
+	excludePaths:
+		analyse:
+			# GlotPress Locales file.
+			- assets/lib/locales/locales.php
 	# TODO Tell PHPStan what is inside arrays.
 	checkMissingIterableValueType: false
