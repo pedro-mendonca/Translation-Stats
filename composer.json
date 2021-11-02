@@ -18,7 +18,7 @@
 		"wp-coding-standards/wpcs": "^2.3.0",
 		"phpcompatibility/phpcompatibility-wp": "^2.1.2",
 		"phpmd/phpmd": "^2.10.2",
-		"szepeviktor/phpstan-wordpress": "^0.7.7",
+		"szepeviktor/phpstan-wordpress": "^1.0.0",
 		"sirbrillig/phpcs-variable-analysis": "^2.11.2"
 	},
 	"config": {
