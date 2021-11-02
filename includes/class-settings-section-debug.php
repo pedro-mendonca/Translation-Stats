@@ -125,15 +125,11 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 					'array_column',
 					'array_map',
 				);
-				if ( ! empty( $test_functions ) ) {
-					foreach ( $test_functions as $test_function ) {
-						$dashicon = function_exists( $test_function ) ? 'dashicons-yes' : 'dashicons-no';
-						?>
-						<span class="dashicons <?php echo esc_attr( $dashicon ); ?>"></span><?php echo esc_html( $test_function . '()' ); ?><br>
-						<?php
-					}
-				} else {
-					esc_html_e( 'No functions to test.', 'translation-stats' );
+				foreach ( $test_functions as $test_function ) {
+					$dashicon = function_exists( $test_function ) ? 'dashicons-yes' : 'dashicons-no';
+					?>
+					<span class="dashicons <?php echo esc_attr( $dashicon ); ?>"></span><?php echo esc_html( $test_function . '()' ); ?><br>
+					<?php
 				}
 				?>
 			</code>

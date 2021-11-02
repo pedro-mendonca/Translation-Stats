@@ -255,7 +255,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Plugins' ) ) {
 			</script>
 
 			<?php
-			if ( 'en_US' !== $translationstats_language && ! empty( $locale ) ) {
+			if ( 'en_US' !== $translationstats_language ) {
 				// If current locale is not 'en_US', add Locale WP.org subdomain to plugin URL (e.g. https://pt.wordpress.org/plugins/translation-stats/ ).
 				$wporg_subdomain = isset( $locale->wporg_subdomain ) ? $locale->wporg_subdomain . '.' : '';
 				$plugin_url      = 'https://' . $wporg_subdomain . substr( Translations_API::plugin_metadata( $plugin_file, 'url' ), strlen( 'https://' ) );
