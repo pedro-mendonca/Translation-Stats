@@ -101,15 +101,28 @@ if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 		 * @since 1.1.1   Renamed from tstats_translation_language() to translation_language().
 		 * @since 1.2.0   Moved to Utils class.
 		 *
-		 * @return string   Translation Language as WordPress Locale ( e.g. 'pt_PT' ).
+		 * @return string   Translation Language as WordPress Locale ( e.g. 'pt_PT' ). Fallback to current Locale.
 		 */
 		public static function translation_language() {
-			// Get Translation Language from Settings.
-			$wp_locale = get_option( TRANSLATION_STATS_WP_OPTION )['settings']['translation_language'];
-			if ( ! $wp_locale || 'site-default' === $wp_locale ) {
-				$wp_locale = get_locale();
+
+			// Default translation language.
+			$wp_locale = get_locale();
+
+			// Get plugin settings.
+			$settings = get_option( TRANSLATION_STATS_WP_OPTION );
+			if ( ! $settings ) {
+				return $wp_locale;
 			}
-			return $wp_locale;
+
+			// Get Translation Language from Settings.
+			$translation_language = $settings['settings']['translation_language'];
+			if ( ! $translation_language || 'site-default' === $translation_language ) {
+				return $wp_locale;
+			}
+
+			// Return settings translation language.
+			return $translation_language;
+
 		}
 
 
