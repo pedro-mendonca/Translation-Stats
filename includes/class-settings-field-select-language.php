@@ -56,7 +56,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Field_Select_Language' ) ) {
 					'id'                          => $field_id,  // ID attribute of the select element. Default 'locale'.
 					'name'                        => $field_id,  // Name attribute of the select element. Default 'locale'.
 					'selected'                    => $value,     // Language which should be selected.
-					'echo'                        => '1',        // Whether to echo the generated markup. Accepts 0, 1, or their boolean equivalents. Default 1.
+					'echo'                        => true,       // Whether to echo the generated markup. Accepts 0, 1, or their boolean equivalents. Default 1.
 					'show_available_translations' => true,       // Whether to show available translations. Default true.
 					'show_option_site_default'    => true,       // Whether to show an option to fall back to the site's locale. Default false.
 					'show_option_en_us'           => false,      // Whether to show an option for English (United States). Default true.
