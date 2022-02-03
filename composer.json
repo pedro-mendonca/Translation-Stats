@@ -38,10 +38,6 @@
 			"@compile:css",
 			"@compile:js"
 		],
-		"build": [
-			"@lint",
-			"@compile"
-		],
 		"zip": "composer archive --file=translation-stats --format=zip",
 		"phpcs-i": "phpcs -i",
 		"lint:php": "phpcs -v --standard=phpcs.xml",
