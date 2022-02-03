@@ -12,7 +12,6 @@
 		"font-weight-notation": null,
 		"no-descending-specificity": null,
 		"selector-class-pattern": null,
-		"scss/at-import-no-partial-leading-underscore": null,
 		"scss/at-import-partial-extension": null,
 		"scss/operator-no-unspaced": null
 	}
