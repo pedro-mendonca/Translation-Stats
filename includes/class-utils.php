@@ -62,13 +62,14 @@ if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 		 * Get asset URL, according the minification status.
 		 *
 		 * @since 1.2.0
+		 * @since 1.2.1   Minify is optional, defaults to false.
 		 *
 		 * @param string $asset    Name of asset excluding the extension.
-		 * @param bool   $minify   Determine if the asset has a minified version.
+		 * @param bool   $minify   Determine if the asset has a minified version. Defaults to false.
 		 *
 		 * @return string|false   Complete URL for the asset. Return false if extension is not suported.
 		 */
-		public static function get_asset_url( $asset, $minify ) {
+		public static function get_asset_url( $asset, $minify = false ) {
 
 			$path = pathinfo( $asset );
 

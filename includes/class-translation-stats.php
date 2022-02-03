@@ -92,7 +92,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 
 			wp_register_style(
 				'translation-stats',
-				Utils::get_asset_url( 'css/admin.css', false ),
+				Utils::get_asset_url( 'css/admin.css', true ),
 				array(),
 				TRANSLATION_STATS_VERSION
 			);
