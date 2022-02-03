@@ -34,10 +34,6 @@
 			"@lint:md:docs",
 			"@lint:pkg-json"
 		],
-		"compile": [
-			"@compile:css",
-			"@compile:js"
-		],
 		"zip": "composer archive --file=translation-stats --format=zip",
 		"phpcs-i": "phpcs -i",
 		"lint:php": "phpcs -v --standard=phpcs.xml",
