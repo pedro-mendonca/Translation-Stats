@@ -29,6 +29,51 @@ on:
   workflow_dispatch:
 
 jobs:
+
+  # Runs PHP compatibility check.
+  #
+  # Violations are reported inline with annotations.
+  #
+  # Performs the following steps:
+  # - Checks out the repository.
+  # - Sets up PHP.
+  # - Logs debug information about the runner container.
+  # - Installs Composer dependencies (use cache if possible).
+  # - Logs PHP_CodeSniffer debug information.
+  # - Runs the PHP compatibility tests.
+  php-compatibility:
+    name: PHP compatibility
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2.4.0
+
+      - name: Set up PHP
+        uses: shivammathur/setup-php@2.16.0
+        with:
+          php-version: '7.4' # Results are the same across all versions, check only in the last stable version.
+          coverage: none
+        env:
+          fail-fast: false
+
+      - name: Log debug information
+        run: |
+          php --version
+          composer --version
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
+
+      - name: Install Composer dependencies
+        uses: ramsey/composer-install@v1
+
+      - name: Log PHPCS debug information
+        run: composer phpcs-i
+
+      - name: Run PHP compatibility tests
+        run: composer compat:php
+
   # Runs PHP coding standards checks.
   #
   # Violations are reported inline with annotations.
@@ -41,7 +86,7 @@ jobs:
   # - Make Composer packages available globally.
   # - Logs PHP_CodeSniffer debug information.
   # - Runs PHPCS on the full codebase.
-  phpcs:
+  php-cs:
     name: PHP coding standards
     runs-on: ubuntu-latest
 
@@ -85,18 +130,18 @@ jobs:
       - name: Show PHPCS results in PR
         run: cs2pr ./phpcs-report.xml
 
-  # Runs the JavaScript, CSS/SCSS and Markdown coding standards checks.
+  # Runs the JavaScript coding standards checks.
   #
-  # JS and CSS violations are not currently reported inline with annotations.
+  # JS violations are not currently reported inline with annotations.
   #
   # Performs the following steps:
   # - Checks out the repository.
   # - Installs NodeJS 16 with caching for NPM.
   # - Logs updated debug information.
-  # _ Installs NPM dependencies using install-changed to hash the `package.json` file.
-  # - Run the WordPress ESLint, Stylelint and Markdownlint checks.
-  js-css-md-cs:
-    name: JS, CSS/SCSS and MD coding standards
+  # - Installs NPM dependencies using install-changed to hash the `package.json` file.
+  # - Run the WordPress ESLint checks.
+  js-cs:
+    name: JavaScript coding standards
     runs-on: ubuntu-latest
 
     steps:
@@ -120,8 +165,70 @@ jobs:
       - name: Run JavaScript Lint
         run: npm run lint:js
 
+  # Runs the CSS/SCSS coding standards checks.
+  #
+  # CSS violations are not currently reported inline with annotations.
+  #
+  # Performs the following steps:
+  # - Checks out the repository.
+  # - Installs NodeJS 16 with caching for NPM.
+  # - Logs updated debug information.
+  # - Installs NPM dependencies using install-changed to hash the `package.json` file.
+  # - Run the WordPress Stylelint checks.
+  css-cs:
+    name: CSS/SCSS coding standards
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2.4.0
+
+      - name: Setup Node
+        uses: actions/setup-node@v2.5.1
+        with:
+          node-version: 16
+          cache: npm
+
+      - name: Log debug information
+        run: |
+          npm --version
+          node --version
+
+      - name: Install Dependencies
+        run: npm ci
+
       - name: Run CSS/SCSS Lint
         run: npm run lint:css
+
+  # Runs the Markdown coding standards checks.
+  #
+  # Performs the following steps:
+  # - Checks out the repository.
+  # - Installs NodeJS 16 with caching for NPM.
+  # - Logs updated debug information.
+  # - Installs NPM dependencies using install-changed to hash the `package.json` file.
+  # - Run the WordPress Markdownlint checks.
+  md-cs:
+    name: Markdown coding standards
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2.4.0
+
+      - name: Setup Node
+        uses: actions/setup-node@v2.5.1
+        with:
+          node-version: 16
+          cache: npm
+
+      - name: Log debug information
+        run: |
+          npm --version
+          node --version
+
+      - name: Install Dependencies
+        run: npm ci
 
       - name: Run Markdown Lint
         run: npm run lint:md:docs
