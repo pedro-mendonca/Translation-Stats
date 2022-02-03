@@ -22,16 +22,18 @@
 	"devDependencies": {
 		"@wordpress/scripts": "^20.0.2",
 		"node-sass": "^7.0.1",
-		"sass-lint": "^1.13.1",
-		"scss": "^0.2.4",
+		"postcss-cli": "^9.1.0",
 		"tablesorter": "^2.31.3",
 		"uglify-js": "^3.15.0"
 	},
 	"scripts": {
-		"compile:js": "npm run compile:js:plugins && npm run compile:js:settings",
-		"compile:js:plugins": "uglifyjs assets/js/admin-plugins.js --compress drop_console=true -o assets/js/admin-plugins.min.js",
-		"compile:js:settings": "uglifyjs assets/js/admin-settings.js --compress drop_console=true -o assets/js/admin-settings.min.js",
+		"build": "npm run build:js & npm run compile:css & npm run build:css",
+		"build:js": "npm run build:js:plugins && npm run build:js:settings",
+		"build:js:plugins": "uglifyjs assets/js/admin-plugins.js --compress drop_console=true -o assets/js/admin-plugins.min.js",
+		"build:js:settings": "uglifyjs assets/js/admin-settings.js --compress drop_console=true -o assets/js/admin-settings.min.js",
 		"compile:css": "node-sass assets/css/ -o assets/css/ && stylelint assets/css/*.css --fix",
+		"build:css": "npm run build:css:admin",
+		"build:css:admin": "postcss assets/css/admin.css > assets/css/admin.min.css",
 		"lint:css": "wp-scripts lint-style",
 		"lint:js": "wp-scripts lint-js",
 		"lint:md:docs": "wp-scripts lint-md-docs",
