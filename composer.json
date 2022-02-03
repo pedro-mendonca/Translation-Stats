@@ -16,9 +16,9 @@
 	"require-dev": {
 		"dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
 		"wp-coding-standards/wpcs": "^2.3.0",
-		"phpcompatibility/phpcompatibility-wp": "^2.1.2",
-		"phpmd/phpmd": "^2.10.2",
-		"szepeviktor/phpstan-wordpress": "^1.0.0",
+		"phpcompatibility/phpcompatibility-wp": "^2.1.3",
+		"phpmd/phpmd": "^2.11.1",
+		"szepeviktor/phpstan-wordpress": "^1.0.2",
 		"sirbrillig/phpcs-variable-analysis": "^2.11.2"
 	},
 	"config": {
@@ -34,14 +34,6 @@
 			"@lint:md:docs",
 			"@lint:pkg-json"
 		],
-		"compile": [
-			"@compile:css",
-			"@compile:js"
-		],
-		"build": [
-			"@lint",
-			"@compile"
-		],
 		"zip": "composer archive --file=translation-stats --format=zip",
 		"phpcs-i": "phpcs -i",
 		"lint:php": "phpcs -v --standard=phpcs.xml",
@@ -53,13 +45,11 @@
 		"lint:js": "npm run lint:js",
 		"lint:md:docs": "npm run lint:md:docs",
 		"lint:pkg-json": "npm run lint:pkg-json",
-		"compile:css": "npm run compile:css",
-		"compile:js": "npm run compile:js",
+		"build": "npm run build",
 		"scripts-list": "composer run-script --list"
 	},
 	"scripts-descriptions": {
-		"lint": "Runs all available code linting (PHP_CodeSniffer, CSS/SASS, JS and MD lint).",
-		"compile": "Compile all CSS and JavaScript",
+		"lint": "Runs all available code linting (PHP_CodeSniffer, PHPStan, CSS, JS and MD lint).",
 		"phpcs-i": "Log PHPCS debug information.",
 		"lint:php": "Runs the PHP code sniffer.",
 		"format:php": "Runs the PHP code sniffer and automatically fix errors.",
@@ -70,10 +60,8 @@
 		"lint:js": "Run npm JS linter.",
 		"lint:md:docs": "Run npm MD linter.",
 		"lint:pkg-json": "Run npm package.json linter.",
-		"compile:css": "Run npm Node Sass and Stylelint to compile CSS.",
-		"compile:js": "Run npm UglifyJS to compile minified JS.",
+		"build": "Compile all CSS and JS with npm run build",
 		"scripts-list": "List all Composer scripts.",
-		"build": "Lint, test and compile all PHP, CSS, JS and MD.",
 		"zip": "Build production zip archive."
 	},
 	"funding": [
