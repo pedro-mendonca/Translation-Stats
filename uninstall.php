@@ -36,9 +36,8 @@ if ( is_multisite() ) {
 function translation_stats_uninstall() {
 	$option = get_option( 'tstats_settings' );
 	// Check if Delete Data on Uninstall is set.
-	if ( empty( $option['delete_data_on_uninstall'] ) ) {
-		return;
-	} else {
+	// TODO: turn setting to boolean instead of string 'true'.
+	if ( ! empty( $option['settings']['delete_data_on_uninstall'] ) && 'true' === $option['settings']['delete_data_on_uninstall'] ) {
 		if ( is_multisite() ) {
 			// Delete option in Multisite.
 			delete_site_option( 'tstats_settings' );
