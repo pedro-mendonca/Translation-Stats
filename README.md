@@ -88,6 +88,12 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
 ## Changelog
 
+### Unreleased
+
+* Tested up to WP 5.9
+* Fix PHP error on new installs before saving settings
+* Fix CSS error
+
 ### 1.2.0
 
 * Stats widget color and border improvements

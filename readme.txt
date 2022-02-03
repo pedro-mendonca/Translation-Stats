@@ -63,8 +63,12 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
 == Changelog ==
 
-= 1.2.0 =
+= Unreleased =
+*   Tested up to WP 5.9
+*   Fix PHP error on new installs before saving settings
+*   Fix CSS error
 
+= 1.2.0 =
 *   Stats widget color and border improvements
 *   Stats widget notices improved with the WP.org information about translation projects issues
 *   Code refactoring of settings sections and fields for easy management and extension
