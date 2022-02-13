@@ -50,7 +50,7 @@ jobs:
         uses: actions/checkout@v2.4.0
 
       - name: Set up PHP
-        uses: shivammathur/setup-php@2.16.0
+        uses: shivammathur/setup-php@2.17.0
         with:
           php-version: '7.4' # Results are the same across all versions, check only in the last stable version.
           coverage: none
@@ -95,7 +95,7 @@ jobs:
         uses: actions/checkout@v2.4.0
 
       - name: Set up PHP
-        uses: shivammathur/setup-php@2.16.0
+        uses: shivammathur/setup-php@2.17.0
         with:
           php-version: '7.4' # Results are the same across all versions, check only in the last stable version.
           coverage: none
