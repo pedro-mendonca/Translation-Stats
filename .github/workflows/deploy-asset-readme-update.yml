@@ -21,7 +21,7 @@ jobs:
 
     steps:
     - name: Checkout repository
-      uses: actions/checkout@v2.4.0
+      uses: actions/checkout@v3
 
     - name: WordPress.org Plugin Readme/Assets Update
       uses: 10up/action-wordpress-plugin-asset-update@2.0.0
