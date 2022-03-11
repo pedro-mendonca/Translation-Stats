@@ -20,7 +20,7 @@
 		"url": "https://github.com/pedro-mendonca/Translation-Stats/issues"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "^22.0.1",
+		"@wordpress/scripts": "^22.2.1",
 		"node-sass": "^7.0.1",
 		"postcss-cli": "^9.1.0",
 		"tablesorter": "^2.31.3",
