@@ -194,7 +194,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 			<p>
 				<?php
 				printf(
-					/* translators: %s: User Locale code. */
+					/* translators: %s: Version of the plugin. */
 					esc_html__( 'Version: %s', 'translation-stats' ),
 					'<code>' . esc_html( TRANSLATION_STATS_VERSION ) . '</code>'
 				);
@@ -203,7 +203,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 			<p>
 				<?php
 				printf(
-					/* translators: %s: User Locale code. */
+					/* translators: %s: Version of settings database. */
 					esc_html__( 'Settings database version: %s', 'translation-stats' ),
 					'<code>' . esc_html( TRANSLATION_STATS_SETTINGS_VERSION ) . '</code>'
 				);
