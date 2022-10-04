@@ -20,11 +20,11 @@
 		"url": "https://github.com/pedro-mendonca/Translation-Stats/issues"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "^23.6.0",
-		"node-sass": "^7.0.1",
+		"@wordpress/scripts": "^24.2.0",
+		"node-sass": "^7.0.3",
 		"postcss-cli": "^10.0.0",
 		"tablesorter": "^2.31.3",
-		"uglify-js": "^3.16.3"
+		"uglify-js": "^3.17.2"
 	},
 	"scripts": {
 		"build": "npm run build:js & npm run compile:css & npm run build:css",
