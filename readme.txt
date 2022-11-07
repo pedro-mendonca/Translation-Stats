@@ -5,7 +5,7 @@ Tags: internationalization, i18n, localization, l10n, translation, statistics, g
 Requires at least: 4.9
 Tested up to: 6.1
 Requires PHP: 7.4
-Stable tag: 1.2.1
+Stable tag: 1.2.2
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -62,6 +62,12 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 4. Translation Stats tools tab
 
 == Changelog ==
+
+= 1.2.2 =
+*   Tested up to WP 6.1
+*   Tested only on supported PHP versions (7.4+)
+*   More detailed console log for updating plugin translation stats
+*   Only show language pack information if percent translated is below minimum threshold
 
 = 1.2.1 =
 *   Tested up to WP 5.9
