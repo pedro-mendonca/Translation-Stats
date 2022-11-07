@@ -39,17 +39,17 @@ jQuery( document ).ready( function( $ ) {
 				forceUpdate: forceUpdate,
 			},
 			beforeSend: function() {
-				console.log( 'Start plugin \'' + tstatsPlugin + '\' Translation Stats update.' );
+				console.log( 'Ajax request to update translation stats for \'' + tstatsPlugin + '\' is starting...' );
 			},
 
-		} ).done( function( tstatsResponse ) {
+		} ).done( function( html, textStatus, jqXHR ) {
 			$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats' ).removeClass( 'tstats-loading' );
 			$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats button.tstats-update-button' ).show();
-			$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content' ).html( tstatsResponse );
+			$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content' ).html( html );
 
-			console.log( 'End plugin \'' + tstatsPlugin + '\' Translation Stats update.' );
-		} ).fail( function() {
-			console.log( 'Translation Stats Ajax Error.' );
+			console.log( 'Ajax request to update translation stats for \'' + tstatsPlugin + '\' has been completed (' + textStatus + '). Status: ' + jqXHR.status + ' ' + jqXHR.statusText );
+		} ).fail( function( jqXHR, textStatus ) {
+			console.log( 'Ajax request to update translation stats for \'' + tstatsPlugin + '\' has failed (' + textStatus + '). Status: ' + jqXHR.status + ' ' + jqXHR.statusText );
 		} );
 	}
 } );
