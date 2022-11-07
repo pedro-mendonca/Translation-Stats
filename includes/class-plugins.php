@@ -786,10 +786,19 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 
 			$translationstats_plugins = array();
 
-			foreach ( $options['plugins'] as $key => $option ) {
-				if ( is_array( $option ) && 'true' === $option['enabled'] ) {
-					$translationstats_plugins[ $key ] = true;
+			$plugins = get_plugins();
+
+			foreach ( $plugins as $plugin_file => $plugin_data ) {
+
+				// Check if the plugin is enabled in the Translation Stats settings.
+				$project_slug = Translations_API::plugin_metadata( $plugin_file, 'slug' );
+				if ( empty( $options['plugins'][ $project_slug ]['enabled'] ) ) {
+					// Skip to next loop iteration.
+					continue;
 				}
+
+				// Add plugin to list.
+				$translationstats_plugins[] = $plugin_file;
 			}
 
 			$count = count( $translationstats_plugins );
