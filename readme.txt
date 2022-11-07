@@ -3,8 +3,8 @@ Contributors: pedromendonca
 Donate link: https://github.com/sponsors/pedro-mendonca
 Tags: internationalization, i18n, localization, l10n, translation, statistics, glotpress
 Requires at least: 4.9
-Tested up to: 6.0
-Requires PHP: 5.6
+Tested up to: 6.1
+Requires PHP: 7.4
 Stable tag: 1.2.1
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
