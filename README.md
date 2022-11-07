@@ -88,6 +88,10 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
 ## Changelog
 
+### 1.2.3
+
+* Fix wrong count on plugins filter by only counting plugins enabled on Translation Stats settings that are actually installed
+
 ### 1.2.2
 
 * Tested up to WP 6.1
