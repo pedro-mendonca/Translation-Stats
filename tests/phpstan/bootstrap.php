@@ -8,7 +8,7 @@
 
 // Set Translation Stats plugin version.
 if ( ! defined( 'TRANSLATION_STATS_VERSION' ) ) {
-	define( 'TRANSLATION_STATS_VERSION', '1.2.3' );
+	define( 'TRANSLATION_STATS_VERSION', '1.2.4' );
 }
 
 // Set Translation Stats required PHP version. Needed for PHP compatibility check for WordPress < 5.1.
