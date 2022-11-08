@@ -173,6 +173,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 
 				wp_enqueue_script( 'translation-stats-plugins' );
 
+				wp_set_script_translations( 'translation-stats-plugins', 'translation-stats' );
+
 				wp_localize_script(
 					'translation-stats-plugins',
 					'tstats',

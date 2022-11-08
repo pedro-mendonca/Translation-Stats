@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Translation Stats\n"
 "Report-Msgid-Bugs-To: https://github.com/pedro-mendonca/Translation-Stats/issues\n"
-"POT-Creation-Date: 2021-07-31 01:39+0100\n"
-"PO-Revision-Date: 2021-07-31 03:08+0100\n"
+"POT-Creation-Date: 2022-11-08 13:51+0000\n"
+"PO-Revision-Date: 2022-11-08 13:51+0000\n"
 "Last-Translator: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language-Team: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language: pt_PT\n"
@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.1.1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;__ngettext:1,2;_n:1,2;__ngettext_noop:1,2;_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Textdomain-Support: yes\n"
@@ -21,6 +21,18 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: node_modules\n"
 "X-Poedit-SearchPathExcluded-1: vendor\n"
+
+#: assets/js/admin-plugins.js:26 includes/class-plugins.php:297
+msgid "Waiting..."
+msgstr "A aguardar..."
+
+#: assets/js/admin-plugins.js:66 assets/js/admin-plugins.min.js:1
+msgid "Loading..."
+msgstr "A carregar..."
+
+#: assets/js/admin-plugins.js:77
+msgid "Updated!"
+msgstr "Actualizado!"
 
 #. translators: combined name for locales: 1: name in English, 2: native name
 #: assets/lib/locales/locales.php:93
@@ -45,12 +57,12 @@ msgstr "Vá às %1$sopções%2$s e comece por seleccionar alguns dos seus plugin
 msgid "Translation Stats settings database successfully updated from version %1$s to version %2$s."
 msgstr "A base de dados das opções do Translation Stats foi actualizada com sucesso da versão %1$s para a versão %2$s."
 
-#: includes/class-db-update.php:177 includes/class-settings.php:234
+#: includes/class-db-update.php:177 includes/class-settings.php:225
 #: includes/class-translation-stats.php:71
 msgid "Settings"
 msgstr "Opções"
 
-#: includes/class-db-update.php:194 includes/class-settings.php:225
+#: includes/class-db-update.php:194 includes/class-settings.php:216
 msgid "Plugins"
 msgstr "Plugins"
 
@@ -86,7 +98,7 @@ msgstr "Slug: %s"
 msgid "Plugin found on WordPress.org"
 msgstr "Plugin encontrado em WordPress.org"
 
-#: includes/class-debug.php:148 includes/class-plugins.php:127
+#: includes/class-debug.php:148 includes/class-plugins.php:131
 msgid "Plugin not found on WordPress.org"
 msgstr "Plugin não encontrado em WordPress.org"
 
@@ -96,7 +108,7 @@ msgstr "Plugin não encontrado em WordPress.org"
 msgid "Translation project found on %1$sWordPress.org%2$s"
 msgstr "Projecto de tradução encontrado em %1$sWordPress.org%2$s"
 
-#: includes/class-debug.php:163 includes/class-plugins.php:136
+#: includes/class-debug.php:163 includes/class-plugins.php:144
 msgid "Translation project not found on WordPress.org"
 msgstr "Projecto de tradução não encontrado em WordPress.org"
 
@@ -110,74 +122,66 @@ msgid "Translation Stats"
 msgstr "Estatísticas de tradução"
 
 #. translators: %s: Language native name.
-#: includes/class-plugins.php:230
+#: includes/class-plugins.php:240
 #, php-format
 msgid "Translation for %s"
 msgstr "Tradução para %s"
 
-#: includes/class-plugins.php:252
+#: includes/class-plugins.php:262
 msgid "Update"
 msgstr "Actualizar"
 
-#: includes/class-plugins.php:276
-msgid "Loading..."
-msgstr "A carregar..."
-
-#: includes/class-plugins.php:317
-msgid "Updated!"
-msgstr "Actualizado!"
-
 #. translators: 1: Name of subproject. 2: Error message.
-#: includes/class-plugins.php:455
+#: includes/class-plugins.php:474
 #, php-format
 msgid "%1$s: %2$s"
 msgstr "%1$s: %2$s"
 
-#: includes/class-plugins.php:457
+#: includes/class-plugins.php:476
 msgid "Not found"
 msgstr "Não encontrado"
 
 #. translators: 1: Translation sub-project name. 2: Threshold value. 3: Current value of percent translated.
-#: includes/class-plugins.php:514 includes/class-plugins.php:535
+#: includes/class-plugins.php:537 includes/class-plugins.php:562
 #, php-format
 msgid "The initial language pack for the plugin will be generated when %1$d%% of the %2$s sub-project strings have been translated (currently %3$d%%)."
 msgstr "O pacote de idioma inicial para o plugin é gerado quando %1$d%% das strings do subprojecto %2$s estiverem traduzidas (actualmente %3$d%%)."
 
-#: includes/class-plugins.php:520
+#: includes/class-plugins.php:543
 msgctxt "Subproject name"
 msgid "Stable (latest release)"
 msgstr "Stable (versão mais recente)"
 
-#: includes/class-plugins.php:541
+#: includes/class-plugins.php:568
 msgctxt "Subproject name"
 msgid "Development (trunk)"
 msgstr "Development (trunk)"
 
 #. translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>.
-#: includes/class-plugins.php:556
+#: includes/class-plugins.php:584
 #, php-format
 msgid "This plugin is not %1$sproperly prepared for localization%2$s."
 msgstr "Este plugin não está %1$scorrectamente preparado para localização%2$s."
 
 #. translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>.
-#: includes/class-plugins.php:564
+#: includes/class-plugins.php:592
 #, php-format
 msgid "If you would like to translate this plugin, %1$splease contact the author%2$s."
 msgstr "Se quiser traduzir este plugin, %1$spor favor contacte o autor%2$s."
 
 #. translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>.
-#: includes/class-plugins.php:572
+#: includes/class-plugins.php:600
 #, php-format
 msgid "Import results are logged on Slack in the %1$s#meta-language-packs%2$s channel."
 msgstr "Os resultados das importações são registados no Slack no canal %1$s#meta-language-packs%2$s."
 
 #. translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>.
-#: includes/class-plugins.php:580
+#: includes/class-plugins.php:608
 #, php-format
 msgid "Please see the %1$shandbook for more information about Slack and possible errors%2$s."
 msgstr "Consulte o %1$smanual para mais informações sobre o Slack e possíveis erros%2$s."
 
-#: includes/class-plugins.php:796
+#: includes/class-plugins.php:840
 msgctxt "Plugin status filter"
 msgid "Translation Stats"
 msgstr "Estatísticas de tradução"
@@ -191,7 +195,7 @@ msgstr "Obrigado por traduzir com o %1$s versão %2$s."
 #. translators: Plugin name, do not translate!
 #. Plugin Name of the plugin/theme
 #: includes/class-settings-footer.php:63
-#: includes/class-settings-section-debug.php:196
+#: includes/class-settings-section-debug.php:192
 msgid "Translation Stats"
 msgstr "Translation Stats"
 
@@ -231,85 +235,81 @@ msgstr "Versão do PHP: %s"
 msgid "PHP Functions Check:"
 msgstr "Teste de funções do PHP:"
 
-#: includes/class-settings-section-debug.php:136
-msgid "No functions to test."
-msgstr "Nenhuma função para testar."
-
-#: includes/class-settings-section-debug.php:157
+#: includes/class-settings-section-debug.php:153
 #: includes/class-settings-widgets.php:63
 msgid "Site"
 msgstr "Site"
 
 #. translators: %s: WordPress Locale code.
-#: includes/class-settings-section-debug.php:163
+#: includes/class-settings-section-debug.php:159
 #, php-format
 msgid "Site Locale: %s"
 msgstr "Locale do site: %s"
 
 #. translators: %s: User Locale code.
-#: includes/class-settings-section-debug.php:172
+#: includes/class-settings-section-debug.php:168
 #, php-format
 msgid "User Locale: %s"
 msgstr "Locale do utilizador: %s"
 
-#. translators: %s: User Locale code.
-#: includes/class-settings-section-debug.php:202
+#. translators: %s: Version of the plugin.
+#: includes/class-settings-section-debug.php:198
 #, php-format
 msgid "Version: %s"
 msgstr "Versão: %s"
 
-#. translators: %s: User Locale code.
-#: includes/class-settings-section-debug.php:211
+#. translators: %s: Version of settings database.
+#: includes/class-settings-section-debug.php:207
 #, php-format
 msgid "Settings database version: %s"
 msgstr "Versão da base de dados das opções: %s"
 
 #. translators: %s: WordPress Locale code.
-#: includes/class-settings-section-debug.php:220
+#: includes/class-settings-section-debug.php:216
 #, php-format
 msgid "Translation Stats Locale: %s"
 msgstr "Locale do Translation Stats: %s"
 
 #. translators: %s: Page Name.
-#: includes/class-settings-section-debug.php:233
+#: includes/class-settings-section-debug.php:229
 #, php-format
 msgid "Settings Page: %s"
 msgstr "Página de opções: %s"
 
 #. translators: %s: Option Name.
-#: includes/class-settings-section-debug.php:242
+#: includes/class-settings-section-debug.php:238
 #, php-format
 msgid "WordPress Option: %s"
 msgstr "Opção do WordPress: %s"
 
-#: includes/class-settings-section-debug.php:248
+#: includes/class-settings-section-debug.php:244
 msgid "Translation Stats settings:"
 msgstr "Opções do Translation Stats:"
 
-#: includes/class-settings-section-debug.php:258
-#: includes/class-settings-section-debug.php:274
+#: includes/class-settings-section-debug.php:254
+#: includes/class-settings-section-debug.php:270
 msgid "No settings found."
 msgstr "Nenhuma opção encontrada."
 
-#: includes/class-settings-section-debug.php:264
+#: includes/class-settings-section-debug.php:260
 msgid "Installed plugins settings:"
 msgstr "Opções dos plugins instalados:"
 
-#: includes/class-settings-section-debug.php:298
+#: includes/class-settings-section-debug.php:294
 msgid "Transients"
 msgstr "Transientes"
 
 #. translators: %s: Prefix Name.
-#: includes/class-settings-section-debug.php:304
+#: includes/class-settings-section-debug.php:300
 #, php-format
 msgid "Transients Prefix: %s"
 msgstr "Prefixo dos transientes: %s"
 
-#: includes/class-settings-section-debug.php:310
+#: includes/class-settings-section-debug.php:306
 msgid "Transients List:"
 msgstr "Lista de transientes:"
 
-#: includes/class-settings-section-debug.php:325
+#: includes/class-settings-section-debug.php:321
 msgid "No transients found."
 msgstr "Nenhum transiente encontrado."
 
@@ -528,37 +528,37 @@ msgstr "Apoie o seu desenvolvimento tornando-se patrocinador!"
 msgid "GitHub Sponsors"
 msgstr "GitHub Sponsors"
 
-#: includes/class-settings.php:70 includes/class-settings.php:71
-#: includes/class-settings.php:299
+#: includes/class-settings.php:59 includes/class-settings.php:60
+#: includes/class-settings.php:290
 msgctxt "Options Page Title"
 msgid "Translation Stats"
 msgstr "Estatísticas de tradução"
 
-#: includes/class-settings.php:137
+#: includes/class-settings.php:126
 msgid "Settings restored successfully."
 msgstr "Opções repostas com sucesso."
 
-#: includes/class-settings.php:168
+#: includes/class-settings.php:159
 msgid "Cache cleaned successfully."
 msgstr "Cache limpa com sucesso."
 
-#: includes/class-settings.php:184
+#: includes/class-settings.php:175
 msgid "Sorry, your nonce did not verify."
 msgstr "Desculpe, o nonce não foi verificado."
 
-#: includes/class-settings.php:243
+#: includes/class-settings.php:234
 msgid "Tools"
 msgstr "Ferramentas"
 
-#: includes/class-settings.php:282
+#: includes/class-settings.php:273
 msgid "You do not have sufficient permissions to access this page."
 msgstr "Não tem permissões suficientes para aceder a esta página."
 
-#: includes/class-settings.php:300
+#: includes/class-settings.php:291
 msgid "Customize the translation stats you want to show."
 msgstr "Personalize as estatísticas de tradução que quer mostrar."
 
-#: includes/class-settings.php:356
+#: includes/class-settings.php:347
 msgid "Save Changes"
 msgstr "Guardar alterações"
 
@@ -612,3 +612,6 @@ msgstr "<a href=\"%s\">Saiba mais sobre como actualizar o PHP</a>."
 #. Author URI of the plugin/theme
 msgid "https://translationstats.com"
 msgstr "https://translationstats.com"
+
+#~ msgid "No functions to test."
+#~ msgstr "Nenhuma função para testar."
