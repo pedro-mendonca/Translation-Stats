@@ -40,13 +40,13 @@ jQuery( document ).ready( function( $ ) {
 			// Hide the Update button.
 			$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats button.tstats-update-button' ).prop( 'disabled', true ).hide();
 			// Show the Waiting notice.
-			$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).removeClass( 'notice-success updating-message updated-message' );
-			$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).addClass( 'notice-warning' );
+			$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).removeClass( 'notice-success updated-message notice-warning updating-message notice-error update-message' );
+			$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).addClass( 'notice-warning update-message' );
 			$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading p' ).html( wp.i18n.__( 'Waiting...', 'translation-stats' ) );
 			$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).fadeIn();
 		}
 
-		// Will begin when the first has finished.
+		// Add request to queue.
 		queue( function() {
 			return $.ajax( {
 
@@ -64,33 +64,39 @@ jQuery( document ).ready( function( $ ) {
 					$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats' ).addClass( 'tstats-loading' );
 
 					// Show the Loading notice.
-					$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).removeClass( 'notice-success updated-message' );
+					$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).removeClass( 'notice-success updated-message notice-warning updating-message notice-error update-message' );
 					$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).addClass( 'notice-warning updating-message' );
 					$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading p' ).html( wp.i18n.__( 'Loading...', 'translation-stats' ) );
 				},
 
 			} ).done( function( html, textStatus, jqXHR ) {
-				// Stop colored bars animation.
-				$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats' ).removeClass( 'tstats-loading' );
-
 				// If Update button was clicked, show Success message aferwards, if not just hide the status notice.
 				if ( forceUpdate ) {
-					$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).removeClass( 'notice-warning updating-message' );
+					// Show the Updated notice.
+					$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).removeClass( 'notice-success updated-message notice-warning updating-message notice-error update-message' );
 					$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).addClass( 'notice-success updated-message' );
 					$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading p' ).html( wp.i18n.__( 'Updated!', 'translation-stats' ) );
 				} else {
+					// Hide the notice.
 					$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).hide();
 				}
-
-				// Enable and show update button.
-				$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats button.tstats-update-button' ).prop( 'disabled', false ).show();
 
 				// Show Translation Stats content.
 				$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.content' ).html( html );
 
 				console.log( 'Ajax request to update translation stats for \'' + tstatsPlugin + '\' has been completed (' + textStatus + '). Status: ' + jqXHR.status + ' ' + jqXHR.statusText );
 			} ).fail( function( jqXHR, textStatus ) {
+				// Show the Error notice.
+				$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).removeClass( 'notice-success updated-message notice-warning updating-message notice-error update-message' );
+				$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).addClass( 'notice-error update-message' );
+				$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading p' ).html( wp.i18n.__( 'An error occurred while updating!', 'translation-stats' ) );
 				console.log( 'Ajax request to update translation stats for \'' + tstatsPlugin + '\' has failed (' + textStatus + '). Status: ' + jqXHR.status + ' ' + jqXHR.statusText );
+			} ).always( function() {
+				// Stop colored bars animation.
+				$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats' ).removeClass( 'tstats-loading' );
+
+				// Enable and show update button.
+				$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats button.tstats-update-button' ).prop( 'disabled', false ).show();
 			} );
 		} );
 	}

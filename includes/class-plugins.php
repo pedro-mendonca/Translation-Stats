@@ -271,7 +271,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				'type'        => 'warning',
 				'notice-alt'  => true,
 				'css-class'   => 'translation-stats-loading',
-				'update-icon' => false,
+				'update-icon' => true,
 				'force_show'  => true,
 				'message'     => esc_html__( 'Waiting...', 'translation-stats' ),
 			);
