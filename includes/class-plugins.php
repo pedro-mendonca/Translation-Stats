@@ -267,15 +267,18 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 */
 		public function plugin_widget_content() {
 
-			$admin_notice = array(
-				'type'        => 'warning-spin',
+			$admin_notice_waiting = array(
+				'type'        => 'warning',
 				'notice-alt'  => true,
 				'css-class'   => 'translation-stats-loading',
 				'update-icon' => true,
 				'force_show'  => true,
-				'message'     => esc_html__( 'Loading...', 'translation-stats' ),
+				'message'     => esc_html__( 'Waiting...', 'translation-stats' ),
 			);
-			Admin_Notice::message( $admin_notice );
+			Admin_Notice::message( $admin_notice_waiting );
+			?>
+			<div class="content"></div>
+			<?php
 
 		}
 
@@ -305,24 +308,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 
 				$this->plugin_widget_content_stats( $project_slug, $locale, $force_update );
 
-				if ( true === $force_update ) {
-					?>
-
-					<div class="translation-stats-content-update-notice">
-						<?php
-						$admin_notice = array(
-							'type'        => 'success',
-							'notice-alt'  => true,
-							'update-icon' => true,
-							'message'     => esc_html__( 'Updated!', 'translation-stats' ),
-						);
-						Admin_Notice::message( $admin_notice );
-						?>
-					</div>
-
-					<?php
-
-				}
 			}
 
 			wp_die();
