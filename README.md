@@ -94,7 +94,7 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
 ### 1.2.4
 
-* Queue Translation Stats updates in sequence to avoid many Ajax requests in paralell
+* Queue Translation Stats updates in sequence to avoid many Ajax requests in parallel
 
 ### 1.2.3
 

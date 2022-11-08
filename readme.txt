@@ -67,7 +67,7 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 *   Custom icon for queued update notice
 
 = 1.2.4 =
-*   Queue Translation Stats updates in sequence to avoid many Ajax requests in paralell
+*   Queue Translation Stats updates in sequence to avoid many Ajax requests in parallel
 
 = 1.2.3 =
 *   Fix wrong count on plugins filter by only counting plugins enabled on Translation Stats settings that are actually installed
