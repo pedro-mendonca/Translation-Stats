@@ -44,6 +44,7 @@ jQuery( document ).ready( function( $ ) {
 			$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).addClass( 'notice-warning update-message' );
 			$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading p' ).html( wp.i18n.__( 'Waiting...', 'translation-stats' ) );
 			$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).fadeIn();
+			console.log( 'Ajax request to update translation stats for \'' + tstatsPlugin + '\' was queued.' );
 		}
 
 		// Add request to queue.
@@ -66,7 +67,7 @@ jQuery( document ).ready( function( $ ) {
 					// Show the Loading notice.
 					$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).removeClass( 'notice-success updated-message notice-warning updating-message notice-error update-message' );
 					$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).addClass( 'notice-warning updating-message' );
-					$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading p' ).html( wp.i18n.__( 'Loading...', 'translation-stats' ) );
+					$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading p' ).html( wp.i18n.__( 'Updating...', 'translation-stats' ) );
 				},
 
 			} ).done( function( html, textStatus, jqXHR ) {
@@ -89,7 +90,7 @@ jQuery( document ).ready( function( $ ) {
 				// Show the Error notice.
 				$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).removeClass( 'notice-success updated-message notice-warning updating-message notice-error update-message' );
 				$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).addClass( 'notice-error update-message' );
-				$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading p' ).html( wp.i18n.__( 'An error occurred while updating!', 'translation-stats' ) );
+				$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading p' ).html( wp.i18n.__( 'An error occurred while updating.', 'translation-stats' ) );
 				console.log( 'Ajax request to update translation stats for \'' + tstatsPlugin + '\' has failed (' + textStatus + '). Status: ' + jqXHR.status + ' ' + jqXHR.statusText );
 			} ).always( function() {
 				// Stop colored bars animation.
