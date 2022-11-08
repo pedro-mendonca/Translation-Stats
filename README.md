@@ -88,9 +88,13 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
 ## Changelog
 
+### 1.2.5
+
+* Custom icon for queued update notice
+
 ### 1.2.4
 
-* Queue Translation Stats updates in sequence to avoid many Ajax requests in paralell.
+* Queue Translation Stats updates in sequence to avoid many Ajax requests in paralell
 
 ### 1.2.3
 
