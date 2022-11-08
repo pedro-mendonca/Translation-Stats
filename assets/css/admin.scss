@@ -43,143 +43,156 @@ table.wp-list-table.plugins { // WordPress Installed Plugins table.
 			}
 		}
 
-		.translation-stats-content .translation-stats-content-stats { // Stats grid layout.
-			display: grid;
-			grid-row-gap: 6px;
-			padding: 6px;
-			margin: 0 0 10px 0;
-			border-radius: $border-radius-outside;
+		.translation-stats-content {
 
-			.content__subproject {
+			.notice {
 
-				.subproject-bar { // Stats bar size.
+				&.translation-stats-loading.notice-warning.update-message {
 
-					display: block;
-					padding: 5px 10px; // Stats bar size
-					background-color: rgba(0, 0, 0, 0); // Status bar overlay color
-					white-space: nowrap;
-
-					.subproject-bar__percentage { // Stats percentage value
-						display: inline-block;
-						font-weight: 700;
-						text-align: right;
-						width: 32px;
-						margin-right: 10px;
+					p::before {
+						content: "\f469";
 					}
 				}
+			}
 
-				a,
-				a div,
-				a div .subproject-bar,
-				.disabled,
-				.disabled .subproject-bar { // Border radius.
-					border-radius: $border-radius-inside;
-				}
+			.translation-stats-content-stats { // Stats grid layout.
+				display: grid;
+				grid-row-gap: 6px;
+				padding: 6px;
+				margin: 0 0 10px 0;
+				border-radius: $border-radius-outside;
 
-				a {
-					display: block;
+				.content__subproject {
 
-					&.enabled div.subproject { // Stats bar enabled generic text color.
-						color: #000;
-						text-shadow: 0 0 6px rgba(255, 255, 225, 0.5);
-					}
+					.subproject-bar { // Stats bar size.
 
-					&.disabled div.subproject { // Stats bar disabled generic text color.
-						background-color: #ddd;
-						color: #8f98a1;
-					}
+						display: block;
+						padding: 5px 10px; // Stats bar size
+						background-color: rgba(0, 0, 0, 0); // Status bar overlay color
+						white-space: nowrap;
 
-					div.percent100 {
-
-						.subproject-bar { // Stats bar 100% text color.
-							color: #fff;
-							text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
-						}
-
-						background-color: $glotpress-percent100;
-					}
-
-					div.percent90 {
-						background-color: $glotpress-percent90;
-					}
-
-					div.percent80 {
-						background-color: $glotpress-percent80;
-					}
-
-					div.percent70 {
-						background-color: $glotpress-percent70;
-					}
-
-					div.percent60 {
-						background-color: $glotpress-percent60;
-					}
-
-					div.percent50 {
-						background-color: $glotpress-percent50;
-					}
-
-					div.percent40 {
-						background-color: $glotpress-percent40;
-					}
-
-					div.percent30 {
-						background-color: $glotpress-percent30;
-					}
-
-					div.percent20 {
-						background-color: $glotpress-percent20;
-					}
-
-					div.percent10 {
-						background-color: $glotpress-percent10;
-					}
-
-					div.percent0 {
-						background-color: $glotpress-percent0;
-					}
-
-				}
-
-				a,
-				a:hover,
-				a:focus,
-				a.enabled div,
-				a.disabled div,
-				a.enabled:hover div,
-				a.disabled:hover div,
-				a.enabled:focus div,
-				a.disabled:focus div,
-				a div.percent0,
-				a:hover div.percent0,
-				a:focus div.percent0,
-				a div.percent100,
-				a:hover div.percent100,
-				a:focus div.percent100,
-				a.enabled div .subproject-bar,
-				a.disabled div .subproject-bar,
-				a:hover div .subproject-bar,
-				a:focus div .subproject-bar, { // Configuration of easeOutCirc.
-
-					@include transition-easeOutCubic ( all, 300ms, cubic-bezier(0.075, 0.82, 0.165, 1), 0s );
-				}
-
-				a.enabled:hover,
-				a.enabled:focus {
-
-					div.subproject {
-						width: 100%; // Stats bar length on hover/focus.
-
-						div.subproject-bar {
-							background-color: rgba(255, 255, 255, 0.2); // Status bar overlay hover/focus color.
+						.subproject-bar__percentage { // Stats percentage value
+							display: inline-block;
+							font-weight: 700;
+							text-align: right;
+							width: 32px;
+							margin-right: 10px;
 						}
 					}
 
-					div.percent0 {
+					a,
+					a div,
+					a div .subproject-bar,
+					.disabled,
+					.disabled .subproject-bar { // Border radius.
+						border-radius: $border-radius-inside;
+					}
 
-						.subproject-bar { // Stats bar 0% hover/focus text color and shadow.
-							color: #fff;
-							text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+					a {
+						display: block;
+
+						&.enabled div.subproject { // Stats bar enabled generic text color.
+							color: #000;
+							text-shadow: 0 0 6px rgba(255, 255, 225, 0.5);
+						}
+
+						&.disabled div.subproject { // Stats bar disabled generic text color.
+							background-color: #ddd;
+							color: #8f98a1;
+						}
+
+						div.percent100 {
+
+							.subproject-bar { // Stats bar 100% text color.
+								color: #fff;
+								text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+							}
+
+							background-color: $glotpress-percent100;
+						}
+
+						div.percent90 {
+							background-color: $glotpress-percent90;
+						}
+
+						div.percent80 {
+							background-color: $glotpress-percent80;
+						}
+
+						div.percent70 {
+							background-color: $glotpress-percent70;
+						}
+
+						div.percent60 {
+							background-color: $glotpress-percent60;
+						}
+
+						div.percent50 {
+							background-color: $glotpress-percent50;
+						}
+
+						div.percent40 {
+							background-color: $glotpress-percent40;
+						}
+
+						div.percent30 {
+							background-color: $glotpress-percent30;
+						}
+
+						div.percent20 {
+							background-color: $glotpress-percent20;
+						}
+
+						div.percent10 {
+							background-color: $glotpress-percent10;
+						}
+
+						div.percent0 {
+							background-color: $glotpress-percent0;
+						}
+
+					}
+
+					a,
+					a:hover,
+					a:focus,
+					a.enabled div,
+					a.disabled div,
+					a.enabled:hover div,
+					a.disabled:hover div,
+					a.enabled:focus div,
+					a.disabled:focus div,
+					a div.percent0,
+					a:hover div.percent0,
+					a:focus div.percent0,
+					a div.percent100,
+					a:hover div.percent100,
+					a:focus div.percent100,
+					a.enabled div .subproject-bar,
+					a.disabled div .subproject-bar,
+					a:hover div .subproject-bar,
+					a:focus div .subproject-bar, { // Configuration of easeOutCirc.
+
+						@include transition-easeOutCubic ( all, 300ms, cubic-bezier(0.075, 0.82, 0.165, 1), 0s );
+					}
+
+					a.enabled:hover,
+					a.enabled:focus {
+
+						div.subproject {
+							width: 100%; // Stats bar length on hover/focus.
+
+							div.subproject-bar {
+								background-color: rgba(255, 255, 255, 0.2); // Status bar overlay hover/focus color.
+							}
+						}
+
+						div.percent0 {
+
+							.subproject-bar { // Stats bar 0% hover/focus text color and shadow.
+								color: #fff;
+								text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+							}
 						}
 					}
 				}

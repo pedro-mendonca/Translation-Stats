@@ -41,6 +41,10 @@ table.wp-list-table.plugins td.column-translation-stats .translation-stats-title
 	color: #46b450;
 }
 
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .notice.translation-stats-loading.notice-warning.update-message p::before {
+	content: "\f469";
+}
+
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats {
 	display: grid;
 	grid-row-gap: 6px;
