@@ -5,6 +5,10 @@ table.wp-list-table.plugins th.column-translation-stats {
 	width: 20%;
 }
 
+table.wp-list-table.plugins th.column-translation-stats a.tstats-edit-settings-button {
+	border-radius: 4px;
+}
+
 table.wp-list-table.plugins td.column-translation-stats {
 	padding-right: 20px;
 }
@@ -24,6 +28,7 @@ table.wp-list-table.plugins td.column-translation-stats .translation-stats-title
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-title .tstats-update-link button.tstats-update-button {
 	display: none;
+	border-radius: 4px;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-title .tstats-update-link button.tstats-update-button span {

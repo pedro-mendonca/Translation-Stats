@@ -70,7 +70,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			$translationstats_language = Utils::translation_language();
 
 			$settings_link = sprintf(
-				'<a href="%s" aria-label="%s"><span class="dashicons dashicons-edit"></span></a>',
+				'<a href="%s" class="tstats-edit-settings-button" aria-label="%s"><span class="dashicons dashicons-edit"></span></a>',
 				esc_url( add_query_arg( 'page', 'translation-stats#plugins', admin_url( 'options-general.php' ) ) ),
 				esc_html__( 'Edit plugins settings', 'translation-stats' )
 			);
