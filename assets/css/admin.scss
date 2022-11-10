@@ -6,6 +6,10 @@ table.wp-list-table.plugins { // WordPress Installed Plugins table.
 	th.column-translation-stats { // Translation Stats Column Header.
 		white-space: nowrap;
 		width: 20%;
+
+		a.tstats-edit-settings-button {
+			border-radius: $border-radius-outside;
+		}
 	}
 
 	td.column-translation-stats { // Translation Stats Column.
@@ -25,6 +29,7 @@ table.wp-list-table.plugins { // WordPress Installed Plugins table.
 
 				button.tstats-update-button {
 					display: none;
+					border-radius: $border-radius-outside;
 
 					span {
 						color: $color-primary;
