@@ -504,3 +504,74 @@ table.tstats-plugin-list-table.widefat tbody .inactive .check-column.plugin-sele
 .tstats-debug-block {
 	display: inline-block;
 }
+
+.switch {
+	position: relative;
+	display: inline-block;
+	width: 30px;
+	height: 16px;
+}
+
+.switch input {
+	opacity: 0;
+	width: 0;
+	height: 0;
+}
+
+.slider {
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: #235a28;
+	-webkit-transition: 0.3s;
+	transition: 0.3s;
+}
+
+.slider::before {
+	position: absolute;
+	content: "";
+	height: 12px;
+	width: 12px;
+	left: 2px;
+	bottom: 2px;
+	background-color: white;
+	-webkit-transition: 0.3s;
+	transition: 0.3s;
+}
+
+input:checked + .slider {
+	background-color: #46b450;
+}
+
+input:focus + .slider {
+	outline: 1px solid transparent;
+	border-color: #4f94d4;
+	box-shadow: 0 0 3px rgba(34, 113, 177, 0.8);
+}
+
+input:checked + .slider::before {
+	-webkit-transform: translateX(14px);
+	-ms-transform: translateX(14px);
+	transform: translateX(14px);
+}
+
+/* Rounded sliders */
+.slider {
+	border-radius: 4px;
+}
+
+.slider::before {
+	border-radius: 2px;
+}
+
+/* Rounded sliders */
+.slider.round {
+	border-radius: 15px;
+}
+
+.slider.round::before {
+	border-radius: 50%;
+}

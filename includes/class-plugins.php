@@ -246,12 +246,29 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		public function plugin_update_button() {
 			?>
 
+			<span class="tstats-update-link" style="float: left; margin-right: 10px">
+				<!--<label class="switch">
+					<input type="checkbox" checked>
+					<span class="slider round"></span>
+				</label>
+			-->
+				<label class="switch" style="vertical-align: text-bottom;">
+					<input type="checkbox">
+					<span class="slider"></span>
+				</label>
+
+			</span>
+
+
+
 			<span class="tstats-update-link">
-				<button class="handlediv button-link tstats-update-button" type="button" aria-expanded="true">
+				<button class="handlediv button-link tstats-update-button" type="button" aria-expanded="true" style="vertical-align: bottom;">
 					<span class="dashicons dashicons-update"></span>
 					<span class="screen-reader-text"><?php esc_html_e( 'Update', 'translation-stats' ); ?></span>
 				</button>
 			</span>
+
+
 
 			<?php
 		}
