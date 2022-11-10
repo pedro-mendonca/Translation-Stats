@@ -28,7 +28,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Footer' ) ) {
 		public function __construct() {
 
 			// Replace admin footer text with customized message.
-			add_filter( 'admin_footer_text', array( $this, 'admin_footer_text' ), 1, 2 );
+			add_filter( 'admin_footer_text', array( $this, 'admin_footer_text' ), 1 );
 
 			// Replace admin footer WordPress version with plugin version.
 			// add_filter( 'update_footer', array( $this, 'admin_footer_version' ), 11 ); // phpcs: ignore.
