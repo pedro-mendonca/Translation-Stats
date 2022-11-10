@@ -49,7 +49,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			add_action( 'pre_current_active_plugins', array( $this, 'plugins_filter_by_translation_stats' ) );
 
 			// Add status link to Translation Stats enabled plugins View.
-			add_action( is_multisite() ? 'views_plugins-network' : 'views_plugins', array( $this, 'plugins_status_link' ) );
+			add_filter( is_multisite() ? 'views_plugins-network' : 'views_plugins', array( $this, 'plugins_status_link' ) );
 
 		}
 
