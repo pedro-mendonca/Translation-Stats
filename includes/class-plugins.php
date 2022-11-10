@@ -31,7 +31,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			add_filter( 'manage_plugins_columns', array( $this, 'add_translation_stats_column' ) );
 
 			// Show plugin translation stats content in column.
-			add_action( 'manage_plugins_custom_column', array( $this, 'render_plugin_stats_column' ), 10, 3 );
+			add_action( 'manage_plugins_custom_column', array( $this, 'render_plugin_stats_column' ), 10, 2 );
 
 			// Add Translation Stats plugin widget title.
 			add_action( 'translation_stats_plugin_widget_title', array( $this, 'plugin_widget_title' ), 10, 2 );
