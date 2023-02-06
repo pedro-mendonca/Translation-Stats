@@ -36,7 +36,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-versions: ['7.4', '8.0', '8.1'] # 7.4 is the minimum supported version.
+        php-versions: ['7.4', '8.0', '8.1', '8.2'] # 7.4 is the minimum supported version.
 
     steps:
       - name: Checkout repository
