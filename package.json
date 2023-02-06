@@ -22,7 +22,7 @@
 	"devDependencies": {
 		"@wordpress/scripts": "^25.3.0",
 		"node-sass": "^8.0.0",
-		"postcss-cli": "^10.0.0",
+		"postcss-cli": "^10.1.0",
 		"tablesorter": "^2.31.3",
 		"uglify-js": "^3.17.4"
 	},
