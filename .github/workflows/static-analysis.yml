@@ -27,7 +27,6 @@ jobs:
   # - Sets up PHP.
   # - Logs debug information.
   # - Installs Composer dependencies (use cache if possible).
-  # - Make Composer packages available globally.
   # - Runs PHPStan on the full codebase.
   phpstan:
     name: Static Analysis (PHP ${{ matrix.php-versions }})
@@ -47,7 +46,6 @@ jobs:
         with:
           php-version: ${{ matrix.php-versions }}
           coverage: none
-          tools: cs2pr, phpstan
         env:
           fail-fast: false
 
@@ -62,8 +60,5 @@ jobs:
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v2
 
-      - name: Make Composer packages available globally
-        run: echo "${PWD}/vendor/bin" >> $GITHUB_PATH
-
       - name: Run PHPStan static analysis (PHP ${{ matrix.php-versions }})
-        run: phpstan analyse -c phpstan.neon --error-format=checkstyle --memory-limit=1G | cs2pr
+        run: composer exec -- phpstan analyse --memory-limit=1G
