@@ -38,14 +38,13 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Field_Select' ) ) {
 			$description    = $args['description'];
 			$select_options = $args['select_options'];
 			$default        = $args['default'];
-			$size           = isset( $args['size'] ) && ! is_null( $args['size'] ) ? $args['size'] : 'regular';
 			$options        = get_option( TRANSLATION_STATS_WP_OPTION );
 			$option         = empty( $options[ $args['path'] ][ $args['id'] ] ) ? '' : $options[ $args['path'] ][ $args['id'] ];
 			$value          = is_array( $options ) ? $option : $default;
 
 			?>
 			<label>
-				<select class="<?php echo esc_attr( $size ); ?>" name="<?php echo esc_attr( $field_id ); ?>" id="<?php echo esc_attr( $field_id ); ?>">
+				<select name="<?php echo esc_attr( $field_id ); ?>" id="<?php echo esc_attr( $field_id ); ?>">
 				<?php
 				foreach ( $select_options as $key => $option_label ) {
 					printf( '<option value="%s"%s>%s</option>', esc_attr( $key ), selected( $value, $key, false ), esc_html( $option_label ) );
