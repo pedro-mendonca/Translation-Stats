@@ -12,3 +12,6 @@ Thumbs.db
 
 # Composer
 /vendor/
+
+# PHPCS
+/phpcs.xml

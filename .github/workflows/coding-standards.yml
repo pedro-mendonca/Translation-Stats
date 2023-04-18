@@ -22,7 +22,7 @@ on:
       # This file configures Markdownlint. Changes could affect the outcome.
       - '.markdownlint.json'
       # This file configures PHPCS. Changes could affect the outcome.
-      - 'phpcs.xml'
+      - 'phpcs.xml.dist'
       # Changes to workflow files should always verify all workflows are successful.
       - '.github/workflows/*.yml'
   # Allows you to run this workflow manually from the Actions tab.
