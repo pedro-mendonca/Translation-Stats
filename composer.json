@@ -1,8 +1,8 @@
 {
 	"name": "pedro-mendonca/translation-stats",
 	"description": "Show plugins translation stats on your WordPress install.",
-	"type": "wordpress-plugin",
 	"license": "GPL-2.0-or-later",
+	"type": "wordpress-plugin",
 	"authors": [
 		{
 			"name": "Pedro Mendonça",
@@ -10,25 +10,35 @@
 			"homepage": "https://pedromendonca.pt"
 		}
 	],
+	"funding": [
+		{
+			"type": "github",
+			"url": "https://github.com/sponsors/pedro-mendonca"
+		}
+	],
 	"require": {
 		"php": ">=7.4"
 	},
 	"require-dev": {
 		"dealerdirect/phpcodesniffer-composer-installer": "^1.0.0",
-		"wp-coding-standards/wpcs": "^2.3.0",
+		"ergebnis/composer-normalize": "^2.28",
 		"phpcompatibility/phpcompatibility-wp": "^2.1.4",
 		"phpmd/phpmd": "^2.13.0",
+		"sirbrillig/phpcs-variable-analysis": "^2.11.10",
 		"szepeviktor/phpstan-wordpress": "^1.1.7",
-		"sirbrillig/phpcs-variable-analysis": "^2.11.10"
+		"wp-coding-standards/wpcs": "^2.3.0"
 	},
 	"config": {
-		"optimize-autoloader": true,
 		"allow-plugins": {
 			"dealerdirect/phpcodesniffer-composer-installer": true,
 			"ergebnis/composer-normalize": true
-		}
+		},
+		"optimize-autoloader": true
 	},
 	"scripts": {
+		"build": "npm run build",
+		"compat:php": "phpcs -v --standard=phpcompat.xml",
+		"format:php": "phpcbf -v --standard=phpcs.xml",
 		"lint": [
 			"@lint:php",
 			"@compat:php",
@@ -38,40 +48,31 @@
 			"@lint:md:docs",
 			"@lint:pkg-json"
 		],
-		"zip": "composer archive --file=translation-stats --format=zip",
-		"phpcs-i": "phpcs -i",
-		"lint:php": "phpcs -v --standard=phpcs.xml",
-		"format:php": "phpcbf -v --standard=phpcs.xml",
-		"compat:php": "phpcs -v --standard=phpcompat.xml",
-		"lint:phpstan": "phpstan analyse -c phpstan.neon --memory-limit=1G",
-		"lint:phpmd": "phpmd . text phpmd.xml",
 		"lint:css": "npm run lint:css",
 		"lint:js": "npm run lint:js",
 		"lint:md:docs": "npm run lint:md:docs",
+		"lint:php": "phpcs -v --standard=phpcs.xml",
+		"lint:phpmd": "phpmd . text phpmd.xml",
+		"lint:phpstan": "phpstan analyse -c phpstan.neon --memory-limit=1G",
 		"lint:pkg-json": "npm run lint:pkg-json",
-		"build": "npm run build",
-		"scripts-list": "composer run-script --list"
+		"phpcs-i": "phpcs -i",
+		"scripts-list": "composer run-script --list",
+		"zip": "composer archive --file=translation-stats --format=zip"
 	},
 	"scripts-descriptions": {
-		"lint": "Runs all available code linting (PHP_CodeSniffer, PHPStan, CSS, JS and MD lint).",
-		"phpcs-i": "Log PHPCS debug information.",
-		"lint:php": "Runs the PHP code sniffer.",
-		"format:php": "Runs the PHP code sniffer and automatically fix errors.",
+		"build": "Compile all CSS and JS with npm run build",
 		"compat:php": "Runs the PHPCompatibilityWP code sniffer.",
-		"lint:phpstan": "Runs the PHPStan code static analysis.",
-		"lint:phpmd": "Runs the PHPMD code static analysis.",
+		"format:php": "Runs the PHP code sniffer and automatically fix errors.",
+		"lint": "Runs all available code linting (PHP_CodeSniffer, PHPStan, CSS, JS and MD lint).",
 		"lint:css": "Run npm CSS linter.",
 		"lint:js": "Run npm JS linter.",
 		"lint:md:docs": "Run npm MD linter.",
+		"lint:php": "Runs the PHP code sniffer.",
+		"lint:phpmd": "Runs the PHPMD code static analysis.",
+		"lint:phpstan": "Runs the PHPStan code static analysis.",
 		"lint:pkg-json": "Run npm package.json linter.",
-		"build": "Compile all CSS and JS with npm run build",
+		"phpcs-i": "Log PHPCS debug information.",
 		"scripts-list": "List all Composer scripts.",
 		"zip": "Build production zip archive."
-	},
-	"funding": [
-		{
-			"type": "github",
-			"url": "https://github.com/sponsors/pedro-mendonca"
-		}
-	]
+	}
 }
