@@ -209,7 +209,17 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 				?>
 			</p>
 			<div>
-				<pre><code class="tstats-code-block"><?php echo esc_html( wp_json_encode( $translationstats_locale, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) ); ?></code></pre>
+				<pre>
+					<code class="tstats-code-block">
+						<?php
+						$code_block = $translationstats_locale;
+						$code_block = wp_json_encode( $code_block, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
+						if ( $code_block ) {
+							echo esc_html( $code_block );
+						}
+						?>
+					</code>
+				</pre>
 			</div>
 			<p>
 				<?php
@@ -236,7 +246,17 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 				<?php
 				if ( isset( $options['settings'] ) ) {
 					?>
-					<pre><code class="tstats-code-block"><?php echo esc_html( wp_json_encode( $options['settings'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) ); ?></code></pre>
+					<pre>
+						<code class="tstats-code-block">
+							<?php
+							$code_block = $options['settings'];
+							$code_block = wp_json_encode( $code_block, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
+							if ( $code_block ) {
+								echo esc_html( $code_block );
+							}
+							?>
+						</code>
+					</pre>
 					<?php
 				} else {
 					?>
@@ -252,7 +272,17 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 				<?php
 				if ( isset( $options['plugins'] ) ) {
 					?>
-					<pre><code class="tstats-code-block"><?php echo esc_html( wp_json_encode( $options['plugins'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) ); ?></code></pre>
+					<pre>
+						<code class="tstats-code-block">
+							<?php
+							$code_block = $options['plugins'];
+							$code_block = wp_json_encode( $code_block, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
+							if ( $code_block ) {
+								echo esc_html( $code_block );
+							}
+							?>
+						</code>
+					</pre>
 					<?php
 				} else {
 					?>
@@ -303,7 +333,17 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 						$response[] = esc_html( substr( $transient, strlen( '_transient_' ) ) );
 					}
 					?>
-					<pre><code class="tstats-code-block"><?php echo esc_html( wp_json_encode( $response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) ); ?></code></pre>
+					<pre>
+						<code class="tstats-code-block">
+							<?php
+							$code_block = $response;
+							$code_block = wp_json_encode( $code_block, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
+							if ( $code_block ) {
+								echo esc_html( $code_block );
+							}
+							?>
+						</code>
+					</pre>
 					<?php
 				} else {
 					?>
