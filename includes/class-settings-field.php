@@ -64,6 +64,20 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Field' ) ) {
 
 
 		/**
+		 * Default callback.
+		 *
+		 * @since 1.2.6
+		 *
+		 * @param array $args  Array of hidden field arguments.
+		 *
+		 * @return void
+		 */
+		public function callback( $args ) {
+			// Empty callback.
+		}
+
+
+		/**
 		 * Check if field type is supported.
 		 *
 		 * @since 1.2.0
