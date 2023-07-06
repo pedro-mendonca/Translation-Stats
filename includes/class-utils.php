@@ -83,14 +83,23 @@ if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 			);
 
 			// Check if type is supported.
-			if ( ! in_array( $path['extension'], $types, true ) ) {
+			if ( ! isset( $path['extension'] ) || ! in_array( $path['extension'], $types, true ) ) {
 				return false;
 			}
+
+			// Set dirname with trailing slash, if dirname is set.
+			$dirname = ( isset( $path['dirname'] ) && $path['dirname'] ) ? $path['dirname'] . '/' : '';
+
+			// Set filename.
+			$filename = $path['filename'];
 
 			// Only provide minified assets if in development mode or SCRIPT_DEBUG is set to true.
 			$suffix = $minify && ! self::is_development_mode() && ( ! defined( 'SCRIPT_DEBUG' ) || ! SCRIPT_DEBUG ) ? '.min' : '';
 
-			return TRANSLATION_STATS_DIR_URL . 'assets/' . $path['dirname'] . '/' . $path['filename'] . $suffix . '.' . $path['extension'];
+			// Set extension.
+			$extension = $path['extension'];
+
+			return TRANSLATION_STATS_DIR_URL . 'assets/' . $dirname . $filename . $suffix . '.' . $extension;
 
 		}
 
