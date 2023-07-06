@@ -23,20 +23,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 
 
 		/**
-		 * Transients.
-		 *
-		 * @var object
-		 */
-		protected $transients;
-
-
-		/**
 		 * Constructor.
 		 */
 		public function __construct() {
-
-			// Instantiate Translation Stats Transients.
-			$this->transients = new Transients();
 
 			// Add admin menu item.
 			add_action( 'admin_menu', array( $this, 'admin_menu' ) );
@@ -158,7 +147,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 				}
 				// Delete translations stats and available languages transients.
 				// The transient 'translation_stats_plugin_available_translations' will be immediatly rebuilt on Settings_Section_Plugins->plugins_list() loading.
-				$this->transients->delete_transients( TRANSLATION_STATS_TRANSIENTS_PREFIX );
+				Transients::delete_transients( TRANSLATION_STATS_TRANSIENTS_PREFIX );
 				$admin_notice = array(
 					'type'        => 'success',
 					'notice-alt'  => false,

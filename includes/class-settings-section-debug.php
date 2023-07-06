@@ -23,23 +23,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 
 
 		/**
-		 * Transients.
-		 *
-		 * @var object
-		 */
-		protected $transients;
-
-
-		/**
 		 * Constructor.
 		 */
 		public function __construct() {
 
 			// Load parent construct.
 			parent::__construct();
-
-			// Instantiate Translation Stats Transients.
-			$this->transients = new Transients();
 
 		}
 
@@ -287,7 +276,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 		 */
 		public function debug_info__transients() {
 
-			$transients = $this->transients->get_transients( TRANSLATION_STATS_TRANSIENTS_PREFIX );
+			$transients = Transients::get_transients( TRANSLATION_STATS_TRANSIENTS_PREFIX );
 
 			?>
 			<h3>

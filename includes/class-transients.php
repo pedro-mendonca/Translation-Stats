@@ -27,12 +27,13 @@ if ( ! class_exists( __NAMESPACE__ . '\Transients' ) ) {
 		 *
 		 * @since 0.8.0
 		 * @since 1.1.1   Renamed from tstats_get_transients() to get_transients().
+		 * @since 1.2.6   Changed to static.
 		 *
 		 * @param string $search  Transient search term.
 		 *
 		 * @return array  Search result of transients.
 		 */
-		public function get_transients( $search ) {
+		public static function get_transients( $search ) {
 			global $wpdb;
 
 			$transients = $wpdb->get_results( // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery,WordPress.DB.DirectDatabaseQuery.NoCaching
@@ -57,13 +58,14 @@ if ( ! class_exists( __NAMESPACE__ . '\Transients' ) ) {
 		 *
 		 * @since 0.8.0
 		 * @since 1.1.1   Renamed from tstats_delete_transients() to delete_transients().
+		 * @since 1.2.6   Changed to static.
 		 *
 		 * @param string $prefix  Transient prefix.
 		 *
 		 * @return void
 		 */
-		public function delete_transients( $prefix ) {
-			$transients = $this->get_transients( $prefix );
+		public static function delete_transients( $prefix ) {
+			$transients = self::get_transients( $prefix );
 			if ( is_array( $transients ) ) {
 				foreach ( $transients as $transient ) {
 					if ( is_multisite() ) {
