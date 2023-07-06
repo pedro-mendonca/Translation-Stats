@@ -23,17 +23,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 
 
 		/**
-		 * Constructor.
-		 */
-		public function __construct() {
-
-			// Load parent construct.
-			parent::__construct();
-
-		}
-
-
-		/**
 		 * Data for the settings section.
 		 *
 		 * @since 1.2.0
