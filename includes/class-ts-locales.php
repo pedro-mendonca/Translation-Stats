@@ -24,13 +24,6 @@ if ( ! class_exists( __NAMESPACE__ . '\TS_Locales' ) ) {
 	 */
 	class TS_Locales extends GP_Locales {
 
-		/**
-		 * @param array $state
-		 */
-		public static function __set_state( $state ) {
-			return new TS_Locale( $state );
-		}
-
 
 		/**
 		 * Set custom 'translation_stats_locales' global variable.
