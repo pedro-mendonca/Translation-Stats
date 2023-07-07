@@ -2,9 +2,6 @@
 /**
  * Class file for the Translation Stats Locale.
  *
- * Extends GP_Locale from:
- * https://meta.trac.wordpress.org/browser/sites/trunk/wordpress.org/public_html/wp-content/mu-plugins/pub/locales/locales.php
- *
  * @package Translation_Stats
  *
  * @since 1.2.6

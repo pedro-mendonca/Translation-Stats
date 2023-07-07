@@ -265,12 +265,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 		 *
 		 * @param string $wp_locale  Locale ( e.g. 'pt_PT' ).
 		 *
-		 * @return object            Return selected Locale object data from Translation Tools and wordpress.org (e.g. 'english_name', 'native_name', 'lang_code_iso_639_1', 'country_code', 'wp_locale', 'slug', etc. ).
+		 * @return TS_Locale          Return selected TS_Locale object data from Translation Stats and wordpress.org (e.g. 'english_name', 'native_name', 'lang_code_iso_639_1', 'country_code', 'wp_locale', 'slug', etc. ).
 		 */
 		public static function locale( $wp_locale ) {
 
 			// Get wordpress.org Locales.
-			$locales = Locales::locales();
+			$locales = TS_Locales::locales();
 
 			$current_locale = null;
 
