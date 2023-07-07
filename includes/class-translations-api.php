@@ -63,7 +63,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 				if ( 'slug' === $metadata ) {
 					return self::get_plugin_slug( $plugin_file );
 				}
-				return '';
+				return null;
 			}
 			if ( isset( $update_plugins->response[ $plugin_file ]->$metadata ) ) {
 				return $update_plugins->response[ $plugin_file ]->$metadata;
@@ -119,7 +119,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 		 *
 		 * @param string $project_slug  Plugin Slug (e.g. 'plugin-slug').
 		 *
-		 * @return string $on_wporg     Returns 'true' if the translation project exist on WordPress.org.
+		 * @return bool $on_wporg       Returns 'true' if the translation project exist on WordPress.org, returns 'false' if not.
 		 */
 		public static function plugin_project_on_translate_wporg( $project_slug ) {
 			// Check project transients.
