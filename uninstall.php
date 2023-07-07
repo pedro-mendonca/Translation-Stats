@@ -35,6 +35,18 @@ if ( is_multisite() ) {
  */
 function translation_stats_uninstall() {
 	$option = get_option( 'tstats_settings' );
+
+	// Check if setting exist.
+	if (
+			! is_array( $option )
+			|| ! isset( $option['settings'] )
+			|| ! is_array( $option['settings'] )
+			|| ! isset( $option['settings']['delete_data_on_uninstall'] )
+			|| ! is_string( $option['settings']['delete_data_on_uninstall'] )
+		) {
+		return;
+	}
+
 	// Check if Delete Data on Uninstall is set.
 	// TODO: turn setting to boolean instead of string 'true'.
 	if ( ! empty( $option['settings']['delete_data_on_uninstall'] ) && 'true' === $option['settings']['delete_data_on_uninstall'] ) {
