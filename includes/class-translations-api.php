@@ -280,7 +280,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 
 					// Get GP_Locale properties to set a new TS_Locale with extended properties.
 					$gp_locale_vars = get_object_vars( $locale );
-					foreach( $gp_locale_vars as $key => $value ) {
+
+					foreach ( $gp_locale_vars as $key => $value ) {
 						$current_locale->$key = $value;
 					}
 
