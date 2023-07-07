@@ -17,19 +17,26 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-if ( ! class_exists( __NAMESPACE__ . '\Locales' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\TS_Locales' ) ) {
 
 	/**
-	 * Class Locales.
+	 * Class TS_Locales.
 	 */
-	class Locales extends GP_Locales {
+	class TS_Locales extends GP_Locales {
+
+		/**
+		 * @param array $state
+		 */
+		public static function __set_state( $state ) {
+			return new TS_Locale( $state );
+		}
 
 
 		/**
 		 * Set custom 'translation_stats_locales' global variable.
 		 * This avoids conficts with other plugins that might use the 'gp_locales' global.
 		 *
-		 * @return object  Object with all the GP_Locales.
+		 * @return TS_Locales  Object with all the TS_Locales.
 		 */
 		public static function &instance() {
 
@@ -46,7 +53,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Locales' ) ) {
 		 *
 		 * @since 1.1.0
 		 *
-		 * @return array  Array of Locales objects.
+		 * @return array  Array of TS_Locales objects.
 		 */
 		public static function locales() {
 
@@ -62,6 +69,11 @@ if ( ! class_exists( __NAMESPACE__ . '\Locales' ) ) {
 			$translations = wp_get_available_translations();
 
 			foreach ( $locales as $key => $locale ) {
+
+				// Check if $locale is a TS_Locale.
+				if ( ! is_a( $locale, __NAMESPACE__ . '\TS_Locale' ) ) {
+					continue;
+				}
 
 				// If Locale don't have 'wp_locale', remove from the list.
 				if ( ! isset( $locale->wp_locale ) ) {
@@ -98,9 +110,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Locales' ) ) {
 		 *
 		 * @since 1.1.0
 		 *
-		 * @param object $locale  Locale object.
+		 * @param TS_Locale $locale   TS_Locale object.
 		 *
-		 * @return string         Returns WordPress Locale Subdomain.
+		 * @return string             Returns WordPress Locale Subdomain.
 		 */
 		public static function wporg_subdomain( $locale ) {
 
@@ -168,9 +180,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Locales' ) ) {
 		 *
 		 * @since 1.1.0
 		 *
-		 * @param object $locale  Locale object.
+		 * @param TS_Locale $locale   TS_Locale object.
 		 *
-		 * @return string         Returns locale complete slug.
+		 * @return string             Returns a TS_Locale complete slug.
 		 */
 		public static function locale_slug( $locale ) {
 
