@@ -294,7 +294,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		public function plugin_widget_content_load() {
 
 			// Initialize variable.
-			$force_update = '';
+			$force_update = false;
 
 			if ( isset( $_POST['forceUpdate'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
 				$force_update = 'true' === sanitize_key( $_POST['forceUpdate'] ) ? true : false; // phpcs:ignore WordPress.Security.NonceVerification.Missing
