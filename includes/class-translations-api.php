@@ -243,7 +243,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 			);
 
 			// Check if project is one of the known ones.
-			if ( array_key_exists( $project, $wporg_projects ) ) {
+			if ( ! is_null( $project ) && array_key_exists( $project, $wporg_projects ) ) {
 				// Add project slug to translate URL.
 				$translate_url .= $wporg_projects[ $project ];
 			}

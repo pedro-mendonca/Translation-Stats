@@ -258,7 +258,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Plugins' ) ) {
 			if ( 'en_US' !== $translationstats_language ) {
 				// If current locale is not 'en_US', add Locale WP.org subdomain to plugin URL (e.g. https://pt.wordpress.org/plugins/translation-stats/ ).
 				$wporg_subdomain = isset( $locale->wporg_subdomain ) ? $locale->wporg_subdomain . '.' : '';
-				$plugin_url      = 'https://' . $wporg_subdomain . substr( Translations_API::plugin_metadata( $plugin_file, 'url' ), strlen( 'https://' ) );
+				$plugin_url      = 'https://' . $wporg_subdomain . substr( strval( Translations_API::plugin_metadata( $plugin_file, 'url' ) ), strlen( 'https://' ) );
 			}
 			$plugin_name   = Translations_API::plugin_on_wporg( $plugin_file ) ? '<a href="' . $plugin_url . '" target="_blank">' . $plugin['Name'] . '</a>' : $plugin['Name'];
 			$plugin_author = Translations_API::plugin_on_wporg( $plugin_file ) && $plugin['AuthorURI'] ? '<a href="' . $plugin['AuthorURI'] . '" target="_blank">' . $plugin['AuthorName'] . '</a>' : $plugin['AuthorName'];
