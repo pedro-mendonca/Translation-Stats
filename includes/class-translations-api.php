@@ -272,15 +272,19 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 			// Get wordpress.org Locales.
 			$locales = TS_Locales::locales();
 
-			$current_locale = null;
+			$current_locale = new TS_Locale();
 
 			foreach ( $locales as $locale ) {
 
 				if ( $locale->wp_locale === $wp_locale ) {
 
-					$current_locale = $locale;
-					break;
+					// Get GP_Locale properties to set a new TS_Locale with extended properties.
+					$gp_locale_vars = get_object_vars( $locale );
+					foreach( $gp_locale_vars as $key => $value ) {
+						$current_locale->$key = $value;
+					}
 
+					break;
 				}
 			}
 

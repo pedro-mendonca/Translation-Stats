@@ -41,7 +41,7 @@ if ( ! class_exists( __NAMESPACE__ . '\TS_Locales' ) ) {
 		public static function &instance() {
 
 			if ( ! isset( $GLOBALS['translation_stats_locales'] ) ) {
-				$GLOBALS['translation_stats_locales'] = new GP_Locales();
+				$GLOBALS['translation_stats_locales'] = new TS_Locales();
 			}
 
 			return $GLOBALS['translation_stats_locales'];
@@ -71,7 +71,7 @@ if ( ! class_exists( __NAMESPACE__ . '\TS_Locales' ) ) {
 			foreach ( $locales as $key => $locale ) {
 
 				// Check if $locale is a TS_Locale.
-				if ( ! is_a( $locale, __NAMESPACE__ . '\TS_Locale' ) ) {
+				if ( ! is_a( $locale, __NAMESPACE__ . '\GP_Locale' ) ) {
 					continue;
 				}
 
@@ -110,7 +110,7 @@ if ( ! class_exists( __NAMESPACE__ . '\TS_Locales' ) ) {
 		 *
 		 * @since 1.1.0
 		 *
-		 * @param TS_Locale $locale   TS_Locale object.
+		 * @param GP_Locale $locale   GP_Locale object.
 		 *
 		 * @return string             Returns WordPress Locale Subdomain.
 		 */
@@ -180,9 +180,9 @@ if ( ! class_exists( __NAMESPACE__ . '\TS_Locales' ) ) {
 		 *
 		 * @since 1.1.0
 		 *
-		 * @param TS_Locale $locale   TS_Locale object.
+		 * @param GP_Locale $locale   GP_Locale object.
 		 *
-		 * @return string             Returns a TS_Locale complete slug.
+		 * @return string             Returns a GP_Locale complete slug.
 		 */
 		public static function locale_slug( $locale ) {
 
