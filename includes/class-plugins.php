@@ -108,7 +108,11 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				if ( 'en_US' !== $translationstats_language ) {
 
 					$project_slug = Translations_API::plugin_metadata( $plugin_file, 'slug' );
-					$options      = get_option( TRANSLATION_STATS_WP_OPTION );
+					if ( is_null( $project_slug ) ) {
+						return;
+					}
+
+					$options = get_option( TRANSLATION_STATS_WP_OPTION );
 
 					// Show Stats only if plugin is enabled in plugin settings.
 					if ( empty( $options['plugins'][ $project_slug ]['enabled'] ) ) {
