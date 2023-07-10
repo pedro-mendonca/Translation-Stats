@@ -27,7 +27,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Plugins' ) ) {
 		 *
 		 * @since 1.2.0
 		 *
-		 * @return array   Array of settings section data.
+		 * @return array<string, string|null>   Array of settings section data.
 		 */
 		public function section() {
 
@@ -149,7 +149,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Plugins' ) ) {
 		 *
 		 * @since 1.2.0
 		 *
-		 * @param array $table_args   Array of table settings.
+		 * @param array<string, string|bool> $table_args   Array of table settings.
 		 *
 		 * @return void
 		 */

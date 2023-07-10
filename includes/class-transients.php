@@ -31,7 +31,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Transients' ) ) {
 		 *
 		 * @param string $search  Transient search term.
 		 *
-		 * @return array  Search result of transients.
+		 * @return array<int, string>  Array of the searched transients names.
 		 */
 		public static function get_transients( $search ) {
 			global $wpdb;

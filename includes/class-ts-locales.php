@@ -42,11 +42,11 @@ if ( ! class_exists( __NAMESPACE__ . '\TS_Locales' ) ) {
 
 
 		/**
-		 * Locales from WordPress.org extended with Transaltion Stats data.
+		 * Locales from WordPress.org extended with Translation Stats data.
 		 *
 		 * @since 1.1.0
 		 *
-		 * @return array  Array of TS_Locales objects.
+		 * @return array<string, GP_Locale>  Array of GP_Locale objects.
 		 */
 		public static function locales() {
 

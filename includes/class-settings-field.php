@@ -25,7 +25,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Field' ) ) {
 		/**
 		 * Constructor.
 		 *
-		 * @param array $field   Array of field data.
+		 * @param array<string, string|bool> $field   Array of field data.
+		 *
+		 * @return void
 		 */
 		public function __construct( $field = null ) {
 
@@ -45,7 +47,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Field' ) ) {
 		 *
 		 * @since 1.2.0
 		 *
-		 * @param array $field  Array of field data.
+		 * @param array<string, string|bool> $field  Array of field data.
 		 *
 		 * @return void
 		 */

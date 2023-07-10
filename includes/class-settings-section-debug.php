@@ -27,7 +27,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 		 *
 		 * @since 1.2.0
 		 *
-		 * @return array   Array of settings section data.
+		 * @return array<string, string>   Array of settings section data.
 		 */
 		public function section() {
 

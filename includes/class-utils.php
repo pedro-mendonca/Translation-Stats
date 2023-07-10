@@ -168,79 +168,83 @@ if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 		 * @since 1.1.1   Renamed from tstats_allowed_html() to allowed_html().
 		 * @since 1.2.0   Moved to Utils class.
 		 *
-		 * @return array  Array of allowed HTML elements.
+		 * @return array<
+		 *           string, bool|array<
+		 *             string, bool
+		 *           >
+		 *         >  Array of allowed HTML elements.
 		 */
 		public static function allowed_html() {
 
 			$allowed_html = array(
 				'a'      => array(
-					'href'   => array(),
-					'title'  => array(),
-					'class'  => array(),
-					'data'   => array(),
-					'rel'    => array(),
-					'target' => array(),
+					'href'   => true,
+					'title'  => true,
+					'class'  => true,
+					'data'   => true,
+					'rel'    => true,
+					'target' => true,
 				),
-				'br'     => array(),
+				'br'     => true,
 				'button' => array(
-					'aria-expanded' => array(),
-					'class'         => array(),
-					'id'            => array(),
-					'type'          => array(),
+					'aria-expanded' => true,
+					'class'         => true,
+					'id'            => true,
+					'type'          => true,
 				),
 				'div'    => array(
-					'class' => array(),
-					'data'  => array(),
-					'style' => array(),
+					'class' => false,
+					'data'  => true,
+					'style' => true,
 				),
-				'em'     => array(),
+				'em'     => true,
 				'form'   => array(
-					'action' => array(),
-					'class'  => array(),
-					'method' => array(),
-					'name'   => array(),
+					'action' => true,
+					'class'  => true,
+					'method' => true,
+					'name'   => true,
 				),
 				'img'    => array(
-					'alt'    => array(),
-					'class'  => array(),
-					'height' => array(),
-					'src'    => array(),
-					'width'  => array(),
+					'alt'    => true,
+					'class'  => true,
+					'height' => true,
+					'src'    => true,
+					'width'  => true,
 				),
 				'input'  => array(
-					'class' => array(),
-					'name'  => array(),
-					'type'  => array(),
-					'value' => array(),
+					'class' => true,
+					'name'  => true,
+					'type'  => true,
+					'value' => true,
 				),
 				'li'     => array(
-					'class' => array(),
+					'class' => true,
 				),
 				'ol'     => array(
-					'class' => array(),
+					'class' => true,
 				),
 				'option' => array(
-					'value'    => array(),
-					'selected' => array(),
+					'value'    => true,
+					'selected' => true,
 				),
 				'p'      => array(
-					'class' => array(),
+					'class' => true,
 				),
-				'script' => array(),
+				'script' => true,
 				'select' => array(
-					'id'    => array(),
-					'class' => array(),
-					'name'  => array(),
+					'id'    => true,
+					'class' => true,
+					'name'  => true,
 				),
 				'span'   => array(
-					'class' => array(),
-					'style' => array(),
+					'class' => true,
+					'style' => true,
 				),
-				'strong' => array(),
-				'style'  => array(),
+				'strong' => true,
+				'style'  => true,
 
 				'ul'     => array(
-					'class' => array(),
+					'class' => true,
 				),
 			);
 

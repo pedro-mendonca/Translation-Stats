@@ -103,7 +103,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 		 *
 		 * @param string $plugin   Plugin slug (project or project/subproject).
 		 *
-		 * @return array|WP_Error  Returns the response from translate.WordPress.org API URL.
+		 * @return array<string, mixed>|WP_Error  Returns the response from translate.WordPress.org API URL.
 		 */
 		public static function translations_api_get_plugin( $plugin ) {
 			$api_get = wp_remote_get( self::translate_url( 'plugins', true ) . $plugin );
@@ -170,7 +170,11 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 		 * @since 0.8.0
 		 * @since 1.1.0  Remove method prefix.
 		 *
-		 * @return array $subprojects  Returns array of the plugins translation subprojects structure.
+		 * @return array<
+		 *           int, array<
+		 *             string, string
+		 *           >
+		 *         > $subprojects  Returns array of the plugins translation subprojects structure.
 		 */
 		public static function plugin_subprojects() {
 			$subprojects = array(

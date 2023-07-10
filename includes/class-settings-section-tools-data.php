@@ -27,7 +27,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Tools_Data' ) ) {
 		 *
 		 * @since 1.2.0
 		 *
-		 * @return array   Array of settings section data.
+		 * @return array<string, string|null>   Array of settings section data.
 		 */
 		public function section() {
 
@@ -46,7 +46,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Tools_Data' ) ) {
 		 *
 		 * @since 1.2.0
 		 *
-		 * @return array   Array of settings section fields.
+		 * @return array<int, array<string, string|bool>>   Array of settings section fields.
 		 */
 		public function fields() {
 

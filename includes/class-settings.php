@@ -181,7 +181,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 		 * @since 0.8.0
 		 * @since 0.9.9   Renamed from tstats_settings_defaults() to settings_defaults().
 		 *
-		 * @return array  Array of default settings.
+		 * @return array<string, array<string, int|string|true>>  Array of default settings.
 		 */
 		public function settings_defaults() {
 			$defaults = array(
@@ -203,8 +203,15 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 		 * The sections keys match the Section IDs from the section classes.
 		 *
 		 * @since 1.2.0
-		 *
-		 * @return array  Array of settings pages tabs and content sections.
+		 * @return array<
+		 *           string, array{
+		 *                     tab: null|array{
+		 *                            title: string,
+		 *                            icon: string
+		 *                          },
+		 *                     sections: array<int, string>
+	 	 *                   }
+		 *         >  Array of settings pages tabs and content sections.
 		 */
 		public static function get_settings_pages() {
 
@@ -302,6 +309,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 
 							// Render settings pages tabs navigation.
 							foreach ( $settings_pages as $key => $page ) {
+
 								// Check if tab exist.
 								if ( ! is_null( $page['tab'] ) ) {
 									?>

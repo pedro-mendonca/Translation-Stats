@@ -27,13 +27,13 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Hidden' ) ) {
 		 *
 		 * @since 1.2.0
 		 *
-		 * @return array   Array of settings section data.
+		 * @return array<string, string|null>   Array of settings section data.
 		 */
 		public function section() {
 
 			return array(
 				'id'          => 'hidden', // Match the section ID from the settings pages of get_settings_pages().
-				'title'       => null,
+				'title'       => '',
 				'description' => null,
 				'page'        => TRANSLATION_STATS_SETTINGS_SECTIONS_PREFIX . 'hidden',
 			);
@@ -46,7 +46,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Hidden' ) ) {
 		 *
 		 * @since 1.2.0
 		 *
-		 * @return array   Array of settings section fields.
+		 * @return array<int, array<string, string|null>>   Array of settings section fields.
 		 */
 		public function fields() {
 

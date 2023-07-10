@@ -25,14 +25,19 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 		/**
 		 * Settings section data.
 		 *
-		 * @var array
+		 * @var array{
+		 *        id: string,
+		 *        title: string,
+		 *        description: null|string,
+		 *        page: string
+	 	 *      }
 		 */
 		protected $section;
 
 		/**
 		 * Settings section fields.
 		 *
-		 * @var array
+		 * @var array<void|string, string|true>
 		 */
 		protected $fields;
 
@@ -72,11 +77,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 		 */
 		public function get_section() {
 
-			$section = $this->section();
-
-			if ( ! empty( $section ) ) {
-				$this->section = $section;
-			}
+			$this->section = $this->section();
 
 		}
 
@@ -115,14 +116,19 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 		 *
 		 * @since 1.2.0
 		 *
-		 * @return array   Array of settings section data.
+		 * @return array{
+		 *        id: string,
+		 *        title: string,
+		 *        description: null,
+		 *        page: string
+	 	 *      }   Array of settings section data.
 		 */
 		public function section() {
 
 			return array(
-				'page'        => null, // Parent settings page.
-				'id'          => null, // Section ID.
-				'title'       => null, // Section title.
+				'page'        => '',   // Parent settings page.
+				'id'          => '',   // Section ID.
+				'title'       => '',   // Section title.
 				'description' => null, // Section description.
 			);
 
@@ -134,7 +140,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 		 *
 		 * @since 1.2.0
 		 *
-		 * @return array   Array of settings section fields.
+		 * @return array{}    Array of settings section fields.
 		 */
 		public function fields() {
 
@@ -212,7 +218,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 		 *
 		 * @since 1.2.0
 		 *
-		 * @param array $field   Field data.
+		 * @param array<string, string|bool> $field   Field data.
 		 * @return void
 		 */
 		public function add_field( $field ) {
@@ -221,10 +227,10 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 			$type = $field['type'];
 
 			// Check it field type is supported.
-			if ( Settings_Field::is_supported( $type ) ) {
+			if ( Settings_Field::is_supported( strval( $type ) ) ) {
 
 				// First letter uppercase to match class names.
-				$type = ucfirst( $type );
+				$type = ucfirst( strval( $type ) );
 
 				// Class name with namespace and field type sufix to load the mathing class.
 				$class = __NAMESPACE__ . "\Settings_Field_{$type}";
@@ -241,7 +247,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 		 *
 		 * @since 1.2.0
 		 *
-		 * @return array   Array of default fields data.
+		 * @return array{page: string, section: string, path: string}   Array of default fields data.
 		 */
 		public function field_defaults() {
 
@@ -259,8 +265,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 		 *
 		 * @since 1.2.0
 		 *
-		 * @param array $field   Array of field data.
-		 * @return array         Array of field data.
+		 * @param array<string, string|bool> $field   Array of field data.
+		 * @return array<string, string|bool>         Array of field data.
 		 */
 		public function prepare_field( $field ) {
 
