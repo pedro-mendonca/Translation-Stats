@@ -1,5 +1,5 @@
 parameters:
-	level: 9
+	level: 8
 	inferPrivatePropertyTypeFromConstructor: true
 	paths:
 		- translation-stats.php
@@ -14,4 +14,4 @@ parameters:
 			# GlotPress Locales file.
 			- assets/lib/locales/locales.php
 	# TODO Tell PHPStan what is inside arrays.
-	checkMissingIterableValueType: false
+	checkMissingIterableValueType: true
