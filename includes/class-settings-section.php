@@ -32,7 +32,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 		 *        title: string,
 		 *        description: null|string,
 		 *        page: string
-	 	 *      }
+		 *      }
 		 */
 		protected $section;
 
@@ -123,7 +123,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 		 *        title: string,
 		 *        description: null,
 		 *        page: string
-	 	 *      }   Array of settings section data.
+		 *      }   Array of settings section data.
 		 */
 		public function section() {
 

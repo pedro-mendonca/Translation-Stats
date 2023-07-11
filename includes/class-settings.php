@@ -212,7 +212,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 		 *                            icon: string
 		 *                          },
 		 *                     sections: array<int, string>
-	 	 *                   }
+		 *                   }
 		 *         >  Array of settings pages tabs and content sections.
 		 */
 		public static function get_settings_pages() {
