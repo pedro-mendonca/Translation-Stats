@@ -1,4 +1,4 @@
-<?php declare( strict_types = 1 );
+<?php
 /**
  * Class file for the Translation Stats Utils.
  *
@@ -7,6 +7,8 @@
  * @since 0.9.0
  * @since 1.2.0   Renamed from Globals to Utils.
  */
+
+declare( strict_types = 1 );
 
 namespace Translation_Stats;
 

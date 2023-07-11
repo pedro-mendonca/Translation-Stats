@@ -1,4 +1,4 @@
-<?php declare( strict_types = 1 );
+<?php
 /**
  * Class file for registering Translation Stats settings button field.
  *
@@ -6,6 +6,8 @@
  *
  * @since 1.2.0
  */
+
+declare( strict_types = 1 );
 
 namespace Translation_Stats;
 

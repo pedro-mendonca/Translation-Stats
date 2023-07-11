@@ -1,4 +1,4 @@
-<?php declare( strict_types = 1 );
+<?php
 /**
  * Primary class file for the Translation Stats plugin.
  *
@@ -6,6 +6,8 @@
  *
  * @since 0.8.0
  */
+
+declare( strict_types = 1 );
 
 namespace Translation_Stats;
 

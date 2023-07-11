@@ -1,4 +1,4 @@
-<?php declare( strict_types = 1 );
+<?php
 /**
  * Class file for the Translation Stats Locales.
  *
@@ -9,6 +9,8 @@
  *
  * @since 1.1.0
  */
+
+declare( strict_types = 1 );
 
 namespace Translation_Stats;
 

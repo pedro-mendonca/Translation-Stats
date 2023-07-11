@@ -1,4 +1,4 @@
-<?php declare( strict_types = 1 );
+<?php
 /**
  * Translation Stats
  *
@@ -24,6 +24,8 @@
  * Text Domain:       translation-stats
  * Domain Path:       /languages
  */
+
+declare( strict_types = 1 );
 
 namespace Translation_Stats;
 

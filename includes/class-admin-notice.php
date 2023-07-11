@@ -1,4 +1,4 @@
-<?php declare( strict_types = 1 );
+<?php
 /**
  * Class file for the Translation Stats admin notices.
  *
@@ -7,6 +7,8 @@
  * @since 0.8.0
  * @since 1.2.0   Renamed from Notices to Admin_Notice.
  */
+
+declare( strict_types = 1 );
 
 namespace Translation_Stats;
 
