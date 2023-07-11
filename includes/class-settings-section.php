@@ -39,7 +39,17 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 		/**
 		 * Settings section fields.
 		 *
-		 * @var array<void|string, string|true>
+		 * @var list<
+		 *     array{
+		 *         id: string,
+		 *         type: string,
+		 *         class: string,
+		 *         title: string,
+		 *         label: string,
+		 *         description: string,
+		 *         helper: string
+		 *     }
+		 * >
 		 */
 		protected $fields;
 
@@ -95,7 +105,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 
 			$fields = $this->fields();
 
-			if ( ! empty( $fields ) ) {
+			if ( ! empty( $fields ) ) { // @phpstan-ignore-line
 
 				// Prepare fields with defaults merged.
 				foreach ( $fields as $key => $field ) {
@@ -163,7 +173,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 			// Get section fields.
 			$fields = $this->fields();
 
-			if ( ! empty( $fields ) ) {
+			if ( ! empty( $fields ) ) { // @phpstan-ignore-line
 
 				// Add settings section fields.
 				foreach ( $this->fields as $field ) {

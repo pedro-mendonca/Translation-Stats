@@ -29,7 +29,20 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Field_Select_Language' ) ) {
 		 *
 		 * @since 1.2.0
 		 *
-		 * @param array $args  Array of select language field arguments.
+		 * @param array{
+		 *     page: string,
+		 *     section: string,
+		 *     path: string,
+		 *     id: string,
+		 *     type: string,
+		 *     class: string,
+		 *     title: string,
+		 *     label: string,
+		 *     description: string,
+		 *     helper: string,
+		 *     select_options: string,
+		 *     default: string
+		 * } $args  Array of select language field arguments.
 		 *
 		 * @return void
 		 */

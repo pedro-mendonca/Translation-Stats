@@ -38,7 +38,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Notice' ) ) {
 		 * @since 1.2.0   Renamed from notice_message() to message().
 		 *                Added support for 'wrap' properties, defaults to 'p' tag for backwards compatibility.
 		 *
-		 * @param array $args   Array of message data.
+		 * @param array<string, bool|string> $args   Array of message data.
 		 *
 		 * @return void
 		 */
@@ -59,7 +59,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Notice' ) ) {
 				'css-class'   => isset( $args['css-class'] ) ? ' ' . $args['css-class'] : '',                          // Some extra CSS classes.
 				'update-icon' => isset( $args['update-icon'] ) && $args['update-icon'] ? true : '',                    // Show update message icons. Defaults to false.
 				'message'     => isset( $args['message'] ) ? $args['message'] : '',                                    // Message to show.
-				'wrap'        => isset( $args['wrap'] ) && self::is_supported( $args['wrap'] ) ? $args['wrap'] : 'p',  // HTML tag to wrap the message. Defaults to 'p' (paragraph).
+				'wrap'        => isset( $args['wrap'] ) && self::is_supported( strval( $args['wrap'] ) ) ? $args['wrap'] : 'p',  // HTML tag to wrap the message. Defaults to 'p' (paragraph).
 				'extra-html'  => isset( $args['extra-html'] ) ? $args['extra-html'] : '',                              // Some extra HTML to show.
 			);
 
@@ -91,13 +91,13 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Notice' ) ) {
 			<div class="notice<?php echo esc_attr( $notice['type'] ) . esc_attr( $notice['notice-alt'] ) . esc_attr( $notice['inline'] ) . esc_attr( $notice['update-icon'] ) . esc_attr( $notice['css-class'] ) . esc_attr( $notice['dismissible'] ); ?>">
 				<?php
 
-				$opening_tag = $notice['wrap'] ? '<' . esc_html( $notice['wrap'] ) . '>' : '';
-				$closing_tag = $notice['wrap'] ? '</' . esc_html( $notice['wrap'] ) . '>' : '';
+				$opening_tag = $notice['wrap'] ? '<' . esc_html( strval( $notice['wrap'] ) ) . '>' : '';
+				$closing_tag = $notice['wrap'] ? '</' . esc_html( strval( $notice['wrap'] ) ) . '>' : '';
 
 				echo wp_kses_post( $opening_tag . $notice['message'] . $closing_tag );
 
 				// Extra HTML.
-				echo wp_kses( $notice['extra-html'], Utils::allowed_html() );
+				echo wp_kses( strval( $notice['extra-html'] ), Utils::allowed_html() );
 				?>
 			</div>
 			<?php

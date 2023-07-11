@@ -46,8 +46,29 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 		 *
 		 * @since 1.2.0
 		 *
-		 * @param array $settings_pages   Array of settings pages tabs and content sections.
-		 * @return array                  Array of filtered settings pages tabs and content sections.
+		 * @param array<
+		 *     string, array{
+		 *         tab: null|array{
+		 *             title: string,
+		 *             icon: string
+		 *         },
+		 *         sections: array<
+		 *             int, string
+		 *         >
+		 *     }
+		 * > $settings_pages   Array of settings pages tabs and content sections.
+		 *
+		 * @return array<
+		 *     string, array{
+		 *         tab: null|array{
+		 *             title: string,
+		 *             icon: string
+		 *         },
+		 *         sections: array<
+		 *             int, string
+		 *         >
+		 *     }
+		 * >   Array of filtered settings pages tabs and content sections.
 		 */
 		public function add_settings_debug_page( $settings_pages ) {
 

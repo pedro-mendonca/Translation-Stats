@@ -27,23 +27,39 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Field' ) ) {
 		/**
 		 * Constructor.
 		 *
-		 * @param array{
-		 *          page: string,
-		 *          section: string,
-		 *          path: string,
-		 *          id: string,
-		 *          type: string,
-		 *          class: string,
-		 *          title: string,
-		 *          label: string,
-		 *          description: string,
-		 *          helper: string,
-		 *          default: bool,
-		 *          wrap?: bool,
-		 *          formaction?: string,
-		 *          confirmation?: string,
-		 *          select_options?: string
-		 *        } $field   Array of field data.
+		 * @param array $field {
+		 *     Array of field data.
+		 *
+		 *     @type string $page             Description.
+		 *     @type string $section          Description.
+		 *     @type string $path             Description.
+		 *     @type string $id               Description.
+		 *     @type string $type             Description.
+		 *     @type string $class            Description.
+		 *     @type string $title            Description.
+		 *     @type string $label            Description.
+		 *     @type string $description      Description.
+		 *     @type string $helper           Description.
+		 *     @type bool $default            Description.
+		 *     @type bool $wrap               Description.
+		 *     @type string $formaction       Description.
+		 *     @type string $confirmation     Description.
+		 *     @type string $select_options   Description.
+		 * } $field   Array of field data.
+		 *
+		 * @phpstan-param array{
+		 *     page: string,
+		 *     section: string,
+		 *     path: string,
+		 *     id: string,
+		 *     type: string,
+		 *     class: string,
+		 *     title: string,
+		 *     label: string,
+		 *     description: string,
+		 *     helper: string,
+		 *     default: bool,
+		 * } $field   Array of field data.
 		 *
 		 * @return void
 		 */
@@ -66,22 +82,18 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Field' ) ) {
 		 * @since 1.2.0
 		 *
 		 * @param array{
-		 *          page: string,
-		 *          section: string,
-		 *          path: string,
-		 *          id: string,
-		 *          type: string,
-		 *          class: string,
-		 *          title: string,
-		 *          label: string,
-		 *          description: string,
-		 *          helper: string,
-		 *          default: bool,
-		 *          wrap?: bool,
-		 *          formaction?: string,
-		 *          confirmation?: string,
-		 *          select_options?: string
-		 *        } $field   Array of field data.
+		 *     page: string,
+		 *     section: string,
+		 *     path: string,
+		 *     id: string,
+		 *     type: string,
+		 *     class: string,
+		 *     title: string,
+		 *     label: string,
+		 *     description: string,
+		 *     helper: string,
+		 *     default: bool,
+		 * } $field   Array of field data.
 		 *
 		 * @return void
 		 */

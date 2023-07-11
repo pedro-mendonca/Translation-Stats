@@ -62,9 +62,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * @since 0.8.0
 		 * @since 1.2.0   Renamed from tstats_add_translation_stats_column() to add_translation_stats_column().
 		 *
-		 * @param array $columns   Columns array.
+		 * @param array<string, string> $columns   Columns array.
 		 *
-		 * @return array $columns  Columns array with added 'translation-stats'.
+		 * @return array<string, string>  Columns array with added 'translation-stats'.
 		 */
 		public function add_translation_stats_column( $columns ) {
 
@@ -476,9 +476,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 *
 		 * @since 1.2.0.
 		 *
-		 * @param array     $project_stats   Array of the sub-projects translation stats objects.
-		 * @param string    $project_slug    Plugin slug.
-		 * @param TS_Locale $locale          TS_Locale object.
+		 * @param array<string, object|false> $project_stats   Array of the sub-projects translation stats objects.
+		 * @param string                      $project_slug    Plugin slug.
+		 * @param TS_Locale                   $locale          TS_Locale object.
 		 *
 		 * @return void
 		 */
@@ -672,11 +672,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * @since 0.9.9
 		 * @since 1.2.0   Renamed from tstats_plugins_filter_by_translation_stats() to plugins_filter_by_translation_stats().
 		 *
-		 * @param array $plugins   Array of arrays containing information on all installed plugins.
+		 * @param array<string, array<string, string|array<string, string>>> $plugins   Array of arrays containing information on all installed plugins.
 		 *
 		 * @return void
 		 */
 		public function plugins_filter_by_translation_stats( $plugins ) {
+
 			// Get WP_Plugins_List_Table and page number.
 			global $wp_list_table, $page;
 
@@ -745,9 +746,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * @since 0.9.9
 		 * @since 1.2.0   Renamed from tstats_plugins_status_link() to plugins_status_link().
 		 *
-		 * @param array $status_links   Array of status links.
+		 * @param array<string, string> $status_links  Array of status links.
 		 *
-		 * @return array                Array of status links.
+		 * @return array<string, string>               Array of status links.
 		 */
 		public function plugins_status_link( $status_links ) {
 

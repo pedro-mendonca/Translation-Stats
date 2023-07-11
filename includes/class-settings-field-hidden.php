@@ -29,7 +29,15 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Field_Hidden' ) ) {
 		 *
 		 * @since 1.2.0
 		 *
-		 * @param array $args  Array of hidden field arguments.
+		 * @param array{
+		 *     page: string,
+		 *     section: string,
+		 *     path: string,
+		 *     id: string,
+		 *     type: string,
+		 *     title: null,
+		 *     default: string
+		 * } $args  Array of hidden field arguments.
 		 *
 		 * @return void
 		 */

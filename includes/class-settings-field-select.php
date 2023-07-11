@@ -29,7 +29,22 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Field_Select' ) ) {
 		 *
 		 * @since 1.2.0
 		 *
-		 * @param array<string, bool|string> $args  Array of select field arguments.
+		 * @param array{
+		 *     page: string,
+		 *     section: string,
+		 *     path: string,
+		 *     id: string,
+		 *     type: string,
+		 *     class: string,
+		 *     title: string,
+		 *     label: string,
+		 *     description: string,
+		 *     helper: string,
+		 *     select_options: array<
+		 *         string, string
+		 *     >,
+		 *     default: string
+		 * } $args  Array of select field arguments.
 		 *
 		 * @return void
 		 */

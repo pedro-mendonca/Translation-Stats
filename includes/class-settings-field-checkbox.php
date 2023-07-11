@@ -29,7 +29,19 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Field_Checkbox' ) ) {
 		 *
 		 * @since 1.2.0
 		 *
-		 * @param array $args  Array of checkbox field arguments.
+		 * @param array{
+		 *     page: string,
+		 *     section: string,
+		 *     path: string,
+		 *     id: string,
+		 *     type: string,
+		 *     class: string,
+		 *     title: string,
+		 *     label: string,
+		 *     description: string,
+		 *     helper: string,
+		 *     default: bool
+		 * } $args   Array of checkbox field arguments.
 		 *
 		 * @return void
 		 */

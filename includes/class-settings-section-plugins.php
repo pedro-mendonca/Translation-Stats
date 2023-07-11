@@ -212,27 +212,27 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Plugins' ) ) {
 		 * @since 1.2.0
 		 *
 		 * @param array{
-		 *          table_prefix: string,
-		 *          show_author: bool,
-		 *          show_slug_text_domain: bool
-		 *        } $table_args        Array of table settings.
+		 *     table_prefix: string,
+		 *     show_author: bool,
+		 *     show_slug_text_domain: bool
+		 * } $table_args  Array of table settings.
 		 * @param array{
-		 *          Name: string,
-		 *          PluginURI: string,
-		 *          Version: string,
-		 *          Description: string,
-		 *          Author: string,
-		 *          AuthorURI: string,
-		 *          TextDomain: string,
-		 *          DomainPath: string,
-		 *          Network: bool,
-		 *          RequiresWP: string,
-		 *          RequiresPHP: string,
-		 *          UpdateURI: string,
-		 *          Title: string,
-		 *          AuthorName: string,
-		 *          plugin_file: string
-		 *        }  $plugin            Array of plugin data.
+		 *     Name: string,
+		 *     PluginURI: string,
+		 *     Version: string,
+		 *     Description: string,
+		 *     Author: string,
+		 *     AuthorURI: string,
+		 *     TextDomain: string,
+		 *     DomainPath: string,
+		 *     Network: bool,
+		 *     RequiresWP: string,
+		 *     RequiresPHP: string,
+		 *     UpdateURI: string,
+		 *     Title: string,
+		 *     AuthorName: string,
+		 *     plugin_file: string
+		 * } $plugin   Array of plugin data.
 		 * @phpstan-param non-empty-array<string, string> $plugin
 		 *
 		 * @return int|false  Row status   Return number of active subprojects, or false if plugin doesn't exist on WP.org.

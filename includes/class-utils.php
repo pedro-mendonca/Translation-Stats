@@ -171,10 +171,10 @@ if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 		 * @since 1.2.0   Moved to Utils class.
 		 *
 		 * @return array<
-		 *           string, bool|array<
-		 *             string, bool
-		 *           >
-		 *         >  Array of allowed HTML elements.
+		 *     string, array<
+		 *         string, bool
+		 *     >
+		 * >  Array of allowed HTML elements.
 		 */
 		public static function allowed_html() {
 
@@ -187,7 +187,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 					'rel'    => true,
 					'target' => true,
 				),
-				'br'     => true,
+				'br'     => array(),
 				'button' => array(
 					'aria-expanded' => true,
 					'class'         => true,
@@ -199,7 +199,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 					'data'  => true,
 					'style' => true,
 				),
-				'em'     => true,
+				'em'     => array(),
 				'form'   => array(
 					'action' => true,
 					'class'  => true,
@@ -232,7 +232,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 				'p'      => array(
 					'class' => true,
 				),
-				'script' => true,
+				'script' => array(),
 				'select' => array(
 					'id'    => true,
 					'class' => true,
@@ -242,8 +242,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 					'class' => true,
 					'style' => true,
 				),
-				'strong' => true,
-				'style'  => true,
+				'strong' => array(),
+				'style'  => array(),
 
 				'ul'     => array(
 					'class' => true,
