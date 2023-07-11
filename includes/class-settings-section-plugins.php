@@ -115,7 +115,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Plugins' ) ) {
 
 					foreach ( $plugins as $plugin_file => $plugin ) {
 
-						$plugin['plugin_file'] = $plugin_file;
+						$plugin['plugin_file'] = strval( $plugin_file );
 
 						$row_status = $this->settings_projects_table_row( $table_args, $plugin );
 
@@ -209,8 +209,29 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Plugins' ) ) {
 		 *
 		 * @since 1.2.0
 		 *
-		 * @param array $table_args        Array of table settings.
-		 * @param array $plugin            Array of plugin data.
+		 * @param array{
+		 *          table_prefix: string,
+		 *          show_author: bool,
+		 *          show_slug_text_domain: bool
+		 *        } $table_args        Array of table settings.
+		 * @param array{
+		 *          Name: string,
+		 *          PluginURI: string,
+		 *          Version: string,
+		 *          Description: string,
+		 *          Author: string,
+		 *          AuthorURI: string,
+		 *          TextDomain: string,
+		 *          DomainPath: string,
+		 *          Network: bool,
+		 *          RequiresWP: string,
+		 *          RequiresPHP: string,
+		 *          UpdateURI: string,
+		 *          Title: string,
+		 *          AuthorName: string,
+		 *          plugin_file: string
+		 *        }  $plugin            Array of plugin data.
+		 * @phpstan-param non-empty-array<string, string> $plugin
 		 *
 		 * @return int|false  Row status   Return number of active subprojects, or false if plugin doesn't exist on WP.org.
 		 */
@@ -326,9 +347,10 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Plugins' ) ) {
 						<div class="plugin-slug-text-domain-message">
 							<?php
 							foreach ( $plugin_data as $key => $item ) {
+
 								$code_class = 'textdomain' === $key ? 'code-error' : '';
 								?>
-								<code class="<?php echo esc_attr( $code_class ); ?>"><?php echo esc_html( $item ); ?></code><br>
+								<code class="<?php echo esc_attr( $code_class ); ?>"><?php echo esc_html( strval( $item ) ); ?></code><br>
 								<?php
 							}
 							?>

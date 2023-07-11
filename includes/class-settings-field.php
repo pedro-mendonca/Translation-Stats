@@ -25,7 +25,23 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Field' ) ) {
 		/**
 		 * Constructor.
 		 *
-		 * @param array<string, string|bool> $field   Array of field data.
+		 * @param array{
+		 *          page: string,
+		 *          section: string,
+		 *          path: string,
+		 *          id: string,
+		 *          type: string,
+		 *          class: string,
+		 *          title: string,
+		 *          label: string,
+		 *          description: string,
+		 *          helper: string,
+		 *          default: bool,
+		 *          wrap?: bool,
+		 *          formaction?: string,
+		 *          confirmation?: string,
+		 *          select_options?: string
+		 *        } $field   Array of field data.
 		 *
 		 * @return void
 		 */
@@ -47,7 +63,23 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Field' ) ) {
 		 *
 		 * @since 1.2.0
 		 *
-		 * @param array<string, string|bool> $field  Array of field data.
+		 * @param array{
+		 *          page: string,
+		 *          section: string,
+		 *          path: string,
+		 *          id: string,
+		 *          type: string,
+		 *          class: string,
+		 *          title: string,
+		 *          label: string,
+		 *          description: string,
+		 *          helper: string,
+		 *          default: bool,
+		 *          wrap?: bool,
+		 *          formaction?: string,
+		 *          confirmation?: string,
+		 *          select_options?: string
+		 *        } $field   Array of field data.
 		 *
 		 * @return void
 		 */
@@ -70,7 +102,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Field' ) ) {
 		 *
 		 * @since 1.2.6
 		 *
-		 * @param array $args  Array of hidden field arguments.
+		 * @param array<string, bool|string> $args  Array of select field arguments.
 		 *
 		 * @return void
 		 */

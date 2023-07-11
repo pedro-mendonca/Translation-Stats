@@ -99,7 +99,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 				foreach ( $fields as $key => $field ) {
 
 					// Populate the field with default data.
-					$fields[ $key ] = $this->prepare_field( $field );
+					$fields[ $key ] = wp_parse_args( $field, $this->field_defaults() );
 
 				}
 
@@ -256,27 +256,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 				'section' => $this->section['id'],    // The default section of the field.
 				'path'    => 'settings',              // The default path of the settings array.
 			);
-
-		}
-
-
-		/**
-		 * Merge field data with field defaults, field data overrides defaults..
-		 *
-		 * @since 1.2.0
-		 *
-		 * @param array<string, string|bool> $field   Array of field data.
-		 * @return array<string, string|bool>         Array of field data.
-		 */
-		public function prepare_field( $field ) {
-
-			// Get default field values.
-			$field_defaults = $this->field_defaults();
-
-			// Merge and override field data over defaults.
-			$field = array_merge( $field_defaults, $field );
-
-			return $field;
 
 		}
 

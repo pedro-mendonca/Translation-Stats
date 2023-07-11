@@ -27,7 +27,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Field_Button' ) ) {
 		 *
 		 * @since 1.2.0
 		 *
-		 * @param array $args  Array of button field arguments.
+		 * @param array<string, bool|string> $args  Array of button field arguments.
 		 *
 		 * @return void
 		 */
