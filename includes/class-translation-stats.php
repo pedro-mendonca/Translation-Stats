@@ -1,4 +1,4 @@
-<?php
+<?php declare( strict_types = 1 );
 /**
  * Primary class file for the Translation Stats plugin.
  *

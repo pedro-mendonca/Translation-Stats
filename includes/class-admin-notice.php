@@ -1,4 +1,4 @@
-<?php
+<?php declare( strict_types = 1 );
 /**
  * Class file for the Translation Stats admin notices.
  *

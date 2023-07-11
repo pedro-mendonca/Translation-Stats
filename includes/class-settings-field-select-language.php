@@ -1,4 +1,4 @@
-<?php
+<?php declare( strict_types = 1 );
 /**
  * Class file for registering Translation Stats settings select language field.
  *
