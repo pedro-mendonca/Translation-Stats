@@ -87,15 +87,13 @@ function translation_stats_uninstall_delete_transients( $search ) {
 		},
 		$transients
 	);
-	if ( is_array( $transients ) ) {
-		foreach ( $transients as $transient ) {
-			if ( is_multisite() ) {
-				// Delete transients in Multisite.
-				delete_site_transient( substr( $transient, strlen( '_transient_' ) ) );
-			} else {
-				// Delete transients.
-				delete_transient( substr( $transient, strlen( '_transient_' ) ) );
-			}
+	foreach ( $transients as $transient ) {
+		if ( is_multisite() ) {
+			// Delete transients in Multisite.
+			delete_site_transient( substr( $transient, strlen( '_transient_' ) ) );
+		} else {
+			// Delete transients.
+			delete_transient( substr( $transient, strlen( '_transient_' ) ) );
 		}
 	}
 }

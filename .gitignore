@@ -15,3 +15,5 @@ Thumbs.db
 
 # PHPCS
 /phpcs.xml
+
+/wp-content/

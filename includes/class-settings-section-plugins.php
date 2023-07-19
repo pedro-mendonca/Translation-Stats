@@ -211,12 +211,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Plugins' ) ) {
 		 *
 		 * @since 1.2.0
 		 *
-		 * @param array{
+		 * @param array $table_args {
 		 *     table_prefix: string,
 		 *     show_author: bool,
 		 *     show_slug_text_domain: bool
 		 * } $table_args  Array of table settings.
-		 * @param array{
+		 * @param array $plugin {
 		 *     Name: string,
 		 *     PluginURI: string,
 		 *     Version: string,
@@ -233,7 +233,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Plugins' ) ) {
 		 *     AuthorName: string,
 		 *     plugin_file: string
 		 * } $plugin   Array of plugin data.
-		 * @phpstan-param non-empty-array<string, string> $plugin
 		 *
 		 * @return int|false  Row status   Return number of active subprojects, or false if plugin doesn't exist on WP.org.
 		 */
