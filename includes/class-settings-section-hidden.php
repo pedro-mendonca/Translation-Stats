@@ -37,7 +37,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Hidden' ) ) {
 				'description' => null,
 				'page'        => TRANSLATION_STATS_SETTINGS_SECTIONS_PREFIX . 'hidden',
 			);
-
 		}
 
 
@@ -59,9 +58,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Hidden' ) ) {
 				),
 
 			);
-
 		}
-
 	}
-
 }

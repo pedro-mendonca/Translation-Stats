@@ -40,7 +40,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Activation' ) ) {
 
 			// Add activation admin notice.
 			add_action( 'admin_notices', array( $this, 'activate_notice' ) );
-
 		}
 
 		/**
@@ -55,7 +54,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Activation' ) ) {
 
 			// Cache plugin activation data.
 			set_transient( 'translation_stats_activate', true, 5 );
-
 		}
 
 
@@ -98,9 +96,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Activation' ) ) {
 				// Delete transient, only display this notice once.
 				delete_transient( 'translation_stats_activate' );
 			}
-
 		}
-
 	}
-
 }

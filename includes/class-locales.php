@@ -148,7 +148,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Locales' ) ) {
 			}
 
 			return $wporg_subdomain;
-
 		}
 
 
@@ -181,9 +180,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Locales' ) ) {
 			}
 
 			return $locale_slug;
-
 		}
-
 	}
-
 }

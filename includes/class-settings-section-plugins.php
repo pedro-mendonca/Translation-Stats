@@ -37,7 +37,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Plugins' ) ) {
 				'description' => null,  // Added below with custom HTML.
 				'page'        => TRANSLATION_STATS_SETTINGS_SECTIONS_PREFIX . 'plugins',
 			);
-
 		}
 
 
@@ -76,7 +75,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Plugins' ) ) {
 			<?php
 
 			$this->plugins_list();
-
 		}
 
 
@@ -140,7 +138,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Plugins' ) ) {
 				</tbody>
 			</table>
 			<?php
-
 		}
 
 
@@ -200,7 +197,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Plugins' ) ) {
 				?>
 			</tr>
 			<?php
-
 		}
 
 
@@ -243,7 +239,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Plugins' ) ) {
 			$subprojects_count = 0;
 			foreach ( $subprojects as $subproject ) {
 				if ( ! empty( $options['plugins'][ $plugin_slug ][ $subproject['slug'] ] ) ) {
-					$subprojects_count++;
+					++$subprojects_count;
 				}
 			}
 			$indeterminate = ( 0 !== $subprojects_count && $subprojects_count < count( $subprojects ) ) ? 'true' : 'false';
@@ -362,7 +358,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Plugins' ) ) {
 
 					// If subproject is selected, increase $row_status.
 					if ( $checked ) {
-						$row_status++;
+						++$row_status;
 					}
 				}
 				?>
@@ -373,7 +369,5 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Plugins' ) ) {
 			// Return row status.
 			return $row_status;
 		}
-
 	}
-
 }

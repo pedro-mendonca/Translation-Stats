@@ -50,7 +50,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 
 			// Add status link to Translation Stats enabled plugins View.
 			add_filter( is_multisite() ? 'views_plugins-network' : 'views_plugins', array( $this, 'plugins_status_link' ) );
-
 		}
 
 
@@ -203,7 +202,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			<?php
 			// Add after Translation Stats plugin widget content.
 			do_action( 'translation_stats_plugin_widget_content__after', $project_slug, $locale );
-
 		}
 
 
@@ -231,7 +229,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				),
 				wp_kses_post( $locale_plugin_link )
 			);
-
 		}
 
 
@@ -279,7 +276,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			?>
 			<div class="content"></div>
 			<?php
-
 		}
 
 
@@ -311,7 +307,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			}
 
 			wp_die();
-
 		}
 
 
@@ -363,7 +358,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 
 			// Show admin notices with aditional information for each plugin.
 			$this->render_notices( $project_stats, $project_slug, $locale );
-
 		}
 
 
@@ -452,7 +446,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				</a>
 			</div>
 			<?php
-
 		}
 
 
@@ -594,7 +587,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				?>
 			</div>
 			<?php
-
 		}
 
 
@@ -729,7 +721,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 					'per_page'    => $plugins_per_page,
 				)
 			);
-
 		}
 
 
@@ -820,7 +811,5 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 
 			return $status_links;
 		}
-
 	}
-
 }

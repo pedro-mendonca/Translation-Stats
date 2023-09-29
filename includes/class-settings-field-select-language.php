@@ -71,9 +71,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Field_Select_Language' ) ) {
 
 			// Add setting field info action hook for debugging.
 			do_action( 'translation_stats_setting_field__after', $field_id, $option, $default );
-
 		}
-
 	}
-
 }

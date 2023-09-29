@@ -29,7 +29,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Widgets' ) ) {
 
 			// Add Sidebar before Translation Stats settings.
 			add_action( 'translation_stats_settings_sidebar__content', array( $this, 'settings_widget__about' ) );
-
 		}
 
 
@@ -105,7 +104,5 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Widgets' ) ) {
 			</div>
 			<?php
 		}
-
 	}
-
 }

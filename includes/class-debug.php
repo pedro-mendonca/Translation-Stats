@@ -35,7 +35,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 
 			// Add Translation Stats plugin stats widget debug.
 			add_action( 'translation_stats_plugins_stats_widget__after', array( $this, 'plugin_stats_widget__debug' ), 10, 3 );
-
 		}
 
 
@@ -62,7 +61,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 			);
 
 			return array_merge( $settings_pages, $debug_page );
-
 		}
 
 
@@ -72,13 +70,13 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 		 * @since 0.8.0
 		 * @since 1.2.0   Renamed from tstats_debug_setting_field_info() to setting_field__debug().
 		 *
-		 * @param string $field_id  Setting ID.
-		 * @param string $value     Setting Value.
-		 * @param string $default   Setting Default.
+		 * @param string $field_id        Setting ID.
+		 * @param string $value           Setting Value.
+		 * @param string $default_value   Setting Default.
 		 *
 		 * @return void
 		 */
-		public function setting_field__debug( $field_id, $value, $default ) {
+		public function setting_field__debug( $field_id, $value, $default_value ) {
 
 			?>
 			<div class="tstats-debug-block notice notice-alt inline notice-info">
@@ -105,13 +103,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 					printf(
 						/* translators: %s: Setting Default. */
 						esc_html__( 'Default: %s', 'translation-stats' ),
-						'<code>' . esc_html( $default ) . '</code>'
+						'<code>' . esc_html( $default_value ) . '</code>'
 					);
 					?>
 				</p>
 			</div>
 			<?php
-
 		}
 
 
@@ -166,9 +163,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 				</p>
 			</div>
 			<?php
-
 		}
-
 	}
-
 }

@@ -36,7 +36,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Field' ) ) {
 
 			// Add field.
 			$this->add_field( $field );
-
 		}
 
 
@@ -59,7 +58,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Field' ) ) {
 				$field['section'],           // The section of the settings page on which to show the box.
 				$field                       // The array of the field data.
 			);
-
 		}
 
 
@@ -98,9 +96,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Field' ) ) {
 			}
 
 			return false;
-
 		}
-
 	}
-
 }

@@ -52,7 +52,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 
 			// Initialize Settings Footer.
 			new Settings_Footer();
-
 		}
 
 
@@ -262,7 +261,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 			 * @since 1.2.0
 			 */
 			return apply_filters( 'translation_stats_settings_pages', $settings_pages );
-
 		}
 
 
@@ -368,9 +366,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 				</div>
 			</div>
 			<?php
-
 		}
-
 	}
-
 }
