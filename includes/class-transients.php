@@ -42,8 +42,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Transients' ) ) {
 				)
 			);
 			$transients = array_map(
-				function( $object ) {
-					return $object->name;
+				function ( $transient_object ) {
+					return $transient_object->name;
 				},
 				$transients
 			);
@@ -76,6 +76,5 @@ if ( ! class_exists( __NAMESPACE__ . '\Transients' ) ) {
 				}
 			}
 		}
-
 	}
 }

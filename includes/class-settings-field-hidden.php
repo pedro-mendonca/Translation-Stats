@@ -41,9 +41,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Field_Hidden' ) ) {
 			?>
 			<input name="<?php echo esc_attr( $field_id ); ?>" id="<?php echo esc_attr( $field_id ); ?>" type="hidden" value="<?php echo esc_attr( $value ); ?>">
 			<?php
-
 		}
-
 	}
-
 }

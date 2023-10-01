@@ -54,7 +54,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 			 * @param bool $development_mode   Set development mode to true or false.
 			 */
 			return apply_filters( 'translation_stats_development_mode', $development_mode );
-
 		}
 
 
@@ -91,7 +90,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 			$suffix = $minify && ! self::is_development_mode() && ( ! defined( 'SCRIPT_DEBUG' ) || ! SCRIPT_DEBUG ) ? '.min' : '';
 
 			return TRANSLATION_STATS_DIR_URL . 'assets/' . $path['dirname'] . '/' . $path['filename'] . $suffix . '.' . $path['extension'];
-
 		}
 
 
@@ -123,7 +121,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 
 			// Return settings translation language.
 			return $translation_language;
-
 		}
 
 
@@ -148,7 +145,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 			$utm_campaign = ! empty( $campaign ) ? $campaign : 'plugin_link';
 
 			return $link . '?utm_source=' . $utm_source . '&amp;utm_medium=' . $utm_medium . '&amp;utm_campaign=' . $utm_campaign;
-
 		}
 
 
@@ -236,9 +232,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 			);
 
 			return $allowed_html;
-
 		}
-
 	}
-
 }

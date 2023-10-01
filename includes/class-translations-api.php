@@ -249,7 +249,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 			}
 
 			return $translate_url;
-
 		}
 
 
@@ -285,9 +284,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 			}
 
 			return $current_locale;
-
 		}
-
 	}
-
 }

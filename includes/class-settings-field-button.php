@@ -56,9 +56,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Field_Button' ) ) {
 			?>
 			<p class='description'><?php echo esc_html( $description ); ?></p>
 			<?php
-
 		}
-
 	}
-
 }

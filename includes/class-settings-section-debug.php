@@ -40,7 +40,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 
 			// Instantiate Translation Stats Transients.
 			$this->transients = new Transients();
-
 		}
 
 
@@ -59,7 +58,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 				'description' => __( 'List of settings and transients of Translation Stats.', 'translation-stats' ),
 				'page'        => TRANSLATION_STATS_SETTINGS_SECTIONS_PREFIX . 'debug',
 			);
-
 		}
 
 
@@ -88,7 +86,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 				<br>
 			</div>
 			<?php
-
 		}
 
 
@@ -134,7 +131,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 				?>
 			</code>
 			<?php
-
 		}
 
 
@@ -171,7 +167,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 				?>
 			</p>
 			<?php
-
 		}
 
 
@@ -273,7 +268,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 				?>
 			</div>
 			<?php
-
 		}
 
 
@@ -325,9 +319,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 				?>
 			</div>
 			<?php
-
 		}
-
 	}
-
 }

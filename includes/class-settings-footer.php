@@ -99,7 +99,5 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Footer' ) ) {
 			}
 			return $text;
 		}
-
 	}
-
 }

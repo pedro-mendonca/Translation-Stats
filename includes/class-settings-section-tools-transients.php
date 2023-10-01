@@ -37,7 +37,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Tools_Transients' ) ) {
 				'description' => null,
 				'page'        => TRANSLATION_STATS_SETTINGS_SECTIONS_PREFIX . 'tools',
 			);
-
 		}
 
 
@@ -81,9 +80,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Tools_Transients' ) ) {
 				),
 
 			);
-
 		}
-
 	}
-
 }

@@ -29,7 +29,6 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 
 			// Add database update check.
 			add_action( 'plugins_loaded', array( $this, 'settings_db_check' ) );
-
 		}
 
 
@@ -56,7 +55,6 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 				$this->update_settings_version( $installed_version );
 
 			}
-
 		}
 
 
@@ -82,7 +80,6 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 			}
 
 			return '0.0';
-
 		}
 
 
@@ -121,7 +118,6 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 				'message'     => $update_message,
 			);
 			Admin_Notice::message( $admin_notice );
-
 		}
 
 
@@ -206,9 +202,6 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 				);
 				Admin_Notice::message( $admin_notice );
 			}
-
 		}
-
 	}
-
 }

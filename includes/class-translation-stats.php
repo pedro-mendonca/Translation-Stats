@@ -52,7 +52,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 			if ( Utils::is_development_mode() ) {
 				new Debug();
 			}
-
 		}
 
 
@@ -98,7 +97,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 			);
 
 			wp_enqueue_style( 'translation-stats' );
-
 		}
 
 
@@ -182,7 +180,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 				);
 
 			}
-
 		}
 
 
@@ -203,9 +200,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 			}
 
 			return false;
-
 		}
-
 	}
-
 }

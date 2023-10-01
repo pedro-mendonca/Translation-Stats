@@ -59,7 +59,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 				$this->section['page'],      // The prefixed menu page on which to display this section. Should match $menu_slug.
 				TRANSLATION_STATS_WP_OPTION  // The WordPress option to store Translation Stats settings.
 			);
-
 		}
 
 
@@ -77,7 +76,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 			if ( ! empty( $section ) ) {
 				$this->section = $section;
 			}
-
 		}
 
 
@@ -106,7 +104,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 				$this->fields = $fields;
 
 			}
-
 		}
 
 
@@ -125,7 +122,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 				'title'       => null, // Section title.
 				'description' => null, // Section description.
 			);
-
 		}
 
 
@@ -139,7 +135,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 		public function fields() {
 
 			return array();
-
 		}
 
 
@@ -168,7 +163,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 
 			// Show custom section data.
 			$this->render_custom_section();
-
 		}
 
 
@@ -191,7 +185,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 
 				<?php
 			}
-
 		}
 
 
@@ -232,7 +225,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 				// Actual field type class instantiation.
 				new $class( $field );
 			}
-
 		}
 
 
@@ -250,7 +242,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 				'section' => $this->section['id'],    // The default section of the field.
 				'path'    => 'settings',              // The default path of the settings array.
 			);
-
 		}
 
 
@@ -271,9 +262,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 			$field = array_merge( $field_defaults, $field );
 
 			return $field;
-
 		}
-
 	}
-
 }

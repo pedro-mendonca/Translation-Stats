@@ -202,7 +202,6 @@ function translation_stats_compatible_version() {
 
 	// Check minimum required PHP version.
 	return version_compare( PHP_VERSION, TRANSLATION_STATS_REQUIRED_PHP, '>=' );
-
 }
 
 
@@ -248,7 +247,6 @@ function class_autoload( $class_name ) {
 	}
 
 	require_once $class;
-
 }
 
 
