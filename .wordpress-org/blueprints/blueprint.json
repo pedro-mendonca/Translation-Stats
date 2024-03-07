@@ -1,0 +1,44 @@
+{
+  "$schema": "https://playground.wordpress.net/blueprint-schema.json",
+  "landingPage": "/wp-admin/options-general.php?page=translation-stats",
+  "preferredVersions": {
+    "php": "7.4",
+    "wp": "latest"
+  },
+  "phpExtensionBundles": [
+    "kitchen-sink"
+  ],
+  "features": {
+    "networking": true
+  },
+  "steps": [
+    {
+      "step": "login",
+      "username": "admin",
+      "password": "password"
+    },
+    {
+      "step": "installPlugin",
+      "pluginZipFile": {
+        "resource": "wordpress.org/plugins",
+        "slug": "translation-stats"
+      },
+      "options": {
+        "activate": true
+      }
+    },
+    {
+      "step": "installPlugin",
+      "pluginZipFile": {
+        "resource": "wordpress.org/plugins",
+        "slug": "hello-dolly"
+      }
+    },
+    {
+      "step": "setSiteOptions",
+      "options": {
+        "tstats_settings": "a:2:{s:7:\"plugins\";a:2:{s:11:\"hello-dolly\";a:5:{s:7:\"enabled\";s:4:\"true\";s:3:\"dev\";s:4:\"true\";s:10:\"dev-readme\";s:4:\"true\";s:6:\"stable\";s:4:\"true\";s:13:\"stable-readme\";s:4:\"true\";}s:17:\"translation-stats\";a:5:{s:7:\"enabled\";s:4:\"true\";s:3:\"dev\";s:4:\"true\";s:10:\"dev-readme\";s:4:\"true\";s:6:\"stable\";s:4:\"true\";s:13:\"stable-readme\";s:4:\"true\";}}s:8:\"settings\";a:5:{s:13:\"show_warnings\";s:4:\"true\";s:20:\"translation_language\";s:12:\"site-default\";s:24:\"delete_data_on_uninstall\";s:4:\"true\";s:21:\"transients_expiration\";s:5:\"86400\";s:16:\"settings_version\";s:3:\"1.0\";}}"
+      }
+    }
+  ]
+}
