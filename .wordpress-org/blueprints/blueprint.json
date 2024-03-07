@@ -27,11 +27,11 @@
         "activate": true
       }
     },
-	{
+    {
     "step": "defineWpConfigConsts",
       "consts": {
         "WP_DEBUG": false,
-		"WPLANG": "en_GB"
+        "WPLANG": "en_GB"
       }
     },
     {
