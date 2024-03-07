@@ -28,10 +28,9 @@
       }
     },
     {
-      "step": "installPlugin",
-      "pluginZipFile": {
-        "resource": "wordpress.org/plugins",
-        "slug": "hello-dolly"
+      "step": "setSiteOptions",
+      "options": {
+        "WPLANG": "en_GB"
       }
     },
     {
