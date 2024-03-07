@@ -16,6 +16,7 @@ Show plugins translation stats on your WordPress install.
 [![Coding Standards](https://github.com/pedro-mendonca/Translation-Stats/actions/workflows/coding-standards.yml/badge.svg)](https://github.com/pedro-mendonca/Translation-Stats/actions/workflows/coding-standards.yml)
 [![Static Analysis](https://github.com/pedro-mendonca/Translation-Stats/actions/workflows/static-analysis.yml/badge.svg)](https://github.com/pedro-mendonca/Translation-Stats/actions/workflows/static-analysis.yml)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/bcd1b44a1d6542e2b75b7b479ce56804)](https://www.codacy.com/app/pedro-mendonca/Translation-Stats?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=pedro-mendonca/Translation-Stats&amp;utm_campaign=Badge_Grade)
+[![WP Plugin Check](https://github.com/pedro-mendonca/Translation-Stats/actions/workflows/plugin-check.yml/badge.svg)](https://github.com/pedro-mendonca/Translation-Stats/actions/workflows/plugin-check.yml)
 
 ## Description
 
