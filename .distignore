@@ -1,0 +1,29 @@
+# Exclude directories from WP.org
+.git
+.github
+.wordpress-org
+node_modules
+vendor
+tests
+
+# Exclude files from WP.org
+.distignore
+.editorconfig
+.eslintignore
+.eslintrc.json
+.gitattributes
+.gitignore
+.markdownlint.json
+.markdownlintignore
+.stylelintignore
+.stylelintrc.json
+composer.json
+composer.lock
+package-lock.json
+package.json
+phpcompat.xml.dist
+phpcs.xml.dist
+phpmd.xml.dist
+phpstan.neon
+postcss.config.js
+README.md
