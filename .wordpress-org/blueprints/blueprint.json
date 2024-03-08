@@ -28,7 +28,7 @@
       }
     },
     {
-    "step": "defineWpConfigConsts",
+      "step": "defineWpConfigConsts",
       "consts": {
         "WP_DEBUG": false,
         "WPLANG": "en_GB"
