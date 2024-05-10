@@ -492,7 +492,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 						'<p>%s</p>',
 						sprintf(
 							wp_kses_post(
-								/* translators: 1: Translation sub-project name. 2: Threshold value. 3: Current value of percent translated. */
+								/* translators: 1: Threshold value. 2: Translation sub-project name. 3: Current value of percent translated. */
 								esc_html__( 'The initial language pack for the plugin will be generated when %1$d%% of the %2$s sub-project strings have been translated (currently %3$d%%).', 'translation-stats' )
 							),
 							$language_packs_threshold,
@@ -517,7 +517,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 						'<p>%s</p>',
 						sprintf(
 							wp_kses_post(
-								/* translators: 1: Translation sub-project name. 2: Threshold value. 3: Current value of percent translated. */
+								/* translators: 1: Threshold value. 2: Translation sub-project name. 3: Current value of percent translated. */
 								esc_html__( 'The initial language pack for the plugin will be generated when %1$d%% of the %2$s sub-project strings have been translated (currently %3$d%%).', 'translation-stats' )
 							),
 							$language_packs_threshold,
