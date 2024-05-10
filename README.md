@@ -92,6 +92,7 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 ### Unreleased
 
 * Tested up to WP 6.5
+* Fix incorrect position of placeholders in comments to translators. Props @presskopp
 
 ### 1.2.5
 
