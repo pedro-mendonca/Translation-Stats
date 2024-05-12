@@ -97,7 +97,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 					// First letter uppercase to match class names.
 					$section = ucfirst( $section );
 
-					// Class name with namespace and sction sufix to load the mathing class.
+					// Class name with namespace and section suffix to load the matching class.
 					$class = __NAMESPACE__ . "\Settings_Section_{$section}";
 
 					// Actual section instantiation.
@@ -156,7 +156,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 					$this->nonce_fail();
 				}
 				// Delete translations stats and available languages transients.
-				// The transient 'translation_stats_plugin_available_translations' will be immediatly rebuilt on Settings_Section_Plugins->plugins_list() loading.
+				// The transient 'translation_stats_plugin_available_translations' will be immediately rebuilt on Settings_Section_Plugins->plugins_list() loading.
 				$this->transients->delete_transients( TRANSLATION_STATS_TRANSIENTS_PREFIX );
 				$admin_notice = array(
 					'type'        => 'success',

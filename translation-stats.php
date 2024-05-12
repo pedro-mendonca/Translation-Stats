@@ -168,7 +168,7 @@ function translation_stats_disabled_notice() {
 				esc_html( TRANSLATION_STATS_REQUIRED_PHP )
 			);
 
-			// Show aditional update link if on WP version 5.1 or higher.
+			// Show additional update link if on WP version 5.1 or higher.
 			// Capability added in WP 5.1: https://core.trac.wordpress.org/ticket/44457.
 			// Introduced in WP 5.1: https://developer.wordpress.org/reference/functions/wp_get_update_php_url/.
 			if ( current_user_can( 'update_php' ) && version_compare( $GLOBALS['wp_version'], '5.1', '>=' ) ) {

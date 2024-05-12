@@ -71,7 +71,7 @@ jQuery( document ).ready( function( $ ) {
 				},
 
 			} ).done( function( html, textStatus, jqXHR ) {
-				// If Update button was clicked, show Success message aferwards, if not just hide the status notice.
+				// If Update button was clicked, show Success message afterwards, if not just hide the status notice.
 				if ( forceUpdate ) {
 					// Show the Updated notice.
 					$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).removeClass( 'notice-success updated-message notice-warning updating-message notice-error update-message' );

@@ -356,7 +356,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			</div>
 			<?php
 
-			// Show admin notices with aditional information for each plugin.
+			// Show admin notices with additional information for each plugin.
 			$this->render_notices( $project_stats, $project_slug, $locale );
 		}
 
@@ -450,7 +450,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 
 
 		/**
-		 * Show admin notices with aditional information for each plugin.
+		 * Show admin notices with additional information for each plugin.
 		 *
 		 * 1) Show 'Stable' or 'Development' language packs info if available.
 		 * 2) Check if at least of of the above are enabled to allow check if it's prepared for localization.
@@ -511,7 +511,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				// Only show initial language pack information if percent translated is below minimum threshold.
 				if ( isset( $project_stats['dev']->percent_translated ) && $project_stats['dev']->percent_translated < $language_packs_threshold ) {
 
-					// Loads from Develompent (trunk).
+					// Loads from Development (trunk).
 					$admin_notice['type']    = 'info';
 					$admin_notice['message'] = sprintf(
 						'<p>%s</p>',

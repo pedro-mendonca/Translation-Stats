@@ -65,7 +65,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 
 
 		/**
-		 * Display debug formated message with plugin setting info.
+		 * Display debug formatted message with plugin setting info.
 		 *
 		 * @since 0.8.0
 		 * @since 1.2.0   Renamed from tstats_debug_setting_field_info() to setting_field__debug().
@@ -113,7 +113,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Debug' ) ) {
 
 
 		/**
-		 * Display debug formated message with plugin translation project info.
+		 * Display debug formatted message with plugin translation project info.
 		 *
 		 * @since 0.9.4
 		 * @since 1.2.0   Renamed from tstats_settings_plugin_widget__debug() to plugin_stats_widget__debug().
