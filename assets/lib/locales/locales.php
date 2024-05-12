@@ -112,7 +112,7 @@ class GP_Locale {
 	public function index_for_number( $number ) {
 		if ( ! isset( $this->_index_for_number ) ) {
 			$gettext = new Gettext_Translations;
-			$expression = $gettext->parenthesize_plural_expression( $this->plural_expression );
+			$expression = $gettext->parenthesize_plural_exression( $this->plural_expression );
 			$this->_index_for_number = $gettext->make_plural_form_function( $this->nplurals, $expression );
 		}
 
