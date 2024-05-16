@@ -5,7 +5,7 @@ Tags: internationalization, i18n, localization, l10n, translation
 Requires at least: 4.9
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 1.2.6
+Stable tag: 1.2.7
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -63,7 +63,7 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
 == Changelog ==
 
-= Unreleased =
+= 1.2.7 =
 *   Fix typos in comments. Props @szepeviktor
 *   Show stats admin notices only on `WP_DEBUG`. Props @Irinashl
 

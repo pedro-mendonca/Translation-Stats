@@ -89,10 +89,10 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
 ## Changelog
 
-### Unreleased
+### 1.2.7
 
 * Fix typos in comments. Props @szepeviktor
-* Show stats admin notices only on `WP_DEBUG`
+* Show stats admin notices only on `WP_DEBUG`. Props @Irinashl
 
 ### 1.2.6
 
