@@ -356,8 +356,10 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			</div>
 			<?php
 
-			// Show admin notices with additional information for each plugin.
-			$this->render_notices( $project_stats, $project_slug, $locale );
+			// Show admin notices with additional information for each plugin, for development mode only.
+			if ( Utils::is_development_mode() ) {
+				$this->render_notices( $project_stats, $project_slug, $locale );
+			}
 		}
 
 
