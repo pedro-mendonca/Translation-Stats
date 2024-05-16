@@ -13,5 +13,5 @@ parameters:
 		analyse:
 			# GlotPress Locales file.
 			- assets/lib/locales/locales.php
-	# TODO Tell PHPStan what is inside arrays.
-	checkMissingIterableValueType: false
+	ignoreErrors:
+		- identifier: missingType.iterableValue
