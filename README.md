@@ -89,6 +89,10 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
 ## Changelog
 
+### Unreleased
+
+* Fix typos in comments. Props @szepeviktor
+
 ### 1.2.6
 
 * Tested up to WP 6.5
