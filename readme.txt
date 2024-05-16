@@ -169,7 +169,7 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 *   Refactoring with PHPStan (Level 6)
 
 = 0.9.7 =
-*   Add tristate to parent checkboxes with enabled and disabled childs
+*   Add tristate to parent checkboxes with enabled and disabled children
 *   Minor code improvements
 
 = 0.9.6.3 =
@@ -214,7 +214,7 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
 = 0.9.4.3 =
 *   Tested up to WP 5.2.4
-*   Add PHP compatibity check
+*   Add PHP compatibility check
 
 = 0.9.4.2 =
 *   Tested up to WP 5.2.3

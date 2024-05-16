@@ -196,7 +196,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 		 * @return void
 		 */
 		public function render_custom_section() {
-			// Intentionally left empy.
+			// Intentionally left empty.
 		}
 
 
@@ -219,7 +219,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 				// First letter uppercase to match class names.
 				$type = ucfirst( $type );
 
-				// Class name with namespace and field type sufix to load the mathing class.
+				// Class name with namespace and field type suffix to load the matching class.
 				$class = __NAMESPACE__ . "\Settings_Field_{$type}";
 
 				// Actual field type class instantiation.

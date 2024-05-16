@@ -27,7 +27,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Locales' ) ) {
 
 		/**
 		 * Set custom 'translation_stats_locales' global variable.
-		 * This avoids conficts with other plugins that might use the 'gp_locales' global.
+		 * This avoids conflicts with other plugins that might use the 'gp_locales' global.
 		 *
 		 * @return object  Object with all the GP_Locales.
 		 */
@@ -42,7 +42,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Locales' ) ) {
 
 
 		/**
-		 * Locales from WordPress.org extended with Transaltion Stats data.
+		 * Locales from WordPress.org extended with Translation Stats data.
 		 *
 		 * @since 1.1.0
 		 *

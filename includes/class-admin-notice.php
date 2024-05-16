@@ -24,7 +24,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Notice' ) ) {
 
 
 		/**
-		 * Display formated admin notice.
+		 * Display formatted admin notice.
 		 *
 		 * WordPress core notice types ( 'error', 'warning', 'warning-spin', 'success' and 'info' ).
 		 * The child type 'warning-spin' is the spinning variation of main 'warning' icon (if 'update-icon' is set to 'true'). The css class will be kept the parent 'warning'.

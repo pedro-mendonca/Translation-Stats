@@ -62,7 +62,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 
 
 		/**
-		 * Display debug formated message with plugin options.
+		 * Display debug formatted message with plugin options.
 		 *
 		 * @since 1.2.0
 		 *
