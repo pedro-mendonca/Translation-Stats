@@ -65,6 +65,7 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
 = Unreleased =
 *   Fix typos in comments. Props @szepeviktor
+*   Show stats admin notices only on `WP_DEBUG`. Props @Irinashl
 
 = 1.2.6 =
 *   Tested up to WP 6.5

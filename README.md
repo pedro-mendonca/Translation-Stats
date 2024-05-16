@@ -92,6 +92,7 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 ### Unreleased
 
 * Fix typos in comments. Props @szepeviktor
+* Show stats admin notices only on `WP_DEBUG`
 
 ### 1.2.6
 
