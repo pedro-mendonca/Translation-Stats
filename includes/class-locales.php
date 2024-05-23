@@ -29,12 +29,19 @@ if ( ! class_exists( __NAMESPACE__ . '\Locales' ) ) {
 		 * Set custom 'translation_stats_locales' global variable.
 		 * This avoids conflicts with other plugins that might use the 'gp_locales' global.
 		 *
-		 * @return object  Object with all the GP_Locales.
+		 * @return Locales  Object with all the Locales.
 		 */
 		public static function &instance() {
 
 			if ( ! isset( $GLOBALS['translation_stats_locales'] ) ) {
-				$GLOBALS['translation_stats_locales'] = new GP_Locales();
+
+				$locales = new Locales();
+
+				foreach ( $locales->locales as $key => $locale ) {
+					$locales->locales[ $key ] = new Locale( $locale );
+				}
+
+				$GLOBALS['translation_stats_locales'] = $locales;
 			}
 
 			return $GLOBALS['translation_stats_locales'];
