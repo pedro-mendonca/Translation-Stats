@@ -393,6 +393,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			 * [untranslated_count] => 0
 			 * [waiting_count] => 0
 			 * [fuzzy_count] => 0
+			 * [all_count] => 136
+			 * [warnings_count] => 0
 			 * [percent_translated] => 100
 			 * [wp_locale] => pt_PT
 			 * [last_modified] => 2018-10-11 10:05:30
