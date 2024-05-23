@@ -89,6 +89,11 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
 ## Changelog
 
+### 1.2.8
+
+* Fix deprecation notice on PHP 8.2+
+* Show current/all counts on subproject statistics. Props @Irinashl
+
 ### 1.2.7
 
 * Fix typos in comments. Props @szepeviktor

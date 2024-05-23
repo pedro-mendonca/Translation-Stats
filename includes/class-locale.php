@@ -7,7 +7,7 @@
  *
  * @package Translation_Stats
  *
- * @since 1.2.7
+ * @since 1.2.8
  */
 
 namespace Translation_Stats;
