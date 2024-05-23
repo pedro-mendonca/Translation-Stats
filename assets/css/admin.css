@@ -72,6 +72,11 @@ table.wp-list-table.plugins td.column-translation-stats .translation-stats-conte
 	margin-right: 10px;
 }
 
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject .subproject-bar .subproject-bar__count {
+	display: inline-block;
+	font-weight: 600;
+}
+
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a,
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div,
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div .subproject-bar,
