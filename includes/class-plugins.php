@@ -407,6 +407,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			// Percent translated.
 			$percent_translated = $subproject_exist && isset( $subproject_stats->percent_translated ) ? $subproject_stats->percent_translated : 0;
 
+			// Current count.
+			$current_count = $subproject_exist && isset( $subproject_stats->current_count ) ? $subproject_stats->current_count : 0;
+
+			// All count.
+			$all_count = $subproject_exist && isset( $subproject_stats->all_count ) ? $subproject_stats->all_count : 0;
+
 			?>
 			<div class="content__subproject <?php echo esc_attr( $subproject_slug ); ?>">
 				<a class="<?php echo esc_attr( $class ); ?>" target="_blank" <?php echo wp_kses_post( $href ); ?>>
@@ -421,7 +427,18 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 					</style>
 					<div class="subproject <?php echo esc_attr( 'percent' . 10 * floor( $percent_translated / 10 ) . ' ' . $subproject_slug ); ?>">
 						<div class="subproject-bar">
-							<span class="subproject-bar__percentage"><?php echo esc_html( $percent_translated ); ?>%</span><span class="subproject-bar__name"><?php echo esc_html( $subproject ); ?></span>
+							<span class="subproject-bar__percentage"><?php echo esc_html( $percent_translated ); ?>%</span>
+							<span class="subproject-bar__name"><?php echo esc_html( $subproject ); ?></span>
+							<span class="subproject-bar__count">
+								<?php
+								printf(
+									// translators: 1: Current count. 2: All count.
+									esc_html__( '(%1$d/%2$d)', 'translation-stats' ),
+									esc_html( $current_count ),
+									esc_html( $all_count )
+								);
+								?>
+							</span>
 						</div>
 					</div>
 					<?php

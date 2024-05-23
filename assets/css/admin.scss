@@ -85,6 +85,11 @@ table.wp-list-table.plugins { // WordPress Installed Plugins table.
 							width: 32px;
 							margin-right: 10px;
 						}
+
+						.subproject-bar__count { // Stats current/all count value
+							display: inline-block;
+							font-weight: 600;
+						}
 					}
 
 					a,
