@@ -109,32 +109,57 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Plugins' ) ) {
 					// Get all installed plugins list.
 					$plugins = get_plugins();
 
-					$all_selected = true;
+					// Count available plugins to check stats.
+					$count = 0;
+
+					// Count enabled plugins.
+					$enabled = 0;
+
+					// Count partially enabled plugins.
+					$indeterminate = 0;
 
 					foreach ( $plugins as $plugin_file => $plugin ) {
 
 						$plugin['plugin_file'] = $plugin_file;
 
 						$row_status = $this->settings_projects_table_row( $table_args, $plugin );
+						//var_dump( $row_status );
 
-						// Check if project row is active but not all 4 subprojects are enabled.
-						if ( false !== $row_status && 4 !== $row_status ) {
-							$all_selected = false;
+						// Skip if row is disabled.
+						if ( false === $row_status ) {
+							continue;
 						}
+
+						// Do if row is enabled.
+						++$count;
+
+						// Check if project row is active and all 4 subprojects are enabled.
+						if ( $row_status > 0 ) {
+							++$enabled;
+
+							// Check if project row is active with only some of the subprojects enabled.
+							if ( $row_status < 4 ) {
+								++$indeterminate;
+							}
+						}
+
 					}
 
-					// Check if all enabled rows are active.
-					if ( $all_selected ) {
-						?>
-						<script>
-						jQuery( document ).ready( function( $ ) {
-							$( 'input#all_plugins' ).prop( 'checked', true );
-						} );
-						</script>
-						<?php
-					}
+					// $all_plugins_checked       = $enabled ? true : false;
+					$indeterminate = $enabled && ( $indeterminate || $count !== $enabled ) ? true : false;
+
+					// Set all plugins checkbox status.
 					?>
-
+					<script>
+					jQuery( document ).ready( function( $ ) {
+						$( 'input#all_plugins' ).prop(
+							{
+								checked: <?php echo esc_html( $enabled ? 'true' : 'false' ); ?>,
+								indeterminate: <?php echo esc_html( $indeterminate ? 'true' : 'false' ); ?>,
+							}
+						);
+					} );
+					</script>
 				</tbody>
 			</table>
 			<?php

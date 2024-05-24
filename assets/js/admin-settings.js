@@ -182,7 +182,62 @@ jQuery( document ).ready( function( $ ) {
 			console.log( 'Project fully enabled.' );
 		}
 
+		updateInputAllPlugins();
+
 		console.log( 'Clicked single project ID "' + id + '" checkbox.' );
+	}
+
+	/**
+	 * Update input checkbox '#all_plugins' status.
+	 *
+	 * @since 1.2.9
+	 */
+	function updateInputAllPlugins() {
+		// Total of fully active plugins.
+		var fullyActivePluginsCount = $( '#tstats-table-plugins tbody tr:not(.disabled).active' ).length;
+
+		// Total of partially active plugins.
+		//var partiallyActivePluginsCount = $( '#tstats-table-plugins tbody tr:not(.disabled).active th input[type="check-box"]' ).length;
+
+		// Total of available plugins.
+		var avaliablePluginsCount = $( '#tstats-table-plugins tbody tr:not(.disabled)' ).length;
+
+		console.log( 'Fully active plugins', fullyActivePluginsCount );
+		//console.log( 'Partially active plugins', partiallyActivePluginsCount );
+		console.log( 'Available plugins', avaliablePluginsCount );
+
+		// Do nothing if no plugin available.
+		if ( avaliablePluginsCount === 0 ) {
+			return;
+		}
+
+		// All plugins enabled.
+		if ( fullyActivePluginsCount === avaliablePluginsCount ) {
+			$( 'input#all_plugins' ).prop(
+				{
+					checked: true,
+					indeterminate: false,
+				}
+			);
+
+			console.log( 'All plugins active.' );
+		} else if ( fullyActivePluginsCount === 0 ) {
+			$( 'input#all_plugins' ).prop(
+				{
+					checked: false,
+					indeterminate: false,
+				}
+			);
+			console.log( 'All plugins inactive.' );
+		} else {
+			$( 'input#all_plugins' ).prop(
+				{
+					checked: false,
+					indeterminate: true,
+				}
+			);
+			console.log( 'Some plugins active.' );
+		}
 	}
 
 	/**
@@ -245,6 +300,8 @@ jQuery( document ).ready( function( $ ) {
 				);
 				console.log( 'Project partially enabled (css "indeterminate").' );
 		}
+
+		updateInputAllPlugins();
 
 		console.log( 'Clicked single project ID "' + id + '" subproject checkbox.' );
 		console.log( pluginSubprojectsCount[ id ] + ' subproject(s) of project ID "' + id + '" selected.' );

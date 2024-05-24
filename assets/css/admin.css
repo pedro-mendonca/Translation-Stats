@@ -226,6 +226,14 @@ table.tstats-plugin-list-table.widefat tr th.check-column input[type="radio"] {
 	vertical-align: middle;
 }
 
+table.tstats-plugin-list-table.widefat tr td.check-column input[type="checkbox"]:indeterminate::before,
+table.tstats-plugin-list-table.widefat tr th.check-column input[type="checkbox"]:indeterminate::before {
+	content: url(data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20d%3D%27M4%209h12v2h-12v-2z%27%20fill%3D%27%231e8cbe%27%2F%3E%3C%2Fsvg%3E);
+	margin: -0.1875rem 0 0 -0.1875rem;
+	height: 1.25rem;
+	width: 1.25rem;
+}
+
 table.tstats-plugin-list-table.widefat tr td.check-column input[type="checkbox"][disabled],
 table.tstats-plugin-list-table.widefat tr th.check-column input[type="checkbox"][disabled] {
 	pointer-events: none;
@@ -319,13 +327,6 @@ table.tstats-plugin-list-table.widefat tbody tr .check-column input[type="checkb
 	margin-top: 0;
 	margin-bottom: 0;
 	margin-right: 0;
-}
-
-table.tstats-plugin-list-table.widefat tbody tr .check-column input[type="checkbox"]:indeterminate::before {
-	content: url(data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20d%3D%27M4%209h12v2h-12v-2z%27%20fill%3D%27%231e8cbe%27%2F%3E%3C%2Fsvg%3E);
-	margin: -0.1875rem 0 0 -0.1875rem;
-	height: 1.25rem;
-	width: 1.25rem;
 }
 
 table.tstats-plugin-list-table.widefat tbody tr td.plugin-slug-text-domain div {
