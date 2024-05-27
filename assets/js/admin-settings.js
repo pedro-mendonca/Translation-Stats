@@ -11,13 +11,13 @@ jQuery( document ).ready( function( $ ) {
 	$( '.tstats-settings__content > .nav-tab-wrapper a' ).on( 'click', tstatsClickSettingsTab );
 
 	// Select all projects checkbox on Settings projects table.
-	$( '.tstats-settings__content #all_plugins' ).on( 'click', tstatsSelectAllPlugins );
+	$( '.tstats-settings__content #all_plugins' ).on( 'click', tstatsPluginsSelectAll );
 
 	// Select single project checkbox on Settings projects table.
 	$( '.tstats-settings__content input.checkbox-plugin' ).on( 'click', tstatsSelectPlugin );
 
 	// Select single subproject checkbox on Settings projects table.
-	$( '.tstats-settings__content input.checkbox-subproject' ).on( 'click', tstatsSelectPluginSubproject );
+	$( '.tstats-settings__content input.checkbox-subproject' ).on( 'click', tstatsUpdatePluginsTableRow );
 
 	// Click plugins table header.
 	$( '.tablesorter-header:not(.sorter-false)' ).on( 'mouseup', tstatsClickPluginsSort );
@@ -124,14 +124,83 @@ jQuery( document ).ready( function( $ ) {
 	 *
 	 * @since 0.9.3
 	 */
-	function tstatsSelectAllPlugins() {
+	function tstatsPluginsSelectAll() {
 		if ( $( '.tstats-plugin-list-table input#all_plugins' ).prop( 'checked' ) ) {
+			// Enable all plugins.
+			tstatsPluginsUpdatePlugins( 'enable' );
 			// Set all project rows as active.
-			$( '.tstats-plugin-list-table tr.inactive' ).addClass( 'active' ).removeClass( 'inactive' );
-			// Set project as selected.
+			$( '.tstats-plugin-list-table tr.inactive' ).addClass( 'active' ).removeClass( 'inactive' ).attr( 'data-subprojects', '4' );
+			// Set plugins as active.
 			$( 'input.checkbox-plugin' ).prop(
 				{
-					indeterminate: false,
+					checked: true,
+				}
+			);
+
+			console.log( 'Enabled all projects checkbox.' );
+		} else {
+			// Disable all plugins.
+			tstatsPluginsUpdatePlugins( 'disable' );
+			// Set all project rows as inactive.
+			$( '.tstats-plugin-list-table tr.active' ).addClass( 'inactive' ).removeClass( 'active' ).attr( 'data-subprojects', '0' );
+			// Set plugins as inactive.
+			$( 'input.checkbox-plugin' ).prop(
+				{
+					checked: false,
+				}
+			);
+
+			console.log( 'Disabled all projects checkbox.' );
+		}
+	}
+
+	/*
+	ActivateAll
+		Loop plugins
+			- ActivatePlugin
+				- ActivateSubprojects
+				- UpdateSubprojectsCount
+		- UpdatePluginsCount
+	DeactivateAll
+		Loop plugins
+			- DeactivatePlugin
+				- DeactivateSubprojects
+				- UpdateSubprojectsCount
+		- UpdatePluginsCount
+
+		UpdateColumnsStatus On selecting subproject or Row
+		UpdateRowsStatus    On selecting subproject or Column
+		UpdateInputAll      On selecting subproject or Column or Row
+
+		SelectSubproject
+			- RecalculateRow
+			- RecalculateColumn
+
+		SelectRow
+			- UpdateRow
+			- RecalculateColumns
+		SelectColumn
+			- UpdateColumn
+			- RecalculateRows
+
+		SelectAll
+			- UpdateRows
+				- UpdateRow (loop)
+	*/
+
+	/**
+	 * Update plugin status.
+	 * Automatically enable/disable all row subprojects.
+	 *
+	 * @since 1.2.9
+	 */
+	function tstatsPluginsUpdatePlugins( action ) {
+		if ( $( '.tstats-plugin-list-table input#all_plugins' ).prop( 'checked' ) ) {
+			// Set all project rows as active.
+			$( '.tstats-plugin-list-table tr.inactive' ).addClass( 'active' ).removeClass( 'inactive' ).attr( 'data-subprojects', '4' );
+			// Set plugins as active.
+			$( 'input.checkbox-plugin' ).prop(
+				{
 					checked: true,
 				}
 			);
@@ -139,7 +208,13 @@ jQuery( document ).ready( function( $ ) {
 			console.log( 'Enabled all projects checkbox.' );
 		} else {
 			// Set all project rows as inactive.
-			$( '.tstats-plugin-list-table tr.active' ).addClass( 'inactive' ).removeClass( 'active' );
+			$( '.tstats-plugin-list-table tr.active' ).addClass( 'inactive' ).removeClass( 'active' ).attr( 'data-subprojects', '0' );
+			// Set plugins as inactive.
+			$( 'input.checkbox-plugin' ).prop(
+				{
+					checked: false,
+				}
+			);
 
 			console.log( 'Disabled all projects checkbox.' );
 		}
@@ -159,14 +234,16 @@ jQuery( document ).ready( function( $ ) {
 		var id = $( event.target ).attr( 'id' );
 
 		// Set row subprojects count.
-		pluginSubprojectsCount[ id ] = $( 'input.' + id + ':checked' ).length;
+		pluginSubprojectsCount = $( 'input.' + id + ':checked' ).length;
 
 		// Set row subprojects total.
-		pluginSubprojectsTotal[ id ] = $( 'input.' + id ).length;
+		pluginSubprojectsTotal = $( 'input.' + id ).length;
 
-		if ( pluginSubprojectsCount[ id ] === pluginSubprojectsTotal[ id ] ) {
+		if ( pluginSubprojectsCount === pluginSubprojectsTotal ) {
 			// Set project row as inactive.
 			$( 'input.' + id ).parents( 'tr' ).addClass( 'inactive' ).removeClass( 'active' );
+			// Set row subprojects data as 0.
+			$( 'input.' + id ).parents( 'tr' ).attr( 'data-subprojects', '0' );
 			// Set row subprojects as unselected.
 			$( 'input.' + id ).prop( 'checked', false );
 
@@ -174,6 +251,8 @@ jQuery( document ).ready( function( $ ) {
 		} else {
 			// Set project row as active.
 			$( 'input.' + id ).parents( 'tr' ).addClass( 'active' ).removeClass( 'inactive' );
+			// Set row subprojects data as 4.
+			$( 'input.' + id ).parents( 'tr' ).attr( 'data-subprojects', '4' );
 			// Set project as selected.
 			$( 'input#' + id ).prop( 'checked', true );
 			// Set row subprojects as selected.
@@ -182,7 +261,7 @@ jQuery( document ).ready( function( $ ) {
 			console.log( 'Project fully enabled.' );
 		}
 
-		updateInputAllPlugins();
+		tstatsUpdatePluginsTableAll();
 
 		console.log( 'Clicked single project ID "' + id + '" checkbox.' );
 	}
@@ -192,7 +271,7 @@ jQuery( document ).ready( function( $ ) {
 	 *
 	 * @since 1.2.9
 	 */
-	function updateInputAllPlugins() {
+	function tstatsUpdatePluginsTableAll() {
 		// Total of fully active plugins.
 		var fullyActivePluginsCount = $( '#tstats-table-plugins tbody tr.active[data-subprojects="4"]' ).length;
 
@@ -241,7 +320,7 @@ jQuery( document ).ready( function( $ ) {
 	 *
 	 * @since 0.9.3
 	 */
-	function tstatsSelectPluginSubproject() {
+	function tstatsUpdatePluginsTableRow() {
 		var pluginSubprojectsCount = {};
 		var pluginSubprojectsTotal = {};
 
@@ -295,7 +374,7 @@ jQuery( document ).ready( function( $ ) {
 				console.log( 'Project partially active (css "indeterminate").' );
 		}
 
-		updateInputAllPlugins();
+		tstatsUpdatePluginsTableAll();
 
 		console.log( 'Clicked single project ID "' + id + '" subproject checkbox.' );
 		console.log( pluginSubprojectsCount + ' subproject(s) of project ID "' + id + '" selected.' );
