@@ -214,8 +214,14 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Plugins' ) ) {
 				}
 				foreach ( $subprojects as $subproject ) {
 					?>
-					<th scope="col" id="column-<?php echo esc_attr( $subproject['slug'] ); ?>" class="manage-column column-<?php echo esc_attr( $subproject['slug'] ); ?> column-subproject" data-sorter="false">
-						<?php echo esc_html( $subproject['name'] ); ?>
+					<th scope="col" id="column-<?php echo esc_attr( $subproject['slug'] ); ?>" class="manage-column column-<?php echo esc_attr( $subproject['slug'] ); ?> column-subproject" data-sorter="false" style="vertical-align: bottom;">
+						<div class="column-name">
+							<?php echo esc_html( $subproject['name'] ); ?>
+						</div>
+						<div class="column-checkbox" style="margin-top: 0.5em;">
+							<label class="screen-reader-text"><?php esc_html_e( 'Select All', 'translation-stats' ); ?></label>
+							<input class="all_plugins" id="all_<?php echo esc_html( $subproject['slug'] ); ?>" type="checkbox" value="true"/ style="margin: 0;">
+						</div>
 					</th>
 					<?php
 				}
