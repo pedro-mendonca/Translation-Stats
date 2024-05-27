@@ -112,24 +112,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 				);
 				?>
 			</p>
-			<p>
-				<?php esc_html_e( 'PHP Functions Check:', 'translation-stats' ); ?>
-			</p>
-			<code class="tstats-code-block">
-				<?php
-				// Test important functions.
-				$test_functions = array(
-					'array_column',
-					'array_map',
-				);
-				foreach ( $test_functions as $test_function ) {
-					$dashicon = function_exists( $test_function ) ? 'dashicons-yes' : 'dashicons-no';
-					?>
-					<span class="dashicons <?php echo esc_attr( $dashicon ); ?>"></span><?php echo esc_html( $test_function . '()' ); ?><br>
-					<?php
-				}
-				?>
-			</code>
 			<?php
 		}
 
