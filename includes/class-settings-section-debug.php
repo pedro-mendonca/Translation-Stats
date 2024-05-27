@@ -112,24 +112,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 				);
 				?>
 			</p>
-			<p>
-				<?php esc_html_e( 'PHP Functions Check:', 'translation-stats' ); ?>
-			</p>
-			<code class="tstats-code-block">
-				<?php
-				// Test important functions.
-				$test_functions = array(
-					'array_column',
-					'array_map',
-				);
-				foreach ( $test_functions as $test_function ) {
-					$dashicon = function_exists( $test_function ) ? 'dashicons-yes' : 'dashicons-no';
-					?>
-					<span class="dashicons <?php echo esc_attr( $dashicon ); ?>"></span><?php echo esc_html( $test_function . '()' ); ?><br>
-					<?php
-				}
-				?>
-			</code>
 			<?php
 		}
 
@@ -207,19 +189,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 			<p>
 				<?php
 				printf(
-					/* translators: %s: WordPress Locale code. */
-					esc_html__( 'Translation Stats Locale: %s', 'translation-stats' ),
-					'<code>' . esc_html( $options['settings']['translation_language'] ) . '</code>'
-				);
-				$translationstats_locale = Translations_API::locale( Utils::translation_language() );
-				?>
-			</p>
-			<div>
-				<pre><code class="tstats-code-block"><?php echo esc_html( wp_json_encode( $translationstats_locale, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) ); ?></code></pre>
-			</div>
-			<p>
-				<?php
-				printf(
 					/* translators: %s: Page Name. */
 					esc_html__( 'Settings Page: %s', 'translation-stats' ),
 					'<code>' . esc_html( TRANSLATION_STATS_SETTINGS_PAGE ) . '</code>'
@@ -243,6 +212,19 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 				if ( isset( $options['settings'] ) ) {
 					?>
 					<pre><code class="tstats-code-block"><?php echo esc_html( wp_json_encode( $options['settings'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) ); ?></code></pre>
+					<p>
+						<?php
+						printf(
+							/* translators: %s: WordPress Locale code. */
+							esc_html__( 'Translation Stats Locale: %s', 'translation-stats' ),
+							'<code>' . esc_html( $options['settings']['translation_language'] ) . '</code>'
+						);
+						$translationstats_locale = Translations_API::locale( Utils::translation_language() );
+						?>
+					</p>
+					<div>
+						<pre><code class="tstats-code-block"><?php echo esc_html( wp_json_encode( $translationstats_locale, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) ); ?></code></pre>
+					</div>
 					<?php
 				} else {
 					?>
