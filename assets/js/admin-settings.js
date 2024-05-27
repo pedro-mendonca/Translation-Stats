@@ -194,10 +194,7 @@ jQuery( document ).ready( function( $ ) {
 	 */
 	function updateInputAllPlugins() {
 		// Total of fully active plugins.
-		var fullyActivePluginsCount = $( '#tstats-table-plugins tbody tr:not(.disabled).active' ).length;
-
-		// Total of partially active plugins.
-		//var partiallyActivePluginsCount = $( '#tstats-table-plugins tbody tr:not(.disabled).active th input[type="check-box"]' ).length;
+		var fullyActivePluginsCount = $( '#tstats-table-plugins tbody tr.active[data-subprojects="4"]' ).length;
 
 		// Total of available plugins.
 		var avaliablePluginsCount = $( '#tstats-table-plugins tbody tr:not(.disabled)' ).length;
@@ -216,26 +213,23 @@ jQuery( document ).ready( function( $ ) {
 			$( 'input#all_plugins' ).prop(
 				{
 					checked: true,
-					indeterminate: false,
 				}
-			);
+			).attr( 'data-plugins', 'all' );
 
 			console.log( 'All plugins active.' );
 		} else if ( fullyActivePluginsCount === 0 ) {
 			$( 'input#all_plugins' ).prop(
 				{
 					checked: false,
-					indeterminate: false,
 				}
-			);
+			).attr( 'data-plugins', 'none' );
 			console.log( 'All plugins inactive.' );
 		} else {
 			$( 'input#all_plugins' ).prop(
 				{
 					checked: false,
-					indeterminate: true,
 				}
-			);
+			).attr( 'data-plugins', 'indeterminate' );
 			console.log( 'Some plugins active.' );
 		}
 	}
@@ -258,23 +252,25 @@ jQuery( document ).ready( function( $ ) {
 		var id = checkboxClass.substring( 'checkbox-subproject '.length );
 
 		// Set row subprojects count.
-		pluginSubprojectsCount[ id ] = $( 'input.' + id + ':checked' ).length;
+		pluginSubprojectsCount = $( 'input.' + id + ':checked' ).length;
+
+		// Update row subprojects data count.
+		$( 'input.' + id ).parents( 'tr' ).attr( 'data-subprojects', pluginSubprojectsCount );
 
 		// Set row subprojects total.
-		pluginSubprojectsTotal[ id ] = $( 'input.' + id ).length;
+		pluginSubprojectsTotal = $( 'input.' + id ).length;
 
-		switch ( pluginSubprojectsCount[ id ] ) {
-			case pluginSubprojectsTotal[ id ]:
+		switch ( pluginSubprojectsCount ) {
+			case pluginSubprojectsTotal:
 				// Set project row as active.
 				$( 'input.' + id ).parents( 'tr' ).addClass( 'active' ).removeClass( 'inactive' );
 				// Set project checkbox as unchecked.
 				$( 'input#' + id ).prop(
 					{
-						indeterminate: false,
 						checked: true,
 					}
 				);
-				console.log( 'Project fully enabled.' );
+				console.log( 'Project fully active.' );
 				break;
 			case 0:
 				// Set project row as inactive.
@@ -282,11 +278,10 @@ jQuery( document ).ready( function( $ ) {
 				// Set project checkbox as unchecked.
 				$( 'input#' + id ).prop(
 					{
-						indeterminate: false,
 						checked: false,
 					}
 				);
-				console.log( 'Project disabled.' );
+				console.log( 'Project inactive.' );
 				break;
 			default:
 				// Set project row as active.
@@ -294,17 +289,16 @@ jQuery( document ).ready( function( $ ) {
 				// Set project checkbox as indeterminate.
 				$( 'input#' + id ).prop(
 					{
-						indeterminate: true,
 						checked: true,
 					}
 				);
-				console.log( 'Project partially enabled (css "indeterminate").' );
+				console.log( 'Project partially active (css "indeterminate").' );
 		}
 
 		updateInputAllPlugins();
 
 		console.log( 'Clicked single project ID "' + id + '" subproject checkbox.' );
-		console.log( pluginSubprojectsCount[ id ] + ' subproject(s) of project ID "' + id + '" selected.' );
+		console.log( pluginSubprojectsCount + ' subproject(s) of project ID "' + id + '" selected.' );
 	}
 
 	/**

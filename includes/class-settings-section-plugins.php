@@ -267,15 +267,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Plugins' ) ) {
 					++$subprojects_count;
 				}
 			}
-			$indeterminate = ( 0 !== $subprojects_count && $subprojects_count < count( $subprojects ) ) ? 'true' : 'false';
-			?>
-			<script>
-			jQuery( document ).ready( function( $ ) {
-				$( 'input#<?php echo esc_html( $row_id ); ?>' ).prop( 'indeterminate', <?php echo esc_html( $indeterminate ); ?> );
-			} );
-			</script>
 
-			<?php
 			if ( 'en_US' !== $translationstats_language ) {
 				// If current locale is not 'en_US', add Locale WP.org subdomain to plugin URL (e.g. https://pt.wordpress.org/plugins/translation-stats/ ).
 				$wporg_subdomain = isset( $locale->wporg_subdomain ) ? $locale->wporg_subdomain . '.' : '';
@@ -303,7 +295,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Plugins' ) ) {
 			$field_name = TRANSLATION_STATS_WP_OPTION . '[plugins][' . $plugin_slug . '][enabled]';
 			?>
 
-			<tr class="<?php echo esc_html( $status ); ?>">
+			<tr class="<?php echo esc_html( $status ); ?>" data-subprojects="<?php echo esc_attr( $subprojects_count ); ?>">
 				<th scope="row" class="check-column plugin-select">
 					<?php
 					if ( ! $disabled ) {
