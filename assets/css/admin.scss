@@ -255,7 +255,7 @@ table.tstats-plugin-list-table.widefat { // Translation Stats Settings Plugins t
 		td,
 		th {
 
-			&.check-column {
+			&.plugin-select {
 				vertical-align: middle;
 				padding-top: 0;
 				padding-bottom: 0;
@@ -384,8 +384,8 @@ table.tstats-plugin-list-table.widefat { // Translation Stats Settings Plugins t
 			vertical-align: text-top;
 		}
 
-		tr td.check-column {
-			input[type="checkbox"][data-plugins="indeterminate"] {
+		tr {
+			input[type="checkbox"][data-indeterminate="true"]:checked {
 				&::before {
 
 					// Use the "Minus" SVG Dashicon.
@@ -427,24 +427,31 @@ table.tstats-plugin-list-table.widefat { // Translation Stats Settings Plugins t
 				}
 			}
 
-			.check-column {
+			.plugin-select {
 
-				input[type="checkbox"] {
-					margin-top: 0;
-					margin-bottom: 0;
-					margin-right: 0;
-				}
+				padding: 0 0 0 2px;
+
+			}
+
+			input[type="checkbox"] {
+				margin-top: 0;
+				margin-bottom: 0;
+				margin-right: 0;
 			}
 
 			&.active {
+
+				th {
+					border-left: 4px solid #72aee6;
+				}
 
 				&[data-subprojects="1"],
 				&[data-subprojects="2"],
 				&[data-subprojects="3"] {
 
-					th.check-column {
+					th.plugin-select {
 
-						input[type="checkbox"] {
+						input[type="checkbox"].checkbox-plugin:checked {
 							&::before {
 
 								// Use the "Minus" SVG Dashicon.
@@ -504,11 +511,11 @@ table.tstats-plugin-list-table.widefat { // Translation Stats Settings Plugins t
 			border-top: 0 solid;
 		}
 
-		.check-column.plugin-subproject {
+		.plugin-subproject {
 			text-align: center;
 		}
 
-		.inactive .check-column.plugin-select {
+		.inactive .plugin-select {
 			padding: 0 0 0 6px;
 		}
 	}

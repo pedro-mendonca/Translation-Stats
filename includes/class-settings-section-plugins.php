@@ -183,7 +183,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Plugins' ) ) {
 
 			?>
 			<tr>
-				<td scope="col" id="cb" class="manage-column column-cb check-column" data-sorter="false">
+				<td scope="col" id="cb" class="manage-column column-cb check-column plugin-select" data-sorter="false">
 					<label class="screen-reader-text"><?php esc_html_e( 'Select All', 'translation-stats' ); ?></label>
 					<input class="all_plugins" id="all_plugins" type="checkbox" value="true"/>
 				</td>
@@ -214,13 +214,13 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Plugins' ) ) {
 				}
 				foreach ( $subprojects as $subproject ) {
 					?>
-					<th scope="col" id="column-<?php echo esc_attr( $subproject['slug'] ); ?>" class="manage-column column-<?php echo esc_attr( $subproject['slug'] ); ?> column-subproject" data-sorter="false" style="vertical-align: bottom;">
+					<th scope="col" id="column-<?php echo esc_attr( $subproject['slug'] ); ?>" class="manage-column column-subproject" data-subproject="<?php echo esc_attr( $subproject['slug'] ); ?>" data-sorter="false" style="vertical-align: bottom;">
 						<div class="column-name">
 							<?php echo esc_html( $subproject['name'] ); ?>
 						</div>
 						<div class="column-checkbox" style="margin-top: 0.5em;">
 							<label class="screen-reader-text"><?php esc_html_e( 'Select All', 'translation-stats' ); ?></label>
-							<input class="all_plugins" id="all_<?php echo esc_html( $subproject['slug'] ); ?>" type="checkbox" value="true"/ style="margin: 0;">
+							<input class="checkbox-subproject" id="subprojects_<?php echo esc_html( $subproject['slug'] ); ?>" type="checkbox" value="true"/ style="margin: 0;">
 						</div>
 					</th>
 					<?php
@@ -301,8 +301,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Plugins' ) ) {
 			$field_name = TRANSLATION_STATS_WP_OPTION . '[plugins][' . $plugin_slug . '][enabled]';
 			?>
 
-			<tr class="<?php echo esc_html( $status ); ?>" data-subprojects="<?php echo esc_attr( $subprojects_count ); ?>">
-				<th scope="row" class="check-column plugin-select">
+			<tr class="<?php echo esc_html( $status ); ?>" data-plugin="<?php echo esc_attr( $plugin_slug ); ?>" data-subprojects="<?php echo esc_attr( $subprojects_count ); ?>">
+				<th scope="row" class="plugin-select">
 					<?php
 					if ( ! $disabled ) {
 						?>
@@ -363,16 +363,15 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Plugins' ) ) {
 				}
 
 				foreach ( $subprojects as $subproject ) {
-					$field_name   = TRANSLATION_STATS_WP_OPTION . '[plugins][' . $plugin_slug . '][' . $subproject['slug'] . ']';
-					$checked      = empty( $options['plugins'][ $plugin_slug ][ $subproject['slug'] ] ) ? '' : true;
-					$plugin_class = ! $disabled ? $row_id : '';
+					$field_name = TRANSLATION_STATS_WP_OPTION . '[plugins][' . $plugin_slug . '][' . $subproject['slug'] . ']';
+					$checked    = empty( $options['plugins'][ $plugin_slug ][ $subproject['slug'] ] ) ? '' : true;
 					?>
-					<td class="check-column plugin-subproject">
+					<td class="plugin-subproject">
 						<?php
 						if ( ! $disabled ) {
 							?>
 							<label class="screen-reader-text"><?php esc_html_e( 'Select Subproject', 'translation-stats' ); ?></label>
-							<input name="<?php echo esc_attr( $field_name ); ?>" <?php checked( $checked, true ); ?> <?php disabled( $disabled, true ); ?> class="checkbox-subproject <?php echo esc_attr( $plugin_class ); ?>" type="checkbox" value="true" />
+							<input name="<?php echo esc_attr( $field_name ); ?>" <?php checked( $checked, true ); ?> <?php disabled( $disabled, true ); ?> class="checkbox-plugin-subproject" data-plugin="<?php echo esc_attr( $plugin_slug ); ?>" data-subproject="<?php echo esc_attr( $subproject['slug'] ); ?>" type="checkbox" value="true" />
 							<?php
 						}
 						?>
