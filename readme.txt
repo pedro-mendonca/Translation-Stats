@@ -65,7 +65,7 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
 = 1.3.0 =
 *   New checkboxes in the subprojects column to bulk-select a specific subproject in all plugins.
-*   Improve [-] the indeterminate behavior of table checkboxes.
+*   Improve the indeterminate [-] behavior of table checkboxes.
 *   Cleanup the Debug section and fix the PHP error when there are no settings saved yet.
 
 = 1.2.8 =
