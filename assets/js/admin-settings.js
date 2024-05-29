@@ -152,7 +152,7 @@ jQuery( document ).ready( function( $ ) {
 	 */
 	function tstatsPluginsActivateAllPlugins() {
 		// Set all plugin rows as active.
-		$( '.tstats-plugin-list-table tr.inactive:not(.disabled)' ).each( function() {
+		$( '.tstats-plugin-list-table tr:not(.disabled)' ).each( function() {
 			var plugin = $( this ).attr( 'data-plugin' );
 			// Activate plugin.
 			tstatsPluginsActivatePlugin( plugin );
@@ -168,7 +168,7 @@ jQuery( document ).ready( function( $ ) {
 	 */
 	function tstatsPluginsDeactivateAllPlugins() {
 		// Set all plugin rows as inactive.
-		$( '.tstats-plugin-list-table tr.active' ).each( function() {
+		$( '.tstats-plugin-list-table tr:not(.disabled)' ).each( function() {
 			var plugin = $( this ).attr( 'data-plugin' );
 			// Deactivate plugin.
 			tstatsPluginsDeactivatePlugin( plugin );
@@ -280,7 +280,7 @@ jQuery( document ).ready( function( $ ) {
 	}
 
 	function tstatsPluginsUpdateRows() {
-		$( '#tstats-table-plugins tbody tr' ).each( function() {
+		$( '#tstats-table-plugins tbody tr:not(.disabled)' ).each( function() {
 			var plugin = $( this ).attr( 'data-plugin' );
 			tstatsPluginsUpdateRow( plugin );
 		} );
