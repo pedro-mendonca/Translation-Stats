@@ -34,9 +34,7 @@
 
 	<!-- Include the WordPress Coding Standards. -->
 	<rule ref="WordPress">
-		<!--
-		<exclude name="WordPress.Files.FileName"/>
-		-->
+		<exclude name="WordPress.PHP.YodaConditions.NotYoda"/>
 	</rule>
 
 	<config name="minimum_supported_wp_version" value="4.9"/>
