@@ -202,13 +202,13 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Plugins' ) ) {
 						foreach ( $subprojects as $subproject ) {
 
 							?>
-							<th scope="col" id="column-<?php echo esc_attr( $subproject['slug'] ); ?>" class="manage-column column-subproject" data-subproject="<?php echo esc_attr( $subproject['slug'] ); ?>" data-sorter="false" style="vertical-align: bottom;">
+							<th scope="col" id="column-<?php echo esc_attr( $subproject['slug'] ); ?>" class="manage-column column-subproject" data-subproject="<?php echo esc_attr( $subproject['slug'] ); ?>" data-sorter="false">
 								<div class="column-name">
 									<?php echo esc_html( $subproject['name'] ); ?>
 								</div>
-								<div class="column-checkbox" style="margin-top: 0.5em;">
+								<div class="column-checkbox">
 									<label class="screen-reader-text"><?php esc_html_e( 'Select All', 'translation-stats' ); ?></label>
-									<input class="checkbox-subproject" id="subprojects_<?php echo esc_html( $subproject['slug'] ); ?>" type="checkbox" value="true" <?php checked( $subprojects_checkboxes_status[ $subproject['slug'] ]['checked'], true ); ?> data-indeterminate="<?php echo esc_attr( $subprojects_checkboxes_status[ $subproject['slug'] ]['indeterminate'] ? 'true' : 'false' ); ?>" style="margin: 0;" />
+									<input class="checkbox-subproject" id="subprojects_<?php echo esc_html( $subproject['slug'] ); ?>" type="checkbox" value="true" <?php checked( $subprojects_checkboxes_status[ $subproject['slug'] ]['checked'], true ); ?> data-indeterminate="<?php echo esc_attr( $subprojects_checkboxes_status[ $subproject['slug'] ]['indeterminate'] ? 'true' : 'false' ); ?>" />
 								</div>
 							</th>
 							<?php

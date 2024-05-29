@@ -381,7 +381,15 @@ table.tstats-plugin-list-table.widefat { // Translation Stats Settings Plugins t
 			width: 10em;
 			overflow: hidden;
 			text-align: center;
-			vertical-align: text-top;
+			vertical-align: bottom;
+
+			.column-checkbox {
+				margin-top: 0.5em;
+
+				input[type="checkbox"] {
+					margin: 0;
+				}
+			}
 		}
 
 		tr {

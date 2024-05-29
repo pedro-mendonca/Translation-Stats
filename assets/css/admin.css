@@ -289,7 +289,15 @@ table.tstats-plugin-list-table.widefat thead .column-subproject {
 	width: 10em;
 	overflow: hidden;
 	text-align: center;
-	vertical-align: text-top;
+	vertical-align: bottom;
+}
+
+table.tstats-plugin-list-table.widefat thead .column-subproject .column-checkbox {
+	margin-top: 0.5em;
+}
+
+table.tstats-plugin-list-table.widefat thead .column-subproject .column-checkbox input[type="checkbox"] {
+	margin: 0;
 }
 
 table.tstats-plugin-list-table.widefat thead tr input[type="checkbox"][data-indeterminate="true"]:checked::before {
