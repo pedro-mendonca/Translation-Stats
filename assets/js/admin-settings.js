@@ -270,7 +270,7 @@ jQuery( document ).ready( function( $ ) {
 	/**
 	 * Activate/deactivate single plugin in Settings projects table.
 	 *
-	 * @since 0.9.3
+	 * @since 1.3.0
 	 */
 	function tstatsPluginsUpdateColumns() {
 		$( '#tstats-table-plugins thead th.column-subproject' ).each( function() {
@@ -279,6 +279,11 @@ jQuery( document ).ready( function( $ ) {
 		} );
 	}
 
+	/**
+	 * Update rows in Settings projects table.
+	 *
+	 * @since 1.3.0
+	 */
 	function tstatsPluginsUpdateRows() {
 		$( '#tstats-table-plugins tbody tr:not(.disabled)' ).each( function() {
 			var plugin = $( this ).attr( 'data-plugin' );
