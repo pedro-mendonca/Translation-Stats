@@ -92,6 +92,7 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 ### Unreleased
 
 * Cleanup Debug section and fix PHP error.
+* Add bulk select for subprojects on the plugins settings page.
 
 ### 1.2.8
 

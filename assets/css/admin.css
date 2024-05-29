@@ -212,22 +212,22 @@ table.tstats-plugin-list-table.widefat.tablesorter tr.filtered {
 	display: none;
 }
 
-table.tstats-plugin-list-table.widefat tr td.check-column,
-table.tstats-plugin-list-table.widefat tr th.check-column {
+table.tstats-plugin-list-table.widefat tr td.plugin-select,
+table.tstats-plugin-list-table.widefat tr th.plugin-select {
 	vertical-align: middle;
 	padding-top: 0;
 	padding-bottom: 0;
 }
 
-table.tstats-plugin-list-table.widefat tr td.check-column input[type="checkbox"],
-table.tstats-plugin-list-table.widefat tr td.check-column input[type="radio"],
-table.tstats-plugin-list-table.widefat tr th.check-column input[type="checkbox"],
-table.tstats-plugin-list-table.widefat tr th.check-column input[type="radio"] {
+table.tstats-plugin-list-table.widefat tr td.plugin-select input[type="checkbox"],
+table.tstats-plugin-list-table.widefat tr td.plugin-select input[type="radio"],
+table.tstats-plugin-list-table.widefat tr th.plugin-select input[type="checkbox"],
+table.tstats-plugin-list-table.widefat tr th.plugin-select input[type="radio"] {
 	vertical-align: middle;
 }
 
-table.tstats-plugin-list-table.widefat tr td.check-column input[type="checkbox"][disabled],
-table.tstats-plugin-list-table.widefat tr th.check-column input[type="checkbox"][disabled] {
+table.tstats-plugin-list-table.widefat tr td.plugin-select input[type="checkbox"][disabled],
+table.tstats-plugin-list-table.widefat tr th.plugin-select input[type="checkbox"][disabled] {
 	pointer-events: none;
 }
 
@@ -289,7 +289,22 @@ table.tstats-plugin-list-table.widefat thead .column-subproject {
 	width: 10em;
 	overflow: hidden;
 	text-align: center;
-	vertical-align: text-top;
+	vertical-align: bottom;
+}
+
+table.tstats-plugin-list-table.widefat thead .column-subproject .column-checkbox {
+	margin-top: 0.5em;
+}
+
+table.tstats-plugin-list-table.widefat thead .column-subproject .column-checkbox input[type="checkbox"] {
+	margin: 0;
+}
+
+table.tstats-plugin-list-table.widefat thead tr input[type="checkbox"][data-indeterminate="true"]:checked::before {
+	content: url(data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20d%3D%27M4%209h12v2h-12v-2z%27%20fill%3D%27%231e8cbe%27%2F%3E%3C%2Fsvg%3E);
+	margin: -0.1875rem 0 0 -0.1875rem;
+	height: 1.25rem;
+	width: 1.25rem;
 }
 
 table.tstats-plugin-list-table.widefat tbody tr td,
@@ -315,13 +330,23 @@ table.tstats-plugin-list-table.widefat tbody tr.disabled .plugin-slug-text-domai
 	opacity: 0.33;
 }
 
-table.tstats-plugin-list-table.widefat tbody tr .check-column input[type="checkbox"] {
+table.tstats-plugin-list-table.widefat tbody tr .plugin-select {
+	padding: 0 0 0 2px;
+}
+
+table.tstats-plugin-list-table.widefat tbody tr input[type="checkbox"] {
 	margin-top: 0;
 	margin-bottom: 0;
 	margin-right: 0;
 }
 
-table.tstats-plugin-list-table.widefat tbody tr .check-column input[type="checkbox"]:indeterminate::before {
+table.tstats-plugin-list-table.widefat tbody tr.active th {
+	border-left: 4px solid #72aee6;
+}
+
+table.tstats-plugin-list-table.widefat tbody tr.active[data-subprojects="1"] th.plugin-select input[type="checkbox"].checkbox-plugin:checked::before,
+table.tstats-plugin-list-table.widefat tbody tr.active[data-subprojects="2"] th.plugin-select input[type="checkbox"].checkbox-plugin:checked::before,
+table.tstats-plugin-list-table.widefat tbody tr.active[data-subprojects="3"] th.plugin-select input[type="checkbox"].checkbox-plugin:checked::before {
 	content: url(data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20d%3D%27M4%209h12v2h-12v-2z%27%20fill%3D%27%231e8cbe%27%2F%3E%3C%2Fsvg%3E);
 	margin: -0.1875rem 0 0 -0.1875rem;
 	height: 1.25rem;
@@ -357,11 +382,11 @@ table.tstats-plugin-list-table.widefat tbody tr.active + tr.disabled th {
 	border-top: 0 solid;
 }
 
-table.tstats-plugin-list-table.widefat tbody .check-column.plugin-subproject {
+table.tstats-plugin-list-table.widefat tbody .plugin-subproject {
 	text-align: center;
 }
 
-table.tstats-plugin-list-table.widefat tbody .inactive .check-column.plugin-select {
+table.tstats-plugin-list-table.widefat tbody .inactive .plugin-select {
 	padding: 0 0 0 6px;
 }
 

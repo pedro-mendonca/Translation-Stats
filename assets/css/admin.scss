@@ -255,7 +255,7 @@ table.tstats-plugin-list-table.widefat { // Translation Stats Settings Plugins t
 		td,
 		th {
 
-			&.check-column {
+			&.plugin-select {
 				vertical-align: middle;
 				padding-top: 0;
 				padding-bottom: 0;
@@ -381,7 +381,30 @@ table.tstats-plugin-list-table.widefat { // Translation Stats Settings Plugins t
 			width: 10em;
 			overflow: hidden;
 			text-align: center;
-			vertical-align: text-top;
+			vertical-align: bottom;
+
+			.column-checkbox {
+				margin-top: 0.5em;
+
+				input[type="checkbox"] {
+					margin: 0;
+				}
+			}
+		}
+
+		tr {
+
+			input[type="checkbox"][data-indeterminate="true"]:checked {
+
+				&::before {
+
+					// Use the "Minus" SVG Dashicon.
+					content: url(data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20d%3D%27M4%209h12v2h-12v-2z%27%20fill%3D%27%231e8cbe%27%2F%3E%3C%2Fsvg%3E);
+					margin: -0.1875rem 0 0 -0.1875rem;
+					height: 1.25rem;
+					width: 1.25rem;
+				}
+			}
 		}
 	}
 
@@ -393,7 +416,6 @@ table.tstats-plugin-list-table.widefat { // Translation Stats Settings Plugins t
 			th {
 				vertical-align: middle;
 			}
-
 
 			&.disabled {
 
@@ -414,22 +436,44 @@ table.tstats-plugin-list-table.widefat { // Translation Stats Settings Plugins t
 				}
 			}
 
-			.check-column {
+			.plugin-select {
 
-				input[type="checkbox"] {
-					margin-top: 0;
-					margin-bottom: 0;
-					margin-right: 0;
+				padding: 0 0 0 2px;
 
-					&:indeterminate::before {
+			}
 
-						// Use the "Minus" SVG Dashicon.
-						content: url(data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20d%3D%27M4%209h12v2h-12v-2z%27%20fill%3D%27%231e8cbe%27%2F%3E%3C%2Fsvg%3E);
-						margin: -0.1875rem 0 0 -0.1875rem;
-						height: 1.25rem;
-						width: 1.25rem;
+			input[type="checkbox"] {
+				margin-top: 0;
+				margin-bottom: 0;
+				margin-right: 0;
+			}
+
+			&.active {
+
+				th {
+					border-left: 4px solid #72aee6;
+				}
+
+				&[data-subprojects="1"],
+				&[data-subprojects="2"],
+				&[data-subprojects="3"] {
+
+					th.plugin-select {
+
+						input[type="checkbox"].checkbox-plugin:checked {
+
+							&::before {
+
+								// Use the "Minus" SVG Dashicon.
+								content: url(data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20d%3D%27M4%209h12v2h-12v-2z%27%20fill%3D%27%231e8cbe%27%2F%3E%3C%2Fsvg%3E);
+								margin: -0.1875rem 0 0 -0.1875rem;
+								height: 1.25rem;
+								width: 1.25rem;
+							}
+						}
 					}
 				}
+
 			}
 
 			td {
@@ -477,11 +521,11 @@ table.tstats-plugin-list-table.widefat { // Translation Stats Settings Plugins t
 			border-top: 0 solid;
 		}
 
-		.check-column.plugin-subproject {
+		.plugin-subproject {
 			text-align: center;
 		}
 
-		.inactive .check-column.plugin-select {
+		.inactive .plugin-select {
 			padding: 0 0 0 6px;
 		}
 	}
