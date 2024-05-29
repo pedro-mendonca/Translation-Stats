@@ -5,7 +5,7 @@ Tags: internationalization, i18n, localization, l10n, translation
 Requires at least: 4.9
 Tested up to: 6.5
 Requires PHP: 7.4
-Stable tag: 1.2.8
+Stable tag: 1.3.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -63,9 +63,10 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
 == Changelog ==
 
-= Unreleased =
-*   Cleanup Debug section and fix PHP error.
-*   Add bulk select for subprojects on the plugins settings page.
+= 1.3.0 =
+*   New checkboxes in the subprojects column to bulk-select a specific subproject in all plugins.
+*   Improve [-] the indeterminate behavior of table checkboxes.
+*   Cleanup the Debug section and fix the PHP error when there are no settings saved yet.
 
 = 1.2.8 =
 *   Fix deprecation notice on PHP 8.2+
