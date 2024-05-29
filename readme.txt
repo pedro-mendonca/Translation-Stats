@@ -65,6 +65,7 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
 = Unreleased =
 *   Cleanup Debug section and fix PHP error.
+*   TODO: Remove inline styles
 
 = 1.2.8 =
 *   Fix deprecation notice on PHP 8.2+

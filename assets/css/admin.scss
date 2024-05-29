@@ -385,7 +385,9 @@ table.tstats-plugin-list-table.widefat { // Translation Stats Settings Plugins t
 		}
 
 		tr {
+
 			input[type="checkbox"][data-indeterminate="true"]:checked {
+
 				&::before {
 
 					// Use the "Minus" SVG Dashicon.
@@ -406,7 +408,6 @@ table.tstats-plugin-list-table.widefat { // Translation Stats Settings Plugins t
 			th {
 				vertical-align: middle;
 			}
-
 
 			&.disabled {
 
@@ -452,6 +453,7 @@ table.tstats-plugin-list-table.widefat { // Translation Stats Settings Plugins t
 					th.plugin-select {
 
 						input[type="checkbox"].checkbox-plugin:checked {
+
 							&::before {
 
 								// Use the "Minus" SVG Dashicon.
