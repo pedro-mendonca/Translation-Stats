@@ -81,6 +81,11 @@ if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 				'svg',
 			);
 
+			// Check if path has dirname and extension.
+			if ( ! isset( $path['dirname'] ) || ! isset( $path['extension'] ) ) {
+				return false;
+			}
+
 			// Check if type is supported.
 			if ( ! in_array( $path['extension'], $types, true ) ) {
 				return false;

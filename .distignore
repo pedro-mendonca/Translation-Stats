@@ -3,8 +3,8 @@
 .github
 .wordpress-org
 node_modules
-vendor
 tests
+vendor
 
 # Exclude files from WP.org
 .distignore
@@ -15,6 +15,7 @@ tests
 .gitignore
 .markdownlint.json
 .markdownlintignore
+.phpunit.result.cache
 .stylelintignore
 .stylelintrc.json
 composer.json
