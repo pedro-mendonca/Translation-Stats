@@ -50,6 +50,6 @@ jobs:
       run: rsync -rc --exclude-from="$GITHUB_WORKSPACE/.distignore" "$GITHUB_WORKSPACE/" translation-stats/ --delete --delete-excluded
 
     - name: Run plugin check
-      uses: swissspidy/wp-plugin-check-action@main
+      uses: wordpress/plugin-check-action@v1
       with:
         build-dir: 'translation-stats'
