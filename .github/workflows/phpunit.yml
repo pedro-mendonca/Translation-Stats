@@ -97,8 +97,7 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@2.31.0
         with:
-          php: ${{ matrix.php }}
-          wp: ${{ matrix.wp }}
+          php-version: ${{ matrix.php }}
           coverage: ${{ matrix.coverage }}
         env:
           fail-fast: false
