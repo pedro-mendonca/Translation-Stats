@@ -94,7 +94,7 @@ jobs:
         uses: ramsey/composer-install@v3
 
       - name: Install WordPress test setup
-        run: bash bin/install-wp-tests.sh wordpress root password 127.0.0.1:${{ job.services.mysql.ports[3306] }} ${{ matrix.wp-version }}
+        run: bash bin/install-wp-tests.sh wordpress root password 127.0.0.1:${{ job.services.mysql.ports[3306] }} ${{ matrix.wp-versions }}
 
       - name: Run PHPUnit tests (PHP ${{ matrix.php-versions }})
         run: composer exec -- phpunit
