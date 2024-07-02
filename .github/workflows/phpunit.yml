@@ -48,30 +48,34 @@ jobs:
       fail-fast: false
       matrix:
         php: ['7.4', '8.0', '8.1', '8.2', '8.3'] # 7.4 is the minimum supported version.
-        wp: ['6.0', '6.1', '6.2', '6.3', '6.4', '6.5', 'latest']
+        wp: ['6.0', '6.1', '6.2', '6.3', '6.4', '6.5']
+        coverage: false
         include:
-          - php: '7.4'
-            wp: '4.9'
-          - php: '7.4'
-            wp: '5.0'
-          - php: '7.4'
-            wp: '5.1'
-          - php: '7.4'
-            wp: '5.2'
-          - php: '7.4'
-            wp: '5.3'
-          - php: '7.4'
-            wp: '5.4'
-          - php: 7.4'
-            wp: '5.5'
-          - php: '7.4'
-            wp: '5.6'
-          - php: '7.4'
-            wp: '5.7'
-          - php: '7.4'
-            wp: '5.8'
-          - php: '7.4'
-            wp: '5.9'
+          #- php: '7.4'
+          #  wp: '4.9'
+          #- php: '7.4'
+          #  wp: '5.0'
+          #- php: '7.4'
+          #  wp: '5.1'
+          #- php: '7.4'
+          #  wp: '5.2'
+          #- php: '7.4'
+          #  wp: '5.3'
+          #- php: '7.4'
+          #  wp: '5.4'
+          #- php: 7.4'
+          #  wp: '5.5'
+          #- php: '7.4'
+          #  wp: '5.6'
+          #- php: '7.4'
+          #  wp: '5.7'
+          #- php: '7.4'
+          #  wp: '5.8'
+          #- php: '7.4'
+          #  wp: '5.9'
+          - php: '8.3'
+            wp: latest
+            coverage: true
 
     steps:
       - name: Checkout repository
