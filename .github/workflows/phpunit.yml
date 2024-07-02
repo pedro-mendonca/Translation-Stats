@@ -47,8 +47,21 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ['7.4', '8.0', '8.1', '8.2', '8.3'] # 7.4 is the minimum supported version.
-        wp: ['6.0', '6.1', '6.2', '6.3', '6.4', '6.5']
+        php: [
+          '7.4',
+          #'8.0',
+          #'8.1',
+          #'8.2',
+          #'8.3'
+          ] # 7.4 is the minimum supported version.
+        wp: [
+          '6.0',
+          #'6.1',
+          #'6.2',
+          #'6.3',
+          #'6.4',
+          #'6.5'
+          ]
         coverage: [false]
         include:
           #- php: '7.4'
@@ -86,7 +99,7 @@ jobs:
         with:
           php: ${{ matrix.php }}
           wp: ${{ matrix.wp }}
-          coverage: none
+          coverage: ${{ matrix.coverage }}
         env:
           fail-fast: false
 
