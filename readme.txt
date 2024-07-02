@@ -2,7 +2,7 @@
 Contributors: pedromendonca
 Donate link: https://github.com/sponsors/pedro-mendonca
 Tags: internationalization, i18n, localization, l10n, translation
-Requires at least: 4.9
+Requires at least: 5.3
 Tested up to: 6.5
 Requires PHP: 7.4
 Stable tag: 1.3.0
@@ -62,6 +62,9 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 4. Translation Stats tools tab
 
 == Changelog ==
+
+= Unreleased =
+*   Bump minimum WP version to 5.3, to match minimum PHP 7.4 compatibility.
 
 = 1.3.0 =
 *   New checkboxes in the subprojects column to bulk-select a specific subproject in all plugins.
