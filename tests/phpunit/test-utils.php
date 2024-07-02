@@ -178,4 +178,69 @@ class Test_Utils extends WP_UnitTestCase {
 
 	}
 
+
+	/**
+	 * Test campaign information to URL.
+	 *
+	 * @dataProvider provide_test_campaign_link
+	 */
+	public function test_campaign_link( $link, $source, $medium, $campaign, $expected_result ) {
+
+		$campaign_link = Utils::campaign_link( $link, $source, $medium, $campaign );
+
+		$this->assertEquals(
+			$campaign_link,
+			$expected_result
+		);
+	}
+
+
+	/**
+	 * Data provider.
+	 *
+	 * @var array
+	 */
+	function provide_test_campaign_link() {
+		return array(
+			// All parameteres provided.
+			array(
+				'link'            => 'https://example.com/',
+				'source'          => 'example_source',
+				'medium'          => 'example_medium',
+				'campaign'        => 'example_campaign',
+				'expected_result' => 'https://example.com/?utm_source=example_source&amp;utm_medium=example_medium&amp;utm_campaign=example_campaign',
+			),
+			// Fallback to defaults.
+			array(
+				'link'            => 'https://example.com/',
+				'source'          => null,
+				'medium'          => null,
+				'campaign'        => null,
+				'expected_result' => 'https://example.com/?utm_source=plugin&amp;utm_medium=link&amp;utm_campaign=plugin_link',
+			),
+			// Some values set.
+			array(
+				'link'            => 'https://example.com/',
+				'source'          => 'example_source',
+				'medium'          => null,
+				'campaign'        => null,
+				'expected_result' => 'https://example.com/?utm_source=example_source&amp;utm_medium=link&amp;utm_campaign=plugin_link',
+			),
+			array(
+				'link'            => 'https://example.com/',
+				'source'          => null,
+				'medium'          => 'example_medium',
+				'campaign'        => null,
+				'expected_result' => 'https://example.com/?utm_source=plugin&amp;utm_medium=example_medium&amp;utm_campaign=plugin_link',
+			),
+			array(
+				'link'            => 'https://example.com/',
+				'source'          => null,
+				'medium'          => null,
+				'campaign'        => 'example_campaign',
+				'expected_result' => 'https://example.com/?utm_source=plugin&amp;utm_medium=link&amp;utm_campaign=example_campaign',
+			),
+		);
+	}
+
 }
