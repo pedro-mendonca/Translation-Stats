@@ -135,4 +135,47 @@ class Test_Utils extends WP_UnitTestCase {
 			),
 		);
 	}
+
+
+	/**
+	 * Test default translation language without any settings.
+	 */
+	public function test_translation_language_default() {
+
+		// Get the Translation Stats configured language.
+		$translationstats_language = Utils::translation_language();
+
+		$this->assertEquals(
+			$translationstats_language,
+			'en_US'
+		);
+
+	}
+
+
+	/**
+	 * Test translation language configured in the settings.
+	 */
+	public function test_translation_language() {
+
+		// Configure translation language.
+		$settings = array(
+			'settings' => array(
+				'translation_language' => 'pt_PT',
+			)
+		);
+
+		// Add plugin setting to the database.
+		add_option( TRANSLATION_STATS_WP_OPTION, $settings );
+
+		// Get the Translation Stats configured language.
+		$translationstats_language = Utils::translation_language();
+
+		$this->assertEquals(
+			$translationstats_language,
+			'pt_PT'
+		);
+
+	}
+
 }
