@@ -27,7 +27,7 @@ jobs:
   # - Installs Composer dependencies (use cache if possible).
   # - Runs PHPUnit on the full codebase.
   phpunit:
-    name: Unit tests (PHP ${{ matrix.php-versions }} | WP ${{ matrix.wp-versions }})
+    name: Unit tests (PHP ${{ matrix.php }} | WP ${{ matrix.wp }})
     runs-on: ubuntu-latest
 
     services:
@@ -47,27 +47,31 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php-versions: ['7.4', '8.0', '8.1', '8.2', '8.3'] # 7.4 is the minimum supported version.
-        wp-versions: [
-          '4.9',
-          '5.0',
-          '5.1',
-          '5.2',
-          '5.3',
-          '5.4',
-          '5.5',
-          '5.6',
-          '5.7',
-          '5.8',
-          '5.9',
-          '6.0',
-          '6.1',
-          '6.2',
-          '6.3',
-          '6.4',
-          '6.5',
-          'latest'
-        ]
+        php: ['7.4', '8.0', '8.1', '8.2', '8.3'] # 7.4 is the minimum supported version.
+        wp: ['6.0', '6.1', '6.2', '6.3', '6.4', '6.5', 'latest']
+        include:
+          - php: '7.4'
+            wp: '4.9'
+          - php: '7.4'
+            wp: '5.0'
+          - php: '7.4'
+            wp: '5.1'
+          - php: '7.4'
+            wp: '5.2'
+          - php: '7.4'
+            wp: '5.3'
+          - php: '7.4'
+            wp: '5.4'
+          - php: 7.4'
+            wp: '5.5'
+          - php: '7.4'
+            wp: '5.6'
+          - php: '7.4'
+            wp: '5.7'
+          - php: '7.4'
+            wp: '5.8'
+          - php: '7.4'
+            wp: '5.9'
 
     steps:
       - name: Checkout repository
@@ -76,8 +80,8 @@ jobs:
       - name: Set up PHP
         uses: shivammathur/setup-php@2.31.0
         with:
-          php-version: ${{ matrix.php-versions }}
-          wp-version: ${{ matrix.wp-versions }}
+          php: ${{ matrix.php }}
+          wp: ${{ matrix.wp }}
           coverage: none
         env:
           fail-fast: false
@@ -93,8 +97,18 @@ jobs:
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v3
 
-      - name: Install WordPress test setup
-        run: bash bin/install-wp-tests.sh wordpress root password 127.0.0.1:${{ job.services.mysql.ports[3306] }} ${{ matrix.wp-versions }}
+      - name: Install appropriate PHPUnit
+        run: |
+          if [[ "${{ matrix.wp }}" == "4.9" ]]; then
+            composer require --dev phpunit/phpunit:^6
+          elif [[ "${{ matrix.wp }}" == "5.0" || "${{ matrix.wp }}" == "5.1" || "${{ matrix.wp }}" == "5.2" || "${{ matrix.wp }}" == "5.3" || "${{ matrix.wp }}" == "5.4" ]]; then
+            composer require --dev phpunit/phpunit:^7
+          else
+            composer require --dev phpunit/phpunit:^9
+          fi
 
-      - name: Run PHPUnit tests (PHP ${{ matrix.php-versions }})
+      - name: Install WordPress test setup
+        run: bash bin/install-wp-tests.sh wordpress root password 127.0.0.1:${{ job.services.mysql.ports[3306] }} ${{ matrix.wp }}
+
+      - name: Run PHPUnit tests (PHP ${{ matrix.php }})
         run: composer exec -- phpunit
