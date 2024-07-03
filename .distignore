@@ -2,6 +2,7 @@
 .git
 .github
 .wordpress-org
+bin
 node_modules
 tests
 vendor
@@ -18,6 +19,7 @@ vendor
 .phpunit.result.cache
 .stylelintignore
 .stylelintrc.json
+.travis.yml
 composer.json
 composer.lock
 package-lock.json
@@ -26,5 +28,6 @@ phpcompat.xml.dist
 phpcs.xml.dist
 phpmd.xml.dist
 phpstan.neon
+phpunit.xml.dist
 postcss.config.js
 README.md

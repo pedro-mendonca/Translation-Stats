@@ -1,10 +1,12 @@
 # Exclude directories from export
 /.github/              export-ignore
 /.wordpress-org/       export-ignore
+/bin/                  export-ignore
 /tests/                export-ignore
 
 # Exclude files from export
 /assets/css/*.scss     export-ignore
+/.distignore           export-ignore
 /.editorconfig         export-ignore
 /.eslintignore         export-ignore
 /.eslintrc.json        export-ignore
@@ -15,6 +17,7 @@
 /.phpunit.result.cache export-ignore
 /.stylelintignore      export-ignore
 /.stylelintrc.json     export-ignore
+/.travis.yml           export-ignore
 /composer.json         export-ignore
 /composer.lock         export-ignore
 /package-lock.json     export-ignore
@@ -23,5 +26,6 @@
 /phpcs.xml.dist        export-ignore
 /phpmd.xml.dist        export-ignore
 /phpstan.neon          export-ignore
+/phpunit.xml.dist      export-ignore
 /postcss.config.js     export-ignore
 /README.md             export-ignore
