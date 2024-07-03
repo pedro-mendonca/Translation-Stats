@@ -1,0 +1,109 @@
+##
+# A reusable workflow that runs the PHPUnit test suite with the specified configuration.
+#
+# This workflow is used by `master` and `dev`.
+##
+name: Run PHPUnit tests
+
+on:
+  workflow_call:
+    inputs:
+      php:
+        description: 'The version of PHP to use, in the format of X.Y. Defaults to 7.4'
+        required: false
+        type: 'string'
+        default: '7.4'
+      wp:
+        description: 'The version of WordPress to use, in the format of X.Y. Defaults to latest'
+        required: false
+        type: 'string'
+        default: 'latest'
+      db-type:
+        description: 'Database type. Valid types are mysql and mariadb.'
+        required: false
+        type: 'string'
+        default: 'mysql'
+      #db-version:
+      #  description: 'Database version.'
+      #  required: false
+      #  type: 'string'
+      #  default: '8.0'
+      multisite:
+        description: 'Whether to run tests as multisite.'
+        required: false
+        type: 'boolean'
+        default: false
+      #allow-errors:
+      #  description: 'Whether to continue when test errors occur.'
+      #  required: false
+      #  type: boolean
+      #  default: false
+      coverage:
+        description: 'Whether to check coverage.'
+        required: false
+        type: boolean
+        default: false
+
+jobs:
+  # Runs the PHPUnit tests.
+  #
+  # Performs the following steps:
+  # - Checks out the repository.
+  # - Sets up the Database.
+  # - Sets up PHP.
+  # - Logs debug information.
+  # - Validate composer.
+  # - Installs Composer dependencies (use cache if possible).
+  # - Installs appropriate PHPUnit for the PHP version.
+  # - Installs WordPress tests.
+  # - Runs PHPUnit on the full codebase.
+  phpunit-tests:
+    # name: PHP ${{ inputs.php }} / ${{ 'mariadb' == inputs.db-type && 'MariaDB' || 'MySQL' }} ${{ inputs.db-version }}${{ inputs.multisite && ' multisite' || '' }}
+    name: WP ${{ inputs.wp }} ${{ inputs.multisite && ' multisite' || '' }} ${{ inputs.coverage && ' with coverage' || '' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up ${{ 'mariadb' == inputs.db-type && 'MariaDB' || 'MySQL' }}
+        uses: shogo82148/actions-setup-mysql@v1
+        with:
+          distribution: ${{ inputs.db-type }}
+          root-password: password
+
+      - name: Set up PHP ${{ inputs.php }}
+        uses: shivammathur/setup-php@2.31.0
+        with:
+          php-version: ${{ inputs.php }}
+          coverage: ${{ inputs.coverage }}
+
+        env:
+          fail-fast: false
+
+      - name: Log debug information
+        run: |
+          php --version
+          composer --version
+
+      - name: Validate composer.json and composer.lock
+        run: composer validate --strict
+
+      - name: Install Composer dependencies
+        uses: ramsey/composer-install@v3
+
+      - name: Install appropriate PHPUnit
+        run: |
+          if [[ "${{ inputs.wp }}" == "4.9" || "${{ inputs.wp }}" == "5.0" ]]; then
+            composer require --dev phpunit/phpunit:^6 --with-dependencies
+          elif [[ "${{ inputs.wp }}" == "5.1" || "${{ inputs.wp }}" == "5.2" || "${{ inputs.wp }}" == "5.3" || "${{ inputs.wp }}" == "5.4" || "${{ inputs.wp }}" == "5.5" || "${{ inputs.wp }}" == "5.6" || "${{ inputs.wp }}" == "5.7" || "${{ inputs.wp }}" == "5.8" ]]; then
+            composer require --dev phpunit/phpunit:^7 --with-dependencies
+          else
+            composer require --dev phpunit/phpunit:^9 --with-dependencies
+          fi
+
+      - name: Install WordPress test setup
+        run: bash bin/install-wp-tests.sh wordpress root password 127.0.0.1:${{ job.services.mysql.ports[3306] }} ${{ inputs.wp }}
+
+      - name: Run PHPUnit tests (PHP ${{ inputs.php }} | WP ${{ inputs.wp }})
+        run: composer exec -- phpunit

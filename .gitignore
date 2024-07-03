@@ -15,3 +15,6 @@ Thumbs.db
 
 # PHPCS
 /phpcs.xml
+
+# PHPUnit
+/.phpunit.result.cache

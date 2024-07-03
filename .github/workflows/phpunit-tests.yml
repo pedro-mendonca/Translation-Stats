@@ -1,0 +1,61 @@
+name: Unit Tests
+
+on:
+  push:
+    branches: [ master, dev ]
+  pull_request:
+    branches: [ master, dev ]
+    paths:
+      # Any change to a PHP file should run checks.
+      - '**.php'
+      # These files configure Composer. Changes could affect the outcome.
+      - 'composer.*'
+      # Changes to workflow files should always verify all workflows are successful.
+      - '.github/workflows/*.yml'
+  # Allows you to run this workflow manually from the Actions tab.
+  workflow_dispatch:
+
+jobs:
+  # Runs PHPUnit testing.
+  #
+  # Violations are reported inline with annotations.
+  #
+  # Performs the following steps:
+  # - Checks out the repository.
+  # - Sets up PHP.
+  # - Logs debug information.
+  # - Installs Composer dependencies (use cache if possible).
+  # - Runs PHPUnit on the full codebase.
+  phpunit:
+    name: PHP ${{ matrix.php || '7.4' }} | ${{ 'mariadb' == matrix.db-type && 'MariaDB' || 'MySQL' }}
+    uses: pedro-mendonca/Translation-Stats/.github/workflows/reusable-phpunit-tests.yml@dev
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['7.4', '8.0', '8.1', '8.2', '8.3'] # 7.4 is the minimum supported version.
+        wp: ['6.0', '6.1', '6.2', '6.3', '6.4', '6.5']
+        include:
+          - wp: '4.9'   # Mininum supported version.
+          - wp: '5.0'   # Significant update with Gutenberg editor.
+          - wp: '5.1'
+          - wp: '5.2'
+          - wp: '5.3'
+          - wp: '5.4'
+          - wp: '5.5'   # Major update with new features and performance improvements.
+          - wp: '5.6'
+          - wp: '5.7'
+          - wp: '5.8'   # Introduction of full site editing features.
+          - wp: '5.9'
+          - php: latest # Latest stable version.
+            coverage: true
+          - php: latest # Latest stable version.
+            db-type: 'mariadb' # Latest MariaDB version.
+            coverage: true
+
+    with:
+      php: ${{ matrix.php || '7.4' }}
+      wp: ${{ matrix.wp || 'latest' }}
+      db-type: ${{ matrix.db-type || 'mysql' }}
+      multisite: ${{ matrix.multisite || false }}
+      coverage: ${{ matrix.coverage || false }}
