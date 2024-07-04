@@ -21,7 +21,7 @@ jobs:
   #
   phpunit:
     name: PHP ${{ matrix.php || '7.4' }} | ${{ 'mariadb' == matrix.db-type && 'MariaDB' || 'MySQL' }}
-    uses: pedro-mendonca/Translation-Stats/.github/workflows/reusable-phpunit-tests.yml@dev
+    uses: pedro-mendonca/Translation-Stats/.github/workflows/reusable-phpunit-tests.yml@master
 
     strategy:
       fail-fast: false
