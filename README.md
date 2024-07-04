@@ -90,6 +90,10 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
 ## Changelog
 
+### Unreleased
+
+* Tested up to WP 6.6
+
 ### 1.3.0
 
 * New checkboxes in the subprojects column to bulk-select a specific subproject in all plugins.

@@ -15,7 +15,7 @@
  * Description:       Show plugins translation stats on your WordPress install.
  * Version:           1.3.0
  * Requires at least: 4.9
- * Tested up to:      6.5
+ * Tested up to:      6.6
  * Requires PHP:      7.4
  * Author:            Pedro Mendonça
  * Author URI:        https://translationstats.com
