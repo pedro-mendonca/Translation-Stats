@@ -16,7 +16,6 @@ vendor
 .gitignore
 .markdownlint.json
 .markdownlintignore
-.phpunit.result.cache
 .stylelintignore
 .stylelintrc.json
 .travis.yml

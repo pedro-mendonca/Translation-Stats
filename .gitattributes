@@ -14,7 +14,6 @@
 /.gitignore            export-ignore
 /.markdownlint.json    export-ignore
 /.markdownlintignore   export-ignore
-/.phpunit.result.cache export-ignore
 /.stylelintignore      export-ignore
 /.stylelintrc.json     export-ignore
 /.travis.yml           export-ignore
