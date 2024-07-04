@@ -26,8 +26,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: ['7.4', '8.0', '8.1', '8.2', '8.3'] # 7.4 is the minimum supported version.
-        wp: ['6.0', '6.1', '6.2', '6.3', '6.4', '6.5']
+        php: [ '7.4', '8.0', '8.1', '8.2', '8.3' ] # 7.4 is the minimum supported version.
+        wp: [ '6.0', '6.1', '6.2', '6.3', '6.4', '6.5' ]
         include:
           - wp: '4.9'   # Minimum supported version.
           - wp: '5.0'   # Significant update with Gutenberg editor.
@@ -40,9 +40,9 @@ jobs:
           - wp: '5.7'
           - wp: '5.8'   # Introduction of full site editing features.
           - wp: '5.9'
-          - php: latest # Latest stable version.
+          - php: 'latest' # Latest stable version.
             coverage: true
-          - php: latest # Latest stable version.
+          - php: 'latest' # Latest stable version.
             db-type: 'mariadb' # Latest MariaDB version.
             coverage: true
 
