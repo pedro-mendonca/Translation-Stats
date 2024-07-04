@@ -61,7 +61,8 @@
 		"lint:pkg-json": "npm run lint:pkg-json",
 		"phpcs-i": "phpcs -i",
 		"scripts-list": "composer run-script --list",
-		"test": "phpunit",
+		"test": "phpunit --colors=always",
+		"test:coverage": "phpunit --colors=always --coverage-clover coverage.xml",
 		"zip": "composer archive --file=translation-stats --format=zip"
 	},
 	"scripts-descriptions": {
@@ -79,6 +80,7 @@
 		"phpcs-i": "Log PHPCS debug information.",
 		"scripts-list": "List all Composer scripts.",
 		"test": "Runs the PHPUnit tests.",
+		"test:coverage": "Runs the PHPUnit tests with code coverage.",
 		"zip": "Build production zip archive."
 	}
 }

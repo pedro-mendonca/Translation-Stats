@@ -47,12 +47,11 @@ jobs:
             coverage: true
           - php: 'latest' # Latest stable version.
             db-type: 'mariadb' # Latest MariaDB version.
-            coverage: true
 
     with:
-      php: ${{ matrix.php || '7.4' }}
-      wp: ${{ matrix.wp || 'latest' }}
-      db-type: ${{ matrix.db-type || 'mysql' }}
-      multisite: ${{ matrix.multisite || false }}
-      coverage: ${{ matrix.coverage || false }}
-      allow-errors: ${{ matrix.allow-errors || false }}
+      php: ${{ matrix.php || '7.4' }}                   # Defaults to '7.4'.
+      wp: ${{ matrix.wp || 'latest' }}                  # Defaults to 'latest'.
+      db-type: ${{ matrix.db-type || 'mysql' }}         # Defaults to 'mysql'.
+      multisite: ${{ matrix.multisite || false }}       # Defaults to false.
+      coverage: ${{ matrix.coverage || false }}         # Defaults to false.
+      allow-errors: ${{ matrix.allow-errors || false }} # Defaults to false.

@@ -6,10 +6,19 @@
 	convertErrorsToExceptions="true"
 	convertNoticesToExceptions="true"
 	convertWarningsToExceptions="true"
+	verbose="true"
+	cacheResult="false"
 	>
 	<testsuites>
 		<testsuite name="testing">
 			<directory prefix="test-" suffix=".php">./tests/phpunit/</directory>
 		</testsuite>
 	</testsuites>
+	<coverage includeUncoveredFiles="true">
+		<include>
+			<directory suffix=".php">./includes</directory>
+			<file>translation-stats.php</file>
+			<file>uninstall.php</file>
+		</include>
+	</coverage>
 </phpunit>
