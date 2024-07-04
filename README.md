@@ -92,6 +92,11 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
 ## Changelog
 
+### Unreleased
+
+* Add PHP Unit Tests.
+* Deprecate TRANSLATION_STATS_DEBUG constant.
+
 ### 1.3.1
 
 * Tested up to WP 6.6
