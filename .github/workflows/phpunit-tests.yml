@@ -27,26 +27,47 @@ jobs:
 
     strategy:
       fail-fast: false
+
       matrix:
-        php: [ '7.4', '8.0', '8.1', '8.2', '8.3' ] # 7.4 is the minimum supported version.
-        wp: [ '6.0', '6.1', '6.2', '6.3', '6.4', '6.5' ]
+        # Test all supported WP versions with the minumum PHP supported version.
+        php: [ '7.4' ] # 7.4 is the minimum supported version.
+        wp:
+          - '4.9' # Minimum supported version.
+          - '5.0' # Significant update with Gutenberg editor.
+          - '5.1'
+          - '5.2'
+          - '5.3'
+          - '5.4'
+          - '5.5' # Major update with new features and performance improvements.
+          - '5.6'
+          - '5.7'
+          - '5.8' # Introduction of full site editing features.
+          - '5.9'
+          - '6.0'
+          - '6.1'
+          - '6.2'
+          - '6.3'
+          - '6.4'
+          - '6.5' # Latest version.
+
         include:
-          - wp: '4.9'   # Minimum supported version.
-          - wp: '5.0'   # Significant update with Gutenberg editor.
-          - wp: '5.1'
-          - wp: '5.2'
-          - wp: '5.3'
-          - wp: '5.4'
-          - wp: '5.5'   # Major update with new features and performance improvements.
-          - wp: '5.6'
-          - wp: '5.7'
-          - wp: '5.8'   # Introduction of full site editing features.
-          - wp: '5.9'
-          - wp: 'trunk'
-            php: 'latest'
+
+          # Test the latest WP version with all PHP supported versions.
+          - php: '8.0'
+          - php: '8.1'
+          - php: '8.2'
+          - php: '8.3'
+
+          # Test the WP trunk with latest PHP version. Allow errors.
+          - php: 'latest'
+            wp: trunk
             allow-errors: true
+
+          # Test the latest WP and PHP versions, with code coverage.
           - php: 'latest' # Latest stable version.
             coverage: true
+
+          # Test the latest WP and PHP versions, with MariaDB database.
           - php: 'latest' # Latest stable version.
             db-type: 'mariadb' # Latest MariaDB version.
 
