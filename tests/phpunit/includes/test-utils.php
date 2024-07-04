@@ -154,9 +154,32 @@ class Test_Utils extends WP_UnitTestCase {
 
 
 	/**
+	 * Test translation language set as 'site-default'.
+	 */
+	public function test_translation_language_site_default() {
+
+		// Configure translation language.
+		$settings = array(
+			'settings' => array(
+				'translation_language' => 'site-default',
+			)
+		);
+
+		// Get the Translation Stats configured language.
+		$translationstats_language = Utils::translation_language();
+
+		$this->assertEquals(
+			$translationstats_language,
+			'en_US'
+		);
+
+	}
+
+
+	/**
 	 * Test translation language configured in the settings.
 	 */
-	public function test_translation_language() {
+	public function test_translation_language_locale() {
 
 		// Configure translation language.
 		$settings = array(
