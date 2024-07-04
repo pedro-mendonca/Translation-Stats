@@ -78,6 +78,7 @@
 		"lint:pkg-json": "Run npm package.json linter.",
 		"phpcs-i": "Log PHPCS debug information.",
 		"scripts-list": "List all Composer scripts.",
+		"test": "Runs the PHPUnit tests.",
 		"zip": "Build production zip archive."
 	}
 }
