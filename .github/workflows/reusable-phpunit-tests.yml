@@ -55,7 +55,6 @@ jobs:
   # - Validate composer.
   # - Installs Composer dependencies (use cache if possible).
   # - Installs appropriate PHPUnit for the PHP version.
-  # - Installs appropriate PHPUnit Polyfills for the PHP version.
   # - Installs WordPress tests.
   # - Runs PHPUnit on the full codebase.
   phpunit-tests:
@@ -102,12 +101,6 @@ jobs:
             composer require --dev phpunit/phpunit:^7 --with-dependencies
           else
             composer require --dev phpunit/phpunit:^9 --with-dependencies
-          fi
-
-      - name: Install appropriate PHPUnit Polyfills
-        run: |
-          if [[ "${{ inputs.php }}" == "7.4" ]]; then
-            composer require --dev yoast/phpunit-polyfills:^1 --with-dependencies
           fi
 
       - name: Install WordPress test setup
