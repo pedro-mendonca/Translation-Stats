@@ -90,9 +90,10 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
 ## Changelog
 
-### Unreleased
+### 1.3.1
 
 * Tested up to WP 6.6
+* Always show notices for plugins not prepared for localization.
 
 ### 1.3.0
 
