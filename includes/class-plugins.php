@@ -357,9 +357,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			<?php
 
 			// Show admin notices with additional information for each plugin, for development mode only.
-			if ( Utils::is_development_mode() ) {
-				$this->render_notices( $project_stats, $project_slug, $locale );
-			}
+			$this->render_notices( $project_stats, $project_slug, $locale );
 		}
 
 
@@ -474,13 +472,14 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * Show admin notices with additional information for each plugin.
 		 *
 		 * 1) Show 'Stable' or 'Development' language packs info if available.
-		 * 2) Check if at least of of the above are enabled to allow check if it's prepared for localization.
+		 * 2) Check if at least one of the above are enabled to allow check if it's prepared for localization.
 		 * 3) If none, inform that the project isn't ready for localization.
 		 *
 		 * A few projects that by the time this was coded have missing translation sub-projects:
 		 *   - https://translate.wordpress.org/locale/pt/default/wp-plugins/media-library-enable-infinite-scrolling/
 		 *   - https://translate.wordpress.org/locale/pt/default/wp-plugins/wp-seo-acf-content-analysis/
 		 *   - https://translate.wordpress.org/locale/pt/default/wp-plugins/woo-fly-cart/
+		 *   - https://translate.wordpress.org/locale/pt/default/wp-plugins/testerwp-ecommerce-companion/
 		 *
 		 * @since 1.2.0.
 		 *
@@ -599,6 +598,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				return;
 			}
 
+			// Check if the notice is not an error and is not in development mode.
+			if ( 'error' !== $admin_notice['type'] && ! Utils::is_development_mode() ) {
+				return;
+			}
+
+			// Show notice if is an error or if development mode is enabled.
 			?>
 			<div class="translation-stats-content-notices">
 				<?php
