@@ -33,11 +33,11 @@ on:
         required: false
         type: 'boolean'
         default: false
-      #allow-errors:
-      #  description: 'Whether to continue when test errors occur.'
-      #  required: false
-      #  type: boolean
-      #  default: false
+      allow-errors:
+        description: 'Whether to continue when test errors occur.'
+        required: false
+        type: boolean
+        default: false
       coverage:
         description: 'Whether to check coverage.'
         required: false
@@ -62,6 +62,7 @@ jobs:
     # name: PHP ${{ inputs.php }} / ${{ 'mariadb' == inputs.db-type && 'MariaDB' || 'MySQL' }} ${{ inputs.db-version }}${{ inputs.multisite && ' multisite' || '' }}
     name: WP ${{ inputs.wp }} ${{ inputs.multisite && ' multisite' || '' }} ${{ inputs.coverage && ' with coverage' || '' }}
     runs-on: ubuntu-latest
+    continue-on-error: ${{ inputs.allow-errors }}
 
     steps:
       - name: Checkout repository
