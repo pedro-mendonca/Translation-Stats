@@ -18,7 +18,9 @@ class Test_Utils extends WP_UnitTestCase {
 	 */
 	public function test_is_development_mode() {
 
-		if ( defined( 'WP_DEBUG' ) && WP_DEBUG === true ) {
+		if ( defined( 'TRANSLATION_STATS_DEBUG' ) ) {
+			$this->assertEquals( TRANSLATION_STATS_DEBUG, Utils::is_development_mode() );
+		} else if ( ( defined( 'WP_DEBUG' ) && WP_DEBUG === true ) || ( defined( 'TRANSLATION_STATS_DEBUG' ) && TRANSLATION_STATS_DEBUG === true ) ) {
 			$this->assertTrue( Utils::is_development_mode() );
 		} else {
 			$this->assertFalse( Utils::is_development_mode() );
