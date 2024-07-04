@@ -40,6 +40,8 @@ jobs:
           - wp: '5.7'
           - wp: '5.8'   # Introduction of full site editing features.
           - wp: '5.9'
+          - wp: 'nightly'
+            php: 'latest'
           - php: 'latest' # Latest stable version.
             coverage: true
           - php: 'latest' # Latest stable version.
