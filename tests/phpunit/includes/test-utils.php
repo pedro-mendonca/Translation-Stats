@@ -165,6 +165,9 @@ class Test_Utils extends WP_UnitTestCase {
 			)
 		);
 
+		// Add plugin setting to the database.
+		add_option( TRANSLATION_STATS_WP_OPTION, $settings );
+
 		// Get the Translation Stats configured language.
 		$translationstats_language = Utils::translation_language();
 
