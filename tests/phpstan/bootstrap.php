@@ -16,11 +16,6 @@ if ( ! defined( 'TRANSLATION_STATS_REQUIRED_PHP' ) ) {
 	define( 'TRANSLATION_STATS_REQUIRED_PHP', '7.4' );
 }
 
-// Set Translation Stats development mode.
-if ( ! defined( 'TRANSLATION_STATS_DEBUG' ) ) {
-	define( 'TRANSLATION_STATS_DEBUG', true );
-}
-
 
 // Require plugin main file.
 require_once 'translation-stats.php';
