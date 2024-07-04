@@ -44,6 +44,11 @@ on:
         type: 'boolean'
         default: false
 
+    secrets:
+      codecov-token:
+        description: 'The token for codecov passed from the caller workflow'
+        required: true
+
 jobs:
   # Runs the PHPUnit tests.
   #
@@ -120,4 +125,4 @@ jobs:
         with:
           file: coverage.xml
           verbose: true
-          token: ${{ secrets.CODECOV_TOKEN }}
+          token: ${{ secrets.codecov-token }}
