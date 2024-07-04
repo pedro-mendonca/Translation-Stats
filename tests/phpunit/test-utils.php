@@ -243,4 +243,90 @@ class Test_Utils extends WP_UnitTestCase {
 		);
 	}
 
+
+	/**
+	 * Test array of allowed HTML elements for use in wp_kses().
+	 */
+	public function test_allowed_html() {
+
+		// Expected array of allowed HTML elements.
+		$expected = array(
+			'a'      => array(
+				'href'   => array(),
+				'title'  => array(),
+				'class'  => array(),
+				'data'   => array(),
+				'rel'    => array(),
+				'target' => array(),
+			),
+			'br'     => array(),
+			'button' => array(
+				'aria-expanded' => array(),
+				'class'         => array(),
+				'id'            => array(),
+				'type'          => array(),
+			),
+			'div'    => array(
+				'class' => array(),
+				'data'  => array(),
+				'style' => array(),
+			),
+			'em'     => array(),
+			'form'   => array(
+				'action' => array(),
+				'class'  => array(),
+				'method' => array(),
+				'name'   => array(),
+			),
+			'img'    => array(
+				'alt'    => array(),
+				'class'  => array(),
+				'height' => array(),
+				'src'    => array(),
+				'width'  => array(),
+			),
+			'input'  => array(
+				'class' => array(),
+				'name'  => array(),
+				'type'  => array(),
+				'value' => array(),
+			),
+			'li'     => array(
+				'class' => array(),
+			),
+			'ol'     => array(
+				'class' => array(),
+			),
+			'option' => array(
+				'value'    => array(),
+				'selected' => array(),
+			),
+			'p'      => array(
+				'class' => array(),
+			),
+			'script' => array(),
+			'select' => array(
+				'id'    => array(),
+				'class' => array(),
+				'name'  => array(),
+			),
+			'span'   => array(
+				'class' => array(),
+				'style' => array(),
+			),
+			'strong' => array(),
+			'style'  => array(),
+
+			'ul'     => array(
+				'class' => array(),
+			),
+		);
+
+		// Call the method being tested.
+		$result = Utils::allowed_html();
+
+		// Assert that the result matches the expected array.
+		$this->assertEquals( $expected, $result );
+	}
+
 }
