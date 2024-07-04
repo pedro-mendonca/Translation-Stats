@@ -14,10 +14,11 @@ Show plugins translation stats on your WordPress install.
 [![WordPress Plugin: Tested WP Version](https://img.shields.io/wordpress/plugin/tested/translation-stats.svg?label=WordPress%20Tested&logo=wordpress)](https://wordpress.org/plugins/translation-stats/)
 
 [![Coding Standards](https://github.com/pedro-mendonca/Translation-Stats/actions/workflows/coding-standards.yml/badge.svg)](https://github.com/pedro-mendonca/Translation-Stats/actions/workflows/coding-standards.yml)
-[![PHPUnit Tests](https://github.com/pedro-mendonca/Translation-Stats/actions/workflows/phpunit-tests.yml/badge.svg)](https://github.com/pedro-mendonca/Translation-Stats/actions/workflows/phpunit-tests.yml)
-[![codecov](https://codecov.io/gh/pedro-mendonca/Translation-Stats/graph/badge.svg?token=LXATJDUT4A)](https://codecov.io/gh/pedro-mendonca/Translation-Stats)
 [![Static Analysis](https://github.com/pedro-mendonca/Translation-Stats/actions/workflows/static-analysis.yml/badge.svg)](https://github.com/pedro-mendonca/Translation-Stats/actions/workflows/static-analysis.yml)
 [![WP Plugin Check](https://github.com/pedro-mendonca/Translation-Stats/actions/workflows/plugin-check.yml/badge.svg)](https://github.com/pedro-mendonca/Translation-Stats/actions/workflows/plugin-check.yml)
+
+[![PHPUnit Tests](https://github.com/pedro-mendonca/Translation-Stats/actions/workflows/phpunit-tests.yml/badge.svg)](https://github.com/pedro-mendonca/Translation-Stats/actions/workflows/phpunit-tests.yml)
+[![codecov](https://codecov.io/gh/pedro-mendonca/Translation-Stats/graph/badge.svg?token=LXATJDUT4A)](https://codecov.io/gh/pedro-mendonca/Translation-Stats)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/bcd1b44a1d6542e2b75b7b479ce56804)](https://www.codacy.com/app/pedro-mendonca/Translation-Stats?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=pedro-mendonca/Translation-Stats&amp;utm_campaign=Badge_Grade)
 
 ## Description
