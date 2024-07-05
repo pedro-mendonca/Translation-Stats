@@ -138,9 +138,13 @@ class Test_Utils extends WP_UnitTestCase {
 
 
 	/**
-	 * Test default translation language without any settings.
+	 * Test translation language.
 	 */
-	public function test_translation_language_default() {
+	public function test_translation_language() {
+
+		/**
+		 * Test default translation language without any settings.
+		 */
 
 		// Get the Translation Stats configured language.
 		$translationstats_language = Utils::translation_language();
@@ -150,57 +154,49 @@ class Test_Utils extends WP_UnitTestCase {
 			'en_US'
 		);
 
-	}
-
-
-	/**
-	 * Test translation language set as 'site-default'.
-	 */
-	public function test_translation_language_site_default() {
+		/**
+		 * Test translation language set as 'site-default'.
+		 */
 
 		// Configure translation language.
-		$settings = array(
-			'settings' => array(
-				'translation_language' => 'site-default',
-			)
-		);
+ 		$settings = array(
+ 			'settings' => array(
+ 				'translation_language' => 'site-default',
+ 			)
+ 		);
 
-		// Add plugin setting to the database.
-		add_option( TRANSLATION_STATS_WP_OPTION, $settings );
+ 		// Add plugin setting to the database.
+ 		add_option( TRANSLATION_STATS_WP_OPTION, $settings );
 
-		// Get the Translation Stats configured language.
-		$translationstats_language = Utils::translation_language();
+ 		// Get the Translation Stats configured language.
+ 		$translationstats_language = Utils::translation_language();
 
-		$this->assertEquals(
-			$translationstats_language,
-			'en_US'
-		);
+ 		$this->assertEquals(
+ 			$translationstats_language,
+ 			'en_US'
+ 		);
 
-	}
-
-
-	/**
-	 * Test translation language configured in the settings.
-	 */
-	public function test_translation_language_locale() {
+		/**
+		 * Test translation language configured in the settings.
+		 */
 
 		// Configure translation language.
-		$settings = array(
-			'settings' => array(
-				'translation_language' => 'pt_PT',
-			)
-		);
+ 		$settings = array(
+ 			'settings' => array(
+ 				'translation_language' => 'pt_PT',
+ 			)
+ 		);
 
-		// Add plugin setting to the database.
-		add_option( TRANSLATION_STATS_WP_OPTION, $settings );
+ 		// Update plugin setting to the database.
+ 		update_option( TRANSLATION_STATS_WP_OPTION, $settings );
 
-		// Get the Translation Stats configured language.
-		$translationstats_language = Utils::translation_language();
+ 		// Get the Translation Stats configured language.
+ 		$translationstats_language = Utils::translation_language();
 
-		$this->assertEquals(
-			$translationstats_language,
-			'pt_PT'
-		);
+ 		$this->assertEquals(
+ 			$translationstats_language,
+ 			'pt_PT'
+ 		);
 
 	}
 
