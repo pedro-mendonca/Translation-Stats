@@ -20,7 +20,7 @@ class Test_Plugin_File extends WP_UnitTestCase {
 
 	/**
 	 * Test Translation Stats minimum requirements.
- 	 */
+	 */
  	function test_translation_stats_compatible_version() {
 
 		$compatible_version = Translation_Stats\translation_stats_compatible_version();
