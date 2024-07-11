@@ -15,6 +15,33 @@ class Test_Translations_API extends WP_UnitTestCase {
 
 
 	/**
+	 * Test get plugin slug from its file path.
+	 */
+	public function test_get_plugin_slug() {
+
+		// Given a complete file path with folder and file.
+		$plugin_slug = Translations_API::get_plugin_slug( 'translation-stats/translation-stats.php' );
+
+		$this->assertEquals( $plugin_slug, 'translation-stats' );
+
+		// Given just the file name and extension.
+		$plugin_slug = Translations_API::get_plugin_slug( 'translation-stats.php' );
+
+		$this->assertEquals( $plugin_slug, 'translation-stats' );
+
+		// Given just a slug.
+		$plugin_slug = Translations_API::get_plugin_slug( 'Translation Stats' );
+
+		$this->assertEquals( $plugin_slug, 'translation-stats' );
+
+		$plugin_slug = Translations_API::get_plugin_slug( 'translation-stats' );
+
+		$this->assertEquals( $plugin_slug, 'translation-stats' );
+
+	}
+
+
+	/**
 	 * Test get plugin data from translate.WordPress.org API.
 	 */
 	public function test_translations_api_get_plugin() {
