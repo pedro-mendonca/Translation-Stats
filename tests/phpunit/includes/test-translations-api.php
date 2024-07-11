@@ -79,7 +79,7 @@ class Test_Translations_API extends WP_UnitTestCase {
 	 *
 	 * @var array
 	 */
-	function provide_test_translate_url() {
+	public function provide_test_translate_url() {
 		return array(
 			// No API.
 			array(
