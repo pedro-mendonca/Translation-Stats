@@ -74,7 +74,7 @@ class Test_Utils extends WP_UnitTestCase {
 	 *
 	 * @var array
 	 */
-	function provide_test_get_asset_url() {
+	public function provide_test_get_asset_url() {
 		return array(
 			// No extension.
 			array(
