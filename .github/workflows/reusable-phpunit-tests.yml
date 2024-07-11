@@ -48,6 +48,9 @@ on:
       codecov-token:
         description: 'The token for codecov passed from the caller workflow'
         required: true
+      codacy-project-token:
+        description: 'The token for Codacy passed from the caller workflow'
+        required: true
 
 jobs:
   # Runs the PHPUnit tests.
@@ -126,3 +129,10 @@ jobs:
           file: coverage.xml
           verbose: true
           token: ${{ secrets.codecov-token }}
+
+      - name: Run codacy-coverage-reporter
+        if: ${{ inputs.coverage }}
+        uses: codacy/codacy-coverage-reporter-action@v1.3.0
+        with:
+          project-token: ${{ secrets.codacy-project-token }}
+          coverage-reports: coverage.xml

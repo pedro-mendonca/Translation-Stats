@@ -13,7 +13,7 @@ use WP_Error;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+	exit; // @codeCoverageIgnore
 }
 
 if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {

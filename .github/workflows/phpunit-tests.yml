@@ -24,6 +24,7 @@ jobs:
     uses: pedro-mendonca/Translation-Stats/.github/workflows/reusable-phpunit-tests.yml@master
     secrets:
       codecov-token: ${{ secrets.CODECOV_TOKEN }}
+      codacy-project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
 
     strategy:
       fail-fast: false

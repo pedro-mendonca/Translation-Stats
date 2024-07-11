@@ -11,7 +11,7 @@ namespace Translation_Stats;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
-	exit;
+	exit; // @codeCoverageIgnore
 }
 
 if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Hidden' ) ) {
