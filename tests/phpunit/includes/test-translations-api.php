@@ -22,21 +22,21 @@ class Test_Translations_API extends WP_UnitTestCase {
 		// Given a complete file path with folder and file.
 		$plugin_slug = Translations_API::get_plugin_slug( 'translation-stats/translation-stats.php' );
 
-		$this->assertEquals( $plugin_slug, 'translation-stats' );
+		$this->assertSame( $plugin_slug, 'translation-stats' );
 
 		// Given just the file name and extension.
 		$plugin_slug = Translations_API::get_plugin_slug( 'translation-stats.php' );
 
-		$this->assertEquals( $plugin_slug, 'translation-stats' );
+		$this->assertSame( $plugin_slug, 'translation-stats' );
 
 		// Given just a slug.
 		$plugin_slug = Translations_API::get_plugin_slug( 'Translation Stats' );
 
-		$this->assertEquals( $plugin_slug, 'translation-stats' );
+		$this->assertSame( $plugin_slug, 'translation-stats' );
 
 		$plugin_slug = Translations_API::get_plugin_slug( 'translation-stats' );
 
-		$this->assertEquals( $plugin_slug, 'translation-stats' );
+		$this->assertSame( $plugin_slug, 'translation-stats' );
 
 	}
 
@@ -51,14 +51,14 @@ class Test_Translations_API extends WP_UnitTestCase {
 
 		$response_code = wp_remote_retrieve_response_code( $response );
 
-		$this->assertEquals( $response_code, 200 );
+		$this->assertSame( $response_code, 200 );
 
 		// Non-existent plugin slug in Translating WordPress.
 		$response = Translations_API::translations_api_get_plugin( 'wrong-slug-translation-stats' );
 
 		$response_code = wp_remote_retrieve_response_code( $response );
 
-		$this->assertEquals( $response_code, 404 );
+		$this->assertSame( $response_code, 404 );
 
 	}
 
@@ -93,7 +93,7 @@ class Test_Translations_API extends WP_UnitTestCase {
 			),
 		);
 
-		$this->assertEquals(
+		$this->assertSame(
 			$plugin_subprojects,
 			$expected
 		);
@@ -183,7 +183,7 @@ class Test_Translations_API extends WP_UnitTestCase {
 
 		$translate_url = Translations_API::translate_url( $project, $api );
 
-		$this->assertEquals(
+		$this->assertSame(
 			$translate_url,
 			$expected_result
 		);

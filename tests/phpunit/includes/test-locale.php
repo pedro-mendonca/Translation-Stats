@@ -33,12 +33,12 @@ class Test_Locale extends WP_UnitTestCase {
 
 		$this->assertNull( $locale->translations );
 
-		$this->assertEquals(
+		$this->assertSame(
  			$locale->locale_slug,
  			'pt/default'
  		);
 
-		$this->assertEquals(
+		$this->assertSame(
  			$locale->wporg_subdomain,
  			'pt'
  		);
