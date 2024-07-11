@@ -123,7 +123,7 @@ jobs:
         if: ${{ ! inputs.coverage }}
         run: composer exec -- phpunit
         run: |
-          if [ "${{ matrix.wordpress-translate-api-tests }}" == "true" ]; then
+          if [ "${{ inputs.wordpress-translate-api-tests }}" == "true" ]; then
             composer exec -- phpunit --group api
           else
             composer exec -- phpunit --exclude-group api
