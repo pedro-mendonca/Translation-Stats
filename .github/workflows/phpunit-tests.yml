@@ -64,18 +64,20 @@ jobs:
             wp: trunk
             allow-errors: true
 
-          # Test the latest WP and PHP versions, with code coverage.
+          # Test the latest WP and PHP versions, with code coverage and remote API.
           - php: 'latest' # Latest stable version.
             coverage: true
+            wordpress-translate-api-tests: true
 
           # Test the latest WP and PHP versions, with MariaDB database.
           - php: 'latest' # Latest stable version.
             db-type: 'mariadb' # Latest MariaDB version.
 
     with:
-      php: ${{ matrix.php || '7.4' }}                   # Defaults to '7.4'.
-      wp: ${{ matrix.wp || 'latest' }}                  # Defaults to 'latest'.
-      db-type: ${{ matrix.db-type || 'mysql' }}         # Defaults to 'mysql'.
-      multisite: ${{ matrix.multisite || false }}       # Defaults to false.
-      coverage: ${{ matrix.coverage || false }}         # Defaults to false.
-      allow-errors: ${{ matrix.allow-errors || false }} # Defaults to false.
+      php: ${{ matrix.php || '7.4' }}                                                     # Defaults to '7.4'.
+      wp: ${{ matrix.wp || 'latest' }}                                                    # Defaults to 'latest'.
+      db-type: ${{ matrix.db-type || 'mysql' }}                                           # Defaults to 'mysql'.
+      multisite: ${{ matrix.multisite || false }}                                         # Defaults to false.
+      coverage: ${{ matrix.coverage || false }}                                           # Defaults to false.
+      allow-errors: ${{ matrix.allow-errors || false }}                                   # Defaults to false.
+      wordpress-translate-api-tests: ${{ matrix.wordpress-translate-api-tests || false }} # Defaults to false.

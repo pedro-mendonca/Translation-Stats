@@ -43,6 +43,8 @@ class Test_Translations_API extends WP_UnitTestCase {
 
 	/**
 	 * Test get plugin data from translate.WordPress.org API.
+	 *
+	 * @group wordpress-translate-api
 	 */
 	public function test_translations_api_get_plugin() {
 

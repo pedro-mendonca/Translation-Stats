@@ -16,6 +16,11 @@
 			<directory prefix="test-" suffix=".php">./tests/phpunit/</directory>
 		</testsuite>
 	</testsuites>
+	<groups>
+		<include>
+			<group>wordpress-translate-api</group>
+		</include>
+	</groups>
 	<coverage includeUncoveredFiles="true">
 		<include>
 			<directory suffix=".php">./includes</directory>
