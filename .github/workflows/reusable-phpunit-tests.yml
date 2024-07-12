@@ -72,7 +72,7 @@ jobs:
   # - Runs PHPUnit on the full codebase.
   phpunit-tests:
     # name: PHP ${{ inputs.php }} / ${{ 'mariadb' == inputs.db-type && 'MariaDB' || 'MySQL' }} ${{ inputs.db-version }}${{ inputs.multisite && ' multisite' || '' }}
-    name: WP ${{ inputs.wp }} ${{ inputs.multisite && ' multisite' || '' }} ${{ inputs.coverage && ' with coverage' || '' }}
+    name: WP ${{ inputs.wp }} ${{ inputs.wordpress-translate-api-tests && ' including API tests' || '' }} ${{ inputs.multisite && ' multisite' || '' }} ${{ inputs.coverage && ' with coverage' || '' }}
     runs-on: ubuntu-latest
     continue-on-error: ${{ inputs.allow-errors }}
 
