@@ -43,6 +43,11 @@ on:
         required: false
         type: 'boolean'
         default: false
+      wordpress-translate-api-tests:
+        description: 'Whether to test Translating WordPress API related functions.'
+        required: false
+        type: 'boolean'
+        default: false
 
     secrets:
       codecov-token:
@@ -67,7 +72,7 @@ jobs:
   # - Runs PHPUnit on the full codebase.
   phpunit-tests:
     # name: PHP ${{ inputs.php }} / ${{ 'mariadb' == inputs.db-type && 'MariaDB' || 'MySQL' }} ${{ inputs.db-version }}${{ inputs.multisite && ' multisite' || '' }}
-    name: WP ${{ inputs.wp }} ${{ inputs.multisite && ' multisite' || '' }} ${{ inputs.coverage && ' with coverage' || '' }}
+    name: WP ${{ inputs.wp }} ${{ inputs.wordpress-translate-api-tests && ' including API tests' || '' }} ${{ inputs.multisite && ' multisite' || '' }} ${{ inputs.coverage && ' with coverage' || '' }}
     runs-on: ubuntu-latest
     continue-on-error: ${{ inputs.allow-errors }}
 
@@ -116,11 +121,21 @@ jobs:
 
       - name: Run PHPUnit tests (PHP ${{ inputs.php }} | WP ${{ inputs.wp }})
         if: ${{ ! inputs.coverage }}
-        run: composer exec -- phpunit
+        run: |
+          if [[ "${{ inputs.wordpress-translate-api-tests }}" == "true" ]]; then
+            composer exec -- phpunit
+          else
+            composer exec -- phpunit --exclude-group wordpress-translate-api
+          fi
 
-      - name: Run PHPUnit tests (PHP ${{ inputs.php }} | WP ${{ inputs.wp }}) with code coverage
+      - name: Run PHPUnit tests (PHP ${{ inputs.php }} | WP ${{ inputs.wp }}) ${{ inputs.wordpress-translate-api-tests && ' including API tests' || '' }} with code coverage
         if: ${{ inputs.coverage }}
-        run: composer exec -- phpunit --colors=always --coverage-clover coverage.xml
+        run: |
+          if [[ "${{ inputs.wordpress-translate-api-tests }}" == "true" ]]; then
+            composer exec -- phpunit --colors=always --coverage-clover coverage.xml
+          else
+            composer exec -- phpunit --colors=always --exclude-group wordpress-translate-api --coverage-clover coverage.xml
+          fi
 
       - name: Upload coverage reports to Codecov
         if: ${{ inputs.coverage }}
