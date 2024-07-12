@@ -125,10 +125,10 @@ jobs:
           if [[ "${{ inputs.wordpress-translate-api-tests }}" == "true" ]]; then
             composer exec -- phpunit --colors=always
           else
-            composer exec -- phpunit  --colors=always --exclude-group wordpress-translate-api
+            composer exec -- phpunit --colors=always --exclude-group wordpress-translate-api
           fi
 
-      - name: Run PHPUnit tests (PHP ${{ inputs.php }} | WP ${{ inputs.wp }}) ${{ inputs.wordpress-translate-api-tests && ' including API tests' || '' }} with code coverage
+      - name: Run PHPUnit tests (PHP ${{ inputs.php }} | WP ${{ inputs.wp }})${{ inputs.wordpress-translate-api-tests && ' incl. API' || '' }} with coverage
         if: ${{ inputs.coverage }}
         run: |
           if [[ "${{ inputs.wordpress-translate-api-tests }}" == "true" ]]; then
