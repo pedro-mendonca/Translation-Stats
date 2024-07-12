@@ -117,7 +117,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 				'force_show'  => true,
 				'message'     => $update_message,
 			);
-			Admin_Notice::message( $admin_notice );
+			new Admin_Notice( $admin_notice );
 		}
 
 
@@ -183,7 +183,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 					'wrap'        => false,
 					'message'     => $message,
 				);
-				Admin_Notice::message( $admin_notice );
+				new Admin_Notice( $admin_notice );
 
 				$message = sprintf(
 					'<h3>%s</h3><pre>%s</pre>',
@@ -200,7 +200,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 					'wrap'        => false,
 					'message'     => $message,
 				);
-				Admin_Notice::message( $admin_notice );
+				new Admin_Notice( $admin_notice );
 			}
 		}
 	}

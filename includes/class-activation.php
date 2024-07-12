@@ -91,7 +91,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Activation' ) ) {
 					'dismissible' => true,
 					'message'     => $activation_message,
 				);
-				Admin_Notice::message( $admin_notice );
+				new Admin_Notice( $admin_notice );
 
 				// Delete transient, only display this notice once.
 				delete_transient( 'translation_stats_activate' );

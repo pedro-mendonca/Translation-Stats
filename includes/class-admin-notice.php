@@ -24,23 +24,78 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Notice' ) ) {
 
 
 		/**
-		 * Display formatted admin notice.
+		 * WordPress core notice types: 'error', 'warning', 'warning-spin', 'success' or 'info'. Defaults to none.
 		 *
-		 * WordPress core notice types ( 'error', 'warning', 'warning-spin', 'success' and 'info' ).
-		 * The child type 'warning-spin' is the spinning variation of main 'warning' icon (if 'update-icon' is set to 'true'). The css class will be kept the parent 'warning'.
-		 * Use 'force_show' => true to ignore the 'show_warnings' setting.
+		 * @var string
+		 */
+		public $type;
+
+		/**
+		 * Show message alternative color scheme with class 'notice-alt': true or false. Defaults no false.
 		 *
-		 * @since 0.8.0
-		 * @since 0.9.5   Array with all the notice data.
-		 * @since 1.1.1   Renamed from tstats_notice_message() to notice_message().
-		 * @since 1.2.0   Renamed from notice_message() to message().
-		 *                Added support for 'wrap' properties, defaults to 'p' tag for backwards compatibility.
+		 * @var bool
+		 */
+		public $notice_alt = false;
+
+		/**
+		 * Is inline. Defaults to true.
+		 *
+		 * @var bool
+		 */
+		public $inline = true;
+
+		/**
+		 * Is dismissible. Defaults to false.
+		 *
+		 * @var bool
+		 */
+		public $dismissible = false;
+
+		/**
+		 * Array some extra CSS classes.
+		 *
+		 * @var array
+		 */
+		public $css_class = array();
+
+		/**
+		 * Show update message icons. Defaults to false.
+		 *
+		 * @var bool
+		 */
+		public $update_icon = false;
+
+		/**
+		 * Message to show.
+		 *
+		 * @var string
+		 */
+		public $message;
+
+		/**
+		 * HTML tag of the message wrapper. Defaults to 'p' (<p>... </p>).
+		 *
+		 * @var string
+		 */
+		public $wrap = 'p';
+
+		/**
+		 * Some extra HTML to show.
+		 *
+		 * @var string
+		 */
+		public $extra_html;
+
+
+		/**
+		 * Constructor.
 		 *
 		 * @param array $args   Array of message data.
-		 *
-		 * @return void
 		 */
-		public static function message( $args ) {
+		public function __construct( $args ) {
+
+			// Prepare all the admin notice fields.
+			$this->prepare_notice( $args );
 
 			// Check if 'show_warnings' is true.
 			$wp_option = get_option( TRANSLATION_STATS_WP_OPTION );
@@ -48,54 +103,82 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Notice' ) ) {
 				return;
 			}
 
-			// Use defaults if properties not set.
-			$notice = array(
-				'type'        => isset( $args['type'] ) ? ' notice-' . $args['type'] : '',                             // WordPress core notice types: 'error', 'warning', 'warning-spin', 'success' or 'info'. Defaults to none.
-				'notice-alt'  => isset( $args['notice-alt'] ) && $args['notice-alt'] ? ' notice-alt' : '',             // Show message alternative color scheme with class 'notice-alt': true or false. Defaults no false.
-				'inline'      => isset( $args['inline'] ) && ! $args['inline'] ? '' : ' inline',                       // Defaults to true.
-				'dismissible' => isset( $args['dismissible'] ) && $args['dismissible'] ? ' is-dismissible' : '',       // Defaults to false.
-				'css-class'   => isset( $args['css-class'] ) ? ' ' . $args['css-class'] : '',                          // Some extra CSS classes.
-				'update-icon' => isset( $args['update-icon'] ) && $args['update-icon'] ? true : '',                    // Show update message icons. Defaults to false.
-				'message'     => isset( $args['message'] ) ? $args['message'] : '',                                    // Message to show.
-				'wrap'        => isset( $args['wrap'] ) && self::is_supported( $args['wrap'] ) ? $args['wrap'] : 'p',  // HTML tag to wrap the message. Defaults to 'p' (paragraph).
-				'extra-html'  => isset( $args['extra-html'] ) ? $args['extra-html'] : '',                              // Some extra HTML to show.
-			);
+			// Render the Admin Notice.
+			$this->render_notice();
+		}
 
-			if ( $notice['update-icon'] ) {
-				switch ( $args['type'] ) {
+
+		/**
+		 * Prepare all the admin notice fields.
+		 *
+		 * @since 1.3.2
+		 *
+		 * @param array $args   Array of message data.
+		 */
+		public function prepare_notice( $args ) {
+
+			// Use defaults if properties not set.
+			// TODO: Sanitize fields.
+			$this->type        = isset( $args['type'] ) ? ' notice-' . $args['type'] : '';
+			$this->notice_alt  = isset( $args['notice-alt'] ) && $args['notice-alt'] ? ' notice-alt' : '';
+			$this->inline      = isset( $args['inline'] ) && ! $args['inline'] ? '' : ' inline';
+			$this->dismissible = isset( $args['dismissible'] ) && $args['dismissible'] ? ' is-dismissible' : '';
+			$this->css_class   = isset( $args['css-class'] ) ? ' ' . $args['css-class'] : '';
+			if ( isset( $args['update-icon'] ) && $args['update-icon'] ) {
+				switch ( $this->type ) {
 					case 'error':
-						$notice['update-icon'] = ' update-message'; // Error icon.
+						$this->update_icon = ' update-message'; // Error icon.
 						break;
 					case 'warning':
-						$notice['update-icon'] = ' update-message'; // Update icon.
+						$this->update_icon = ' update-message'; // Update icon.
 						break;
 					case 'warning-spin':
-						$notice['update-icon'] = ' updating-message'; // Spins the update icon.
-						$notice['type']        = ' notice-warning'; // Set the notice type to the default parent 'warning' class.
+						$this->update_icon = ' updating-message'; // Spins the update icon.
+						$this->type        = ' notice-warning';   // Set the notice type to the default parent 'warning' class.
 						break;
 					case 'success':
-						$notice['update-icon'] = ' updated-message'; // Updated icon (check mark).
+						$this->update_icon = ' updated-message'; // Updated icon (check mark).
 						break;
 					case 'info':
-						$notice['update-icon'] = ''; // No icon.
+						$this->update_icon = ''; // No icon.
 						break;
 					default:
-						$notice['update-icon'] = ''; // Defaults to none.
+						$this->update_icon = ''; // Defaults to none.
 						break;
 				}
 			}
+			$this->message    = isset( $args['message'] ) ? $args['message'] : '';
+			$this->wrap       = isset( $args['wrap'] ) && self::is_supported( $args['wrap'] ) ? $args['wrap'] : 'p';
+			$this->extra_html = isset( $args['extra-html'] ) ? $args['extra-html'] : '';
+		}
+
+
+		/**
+		 * Display formatted admin notice.
+		 *
+		 * WordPress core notice types ( 'error', 'warning', 'warning-spin', 'success' and 'info' ).
+		 * The child type 'warning-spin' is the spinning variation of main 'warning' icon (if 'update-icon' is set to 'true'). The css class will be kept the parent 'warning'.
+		 * Use 'force_show' => true to ignore the 'show_warnings' setting.
+		 *
+		 * @since 1.3.1
+		 *
+		 * @return void
+		 */
+		public function render_notice() {
+
+			// TODO: return the admin notice.
 
 			?>
-			<div class="notice<?php echo esc_attr( $notice['type'] ) . esc_attr( $notice['notice-alt'] ) . esc_attr( $notice['inline'] ) . esc_attr( $notice['update-icon'] ) . esc_attr( $notice['css-class'] ) . esc_attr( $notice['dismissible'] ); ?>">
+			<div class="notice<?php echo esc_attr( $this->type ) . esc_attr( $this->notice_alt ) . esc_attr( $this->inline ) . esc_attr( $this->update_icon ) . esc_attr( $this->css_class ) . esc_attr( $this->dismissible ); ?>">
 				<?php
 
-				$opening_tag = $notice['wrap'] ? '<' . esc_html( $notice['wrap'] ) . '>' : '';
-				$closing_tag = $notice['wrap'] ? '</' . esc_html( $notice['wrap'] ) . '>' : '';
+				$opening_tag = $this->wrap ? '<' . esc_html( $this->wrap ) . '>' : '';
+				$closing_tag = $this->wrap ? '</' . esc_html( $this->wrap ) . '>' : '';
 
-				echo wp_kses_post( $opening_tag . $notice['message'] . $closing_tag );
+				echo wp_kses_post( $opening_tag . $this->message . $closing_tag );
 
 				// Extra HTML.
-				echo wp_kses( $notice['extra-html'], Utils::allowed_html() );
+				echo wp_kses( $this->extra_html, Utils::allowed_html() );
 				?>
 			</div>
 			<?php

@@ -125,7 +125,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 							'notice-alt' => true,
 							'message'    => esc_html__( 'Plugin not found on WordPress.org', 'translation-stats' ),
 						);
-						Admin_Notice::message( $admin_notice ); // TODO: Add alternative GlotPress API.
+						new Admin_Notice( $admin_notice ); // TODO: Add alternative GlotPress API.
 
 					} elseif ( ! $plugin_translation_on_wporg ) { // Check if translation project is on WordPress.org.
 
@@ -134,7 +134,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 							'notice-alt' => true,
 							'message'    => esc_html__( 'Translation project not found on WordPress.org', 'translation-stats' ),
 						);
-						Admin_Notice::message( $admin_notice );
+						new Admin_Notice( $admin_notice );
 
 					} else {
 
@@ -272,7 +272,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				'force_show'  => true,
 				'message'     => esc_html__( 'Waiting...', 'translation-stats' ),
 			);
-			Admin_Notice::message( $admin_notice_waiting );
+			new Admin_Notice( $admin_notice_waiting );
 			?>
 			<div class="content"></div>
 			<?php
@@ -608,7 +608,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			<div class="translation-stats-content-notices">
 				<?php
 
-				Admin_Notice::message( $admin_notice );
+				new Admin_Notice( $admin_notice );
 
 				?>
 			</div>

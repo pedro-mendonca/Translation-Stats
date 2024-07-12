@@ -135,7 +135,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 					'force_show'  => true,
 					'message'     => '<strong>' . esc_html__( 'Settings restored successfully.', 'translation-stats' ) . '</strong>',
 				);
-				Admin_Notice::message( $admin_notice );
+				new Admin_Notice( $admin_notice );
 			}
 		}
 
@@ -166,7 +166,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 					'force_show'  => true,
 					'message'     => '<strong>' . esc_html__( 'Cache cleaned successfully.', 'translation-stats' ) . '</strong>',
 				);
-				Admin_Notice::message( $admin_notice );
+				new Admin_Notice( $admin_notice );
 			}
 		}
 
