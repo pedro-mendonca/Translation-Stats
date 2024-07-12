@@ -121,6 +121,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Notice' ) ) {
 			$this->type = $this->sanitize_type( isset( $args['type'] ) ?? '' );
 
 			// TODO: Sanitize fields.
+			// TODO: Add classes parameters as CSS classes.
 			$this->notice_alt  = isset( $args['notice-alt'] ) && $args['notice-alt'] ? ' notice-alt' : '';
 			$this->inline      = isset( $args['inline'] ) && ! $args['inline'] ? '' : ' inline';
 			$this->dismissible = isset( $args['dismissible'] ) && $args['dismissible'] ? ' is-dismissible' : '';
@@ -176,7 +177,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Notice' ) ) {
 
 			// Check if field type exist in the supported types array.
 			if ( in_array( $type, $types, true ) ) {
-				return 'notice-' . $type;
+				return ' notice-' . $type;
 			}
 
 			return '';
