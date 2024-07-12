@@ -117,9 +117,10 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Notice' ) ) {
 		 */
 		public function prepare_notice( $args ) {
 
-			// Use defaults if properties not set.
+			// Set Type.
+			$this->type = $this->sanitize_type( isset( $args['type'] ) ?? '' );
+
 			// TODO: Sanitize fields.
-			$this->type        = isset( $args['type'] ) ? ' notice-' . $args['type'] : '';
 			$this->notice_alt  = isset( $args['notice-alt'] ) && $args['notice-alt'] ? ' notice-alt' : '';
 			$this->inline      = isset( $args['inline'] ) && ! $args['inline'] ? '' : ' inline';
 			$this->dismissible = isset( $args['dismissible'] ) && $args['dismissible'] ? ' is-dismissible' : '';
@@ -150,6 +151,35 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Notice' ) ) {
 			$this->message    = isset( $args['message'] ) ? $args['message'] : '';
 			$this->wrap       = isset( $args['wrap'] ) && self::is_supported( $args['wrap'] ) ? $args['wrap'] : 'p';
 			$this->extra_html = isset( $args['extra-html'] ) ? $args['extra-html'] : '';
+		}
+
+
+		/**
+		 * Sanitize the Admin Notice type.
+		 * WordPress core notice types: 'error', 'warning', 'warning-spin', 'success' or 'info'. Defaults to none.
+		 *
+		 * @since 1.3.2
+		 *
+		 * @param string $type  WordPress core notice types.
+		 *
+		 * @return string   Admin Notice type.
+		 */
+		public function sanitize_type( $type = '' ) {
+
+			$types = array(
+				'error',
+				'warning',
+				'warning-spin',
+				'success',
+				'info',
+			);
+
+			// Check if field type exist in the supported types array.
+			if ( in_array( $type, $types, true ) ) {
+				return 'notice-' . $type;
+			}
+
+			return '';
 		}
 
 
