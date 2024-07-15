@@ -5,8 +5,8 @@
  * @package Translation_Stats
  */
 
-Use Translation_Stats\Locales;
-Use Translation_Stats\GP_Locales;
+use Translation_Stats\Locales;
+use Translation_Stats\GP_Locales;
 
 
 /**
@@ -22,10 +22,8 @@ class Test_Locales extends WP_UnitTestCase {
 		$this->assertFalse( isset( $GLOBALS['translation_stats_locales'] ) );
 
 		// Get wordpress.org Locales.
-		$locales = Locales::locales();
+		Locales::locales();
 
 		$this->assertTrue( isset( $GLOBALS['translation_stats_locales'] ) );
-
 	}
-
 }

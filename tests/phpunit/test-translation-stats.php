@@ -5,7 +5,6 @@
  * @package Translation_Stats
  */
 
-
 /**
  * Plugin file test case.
  */
@@ -30,7 +29,5 @@ class Test_Plugin_File extends WP_UnitTestCase {
 		} else {
 			$this->assertFalse( $compatible_version );
 		}
-
- 	}
-
+	}
 }

@@ -5,7 +5,7 @@
  * @package Translation_Stats
  */
 
-Use Translation_Stats\Translation_Stats;
+use Translation_Stats\Translation_Stats;
 
 
 /**
@@ -23,7 +23,7 @@ class Test_Translation_Stats extends WP_UnitTestCase {
 			'deactivate' => '<a href="#" id="deactivate-akismet" aria-label="Deactivate Akismet">Deactivate</a>',
 		);
 
-		$translation_stats = new Translation_Stats;
+		$translation_stats = new Translation_Stats();
 
 		$plugin_action_links = $translation_stats->plugin_action_links( $links );
 
@@ -34,7 +34,6 @@ class Test_Translation_Stats extends WP_UnitTestCase {
 				'deactivate' => '<a href="#" id="deactivate-akismet" aria-label="Deactivate Akismet">Deactivate</a>',
 			)
 		);
-
 	}
 
 
@@ -43,7 +42,7 @@ class Test_Translation_Stats extends WP_UnitTestCase {
 	 */
 	public function test_allowed_pages() {
 
-		$translation_stats = new Translation_Stats;
+		$translation_stats = new Translation_Stats();
 
 		// Allowed pages.
 		$this->assertTrue( $translation_stats->allowed_pages( 'plugins.php' ) );
@@ -57,7 +56,5 @@ class Test_Translation_Stats extends WP_UnitTestCase {
 		$this->assertFalse( $translation_stats->allowed_pages( null ) );
 		$this->assertFalse( $translation_stats->allowed_pages( true ) );
 		$this->assertFalse( $translation_stats->allowed_pages( false ) );
-
 	}
-
 }
