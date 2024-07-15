@@ -500,7 +500,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			$admin_notice = array(
 				'message'    => null,
 				'notice-alt' => true,
-				'wrap'       => false,
 			);
 
 			if ( isset( $project_stats['stable'] ) && is_object( $project_stats['stable'] ) ) { // First check id 'Stable' stats are enabled and if the subproject exists on WP.org.
@@ -511,20 +510,17 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 					// Loads from Stable (Latest release).
 					$admin_notice['type']    = 'info';
 					$admin_notice['message'] = sprintf(
-						'<p>%s</p>',
+						wp_kses_post(
+							/* translators: 1: Threshold value. 2: Translation sub-project name. 3: Current value of percent translated. */
+							esc_html__( 'The initial language pack for the plugin will be generated when %1$d%% of the %2$s sub-project strings have been translated (currently %3$d%%).', 'translation-stats' )
+						),
+						$language_packs_threshold,
 						sprintf(
-							wp_kses_post(
-								/* translators: 1: Threshold value. 2: Translation sub-project name. 3: Current value of percent translated. */
-								esc_html__( 'The initial language pack for the plugin will be generated when %1$d%% of the %2$s sub-project strings have been translated (currently %3$d%%).', 'translation-stats' )
-							),
-							$language_packs_threshold,
-							sprintf(
-								'<a href="%1$s" target="_blank">%2$s</a>',
-								esc_url( Translations_API::translate_url( 'plugins', false ) . $project_slug . '/stable/' . $locale->locale_slug ),
-								esc_html_x( 'Stable (latest release)', 'Subproject name', 'translation-stats' )
-							),
-							$project_stats['stable']->percent_translated
-						)
+							'<a href="%1$s" target="_blank">%2$s</a>',
+							esc_url( Translations_API::translate_url( 'plugins', false ) . $project_slug . '/stable/' . $locale->locale_slug ),
+							esc_html_x( 'Stable (latest release)', 'Subproject name', 'translation-stats' )
+						),
+						$project_stats['stable']->percent_translated
 					);
 
 				}
@@ -536,20 +532,17 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 					// Loads from Development (trunk).
 					$admin_notice['type']    = 'info';
 					$admin_notice['message'] = sprintf(
-						'<p>%s</p>',
+						wp_kses_post(
+							/* translators: 1: Threshold value. 2: Translation sub-project name. 3: Current value of percent translated. */
+							esc_html__( 'The initial language pack for the plugin will be generated when %1$d%% of the %2$s sub-project strings have been translated (currently %3$d%%).', 'translation-stats' )
+						),
+						$language_packs_threshold,
 						sprintf(
-							wp_kses_post(
-								/* translators: 1: Threshold value. 2: Translation sub-project name. 3: Current value of percent translated. */
-								esc_html__( 'The initial language pack for the plugin will be generated when %1$d%% of the %2$s sub-project strings have been translated (currently %3$d%%).', 'translation-stats' )
-							),
-							$language_packs_threshold,
-							sprintf(
-								'<a href="%1$s" target="_blank">%2$s</a>',
-								esc_url( Translations_API::translate_url( 'plugins', false ) . $project_slug . '/dev/' . $locale->locale_slug ),
-								esc_html_x( 'Development (trunk)', 'Subproject name', 'translation-stats' )
-							),
-							$project_stats['dev']->percent_translated
-						)
+							'<a href="%1$s" target="_blank">%2$s</a>',
+							esc_url( Translations_API::translate_url( 'plugins', false ) . $project_slug . '/dev/' . $locale->locale_slug ),
+							esc_html_x( 'Development (trunk)', 'Subproject name', 'translation-stats' )
+						),
+						$project_stats['dev']->percent_translated
 					);
 
 				}
@@ -557,6 +550,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 
 				// The project is not correctly prepared for localization.
 				$admin_notice['type']    = 'error';
+				$admin_notice['wrap']    = false;
 				$admin_notice['message'] = sprintf(
 					'<p>%1$s %2$s</p><p>%3$s %4$s</p>',
 					sprintf(

@@ -25,7 +25,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Notice' ) ) {
 
 
 		/**
-		 * WordPress core notice types: 'error', 'warning', 'success' or 'info'. Defaults to none.
+		 * WordPress core notice types: 'error', 'warning', 'success' or 'info'. Defaults to empty.
 		 *
 		 * @var string
 		 */
@@ -36,38 +36,38 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Notice' ) ) {
 		 *
 		 * @var bool
 		 */
-		public $notice_alt = false;
+		public $notice_alt;
 
 		/**
 		 * Is inline. Defaults to true.
 		 *
 		 * @var bool
 		 */
-		public $inline = true;
+		public $inline;
 
 		/**
 		 * Is dismissible. Defaults to false.
 		 *
 		 * @var bool
 		 */
-		public $dismissible = false;
+		public $dismissible;
 
 		/**
-		 * Array some extra CSS classes.
+		 * Array some extra CSS classes. Defaults to empty array.
 		 *
 		 * @var array
 		 */
-		public $additional_classes = array();
+		public $additional_classes;
 
 		/**
 		 * Show update message icons. Defaults to false.
 		 *
 		 * @var bool
 		 */
-		public $update_icon = false;
+		public $update_icon;
 
 		/**
-		 * Message to show.
+		 * Message to show. Defaults to empty.
 		 *
 		 * @var string
 		 */
@@ -78,10 +78,10 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Notice' ) ) {
 		 *
 		 * @var string
 		 */
-		public $wrap = 'p';
+		public $wrap;
 
 		/**
-		 * Some extra HTML to show.
+		 * Some extra HTML to show. Defaults to empty.
 		 *
 		 * @var string
 		 */
@@ -120,21 +120,36 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Notice' ) ) {
 		 */
 		public function set( $args ) {
 
-			// Set all the fields.
-			$this->type               = $this->sanitize_type( isset( $args['type'] ) ? $args['type'] : '' );
-			$this->notice_alt         = isset( $args['notice-alt'] ) && $args['notice-alt'] === true ? true : false;
-			$this->inline             = isset( $args['inline'] ) && $args['inline'] === false ? false : true;
-			$this->dismissible        = isset( $args['dismissible'] ) && $args['dismissible'] === true ? true : false;
-			$this->additional_classes = isset( $args['additional-classes'] ) && is_array( $args['additional-classes'] ) ? $args['additional-classes'] : array();
-			$this->update_icon        = isset( $args['update-icon'] ) && $args['update-icon'] === true ? true : false;
-			$this->message            = isset( $args['message'] ) ? $args['message'] : '';
-			$this->wrap               = isset( $args['wrap'] ) && self::is_supported( $args['wrap'] ) ? $args['wrap'] : 'p';
-			$this->extra_html         = isset( $args['extra-html'] ) ? $args['extra-html'] : '';
+			// Default properties.
+			$defaults = array(
+				'type'               => '',
+				'notice-alt'         => false,
+				'inline'             => true,
+				'dismissible'        => false,
+				'additional-classes' => array(),
+				'update-icon'        => false,
+				'message'            => '',
+				'wrap'               => '',
+				'extra-html'         => '',
+			);
+
+			$args = wp_parse_args( $args, $defaults );
+
+			// Set all the properties.
+			$this->type               = $this->sanitize_type( $args['type'] );
+			$this->notice_alt         = $args['notice-alt'] === true ? true : false;
+			$this->inline             = $args['inline'] === false ? false : true;
+			$this->dismissible        = $args['dismissible'] === true ? true : false;
+			$this->additional_classes = is_array( $args['additional-classes'] ) ? $args['additional-classes'] : array();
+			$this->update_icon        = $args['update-icon'] === true ? true : false;
+			$this->message            = $args['message'];
+			$this->wrap               = $this->sanitize_wrap( $args['wrap'] );
+			$this->extra_html         = $args['extra-html'];
 		}
 
 
 		/**
-		 * Sanitize the Admin Notice type.
+		 * Sanitize the Admin Notice type. Defaults to empty.
 		 *
 		 * @since 1.3.2
 		 *
@@ -157,6 +172,33 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Notice' ) ) {
 			}
 
 			return '';
+		}
+
+
+		/**
+		 * Sanitize the Admin Notice HTML wrapper tag. Defaults to 'p' (paragraph HTML tag).
+		 *
+		 * @since 1.3.2
+		 *
+		 * @param string $wrap  Notice supported HTML wrapper.
+		 *
+		 * @return string   Admin Notice wrapper.
+		 */
+		public function sanitize_wrap( $wrap = '' ) {
+
+			$wrappers = array(
+				false,
+				'p',
+				'div',
+				'span',
+			);
+
+			// Check if field wrapper exist in the supported wrappers array.
+			if ( in_array( $wrap, $wrappers, true ) ) {
+				return $wrap;
+			}
+
+			return 'p';
 		}
 
 
@@ -238,33 +280,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Notice' ) ) {
 		public function render() {
 
 			echo wp_kses_post( $this->notice_html() );
-		}
-
-
-		/**
-		 * Check if HTML wrap tag type is supported.
-		 *
-		 * @since 1.2.0
-		 *
-		 * @param string $type   Type of HTML tag to check if is supported.
-		 *
-		 * @return bool   True if type is supported, defaults to false.
-		 */
-		public static function is_supported( $type ) {
-
-			$types = array(
-				false,
-				'p',
-				'div',
-				'span',
-			);
-
-			// Check if field type exist in the supported types array.
-			if ( in_array( $type, $types, true ) ) {
-				return true;
-			}
-
-			return false;
 		}
 	}
 }

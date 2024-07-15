@@ -97,4 +97,69 @@ class Test_Admin_Notice extends WP_UnitTestCase {
 		$this->assertSame( $admin_notice->type, $expected_result );
 
 	}
+
+	/**
+	 * Data provider.
+	 *
+	 * @var array
+	 */
+	public function provide_test_sanitize_wrap() {
+		return array(
+			// Supported.
+			array(
+				'wrap'            => false,
+				'expected_result' => false,
+			),
+			array(
+				'type'            => 'p',
+				'expected_result' => 'p',
+			),
+			array(
+				'type'            => 'div',
+				'expected_result' => 'div',
+			),
+			array(
+				'type'            => 'span',
+				'expected_result' => 'span',
+			),
+			// Not supported.
+			array(
+				'type'            => 'other',
+				'expected_result' => 'p',
+			),
+			array(
+				'type'            => '',
+				'expected_result' => 'p',
+			),
+			array(
+				'type'            => null,
+				'expected_result' => 'p',
+			),
+			array(
+				'type'            => true,
+				'expected_result' => 'p',
+			),
+			array(
+				'type'            => array(),
+				'expected_result' => 'p',
+			),
+		);
+	}
+
+	/**
+	 * Test wrap sanitization.
+	 *
+	 * @dataProvider provide_test_sanitize_wrap
+	 */
+	public function test_sanitize_wrap( $wrap, $expected_result ) {
+
+		$args = array(
+			'wrap' => $wrap,
+		);
+
+		$admin_notice = new Admin_Notice( $args );
+
+		$this->assertSame( $admin_notice->wrap, $expected_result );
+
+	}
 }
