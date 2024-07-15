@@ -379,4 +379,21 @@ class Test_Admin_Notice extends WP_UnitTestCase {
 		$this->assertSame( $admin_notice->wrap, $expected_result );
 
 	}
+
+	/**
+	 * Test admin notice render.
+	 */
+	public function test_render() {
+
+		$this->expectOutputString( '<div class="notice inline"><p></p></div><div class="notice inline"><p></p></div>' );
+
+		$args = array(
+			'force_show' => true,
+		);
+
+		$admin_notice = new Admin_Notice( $args );
+
+		$admin_notice->render();
+
+	}
 }
