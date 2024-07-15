@@ -87,6 +87,239 @@ class Test_Admin_Notice extends WP_UnitTestCase {
 	 *
 	 * @var array
 	 */
+	public function provide_test_notice_html() {
+		return array(
+			array(
+				'type'               => '',
+				'notice_alt'         => false,
+				'inline'             => false,
+				'dismissible'        => false,
+				'additional_classes' => array(),
+				'update_icon'        => false,
+				'message'            => '',
+				'wrap'               => false,
+				'extra_html'         => '',
+				'expected_result'    => '<div class="notice"></div>',
+			),
+			array(
+				'type'               => '',
+				'notice_alt'         => false,
+				'inline'             => false,
+				'dismissible'        => false,
+				'additional_classes' => array(),
+				'update_icon'        => false,
+				'message'            => '',
+				'wrap'               => 'p',
+				'extra_html'         => '',
+				'expected_result'    => '<div class="notice"><p></p></div>',
+			),
+			array(
+				'type'               => '',
+				'notice_alt'         => true,
+				'inline'             => false,
+				'dismissible'        => false,
+				'additional_classes' => array(),
+				'update_icon'        => false,
+				'message'            => '',
+				'wrap'               => false,
+				'extra_html'         => '',
+				'expected_result'    => '<div class="notice notice-alt"></div>',
+			),
+			array(
+				'type'               => '',
+				'notice_alt'         => false,
+				'inline'             => true,
+				'dismissible'        => false,
+				'additional_classes' => array(),
+				'update_icon'        => false,
+				'message'            => '',
+				'wrap'               => 'p',
+				'extra_html'         => '',
+				'expected_result'    => '<div class="notice inline"><p></p></div>',
+			),
+			array(
+				'type'               => '',
+				'notice_alt'         => false,
+				'inline'             => false,
+				'dismissible'        => true,
+				'additional_classes' => array(),
+				'update_icon'        => false,
+				'message'            => '',
+				'wrap'               => 'p',
+				'extra_html'         => '',
+				'expected_result'    => '<div class="notice is-dismissible"><p></p></div>',
+			),
+			array(
+				'type'               => '',
+				'notice_alt'         => false,
+				'inline'             => false,
+				'dismissible'        => false,
+				'additional_classes' => array(
+					'class-1',
+					'class-2',
+				),
+				'update_icon'        => false,
+				'message'            => '',
+				'wrap'               => 'p',
+				'extra_html'         => '',
+				'expected_result'    => '<div class="notice class-1 class-2"><p></p></div>',
+			),
+			array(
+				'type'               => 'info',
+				'notice_alt'         => false,
+				'inline'             => false,
+				'dismissible'        => false,
+				'additional_classes' => array(),
+				'update_icon'        => false,
+				'message'            => '',
+				'wrap'               => 'p',
+				'extra_html'         => '',
+				'expected_result'    => '<div class="notice notice-info"><p></p></div>',
+			),
+			array(
+				'type'               => 'info',
+				'notice_alt'         => false,
+				'inline'             => false,
+				'dismissible'        => false,
+				'additional_classes' => array(),
+				'update_icon'        => true,
+				'message'            => '',
+				'wrap'               => 'p',
+				'extra_html'         => '',
+				'expected_result'    => '<div class="notice notice-info"><p></p></div>',
+			),
+			array(
+				'type'               => 'warning',
+				'notice_alt'         => false,
+				'inline'             => false,
+				'dismissible'        => false,
+				'additional_classes' => array(),
+				'update_icon'        => false,
+				'message'            => '',
+				'wrap'               => 'p',
+				'extra_html'         => '',
+				'expected_result'    => '<div class="notice notice-warning"><p></p></div>',
+			),
+			array(
+				'type'               => 'warning',
+				'notice_alt'         => false,
+				'inline'             => false,
+				'dismissible'        => false,
+				'additional_classes' => array(),
+				'update_icon'        => true,
+				'message'            => '',
+				'wrap'               => 'p',
+				'extra_html'         => '',
+				'expected_result'    => '<div class="notice notice-warning update-message"><p></p></div>',
+			),
+			array(
+				'type'               => 'success',
+				'notice_alt'         => false,
+				'inline'             => false,
+				'dismissible'        => false,
+				'additional_classes' => array(),
+				'update_icon'        => false,
+				'message'            => '',
+				'wrap'               => 'p',
+				'extra_html'         => '',
+				'expected_result'    => '<div class="notice notice-success"><p></p></div>',
+			),
+			array(
+				'type'               => 'success',
+				'notice_alt'         => false,
+				'inline'             => false,
+				'dismissible'        => false,
+				'additional_classes' => array(),
+				'update_icon'        => true,
+				'message'            => '',
+				'wrap'               => 'p',
+				'extra_html'         => '',
+				'expected_result'    => '<div class="notice notice-success updated-message"><p></p></div>',
+			),
+			array(
+				'type'               => 'error',
+				'notice_alt'         => false,
+				'inline'             => false,
+				'dismissible'        => false,
+				'additional_classes' => array(),
+				'update_icon'        => false,
+				'message'            => '',
+				'wrap'               => 'p',
+				'extra_html'         => '',
+				'expected_result'    => '<div class="notice notice-error"><p></p></div>',
+			),
+			array(
+				'type'               => 'error',
+				'notice_alt'         => false,
+				'inline'             => false,
+				'dismissible'        => false,
+				'additional_classes' => array(),
+				'update_icon'        => true,
+				'message'            => '',
+				'wrap'               => 'p',
+				'extra_html'         => '',
+				'expected_result'    => '<div class="notice notice-error update-message"><p></p></div>',
+			),
+			array(
+				'type'               => '',
+				'notice_alt'         => false,
+				'inline'             => false,
+				'dismissible'        => false,
+				'additional_classes' => array(),
+				'update_icon'        => false,
+				'message'            => 'Hello World!',
+				'wrap'               => 'p',
+				'extra_html'         => '',
+				'expected_result'    => '<div class="notice"><p>Hello World!</p></div>',
+			),
+			array(
+				'type'               => '',
+				'notice_alt'         => false,
+				'inline'             => false,
+				'dismissible'        => false,
+				'additional_classes' => array(),
+				'update_icon'        => false,
+				'message'            => 'Hello World!',
+				'wrap'               => 'p',
+				'extra_html'         => '<div>Done!</div>',
+				'expected_result'    => '<div class="notice"><p>Hello World!</p></div><div>Done!</div>',
+			),
+		);
+	}
+
+	/**
+	 * Test wrap sanitization.
+	 *
+	 * @dataProvider provide_test_notice_html
+	 */
+	public function test_notice_html( $type, $notice_alt, $inline, $dismissible, $additional_classes, $update_icon, $message, $wrap, $extra_html, $expected_result ) {
+
+		// Default properties.
+		$args = array(
+			'type'               => $type,
+			'notice-alt'         => $notice_alt,
+			'inline'             => $inline,
+			'dismissible'        => $dismissible,
+			'additional-classes' => $additional_classes,
+			'update-icon'        => $update_icon,
+			'message'            => $message,
+			'wrap'               => $wrap,
+			'extra-html'         => $extra_html,
+		);
+
+		$admin_notice = new Admin_Notice( $args );
+
+		$markup = $admin_notice->notice_html();
+
+		$this->assertSame( $markup, $expected_result );
+
+	}
+
+	/**
+	 * Data provider.
+	 *
+	 * @var array
+	 */
 	public function provide_test_sanitize_wrap() {
 		return array(
 			// Supported.
