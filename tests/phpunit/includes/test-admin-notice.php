@@ -5,7 +5,7 @@
  * @package Translation_Stats
  */
 
-Use Translation_Stats\Admin_Notice;
+use Translation_Stats\Admin_Notice;
 
 
 /**
@@ -69,6 +69,9 @@ class Test_Admin_Notice extends WP_UnitTestCase {
 	 * Test type sanitization.
 	 *
 	 * @dataProvider provide_test_sanitize_type
+	 *
+	 * @param string $type              The type of the admin notice.
+	 * @param string $expected_result   The expected result for the test.
 	 */
 	public function test_sanitize_type( $type, $expected_result ) {
 
@@ -79,7 +82,6 @@ class Test_Admin_Notice extends WP_UnitTestCase {
 		$admin_notice = new Admin_Notice( $args );
 
 		$this->assertSame( $admin_notice->type, $expected_result );
-
 	}
 
 	/**
@@ -291,6 +293,17 @@ class Test_Admin_Notice extends WP_UnitTestCase {
 	 * Test wrap sanitization.
 	 *
 	 * @dataProvider provide_test_notice_html
+	 *
+	 * @param string $type                 The type of the admin notice.
+	 * @param bool   $notice_alt           Wether to set as notice-alt.
+	 * @param bool   $inline               Wether to set as inline.
+	 * @param bool   $dismissible          Wether to set as dismissible.
+	 * @param array  $additional_classes   The type of the admin notice.
+	 * @param bool   $update_icon          Wether to use the update-icon.
+	 * @param string $message              The message of the admin notice.
+	 * @param string $wrap                 The HTML to wrap the admin notice message.
+	 * @param string $extra_html           The extra HTML markup to add to the end of the admin message.
+	 * @param string $expected_result      The expected result for the test.
 	 */
 	public function test_notice_html( $type, $notice_alt, $inline, $dismissible, $additional_classes, $update_icon, $message, $wrap, $extra_html, $expected_result ) {
 
@@ -312,7 +325,6 @@ class Test_Admin_Notice extends WP_UnitTestCase {
 		$markup = $admin_notice->notice_html();
 
 		$this->assertSame( $markup, $expected_result );
-
 	}
 
 	/**
@@ -367,6 +379,9 @@ class Test_Admin_Notice extends WP_UnitTestCase {
 	 * Test wrap sanitization.
 	 *
 	 * @dataProvider provide_test_sanitize_wrap
+	 *
+	 * @param string $wrap              The HTML to wrap the admin notice message.
+	 * @param string $expected_result   The expected result for the test.
 	 */
 	public function test_sanitize_wrap( $wrap, $expected_result ) {
 
@@ -377,7 +392,6 @@ class Test_Admin_Notice extends WP_UnitTestCase {
 		$admin_notice = new Admin_Notice( $args );
 
 		$this->assertSame( $admin_notice->wrap, $expected_result );
-
 	}
 
 	/**
@@ -394,6 +408,5 @@ class Test_Admin_Notice extends WP_UnitTestCase {
 		$admin_notice = new Admin_Notice( $args );
 
 		$admin_notice->render();
-
 	}
 }

@@ -5,7 +5,7 @@
  * @package Translation_Stats
  */
 
-Use Translation_Stats\Translations_API;
+use Translation_Stats\Translations_API;
 
 
 /**
@@ -37,7 +37,6 @@ class Test_Translations_API extends WP_UnitTestCase {
 		$plugin_slug = Translations_API::get_plugin_slug( 'translation-stats' );
 
 		$this->assertSame( $plugin_slug, 'translation-stats' );
-
 	}
 
 
@@ -61,7 +60,6 @@ class Test_Translations_API extends WP_UnitTestCase {
 		$response_code = wp_remote_retrieve_response_code( $response );
 
 		$this->assertSame( $response_code, 404 );
-
 	}
 
 
@@ -99,7 +97,6 @@ class Test_Translations_API extends WP_UnitTestCase {
 			$plugin_subprojects,
 			$expected
 		);
-
 	}
 
 
@@ -180,6 +177,10 @@ class Test_Translations_API extends WP_UnitTestCase {
 	 * Test the translate site URL.
 	 *
 	 * @dataProvider provide_test_translate_url
+	 *
+	 * @param string $project           The project.
+	 * @param bool   $api               Wether to get an API URL.
+	 * @param string $expected_result   The expected result for the test.
 	 */
 	public function test_translate_url( $project, $api, $expected_result ) {
 
@@ -189,7 +190,5 @@ class Test_Translations_API extends WP_UnitTestCase {
 			$translate_url,
 			$expected_result
 		);
-
 	}
-
 }

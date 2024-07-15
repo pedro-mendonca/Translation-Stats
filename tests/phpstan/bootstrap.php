@@ -5,7 +5,6 @@
  * @package Translation_Stats
  */
 
-
 // Set Translation Stats plugin version.
 if ( ! defined( 'TRANSLATION_STATS_VERSION' ) ) {
 	define( 'TRANSLATION_STATS_VERSION', '1.2.5' );
