@@ -157,7 +157,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Notice' ) ) {
 		 *
 		 * @return string   Admin Notice type.
 		 */
-		public function sanitize_type( $type = '' ) {
+		public function sanitize_type( $type ) {
 
 			$types = array(
 				'error',
@@ -245,10 +245,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Notice' ) ) {
 					case 'success':
 						array_push( $css_classes, 'updated-message' ); // Updated icon (check mark).
 						break;
-					case 'info':
-						break; // No icon.
 					default:
-						break; // Defaults to none.
+						break; // Defaults to none. Used by 'info' that has no update-icon message.
 				}
 			}
 
