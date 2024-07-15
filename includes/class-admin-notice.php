@@ -6,6 +6,7 @@
  *
  * @since 0.8.0
  * @since 1.2.0   Renamed from Notices to Admin_Notice.
+ * @since 1.3.2   Property names inspired by the new 6.4 admin notices: https://github.com/WordPress/wordpress-develop/pull/4119/
  */
 
 namespace Translation_Stats;
@@ -24,7 +25,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Notice' ) ) {
 
 
 		/**
-		 * WordPress core notice types: 'error', 'warning', 'warning-spin', 'success' or 'info'. Defaults to none.
+		 * WordPress core notice types: 'error', 'warning', 'success' or 'info'. Defaults to none.
 		 *
 		 * @var string
 		 */
@@ -56,7 +57,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Notice' ) ) {
 		 *
 		 * @var array
 		 */
-		public $css_class = array();
+		public $additional_classes = array();
 
 		/**
 		 * Show update message icons. Defaults to false.
@@ -94,8 +95,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Notice' ) ) {
 		 */
 		public function __construct( $args ) {
 
-			// Prepare all the admin notice fields.
-			$this->prepare_notice( $args );
+			// Set all the admin notice fields.
+			$this->set( $args );
 
 			// Check if 'show_warnings' is true.
 			$wp_option = get_option( TRANSLATION_STATS_WP_OPTION );
@@ -103,61 +104,37 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Notice' ) ) {
 				return;
 			}
 
-			// Render the Admin Notice.
-			$this->render_notice();
+			// Render the admin notice.
+			$this->render();
 		}
 
 
 		/**
-		 * Prepare all the admin notice fields.
+		 * Set all the admin notice fields.
 		 *
 		 * @since 1.3.2
 		 *
 		 * @param array $args   Array of message data.
+		 *
+		 * @return void
 		 */
-		public function prepare_notice( $args ) {
+		public function set( $args ) {
 
-			// Set Type.
-			$this->type = $this->sanitize_type( isset( $args['type'] ) ?? '' );
-
-			// TODO: Sanitize fields.
-			// TODO: Add classes parameters as CSS classes.
-			$this->notice_alt  = isset( $args['notice-alt'] ) && $args['notice-alt'] ? ' notice-alt' : '';
-			$this->inline      = isset( $args['inline'] ) && ! $args['inline'] ? '' : ' inline';
-			$this->dismissible = isset( $args['dismissible'] ) && $args['dismissible'] ? ' is-dismissible' : '';
-			$this->css_class   = isset( $args['css-class'] ) ? ' ' . $args['css-class'] : '';
-			if ( isset( $args['update-icon'] ) && $args['update-icon'] ) {
-				switch ( $this->type ) {
-					case 'error':
-						$this->update_icon = ' update-message'; // Error icon.
-						break;
-					case 'warning':
-						$this->update_icon = ' update-message'; // Update icon.
-						break;
-					case 'warning-spin':
-						$this->update_icon = ' updating-message'; // Spins the update icon.
-						$this->type        = ' notice-warning';   // Set the notice type to the default parent 'warning' class.
-						break;
-					case 'success':
-						$this->update_icon = ' updated-message'; // Updated icon (check mark).
-						break;
-					case 'info':
-						$this->update_icon = ''; // No icon.
-						break;
-					default:
-						$this->update_icon = ''; // Defaults to none.
-						break;
-				}
-			}
-			$this->message    = isset( $args['message'] ) ? $args['message'] : '';
-			$this->wrap       = isset( $args['wrap'] ) && self::is_supported( $args['wrap'] ) ? $args['wrap'] : 'p';
-			$this->extra_html = isset( $args['extra-html'] ) ? $args['extra-html'] : '';
+			// Set all the fields.
+			$this->type               = $this->sanitize_type( isset( $args['type'] ) ? $args['type'] : '' );
+			$this->notice_alt         = isset( $args['notice-alt'] ) && $args['notice-alt'] === true ? true : false;
+			$this->inline             = isset( $args['inline'] ) && $args['inline'] === false ? false : true;
+			$this->dismissible        = isset( $args['dismissible'] ) && $args['dismissible'] === true ? true : false;
+			$this->additional_classes = isset( $args['additional-classes'] ) && is_array( $args['additional-classes'] ) ? $args['additional-classes'] : array();
+			$this->update_icon        = isset( $args['update-icon'] ) && $args['update-icon'] === true ? true : false;
+			$this->message            = isset( $args['message'] ) ? $args['message'] : '';
+			$this->wrap               = isset( $args['wrap'] ) && self::is_supported( $args['wrap'] ) ? $args['wrap'] : 'p';
+			$this->extra_html         = isset( $args['extra-html'] ) ? $args['extra-html'] : '';
 		}
 
 
 		/**
 		 * Sanitize the Admin Notice type.
-		 * WordPress core notice types: 'error', 'warning', 'warning-spin', 'success' or 'info'. Defaults to none.
 		 *
 		 * @since 1.3.2
 		 *
@@ -170,14 +147,13 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Notice' ) ) {
 			$types = array(
 				'error',
 				'warning',
-				'warning-spin',
 				'success',
 				'info',
 			);
 
 			// Check if field type exist in the supported types array.
 			if ( in_array( $type, $types, true ) ) {
-				return ' notice-' . $type;
+				return $type;
 			}
 
 			return '';
@@ -185,34 +161,83 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Notice' ) ) {
 
 
 		/**
-		 * Display formatted admin notice.
+		 * Generate the markup for an admin notice.
 		 *
-		 * WordPress core notice types ( 'error', 'warning', 'warning-spin', 'success' and 'info' ).
-		 * The child type 'warning-spin' is the spinning variation of main 'warning' icon (if 'update-icon' is set to 'true'). The css class will be kept the parent 'warning'.
-		 * Use 'force_show' => true to ignore the 'show_warnings' setting.
+		 * @since 1.3.2
 		 *
-		 * @since 1.3.1
+		 * @return string   The markup for an admin notice.
+		 */
+		public function notice_html() {
+
+			// Set minimal CSS class.
+			$css_classes = array( 'notice' );
+
+			// Set type CSS class.
+			if ( $this->type !== '' ) {
+				array_push( $css_classes, 'notice-' . $this->type );
+			}
+
+			// Set notice-alt CSS class.
+			if ( $this->notice_alt === true ) {
+				array_push( $css_classes, 'notice-alt' );
+			}
+
+			// Set inline CSS class.
+			if ( $this->inline === true ) {
+				array_push( $css_classes, 'inline' );
+			}
+
+			// Set dismissible CSS class.
+			if ( $this->dismissible === true ) {
+				array_push( $css_classes, 'is-dismissible' );
+			}
+
+			if ( $this->update_icon === true ) {
+				switch ( $this->type ) {
+					case 'error':
+						array_push( $css_classes, 'update-message' ); // Error icon.
+						break;
+					case 'warning':
+						array_push( $css_classes, 'update-message' ); // Update icon.
+						break;
+					case 'success':
+						array_push( $css_classes, 'updated-message' ); // Updated icon (check mark).
+						break;
+					case 'info':
+						break; // No icon.
+					default:
+						break; // Defaults to none.
+				}
+			}
+
+			// Set extra CSS classes.
+			if ( ! empty( $this->additional_classes ) ) {
+				array_push( $css_classes, implode( ' ', $this->additional_classes ) );
+			}
+
+			$css_classes = implode( ' ', $css_classes );
+
+			return sprintf(
+				'%s%s%s%s%s',
+				'<div class="' . esc_attr( $css_classes ) . '">',
+				$this->wrap ? '<' . esc_html( $this->wrap ) . '>' : '',
+				$this->message,
+				$this->wrap ? '</' . esc_html( $this->wrap ) . '>' : '',
+				'</div>'
+			) . wp_kses( $this->extra_html, Utils::allowed_html() );
+		}
+
+
+		/**
+		 * Render notice HTML.
+		 *
+		 * @since 1.3.2
 		 *
 		 * @return void
 		 */
-		public function render_notice() {
+		public function render() {
 
-			// TODO: return the admin notice.
-
-			?>
-			<div class="notice<?php echo esc_attr( $this->type ) . esc_attr( $this->notice_alt ) . esc_attr( $this->inline ) . esc_attr( $this->update_icon ) . esc_attr( $this->css_class ) . esc_attr( $this->dismissible ); ?>">
-				<?php
-
-				$opening_tag = $this->wrap ? '<' . esc_html( $this->wrap ) . '>' : '';
-				$closing_tag = $this->wrap ? '</' . esc_html( $this->wrap ) . '>' : '';
-
-				echo wp_kses_post( $opening_tag . $this->message . $closing_tag );
-
-				// Extra HTML.
-				echo wp_kses( $this->extra_html, Utils::allowed_html() );
-				?>
-			</div>
-			<?php
+			echo wp_kses_post( $this->notice_html() );
 		}
 
 
@@ -222,6 +247,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Notice' ) ) {
 		 * @since 1.2.0
 		 *
 		 * @param string $type   Type of HTML tag to check if is supported.
+		 *
 		 * @return bool   True if type is supported, defaults to false.
 		 */
 		public static function is_supported( $type ) {

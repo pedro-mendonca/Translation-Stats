@@ -265,12 +265,14 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		public function plugin_widget_content() {
 
 			$admin_notice_waiting = array(
-				'type'        => 'warning',
-				'notice-alt'  => true,
-				'css-class'   => 'translation-stats-loading',
-				'update-icon' => true,
-				'force_show'  => true,
-				'message'     => esc_html__( 'Waiting...', 'translation-stats' ),
+				'type'               => 'warning',
+				'notice-alt'         => true,
+				'additional-classes' => array(
+					'translation-stats-loading',
+				),
+				'update-icon'        => true,
+				'force_show'         => true,
+				'message'            => esc_html__( 'Waiting...', 'translation-stats' ),
 			);
 			new Admin_Notice( $admin_notice_waiting );
 			?>
