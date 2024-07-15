@@ -6,6 +6,7 @@
  *
  * @since 0.8.0
  * @since 1.2.0   Renamed from Notices to Admin_Notice.
+ * @since 1.3.2   Property names inspired by the new 6.4 admin notices: https://github.com/WordPress/wordpress-develop/pull/4119/
  */
 
 namespace Translation_Stats;
@@ -24,23 +25,78 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Notice' ) ) {
 
 
 		/**
-		 * Display formatted admin notice.
+		 * WordPress core notice types: 'error', 'warning', 'success' or 'info'. Defaults to empty.
 		 *
-		 * WordPress core notice types ( 'error', 'warning', 'warning-spin', 'success' and 'info' ).
-		 * The child type 'warning-spin' is the spinning variation of main 'warning' icon (if 'update-icon' is set to 'true'). The css class will be kept the parent 'warning'.
-		 * Use 'force_show' => true to ignore the 'show_warnings' setting.
+		 * @var string
+		 */
+		public $type;
+
+		/**
+		 * Show message alternative color scheme with class 'notice-alt': true or false. Defaults no false.
 		 *
-		 * @since 0.8.0
-		 * @since 0.9.5   Array with all the notice data.
-		 * @since 1.1.1   Renamed from tstats_notice_message() to notice_message().
-		 * @since 1.2.0   Renamed from notice_message() to message().
-		 *                Added support for 'wrap' properties, defaults to 'p' tag for backwards compatibility.
+		 * @var bool
+		 */
+		public $notice_alt;
+
+		/**
+		 * Is inline. Defaults to true.
+		 *
+		 * @var bool
+		 */
+		public $inline;
+
+		/**
+		 * Is dismissible. Defaults to false.
+		 *
+		 * @var bool
+		 */
+		public $dismissible;
+
+		/**
+		 * Array some extra CSS classes. Defaults to empty array.
+		 *
+		 * @var array
+		 */
+		public $additional_classes;
+
+		/**
+		 * Show update message icons. Defaults to false.
+		 *
+		 * @var bool
+		 */
+		public $update_icon;
+
+		/**
+		 * Message to show. Defaults to empty.
+		 *
+		 * @var string
+		 */
+		public $message;
+
+		/**
+		 * HTML tag of the message wrapper. Defaults to 'p' (<p>... </p>).
+		 *
+		 * @var string
+		 */
+		public $wrap;
+
+		/**
+		 * Some extra HTML to show. Defaults to empty.
+		 *
+		 * @var string
+		 */
+		public $extra_html;
+
+
+		/**
+		 * Constructor.
 		 *
 		 * @param array $args   Array of message data.
-		 *
-		 * @return void
 		 */
-		public static function message( $args ) {
+		public function __construct( $args ) {
+
+			// Set all the admin notice fields.
+			$this->set( $args );
 
 			// Check if 'show_warnings' is true.
 			$wp_option = get_option( TRANSLATION_STATS_WP_OPTION );
@@ -48,83 +104,180 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Notice' ) ) {
 				return;
 			}
 
-			// Use defaults if properties not set.
-			$notice = array(
-				'type'        => isset( $args['type'] ) ? ' notice-' . $args['type'] : '',                             // WordPress core notice types: 'error', 'warning', 'warning-spin', 'success' or 'info'. Defaults to none.
-				'notice-alt'  => isset( $args['notice-alt'] ) && $args['notice-alt'] ? ' notice-alt' : '',             // Show message alternative color scheme with class 'notice-alt': true or false. Defaults no false.
-				'inline'      => isset( $args['inline'] ) && ! $args['inline'] ? '' : ' inline',                       // Defaults to true.
-				'dismissible' => isset( $args['dismissible'] ) && $args['dismissible'] ? ' is-dismissible' : '',       // Defaults to false.
-				'css-class'   => isset( $args['css-class'] ) ? ' ' . $args['css-class'] : '',                          // Some extra CSS classes.
-				'update-icon' => isset( $args['update-icon'] ) && $args['update-icon'] ? true : '',                    // Show update message icons. Defaults to false.
-				'message'     => isset( $args['message'] ) ? $args['message'] : '',                                    // Message to show.
-				'wrap'        => isset( $args['wrap'] ) && self::is_supported( $args['wrap'] ) ? $args['wrap'] : 'p',  // HTML tag to wrap the message. Defaults to 'p' (paragraph).
-				'extra-html'  => isset( $args['extra-html'] ) ? $args['extra-html'] : '',                              // Some extra HTML to show.
-			);
-
-			if ( $notice['update-icon'] ) {
-				switch ( $args['type'] ) {
-					case 'error':
-						$notice['update-icon'] = ' update-message'; // Error icon.
-						break;
-					case 'warning':
-						$notice['update-icon'] = ' update-message'; // Update icon.
-						break;
-					case 'warning-spin':
-						$notice['update-icon'] = ' updating-message'; // Spins the update icon.
-						$notice['type']        = ' notice-warning'; // Set the notice type to the default parent 'warning' class.
-						break;
-					case 'success':
-						$notice['update-icon'] = ' updated-message'; // Updated icon (check mark).
-						break;
-					case 'info':
-						$notice['update-icon'] = ''; // No icon.
-						break;
-					default:
-						$notice['update-icon'] = ''; // Defaults to none.
-						break;
-				}
-			}
-
-			?>
-			<div class="notice<?php echo esc_attr( $notice['type'] ) . esc_attr( $notice['notice-alt'] ) . esc_attr( $notice['inline'] ) . esc_attr( $notice['update-icon'] ) . esc_attr( $notice['css-class'] ) . esc_attr( $notice['dismissible'] ); ?>">
-				<?php
-
-				$opening_tag = $notice['wrap'] ? '<' . esc_html( $notice['wrap'] ) . '>' : '';
-				$closing_tag = $notice['wrap'] ? '</' . esc_html( $notice['wrap'] ) . '>' : '';
-
-				echo wp_kses_post( $opening_tag . $notice['message'] . $closing_tag );
-
-				// Extra HTML.
-				echo wp_kses( $notice['extra-html'], Utils::allowed_html() );
-				?>
-			</div>
-			<?php
+			// Render the admin notice.
+			$this->render();
 		}
 
 
 		/**
-		 * Check if HTML wrap tag type is supported.
+		 * Set all the admin notice fields.
 		 *
-		 * @since 1.2.0
+		 * @since 1.3.2
 		 *
-		 * @param string $type   Type of HTML tag to check if is supported.
-		 * @return bool   True if type is supported, defaults to false.
+		 * @param array $args   Array of message data.
+		 *
+		 * @return void
 		 */
-		public static function is_supported( $type ) {
+		public function set( $args ) {
+
+			// Default properties.
+			$defaults = array(
+				'type'               => '',
+				'notice-alt'         => false,
+				'inline'             => true,
+				'dismissible'        => false,
+				'additional-classes' => array(),
+				'update-icon'        => false,
+				'message'            => '',
+				'wrap'               => '',
+				'extra-html'         => '',
+			);
+
+			$args = wp_parse_args( $args, $defaults );
+
+			// Set all the properties.
+			$this->type               = $this->sanitize_type( $args['type'] );
+			$this->notice_alt         = $args['notice-alt'] === true ? true : false;
+			$this->inline             = $args['inline'] === false ? false : true;
+			$this->dismissible        = $args['dismissible'] === true ? true : false;
+			$this->additional_classes = is_array( $args['additional-classes'] ) ? $args['additional-classes'] : array();
+			$this->update_icon        = $args['update-icon'] === true ? true : false;
+			$this->message            = $args['message'];
+			$this->wrap               = $this->sanitize_wrap( $args['wrap'] );
+			$this->extra_html         = $args['extra-html'];
+		}
+
+
+		/**
+		 * Sanitize the Admin Notice type. Defaults to empty.
+		 *
+		 * @since 1.3.2
+		 *
+		 * @param string $type  WordPress core notice types.
+		 *
+		 * @return string   Admin Notice type.
+		 */
+		public function sanitize_type( $type ) {
 
 			$types = array(
+				'error',
+				'warning',
+				'success',
+				'info',
+			);
+
+			// Check if field type exist in the supported types array.
+			if ( in_array( $type, $types, true ) ) {
+				return $type;
+			}
+
+			return '';
+		}
+
+
+		/**
+		 * Sanitize the Admin Notice HTML wrapper tag. Defaults to 'p' (paragraph HTML tag).
+		 *
+		 * @since 1.3.2
+		 *
+		 * @param string $wrap  Notice supported HTML wrapper.
+		 *
+		 * @return string   Admin Notice wrapper.
+		 */
+		public function sanitize_wrap( $wrap = '' ) {
+
+			$wrappers = array(
 				false,
 				'p',
 				'div',
 				'span',
 			);
 
-			// Check if field type exist in the supported types array.
-			if ( in_array( $type, $types, true ) ) {
-				return true;
+			// Check if field wrapper exist in the supported wrappers array.
+			if ( in_array( $wrap, $wrappers, true ) ) {
+				return $wrap;
 			}
 
-			return false;
+			return 'p';
+		}
+
+
+		/**
+		 * Generate the markup for an admin notice.
+		 *
+		 * @since 1.3.2
+		 *
+		 * @return string   The markup for an admin notice.
+		 */
+		public function notice_html() {
+
+			// Set minimal CSS class.
+			$css_classes = array( 'notice' );
+
+			// Set type CSS class.
+			if ( $this->type !== '' ) {
+				array_push( $css_classes, 'notice-' . $this->type );
+			}
+
+			// Set notice-alt CSS class.
+			if ( $this->notice_alt === true ) {
+				array_push( $css_classes, 'notice-alt' );
+			}
+
+			// Set inline CSS class.
+			if ( $this->inline === true ) {
+				array_push( $css_classes, 'inline' );
+			}
+
+			// Set dismissible CSS class.
+			if ( $this->dismissible === true ) {
+				array_push( $css_classes, 'is-dismissible' );
+			}
+
+			if ( $this->update_icon === true ) {
+				switch ( $this->type ) {
+					case 'error':
+						array_push( $css_classes, 'update-message' ); // Error icon.
+						break;
+					case 'warning':
+						array_push( $css_classes, 'update-message' ); // Update icon.
+						break;
+					case 'success':
+						array_push( $css_classes, 'updated-message' ); // Updated icon (check mark).
+						break;
+					default:
+						break; // Defaults to none. Used by 'info' that has no update-icon message.
+				}
+			}
+
+			// Set extra CSS classes.
+			if ( ! empty( $this->additional_classes ) ) {
+				array_push( $css_classes, implode( ' ', $this->additional_classes ) );
+			}
+
+			$css_classes = implode( ' ', $css_classes );
+
+			return sprintf(
+				'%s%s%s%s%s',
+				'<div class="' . esc_attr( $css_classes ) . '">',
+				$this->wrap ? '<' . esc_html( $this->wrap ) . '>' : '',
+				$this->message,
+				$this->wrap ? '</' . esc_html( $this->wrap ) . '>' : '',
+				'</div>'
+			) . wp_kses( $this->extra_html, Utils::allowed_html() );
+		}
+
+
+		/**
+		 * Render notice HTML.
+		 *
+		 * @since 1.3.2
+		 *
+		 * @return void
+		 */
+		public function render() {
+
+			echo wp_kses_post( $this->notice_html() );
 		}
 	}
 }
