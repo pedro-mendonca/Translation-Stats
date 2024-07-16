@@ -125,7 +125,7 @@ jobs:
 
     - name: Process results
       run: |
-        node ${{ github.action_path }}/dist/index.js ${{ runner.temp }}/plugin-check-results.txt
+        node ../../actions/plugin-check-action/dist/index.js ${{ runner.temp }}/plugin-check-results.txt
       shell: bash
       env:
         INPUT_REPO_TOKEN: ${{ github.token }}
