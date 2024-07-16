@@ -1,4 +1,4 @@
-name: WP Plugin Check
+name: WP Plugin Check (Alternate)
 on: # rebuild any PRs and main branch changes
   pull_request:
   push:
@@ -30,11 +30,17 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Set up Node
+      uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b
+      with:
+        node-version: '20'
+
     - name: Set up PHP
       uses: shivammathur/setup-php@2.31.1
       with:
         php-version: '7.4'
         coverage: none
+        tools: composer
       env:
         fail-fast: false
 
