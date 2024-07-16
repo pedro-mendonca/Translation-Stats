@@ -4,47 +4,51 @@ author: 'Pascal Birchler'
 branding:
   color: 'blue'
   icon: 'trending-up'
-inputs:
-  repo-token:
-    description: 'The GITHUB_TOKEN secret'
-    required: false
-    default: ${{ github.token }}
-  build-dir:
-    description: 'Build directory'
-    required: false
-    default: './'
-  checks:
-    description: 'Only run specific checks'
-    required: false
-    default: ''
-  exclude-checks:
-    description: 'Checks to exclude'
-    required: false
-    default: ''
-  categories:
-    description: 'Limit checks to specific categories'
-    required: false
-    default: ''
-  exclude-directories:
-    description: 'Exclude certain directories from checks'
-    required: false
-    default: ''
-  ignore-warnings:
-    description: 'Ignore warnings'
-    required: false
-    default: 'false'
-  ignore-errors:
-    description: 'Ignore errors'
-    required: false
-    default: 'false'
-  include-experimental:
-    description: 'Include experimental checks'
-    required: false
-    default: 'false'
-  wp-version:
-    description: 'WordPress version to use'
-    required: false
-    default: 'latest'
+
+on:
+  workflow_call:
+    inputs:
+      repo-token:
+        description: 'The GITHUB_TOKEN secret'
+        required: false
+        default: ${{ github.token }}
+      build-dir:
+        description: 'Build directory'
+        required: false
+        default: './'
+      checks:
+        description: 'Only run specific checks'
+        required: false
+        default: ''
+      exclude-checks:
+        description: 'Checks to exclude'
+        required: false
+        default: ''
+      categories:
+        description: 'Limit checks to specific categories'
+        required: false
+        default: ''
+      exclude-directories:
+        description: 'Exclude certain directories from checks'
+        required: false
+        default: ''
+      ignore-warnings:
+        description: 'Ignore warnings'
+        required: false
+        default: 'false'
+      ignore-errors:
+        description: 'Ignore errors'
+        required: false
+        default: 'false'
+      include-experimental:
+        description: 'Include experimental checks'
+        required: false
+        default: 'false'
+      wp-version:
+        description: 'WordPress version to use'
+        required: false
+        default: 'latest'
+
 runs:
   using: "composite"
   steps:
