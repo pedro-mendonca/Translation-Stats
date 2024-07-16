@@ -1,68 +1,57 @@
-name: 'WordPress Plugin Check'
-description: 'Test your WordPress plugin with Plugin Check'
-author: 'Pascal Birchler'
-branding:
-  color: 'blue'
-  icon: 'trending-up'
+name: WP Plugin Check
+on: # rebuild any PRs and main branch changes
+  pull_request:
+  push:
+    branches:
+    - master
+    - dev
+    - 'releases/*'
+  # Allows you to run this workflow manually from the Actions tab.
+  workflow_dispatch:
 
-on:
-  workflow_call:
-    inputs:
-      repo-token:
-        description: 'The GITHUB_TOKEN secret'
-        required: false
-        default: ${{ github.token }}
-      build-dir:
-        description: 'Build directory'
-        required: false
-        default: './'
-      checks:
-        description: 'Only run specific checks'
-        required: false
-        default: ''
-      exclude-checks:
-        description: 'Checks to exclude'
-        required: false
-        default: ''
-      categories:
-        description: 'Limit checks to specific categories'
-        required: false
-        default: ''
-      exclude-directories:
-        description: 'Exclude certain directories from checks'
-        required: false
-        default: ''
-      ignore-warnings:
-        description: 'Ignore warnings'
-        required: false
-        default: 'false'
-      ignore-errors:
-        description: 'Ignore errors'
-        required: false
-        default: 'false'
-      include-experimental:
-        description: 'Include experimental checks'
-        required: false
-        default: 'false'
-      wp-version:
-        description: 'WordPress version to use'
-        required: false
-        default: 'latest'
+jobs:
+  # Runs the WP Plugin Check.
+  #
+  # Checks from the Plugin Review Team.
+  #
+  # For the detailed list of checks:
+  # - https://wordpress.org/plugins/plugin-check/
+  #
+  # Performs the following steps:
+  # - Checks out the repository.
+  # - Sets up PHP.
+  # - Installs Composer dependencies.
+  # - Runs the Plugin Check.
+  plugin-check:
+    name: Plugin Check
+    runs-on: ubuntu-latest
 
-runs:
-  using: "composite"
-  steps:
-    - name: Set up Node
-      uses: actions/setup-node@1e60f620b9541d16bece96c5465dc8ee9832be0b
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up PHP
+      uses: shivammathur/setup-php@2.31.1
       with:
-        node-version: '20'
-
-    - name: Setup PHP
-      uses: shivammathur/setup-php@c541c155eee45413f5b09a52248675b1a2575231
-      with:
-        php-version: 'latest'
+        php-version: '7.4'
         coverage: none
-        tools: composer
+      env:
+        fail-fast: false
+
+    - name: Validate composer.json and composer.lock
+      run: composer validate --strict
+
+    - name: Install Composer dependencies
+      uses: ramsey/composer-install@v3
+      with:
+        composer-options: "--no-dev"
+
+    - name: Copy the plugin files to the plugin check folder, excluding the files on .distignore.
+      run: rsync -rc --exclude-from="$GITHUB_WORKSPACE/.distignore" "$GITHUB_WORKSPACE/" translation-stats/ --delete --delete-excluded
+
+    #
+    # Test action.
+    #
 
     - name: Install WP-CLI
       run: |
@@ -86,7 +75,7 @@ runs:
         echo "PLUGIN_SLUG=$PLUGIN_SLUG" >> "$GITHUB_ENV"
       shell: bash
       env:
-        BUILD_DIR: ${{ inputs.build-dir }}
+        BUILD_DIR: 'translation-stats'
 
     - name: Setup wp-env
       run: |
@@ -98,7 +87,7 @@ runs:
         wp-env start --update
       shell: bash
       env:
-        WP_VERSION: ${{ inputs.wp-version == 'trunk' && '"WordPress/WordPress#master"' || 'null' }}
+        WP_VERSION: 'null'
 
     - name: Run Plugin Check
       run: |
@@ -120,17 +109,17 @@ runs:
         wp-env run cli wp plugin check $PLUGIN_SLUG --format=json $ADDITIONAL_ARGS --require=./wp-content/plugins/plugin-check/cli.php > ${{ runner.temp }}/plugin-check-results.txt
       shell: bash
       env:
-        CHECKS: ${{ inputs.checks && format('--checks={0}', inputs.checks) || '' }}
-        EXCLUDE_CHECKS: ${{ inputs.exclude-checks && format('--exclude-checks={0}', inputs.exclude-checks) || '' }}
-        CATEGORIES: ${{ inputs.categories && format('--categories={0}', inputs.categories) || '' }}
-        EXCLUDE_DIRS: ${{ inputs.exclude-directories && format('--exclude-directories={0}', inputs.exclude-directories) || '' }}
-        IGNORE_WARNINGS: ${{ inputs.ignore-warnings == 'true' && '--ignore-warnings' || '' }}
-        IGNORE_ERRORS: ${{ inputs.ignore-errors == 'true' && '--ignore-errors' || '' }}
-        INCLUDE_EXPERIMENTAL: ${{ inputs.include-experimental == 'true' && '--include-experimental' || '' }}
+        CHECKS: ''
+        EXCLUDE_CHECKS: ''
+        CATEGORIES: ''
+        EXCLUDE_DIRS: ''
+        IGNORE_WARNINGS: ''
+        IGNORE_ERRORS: ''
+        INCLUDE_EXPERIMENTAL: ''
 
     - name: Process results
       run: |
         node ${{ github.action_path }}/dist/index.js ${{ runner.temp }}/plugin-check-results.txt
       shell: bash
       env:
-        INPUT_REPO_TOKEN: ${{ inputs.repo-token }}
+        INPUT_REPO_TOKEN: ${{ github.token }}

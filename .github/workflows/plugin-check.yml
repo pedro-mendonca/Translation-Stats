@@ -53,8 +53,3 @@ jobs:
       uses: wordpress/plugin-check-action@v1
       with:
         build-dir: 'translation-stats'
-
-    - name: Run plugin check (local test action)
-      uses: pedro-mendonca/Translation-Stats/.github/workflows/plugin-check-test.yml@dev
-      with:
-        build-dir: 'translation-stats'
