@@ -24,7 +24,7 @@
 		"node-sass": "^9.0.0",
 		"postcss-cli": "^11.0.0",
 		"tablesorter": "^2.31.3",
-		"uglify-js": "^3.19.1"
+		"uglify-js": "^3.19.3"
 	},
 	"scripts": {
 		"build": "npm run build:js & npm run compile:css & npm run build:css",
