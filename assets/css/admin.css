@@ -1,80 +1,79 @@
 @charset "UTF-8";
 
 table.wp-list-table.plugins th.column-translation-stats {
-	white-space: nowrap;
-	width: 20%;
+  white-space: nowrap;
+  width: 20%;
 }
 
 table.wp-list-table.plugins th.column-translation-stats a.tstats-edit-settings-button {
-	border-radius: 4px;
+  border-radius: 4px;
 }
 
 table.wp-list-table.plugins td.column-translation-stats {
-	padding-right: 20px;
+  padding-right: 20px;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-title {
-	display: block;
-	white-space: nowrap;
+  display: block;
+  white-space: nowrap;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-title p {
-	margin-top: 0;
+  margin-top: 0;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-title .tstats-update-link {
-	float: right;
+  float: right;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-title .tstats-update-link button.tstats-update-button {
-	display: none;
-	border-radius: 4px;
+  display: none;
+  border-radius: 4px;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-title .tstats-update-link button.tstats-update-button span {
-	color: #235a28;
-	-webkit-transition: all 600ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
-	-moz-transition: all 600ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
-	-o-transition: all 600ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
-	transition: all 600ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+  color: #235a28;
+  -webkit-transition: all 600ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+  transition: all 600ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
 }
 
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-title .tstats-update-link button.tstats-update-button:hover span,
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-title .tstats-update-link button.tstats-update-button:focus span {
-	transform: rotateZ(180deg);
-	color: #46b450;
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-title .tstats-update-link button.tstats-update-button:hover span, table.wp-list-table.plugins td.column-translation-stats .translation-stats-title .tstats-update-link button.tstats-update-button:focus span {
+  -webkit-transform: rotateZ(180deg);
+  -ms-transform: rotate(180deg);
+  transform: rotateZ(180deg);
+  color: #46b450;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .notice.translation-stats-loading.notice-warning.update-message p::before {
-	content: "\f469";
+  content: "\f469";
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats {
-	display: grid;
-	grid-row-gap: 6px;
-	padding: 6px;
-	margin: 0 0 10px 0;
-	border-radius: 4px;
+  display: grid;
+  grid-row-gap: 6px;
+  padding: 6px;
+  margin: 0 0 10px 0;
+  border-radius: 4px;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject .subproject-bar {
-	display: block;
-	padding: 5px 10px;
-	background-color: rgba(0, 0, 0, 0);
-	white-space: nowrap;
+  display: block;
+  padding: 5px 10px;
+  background-color: rgba(0, 0, 0, 0);
+  white-space: nowrap;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject .subproject-bar .subproject-bar__percentage {
-	display: inline-block;
-	font-weight: 700;
-	text-align: right;
-	width: 32px;
-	margin-right: 10px;
+  display: inline-block;
+  font-weight: 700;
+  text-align: right;
+  width: 32px;
+  margin-right: 10px;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject .subproject-bar .subproject-bar__count {
-	display: inline-block;
-	font-weight: 600;
+  display: inline-block;
+  font-weight: 600;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a,
@@ -82,70 +81,70 @@ table.wp-list-table.plugins td.column-translation-stats .translation-stats-conte
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div .subproject-bar,
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject .disabled,
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject .disabled .subproject-bar {
-	border-radius: 2px;
+  border-radius: 2px;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a {
-	display: block;
+  display: block;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a.enabled div.subproject {
-	color: #000;
-	text-shadow: 0 0 6px rgba(255, 255, 225, 0.5);
+  color: #000;
+  text-shadow: 0 0 6px rgba(255, 255, 225, 0.5);
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a.disabled div.subproject {
-	background-color: #ddd;
-	color: #8f98a1;
+  background-color: #ddd;
+  color: #8f98a1;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div.percent100 {
-	background-color: #46b450;
+  background-color: #46b450;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div.percent100 .subproject-bar {
-	color: #fff;
-	text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+  color: #fff;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div.percent90 {
-	background-color: #6bc373;
+  background-color: #6bc373;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div.percent80 {
-	background-color: #90d296;
+  background-color: #90d296;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div.percent70 {
-	background-color: #b5e1b9;
+  background-color: #b5e1b9;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div.percent60 {
-	background-color: #c7e8ca;
+  background-color: #c7e8ca;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div.percent50 {
-	background-color: #ffe399;
+  background-color: #ffe399;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div.percent40 {
-	background-color: #fbc5a9;
+  background-color: #fbc5a9;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div.percent30 {
-	background-color: #f1adad;
+  background-color: #f1adad;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div.percent20 {
-	background-color: #ea8484;
+  background-color: #ea8484;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div.percent10 {
-	background-color: #e35b5b;
+  background-color: #e35b5b;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div.percent0 {
-	background-color: #dc3232;
+  background-color: #dc3232;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a,
@@ -167,370 +166,386 @@ table.wp-list-table.plugins td.column-translation-stats .translation-stats-conte
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a.disabled div .subproject-bar,
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a:hover div .subproject-bar,
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a:focus div .subproject-bar {
-	-webkit-transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
-	-moz-transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
-	-o-transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
-	transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+  -webkit-transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+  transition: all 300ms cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a.enabled:hover div.subproject,
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a.enabled:focus div.subproject {
-	width: 100%;
+  width: 100%;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a.enabled:hover div.subproject div.subproject-bar,
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a.enabled:focus div.subproject div.subproject-bar {
-	background-color: rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.2);
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a.enabled:hover div.percent0 .subproject-bar,
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a.enabled:focus div.percent0 .subproject-bar {
-	color: #fff;
-	text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+  color: #fff;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
 }
 
 table.wp-list-table.plugins td.column-translation-stats.tstats-loading .translation-stats-content .translation-stats-content-stats div a div.subproject {
-	background-image: repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25) 10px, rgba(0, 0, 0, 0) 10px, rgba(0, 0, 0, 0) 20px);
-	background-size: 28px 28px;
-	animation: tstats_bar_loading 0.5s linear infinite;
+  background-image: repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25) 10px, rgba(0, 0, 0, 0) 10px, rgba(0, 0, 0, 0) 20px);
+  background-size: 28px 28px;
+  -webkit-animation: tstats_bar_loading 0.5s linear infinite;
+  animation: tstats_bar_loading 0.5s linear infinite;
+}
+
+@-webkit-keyframes tstats_bar_loading {
+
+  0% {
+    background-position: 0 0;
+  }
+
+  100% {
+    background-position: 28px 0;
+  }
 }
 
 @keyframes tstats_bar_loading {
 
-	0% {
-		background-position: 0 0;
-	}
+  0% {
+    background-position: 0 0;
+  }
 
-	100% {
-		background-position: 28px 0;
-	}
+  100% {
+    background-position: 28px 0;
+  }
 }
 
 table.tstats-plugin-list-table.widefat.tablesorter tr.filtered {
 
-	/* Rows hidden by filtering (needed for child rows). */
-	display: none;
+  /* Rows hidden by filtering (needed for child rows). */
+  display: none;
 }
 
 table.tstats-plugin-list-table.widefat tr td.plugin-select,
 table.tstats-plugin-list-table.widefat tr th.plugin-select {
-	vertical-align: middle;
-	padding-top: 0;
-	padding-bottom: 0;
+  vertical-align: middle;
+  padding-top: 0;
+  padding-bottom: 0;
 }
 
 table.tstats-plugin-list-table.widefat tr td.plugin-select input[type="checkbox"],
 table.tstats-plugin-list-table.widefat tr td.plugin-select input[type="radio"],
 table.tstats-plugin-list-table.widefat tr th.plugin-select input[type="checkbox"],
 table.tstats-plugin-list-table.widefat tr th.plugin-select input[type="radio"] {
-	vertical-align: middle;
+  vertical-align: middle;
 }
 
 table.tstats-plugin-list-table.widefat tr td.plugin-select input[type="checkbox"][disabled],
 table.tstats-plugin-list-table.widefat tr th.plugin-select input[type="checkbox"][disabled] {
-	pointer-events: none;
+  pointer-events: none;
 }
 
 table.tstats-plugin-list-table.widefat thead {
 
-	/* Tablesorter */
+  /* Tablesorter */
 }
 
 table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false) .tablesorter-header-inner::after {
-	font: normal 20px/1 dashicons;
-	vertical-align: bottom;
-	color: #235a28;
+  font: normal 20px/1 dashicons;
+  vertical-align: bottom;
+  color: #235a28;
 }
 
-table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false):hover,
-table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false):focus {
-	cursor: pointer;
+table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false):hover, table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false):focus {
+  cursor: pointer;
 }
 
-table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false):hover .tablesorter-header-inner::after,
-table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false):focus .tablesorter-header-inner::after {
-	color: #46b450;
+table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false):hover .tablesorter-header-inner::after, table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false):focus .tablesorter-header-inner::after {
+  color: #46b450;
 }
 
-table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false).tablesorter-headerUnSorted:hover .tablesorter-header-inner::after,
-table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false).tablesorter-headerUnSorted:focus .tablesorter-header-inner::after {
+table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false).tablesorter-headerUnSorted:hover .tablesorter-header-inner::after, table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false).tablesorter-headerUnSorted:focus .tablesorter-header-inner::after {
 
-	/* Arrow up. */
-	content: "\f142";
+  /* Arrow up. */
+  content: "\f142";
 }
 
 table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false).tablesorter-headerAsc .tablesorter-header-inner::after {
 
-	/* Arrow up. */
-	content: "\f142";
+  /* Arrow up. */
+  content: "\f142";
 }
 
-table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false).tablesorter-headerAsc:hover .tablesorter-header-inner::after,
-table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false).tablesorter-headerAsc:focus .tablesorter-header-inner::after {
+table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false).tablesorter-headerAsc:hover .tablesorter-header-inner::after, table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false).tablesorter-headerAsc:focus .tablesorter-header-inner::after {
 
-	/* Arrow down. */
-	content: "\f140";
+  /* Arrow down. */
+  content: "\f140";
 }
 
 table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false).tablesorter-headerDesc .tablesorter-header-inner::after {
 
-	/* Arrow down. */
-	content: "\f140";
+  /* Arrow down. */
+  content: "\f140";
 }
 
-table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false).tablesorter-headerDesc:hover .tablesorter-header-inner::after,
-table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false).tablesorter-headerDesc:focus .tablesorter-header-inner::after {
+table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false).tablesorter-headerDesc:hover .tablesorter-header-inner::after, table.tstats-plugin-list-table.widefat thead .tablesorter-header:not(.sorter-false).tablesorter-headerDesc:focus .tablesorter-header-inner::after {
 
-	/* Arrow up. */
-	content: "\f142";
+  /* Arrow up. */
+  content: "\f142";
 }
 
 table.tstats-plugin-list-table.widefat thead .column-subproject {
-	width: 10em;
-	overflow: hidden;
-	text-align: center;
-	vertical-align: bottom;
+  width: 10em;
+  overflow: hidden;
+  text-align: center;
+  vertical-align: bottom;
 }
 
 table.tstats-plugin-list-table.widefat thead .column-subproject .column-checkbox {
-	margin-top: 0.5em;
+  margin-top: 0.5em;
 }
 
 table.tstats-plugin-list-table.widefat thead .column-subproject .column-checkbox input[type="checkbox"] {
-	margin: 0;
+  margin: 0;
 }
 
 table.tstats-plugin-list-table.widefat thead tr input[type="checkbox"][data-indeterminate="true"]:checked::before {
-	content: url(data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20d%3D%27M4%209h12v2h-12v-2z%27%20fill%3D%27%231e8cbe%27%2F%3E%3C%2Fsvg%3E);
-	margin: -0.1875rem 0 0 -0.1875rem;
-	height: 1.25rem;
-	width: 1.25rem;
+  content: url(data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20d%3D%27M4%209h12v2h-12v-2z%27%20fill%3D%27%231e8cbe%27%2F%3E%3C%2Fsvg%3E);
+  margin: -0.1875rem 0 0 -0.1875rem;
+  height: 1.25rem;
+  width: 1.25rem;
 }
 
 table.tstats-plugin-list-table.widefat tbody tr td,
 table.tstats-plugin-list-table.widefat tbody tr th {
-	vertical-align: middle;
+  vertical-align: middle;
 }
 
 table.tstats-plugin-list-table.widefat tbody tr.disabled {
-	background-color: #f1f1f1;
+  background-color: #f1f1f1;
 }
 
 table.tstats-plugin-list-table.widefat tbody tr.disabled th {
-	border-left: 4px solid transparent;
+  border-left: 4px solid transparent;
 }
 
 table.tstats-plugin-list-table.widefat tbody tr.disabled .plugin-name {
-	padding: 10px 9px;
+  padding: 10px 9px;
 }
 
 table.tstats-plugin-list-table.widefat tbody tr.disabled .plugin-name,
 table.tstats-plugin-list-table.widefat tbody tr.disabled .plugin-author,
 table.tstats-plugin-list-table.widefat tbody tr.disabled .plugin-slug-text-domain {
-	opacity: 0.33;
+  opacity: 0.33;
 }
 
 table.tstats-plugin-list-table.widefat tbody tr .plugin-select {
-	padding: 0 0 0 2px;
+  padding: 0 0 0 2px;
 }
 
 table.tstats-plugin-list-table.widefat tbody tr input[type="checkbox"] {
-	margin-top: 0;
-	margin-bottom: 0;
-	margin-right: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  margin-right: 0;
 }
 
 table.tstats-plugin-list-table.widefat tbody tr.active th {
-	border-left: 4px solid #72aee6;
+  border-left: 4px solid #72aee6;
 }
 
-table.tstats-plugin-list-table.widefat tbody tr.active[data-subprojects="1"] th.plugin-select input[type="checkbox"].checkbox-plugin:checked::before,
-table.tstats-plugin-list-table.widefat tbody tr.active[data-subprojects="2"] th.plugin-select input[type="checkbox"].checkbox-plugin:checked::before,
-table.tstats-plugin-list-table.widefat tbody tr.active[data-subprojects="3"] th.plugin-select input[type="checkbox"].checkbox-plugin:checked::before {
-	content: url(data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20d%3D%27M4%209h12v2h-12v-2z%27%20fill%3D%27%231e8cbe%27%2F%3E%3C%2Fsvg%3E);
-	margin: -0.1875rem 0 0 -0.1875rem;
-	height: 1.25rem;
-	width: 1.25rem;
+table.tstats-plugin-list-table.widefat tbody tr.active[data-subprojects="1"] th.plugin-select input[type="checkbox"].checkbox-plugin:checked::before, table.tstats-plugin-list-table.widefat tbody tr.active[data-subprojects="2"] th.plugin-select input[type="checkbox"].checkbox-plugin:checked::before, table.tstats-plugin-list-table.widefat tbody tr.active[data-subprojects="3"] th.plugin-select input[type="checkbox"].checkbox-plugin:checked::before {
+  content: url(data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20d%3D%27M4%209h12v2h-12v-2z%27%20fill%3D%27%231e8cbe%27%2F%3E%3C%2Fsvg%3E);
+  margin: -0.1875rem 0 0 -0.1875rem;
+  height: 1.25rem;
+  width: 1.25rem;
 }
 
 table.tstats-plugin-list-table.widefat tbody tr td.plugin-slug-text-domain div {
-	display: table-cell;
-	vertical-align: middle;
+  display: table-cell;
+  vertical-align: middle;
 }
 
 table.tstats-plugin-list-table.widefat tbody tr td.plugin-slug-text-domain div.plugin-slug-text-domain-icon span.dashicons.dashicons-yes {
-	color: #008000;
+  color: #008000;
 }
 
 table.tstats-plugin-list-table.widefat tbody tr td.plugin-slug-text-domain div.plugin-slug-text-domain-icon span.dashicons.dashicons-no {
-	color: #f00;
+  color: #f00;
 }
 
 table.tstats-plugin-list-table.widefat tbody tr td.plugin-slug-text-domain div.plugin-slug-text-domain-message code {
-	display: inline-block;
+  display: inline-block;
 }
 
 table.tstats-plugin-list-table.widefat tbody tr td.plugin-slug-text-domain div.plugin-slug-text-domain-message code.code-error {
-	background-color: rgba(255, 0, 0, 0.07);
-	color: #f00;
+  background-color: rgba(255, 0, 0, 0.07);
+  color: #f00;
 }
 
 table.tstats-plugin-list-table.widefat tbody tr.active + tr.inactive td,
 table.tstats-plugin-list-table.widefat tbody tr.active + tr.inactive th,
 table.tstats-plugin-list-table.widefat tbody tr.active + tr.disabled td,
 table.tstats-plugin-list-table.widefat tbody tr.active + tr.disabled th {
-	border-top: 0 solid;
+  border-top: 0 solid;
 }
 
 table.tstats-plugin-list-table.widefat tbody .plugin-subproject {
-	text-align: center;
+  text-align: center;
 }
 
 table.tstats-plugin-list-table.widefat tbody .inactive .plugin-select {
-	padding: 0 0 0 6px;
+  padding: 0 0 0 6px;
 }
 
 .tstats-settings-wrapper {
-	display: flex;
-	flex-wrap: wrap;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
 }
 
 @media (min-width: 992px) {
 
-	.tstats-settings-wrapper {
-		flex-wrap: nowrap;
-	}
+  .tstats-settings-wrapper {
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+  }
 }
 
 .tstats-settings-wrapper .tstats-settings__content {
-	width: 100%;
+  width: 100%;
 }
 
 .tstats-settings-wrapper .tstats-settings__content .nav-tab-wrapper a.nav-tab span.dashicons {
-	color: #235a28;
-	vertical-align: text-top;
+  color: #235a28;
+  vertical-align: text-top;
 }
 
 .tstats-settings-wrapper .tstats-settings__content .nav-tab-wrapper a.nav-tab-active span.dashicons,
 .tstats-settings-wrapper .tstats-settings__content .nav-tab-wrapper a.nav-tab:hover span.dashicons,
 .tstats-settings-wrapper .tstats-settings__content .nav-tab-wrapper a.nav-tab:focus span.dashicons {
-	color: #46b450;
+  color: #46b450;
 }
 
 @media (min-width: 992px) {
 
-	.tstats-settings-wrapper .tstats-settings__content {
-		order: 1;
-		overflow: auto;
-	}
+  .tstats-settings-wrapper .tstats-settings__content {
+    -webkit-box-ordinal-group: 2;
+    -ms-flex-order: 1;
+    order: 1;
+    overflow: auto;
+  }
 }
 
 .tstats-settings-wrapper .tstats-settings__sidebar {
-	width: 100%;
-	padding: 0;
+  width: 100%;
+  padding: 0;
 }
 
 @media (min-width: 992px) {
 
-	.tstats-settings-wrapper .tstats-settings__sidebar {
-		width: 25%;
-		min-width: 280px;
-		max-width: 350px;
-		padding-left: 20px;
-		order: 2;
-	}
+  .tstats-settings-wrapper .tstats-settings__sidebar {
+    width: 25%;
+    min-width: 280px;
+    max-width: 350px;
+    padding-left: 20px;
+    -webkit-box-ordinal-group: 3;
+    -ms-flex-order: 2;
+    order: 2;
+  }
 }
 
 .tstats-settings-wrapper .tstats-settings__sidebar .postbox {
-	border-radius: 4px;
+  border-radius: 4px;
 }
 
 .tstats-settings-wrapper .tstats-settings__sidebar .postbox .inside h3 {
-	margin: 30px 0 0;
+  margin: 30px 0 0;
 }
 
 .tstats-settings-wrapper .tstats-settings__sidebar .postbox .inside a {
-	text-decoration: none;
+  -webkit-text-decoration: none;
+  text-decoration: none;
 }
 
 .tstats-settings-wrapper .tstats-settings__sidebar .postbox .inside .tstats-logo a.tstats-logo-link {
-	display: block;
-	width: 100%;
+  display: block;
+  width: 100%;
 }
 
 .tstats-settings-wrapper .tstats-settings__sidebar .postbox .inside .tstats-logo a.tstats-logo-link div.tstats-logo-image {
-	margin: auto;
-	background-image: url(../images/logo-color-transparent.svg);
-	background-position: center;
-	background-size: contain;
-	height: 120px;
-	width: 230px;
-	background-repeat: no-repeat;
+  margin: auto;
+  background-image: url(../images/logo-color-transparent.svg);
+  background-position: center;
+  background-size: contain;
+  height: 120px;
+  width: 230px;
+  background-repeat: no-repeat;
 }
 
 .tstats-settings-wrapper .tstats-settings__sidebar .postbox .inside .tstats-sponsor h3::after {
-	content: " ☕";
+  content: " ☕";
 }
 
 .tstats-settings-wrapper .tstats-settings__sidebar .postbox .inside .tstats-sponsor ul form button.tstats-github-sponsor span,
 .tstats-settings-wrapper .tstats-settings__sidebar .postbox .inside .tstats-sponsor ul form button.tstats-github-sponsor i {
-	vertical-align: text-top;
-	font-size: large;
+  vertical-align: text-top;
+  font-size: large;
 }
 
 .tstats-settings-wrapper .tstats-settings__sidebar .postbox .inside .tstats-sponsor ul form button.tstats-github-sponsor span {
-	color: #ea4aaa;
+  color: #ea4aaa;
 }
 
 .tstats-settings-wrapper .tstats-settings__sidebar .postbox .footer {
-	padding: 10px;
+  padding: 10px;
 }
 
 .tstats-settings-wrapper .tstats-settings__sidebar .paper-shadow {
-	position: relative;
+  position: relative;
 }
 
-.tstats-settings-wrapper .tstats-settings__sidebar .paper-shadow::before,
-.tstats-settings-wrapper .tstats-settings__sidebar .paper-shadow::after {
-	z-index: -1;
-	position: absolute;
-	content: "";
-	bottom: 1em;
-	width: 50%;
-	top: 80%;
-	background: #777;
-	box-shadow: 0 1em 0.5em #777;
+.tstats-settings-wrapper .tstats-settings__sidebar .paper-shadow::before, .tstats-settings-wrapper .tstats-settings__sidebar .paper-shadow::after {
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 1em;
+  width: 50%;
+  top: 80%;
+  background: #777;
+  -webkit-box-shadow: 0 1em 0.5em #777;
+  box-shadow: 0 1em 0.5em #777;
 }
 
 .tstats-settings-wrapper .tstats-settings__sidebar .paper-shadow::before {
-	transform: rotate(-3deg);
-	left: 0.5em;
+  -webkit-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+  left: 0.5em;
 }
 
 .tstats-settings-wrapper .tstats-settings__sidebar .paper-shadow::after {
-	transform: rotate(3deg);
-	right: 0.5em;
+  -webkit-transform: rotate(3deg);
+  -ms-transform: rotate(3deg);
+  transform: rotate(3deg);
+  right: 0.5em;
 }
 
 #tab-debug .tstats-code-block {
-	overflow: auto;
-	display: block;
+  overflow: auto;
+  display: block;
 }
 
 #tab-debug .tstats-code-block .dashicons-yes {
-	color: #008000;
+  color: #008000;
 }
 
 #tab-debug .tstats-code-block .dashicons-no {
-	color: #f00;
+  color: #f00;
 }
 
 #tab-debug .tstats-debug-block {
-	width: calc(100% - 29px);
-	height: 60vh;
-	overflow: auto;
+  width: calc(100% - 29px);
+  height: 60vh;
+  overflow: auto;
 }
 
 .tstats-debug-block {
-	display: inline-block;
+  display: inline-block;
 }
