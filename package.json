@@ -21,22 +21,28 @@
 	},
 	"devDependencies": {
 		"@wordpress/scripts": "^30.15.0",
-		"node-sass": "^9.0.0",
 		"postcss-cli": "^11.0.1",
+    "postcss-preset-env": "^10.1.1",
+		"sass": "^1.86.0",
 		"tablesorter": "^2.31.3",
 		"uglify-js": "^3.19.3"
 	},
 	"scripts": {
-		"build": "npm run build:js & npm run compile:css & npm run build:css",
+		"build": "npm run build:js & npm run build:css",
 		"build:js": "npm run build:js:plugins && npm run build:js:settings",
-		"build:js:plugins": "uglifyjs assets/js/admin-plugins.js --compress drop_console=true -o assets/js/admin-plugins.min.js",
-		"build:js:settings": "uglifyjs assets/js/admin-settings.js --compress drop_console=true -o assets/js/admin-settings.min.js",
-		"compile:css": "node-sass assets/css/ -o assets/css/ && stylelint assets/css/*.css --fix",
-		"build:css": "npm run build:css:admin",
-		"build:css:admin": "postcss assets/css/admin.css > assets/css/admin.min.css",
+    "build:js:plugins": "uglifyjs assets/js/admin-plugins.js -o assets/js/admin-plugins.min.js --compress drop_console=true --source-map base=assets/js,url=admin-plugins.min.js.map",
+    "build:js:settings": "uglifyjs assets/js/admin-settings.js -o assets/js/admin-settings.min.js --compress drop_console=true --source-map base=assets/js,url=admin-settings.min.js.map",
+    "build:css": "npm run compile:css && npm run lint:css:fix && npm run build:css:prefix && npm run build:css:minify",
+    "compile:css": "sass assets/css/ --color --no-source-map --verbose",
+    "build:css:prefix": "postcss assets/css/admin.css --replace --verbose",
+		"build:css:minify": "postcss assets/css/admin.css -o assets/css/admin.min.css --map --use cssnano --verbose",
 		"lint:css": "wp-scripts lint-style",
+    "lint:css:fix": "npm run lint:css -- --fix",
 		"lint:js": "wp-scripts lint-js",
 		"lint:md:docs": "wp-scripts lint-md-docs",
 		"lint:pkg-json": "wp-scripts lint-pkg-json"
-	}
+	},
+	"browserslist": [
+		"last 3 versions"
+	]
 }

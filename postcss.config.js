@@ -1,8 +1,9 @@
 /* global module require */
 module.exports = {
 	plugins: [
-		require( 'cssnano' )( {
-			preset: 'default',
+		require( 'autoprefixer' )( {
+			cascade: false
 		} ),
+		require( 'postcss-preset-env' ),
 	],
 };
