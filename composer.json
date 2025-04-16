@@ -21,7 +21,7 @@
 	},
 	"require-dev": {
 		"dealerdirect/phpcodesniffer-composer-installer": "^1.0.0",
-		"ergebnis/composer-normalize": "^2.46.0",
+		"ergebnis/composer-normalize": "^2.47.0",
 		"phpcompatibility/phpcompatibility-wp": "^2.1.6",
 		"phpmd/phpmd": "^2.15.0",
 		"phpstan/extension-installer": "^1.4.3",
