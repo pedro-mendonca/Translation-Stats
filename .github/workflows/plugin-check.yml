@@ -53,3 +53,4 @@ jobs:
       uses: wordpress/plugin-check-action@v1
       with:
         build-dir: 'translation-stats'
+        exclude-directories: 'translation-stats/assets/lib'
