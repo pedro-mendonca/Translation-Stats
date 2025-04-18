@@ -49,7 +49,10 @@ jobs:
           - '6.2'
           - '6.3'
           - '6.4'
-          - '6.5' # Latest version.
+          - '6.5'
+          - '6.6'
+          - '6.7'
+          - '6.8' # Latest version.
 
         include:
 
@@ -58,6 +61,7 @@ jobs:
           - php: '8.1'
           - php: '8.2'
           - php: '8.3'
+          - php: '8.4'
 
           # Test the WP trunk with latest PHP version. Allow errors.
           - php: 'latest'
