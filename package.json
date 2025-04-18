@@ -28,7 +28,7 @@
 		"uglify-js": "^3.19.3"
 	},
 	"scripts": {
-		"build": "npm run build:js & npm run build:css",
+		"build": "npm run build:js && npm run build:css",
 		"build:js": "npm run build:js:plugins && npm run build:js:settings",
 		"build:js:plugins": "uglifyjs assets/js/admin-plugins.js -o assets/js/admin-plugins.min.js --compress drop_console=true --source-map base=assets/js,url=admin-plugins.min.js.map",
 		"build:js:settings": "uglifyjs assets/js/admin-settings.js -o assets/js/admin-settings.min.js --compress drop_console=true --source-map base=assets/js,url=admin-settings.min.js.map",
