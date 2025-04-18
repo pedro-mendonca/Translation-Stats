@@ -95,8 +95,10 @@ jobs:
         env:
           fail-fast: false
 
-      - name: Install Subversion
-        run: sudo apt-get update && sudo apt-get install -y subversion
+      - name: Install SVN ( Subversion )
+        run: |
+          sudo apt-get update
+          sudo apt-get install subversion
 
       - name: Log debug information
         run: |
