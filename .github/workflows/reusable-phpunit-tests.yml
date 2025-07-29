@@ -87,7 +87,7 @@ jobs:
           root-password: password
 
       - name: Set up PHP ${{ inputs.php }}
-        uses: shivammathur/setup-php@2.33.0
+        uses: shivammathur/setup-php@2.35.1
         with:
           php-version: ${{ inputs.php }}
           coverage: ${{ inputs.coverage && 'xdebug' || 'none' }}
