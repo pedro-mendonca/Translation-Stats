@@ -706,26 +706,19 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 
 			$options = get_site_option( TRANSLATION_STATS_WP_OPTION );
 
-			$translationstats_plugins = array();
-
 			foreach ( $plugins as $plugin_file => $plugin_data ) {
 
 				// Check if the plugin is enabled in the Translation Stats settings.
 				$project_slug = Translations_API::plugin_metadata( $plugin_file, 'slug' );
 				if ( empty( $options['plugins'][ $project_slug ]['enabled'] ) ) {
-					// Skip to next loop iteration.
+					// Unset plugin from list.
+					unset( $wp_list_table->items[ $plugin_file ] );
 					continue;
 				}
-
-				// Add plugin to list.
-				$translationstats_plugins[ $plugin_file ] = $plugin_data;
 			}
 
-			// Set the table list items array to just the Translation Stats enabled plugins.
-			$wp_list_table->items = $translationstats_plugins;
-
 			// Count Translation Stats enabled plugins.
-			$count = count( $translationstats_plugins );
+			$count = count( $wp_list_table->items );
 
 			// Get plugins_per_page setting.
 			$plugins_per_page = $wp_list_table->get_items_per_page( str_replace( '-', '_', $wp_list_table->screen->id . '_per_page' ), 999 );
