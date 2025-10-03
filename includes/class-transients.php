@@ -64,7 +64,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Transients' ) ) {
 		 */
 		public function delete_transients( $prefix ) {
 			$transients = $this->get_transients( $prefix );
-			if ( is_array( $transients ) ) {
+			if ( ! empty( $transients ) ) {
 				foreach ( $transients as $transient ) {
 					if ( is_multisite() ) {
 						// Delete transients in Multisite.

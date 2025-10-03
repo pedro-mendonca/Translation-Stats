@@ -34,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Check if get_plugin_data() function exists.
 if ( ! function_exists( 'get_plugin_data' ) ) {
-	require_once ABSPATH . 'wp-admin/includes/plugin.php';
+	require_once ABSPATH . 'wp-admin/includes/plugin.php'; /* @phpstan-ignore requireOnce.fileNotFound */
 }
 
 // Get plugin headers data.
