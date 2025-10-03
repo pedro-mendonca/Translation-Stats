@@ -713,7 +713,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				if ( empty( $options['plugins'][ $project_slug ]['enabled'] ) ) {
 					// Unset plugin from list.
 					unset( $wp_list_table->items[ $plugin_file ] );
-					continue;
 				}
 			}
 
