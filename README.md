@@ -92,9 +92,13 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
 ## Changelog
 
-### Unreleased
+### 1.3.2
 
+* Tested up to WP 6.9
+* Fix the translated descriptions of plugins in the plugin table filter for plugins with translation stats.
+* Add sanitization of settings.
 * Add PHP Unit Tests.
+* Update library Tablesorter.
 * Deprecate TRANSLATION_STATS_DEBUG constant.
 
 ### 1.3.1
