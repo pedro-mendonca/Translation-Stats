@@ -3,7 +3,7 @@ Contributors: pedromendonca
 Donate link: https://github.com/sponsors/pedro-mendonca
 Tags: internationalization, i18n, localization, l10n, translation
 Requires at least: 4.9
-Tested up to: 6.8
+Tested up to: 6.9
 Requires PHP: 7.4
 Stable tag: 1.3.1
 License: GPLv2
@@ -63,8 +63,12 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
 == Changelog ==
 
-= Unreleased =
+= 1.3.2 =
+*   Tested up to WP 6.9
+*   Fix the translated descriptions of plugins in the plugin table filter for plugins with translation stats.
+*   Add sanitization of settings.
 *   Add PHP Unit Tests.
+*   Update library Tablesorter.
 *   Deprecate TRANSLATION_STATS_DEBUG constant.
 
 = 1.3.1 =
