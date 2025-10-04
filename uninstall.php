@@ -75,7 +75,7 @@ function translation_stats_uninstall_delete_transients( $search ) {
 		},
 		$transients
 	);
-	if ( is_array( $transients ) ) {
+	if ( ! empty( $transients ) ) {
 		foreach ( $transients as $transient ) {
 			if ( is_multisite() ) {
 				// Delete transients in Multisite.
