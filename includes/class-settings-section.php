@@ -49,15 +49,16 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 			$this->get_fields();
 
 			add_settings_section(
-				$this->section['id'],       // ID of the section.
-				$this->section['title'],    // Title of the section.
-				array( $this, 'callback' ), // Function that fills the section with the desired content.
-				$this->section['page']      // The prefixed menu page on which to display this section.  Should match $menu_slug.
+				$this->section['id'],             // ID of the section.
+				$this->section['title'],          // Title of the section.
+				array( $this, 'render_section' ), // Function that fills the section with the desired content.
+				$this->section['page']            // The prefixed menu page on which to display this section.  Should match $menu_slug.
 			);
 
 			register_setting(
-				$this->section['page'],      // The prefixed menu page on which to display this section. Should match $menu_slug.
-				TRANSLATION_STATS_WP_OPTION  // The WordPress option to store Translation Stats settings.
+				$this->section['page'],             // The prefixed menu page on which to display this section. Should match $menu_slug.
+				TRANSLATION_STATS_WP_OPTION,        // The WordPress option to store Translation Stats settings.
+				array( $this, 'sanitize_settings' ) // Callback function to sanitize the settings.
 			);
 		}
 
@@ -142,10 +143,11 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 		 * Callback function for the settings section.
 		 *
 		 * @since 1.2.0
+		 * @since 1.3.2   Renamed from callback() to render_section().
 		 *
 		 * @return callable|void
 		 */
-		public function callback() {
+		public function render_section() {
 
 			// Get section fields.
 			$fields = $this->fields();
@@ -262,6 +264,49 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 			$field = array_merge( $field_defaults, $field );
 
 			return $field;
+		}
+
+
+		/**
+		 * Sanitize the settings and plugins form input.
+		 *
+		 * @since 1.3.2
+		 *
+		 * @param array $data   Array of input settings data.
+		 *
+		 * @return array   Array of sanitized settings data.
+		 */
+		public function sanitize_settings( $data = array() ) {
+
+			$default_settings = new Settings();
+			$default_settings = $default_settings->settings_defaults();
+
+			$sanitized = array();
+
+			// Sanitize settings data.
+			if ( isset( $data['settings'] ) && is_array( $data['settings'] ) ) {
+				$sanitized['settings'] = array_map( 'sanitize_text_field', $data['settings'] );
+			} else {
+				$sanitized['settings'] = $default_settings;
+			}
+
+			// Sanitize plugins data.
+			$sanitized['plugins'] = array();
+			if ( isset( $data['plugins'] ) && is_array( $data['plugins'] ) ) {
+				foreach ( $data['plugins'] as $plugin_slug => $plugin_data ) {
+					if ( ! is_array( $plugin_data ) ) {
+						continue;
+					}
+
+					// Sanitize plugin slug.
+					$plugin_slug = sanitize_key( $plugin_slug );
+
+					// Sanitize each plugin data.
+					$sanitized['plugins'][ $plugin_slug ] = array_map( 'sanitize_text_field', $plugin_data );
+				}
+			}
+
+			return $sanitized;
 		}
 	}
 }
