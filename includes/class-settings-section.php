@@ -49,10 +49,10 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 			$this->get_fields();
 
 			add_settings_section(
-				$this->section['id'],       // ID of the section.
-				$this->section['title'],    // Title of the section.
-				array( $this, 'callback' ), // Function that fills the section with the desired content.
-				$this->section['page']      // The prefixed menu page on which to display this section.  Should match $menu_slug.
+				$this->section['id'],             // ID of the section.
+				$this->section['title'],          // Title of the section.
+				array( $this, 'render_section' ), // Function that fills the section with the desired content.
+				$this->section['page']            // The prefixed menu page on which to display this section.  Should match $menu_slug.
 			);
 
 			register_setting(
@@ -142,10 +142,11 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 		 * Callback function for the settings section.
 		 *
 		 * @since 1.2.0
+		 * @since 1.3.2   Renamed from callback() to render_section().
 		 *
 		 * @return callable|void
 		 */
-		public function callback() {
+		public function render_section() {
 
 			// Get section fields.
 			$fields = $this->fields();
