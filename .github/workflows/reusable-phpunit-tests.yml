@@ -78,7 +78,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
 
       - name: Set up ${{ 'mariadb' == inputs.db-type && 'MariaDB' || 'MySQL' }}
         uses: shogo82148/actions-setup-mysql@v1
