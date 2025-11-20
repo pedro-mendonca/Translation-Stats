@@ -23,7 +23,7 @@
 		"@wordpress/scripts": "^30.26.0",
 		"postcss-cli": "^11.0.1",
 		"postcss-preset-env": "^10.4.0",
-		"sass": "^1.93.2",
+		"sass": "^1.94.2",
 		"tablesorter": "^2.31.3",
 		"uglify-js": "^3.19.3"
 	},
