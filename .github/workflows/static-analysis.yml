@@ -11,7 +11,7 @@ on:
       # These files configure Composer. Changes could affect the outcome.
       - 'composer.*'
       # This file configures PHPStan. Changes could affect the outcome.
-      - 'phpstan.neon'
+      - 'phpstan.neon.dist'
       # Changes to workflow files should always verify all workflows are successful.
       - '.github/workflows/*.yml'
   # Allows you to run this workflow manually from the Actions tab.
@@ -61,4 +61,4 @@ jobs:
         uses: ramsey/composer-install@v3
 
       - name: Run PHPStan static analysis (PHP ${{ matrix.php-versions }})
-        run: composer exec -- phpstan analyse --memory-limit=1G
+        run: composer exec -- phpstan analyse -c phpstan.neon.dist --memory-limit=1G
