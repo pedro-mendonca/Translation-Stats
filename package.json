@@ -1,6 +1,6 @@
 {
 	"requires": true,
-	"lockfileVersion": 1,
+	"lockfileVersion": 3,
 	"name": "translation-stats",
 	"version": "1.3.0",
 	"description": "The plugin adds a \"Translation Stats\" column to the plugin list screen in WordPress admin.",
