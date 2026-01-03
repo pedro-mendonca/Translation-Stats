@@ -98,13 +98,13 @@ table.wp-list-table.plugins td.column-translation-stats .translation-stats-conte
   color: #8f98a1;
 }
 
-table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div.percent100 {
-  background-color: #46b450;
-}
-
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div.percent100 .subproject-bar {
   color: #fff;
   text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div.percent100 {
+  background-color: #46b450;
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats .content__subproject a div.percent90 {
