@@ -17,17 +17,18 @@
 		}
 	],
 	"require": {
-		"php": ">=7.4"
+		"php": "^7.4 || ^8.0"
 	},
 	"require-dev": {
-		"dealerdirect/phpcodesniffer-composer-installer": "^1.1.2",
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.2.0",
 		"ergebnis/composer-normalize": "^2.48.2",
-		"phpcompatibility/phpcompatibility-wp": "^2.1.7",
+		"phpcompatibility/phpcompatibility-wp": "^2.1.8",
 		"phpmd/phpmd": "^2.15.0",
 		"phpstan/extension-installer": "^1.4.3",
+		"phpstan/phpstan": "^2.1.33",
 		"sirbrillig/phpcs-variable-analysis": "^2.13.0",
-		"szepeviktor/phpstan-wordpress": ">=2.0.2",
-		"wp-coding-standards/wpcs": "^3.2.0",
+		"szepeviktor/phpstan-wordpress": "^2.0.3",
+		"wp-coding-standards/wpcs": "^3.3.0",
 		"yoast/phpunit-polyfills": "^1.1.5"
 	},
 	"config": {
@@ -37,7 +38,10 @@
 			"ergebnis/composer-normalize": true,
 			"phpstan/extension-installer": true
 		},
-		"optimize-autoloader": true
+		"optimize-autoloader": true,
+		"platform": {
+			"php": "7.4"
+		}
 	},
 	"scripts": {
 		"build": "npm run build",
