@@ -26,6 +26,14 @@ if ( ! class_exists( __NAMESPACE__ . '\Locales' ) ) {
 
 
 		/**
+		 * List of locales, keyed by their slug, extended with Translation Stats data.
+		 *
+		 * @var Locale[]
+		 */
+		public $locales = array();
+
+
+		/**
 		 * Set custom 'translation_stats_locales' global variable.
 		 * This avoids conflicts with other plugins that might use the 'gp_locales' global.
 		 *
@@ -70,8 +78,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Locales' ) ) {
 
 			foreach ( $locales as $key => $locale ) {
 
-				// If Locale don't have 'wp_locale', remove from the list.
-				if ( ! isset( $locale->wp_locale ) ) {
+				// If Locale doesn't have 'wp_locale', remove from the list.
+				if ( null === $locale->wp_locale ) {
 					unset( $locales[ $key ] );
 					continue;
 				}
@@ -149,7 +157,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Locales' ) ) {
 			);
 
 			// Check if 'wp_locale' exist in the custom subdomain criteria array.
-			if ( array_key_exists( $locale->wp_locale, $wporg_custom_subdomains ) ) {
+			if ( null !== $locale->wp_locale && array_key_exists( $locale->wp_locale, $wporg_custom_subdomains ) ) {
 				// Set custom subdomain.
 				$wporg_subdomain = $wporg_custom_subdomains[ $locale->wp_locale ];
 			}
