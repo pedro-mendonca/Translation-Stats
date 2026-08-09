@@ -41,6 +41,13 @@
 		"optimize-autoloader": true,
 		"platform": {
 			"php": "7.4"
+		},
+		"policy": {
+			"advisories": {
+				"ignore-id": {
+					"PKSA-z3gr-8qht-p93v": "PHPUnit 6/7 are dev-only, required to test against WP <= 5.8."
+				}
+			}
 		}
 	},
 	"scripts": {
