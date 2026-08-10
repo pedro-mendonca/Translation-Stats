@@ -5,6 +5,11 @@
  * @package Translation_Stats
  */
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // @codeCoverageIgnore
+}
+
 $translation_stats_tests_dir = getenv( 'WP_TESTS_DIR' );
 
 if ( ! $translation_stats_tests_dir ) {

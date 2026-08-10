@@ -10,6 +10,11 @@
 
 namespace Translation_Stats;
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // @codeCoverageIgnore
+}
+
 use Gettext_Translations;
 
 if ( ! class_exists( __NAMESPACE__ . '\GP_Locale' ) ) :
