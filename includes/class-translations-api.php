@@ -209,12 +209,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 		 * @since 1.2.0   Renamed from translations_api_url() to translate_url().
 		 *                Added 'api' parameter to allow choose 'api' or normal URL.
 		 *
-		 * @param string $project   Set the project URL you want to get. Defaults to null.
+		 * @param string $project   Set the project URL you want to get. Defaults to 'plugins'.
 		 * @param bool   $api       Set to 'true' to get the API URL. Defaults to false.
 		 *
 		 * @return string           Returns URL.
 		 */
-		public static function translate_url( $project = null, $api = false ) {
+		public static function translate_url( $project = 'plugins', $api = false ) {
 
 			// Set WordPress.org translate site URL.
 			$translate_url = 'https://translate.wordpress.org/';
@@ -264,7 +264,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 		 *
 		 * @param string $wp_locale  Locale ( e.g. 'pt_PT' ).
 		 *
-		 * @return object            Return selected Locale object data from Translation Tools and wordpress.org (e.g. 'english_name', 'native_name', 'lang_code_iso_639_1', 'country_code', 'wp_locale', 'slug', etc. ).
+		 * @return Locale|null   Return selected Locale object data from Translation Tools and wordpress.org (e.g. 'english_name', 'native_name', 'lang_code_iso_639_1', 'country_code', 'wp_locale', 'slug', etc. ), or null if the Locale doesn't exist.
 		 */
 		public static function locale( $wp_locale ) {
 
