@@ -42,7 +42,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Locale' ) ) {
 		/**
 		 * Subdomain of the Locale team page on wp.org.
 		 *
-		 * @var string
+		 * @var string|null
 		 */
 		public $wporg_subdomain;
 

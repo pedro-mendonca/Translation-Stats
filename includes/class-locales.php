@@ -115,9 +115,14 @@ if ( ! class_exists( __NAMESPACE__ . '\Locales' ) ) {
 		 *
 		 * @param object $locale  Locale object.
 		 *
-		 * @return string         Returns WordPress Locale Subdomain.
+		 * @return string|null  Returns WordPress Locale Subdomain. Returns null if 'wp_locale' is null.
 		 */
 		public static function wporg_subdomain( $locale ) {
+
+			// Check if 'wp_locale' exists.
+			if ( null === $locale->wp_locale ) {
+				return null;
+			}
 
 			// Defaults to 'slug', or 'root_slug' if is variant.
 			$wporg_subdomain = isset( $locale->root_slug ) ? $locale->root_slug : $locale->slug;
@@ -157,7 +162,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Locales' ) ) {
 			);
 
 			// Check if 'wp_locale' exist in the custom subdomain criteria array.
-			if ( null !== $locale->wp_locale && array_key_exists( $locale->wp_locale, $wporg_custom_subdomains ) ) {
+			if ( array_key_exists( $locale->wp_locale, $wporg_custom_subdomains ) ) {
 				// Set custom subdomain.
 				$wporg_subdomain = $wporg_custom_subdomains[ $locale->wp_locale ];
 			}
