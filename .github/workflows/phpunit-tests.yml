@@ -33,9 +33,7 @@ jobs:
         # Test all supported WP versions with the minumum PHP supported version.
         php: [ '7.4' ] # 7.4 is the minimum supported version.
         wp:
-          - '4.9' # Minimum supported version.
-          - '5.0' # Significant update with Gutenberg editor.
-          - '5.1'
+          - '5.1' # Minimum supported version.
           - '5.2'
           - '5.3'
           - '5.4'

@@ -14,7 +14,7 @@
  * GitHub Plugin URI: https://github.com/pedro-mendonca/Translation-Stats
  * Description:       Show plugins translation stats on your WordPress install.
  * Version:           1.3.2
- * Requires at least: 4.9
+ * Requires at least: 5.1
  * Tested up to:      7.1
  * Requires PHP:      7.4
  * Author:            Pedro Mendonça
@@ -168,10 +168,7 @@ function translation_stats_disabled_notice() {
 				esc_html( TRANSLATION_STATS_REQUIRED_PHP )
 			);
 
-			// Show additional update link if on WP version 5.1 or higher.
-			// Capability added in WP 5.1: https://core.trac.wordpress.org/ticket/44457.
-			// Introduced in WP 5.1: https://developer.wordpress.org/reference/functions/wp_get_update_php_url/.
-			if ( current_user_can( 'update_php' ) && version_compare( $GLOBALS['wp_version'], '5.1', '>=' ) ) {
+			if ( current_user_can( 'update_php' ) ) {
 				echo ' ' . sprintf(
 					wp_kses_post(
 						/* translators: %s: URL to Update PHP page. */
