@@ -113,7 +113,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Locales' ) ) {
 		 *
 		 * @since 1.1.0
 		 *
-		 * @param object $locale  Locale object.
+		 * @param GP_Locale $locale  GP_Locale object.
 		 *
 		 * @return string|null  Returns WordPress Locale Subdomain. Returns null if 'wp_locale' is null.
 		 */
@@ -187,7 +187,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Locales' ) ) {
 		 *
 		 * @since 1.1.0
 		 *
-		 * @param object $locale  Locale object.
+		 * @param GP_Locale $locale  GP_Locale object.
 		 *
 		 * @return string         Returns locale complete slug.
 		 */

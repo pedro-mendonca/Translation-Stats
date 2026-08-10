@@ -62,6 +62,18 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Field' ) ) {
 
 
 		/**
+		 * Display settings field type.
+		 *
+		 * @since 1.2.0
+		 *
+		 * @param array $args  Array of field arguments.
+		 *
+		 * @return void
+		 */
+		abstract public function callback( $args );
+
+
+		/**
 		 * Check if field type is supported.
 		 *
 		 * @since 1.2.0

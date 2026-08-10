@@ -25,7 +25,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 		/**
 		 * Transients.
 		 *
-		 * @var object
+		 * @var Transients
 		 */
 		protected $transients;
 

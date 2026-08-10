@@ -25,7 +25,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 		/**
 		 * Transients.
 		 *
-		 * @var object
+		 * @var Transients
 		 */
 		protected $transients;
 
@@ -211,7 +211,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 				<?php
 				if ( isset( $options['settings'] ) ) {
 					?>
-					<pre><code class="tstats-code-block"><?php echo esc_html( wp_json_encode( $options['settings'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) ); ?></code></pre>
+					<pre><code class="tstats-code-block"><?php echo esc_html( (string) wp_json_encode( $options['settings'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) ); ?></code></pre>
 					<p>
 						<?php
 						printf(
@@ -223,7 +223,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 						?>
 					</p>
 					<div>
-						<pre><code class="tstats-code-block"><?php echo esc_html( wp_json_encode( $translationstats_locale, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) ); ?></code></pre>
+						<pre><code class="tstats-code-block"><?php echo esc_html( (string) wp_json_encode( $translationstats_locale, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) ); ?></code></pre>
 					</div>
 					<?php
 				} else {
@@ -240,7 +240,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 				<?php
 				if ( isset( $options['plugins'] ) ) {
 					?>
-					<pre><code class="tstats-code-block"><?php echo esc_html( wp_json_encode( $options['plugins'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) ); ?></code></pre>
+					<pre><code class="tstats-code-block"><?php echo esc_html( (string) wp_json_encode( $options['plugins'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) ); ?></code></pre>
 					<?php
 				} else {
 					?>
@@ -290,7 +290,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 						$response[] = esc_html( substr( $transient, strlen( '_transient_' ) ) );
 					}
 					?>
-					<pre><code class="tstats-code-block"><?php echo esc_html( wp_json_encode( $response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) ); ?></code></pre>
+					<pre><code class="tstats-code-block"><?php echo esc_html( (string) wp_json_encode( $response, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) ); ?></code></pre>
 					<?php
 				} else {
 					?>

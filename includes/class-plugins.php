@@ -213,7 +213,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * @since 1.2.0  Renamed from tstats_stats_plugin_widget_title() to plugin_widget_title().
 		 *
 		 * @param string $project_slug  Plugin Slug.
-		 * @param object $locale        Locale object.
+		 * @param Locale $locale        Locale object.
 		 *
 		 * @return void
 		 */
@@ -292,7 +292,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		public function plugin_widget_content_load() {
 
 			// Initialize variable.
-			$force_update = '';
+			$force_update = false;
 
 			if ( isset( $_POST['forceUpdate'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
 				$force_update = 'true' === sanitize_key( $_POST['forceUpdate'] ) ? true : false; // phpcs:ignore WordPress.Security.NonceVerification.Missing
@@ -320,7 +320,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * @since 1.2.0   Renamed from tstats_stats_plugin_widget_content_stats() to plugin_widget_content_stats().
 		 *
 		 * @param string $project_slug   Plugin Slug.
-		 * @param object $locale         Locale object.
+		 * @param Locale $locale         Locale object.
 		 * @param bool   $force_update   True: Force get new stats. False: Use transients.
 		 *
 		 * @return void
@@ -371,11 +371,11 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * @since 1.2.0   Renamed from tstats_render_stats_bar() to render_stats_bar().
 		 * @since 1.2.1   Removed unused parameter $force_update.
 		 *
-		 * @param object|string $subproject_stats   Subproject stats. Can be either an object or an empty string.
-		 * @param object        $locale             Locale object.
-		 * @param string        $project_slug       Plugin Slug.
-		 * @param string        $subproject         Translation subproject ( 'Dev', 'Dev Readme', 'Stable', 'Stable Readme' ).
-		 * @param string        $subproject_slug    Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).
+		 * @param object|false $subproject_stats   Subproject stats object, or false if the subproject doesn't exist.
+		 * @param Locale       $locale             Locale object.
+		 * @param string       $project_slug       Plugin Slug.
+		 * @param string       $subproject         Translation subproject ( 'Dev', 'Dev Readme', 'Stable', 'Stable Readme' ).
+		 * @param string       $subproject_slug    Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).
 		 *
 		 * @return void
 		 */
@@ -487,7 +487,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 *
 		 * @param array  $project_stats   Array of the sub-projects translation stats objects.
 		 * @param string $project_slug    Plugin slug.
-		 * @param object $locale          Locale object.
+		 * @param Locale $locale          Locale object.
 		 *
 		 * @return void
 		 */
@@ -619,7 +619,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * @since 1.1.0   Use Locale object.
 		 * @since 1.2.0   Renamed from tstats_plugin_subproject_stats() to plugin_subproject_stats().
 		 *
-		 * @param object $locale            Locale object.
+		 * @param Locale $locale            Locale object.
 		 * @param string $project_slug      Plugin Slug.
 		 * @param string $subproject_slug   Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).
 		 * @param bool   $force_update      True: Force get new stats. False: Use transients.
