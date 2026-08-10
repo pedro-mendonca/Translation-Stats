@@ -305,7 +305,7 @@ table.tstats-plugin-list-table.widefat thead .column-subproject .column-checkbox
 }
 
 table.tstats-plugin-list-table.widefat thead tr input[type="checkbox"][data-indeterminate="true"]:checked::before {
-  content: url(data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20d%3D%27M4%209h12v2h-12v-2z%27%20fill%3D%27%231e8cbe%27%2F%3E%3C%2Fsvg%3E);
+  content: url(data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20d%3D%27M4%209h12v2h-12v-2z%27%20fill%3D%27%23fff%27%2F%3E%3C%2Fsvg%3E);
   margin: -0.1875rem 0 0 -0.1875rem;
   height: 1.25rem;
   width: 1.25rem;
@@ -349,7 +349,7 @@ table.tstats-plugin-list-table.widefat tbody tr.active th {
 }
 
 table.tstats-plugin-list-table.widefat tbody tr.active[data-subprojects="1"] th.plugin-select input[type="checkbox"].checkbox-plugin:checked::before, table.tstats-plugin-list-table.widefat tbody tr.active[data-subprojects="2"] th.plugin-select input[type="checkbox"].checkbox-plugin:checked::before, table.tstats-plugin-list-table.widefat tbody tr.active[data-subprojects="3"] th.plugin-select input[type="checkbox"].checkbox-plugin:checked::before {
-  content: url(data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20d%3D%27M4%209h12v2h-12v-2z%27%20fill%3D%27%231e8cbe%27%2F%3E%3C%2Fsvg%3E);
+  content: url(data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2020%2020%27%3E%3Cpath%20d%3D%27M4%209h12v2h-12v-2z%27%20fill%3D%27%23fff%27%2F%3E%3C%2Fsvg%3E);
   margin: -0.1875rem 0 0 -0.1875rem;
   height: 1.25rem;
   width: 1.25rem;
