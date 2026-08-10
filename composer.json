@@ -20,15 +20,15 @@
 		"php": "^7.4 || ^8.0"
 	},
 	"require-dev": {
-		"dealerdirect/phpcodesniffer-composer-installer": "^1.2.0",
-		"ergebnis/composer-normalize": "^2.48.2",
+		"dealerdirect/phpcodesniffer-composer-installer": "^1.2.1",
+		"ergebnis/composer-normalize": "^2.52.0",
 		"phpcompatibility/phpcompatibility-wp": "^2.1.8",
 		"phpmd/phpmd": "^2.15.0",
 		"phpstan/extension-installer": "^1.4.3",
-		"phpstan/phpstan": "^2.1.36",
-		"sirbrillig/phpcs-variable-analysis": "^2.13.0",
+		"phpstan/phpstan": "^2.2.8",
+		"sirbrillig/phpcs-variable-analysis": "^3.0.0",
 		"szepeviktor/phpstan-wordpress": "^2.0.3",
-		"wp-coding-standards/wpcs": "^3.3.0",
+		"wp-coding-standards/wpcs": "^3.4.1",
 		"yoast/phpunit-polyfills": "^1.1.5"
 	},
 	"config": {
@@ -41,6 +41,13 @@
 		"optimize-autoloader": true,
 		"platform": {
 			"php": "7.4"
+		},
+		"policy": {
+			"advisories": {
+				"ignore-id": {
+					"PKSA-z3gr-8qht-p93v": "PHPUnit 6/7 are dev-only, required to test against WP <= 5.8."
+				}
+			}
 		}
 	},
 	"scripts": {

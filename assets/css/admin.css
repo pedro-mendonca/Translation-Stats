@@ -460,7 +460,6 @@ table.tstats-plugin-list-table.widefat tbody .inactive .plugin-select {
 }
 
 .tstats-settings-wrapper .tstats-settings__sidebar .postbox .inside a {
-  -webkit-text-decoration: none;
   text-decoration: none;
 }
 
@@ -483,10 +482,22 @@ table.tstats-plugin-list-table.widefat tbody .inactive .plugin-select {
   content: " ☕";
 }
 
+.tstats-settings-wrapper .tstats-settings__sidebar .postbox .inside .tstats-sponsor ul form button.tstats-github-sponsor {
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 3px;
+}
+
 .tstats-settings-wrapper .tstats-settings__sidebar .postbox .inside .tstats-sponsor ul form button.tstats-github-sponsor span,
 .tstats-settings-wrapper .tstats-settings__sidebar .postbox .inside .tstats-sponsor ul form button.tstats-github-sponsor i {
-  vertical-align: text-top;
   font-size: large;
+  width: auto;
+  height: auto;
+  line-height: 1;
 }
 
 .tstats-settings-wrapper .tstats-settings__sidebar .postbox .inside .tstats-sponsor ul form button.tstats-github-sponsor span {

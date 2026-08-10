@@ -195,14 +195,14 @@ jQuery( document ).ready( function( $ ) {
 		$( row ).find( 'input.checkbox-plugin' ).prop(
 			{
 				checked: true,
-			}
+			},
 		);
 
 		// Activate plugins subprojects.
 		$( row ).find( 'input.checkbox-plugin-subproject' ).prop(
 			{
 				checked: true,
-			}
+			},
 		);
 
 		console.log( 'Activate plugin.' );
@@ -226,14 +226,14 @@ jQuery( document ).ready( function( $ ) {
 		$( row ).find( 'input.checkbox-plugin' ).prop(
 			{
 				checked: false,
-			}
+			},
 		);
 
 		// Deactivate plugins subprojects.
 		$( row ).find( 'input.checkbox-plugin-subproject' ).prop(
 			{
 				checked: false,
-			}
+			},
 		);
 
 		console.log( 'Deactivate plugin.' );
@@ -369,7 +369,7 @@ jQuery( document ).ready( function( $ ) {
 			$( row ).find( 'input.checkbox-plugin' ).prop(
 				{
 					checked: true,
-				}
+				},
 			);
 		} else {
 			// Set row as inactive.
@@ -378,7 +378,7 @@ jQuery( document ).ready( function( $ ) {
 			$( row ).find( 'input.checkbox-plugin' ).prop(
 				{
 					checked: false,
-				}
+				},
 			);
 		}
 	}
@@ -403,7 +403,7 @@ jQuery( document ).ready( function( $ ) {
 				$( 'input#subprojects_' + subproject ).prop(
 					{
 						checked: true,
-					}
+					},
 				);
 				// Set subproject to indeterminate not all plugins are active.
 				if ( subprojectActivePlugins < enabledPlugins ) {
@@ -417,7 +417,7 @@ jQuery( document ).ready( function( $ ) {
 				$( 'input#subprojects_' + subproject ).prop(
 					{
 						checked: false,
-					}
+					},
 				);
 				$( 'input#subprojects_' + subproject ).attr( 'data-indeterminate', false );
 			}
@@ -446,7 +446,7 @@ jQuery( document ).ready( function( $ ) {
 			$( '#tstats-table-plugins thead input#all_plugins' ).prop(
 				{
 					checked: true,
-				}
+				},
 			);
 			if ( completelyActiveSubprojects < 4 ) {
 				// Some subprojects activated.
@@ -462,7 +462,7 @@ jQuery( document ).ready( function( $ ) {
 			$( '#tstats-table-plugins thead input#all_plugins' ).prop(
 				{
 					checked: false,
-				}
+				},
 			);
 			$( '#tstats-table-plugins thead input#all_plugins' ).attr( 'data-indeterminate', false );
 			console.log( 'No subprojects activated.' );

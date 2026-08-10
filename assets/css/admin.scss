@@ -628,11 +628,16 @@ table.tstats-plugin-list-table.widefat { // Translation Stats Settings Plugins t
 						form {
 
 							button.tstats-github-sponsor {
+								display: inline-flex;
+								align-items: center;
+								gap: 3px;
 
 								span,
 								i {
-									vertical-align: text-top;
 									font-size: large;
+									width: auto;
+									height: auto;
+									line-height: 1;
 								}
 
 								span {

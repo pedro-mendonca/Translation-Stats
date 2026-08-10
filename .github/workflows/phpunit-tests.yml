@@ -52,7 +52,9 @@ jobs:
           - '6.5'
           - '6.6'
           - '6.7'
-          - '6.8' # Latest version.
+          - '6.8'
+          - '6.9'
+          - '7.0' # Latest version.
 
         include:
 
