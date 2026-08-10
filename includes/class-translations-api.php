@@ -209,12 +209,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 		 * @since 1.2.0   Renamed from translations_api_url() to translate_url().
 		 *                Added 'api' parameter to allow choose 'api' or normal URL.
 		 *
-		 * @param string $project   Set the project URL you want to get. Defaults to null.
+		 * @param string $project   Set the project URL you want to get. Defaults to 'plugins'.
 		 * @param bool   $api       Set to 'true' to get the API URL. Defaults to false.
 		 *
 		 * @return string           Returns URL.
 		 */
-		public static function translate_url( $project = null, $api = false ) {
+		public static function translate_url( $project = 'plugins', $api = false ) {
 
 			// Set WordPress.org translate site URL.
 			$translate_url = 'https://translate.wordpress.org/';
