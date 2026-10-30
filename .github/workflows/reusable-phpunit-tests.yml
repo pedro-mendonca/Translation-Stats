@@ -87,7 +87,7 @@ jobs:
           root-password: password
 
       - name: Set up PHP ${{ inputs.php }}
-        uses: shivammathur/setup-php@2.37.2
+        uses: shivammathur/setup-php@2.40.0
         with:
           php-version: ${{ inputs.php }}
           coverage: ${{ inputs.coverage && 'xdebug' || 'none' }}
@@ -142,7 +142,7 @@ jobs:
 
       - name: Upload coverage reports to Codecov
         if: ${{ inputs.coverage }}
-        uses: codecov/codecov-action@v7.0.0
+        uses: codecov/codecov-action@v7.1.1
         with:
           file: coverage.xml
           verbose: true
