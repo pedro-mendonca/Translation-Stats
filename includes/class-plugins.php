@@ -248,6 +248,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			?>
 
 			<span class="tstats-update-link">
+				<span class="tstats-update-status" aria-live="polite"></span>
 				<button class="handlediv button-link tstats-update-button" type="button" aria-expanded="true">
 					<span class="dashicons dashicons-update"></span>
 					<span class="screen-reader-text"><?php esc_html_e( 'Update', 'translation-stats' ); ?></span>

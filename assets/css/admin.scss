@@ -27,6 +27,14 @@ table.wp-list-table.plugins { // WordPress Installed Plugins table.
 			.tstats-update-link {
 				float: right;
 
+				.tstats-update-status { // Update status, shown in the title to not move the stats.
+					margin-right: 4px;
+					font-size: 12px;
+					font-style: italic;
+					color: global.$color-shadow;
+					vertical-align: middle;
+				}
+
 				button.tstats-update-button {
 					display: none;
 					border-radius: global.$border-radius-outside;
@@ -43,6 +51,30 @@ table.wp-list-table.plugins { // WordPress Installed Plugins table.
 						span {
 							transform: rotateZ(180deg);
 							color: global.$color-secondary;
+						}
+					}
+
+					&.updating { // Spin the icon while updating.
+						cursor: default;
+
+						span.dashicons {
+							color: global.$color-secondary;
+							animation: tstats_update_spin 1s linear infinite;
+
+							@media (prefers-reduced-motion: reduce) {
+								animation: none;
+							}
+						}
+					}
+
+					@keyframes tstats_update_spin {
+
+						0% {
+							transform: rotateZ(0deg);
+						}
+
+						100% {
+							transform: rotateZ(360deg);
 						}
 					}
 

@@ -26,6 +26,14 @@ table.wp-list-table.plugins td.column-translation-stats .translation-stats-title
   float: right;
 }
 
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-title .tstats-update-link .tstats-update-status {
+  margin-right: 4px;
+  font-size: 12px;
+  font-style: italic;
+  color: #777;
+  vertical-align: middle;
+}
+
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-title .tstats-update-link button.tstats-update-button {
   display: none;
   border-radius: 4px;
@@ -42,6 +50,50 @@ table.wp-list-table.plugins td.column-translation-stats .translation-stats-title
   -ms-transform: rotate(180deg);
   transform: rotateZ(180deg);
   color: #46b450;
+}
+
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-title .tstats-update-link button.tstats-update-button.updating {
+  cursor: default;
+}
+
+table.wp-list-table.plugins td.column-translation-stats .translation-stats-title .tstats-update-link button.tstats-update-button.updating span.dashicons {
+  color: #46b450;
+  -webkit-animation: tstats_update_spin 1s linear infinite;
+  animation: tstats_update_spin 1s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+  table.wp-list-table.plugins td.column-translation-stats .translation-stats-title .tstats-update-link button.tstats-update-button.updating span.dashicons {
+    -webkit-animation: none;
+    animation: none;
+  }
+}
+
+@-webkit-keyframes tstats_update_spin {
+
+  0% {
+    -webkit-transform: rotateZ(0deg);
+    transform: rotateZ(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotateZ(360deg);
+    transform: rotateZ(360deg);
+  }
+}
+
+@keyframes tstats_update_spin {
+
+  0% {
+    -webkit-transform: rotateZ(0deg);
+    transform: rotateZ(0deg);
+  }
+
+  100% {
+    -webkit-transform: rotateZ(360deg);
+    transform: rotateZ(360deg);
+  }
 }
 
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .notice.translation-stats-loading.notice-warning.update-message p::before {

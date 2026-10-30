@@ -262,6 +262,22 @@ class Test_Plugins extends Translation_Stats_TestCase {
 
 
 	/**
+	 * Test the update button has the update status in the widget title, announced to screen readers.
+	 */
+	public function test_plugin_update_button() {
+
+		$plugins = new Plugins();
+
+		ob_start();
+		$plugins->plugin_update_button();
+		$html = (string) ob_get_clean();
+
+		$this->assertStringContainsString( '<span class="tstats-update-status" aria-live="polite"></span>', $html );
+		$this->assertStringContainsString( 'tstats-update-button', $html );
+	}
+
+
+	/**
 	 * Render the plugin widget content.
 	 *
 	 * @return string  The rendered HTML.

@@ -1,4 +1,4 @@
-/* global document, wp */
+/* global document, wp, setTimeout, clearTimeout */
 
 jQuery( document ).ready( function( $ ) {
 	var Queue = function() {
@@ -38,14 +38,20 @@ jQuery( document ).ready( function( $ ) {
 	 * @param {boolean} forceUpdate  True or false.
 	 */
 	function tstatsPluginSubprojectsLoad( tstatsPlugin, forceUpdate ) {
-		// If Update button was clicked, instantly show Waiting message.
+		var widget = $( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats' );
+		var notice = widget.find( 'div.translation-stats-content div.notice.translation-stats-loading' );
+		var button = widget.find( 'button.tstats-update-button' );
+		var status = widget.find( '.tstats-update-status' );
+
+		// If Update button was clicked, show the update status in the widget title, to not move the stats.
 		if ( forceUpdate ) {
-			// Hide the Update button.
-			$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats button.tstats-update-button' ).prop( 'disabled', true ).hide();
-			// Show the Waiting notice.
-			$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).removeClass( 'hidden notice-success updated-message notice-error updating-message' ).addClass( 'notice-warning update-message' );
-			$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading p' ).html( wp.i18n.__( 'Waiting...', 'translation-stats' ) );
-			$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).fadeIn();
+			// Disable the Update button and spin its icon.
+			button.prop( 'disabled', true ).addClass( 'updating' );
+			// Hide any previous error notice.
+			notice.hide();
+			// Show the Waiting status.
+			clearTimeout( status.data( 'timeout' ) );
+			status.text( wp.i18n.__( 'Waiting...', 'translation-stats' ) );
 			console.log( 'REST API request to update translation stats for \'' + tstatsPlugin + '\' was queued.' );
 		}
 
@@ -54,40 +60,47 @@ jQuery( document ).ready( function( $ ) {
 			console.log( 'REST API request to update translation stats for \'' + tstatsPlugin + '\' is starting...' );
 
 			// Start colored bars animation.
-			$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats' ).addClass( 'tstats-loading' );
+			widget.addClass( 'tstats-loading' );
 
-			// Show the Loading notice.
-			$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).removeClass( 'update-message' ).addClass( 'updating-message' );
-			$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading p' ).html( wp.i18n.__( 'Updating...', 'translation-stats' ) );
+			if ( forceUpdate ) {
+				// Show the Updating status.
+				status.text( wp.i18n.__( 'Updating...', 'translation-stats' ) );
+			} else {
+				// Show the Updating notice, in the empty widget without the cached stats.
+				notice.removeClass( 'update-message' ).addClass( 'updating-message' );
+				notice.find( 'p' ).html( wp.i18n.__( 'Updating...', 'translation-stats' ) );
+			}
 
 			return wp.apiFetch( {
 				path: '/translation-stats/v1/plugins/' + encodeURIComponent( tstatsPlugin ) + '/stats' + ( forceUpdate ? '?force=true' : '' ),
 			} ).then( function( response ) {
-				// If Update button was clicked, show Success message afterwards, if not just hide the status notice.
 				if ( forceUpdate ) {
-					// Show the Updated notice.
-					$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).removeClass( 'notice-warning updating-message' ).addClass( 'notice-success updated-message' );
-					$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading p' ).html( wp.i18n.__( 'Updated!', 'translation-stats' ) );
+					// Show the Updated status for a few seconds.
+					status.text( wp.i18n.__( 'Updated!', 'translation-stats' ) );
+					status.data( 'timeout', setTimeout( function() {
+						status.text( '' );
+					}, 3000 ) );
 				} else {
 					// Hide the notice.
-					$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).hide();
+					notice.hide();
 				}
 
 				// Show Translation Stats content.
-				$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.content' ).html( response.html );
+				widget.find( 'div.translation-stats-content div.content' ).html( response.html );
 
 				console.log( 'REST API request to update translation stats for \'' + tstatsPlugin + '\' has been completed.' );
 			} ).catch( function( error ) {
-				// Show the Error notice.
-				$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).removeClass( 'notice-success updated-message notice-warning updating-message' ).addClass( 'notice-error update-message' );
-				$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading p' ).html( wp.i18n.__( 'An error occurred while updating.', 'translation-stats' ) );
+				// Clear the status and show the Error notice.
+				status.text( '' );
+				notice.removeClass( 'hidden notice-success updated-message notice-warning updating-message' ).addClass( 'notice-error update-message' ).show();
+				notice.find( 'p' ).html( wp.i18n.__( 'An error occurred while updating.', 'translation-stats' ) );
 				console.log( 'REST API request to update translation stats for \'' + tstatsPlugin + '\' has failed (' + error.code + '): ' + error.message );
 			} ).then( function() {
 				// Stop colored bars animation.
-				$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats' ).removeClass( 'tstats-loading' );
+				widget.removeClass( 'tstats-loading' );
 
-				// Enable and show update button.
-				$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats button.tstats-update-button' ).prop( 'disabled', false ).show();
+				// Enable and show update button, and stop spinning its icon.
+				button.prop( 'disabled', false ).removeClass( 'updating' ).show();
 			} );
 		} );
 	}
