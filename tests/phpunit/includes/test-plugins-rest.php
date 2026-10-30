@@ -183,6 +183,23 @@ class Test_Plugins_REST extends Translation_Stats_TestCase {
 
 
 	/**
+	 * Test the request returns an error when translate.WordPress.org is unavailable, without caching it.
+	 */
+	public function test_request_api_unavailable() {
+
+		$this->login( 'administrator' );
+
+		$this->mock_translate_api( 429 );
+
+		$response = $this->request();
+
+		$this->assertSame( 503, $response->get_status() );
+		$this->assertSame( 'translation_stats_api_unavailable', $response->get_data()['code'] );
+		$this->assertFalse( get_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . 'translation-stats_stable_pt_PT' ) );
+	}
+
+
+	/**
 	 * Test the stats are cached, unless forcing the update.
 	 */
 	public function test_request_force_update() {

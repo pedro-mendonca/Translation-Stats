@@ -171,10 +171,6 @@ class Test_Plugins extends Translation_Stats_TestCase {
 				'response' => 404,
 				'body'     => '',
 			),
-			'error'               => array(
-				'response' => new WP_Error( 'http_request_failed', 'Connection timed out.' ),
-				'body'     => '',
-			),
 		);
 	}
 
@@ -194,6 +190,47 @@ class Test_Plugins extends Translation_Stats_TestCase {
 		$plugins = new Plugins();
 
 		$this->assertFalse( $plugins->plugin_subproject_stats( $this->get_locale( 'pt_PT', 'pt' ), 'translation-stats', 'stable', false ) );
+	}
+
+
+	/**
+	 * Data provider.
+	 *
+	 * @var array
+	 */
+	public function provide_test_plugin_subproject_stats_api_unavailable() {
+		return array(
+			'rate limited' => array(
+				'response' => 429,
+			),
+			'server error' => array(
+				'response' => 503,
+			),
+			'error'        => array(
+				'response' => new WP_Error( 'http_request_failed', 'Connection timed out.' ),
+			),
+		);
+	}
+
+
+	/**
+	 * Test get the subproject stats when translate.WordPress.org is unavailable returns an error, which isn't cached.
+	 *
+	 * @dataProvider provide_test_plugin_subproject_stats_api_unavailable
+	 *
+	 * @param int|WP_Error $response   The mocked API response.
+	 */
+	public function test_plugin_subproject_stats_api_unavailable( $response ) {
+
+		$this->mock_translate_api( $response );
+
+		$plugins = new Plugins();
+
+		$stats = $plugins->plugin_subproject_stats( $this->get_locale( 'pt_PT', 'pt' ), 'translation-stats', 'stable', false );
+
+		$this->assertWPError( $stats );
+		$this->assertSame( 503, $stats->get_error_data()['status'] );
+		$this->assertFalse( get_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . 'translation-stats_stable_pt_PT' ) );
 	}
 
 
