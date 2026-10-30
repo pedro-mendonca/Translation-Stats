@@ -119,6 +119,8 @@ jobs:
 
       - name: Run PHPUnit tests (PHP ${{ inputs.php }} | WP ${{ inputs.wp }})
         if: ${{ ! inputs.coverage }}
+        env:
+          WP_MULTISITE: ${{ inputs.multisite && '1' || '0' }}
         run: |
           if [[ "${{ inputs.wordpress-translate-api-tests }}" == "true" ]]; then
             composer exec -- phpunit --colors=always
@@ -128,6 +130,8 @@ jobs:
 
       - name: Run PHPUnit tests (PHP ${{ inputs.php }} | WP ${{ inputs.wp }})${{ inputs.wordpress-translate-api-tests && ' including Translate WordPress API' || '' }} with coverage
         if: ${{ inputs.coverage }}
+        env:
+          WP_MULTISITE: ${{ inputs.multisite && '1' || '0' }}
         run: |
           if [[ "${{ inputs.wordpress-translate-api-tests }}" == "true" ]]; then
             composer exec -- phpunit --colors=always --coverage-clover coverage.xml

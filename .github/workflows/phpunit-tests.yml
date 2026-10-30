@@ -10,6 +10,8 @@ on:
       - '**.php'
       # These files configure Composer. Changes could affect the outcome.
       - 'composer.*'
+      # Changes to the PHPUnit configuration should run tests.
+      - 'phpunit.xml.dist'
       # Changes to workflow files should always verify all workflows are successful.
       - '.github/workflows/*.yml'
   # Allows you to run this workflow manually from the Actions tab.
@@ -21,7 +23,7 @@ jobs:
   #
   phpunit:
     name: PHP ${{ matrix.php || '7.4' }} | ${{ 'mariadb' == matrix.db-type && 'MariaDB' || 'MySQL' }}
-    uses: pedro-mendonca/Translation-Stats/.github/workflows/reusable-phpunit-tests.yml@master
+    uses: ./.github/workflows/reusable-phpunit-tests.yml
     secrets:
       codecov-token: ${{ secrets.CODECOV_TOKEN }}
       codacy-project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
@@ -70,6 +72,10 @@ jobs:
           # Test the latest WP and PHP versions, with MariaDB database.
           - php: 'latest' # Latest stable version.
             db-type: 'mariadb' # Latest MariaDB version.
+
+          # Test the latest WP and PHP versions, as multisite.
+          - php: 'latest' # Latest stable version.
+            multisite: true
 
     with:
       php: ${{ matrix.php || '7.4' }}                                                     # Defaults to '7.4'.
