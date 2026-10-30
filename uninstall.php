@@ -35,16 +35,11 @@ if ( is_multisite() ) {
  */
 function translation_stats_uninstall() {
 	$option = get_option( 'tstats_settings' );
-	// Check if Delete Data on Uninstall is set.
+	// Check if Delete Data on Uninstall is set, as string 'true' from the settings form or boolean true from the default settings.
 	// TODO: turn setting to boolean instead of string 'true'.
-	if ( ! empty( $option['settings']['delete_data_on_uninstall'] ) && 'true' === $option['settings']['delete_data_on_uninstall'] ) {
-		if ( is_multisite() ) {
-			// Delete option in Multisite.
-			delete_site_option( 'tstats_settings' );
-		} else {
-			// Delete option.
-			delete_option( 'tstats_settings' );
-		}
+	if ( ! empty( $option['settings']['delete_data_on_uninstall'] ) ) {
+		// Delete option, set per site also in Multisite.
+		delete_option( 'tstats_settings' );
 		// Delete transients.
 		translation_stats_uninstall_delete_transients( 'translation_stats_plugin_' );
 	}
@@ -77,13 +72,8 @@ function translation_stats_uninstall_delete_transients( $search ) {
 	);
 	if ( ! empty( $transients ) ) {
 		foreach ( $transients as $transient ) {
-			if ( is_multisite() ) {
-				// Delete transients in Multisite.
-				delete_site_transient( substr( $transient, strlen( '_transient_' ) ) );
-			} else {
-				// Delete transients.
-				delete_transient( substr( $transient, strlen( '_transient_' ) ) );
-			}
+			// Delete transients, set per site also in Multisite.
+			delete_transient( substr( $transient, strlen( '_transient_' ) ) );
 		}
 	}
 }
