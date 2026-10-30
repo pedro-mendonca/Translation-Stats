@@ -51,6 +51,37 @@ class Test_Settings extends Translation_Stats_TestCase {
 
 
 	/**
+	 * Test the settings sections of all the settings pages are registered, with the sanitized option.
+	 */
+	public function test_settings_sections() {
+		global $wp_settings_sections;
+
+		$settings = new Settings();
+		$settings->settings_sections();
+
+		$settings_pages = Settings::get_settings_pages();
+
+		// The debug page is added in development mode, as WP_DEBUG is enabled in the tests.
+		$this->assertArrayHasKey( 'debug', $settings_pages );
+
+		foreach ( $settings_pages as $page_id => $settings_page ) {
+
+			$page = TRANSLATION_STATS_SETTINGS_SECTIONS_PREFIX . $page_id;
+
+			foreach ( $settings_page['sections'] as $section_id ) {
+				$this->assertArrayHasKey( $section_id, $wp_settings_sections[ $page ], "Section '{$section_id}' not registered in page '{$page}'." );
+			}
+		}
+
+		// The plugin option, sanitized.
+		$registered_settings = get_registered_settings();
+
+		$this->assertArrayHasKey( TRANSLATION_STATS_WP_OPTION, $registered_settings );
+		$this->assertIsCallable( $registered_settings[ TRANSLATION_STATS_WP_OPTION ]['sanitize_callback'] );
+	}
+
+
+	/**
 	 * Test the default settings.
 	 */
 	public function test_settings_defaults() {
