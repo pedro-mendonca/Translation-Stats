@@ -5,7 +5,7 @@ Tags: internationalization, i18n, localization, l10n, translation
 Requires at least: 5.9
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.3.3
+Stable tag: 1.4.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -63,8 +63,18 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
 == Changelog ==
 
-= Unreleased =
+= 1.4.0 =
 *   Bump minimum WP version to 5.9.
+*   Security: Check the user permission to load the plugin translation stats, now loaded with the REST API.
+*   Show the cached plugin translation stats instantly, loading only the missing ones.
+*   Show the plugin translation stats update status next to the update button, without moving the stats.
+*   Fix translate.wordpress.org errors and rate limits shown as translation project not found for a day.
+*   Fix the Translation Stats plugins filter, status link and settings update on Multisite.
+*   Fix cleaning the cache on Multisite.
+*   Fix plugin data not deleted on uninstall with the default settings and on Multisite.
+*   Fix default settings saved nested when sanitizing settings without data.
+*   Show an error page with status 403 when the settings form nonce fails.
+*   Increase unit tests coverage.
 
 = 1.3.3 =
 *   Tested up to WP 7.1.
