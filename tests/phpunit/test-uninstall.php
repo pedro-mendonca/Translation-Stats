@@ -105,30 +105,31 @@ class Test_Uninstall extends Translation_Stats_TestCase {
 
 
 	/**
-	 * Test the plugin data is deleted in all the sites on multisite uninstall.
-	 *
-	 * @group multisite
+	 * Test the plugin data is deleted in all the sites, with an additional site on multisite.
 	 */
-	public function test_uninstall_multisite() {
+	public function test_uninstall_all_sites() {
 
-		if ( ! is_multisite() ) {
-			$this->markTestSkipped( 'Test requires multisite.' );
+		$this->add_plugin_data( 'true' );
+
+		$site_ids = array();
+		if ( is_multisite() ) {
+			$site_ids[] = self::factory()->blog->create();
 		}
 
-		$site_id = self::factory()->blog->create();
-
-		$this->add_plugin_data( 'true' );
-
-		switch_to_blog( $site_id );
-		$this->add_plugin_data( 'true' );
-		restore_current_blog();
+		foreach ( $site_ids as $site_id ) {
+			switch_to_blog( $site_id );
+			$this->add_plugin_data( 'true' );
+			restore_current_blog();
+		}
 
 		$this->uninstall();
 
 		$this->assert_plugin_data( false );
 
-		switch_to_blog( $site_id );
-		$this->assert_plugin_data( false );
-		restore_current_blog();
+		foreach ( $site_ids as $site_id ) {
+			switch_to_blog( $site_id );
+			$this->assert_plugin_data( false );
+			restore_current_blog();
+		}
 	}
 }
