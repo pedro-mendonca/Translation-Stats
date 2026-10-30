@@ -334,6 +334,38 @@ class Test_Plugins extends Translation_Stats_TestCase {
 
 
 	/**
+	 * Test the plugin stats widget passes the project slug and Locale to the content, rendering the cached stats.
+	 */
+	public function test_render_plugin_stats() {
+
+		$this->set_settings( array( 'translation_language' => 'pt_PT' ), array( 'translation-stats' => array( 'stable' => 'true' ) ) );
+
+		$this->cache_subprojects_stats( array( 'dev', 'dev-readme', 'stable', 'stable-readme' ) );
+
+		$received = array();
+		add_action(
+			'translation_stats_plugin_widget_content',
+			function ( $project_slug, $locale ) use ( &$received ) {
+				$received = array( $project_slug, $locale->wp_locale );
+			},
+			10,
+			2
+		);
+
+		$plugins = new Plugins();
+
+		ob_start();
+		$plugins->render_plugin_stats( 'translation-stats' );
+		$html = (string) ob_get_clean();
+
+		$this->assertSame( array( 'translation-stats', 'pt_PT' ), $received );
+		$this->assertStringContainsString( 'translation-stats-title', $html );
+		$this->assertStringContainsString( 'translation-stats-cached', $html );
+		$this->assertStringContainsString( '95%', $html );
+	}
+
+
+	/**
 	 * Data provider.
 	 *
 	 * @var array
