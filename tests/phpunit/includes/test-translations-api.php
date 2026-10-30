@@ -11,61 +11,7 @@ use Translation_Stats\Translations_API;
 /**
  * Translations_API test case.
  */
-class Test_Translations_API extends WP_UnitTestCase {
-
-
-	/**
-	 * URLs requested to the mocked translate.WordPress.org API.
-	 *
-	 * @var array
-	 */
-	private $requested_urls = array();
-
-
-	/**
-	 * Mock the translate.WordPress.org API response, without making a real HTTP request.
-	 *
-	 * @param int|WP_Error $response   HTTP response code to return, or a WP_Error.
-	 */
-	private function mock_translate_api( $response ) {
-
-		$this->requested_urls = array();
-
-		// Settings needed to set the transients expiration.
-		update_option(
-			TRANSLATION_STATS_WP_OPTION,
-			array(
-				'settings' => array(
-					'transients_expiration' => HOUR_IN_SECONDS,
-				),
-			)
-		);
-
-		add_filter(
-			'pre_http_request',
-			function ( $preempt, $args, $url ) use ( $response ) {
-
-				$this->requested_urls[] = $url;
-
-				if ( is_wp_error( $response ) ) {
-					return $response;
-				}
-
-				return array(
-					'headers'  => array(),
-					'body'     => '',
-					'response' => array(
-						'code'    => $response,
-						'message' => get_status_header_desc( $response ),
-					),
-					'cookies'  => array(),
-					'filename' => null,
-				);
-			},
-			10,
-			3
-		);
-	}
+class Test_Translations_API extends Translation_Stats_TestCase {
 
 
 	/**
@@ -152,8 +98,6 @@ class Test_Translations_API extends WP_UnitTestCase {
 
 		$this->assertSame( wp_remote_retrieve_response_code( $response ), 200 );
 		$this->assertSame( $this->requested_urls, array( 'https://translate.wordpress.org/api/projects/wp-plugins/translation-stats' ) );
-
-		remove_all_filters( 'pre_http_request' );
 
 		// Non-existent plugin slug in Translating WordPress.
 		$this->mock_translate_api( 404 );
