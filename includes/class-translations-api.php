@@ -117,7 +117,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 		 *
 		 * @since 1.4.0
 		 *
-		 * @param array|\WP_Error $response   The translate.WordPress.org API response.
+		 * @param array|WP_Error $response   The translate.WordPress.org API response.
 		 *
 		 * @return bool   True if the API is unavailable.
 		 */
