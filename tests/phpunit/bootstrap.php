@@ -37,5 +37,6 @@ tests_add_filter( 'muplugins_loaded', 'translation_stats_manually_load_plugin' )
 // Start up the WP testing environment.
 require "{$translation_stats_tests_dir}/includes/bootstrap.php";
 
-// Load the base test case.
+// Load the test helpers and the base test case.
+require __DIR__ . '/trait-translation-stats-test-helpers.php';
 require __DIR__ . '/class-translation-stats-testcase.php';
