@@ -66,13 +66,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Transients' ) ) {
 			$transients = $this->get_transients( $prefix );
 			if ( ! empty( $transients ) ) {
 				foreach ( $transients as $transient ) {
-					if ( is_multisite() ) {
-						// Delete transients in Multisite.
-						delete_site_transient( substr( $transient, strlen( '_transient_' ) ) );
-					} else {
-						// Delete transients.
-						delete_transient( substr( $transient, strlen( '_transient_' ) ) );
-					}
+					// Delete transients, set per site also in Multisite.
+					delete_transient( substr( $transient, strlen( '_transient_' ) ) );
 				}
 			}
 		}

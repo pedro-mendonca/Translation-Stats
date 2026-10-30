@@ -34,6 +34,10 @@
 	<!-- Include the WordPress Coding Standards. -->
 	<rule ref="WordPress">
 		<exclude name="WordPress.PHP.YodaConditions.NotYoda"/>
+		<properties>
+			<!-- Set the base test case for the unit tests, for all the sniffs that check test classes. -->
+			<property name="custom_test_classes" type="array" value="Translation_Stats_TestCase"/>
+		</properties>
 	</rule>
 
 	<config name="minimum_supported_wp_version" value="5.9"/>

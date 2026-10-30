@@ -180,8 +180,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 		 * @return void
 		 */
 		public function nonce_fail() {
-			esc_html_e( 'Sorry, your nonce did not verify.', 'translation-stats' );
-			exit;
+			wp_die( esc_html__( 'Sorry, your nonce did not verify.', 'translation-stats' ), 403 );
 		}
 
 

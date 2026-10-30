@@ -287,7 +287,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 			if ( isset( $data['settings'] ) && is_array( $data['settings'] ) ) {
 				$sanitized['settings'] = array_map( 'sanitize_text_field', $data['settings'] );
 			} else {
-				$sanitized['settings'] = $default_settings;
+				$sanitized['settings'] = $default_settings['settings'];
 			}
 
 			// Sanitize plugins data.
