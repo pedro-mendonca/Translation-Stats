@@ -15,6 +15,60 @@ class Test_Translations_API extends WP_UnitTestCase {
 
 
 	/**
+	 * URLs requested to the mocked translate.WordPress.org API.
+	 *
+	 * @var array
+	 */
+	private $requested_urls = array();
+
+
+	/**
+	 * Mock the translate.WordPress.org API response, without making a real HTTP request.
+	 *
+	 * @param int|WP_Error $response   HTTP response code to return, or a WP_Error.
+	 */
+	private function mock_translate_api( $response ) {
+
+		$this->requested_urls = array();
+
+		// Settings needed to set the transients expiration.
+		update_option(
+			TRANSLATION_STATS_WP_OPTION,
+			array(
+				'settings' => array(
+					'transients_expiration' => HOUR_IN_SECONDS,
+				),
+			)
+		);
+
+		add_filter(
+			'pre_http_request',
+			function ( $preempt, $args, $url ) use ( $response ) {
+
+				$this->requested_urls[] = $url;
+
+				if ( is_wp_error( $response ) ) {
+					return $response;
+				}
+
+				return array(
+					'headers'  => array(),
+					'body'     => '',
+					'response' => array(
+						'code'    => $response,
+						'message' => get_status_header_desc( $response ),
+					),
+					'cookies'  => array(),
+					'filename' => null,
+				);
+			},
+			10,
+			3
+		);
+	}
+
+
+	/**
 	 * Test get plugin slug from its file path.
 	 */
 	public function test_get_plugin_slug() {
@@ -83,6 +137,104 @@ class Test_Translations_API extends WP_UnitTestCase {
 		$response_code = wp_remote_retrieve_response_code( $response );
 
 		$this->assertSame( $response_code, 404 );
+	}
+
+
+	/**
+	 * Test get plugin data from a mocked translate.WordPress.org API.
+	 */
+	public function test_translations_api_get_plugin_mocked() {
+
+		// Existent plugin slug in Translating WordPress.
+		$this->mock_translate_api( 200 );
+
+		$response = Translations_API::translations_api_get_plugin( 'translation-stats' );
+
+		$this->assertSame( wp_remote_retrieve_response_code( $response ), 200 );
+		$this->assertSame( $this->requested_urls, array( 'https://translate.wordpress.org/api/projects/wp-plugins/translation-stats' ) );
+
+		remove_all_filters( 'pre_http_request' );
+
+		// Non-existent plugin slug in Translating WordPress.
+		$this->mock_translate_api( 404 );
+
+		$response = Translations_API::translations_api_get_plugin( 'wrong-slug-translation-stats' );
+
+		$this->assertSame( wp_remote_retrieve_response_code( $response ), 404 );
+		$this->assertSame( $this->requested_urls, array( 'https://translate.wordpress.org/api/projects/wp-plugins/wrong-slug-translation-stats' ) );
+	}
+
+
+	/**
+	 * Data provider.
+	 *
+	 * @var array
+	 */
+	public function provide_test_translate_api_responses() {
+		return array(
+			'found'     => array(
+				'response'        => 200,
+				'expected_result' => true,
+			),
+			'not found' => array(
+				'response'        => 404,
+				'expected_result' => false,
+			),
+			'error'     => array(
+				'response'        => new WP_Error( 'http_request_failed', 'Connection timed out.' ),
+				'expected_result' => false,
+			),
+		);
+	}
+
+
+	/**
+	 * Test if the translation project exists on translate.WordPress.org, and is cached in a transient.
+	 *
+	 * @dataProvider provide_test_translate_api_responses
+	 *
+	 * @param int|WP_Error $response          The mocked API response.
+	 * @param bool         $expected_result   The expected result for the test.
+	 */
+	public function test_plugin_project_on_translate_wporg( $response, $expected_result ) {
+
+		$this->mock_translate_api( $response );
+
+		$on_wporg = Translations_API::plugin_project_on_translate_wporg( 'translation-stats' );
+
+		$this->assertSame( $on_wporg, $expected_result );
+		$this->assertSame( $this->requested_urls, array( 'https://translate.wordpress.org/api/projects/wp-plugins/translation-stats' ) );
+
+		// The second check uses the transient, without a new request.
+		Translations_API::plugin_project_on_translate_wporg( 'translation-stats' );
+
+		$this->assertCount( 1, $this->requested_urls );
+	}
+
+
+	/**
+	 * Test if the translation subproject exists on translate.WordPress.org, and is cached in a transient.
+	 *
+	 * @dataProvider provide_test_translate_api_responses
+	 *
+	 * @param int|WP_Error $response          The mocked API response.
+	 * @param bool         $expected_result   The expected result for the test.
+	 */
+	public function test_plugin_subproject_on_translate_wporg( $response, $expected_result ) {
+
+		$this->mock_translate_api( $response );
+
+		$translations_api = new Translations_API();
+
+		$on_wporg = $translations_api->plugin_subproject_on_translate_wporg( 'translation-stats', 'stable' );
+
+		$this->assertSame( $on_wporg, $expected_result );
+		$this->assertSame( $this->requested_urls, array( 'https://translate.wordpress.org/api/projects/wp-plugins/translation-stats/stable' ) );
+
+		// The second check uses the transient, without a new request.
+		$translations_api->plugin_subproject_on_translate_wporg( 'translation-stats', 'stable' );
+
+		$this->assertCount( 1, $this->requested_urls );
 	}
 
 
