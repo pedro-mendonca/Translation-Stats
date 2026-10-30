@@ -55,6 +55,15 @@
 		<properties>
 			<!-- Set the global prefix. -->
 			<property name="prefixes" type="array" value="translation_stats"/>
+			<!-- Set the base test case for the unit tests. -->
+			<property name="custom_test_classes" type="array" value="Translation_Stats_TestCase"/>
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.Files.FileName">
+		<properties>
+			<!-- Set the base test case for the unit tests. -->
+			<property name="custom_test_classes" type="array" value="Translation_Stats_TestCase"/>
 		</properties>
 	</rule>
 

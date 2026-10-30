@@ -5,7 +5,6 @@
  * @package Translation_Stats
  */
 
-
 /**
  * Translation Stats test case, with helpers shared by the test classes.
  */
