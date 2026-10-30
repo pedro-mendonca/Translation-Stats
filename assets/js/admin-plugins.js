@@ -20,12 +20,15 @@ jQuery( document ).ready( function( $ ) {
 		tstatsPluginSubprojectsLoad( tstatsPlugin, forceUpdate );
 	} );
 
-	// Action on each loading div.
-	$( 'table.wp-list-table td.translation-stats div.translation-stats-loading' ).each( function() {
+	// Action on each loading div, except the ones with the cached stats already rendered.
+	$( 'table.wp-list-table td.translation-stats div.translation-stats-loading:not(.translation-stats-cached)' ).each( function() {
 		var tstatsPlugin = $( this ).closest( 'tr' ).attr( 'data-slug' );
 		var forceUpdate = false;
 		tstatsPluginSubprojectsLoad( tstatsPlugin, forceUpdate );
 	} );
+
+	// Show the update button of the cached stats already rendered, as there is no request to load them.
+	$( 'table.wp-list-table td.translation-stats div.translation-stats-loading.translation-stats-cached' ).closest( 'td.translation-stats' ).find( 'button.tstats-update-button' ).show();
 
 	/**
 	 * Load subprojects stats.
@@ -40,7 +43,7 @@ jQuery( document ).ready( function( $ ) {
 			// Hide the Update button.
 			$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats button.tstats-update-button' ).prop( 'disabled', true ).hide();
 			// Show the Waiting notice.
-			$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).removeClass( 'notice-success updated-message notice-error updating-message' ).addClass( 'notice-warning update-message' );
+			$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).removeClass( 'hidden notice-success updated-message notice-error updating-message' ).addClass( 'notice-warning update-message' );
 			$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading p' ).html( wp.i18n.__( 'Waiting...', 'translation-stats' ) );
 			$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).fadeIn();
 			console.log( 'REST API request to update translation stats for \'' + tstatsPlugin + '\' was queued.' );

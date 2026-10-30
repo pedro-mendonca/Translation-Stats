@@ -40,7 +40,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			add_action( 'translation_stats_plugin_widget_title__actions', array( $this, 'plugin_update_button' ) );
 
 			// Add Translation Stats plugin widget content.
-			add_action( 'translation_stats_plugin_widget_content', array( $this, 'plugin_widget_content' ) );
+			add_action( 'translation_stats_plugin_widget_content', array( $this, 'plugin_widget_content' ), 10, 2 );
 
 			// Register the REST API route to load the plugin subprojects stats.
 			add_action( 'rest_api_init', array( $this, 'register_rest_routes' ) );
@@ -198,7 +198,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 
 				<?php
 				// Add Translation Stats plugin widget content.
-				do_action( 'translation_stats_plugin_widget_content' );
+				do_action( 'translation_stats_plugin_widget_content', $project_slug, $locale );
 				?>
 
 			</div>
@@ -259,29 +259,87 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 
 
 		/**
-		 * Load plugin widget loading placeholder.
+		 * Load plugin widget content, with the cached stats, or the loading placeholder to load them with the REST API.
 		 *
 		 * @since 0.9.4
 		 * @since 1.2.0   Renamed from tstats_stats_plugin_widget_content() to plugin_widget_content().
+		 * @since 1.4.0   Render the cached stats, without loading them with the REST API.
+		 *
+		 * @param string      $project_slug   Plugin Slug.
+		 * @param Locale|null $locale         Locale object.
 		 *
 		 * @return void
 		 */
-		public function plugin_widget_content() {
+		public function plugin_widget_content( $project_slug = '', $locale = null ) {
+
+			$cached = '' !== $project_slug && ! is_null( $locale ) && $this->plugin_stats_cached( $project_slug, $locale );
+
+			$additional_classes = array(
+				'translation-stats-loading',
+			);
+
+			if ( $cached ) {
+				// Keep the hidden notice to show the update status.
+				$additional_classes[] = 'translation-stats-cached';
+				$additional_classes[] = 'hidden';
+			}
 
 			$admin_notice_waiting = array(
 				'type'               => 'warning',
 				'notice-alt'         => true,
-				'additional-classes' => array(
-					'translation-stats-loading',
-				),
+				'additional-classes' => $additional_classes,
 				'update-icon'        => true,
 				'force_show'         => true,
 				'message'            => esc_html__( 'Waiting...', 'translation-stats' ),
 			);
 			new Admin_Notice( $admin_notice_waiting );
 			?>
-			<div class="content"></div>
+			<div class="content">
+				<?php
+				if ( $cached ) {
+					$this->plugin_widget_content_stats( $project_slug, $locale, false );
+				}
+				?>
+			</div>
 			<?php
+		}
+
+
+		/**
+		 * Check if the stats of all the plugin subprojects are cached.
+		 *
+		 * @since 1.4.0
+		 *
+		 * @param string $project_slug   Plugin Slug.
+		 * @param Locale $locale         Locale object.
+		 *
+		 * @return bool   True if all the subprojects stats are cached.
+		 */
+		public function plugin_stats_cached( $project_slug, $locale ) {
+
+			foreach ( Translations_API::plugin_subprojects() as $subproject ) {
+				if ( false === get_transient( $this->plugin_subproject_stats_transient( $locale, $project_slug, $subproject['slug'] ) ) ) {
+					return false;
+				}
+			}
+
+			return true;
+		}
+
+
+		/**
+		 * Get the transient name of the plugin subproject stats.
+		 *
+		 * @since 1.4.0
+		 *
+		 * @param Locale $locale            Locale object.
+		 * @param string $project_slug      Plugin Slug.
+		 * @param string $subproject_slug   Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).
+		 *
+		 * @return string   Transient name.
+		 */
+		public function plugin_subproject_stats_transient( $locale, $project_slug, $subproject_slug ) {
+			return TRANSLATION_STATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug . '_' . $locale->wp_locale;
 		}
 
 
@@ -693,7 +751,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				$stats = false;
 			} else {
 				// Get subproject transients.
-				$stats = get_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug . '_' . $locale->wp_locale );
+				$stats = get_transient( $this->plugin_subproject_stats_transient( $locale, $project_slug, $subproject_slug ) );
 			}
 
 			if ( false === $stats ) {
@@ -738,7 +796,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 					}
 				}
 
-				set_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug . '_' . $locale->wp_locale, $stats, get_option( TRANSLATION_STATS_WP_OPTION )['settings']['transients_expiration'] );
+				set_transient( $this->plugin_subproject_stats_transient( $locale, $project_slug, $subproject_slug ), $stats, get_option( TRANSLATION_STATS_WP_OPTION )['settings']['transients_expiration'] );
 			}
 
 			return $stats;
