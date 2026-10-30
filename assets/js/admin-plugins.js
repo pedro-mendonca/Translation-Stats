@@ -1,4 +1,4 @@
-/* global document, tstats, wp */
+/* global document, wp, setTimeout, clearTimeout */
 
 jQuery( document ).ready( function( $ ) {
 	var Queue = function() {
@@ -17,15 +17,18 @@ jQuery( document ).ready( function( $ ) {
 	$( 'table.wp-list-table td.translation-stats button.tstats-update-button' ).on( 'click', function() {
 		var tstatsPlugin = $( this ).closest( 'tr' ).attr( 'data-slug' );
 		var forceUpdate = true;
-		tstatsPluginSubprojectsLoadAjax( tstatsPlugin, forceUpdate );
+		tstatsPluginSubprojectsLoad( tstatsPlugin, forceUpdate );
 	} );
 
-	// Action on each loading div.
-	$( 'table.wp-list-table td.translation-stats div.translation-stats-loading' ).each( function() {
+	// Action on each loading div, except the ones with the cached stats already rendered.
+	$( 'table.wp-list-table td.translation-stats div.translation-stats-loading:not(.translation-stats-cached)' ).each( function() {
 		var tstatsPlugin = $( this ).closest( 'tr' ).attr( 'data-slug' );
 		var forceUpdate = false;
-		tstatsPluginSubprojectsLoadAjax( tstatsPlugin, forceUpdate );
+		tstatsPluginSubprojectsLoad( tstatsPlugin, forceUpdate );
 	} );
+
+	// Show the update button of the cached stats already rendered, as there is no request to load them.
+	$( 'table.wp-list-table td.translation-stats div.translation-stats-loading.translation-stats-cached' ).closest( 'td.translation-stats' ).find( 'button.tstats-update-button' ).show();
 
 	/**
 	 * Load subprojects stats.
@@ -34,67 +37,70 @@ jQuery( document ).ready( function( $ ) {
 	 * @param {string}  tstatsPlugin Project slug.
 	 * @param {boolean} forceUpdate  True or false.
 	 */
-	function tstatsPluginSubprojectsLoadAjax( tstatsPlugin, forceUpdate ) {
-		// If Update button was clicked, instantly show Waiting message.
+	function tstatsPluginSubprojectsLoad( tstatsPlugin, forceUpdate ) {
+		var widget = $( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats' );
+		var notice = widget.find( 'div.translation-stats-content div.notice.translation-stats-loading' );
+		var button = widget.find( 'button.tstats-update-button' );
+		var status = widget.find( '.tstats-update-status' );
+
+		// If Update button was clicked, show the update status in the widget title, to not move the stats.
 		if ( forceUpdate ) {
-			// Hide the Update button.
-			$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats button.tstats-update-button' ).prop( 'disabled', true ).hide();
-			// Show the Waiting notice.
-			$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).removeClass( 'notice-success updated-message notice-error updating-message' ).addClass( 'notice-warning update-message' );
-			$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading p' ).html( wp.i18n.__( 'Waiting...', 'translation-stats' ) );
-			$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).fadeIn();
-			console.log( 'Ajax request to update translation stats for \'' + tstatsPlugin + '\' was queued.' );
+			// Disable the Update button and spin its icon.
+			button.prop( 'disabled', true ).addClass( 'updating' );
+			// Hide any previous error notice.
+			notice.hide();
+			// Show the Waiting status.
+			clearTimeout( status.data( 'timeout' ) );
+			status.text( wp.i18n.__( 'Waiting...', 'translation-stats' ) );
+			console.log( 'REST API request to update translation stats for \'' + tstatsPlugin + '\' was queued.' );
 		}
 
 		// Add request to queue.
 		queue( function() {
-			return $.ajax( {
+			console.log( 'REST API request to update translation stats for \'' + tstatsPlugin + '\' is starting...' );
 
-				url: tstats.ajaxurl,
-				type: 'POST',
-				data: {
-					action: 'translation_stats_plugin_widget_content_load',
-					_ajax_nonce: tstats.nonce,
-					tstatsPlugin: tstatsPlugin,
-					forceUpdate: forceUpdate,
-				},
-				beforeSend: function() {
-					console.log( 'Ajax request to update translation stats for \'' + tstatsPlugin + '\' is starting...' );
+			// Start colored bars animation.
+			widget.addClass( 'tstats-loading' );
 
-					// Start colored bars animation.
-					$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats' ).addClass( 'tstats-loading' );
+			if ( forceUpdate ) {
+				// Show the Updating status.
+				status.text( wp.i18n.__( 'Updating...', 'translation-stats' ) );
+			} else {
+				// Show the Updating notice, in the empty widget without the cached stats.
+				notice.removeClass( 'update-message' ).addClass( 'updating-message' );
+				notice.find( 'p' ).html( wp.i18n.__( 'Updating...', 'translation-stats' ) );
+			}
 
-					// Show the Loading notice.
-					$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).removeClass( 'update-message' ).addClass( 'updating-message' );
-					$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading p' ).html( wp.i18n.__( 'Updating...', 'translation-stats' ) );
-				},
-
-			} ).done( function( html, textStatus, jqXHR ) {
-				// If Update button was clicked, show Success message afterwards, if not just hide the status notice.
+			return wp.apiFetch( {
+				path: '/translation-stats/v1/plugins/' + encodeURIComponent( tstatsPlugin ) + '/stats' + ( forceUpdate ? '?force=true' : '' ),
+			} ).then( function( response ) {
 				if ( forceUpdate ) {
-					// Show the Updated notice.
-					$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).removeClass( 'notice-warning updating-message' ).addClass( 'notice-success updated-message' );
-					$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading p' ).html( wp.i18n.__( 'Updated!', 'translation-stats' ) );
+					// Show the Updated status for a few seconds.
+					status.text( wp.i18n.__( 'Updated!', 'translation-stats' ) );
+					status.data( 'timeout', setTimeout( function() {
+						status.text( '' );
+					}, 3000 ) );
 				} else {
 					// Hide the notice.
-					$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).hide();
+					notice.hide();
 				}
 
 				// Show Translation Stats content.
-				$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.content' ).html( html );
+				widget.find( 'div.translation-stats-content div.content' ).html( response.html );
 
-				console.log( 'Ajax request to update translation stats for \'' + tstatsPlugin + '\' has been completed (' + textStatus + '). Status: ' + jqXHR.status + ' ' + jqXHR.statusText );
-			} ).fail( function( jqXHR, textStatus ) {
-				// Show the Error notice.
-				$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading' ).removeClass( 'notice-success updated-message notice-warning updating-message' ).addClass( 'notice-error update-message' );
-				$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats div.translation-stats-content div.notice.translation-stats-loading p' ).html( wp.i18n.__( 'An error occurred while updating.', 'translation-stats' ) );
-				console.log( 'Ajax request to update translation stats for \'' + tstatsPlugin + '\' has failed (' + textStatus + '). Status: ' + jqXHR.status + ' ' + jqXHR.statusText );
-			} ).always( function() {
+				console.log( 'REST API request to update translation stats for \'' + tstatsPlugin + '\' has been completed.' );
+			} ).catch( function( error ) {
+				// Clear the status and show the Error notice.
+				status.text( '' );
+				notice.removeClass( 'hidden notice-success updated-message notice-warning updating-message' ).addClass( 'notice-error update-message' ).show();
+				notice.find( 'p' ).html( wp.i18n.__( 'An error occurred while updating.', 'translation-stats' ) );
+				console.log( 'REST API request to update translation stats for \'' + tstatsPlugin + '\' has failed (' + error.code + '): ' + error.message );
+			} ).then( function() {
 				// Stop colored bars animation.
-				$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats' ).removeClass( 'tstats-loading' );
+				widget.removeClass( 'tstats-loading' );
 
-				// Enable and show update button.
-				$( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats button.tstats-update-button' ).prop( 'disabled', false ).show();
+				// Enable and show update button, and stop spinning its icon.
+				button.prop( 'disabled', false ).removeClass( 'updating' ).show();
 			} );
 		} );
 	}

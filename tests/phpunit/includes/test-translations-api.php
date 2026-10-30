@@ -116,17 +116,30 @@ class Test_Translations_API extends Translation_Stats_TestCase {
 	 */
 	public function provide_test_translate_api_responses() {
 		return array(
-			'found'     => array(
-				'response'        => 200,
-				'expected_result' => true,
+			'found'        => array(
+				'response'          => 200,
+				'expected_result'   => true,
+				'expected_requests' => 1,
 			),
-			'not found' => array(
-				'response'        => 404,
-				'expected_result' => false,
+			'not found'    => array(
+				'response'          => 404,
+				'expected_result'   => false,
+				'expected_requests' => 1,
 			),
-			'error'     => array(
-				'response'        => new WP_Error( 'http_request_failed', 'Connection timed out.' ),
-				'expected_result' => false,
+			'rate limited' => array(
+				'response'          => 429,
+				'expected_result'   => true,
+				'expected_requests' => 2,
+			),
+			'server error' => array(
+				'response'          => 503,
+				'expected_result'   => true,
+				'expected_requests' => 2,
+			),
+			'error'        => array(
+				'response'          => new WP_Error( 'http_request_failed', 'Connection timed out.' ),
+				'expected_result'   => true,
+				'expected_requests' => 2,
 			),
 		);
 	}
@@ -134,13 +147,15 @@ class Test_Translations_API extends Translation_Stats_TestCase {
 
 	/**
 	 * Test if the translation project exists on translate.WordPress.org, and is cached in a transient.
+	 * If translate.WordPress.org is unavailable, the project is assumed to exist and the result isn't cached.
 	 *
 	 * @dataProvider provide_test_translate_api_responses
 	 *
-	 * @param int|WP_Error $response          The mocked API response.
-	 * @param bool         $expected_result   The expected result for the test.
+	 * @param int|WP_Error $response            The mocked API response.
+	 * @param bool         $expected_result     The expected result for the test.
+	 * @param int          $expected_requests   The expected requests after checking twice.
 	 */
-	public function test_plugin_project_on_translate_wporg( $response, $expected_result ) {
+	public function test_plugin_project_on_translate_wporg( $response, $expected_result, $expected_requests ) {
 
 		$this->mock_translate_api( $response );
 
@@ -149,22 +164,24 @@ class Test_Translations_API extends Translation_Stats_TestCase {
 		$this->assertSame( $on_wporg, $expected_result );
 		$this->assertSame( $this->requested_urls, array( 'https://translate.wordpress.org/api/projects/wp-plugins/translation-stats' ) );
 
-		// The second check uses the transient, without a new request.
+		// The second check uses the transient, without a new request, unless the API was unavailable.
 		Translations_API::plugin_project_on_translate_wporg( 'translation-stats' );
 
-		$this->assertCount( 1, $this->requested_urls );
+		$this->assertCount( $expected_requests, $this->requested_urls );
 	}
 
 
 	/**
 	 * Test if the translation subproject exists on translate.WordPress.org, and is cached in a transient.
+	 * If translate.WordPress.org is unavailable, the subproject is assumed to exist and the result isn't cached.
 	 *
 	 * @dataProvider provide_test_translate_api_responses
 	 *
-	 * @param int|WP_Error $response          The mocked API response.
-	 * @param bool         $expected_result   The expected result for the test.
+	 * @param int|WP_Error $response            The mocked API response.
+	 * @param bool         $expected_result     The expected result for the test.
+	 * @param int          $expected_requests   The expected requests after checking twice.
 	 */
-	public function test_plugin_subproject_on_translate_wporg( $response, $expected_result ) {
+	public function test_plugin_subproject_on_translate_wporg( $response, $expected_result, $expected_requests ) {
 
 		$this->mock_translate_api( $response );
 
@@ -175,10 +192,10 @@ class Test_Translations_API extends Translation_Stats_TestCase {
 		$this->assertSame( $on_wporg, $expected_result );
 		$this->assertSame( $this->requested_urls, array( 'https://translate.wordpress.org/api/projects/wp-plugins/translation-stats/stable' ) );
 
-		// The second check uses the transient, without a new request.
+		// The second check uses the transient, without a new request, unless the API was unavailable.
 		$translations_api->plugin_subproject_on_translate_wporg( 'translation-stats', 'stable' );
 
-		$this->assertCount( 1, $this->requested_urls );
+		$this->assertCount( $expected_requests, $this->requested_urls );
 	}
 
 

@@ -112,28 +112,51 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 
 
 		/**
+		 * Check if the translate.WordPress.org API response is unavailable, without a definitive answer.
+		 * Only 200 (found) and 404 (not found) are definitive. Failed requests, rate limits (429) and server errors aren't.
+		 *
+		 * @since 1.4.0
+		 *
+		 * @param array|WP_Error $response   The translate.WordPress.org API response.
+		 *
+		 * @return bool   True if the API is unavailable.
+		 */
+		public static function is_api_unavailable( $response ) {
+
+			if ( is_wp_error( $response ) ) {
+				return true;
+			}
+
+			return ! in_array( wp_remote_retrieve_response_code( $response ), array( 200, 404 ), true );
+		}
+
+
+		/**
 		 * Check if translation project exist without /subproject slug (e.g. https://translate.wordpress.org/api/projects/wp-plugins/wp-seo-acf-content-analysis).
 		 *
 		 * @since 0.8.0
 		 * @since 1.1.0  Remove method prefix.
 		 *
+		 * @since 1.4.0  If translate.WordPress.org is unavailable, assume the project exists and don't cache the result.
+		 *
 		 * @param string $project_slug  Plugin Slug (e.g. 'plugin-slug').
 		 *
-		 * @return string $on_wporg     Returns 'true' if the translation project exist on WordPress.org.
+		 * @return bool                 Returns true if the translation project exist on WordPress.org.
 		 */
 		public static function plugin_project_on_translate_wporg( $project_slug ) {
 			// Check project transients.
 			$on_wporg = get_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . $project_slug );
 			if ( false === $on_wporg ) {
 				$json = self::translations_api_get_plugin( $project_slug );
-				if ( is_wp_error( $json ) || wp_remote_retrieve_response_code( $json ) !== 200 ) {
-					$on_wporg = false;
-				} else {
-					$on_wporg = true;
+				if ( self::is_api_unavailable( $json ) ) {
+					// Unknown, the stats request will show the error.
+					return true;
 				}
+				$on_wporg = 200 === wp_remote_retrieve_response_code( $json );
 				set_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . $project_slug, $on_wporg, get_option( TRANSLATION_STATS_WP_OPTION )['settings']['transients_expiration'] );
 			}
-			return $on_wporg;
+			// Cached values are strings.
+			return (bool) $on_wporg;
 		}
 
 
@@ -143,24 +166,27 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 		 * @since 0.8.0
 		 * @since 1.1.0  Remove method prefix.
 		 *
+		 * @since 1.4.0  If translate.WordPress.org is unavailable, assume the subproject exists and don't cache the result.
+		 *
 		 * @param string $project_slug     Plugin Slug (e.g. 'plugin-slug').
 		 * @param string $subproject_slug  Plugin Subproject Slug (e.g. 'dev', 'dev-readme', 'stable', 'stable-readme').
 		 *
-		 * @return string                  Returns 'true' if the translation subproject exist on WordPress.org.
+		 * @return bool                    Returns true if the translation subproject exist on WordPress.org.
 		 */
 		public function plugin_subproject_on_translate_wporg( $project_slug, $subproject_slug ) {
 			// Check subproject transients.
 			$on_wporg = get_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug );
 			if ( false === $on_wporg ) {
 				$json = self::translations_api_get_plugin( $project_slug . '/' . $subproject_slug );
-				if ( is_wp_error( $json ) || wp_remote_retrieve_response_code( $json ) !== 200 ) {
-					$on_wporg = false;
-				} else {
-					$on_wporg = true;
+				if ( self::is_api_unavailable( $json ) ) {
+					// Unknown, the stats request will show the error.
+					return true;
 				}
+				$on_wporg = 200 === wp_remote_retrieve_response_code( $json );
 				set_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug, $on_wporg, get_option( TRANSLATION_STATS_WP_OPTION )['settings']['transients_expiration'] );
 			}
-			return $on_wporg;
+			// Cached values are strings.
+			return (bool) $on_wporg;
 		}
 
 

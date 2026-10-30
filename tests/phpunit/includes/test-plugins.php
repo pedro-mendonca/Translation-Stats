@@ -171,10 +171,6 @@ class Test_Plugins extends Translation_Stats_TestCase {
 				'response' => 404,
 				'body'     => '',
 			),
-			'error'               => array(
-				'response' => new WP_Error( 'http_request_failed', 'Connection timed out.' ),
-				'body'     => '',
-			),
 		);
 	}
 
@@ -194,6 +190,47 @@ class Test_Plugins extends Translation_Stats_TestCase {
 		$plugins = new Plugins();
 
 		$this->assertFalse( $plugins->plugin_subproject_stats( $this->get_locale( 'pt_PT', 'pt' ), 'translation-stats', 'stable', false ) );
+	}
+
+
+	/**
+	 * Data provider.
+	 *
+	 * @var array
+	 */
+	public function provide_test_plugin_subproject_stats_api_unavailable() {
+		return array(
+			'rate limited' => array(
+				'response' => 429,
+			),
+			'server error' => array(
+				'response' => 503,
+			),
+			'error'        => array(
+				'response' => new WP_Error( 'http_request_failed', 'Connection timed out.' ),
+			),
+		);
+	}
+
+
+	/**
+	 * Test get the subproject stats when translate.WordPress.org is unavailable returns an error, which isn't cached.
+	 *
+	 * @dataProvider provide_test_plugin_subproject_stats_api_unavailable
+	 *
+	 * @param int|WP_Error $response   The mocked API response.
+	 */
+	public function test_plugin_subproject_stats_api_unavailable( $response ) {
+
+		$this->mock_translate_api( $response );
+
+		$plugins = new Plugins();
+
+		$stats = $plugins->plugin_subproject_stats( $this->get_locale( 'pt_PT', 'pt' ), 'translation-stats', 'stable', false );
+
+		$this->assertWPError( $stats );
+		$this->assertSame( 503, $stats->get_error_data()['status'] );
+		$this->assertFalse( get_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . 'translation-stats_stable_pt_PT' ) );
 	}
 
 
@@ -221,6 +258,149 @@ class Test_Plugins extends Translation_Stats_TestCase {
 		$plugins->plugin_subproject_stats( $locale, 'translation-stats', 'stable', true );
 
 		$this->assertCount( 2, $this->requested_urls );
+	}
+
+
+	/**
+	 * Test the update button has the update status in the widget title, announced to screen readers.
+	 */
+	public function test_plugin_update_button() {
+
+		$plugins = new Plugins();
+
+		ob_start();
+		$plugins->plugin_update_button();
+		$html = (string) ob_get_clean();
+
+		$this->assertStringContainsString( '<span class="tstats-update-status" aria-live="polite"></span>', $html );
+		$this->assertStringContainsString( 'tstats-update-button', $html );
+	}
+
+
+	/**
+	 * Render the plugin widget content.
+	 *
+	 * @return string  The rendered HTML.
+	 */
+	private function render_plugin_widget_content() {
+
+		$plugins = new Plugins();
+
+		ob_start();
+		$plugins->plugin_widget_content( 'translation-stats', $this->get_locale( 'pt_PT', 'pt' ) );
+		return (string) ob_get_clean();
+	}
+
+
+	/**
+	 * Cache the stats of the plugin subprojects.
+	 *
+	 * @param array $subprojects   Slugs of the subprojects to cache.
+	 */
+	private function cache_subprojects_stats( $subprojects ) {
+
+		$this->mock_translate_api( 200, $this->get_subproject_body() );
+
+		$plugins = new Plugins();
+
+		foreach ( $subprojects as $subproject ) {
+			$plugins->plugin_subproject_stats( $this->get_locale( 'pt_PT', 'pt' ), 'translation-stats', $subproject, false );
+		}
+
+		// Reset the requests, to check the requests made while rendering.
+		$this->mock_translate_api( 200, $this->get_subproject_body() );
+	}
+
+
+	/**
+	 * Test the plugin widget content renders the cached stats, without requesting the API or loading them with the REST API.
+	 */
+	public function test_plugin_widget_content_cached() {
+
+		$this->set_settings( array( 'translation_language' => 'pt_PT' ), array( 'translation-stats' => array( 'stable' => 'true' ) ) );
+
+		$this->cache_subprojects_stats( array( 'dev', 'dev-readme', 'stable', 'stable-readme' ) );
+
+		$html = $this->render_plugin_widget_content();
+
+		$this->assertStringContainsString( 'translation-stats-cached', $html );
+		$this->assertStringContainsString( 'translation-stats-content-stats', $html );
+		$this->assertStringContainsString( '95%', $html );
+		$this->assertSame( array(), $this->requested_urls );
+
+		// The status notice is below the stats, to not move them when shown.
+		$this->assertGreaterThan( strpos( $html, 'translation-stats-content-stats' ), strpos( $html, 'translation-stats-loading' ) );
+	}
+
+
+	/**
+	 * Test the plugin stats widget passes the project slug and Locale to the content, rendering the cached stats.
+	 */
+	public function test_render_plugin_stats() {
+
+		$this->set_settings( array( 'translation_language' => 'pt_PT' ), array( 'translation-stats' => array( 'stable' => 'true' ) ) );
+
+		$this->cache_subprojects_stats( array( 'dev', 'dev-readme', 'stable', 'stable-readme' ) );
+
+		$received = array();
+		add_action(
+			'translation_stats_plugin_widget_content',
+			function ( $project_slug, $locale ) use ( &$received ) {
+				$received = array( $project_slug, $locale->wp_locale );
+			},
+			10,
+			2
+		);
+
+		$plugins = new Plugins();
+
+		ob_start();
+		$plugins->render_plugin_stats( 'translation-stats' );
+		$html = (string) ob_get_clean();
+
+		$this->assertSame( array( 'translation-stats', 'pt_PT' ), $received );
+		$this->assertStringContainsString( 'translation-stats-title', $html );
+		$this->assertStringContainsString( 'translation-stats-cached', $html );
+		$this->assertStringContainsString( '95%', $html );
+	}
+
+
+	/**
+	 * Data provider.
+	 *
+	 * @var array
+	 */
+	public function provide_test_plugin_widget_content_not_cached() {
+		return array(
+			'no cached stats'      => array(
+				'subprojects' => array(),
+			),
+			'partial cached stats' => array(
+				'subprojects' => array( 'dev', 'dev-readme', 'stable' ),
+			),
+		);
+	}
+
+
+	/**
+	 * Test the plugin widget content without all the stats cached renders the placeholder, to load them with the REST API.
+	 *
+	 * @dataProvider provide_test_plugin_widget_content_not_cached
+	 *
+	 * @param array $subprojects   Slugs of the cached subprojects.
+	 */
+	public function test_plugin_widget_content_not_cached( $subprojects ) {
+
+		$this->set_settings( array( 'translation_language' => 'pt_PT' ), array( 'translation-stats' => array( 'stable' => 'true' ) ) );
+
+		$this->cache_subprojects_stats( $subprojects );
+
+		$html = $this->render_plugin_widget_content();
+
+		$this->assertStringContainsString( 'translation-stats-loading', $html );
+		$this->assertStringNotContainsString( 'translation-stats-cached', $html );
+		$this->assertStringNotContainsString( 'translation-stats-content-stats', $html );
+		$this->assertSame( array(), $this->requested_urls );
 	}
 
 
