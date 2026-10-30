@@ -42,8 +42,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			// Add Translation Stats plugin widget content.
 			add_action( 'translation_stats_plugin_widget_content', array( $this, 'plugin_widget_content' ) );
 
-			// Load plugin subprojects stats.
-			add_action( 'wp_ajax_translation_stats_plugin_widget_content_load', array( $this, 'plugin_widget_content_load' ) );
+			// Register the REST API route to load the plugin subprojects stats.
+			add_action( 'rest_api_init', array( $this, 'register_rest_routes' ) );
 
 			// Filter plugins list to show only Translation Stats enabled plugins.
 			add_action( 'pre_current_active_plugins', array( $this, 'plugins_filter_by_translation_stats' ) );
@@ -286,41 +286,75 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 
 
 		/**
-		 * Load plugin widget content.
+		 * Register the REST API route to load the plugin widget content.
 		 *
-		 * @since 0.9.4
-		 * @since 1.2.0   Renamed from tstats_stats_plugin_widget_content_load() to plugin_widget_content_load().
+		 * @since 1.4.0
 		 *
 		 * @return void
 		 */
-		public function plugin_widget_content_load() {
+		public function register_rest_routes() {
 
-			// Check nonce.
-			check_ajax_referer( 'translation_stats_plugin_widget_content_load' );
+			register_rest_route(
+				'translation-stats/v1',
+				'/plugins/(?P<slug>[a-z0-9_-]+)/stats',
+				array(
+					'methods'             => \WP_REST_Server::READABLE,
+					'callback'            => array( $this, 'rest_plugin_widget_content' ),
+					'permission_callback' => array( $this, 'rest_permission_check' ),
+					'args'                => array(
+						'slug'  => array(
+							'description' => __( 'Plugin slug.', 'translation-stats' ),
+							'type'        => 'string',
+						),
+						'force' => array(
+							'description' => __( 'Force getting new stats instead of the cached ones.', 'translation-stats' ),
+							'type'        => 'boolean',
+							'default'     => false,
+						),
+					),
+				)
+			);
+		}
 
-			// Check if user can access the plugins.
-			if ( ! current_user_can( 'activate_plugins' ) ) {
-				wp_die( -1, 403 );
-			}
 
-			// Initialize variable.
-			$force_update = false;
+		/**
+		 * Check if the user can access the plugins, where the plugin widget is shown.
+		 *
+		 * @since 1.4.0
+		 *
+		 * @return bool   True if the user can access the plugins.
+		 */
+		public function rest_permission_check() {
+			return current_user_can( 'activate_plugins' );
+		}
 
-			if ( isset( $_POST['forceUpdate'] ) ) {
-				$force_update = 'true' === sanitize_key( $_POST['forceUpdate'] ) ? true : false;
-			}
+
+		/**
+		 * Load plugin widget content with the REST API.
+		 *
+		 * @since 0.9.4
+		 * @since 1.2.0   Renamed from tstats_stats_plugin_widget_content_load() to plugin_widget_content_load().
+		 * @since 1.4.0   Use the REST API instead of Ajax, renamed to rest_plugin_widget_content().
+		 *
+		 * @param \WP_REST_Request $request   The REST API request.
+		 *
+		 * @return \WP_REST_Response   Response with the plugin widget content HTML.
+		 */
+		public function rest_plugin_widget_content( $request ) {
+
+			$html = '';
 
 			$locale = Translations_API::locale( Utils::translation_language() );
 
-			if ( ! is_null( $locale ) && isset( $_POST['tstatsPlugin'] ) ) {
+			if ( ! is_null( $locale ) ) {
 
-				$project_slug = sanitize_key( $_POST['tstatsPlugin'] );
-
-				$this->plugin_widget_content_stats( $project_slug, $locale, $force_update );
+				ob_start();
+				$this->plugin_widget_content_stats( $request['slug'], $locale, $request['force'] );
+				$html = (string) ob_get_clean();
 
 			}
 
-			wp_die();
+			return rest_ensure_response( array( 'html' => $html ) );
 		}
 
 
