@@ -295,18 +295,26 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 */
 		public function plugin_widget_content_load() {
 
+			// Check nonce.
+			check_ajax_referer( 'translation_stats_plugin_widget_content_load' );
+
+			// Check if user can access the plugins.
+			if ( ! current_user_can( 'activate_plugins' ) ) {
+				wp_die( -1, 403 );
+			}
+
 			// Initialize variable.
 			$force_update = false;
 
-			if ( isset( $_POST['forceUpdate'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
-				$force_update = 'true' === sanitize_key( $_POST['forceUpdate'] ) ? true : false; // phpcs:ignore WordPress.Security.NonceVerification.Missing
+			if ( isset( $_POST['forceUpdate'] ) ) {
+				$force_update = 'true' === sanitize_key( $_POST['forceUpdate'] ) ? true : false;
 			}
 
 			$locale = Translations_API::locale( Utils::translation_language() );
 
-			if ( ! is_null( $locale ) && isset( $_POST['tstatsPlugin'] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing
+			if ( ! is_null( $locale ) && isset( $_POST['tstatsPlugin'] ) ) {
 
-				$project_slug = sanitize_key( $_POST['tstatsPlugin'] ); // phpcs:ignore WordPress.Security.NonceVerification.Missing
+				$project_slug = sanitize_key( $_POST['tstatsPlugin'] );
 
 				$this->plugin_widget_content_stats( $project_slug, $locale, $force_update );
 
