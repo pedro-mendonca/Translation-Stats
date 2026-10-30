@@ -20,6 +20,7 @@ vendor
 .stylelintignore
 .stylelintrc.json
 .travis.yml
+codecov.yml
 composer.json
 composer.lock
 package-lock.json

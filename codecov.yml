@@ -1,0 +1,7 @@
+coverage:
+  status:
+    project:
+      default:
+        # Allow a small drop, e.g. when the remote API test is skipped.
+        target: auto
+        threshold: 1%
