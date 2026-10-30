@@ -41,6 +41,25 @@ class Test_Translations_API extends WP_UnitTestCase {
 
 
 	/**
+	 * Skip the test if translate.WordPress.org API is unavailable, rate limited or failing.
+	 *
+	 * @param array|WP_Error $response   The API response.
+	 */
+	private function skip_if_api_unavailable( $response ) {
+
+		if ( is_wp_error( $response ) ) {
+			$this->markTestSkipped( 'Translate WordPress API request failed: ' . $response->get_error_message() );
+		}
+
+		$response_code = wp_remote_retrieve_response_code( $response );
+
+		if ( 429 === $response_code || $response_code >= 500 ) {
+			$this->markTestSkipped( 'Translate WordPress API unavailable: HTTP ' . $response_code );
+		}
+	}
+
+
+	/**
 	 * Test get plugin data from translate.WordPress.org API.
 	 *
 	 * @group wordpress-translate-api
@@ -50,12 +69,16 @@ class Test_Translations_API extends WP_UnitTestCase {
 		// Existent plugin slug in Translating WordPress.
 		$response = Translations_API::translations_api_get_plugin( 'translation-stats' );
 
+		$this->skip_if_api_unavailable( $response );
+
 		$response_code = wp_remote_retrieve_response_code( $response );
 
 		$this->assertSame( $response_code, 200 );
 
 		// Non-existent plugin slug in Translating WordPress.
 		$response = Translations_API::translations_api_get_plugin( 'wrong-slug-translation-stats' );
+
+		$this->skip_if_api_unavailable( $response );
 
 		$response_code = wp_remote_retrieve_response_code( $response );
 
