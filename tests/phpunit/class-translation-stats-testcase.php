@@ -33,6 +33,7 @@ abstract class Translation_Stats_TestCase extends WP_UnitTestCase {
 			array(
 				'settings' => array_merge(
 					array(
+						'translation_language'  => 'site-default',
 						'transients_expiration' => HOUR_IN_SECONDS,
 						'settings_version'      => TRANSLATION_STATS_SETTINGS_VERSION,
 					),
