@@ -61,7 +61,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 		 * @param string $asset    Name of asset excluding the extension.
 		 * @param bool   $minify   Determine if the asset has a minified version. Defaults to false.
 		 *
-		 * @return string|false   Complete URL for the asset. Return false if extension is not supported.
+		 * @return non-empty-string|false   Complete URL for the asset. Return false if extension is not supported.
 		 */
 		public static function get_asset_url( $asset, $minify = false ) {
 
@@ -86,7 +86,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 				return false;
 			}
 
-			// Only provide minified assets if in development mode or SCRIPT_DEBUG is set to true.
+			// Only provide minified assets if not in development mode and SCRIPT_DEBUG is not set to true.
 			$suffix = $minify && ! self::is_development_mode() && ( ! defined( 'SCRIPT_DEBUG' ) || ! SCRIPT_DEBUG ) ? '.min' : '';
 
 			return TRANSLATION_STATS_DIR_URL . 'assets/' . $path['dirname'] . '/' . $path['filename'] . $suffix . '.' . $path['extension'];

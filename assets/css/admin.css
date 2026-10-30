@@ -51,6 +51,7 @@ table.wp-list-table.plugins td.column-translation-stats .translation-stats-conte
 table.wp-list-table.plugins td.column-translation-stats .translation-stats-content .translation-stats-content-stats {
   display: grid;
   grid-row-gap: 6px;
+  row-gap: 6px;
   padding: 6px;
   margin: 0 0 10px 0;
   border-radius: 4px;

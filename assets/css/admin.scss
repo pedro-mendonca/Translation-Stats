@@ -64,7 +64,7 @@ table.wp-list-table.plugins { // WordPress Installed Plugins table.
 
 			.translation-stats-content-stats { // Stats grid layout.
 				display: grid;
-				grid-row-gap: 6px;
+				row-gap: 6px;
 				padding: 6px;
 				margin: 0 0 10px 0;
 				border-radius: global.$border-radius-outside;

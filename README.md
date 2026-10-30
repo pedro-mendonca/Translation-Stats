@@ -66,7 +66,7 @@ The language pack for a plugin will be generated when 90% of the Stable (latest 
 
 ### Can I help translating this plugin to my own language?
 
-Yes you can! If you want to translate this plugin to your language, please [click here](https://translate.wordpress.org/projects/wp-plugins/translation-stats).
+Yes you can! If you want to translate this plugin to your language, please [translate it on translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/translation-stats).
 
 ### Can I contribute to this plugin?
 
