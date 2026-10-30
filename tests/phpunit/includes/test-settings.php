@@ -33,7 +33,7 @@ class Test_Settings extends Translation_Stats_TestCase {
 
 		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
 
-		$_POST[ $action ]                        = 'true';
+		$_POST[ $action ]                       = 'true';
 		$_POST['translation_stats_nonce_check'] = wp_create_nonce( 'translation_stats_action' );
 	}
 
@@ -121,5 +121,56 @@ class Test_Settings extends Translation_Stats_TestCase {
 
 		$this->assertFalse( get_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . 'translation-stats' ) );
 		$this->assertStringContainsString( 'Cache cleaned successfully.', $output );
+	}
+
+
+	/**
+	 * Data provider.
+	 *
+	 * @var array
+	 */
+	public function provide_test_invalid_nonce() {
+		return array(
+			'reset settings'    => array(
+				'action'   => 'reset_settings',
+				'callback' => 'settings_reset_callback',
+			),
+			'delete transients' => array(
+				'action'   => 'delete_transients',
+				'callback' => 'transients_delete_callback',
+			),
+		);
+	}
+
+
+	/**
+	 * Test the actions stop without changing data if the nonce is invalid.
+	 *
+	 * @dataProvider provide_test_invalid_nonce
+	 *
+	 * @param string $action     The submitted action.
+	 * @param string $callback   The settings callback to run.
+	 */
+	public function test_invalid_nonce( $action, $callback ) {
+
+		$this->set_settings( array( 'translation_language' => 'pt_PT' ) );
+
+		set_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . 'translation-stats', true );
+
+		$this->submit_action( $action );
+
+		$_POST['translation_stats_nonce_check'] = 'invalid';
+
+		$settings = new Settings();
+
+		try {
+			$settings->$callback();
+			$this->fail( 'Expected wp_die() on invalid nonce.' );
+		} catch ( WPDieException $e ) {
+			$this->assertSame( 'Sorry, your nonce did not verify.', $e->getMessage() );
+		}
+
+		$this->assertSame( 'pt_PT', get_option( TRANSLATION_STATS_WP_OPTION )['settings']['translation_language'] );
+		$this->assertTrue( get_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . 'translation-stats' ) );
 	}
 }
