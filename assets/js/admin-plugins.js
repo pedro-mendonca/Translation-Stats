@@ -54,6 +54,7 @@ jQuery( document ).ready( function( $ ) {
 				type: 'POST',
 				data: {
 					action: 'translation_stats_plugin_widget_content_load',
+					_ajax_nonce: tstats.nonce,
 					tstatsPlugin: tstatsPlugin,
 					forceUpdate: forceUpdate,
 				},

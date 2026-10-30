@@ -173,6 +173,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 
 				wp_set_script_translations( 'translation-stats-plugins', 'translation-stats' );
 
+				// Nonce for the plugin widget content Ajax requests.
+				$vars['nonce'] = wp_create_nonce( 'translation_stats_plugin_widget_content_load' );
+
 				wp_localize_script(
 					'translation-stats-plugins',
 					'tstats',
