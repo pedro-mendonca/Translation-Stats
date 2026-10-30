@@ -33,15 +33,7 @@ jobs:
         # Test all supported WP versions with the minumum PHP supported version.
         php: [ '7.4' ] # 7.4 is the minimum supported version.
         wp:
-          - '5.1' # Minimum supported version.
-          - '5.2'
-          - '5.3'
-          - '5.4'
-          - '5.5' # Major update with new features and performance improvements.
-          - '5.6'
-          - '5.7'
-          - '5.8' # Introduction of full site editing features.
-          - '5.9'
+          - '5.9' # Minimum supported version.
           - '6.0'
           - '6.1'
           - '6.2'
