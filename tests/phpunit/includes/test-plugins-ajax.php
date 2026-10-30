@@ -27,6 +27,11 @@ class Test_Plugins_Ajax extends WP_Ajax_UnitTestCase {
 	public function set_up() {
 		parent::set_up();
 
+		// Remove the core update checks on 'admin_init', which would request the mocked API.
+		remove_action( 'admin_init', '_maybe_update_core' );
+		remove_action( 'admin_init', '_maybe_update_plugins' );
+		remove_action( 'admin_init', '_maybe_update_themes' );
+
 		$this->set_settings(
 			array( 'translation_language' => 'pt_PT' ),
 			array(
@@ -144,6 +149,23 @@ class Test_Plugins_Ajax extends WP_Ajax_UnitTestCase {
 
 		$this->assertSame( array(), $this->requested_urls );
 		$this->assertFalse( get_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . 'translation-stats_stable_pt_PT' ) );
+	}
+
+
+	/**
+	 * Test the plugins page script gets a valid nonce for the Ajax requests.
+	 */
+	public function test_plugins_page_script_nonce() {
+
+		$this->login( 'administrator' );
+
+		$translation_stats = new Translation_Stats\Translation_Stats();
+		$translation_stats->register_plugin_scripts( 'plugins.php' );
+
+		$data = wp_scripts()->get_data( 'translation-stats-plugins', 'data' );
+
+		$this->assertSame( 1, preg_match( '/"nonce":"([a-f0-9]+)"/', $data, $matches ) );
+		$this->assertSame( 1, wp_verify_nonce( $matches[1], self::ACTION ) );
 	}
 
 
