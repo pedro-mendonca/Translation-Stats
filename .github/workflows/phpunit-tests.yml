@@ -10,6 +10,8 @@ on:
       - '**.php'
       # These files configure Composer. Changes could affect the outcome.
       - 'composer.*'
+      # Changes to the PHPUnit configuration should run tests.
+      - 'phpunit.xml.dist'
       # Changes to workflow files should always verify all workflows are successful.
       - '.github/workflows/*.yml'
   # Allows you to run this workflow manually from the Actions tab.
@@ -21,7 +23,7 @@ jobs:
   #
   phpunit:
     name: PHP ${{ matrix.php || '7.4' }} | ${{ 'mariadb' == matrix.db-type && 'MariaDB' || 'MySQL' }}
-    uses: pedro-mendonca/Translation-Stats/.github/workflows/reusable-phpunit-tests.yml@master
+    uses: ./.github/workflows/reusable-phpunit-tests.yml
     secrets:
       codecov-token: ${{ secrets.CODECOV_TOKEN }}
       codacy-project-token: ${{ secrets.CODACY_PROJECT_TOKEN }}
@@ -33,15 +35,7 @@ jobs:
         # Test all supported WP versions with the minumum PHP supported version.
         php: [ '7.4' ] # 7.4 is the minimum supported version.
         wp:
-          - '5.1' # Minimum supported version.
-          - '5.2'
-          - '5.3'
-          - '5.4'
-          - '5.5' # Major update with new features and performance improvements.
-          - '5.6'
-          - '5.7'
-          - '5.8' # Introduction of full site editing features.
-          - '5.9'
+          - '5.9' # Minimum supported version.
           - '6.0'
           - '6.1'
           - '6.2'
@@ -52,7 +46,8 @@ jobs:
           - '6.7'
           - '6.8'
           - '6.9'
-          - '7.0' # Latest version.
+          - '7.0'
+          - '7.1' # Latest version.
 
         include:
 
@@ -77,6 +72,10 @@ jobs:
           # Test the latest WP and PHP versions, with MariaDB database.
           - php: 'latest' # Latest stable version.
             db-type: 'mariadb' # Latest MariaDB version.
+
+          # Test the latest WP and PHP versions, as multisite.
+          - php: 'latest' # Latest stable version.
+            multisite: true
 
     with:
       php: ${{ matrix.php || '7.4' }}                                                     # Defaults to '7.4'.

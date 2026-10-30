@@ -111,19 +111,16 @@ jobs:
       - name: Install Composer dependencies
         uses: ramsey/composer-install@v4
 
-      - name: Install appropriate PHPUnit
-        run: |
-          if [[ "${{ inputs.wp }}" == "5.1" || "${{ inputs.wp }}" == "5.2" || "${{ inputs.wp }}" == "5.3" || "${{ inputs.wp }}" == "5.4" || "${{ inputs.wp }}" == "5.5" || "${{ inputs.wp }}" == "5.6" || "${{ inputs.wp }}" == "5.7" || "${{ inputs.wp }}" == "5.8" ]]; then
-            composer require --dev phpunit/phpunit:^7 --with-dependencies
-          else
-            composer require --dev phpunit/phpunit:^9 --with-dependencies
-          fi
+      - name: Install PHPUnit
+        run: composer require --dev phpunit/phpunit:^9 --with-dependencies
 
       - name: Install WordPress test setup
         run: bash bin/install-wp-tests.sh wordpress root password 127.0.0.1:${{ job.services.mysql.ports[3306] }} ${{ inputs.wp }}
 
       - name: Run PHPUnit tests (PHP ${{ inputs.php }} | WP ${{ inputs.wp }})
         if: ${{ ! inputs.coverage }}
+        env:
+          WP_MULTISITE: ${{ inputs.multisite && '1' || '0' }}
         run: |
           if [[ "${{ inputs.wordpress-translate-api-tests }}" == "true" ]]; then
             composer exec -- phpunit --colors=always
@@ -133,6 +130,8 @@ jobs:
 
       - name: Run PHPUnit tests (PHP ${{ inputs.php }} | WP ${{ inputs.wp }})${{ inputs.wordpress-translate-api-tests && ' including Translate WordPress API' || '' }} with coverage
         if: ${{ inputs.coverage }}
+        env:
+          WP_MULTISITE: ${{ inputs.multisite && '1' || '0' }}
         run: |
           if [[ "${{ inputs.wordpress-translate-api-tests }}" == "true" ]]; then
             composer exec -- phpunit --colors=always --coverage-clover coverage.xml
@@ -144,7 +143,8 @@ jobs:
         if: ${{ inputs.coverage }}
         uses: codecov/codecov-action@v7.1.1
         with:
-          file: coverage.xml
+          files: ./coverage.xml
+          disable_search: true
           verbose: true
           token: ${{ secrets.codecov-token }}
 
