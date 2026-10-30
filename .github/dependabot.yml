@@ -12,7 +12,10 @@ updates:
     schedule:
       # Check for updates every weekday.
       interval: "daily"
-    open-pull-requests-limit: 10
+    groups:
+      github-actions:
+        patterns:
+          - "*"
 
   # Maintain dependencies for npm.
   - package-ecosystem: "npm"
@@ -21,7 +24,15 @@ updates:
     schedule:
       # Check for updates every weekday.
       interval: "daily"
-    open-pull-requests-limit: 10
+    groups:
+      npm-version-updates:
+        applies-to: version-updates
+        patterns:
+          - "*"
+      npm-security-updates:
+        applies-to: security-updates
+        patterns:
+          - "*"
 
   # Maintain dependencies for Composer.
   - package-ecosystem: "composer"
@@ -30,4 +41,12 @@ updates:
     schedule:
       # Check for updates every weekday.
       interval: "daily"
-    open-pull-requests-limit: 10
+    groups:
+      composer-version-updates:
+        applies-to: version-updates
+        patterns:
+          - "*"
+      composer-security-updates:
+        applies-to: security-updates
+        patterns:
+          - "*"
