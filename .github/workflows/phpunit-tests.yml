@@ -1,11 +1,9 @@
 name: Unit Tests
 
 on:
-  push:
-    branches: [ master, dev ]
   pull_request:
     branches: [ master, dev ]
-    paths:
+    paths: &paths
       # Any change to a PHP file should run checks.
       - '**.php'
       # These files configure Composer. Changes could affect the outcome.
@@ -14,8 +12,16 @@ on:
       - 'phpunit.xml.dist'
       # Changes to workflow files should always verify all workflows are successful.
       - '.github/workflows/*.yml'
+  push:
+    branches: [ master, dev ]
+    paths: *paths
   # Allows you to run this workflow manually from the Actions tab.
   workflow_dispatch:
+
+# Cancel superseded runs of pull requests. Runs on pushes to the branches are never cancelled.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   #
