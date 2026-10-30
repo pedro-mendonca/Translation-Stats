@@ -284,15 +284,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				$additional_classes[] = 'hidden';
 			}
 
-			$admin_notice_waiting = array(
-				'type'               => 'warning',
-				'notice-alt'         => true,
-				'additional-classes' => $additional_classes,
-				'update-icon'        => true,
-				'force_show'         => true,
-				'message'            => esc_html__( 'Waiting...', 'translation-stats' ),
-			);
-			new Admin_Notice( $admin_notice_waiting );
 			?>
 			<div class="content">
 				<?php
@@ -302,6 +293,17 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				?>
 			</div>
 			<?php
+
+			// Show the status notice below the stats, to not move them when the notice is shown.
+			$admin_notice_waiting = array(
+				'type'               => 'warning',
+				'notice-alt'         => true,
+				'additional-classes' => $additional_classes,
+				'update-icon'        => true,
+				'force_show'         => true,
+				'message'            => esc_html__( 'Waiting...', 'translation-stats' ),
+			);
+			new Admin_Notice( $admin_notice_waiting );
 		}
 
 

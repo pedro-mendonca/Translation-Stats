@@ -311,6 +311,9 @@ class Test_Plugins extends Translation_Stats_TestCase {
 		$this->assertStringContainsString( 'translation-stats-content-stats', $html );
 		$this->assertStringContainsString( '95%', $html );
 		$this->assertSame( array(), $this->requested_urls );
+
+		// The status notice is below the stats, to not move them when shown.
+		$this->assertGreaterThan( strpos( $html, 'translation-stats-content-stats' ), strpos( $html, 'translation-stats-loading' ) );
 	}
 
 
