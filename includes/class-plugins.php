@@ -708,7 +708,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				return;
 			}
 
-			$options = get_site_option( TRANSLATION_STATS_WP_OPTION );
+			$options = get_option( TRANSLATION_STATS_WP_OPTION );
 
 			foreach ( $plugins as $plugin_file => $plugin_data ) {
 
@@ -766,7 +766,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				return $status_links;
 			}
 
-			$options = get_site_option( TRANSLATION_STATS_WP_OPTION );
+			$options = get_option( TRANSLATION_STATS_WP_OPTION );
 
 			// Check if Translation Stats settings exist.
 			if ( empty( $options ) ) {

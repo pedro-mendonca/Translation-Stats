@@ -67,7 +67,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 		 */
 		public function installed_settings_version() {
 
-			$options = get_site_option( TRANSLATION_STATS_WP_OPTION );
+			$options = get_option( TRANSLATION_STATS_WP_OPTION );
 
 			// Check if Translation Stats settings exist.
 			if ( empty( $options ) ) {
@@ -130,7 +130,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 		 */
 		public function settings_update_v0_to_v1() {
 
-			$options = get_site_option( TRANSLATION_STATS_WP_OPTION );
+			$options = get_option( TRANSLATION_STATS_WP_OPTION );
 
 			$settings_v0 = array(
 				'show_warnings',
@@ -164,14 +164,14 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 
 			$settings_v1['plugins'] = $options;
 
-			update_site_option( TRANSLATION_STATS_WP_OPTION, $settings_v1 );
+			update_option( TRANSLATION_STATS_WP_OPTION, $settings_v1 );
 
 			if ( Utils::is_development_mode() ) {
 
 				$message = sprintf(
 					'<h3>%s</h3><pre>%s</pre>',
 					esc_html__( 'Settings', 'translation-stats' ),
-					wp_json_encode( get_site_option( TRANSLATION_STATS_WP_OPTION )['settings'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES )
+					wp_json_encode( get_option( TRANSLATION_STATS_WP_OPTION )['settings'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES )
 				);
 
 				$admin_notice = array(
@@ -188,7 +188,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 				$message = sprintf(
 					'<h3>%s</h3><pre>%s</pre>',
 					esc_html__( 'Plugins', 'translation-stats' ),
-					wp_json_encode( get_site_option( TRANSLATION_STATS_WP_OPTION )['plugins'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES )
+					wp_json_encode( get_option( TRANSLATION_STATS_WP_OPTION )['plugins'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES )
 				);
 
 				$admin_notice = array(
