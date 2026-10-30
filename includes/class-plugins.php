@@ -338,7 +338,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 *
 		 * @param \WP_REST_Request $request   The REST API request.
 		 *
-		 * @return \WP_REST_Response   Response with the plugin widget content HTML.
+		 * @return \WP_REST_Response|\WP_Error   Response with the plugin widget content HTML, or WP_Error if translate.WordPress.org is unavailable.
 		 */
 		public function rest_plugin_widget_content( $request ) {
 
@@ -349,9 +349,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			if ( ! is_null( $locale ) ) {
 
 				ob_start();
-				$this->plugin_widget_content_stats( $request['slug'], $locale, $request['force'] );
-				$html = (string) ob_get_clean();
+				$result = $this->plugin_widget_content_stats( $request['slug'], $locale, $request['force'] );
+				$html   = (string) ob_get_clean();
 
+				if ( is_wp_error( $result ) ) {
+					return $result;
+				}
 			}
 
 			return rest_ensure_response( array( 'html' => $html ) );
@@ -369,7 +372,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * @param Locale $locale         Locale object.
 		 * @param bool   $force_update   True: Force get new stats. False: Use transients.
 		 *
-		 * @return void
+		 * @return true|\WP_Error   True if rendered, or WP_Error if translate.WordPress.org is unavailable, without rendering.
 		 */
 		public function plugin_widget_content_stats( $project_slug, $locale, $force_update ) {
 
@@ -382,14 +385,22 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			// Define project translation stats.
 			$project_stats = array();
 
+			// Get all the subprojects stats before rendering, to not render partial stats.
+			foreach ( $subprojects as $subproject ) {
+
+				// Get plugin subproject translation stats.
+				$project_stats[ $subproject['slug'] ] = $this->plugin_subproject_stats( $locale, $project_slug, $subproject['slug'], $force_update );
+
+				if ( is_wp_error( $project_stats[ $subproject['slug'] ] ) ) {
+					return $project_stats[ $subproject['slug'] ];
+				}
+			}
+
 			?>
 			<div class="translation-stats-content-stats widget-inside">
 				<?php
 
 				foreach ( $subprojects as $subproject ) {
-
-					// Get plugin subproject translation stats.
-					$project_stats[ $subproject['slug'] ] = $this->plugin_subproject_stats( $locale, $project_slug, $subproject['slug'], $force_update );
 
 					// Show bar only if subproject is enabled on its settings.
 					if ( isset( $options['plugins'][ $project_slug ][ $subproject['slug'] ] ) ) {
@@ -406,6 +417,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 
 			// Show admin notices with additional information for each plugin, for development mode only.
 			$this->render_notices( $project_stats, $project_slug, $locale );
+
+			return true;
 		}
 
 
@@ -664,13 +677,14 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * @since 0.8.0
 		 * @since 1.1.0   Use Locale object.
 		 * @since 1.2.0   Renamed from tstats_plugin_subproject_stats() to plugin_subproject_stats().
+		 * @since 1.4.0   Return WP_Error if translate.WordPress.org is unavailable, without caching it.
 		 *
 		 * @param Locale $locale            Locale object.
 		 * @param string $project_slug      Plugin Slug.
 		 * @param string $subproject_slug   Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).
 		 * @param bool   $force_update      True: Force get new stats. False: Use transients.
 		 *
-		 * @return object|false              Project stats if exist, otherwise returns 'false'.
+		 * @return object|false|\WP_Error    Project stats if exist, 'false' if not, or WP_Error if translate.WordPress.org is unavailable.
 		 */
 		public function plugin_subproject_stats( $locale, $project_slug, $subproject_slug, $force_update ) {
 
@@ -686,14 +700,25 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 
 				$json = Translations_API::translations_api_get_plugin( $project_slug . '/' . $subproject_slug );
 
-				if ( is_wp_error( $json ) || wp_remote_retrieve_response_code( $json ) !== 200 ) {
+				if ( Translations_API::is_api_unavailable( $json ) ) {
+
+					// Don't cache, to get the stats again on the next request.
+					return new \WP_Error(
+						'translation_stats_api_unavailable',
+						__( 'The translation stats couldn\'t be loaded from translate.wordpress.org. Please try again later.', 'translation-stats' ),
+						array( 'status' => 503 )
+					);
+
+				}
+
+				if ( wp_remote_retrieve_response_code( $json ) !== 200 ) {
 
 					// Subproject not found (Error 404) - Plugin is not properly prepared for localization.
 					$stats = false;
 
 				} else {
 
-					$body = json_decode( $json['body'] );
+					$body = json_decode( wp_remote_retrieve_body( $json ) );
 					if ( empty( $body->translation_sets ) ) {
 
 						// No translation sets found.
