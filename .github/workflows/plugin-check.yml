@@ -9,6 +9,11 @@ on: # rebuild any PRs and main branch changes
   # Allows you to run this workflow manually from the Actions tab.
   workflow_dispatch:
 
+# Cancel superseded runs of pull requests. Runs on pushes to the branches are never cancelled.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event_name == 'pull_request' && github.event.pull_request.number || github.run_id }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
 jobs:
   # Runs the WP Plugin Check.
   #
