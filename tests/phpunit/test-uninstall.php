@@ -68,7 +68,7 @@ class Test_Uninstall extends Translation_Stats_TestCase {
 	 *
 	 * @var array
 	 */
-	public function provide_test_uninstall() {
+	public function provide_test_uninstall_deletes_data() {
 		return array(
 			'delete data, saved from settings form' => array(
 				'delete_data_on_uninstall' => 'true',
@@ -89,12 +89,12 @@ class Test_Uninstall extends Translation_Stats_TestCase {
 	/**
 	 * Test the plugin data is deleted on uninstall, if set in the settings.
 	 *
-	 * @dataProvider provide_test_uninstall
+	 * @dataProvider provide_test_uninstall_deletes_data
 	 *
 	 * @param mixed $delete_data_on_uninstall   The 'delete_data_on_uninstall' setting value.
 	 * @param bool  $expected_data              Whether the plugin data should exist after uninstall.
 	 */
-	public function test_uninstall( $delete_data_on_uninstall, $expected_data ) {
+	public function test_uninstall_deletes_data( $delete_data_on_uninstall, $expected_data ) {
 
 		$this->add_plugin_data( $delete_data_on_uninstall );
 
