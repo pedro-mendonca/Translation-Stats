@@ -26,116 +26,68 @@ class Test_Utils extends WP_UnitTestCase {
 	}
 
 	/**
-	 * Test get_asset_url().
-	 *
-	 * @dataProvider provide_test_get_asset_url
-	 *
-	 * @param string $test_asset                 The test asset.
-	 * @param string $expected_result            The expected result for the test.
-	 * @param string $expected_result_minified   The expected minified result for the test.
-	 */
-	public function test_get_asset_url( $test_asset, $expected_result, $expected_result_minified ) {
-
-		if ( defined( 'WP_DEBUG' ) && WP_DEBUG === true ) {
-			// Load main asset files.
-			$asset_url = Utils::get_asset_url( $test_asset, false );
-
-			$this->assertEquals(
-				$asset_url,
-				$expected_result // Load normal version.
-			);
-
-			// Load minified asset files.
-			$asset_url = Utils::get_asset_url( $test_asset, true );
-
-			$this->assertEquals(
-				$asset_url,
-				$expected_result // Load normal version.
-			);
-		} else {
-			// Load main asset files.
-			$asset_url = Utils::get_asset_url( $test_asset, false );
-
-			$this->assertEquals(
-				$asset_url,
-				$expected_result // Load normal version.
-			);
-
-			// Load minified asset files.
-			$asset_url = Utils::get_asset_url( $test_asset, true );
-
-			$this->assertEquals(
-				$asset_url,
-				$expected_result_minified // Load minified version.
-			);
-		}
-	}
-
-
-	/**
 	 * Data provider.
 	 *
 	 * @var array
 	 */
-	public function provide_test_get_asset_url() {
+	public function provide_test_get_build_asset() {
 		return array(
-			// No extension.
-			array(
-				'test_asset'               => 'filename',
-				'expected_result'          => false,
-				'expected_result_minified' => false,
+			'plugins script'  => array(
+				'name'                  => 'js/admin-plugins',
+				'extension'             => 'js',
+				'expected_url'          => TRANSLATION_STATS_DIR_URL . 'assets/build/js/admin-plugins.js',
+				'expected_dependencies' => array( 'jquery', 'wp-api-fetch', 'wp-i18n' ),
 			),
-			array(
-				'test_asset'               => 'path/filename',
-				'expected_result'          => false,
-				'expected_result_minified' => false,
+			'settings script' => array(
+				'name'                  => 'js/admin-settings',
+				'extension'             => 'js',
+				'expected_url'          => TRANSLATION_STATS_DIR_URL . 'assets/build/js/admin-settings.js',
+				'expected_dependencies' => array( 'jquery' ),
 			),
-			// Unsupported extension.
-			array(
-				'test_asset'               => 'path/filename.txt',
-				'expected_result'          => false,
-				'expected_result_minified' => false,
+			'style'           => array(
+				'name'                  => 'css/admin',
+				'extension'             => 'css',
+				'expected_url'          => TRANSLATION_STATS_DIR_URL . 'assets/build/css/admin.css',
+				'expected_dependencies' => array(),
 			),
+		);
+	}
+
+
+	/**
+	 * Test get the built asset URL, with the dependencies and the version from its asset file.
+	 *
+	 * @dataProvider provide_test_get_build_asset
+	 *
+	 * @param string $name                   The built asset name.
+	 * @param string $extension              The built asset extension.
+	 * @param string $expected_url           The expected URL.
+	 * @param array  $expected_dependencies   The expected dependencies.
+	 */
+	public function test_get_build_asset( $name, $extension, $expected_url, $expected_dependencies ) {
+
+		$asset = Utils::get_build_asset( $name, $extension );
+
+		$asset_file = require TRANSLATION_STATS_DIR_PATH . 'assets/build/' . $name . '.asset.php';
+
+		$this->assertSame( $expected_url, $asset['url'] );
+		$this->assertSame( $expected_dependencies, $asset['dependencies'] );
+		$this->assertSame( $asset_file['version'], $asset['version'] );
+	}
+
+
+	/**
+	 * Test get a built asset without asset file uses no dependencies and the plugin version.
+	 */
+	public function test_get_build_asset_without_asset_file() {
+
+		$this->assertSame(
 			array(
-				'test_asset'               => 'path/filename.xls',
-				'expected_result'          => false,
-				'expected_result_minified' => false,
+				'url'          => TRANSLATION_STATS_DIR_URL . 'assets/build/js/missing.js',
+				'dependencies' => array(),
+				'version'      => TRANSLATION_STATS_VERSION,
 			),
-			array(
-				'test_asset'               => 'path/filename.doc',
-				'expected_result'          => false,
-				'expected_result_minified' => false,
-			),
-			array(
-				'test_asset'               => 'path/filename.css',
-				'expected_result'          => TRANSLATION_STATS_DIR_URL . 'assets/path/filename.css',
-				'expected_result_minified' => TRANSLATION_STATS_DIR_URL . 'assets/path/filename.min.css',
-			),
-			array(
-				'test_asset'               => 'path/filename.js',
-				'expected_result'          => TRANSLATION_STATS_DIR_URL . 'assets/path/filename.js',
-				'expected_result_minified' => TRANSLATION_STATS_DIR_URL . 'assets/path/filename.min.js',
-			),
-			array(
-				'test_asset'               => 'css/admin.css',
-				'expected_result'          => TRANSLATION_STATS_DIR_URL . 'assets/css/admin.css',
-				'expected_result_minified' => TRANSLATION_STATS_DIR_URL . 'assets/css/admin.min.css',
-			),
-			array(
-				'test_asset'               => 'js/admin-plugins.js',
-				'expected_result'          => TRANSLATION_STATS_DIR_URL . 'assets/js/admin-plugins.js',
-				'expected_result_minified' => TRANSLATION_STATS_DIR_URL . 'assets/js/admin-plugins.min.js',
-			),
-			array(
-				'test_asset'               => 'js/admin-settings.js',
-				'expected_result'          => TRANSLATION_STATS_DIR_URL . 'assets/js/admin-settings.js',
-				'expected_result_minified' => TRANSLATION_STATS_DIR_URL . 'assets/js/admin-settings.min.js',
-			),
-			array(
-				'test_asset'               => 'lib/tablesorter/jquery.tablesorter.combined.js',
-				'expected_result'          => TRANSLATION_STATS_DIR_URL . 'assets/lib/tablesorter/jquery.tablesorter.combined.js',
-				'expected_result_minified' => TRANSLATION_STATS_DIR_URL . 'assets/lib/tablesorter/jquery.tablesorter.combined.min.js',
-			),
+			Utils::get_build_asset( 'js/missing', 'js' )
 		);
 	}
 
