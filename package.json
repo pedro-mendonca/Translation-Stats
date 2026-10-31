@@ -25,6 +25,11 @@
 		"tablesorter": "^2.31.3",
 		"uglify-js": "^3.19.3"
 	},
+	"overrides": {
+		"markdownlint-cli": "^0.50.0",
+		"re2js": "~2.8.7",
+		"serialize-javascript": "^7.1.3"
+	},
 	"scripts": {
 		"build": "npm run build:js && npm run build:css",
 		"build:js": "npm run build:js:plugins && npm run build:js:settings",
