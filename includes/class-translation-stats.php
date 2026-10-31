@@ -23,6 +23,14 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 
 
 		/**
+		 * Plugins instance, for the plugins page and the REST API.
+		 *
+		 * @var Plugins
+		 */
+		protected $plugins;
+
+
+		/**
 		 * Constructor.
 		 */
 		public function __construct() {
@@ -46,12 +54,29 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 			new Settings();
 
 			// Initialize the plugins page metadata view.
-			new Plugins();
+			$this->plugins = new Plugins();
+
+			// Register the REST API routes.
+			add_action( 'rest_api_init', array( $this, 'register_rest_routes' ) );
 
 			// Initialize the plugin debug.
 			if ( Utils::is_development_mode() ) {
 				new Debug();
 			}
+		}
+
+
+		/**
+		 * Register the REST API routes.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @return void
+		 */
+		public function register_rest_routes() {
+
+			$plugins_controller = new Plugins_REST_Controller( $this->plugins );
+			$plugins_controller->register_routes();
 		}
 
 
