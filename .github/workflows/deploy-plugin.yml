@@ -14,6 +14,26 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v7
 
+    # Only deploy if the committed build is up to date with the sources.
+    - name: Setup Node
+      uses: actions/setup-node@v7
+      with:
+        node-version-file: '.nvmrc'
+        cache: npm
+
+    - name: Build
+      run: |
+        npm ci
+        npm run build
+
+    - name: Check the build is up to date
+      run: |
+        if [ -n "$(git status --porcelain -- assets/build)" ]; then
+          git status --porcelain -- assets/build
+          echo "::error::The build in assets/build is outdated. Run 'npm run build' and commit the changes."
+          exit 1
+        fi
+
     - name: WordPress.org Plugin Deploy
       uses: 10up/action-wordpress-plugin-deploy@2.3.0
       env:
