@@ -307,7 +307,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				'additional-classes' => $additional_classes,
 				'update-icon'        => true,
 				'force_show'         => true,
-				'message'            => esc_html__( 'Waiting...', 'translation-stats' ),
+				'message'            => esc_html__( 'Waiting…', 'translation-stats' ),
 			);
 			new Admin_Notice( $admin_notice_waiting );
 		}

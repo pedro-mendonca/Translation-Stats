@@ -60,7 +60,7 @@ jQuery( document ).ready( function( $ ) {
 			notice.hide();
 			// Show the Waiting status.
 			clearTimeout( status.data( 'timeout' ) );
-			status.text( __( 'Waiting...', 'translation-stats' ) );
+			status.text( __( 'Waiting…', 'translation-stats' ) );
 			console.log( 'REST API request to update translation stats for \'' + tstatsPlugin + '\' was queued.' );
 		}
 
@@ -73,11 +73,11 @@ jQuery( document ).ready( function( $ ) {
 
 			if ( forceUpdate ) {
 				// Show the Updating status.
-				status.text( __( 'Updating...', 'translation-stats' ) );
+				status.text( __( 'Updating…', 'translation-stats' ) );
 			} else {
 				// Show the Updating notice, in the empty widget without the cached stats.
 				notice.removeClass( 'update-message' ).addClass( 'updating-message' );
-				notice.find( 'p' ).html( __( 'Updating...', 'translation-stats' ) );
+				notice.find( 'p' ).html( __( 'Updating…', 'translation-stats' ) );
 			}
 
 			return apiFetch( {
