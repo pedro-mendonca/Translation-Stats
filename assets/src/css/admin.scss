@@ -155,16 +155,9 @@ table.wp-list-table.plugins { // WordPress Installed Plugins table.
 							color: #8f98a1;
 						}
 
-						&.placeholder div.subproject { // Empty stats bar while loading the stats.
-							background-color: #ddd;
-							background-image: repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25) 10px, rgba(0, 0, 0, 0) 10px, rgba(0, 0, 0, 0) 20px);
-							background-size: 28px 28px;
+						&.placeholder div.subproject { // Empty stats bar while queued, static with the light grey of the loading stripes.
+							background-color: #e6e6e6;
 							color: rgba(0, 0, 0, 0.55); // Stats bar text color, greyed.
-							animation: tstats_bar_loading 0.5s linear infinite;
-
-							@media (prefers-reduced-motion: reduce) {
-								animation: none;
-							}
 						}
 
 						div.percent100 {
@@ -272,6 +265,14 @@ table.wp-list-table.plugins { // WordPress Installed Plugins table.
 				background-image: repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25) 10px, rgba(0, 0, 0, 0) 10px, rgba(0, 0, 0, 0) 20px); // Determines size.
 				background-size: 28px 28px;
 				animation: tstats_bar_loading 0.5s linear infinite;
+
+				@media (prefers-reduced-motion: reduce) {
+					animation: none;
+				}
+			}
+
+			.translation-stats-content .translation-stats-content-stats div a.placeholder div.subproject { // Empty stats bar while loading, with the moving stripes.
+				background-color: #ddd;
 			}
 
 			@keyframes tstats_bar_loading {
