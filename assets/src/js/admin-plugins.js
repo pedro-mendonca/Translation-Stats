@@ -52,9 +52,9 @@ jQuery( document ).ready( function( $ ) {
 		const button = widget.find( 'button.tstats-update-button' );
 		const status = widget.find( '.tstats-update-status' );
 
-		// If Update button was clicked, disable it and spin its icon.
+		// If Update button was clicked, disable it and dim its icon while queued.
 		if ( forceUpdate ) {
-			button.prop( 'disabled', true ).addClass( 'updating' );
+			button.prop( 'disabled', true ).addClass( 'waiting' );
 		}
 
 		// Hide any previous error notice.
@@ -72,8 +72,9 @@ jQuery( document ).ready( function( $ ) {
 			// Start colored bars animation.
 			widget.addClass( 'tstats-loading' );
 
-			// Show the Updating status.
+			// Show the Updating status, and spin the Update button icon while updating.
 			status.text( __( 'Updating…', 'translation-stats' ) );
+			button.removeClass( 'waiting' ).addClass( 'updating' );
 
 			return apiFetch( {
 				path: '/translation-stats/v1/plugins/' + encodeURIComponent( tstatsPlugin ) + '/stats' + ( forceUpdate ? '?force=true' : '' ),
@@ -104,7 +105,7 @@ jQuery( document ).ready( function( $ ) {
 				widget.removeClass( 'tstats-loading' );
 
 				// Enable and show update button, and stop spinning its icon.
-				button.prop( 'disabled', false ).removeClass( 'updating' ).show();
+				button.prop( 'disabled', false ).removeClass( 'waiting updating' ).show();
 			} );
 		} );
 	}

@@ -54,6 +54,16 @@ table.wp-list-table.plugins { // WordPress Installed Plugins table.
 						}
 					}
 
+					&.waiting { // Dim the still icon while the update is queued.
+						cursor: default;
+
+						span.dashicons {
+							transform: none;
+							color: global.$color-primary;
+							opacity: 0.4;
+						}
+					}
+
 					&.updating { // Spin the icon while updating.
 						cursor: default;
 
@@ -149,7 +159,7 @@ table.wp-list-table.plugins { // WordPress Installed Plugins table.
 							background-color: #ddd;
 							background-image: repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25) 10px, rgba(0, 0, 0, 0) 10px, rgba(0, 0, 0, 0) 20px);
 							background-size: 28px 28px;
-							color: #8f98a1;
+							color: rgba(0, 0, 0, 0.55); // Stats bar text color, greyed.
 							animation: tstats_bar_loading 0.5s linear infinite;
 
 							@media (prefers-reduced-motion: reduce) {
