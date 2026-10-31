@@ -1,8 +1,16 @@
 coverage:
   status:
     project:
-      default:
+      # PHP and JavaScript coverage are compared separately, with their flags.
+      php:
+        flags:
+          - php
+        target: auto
         # Allow a small drop, e.g. when the remote API test is skipped.
+        threshold: 1%
+      javascript:
+        flags:
+          - javascript
         target: auto
         threshold: 1%
     patch:
