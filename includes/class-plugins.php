@@ -265,11 +265,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 
 
 		/**
-		 * Load plugin widget content, with the cached stats, or the loading placeholder to load them with the REST API.
+		 * Load plugin widget content, with the cached stats, or an empty stats placeholder to load them with the REST API.
 		 *
 		 * @since 0.9.4
 		 * @since 1.2.0   Renamed from tstats_stats_plugin_widget_content() to plugin_widget_content().
 		 * @since 1.4.0   Render the cached stats, without loading them with the REST API.
+		 * @since 1.5.0   Render an empty stats placeholder without the cached stats, instead of the Waiting notice.
 		 *
 		 * @param string      $project_slug   Plugin Slug.
 		 * @param Locale|null $locale         Locale object.
@@ -280,14 +281,14 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 
 			$cached = '' !== $project_slug && ! is_null( $locale ) && $this->plugin_stats_cached( $project_slug, $locale );
 
+			// The status notice is hidden, to show errors. The stats without cache are loaded with the REST API.
 			$additional_classes = array(
 				'translation-stats-loading',
+				'hidden',
 			);
 
 			if ( $cached ) {
-				// Keep the hidden notice to show the update status.
 				$additional_classes[] = 'translation-stats-cached';
-				$additional_classes[] = 'hidden';
 			}
 
 			?>
@@ -295,21 +296,64 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				<?php
 				if ( $cached ) {
 					$this->plugin_widget_content_stats( $project_slug, $locale, false );
+				} else {
+					$this->render_stats_placeholder( $project_slug );
 				}
 				?>
 			</div>
 			<?php
 
 			// Show the status notice below the stats, to not move them when the notice is shown.
-			$admin_notice_waiting = array(
+			$admin_notice_status = array(
 				'type'               => 'warning',
 				'notice-alt'         => true,
 				'additional-classes' => $additional_classes,
 				'update-icon'        => true,
 				'force_show'         => true,
-				'message'            => esc_html__( 'Waiting…', 'translation-stats' ),
+				'message'            => '',
 			);
-			new Admin_Notice( $admin_notice_waiting );
+			new Admin_Notice( $admin_notice_status );
+		}
+
+
+		/**
+		 * Render an empty stats placeholder, with a bar for each enabled subproject, while loading the stats.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @param string $project_slug   Plugin Slug.
+		 *
+		 * @return void
+		 */
+		public function render_stats_placeholder( $project_slug ) {
+
+			$options = get_option( TRANSLATION_STATS_WP_OPTION );
+
+			?>
+			<div class="translation-stats-content-stats widget-inside translation-stats-placeholder" aria-hidden="true">
+				<?php
+				foreach ( Translations_API::plugin_subprojects() as $subproject ) {
+
+					// Show bar only if subproject is enabled on its settings.
+					if ( ! isset( $options['plugins'][ $project_slug ][ $subproject['slug'] ] ) ) {
+						continue;
+					}
+
+					?>
+					<div class="content__subproject <?php echo esc_attr( $subproject['slug'] ); ?>">
+						<a class="placeholder">
+							<div class="subproject">
+								<div class="subproject-bar">
+									<span class="subproject-bar__name"><?php echo esc_html( $subproject['name'] ); ?></span>
+								</div>
+							</div>
+						</a>
+					</div>
+					<?php
+				}
+				?>
+			</div>
+			<?php
 		}
 
 

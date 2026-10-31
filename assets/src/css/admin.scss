@@ -145,6 +145,18 @@ table.wp-list-table.plugins { // WordPress Installed Plugins table.
 							color: #8f98a1;
 						}
 
+						&.placeholder div.subproject { // Empty stats bar while loading the stats.
+							background-color: #ddd;
+							background-image: repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25) 10px, rgba(0, 0, 0, 0) 10px, rgba(0, 0, 0, 0) 20px);
+							background-size: 28px 28px;
+							color: #8f98a1;
+							animation: tstats_bar_loading 0.5s linear infinite;
+
+							@media (prefers-reduced-motion: reduce) {
+								animation: none;
+							}
+						}
+
 						div.percent100 {
 
 							.subproject-bar { // Stats bar 100% text color.
