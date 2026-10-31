@@ -38,31 +38,15 @@ class RemoveEmptyStyleScripts {
  * @return {Array} Webpack module rules.
  */
 function disablePostCSSConfigLookup( rules ) {
-	return rules.map( ( rule ) => {
-		if ( ! Array.isArray( rule.use ) ) {
-			return rule;
-		}
+	rules
+		.filter( ( rule ) => Array.isArray( rule.use ) )
+		.flatMap( ( rule ) => rule.use )
+		.filter( ( loader ) => loader.loader && loader.loader.includes( 'postcss-loader' ) )
+		.forEach( ( loader ) => {
+			loader.options.postcssOptions = Object.assign( {}, loader.options.postcssOptions, { config: false } );
+		} );
 
-		return {
-			...rule,
-			use: rule.use.map( ( loader ) => {
-				if ( ! loader.loader || ! loader.loader.includes( 'postcss-loader' ) ) {
-					return loader;
-				}
-
-				return {
-					...loader,
-					options: {
-						...loader.options,
-						postcssOptions: {
-							...loader.options.postcssOptions,
-							config: false,
-						},
-					},
-				};
-			} ),
-		};
-	} );
+	return rules;
 }
 
 module.exports = {
