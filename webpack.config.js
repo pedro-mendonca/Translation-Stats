@@ -29,8 +29,48 @@ class RemoveEmptyStyleScripts {
 	}
 }
 
+/**
+ * Disable the PostCSS config files lookup, to only use the @wordpress/scripts default config.
+ * Otherwise, a config file in a parent directory, like a development environment, changes the build.
+ *
+ * @param {Array} rules Webpack module rules.
+ *
+ * @return {Array} Webpack module rules.
+ */
+function disablePostCSSConfigLookup( rules ) {
+	return rules.map( ( rule ) => {
+		if ( ! Array.isArray( rule.use ) ) {
+			return rule;
+		}
+
+		return {
+			...rule,
+			use: rule.use.map( ( loader ) => {
+				if ( ! loader.loader || ! loader.loader.includes( 'postcss-loader' ) ) {
+					return loader;
+				}
+
+				return {
+					...loader,
+					options: {
+						...loader.options,
+						postcssOptions: {
+							...loader.options.postcssOptions,
+							config: false,
+						},
+					},
+				};
+			} ),
+		};
+	} );
+}
+
 module.exports = {
 	...defaultConfig,
+	module: {
+		...defaultConfig.module,
+		rules: disablePostCSSConfigLookup( defaultConfig.module.rules ),
+	},
 	plugins: [ ...defaultConfig.plugins, new RemoveEmptyStyleScripts() ],
 	entry: {
 		'js/admin-plugins': './assets/src/js/admin-plugins.js',
