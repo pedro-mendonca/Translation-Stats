@@ -78,6 +78,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 		 *
 		 * @since 0.8.0
 		 * @since 1.1.1   Renamed from tstats_register_plugin_styles() to register_plugin_styles().
+		 * @since 1.5.0   Use the style built with @wordpress/scripts, with RTL support.
 		 *
 		 * @param string $hook  Hook.
 		 *
@@ -89,12 +90,17 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 				return;
 			}
 
+			$asset = Utils::get_build_asset( 'css/admin', 'css' );
+
 			wp_register_style(
 				'translation-stats',
-				Utils::get_asset_url( 'css/admin.css', true ),
-				array(),
-				TRANSLATION_STATS_VERSION
+				$asset['url'],
+				$asset['dependencies'],
+				$asset['version']
 			);
+
+			// Use the built RTL style for right-to-left languages.
+			wp_style_add_data( 'translation-stats', 'rtl', 'replace' );
 
 			wp_enqueue_style( 'translation-stats' );
 		}
@@ -105,6 +111,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 		 *
 		 * @since 0.8.0
 		 * @since 1.1.1   Renamed from tstats_register_plugin_scripts() to register_plugin_scripts().
+		 * @since 1.5.0   Use the scripts built with @wordpress/scripts, with their dependencies and version.
 		 *
 		 * @param string $hook  Hook.
 		 *
@@ -124,13 +131,14 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 			// Check for Translation Stats settings page.
 			if ( 'settings_page_' . TRANSLATION_STATS_SETTINGS_PAGE === $hook ) {
 
+				// The settings script includes the tablesorter library.
+				$asset = Utils::get_build_asset( 'js/admin-settings', 'js' );
+
 				wp_register_script(
 					'translation-stats-settings',
-					Utils::get_asset_url( 'js/admin-settings.js', true ),
-					array(
-						'jquery',
-					),
-					TRANSLATION_STATS_VERSION,
+					$asset['url'],
+					$asset['dependencies'],
+					$asset['version'],
 					false
 				);
 
@@ -142,31 +150,18 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 					$vars
 				);
 
-				wp_register_script(
-					'translation-stats-tablesorter',
-					Utils::get_asset_url( 'lib/tablesorter/jquery.tablesorter.combined.js', true ),
-					array(
-						'jquery',
-					),
-					'2.31.3',
-					false
-				);
-
-				wp_enqueue_script( 'translation-stats-tablesorter' );
-
 			}
 
 			// Check for plugins page.
 			if ( 'plugins.php' === $hook ) {
 
+				$asset = Utils::get_build_asset( 'js/admin-plugins', 'js' );
+
 				wp_register_script(
 					'translation-stats-plugins',
-					Utils::get_asset_url( 'js/admin-plugins.js', true ),
-					array(
-						'jquery',
-						'wp-api-fetch',
-					),
-					TRANSLATION_STATS_VERSION,
+					$asset['url'],
+					$asset['dependencies'],
+					$asset['version'],
 					false
 				);
 
