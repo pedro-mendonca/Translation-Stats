@@ -13,13 +13,5 @@
 		"no-descending-specificity": null,
 		"selector-class-pattern": null,
 		"scss/operator-no-unspaced": null
-	},
-	"overrides": [
-		{
-			"files": [ "assets/css/admin.css" ],
-			"rules": {
-				"property-no-deprecated": null
-			}
-		}
-	]
+	}
 }

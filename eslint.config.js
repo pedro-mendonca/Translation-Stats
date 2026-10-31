@@ -5,15 +5,13 @@ const wordpress = require( '@wordpress/eslint-plugin' );
 
 module.exports = [
 	{
-		ignores: [ '**/*.min.js', 'assets/lib/', 'vendor/', '*.js' ],
+		ignores: [ 'assets/build/', 'assets/lib/', 'vendor/', '*.js' ],
 	},
-	...wordpress.configs.es5,
+	...wordpress.configs[ 'recommended-with-formatting' ],
 	{
-		languageOptions: {
-			globals: {
-				jQuery: 'readonly',
-				console: 'readonly',
-			},
+		settings: {
+			// Provided by WordPress, not installed with npm.
+			'import/core-modules': [ 'jquery' ],
 		},
 		rules: {
 			'no-console': 'off',

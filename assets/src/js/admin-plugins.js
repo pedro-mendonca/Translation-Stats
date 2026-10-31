@@ -1,29 +1,38 @@
-/* global document, wp, setTimeout, clearTimeout */
+/**
+ * External dependencies
+ */
+import jQuery from 'jquery';
+
+/**
+ * WordPress dependencies
+ */
+import apiFetch from '@wordpress/api-fetch';
+import { __ } from '@wordpress/i18n';
 
 jQuery( document ).ready( function( $ ) {
-	var Queue = function() {
-		var previous = new $.Deferred().resolve();
+	const Queue = function() {
+		let previous = new $.Deferred().resolve();
 
 		return function( fn, fail ) {
 			return previous = previous.then( fn, fail || fn );
 		};
 	};
 
-	var queue = Queue();
+	const queue = Queue();
 
 	console.log( 'Loaded admin-plugins.js' );
 
 	// Action on click update button.
 	$( 'table.wp-list-table td.translation-stats button.tstats-update-button' ).on( 'click', function() {
-		var tstatsPlugin = $( this ).closest( 'tr' ).attr( 'data-slug' );
-		var forceUpdate = true;
+		const tstatsPlugin = $( this ).closest( 'tr' ).attr( 'data-slug' );
+		const forceUpdate = true;
 		tstatsPluginSubprojectsLoad( tstatsPlugin, forceUpdate );
 	} );
 
 	// Action on each loading div, except the ones with the cached stats already rendered.
 	$( 'table.wp-list-table td.translation-stats div.translation-stats-loading:not(.translation-stats-cached)' ).each( function() {
-		var tstatsPlugin = $( this ).closest( 'tr' ).attr( 'data-slug' );
-		var forceUpdate = false;
+		const tstatsPlugin = $( this ).closest( 'tr' ).attr( 'data-slug' );
+		const forceUpdate = false;
 		tstatsPluginSubprojectsLoad( tstatsPlugin, forceUpdate );
 	} );
 
@@ -38,10 +47,10 @@ jQuery( document ).ready( function( $ ) {
 	 * @param {boolean} forceUpdate  True or false.
 	 */
 	function tstatsPluginSubprojectsLoad( tstatsPlugin, forceUpdate ) {
-		var widget = $( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats' );
-		var notice = widget.find( 'div.translation-stats-content div.notice.translation-stats-loading' );
-		var button = widget.find( 'button.tstats-update-button' );
-		var status = widget.find( '.tstats-update-status' );
+		const widget = $( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats' );
+		const notice = widget.find( 'div.translation-stats-content div.notice.translation-stats-loading' );
+		const button = widget.find( 'button.tstats-update-button' );
+		const status = widget.find( '.tstats-update-status' );
 
 		// If Update button was clicked, show the update status in the widget title, to not move the stats.
 		if ( forceUpdate ) {
@@ -51,7 +60,7 @@ jQuery( document ).ready( function( $ ) {
 			notice.hide();
 			// Show the Waiting status.
 			clearTimeout( status.data( 'timeout' ) );
-			status.text( wp.i18n.__( 'Waiting...', 'translation-stats' ) );
+			status.text( __( 'Waiting…', 'translation-stats' ) );
 			console.log( 'REST API request to update translation stats for \'' + tstatsPlugin + '\' was queued.' );
 		}
 
@@ -64,19 +73,19 @@ jQuery( document ).ready( function( $ ) {
 
 			if ( forceUpdate ) {
 				// Show the Updating status.
-				status.text( wp.i18n.__( 'Updating...', 'translation-stats' ) );
+				status.text( __( 'Updating…', 'translation-stats' ) );
 			} else {
 				// Show the Updating notice, in the empty widget without the cached stats.
 				notice.removeClass( 'update-message' ).addClass( 'updating-message' );
-				notice.find( 'p' ).html( wp.i18n.__( 'Updating...', 'translation-stats' ) );
+				notice.find( 'p' ).html( __( 'Updating…', 'translation-stats' ) );
 			}
 
-			return wp.apiFetch( {
+			return apiFetch( {
 				path: '/translation-stats/v1/plugins/' + encodeURIComponent( tstatsPlugin ) + '/stats' + ( forceUpdate ? '?force=true' : '' ),
 			} ).then( function( response ) {
 				if ( forceUpdate ) {
 					// Show the Updated status for a few seconds.
-					status.text( wp.i18n.__( 'Updated!', 'translation-stats' ) );
+					status.text( __( 'Updated!', 'translation-stats' ) );
 					status.data( 'timeout', setTimeout( function() {
 						status.text( '' );
 					}, 3000 ) );
@@ -93,7 +102,7 @@ jQuery( document ).ready( function( $ ) {
 				// Clear the status and show the Error notice.
 				status.text( '' );
 				notice.removeClass( 'hidden notice-success updated-message notice-warning updating-message' ).addClass( 'notice-error update-message' ).show();
-				notice.find( 'p' ).html( wp.i18n.__( 'An error occurred while updating.', 'translation-stats' ) );
+				notice.find( 'p' ).html( __( 'An error occurred while updating.', 'translation-stats' ) );
 				console.log( 'REST API request to update translation stats for \'' + tstatsPlugin + '\' has failed (' + error.code + '): ' + error.message );
 			} ).then( function() {
 				// Stop colored bars animation.

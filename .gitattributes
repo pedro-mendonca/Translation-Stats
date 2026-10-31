@@ -5,7 +5,7 @@
 /tests/                export-ignore
 
 # Exclude files from export
-/assets/css/*.scss     export-ignore
+/assets/src/css/*.scss export-ignore
 /.distignore           export-ignore
 /.editorconfig         export-ignore
 /.eslintignore         export-ignore
@@ -28,5 +28,5 @@
 /phpmd.xml.dist        export-ignore
 /phpstan.neon.dist     export-ignore
 /phpunit.xml.dist      export-ignore
-/postcss.config.js     export-ignore
+/webpack.config.js     export-ignore
 /README.md             export-ignore

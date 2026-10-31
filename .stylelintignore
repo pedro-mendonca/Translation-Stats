@@ -1,4 +1,4 @@
-*.min.css
+/assets/build/
 /assets/lib/
 /node_modules/
 /vendor/

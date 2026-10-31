@@ -1,4 +1,10 @@
-/* global document, event, window */
+/* global event */
+
+/**
+ * External dependencies
+ */
+import jQuery from 'jquery';
+import 'tablesorter/dist/js/jquery.tablesorter.combined';
 
 jQuery( document ).ready( function( $ ) {
 	// Run scripts on page load.
@@ -35,13 +41,13 @@ jQuery( document ).ready( function( $ ) {
 	 */
 	function tstatsOnLoad() {
 		// Set default Settings Active tab.
-		var tstatsDefaultTabID = '#plugins';
+		const tstatsDefaultTabID = '#plugins';
 
 		// Get URL hash.
-		var tstatsSettingsURLHash = window.location.hash;
+		const tstatsSettingsURLHash = window.location.hash;
 
 		// Declare variable.
-		var tstatsActiveTabID;
+		let tstatsActiveTabID;
 
 		// Check for URL hash.
 		if ( tstatsSettingsURLHash ) {
@@ -110,7 +116,7 @@ jQuery( document ).ready( function( $ ) {
 	 * @since 0.9.3
 	 */
 	function tstatsClickSettingsTab() {
-		var tstatsActiveTabContentID = $( this ).attr( 'href' ).replace( '#', '#tab-' );
+		const tstatsActiveTabContentID = $( this ).attr( 'href' ).replace( '#', '#tab-' );
 
 		// Active tab.
 		$( this ).parent().children().removeClass( 'nav-tab-active' );
@@ -127,7 +133,7 @@ jQuery( document ).ready( function( $ ) {
 	 * @since 1.3.0
 	 */
 	function tstatsPluginsSelectAll() {
-		var activeSubprojects = $( '#tstats-table-plugins thead input[data-indeterminate="false"].checkbox-subproject:checked' ).length;
+		const activeSubprojects = $( '#tstats-table-plugins thead input[data-indeterminate="false"].checkbox-subproject:checked' ).length;
 
 		$( '#tstats-table-plugins thead input#all_plugins' ).attr( 'data-indeterminate', false );
 
@@ -153,7 +159,7 @@ jQuery( document ).ready( function( $ ) {
 	function tstatsPluginsActivateAllPlugins() {
 		// Set all plugin rows as active.
 		$( '.tstats-plugin-list-table tr:not(.disabled)' ).each( function() {
-			var plugin = $( this ).attr( 'data-plugin' );
+			const plugin = $( this ).attr( 'data-plugin' );
 			// Activate plugin.
 			tstatsPluginsActivatePlugin( plugin );
 		} );
@@ -169,7 +175,7 @@ jQuery( document ).ready( function( $ ) {
 	function tstatsPluginsDeactivateAllPlugins() {
 		// Set all plugin rows as inactive.
 		$( '.tstats-plugin-list-table tr:not(.disabled)' ).each( function() {
-			var plugin = $( this ).attr( 'data-plugin' );
+			const plugin = $( this ).attr( 'data-plugin' );
 			// Deactivate plugin.
 			tstatsPluginsDeactivatePlugin( plugin );
 		} );
@@ -186,7 +192,7 @@ jQuery( document ).ready( function( $ ) {
 	 */
 	function tstatsPluginsActivatePlugin( plugin ) {
 		// Set row.
-		var row = $( '.tstats-plugin-list-table tr[data-plugin="' + plugin + '"]' );
+		const row = $( '.tstats-plugin-list-table tr[data-plugin="' + plugin + '"]' );
 
 		// Set plugin row as active.
 		$( row ).addClass( 'active' ).removeClass( 'inactive' ).attr( 'data-subprojects', '4' );
@@ -217,7 +223,7 @@ jQuery( document ).ready( function( $ ) {
 	 */
 	function tstatsPluginsDeactivatePlugin( plugin ) {
 		// Set row.
-		var row = $( '.tstats-plugin-list-table tr[data-plugin="' + plugin + '"]' );
+		const row = $( '.tstats-plugin-list-table tr[data-plugin="' + plugin + '"]' );
 
 		// Set plugin row as inactive.
 		$( row ).addClass( 'inactive' ).removeClass( 'active' ).attr( 'data-subprojects', '0' );
@@ -247,13 +253,13 @@ jQuery( document ).ready( function( $ ) {
 	 */
 	function tstatsPluginsSelectPlugin() {
 		// Get the clicked row ID from Settings projects table.
-		var id = $( event.target ).attr( 'id' );
+		const id = $( event.target ).attr( 'id' );
 
 		// Get plugin ID.
-		var plugin = id.substring( 'plugins_'.length );
+		const plugin = id.substring( 'plugins_'.length );
 
 		// Get plugin active subprojects count.
-		var activeSubprojects = $( 'input[data-plugin="' + plugin + '"].checkbox-plugin-subproject:checked' ).length;
+		const activeSubprojects = $( 'input[data-plugin="' + plugin + '"].checkbox-plugin-subproject:checked' ).length;
 
 		if ( activeSubprojects < 4 ) {
 			// Activate plugin.
@@ -274,7 +280,7 @@ jQuery( document ).ready( function( $ ) {
 	 */
 	function tstatsPluginsUpdateColumns() {
 		$( '#tstats-table-plugins thead th.column-subproject' ).each( function() {
-			var subproject = $( this ).attr( 'data-subproject' );
+			const subproject = $( this ).attr( 'data-subproject' );
 			tstatsPluginsUpdateColumn( subproject );
 		} );
 	}
@@ -286,7 +292,7 @@ jQuery( document ).ready( function( $ ) {
 	 */
 	function tstatsPluginsUpdateRows() {
 		$( '#tstats-table-plugins tbody tr:not(.disabled)' ).each( function() {
-			var plugin = $( this ).attr( 'data-plugin' );
+			const plugin = $( this ).attr( 'data-plugin' );
 			tstatsPluginsUpdateRow( plugin );
 		} );
 	}
@@ -300,16 +306,16 @@ jQuery( document ).ready( function( $ ) {
 	 */
 	function tstatsPluginsSelectSubprojectColumn() {
 		// Get the clicked subproject ID from Settings projects table.
-		var id = $( event.target ).attr( 'id' );
+		const id = $( event.target ).attr( 'id' );
 
 		// Get subproject column id.
-		var subproject = id.substring( 'subprojects_'.length );
+		const subproject = id.substring( 'subprojects_'.length );
 
 		// Get column checked count.
-		var currentCount = $( 'input[data-subproject="' + subproject + '"]:checked' ).length;
+		const currentCount = $( 'input[data-subproject="' + subproject + '"]:checked' ).length;
 
 		// Get column total.
-		var totalCount = $( 'input[data-subproject="' + subproject + '"]' ).length;
+		const totalCount = $( 'input[data-subproject="' + subproject + '"]' ).length;
 
 		if ( totalCount > 0 && currentCount < totalCount ) {
 			$( 'input[data-subproject="' + subproject + '"]' ).prop( 'checked', true );
@@ -337,7 +343,7 @@ jQuery( document ).ready( function( $ ) {
 	 */
 	function tstatsPluginsSelectPluginSubproject() {
 		// Get plugin ID.
-		var plugin = $( event.target ).parents( 'tr' ).attr( 'data-plugin' );
+		const plugin = $( event.target ).parents( 'tr' ).attr( 'data-plugin' );
 
 		tstatsPluginsUpdateRow( plugin );
 
@@ -354,10 +360,10 @@ jQuery( document ).ready( function( $ ) {
 	 */
 	function tstatsPluginsUpdateRow( plugin ) {
 		// Set row.
-		var row = $( '.tstats-plugin-list-table tr[data-plugin="' + plugin + '"]' );
+		const row = $( '.tstats-plugin-list-table tr[data-plugin="' + plugin + '"]' );
 
 		// Get plugin active subprojects count.
-		var pluginActiveSubprojects = $( 'input[data-plugin="' + plugin + '"].checkbox-plugin-subproject:checked' ).length;
+		const pluginActiveSubprojects = $( 'input[data-plugin="' + plugin + '"].checkbox-plugin-subproject:checked' ).length;
 
 		// Update plugin subprojects data count.
 		$( row ).attr( 'data-subprojects', pluginActiveSubprojects );
@@ -392,10 +398,10 @@ jQuery( document ).ready( function( $ ) {
 	 */
 	function tstatsPluginsUpdateColumn( subproject ) {
 		// Get enabled plugins count.
-		var enabledPlugins = $( '#tstats-table-plugins tbody tr:not(.disabled)' ).length;
+		const enabledPlugins = $( '#tstats-table-plugins tbody tr:not(.disabled)' ).length;
 
 		// Get plugin subproject active plugins count.
-		var subprojectActivePlugins = $( 'input[data-subproject="' + subproject + '"].checkbox-plugin-subproject:checked' ).length;
+		const subprojectActivePlugins = $( 'input[data-subproject="' + subproject + '"].checkbox-plugin-subproject:checked' ).length;
 
 		if ( enabledPlugins > 0 ) {
 			// Select subproject if > 0 plugins active.
@@ -431,10 +437,10 @@ jQuery( document ).ready( function( $ ) {
 	 */
 	function tstatsPluginsUpdateHeader() {
 		// Set activated subprojects.
-		var activeSubprojects = 0;
+		let activeSubprojects = 0;
 
 		// Set completely activated subprojects.
-		var completelyActiveSubprojects = 0;
+		let completelyActiveSubprojects = 0;
 
 		// Update plugins table header subprojects columns.
 		tstatsPluginsUpdateColumns();

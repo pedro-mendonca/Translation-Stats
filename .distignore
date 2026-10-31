@@ -30,5 +30,5 @@ phpcs.xml.dist
 phpmd.xml.dist
 phpstan.neon.dist
 phpunit.xml.dist
-postcss.config.js
+webpack.config.js
 README.md
