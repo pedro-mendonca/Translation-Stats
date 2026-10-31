@@ -36,8 +36,8 @@ jQuery( document ).ready( function( $ ) {
 		tstatsPluginSubprojectsLoad( tstatsPlugin, forceUpdate );
 	} );
 
-	// Show the update button of the cached stats already rendered, as there is no request to load them.
-	$( 'table.wp-list-table td.translation-stats div.translation-stats-loading.translation-stats-cached' ).closest( 'td.translation-stats' ).find( 'button.tstats-update-button' ).show();
+	// Show the update buttons, disabled and dimmed while loading the stats without cache.
+	$( 'table.wp-list-table td.translation-stats button.tstats-update-button' ).show();
 
 	/**
 	 * Load subprojects stats.
@@ -52,10 +52,8 @@ jQuery( document ).ready( function( $ ) {
 		const button = widget.find( 'button.tstats-update-button' );
 		const status = widget.find( '.tstats-update-status' );
 
-		// If Update button was clicked, disable it and dim its icon while queued.
-		if ( forceUpdate ) {
-			button.prop( 'disabled', true ).addClass( 'waiting' );
-		}
+		// Disable the Update button and dim its icon while queued.
+		button.prop( 'disabled', true ).addClass( 'waiting' );
 
 		// Hide any previous error notice.
 		notice.hide();
