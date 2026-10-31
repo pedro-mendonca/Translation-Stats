@@ -171,6 +171,48 @@ jobs:
       - name: Run JavaScript Lint
         run: npm run lint:js
 
+  # Checks the committed build is up to date with the sources.
+  #
+  # Performs the following steps:
+  # - Checks out the repository.
+  # - Installs NodeJS with caching for NPM.
+  # - Logs updated debug information.
+  # - Installs NPM dependencies.
+  # - Builds the JavaScript and CSS with @wordpress/scripts.
+  # - Fails if the build differs from the committed one in assets/build.
+  build:
+    name: JavaScript and CSS build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: Log debug information
+        run: |
+          npm --version
+          node --version
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+
+      - name: Check the build is up to date
+        run: |
+          if [ -n "$(git status --porcelain -- assets/build)" ]; then
+            git status --porcelain -- assets/build
+            echo "::error::The build in assets/build is outdated. Run 'npm run build' and commit the changes."
+            exit 1
+          fi
+
   # Runs the CSS/SCSS coding standards checks.
   #
   # CSS violations are not currently reported inline with annotations.
