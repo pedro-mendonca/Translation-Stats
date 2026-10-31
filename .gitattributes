@@ -28,5 +28,6 @@
 /phpmd.xml.dist        export-ignore
 /phpstan.neon.dist     export-ignore
 /phpunit.xml.dist      export-ignore
+/vitest.config.mjs     export-ignore
 /webpack.config.js     export-ignore
 /README.md             export-ignore
