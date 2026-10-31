@@ -21,7 +21,11 @@
 		"@wordpress/api-fetch": "^8.0.0",
 		"@wordpress/i18n": "^7.0.0",
 		"@wordpress/scripts": "^37.0.0",
-		"tablesorter": "^2.31.3"
+		"jquery": "^3.7.1",
+		"jsdom": "^26.1.0",
+		"tablesorter": "^2.31.3",
+		"vite": "^8.3.5",
+		"vitest": "^5.0.5"
 	},
 	"overrides": {
 		"markdownlint-cli": "^0.50.0",
@@ -31,6 +35,8 @@
 	"scripts": {
 		"build": "wp-scripts build",
 		"start": "wp-scripts start",
+		"test:unit": "wp-scripts test-unit-js",
+		"test:unit:watch": "wp-scripts test-unit-js --watch",
 		"lint:css": "wp-scripts lint-style",
 		"lint:css:fix": "npm run lint:css -- --fix",
 		"lint:js": "wp-scripts lint-js",

@@ -383,7 +383,7 @@ class Test_Plugins extends Translation_Stats_TestCase {
 
 
 	/**
-	 * Test the plugin widget content without all the stats cached renders the placeholder, to load them with the REST API.
+	 * Test the plugin widget content without all the stats cached renders an empty stats placeholder, to load them with the REST API.
 	 *
 	 * @dataProvider provide_test_plugin_widget_content_not_cached
 	 *
@@ -397,9 +397,17 @@ class Test_Plugins extends Translation_Stats_TestCase {
 
 		$html = $this->render_plugin_widget_content();
 
-		$this->assertStringContainsString( 'translation-stats-loading', $html );
+		// Placeholder with an empty bar for each enabled subproject.
+		$this->assertStringContainsString( 'translation-stats-placeholder', $html );
+		$this->assertSame( 1, substr_count( $html, 'content__subproject' ) );
+		$this->assertStringContainsString( 'Stable', $html );
+		$this->assertStringNotContainsString( 'subproject-bar__percentage', $html );
+
+		// The status notice is hidden, only shown on errors, and loads the stats.
+		$this->assertMatchesRegularExpression( '/class="[^"]*translation-stats-loading[^"]*hidden[^"]*"/', $html );
 		$this->assertStringNotContainsString( 'translation-stats-cached', $html );
-		$this->assertStringNotContainsString( 'translation-stats-content-stats', $html );
+		$this->assertStringNotContainsString( 'Waiting', $html );
+
 		$this->assertSame( array(), $this->requested_urls );
 	}
 
