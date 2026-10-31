@@ -33,6 +33,55 @@ class Test_Settings_Section_Plugins extends Translation_Stats_TestCase {
 		);
 
 		$this->set_plugin_on_wporg( 'hello-dolly' );
+
+		$this->set_installed_plugins();
+	}
+
+
+	/**
+	 * Set the installed plugins data, independent of the plugins bundled with each WordPress version.
+	 */
+	private function set_installed_plugins() {
+
+		$plugin = array(
+			'Name'       => '',
+			'PluginURI'  => '',
+			'Version'    => '1.0.0',
+			'Author'     => '',
+			'AuthorURI'  => '',
+			'TextDomain' => '',
+			'DomainPath' => '',
+			'Network'    => false,
+			'Title'      => '',
+			'AuthorName' => '',
+		);
+
+		$plugins = array(
+			'akismet/akismet.php' => array_merge(
+				$plugin,
+				array(
+					'Name'       => 'Akismet Anti-spam',
+					'Title'      => 'Akismet Anti-spam',
+					'Author'     => 'Automattic',
+					'AuthorName' => 'Automattic',
+					'AuthorURI'  => 'https://automattic.com/',
+					'TextDomain' => 'akismet',
+				)
+			),
+			'hello.php'           => array_merge(
+				$plugin,
+				array(
+					'Name'       => 'Hello Dolly',
+					'Title'      => 'Hello Dolly',
+					'Author'     => 'Matt Mullenweg',
+					'AuthorName' => 'Matt Mullenweg',
+					'AuthorURI'  => 'https://ma.tt/',
+					'TextDomain' => 'hello-dolly',
+				)
+			),
+		);
+
+		wp_cache_set( 'plugins', array( '' => $plugins ), 'plugins' );
 	}
 
 
@@ -89,7 +138,7 @@ class Test_Settings_Section_Plugins extends Translation_Stats_TestCase {
 
 		// Link to the plugin on the Locale subdomain of WordPress.org.
 		$this->assertStringContainsString( '<a href="https://pt.wordpress.org/plugins/hello-dolly/" target="_blank">Hello Dolly</a>', $html );
-		$this->assertStringContainsString( '<a href="http://ma.tt/" target="_blank">Matt Mullenweg</a>', $html );
+		$this->assertStringContainsString( '<a href="https://ma.tt/" target="_blank">Matt Mullenweg</a>', $html );
 
 		// The slug matches the text domain.
 		$this->assertMatchesRegularExpression( '/data-plugin="hello-dolly".*?dashicons-yes/s', $html );
