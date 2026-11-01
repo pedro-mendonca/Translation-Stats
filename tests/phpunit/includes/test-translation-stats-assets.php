@@ -97,4 +97,17 @@ class Test_Translation_Stats_Assets extends Translation_Stats_TestCase {
 		$this->assertSame( $asset['version'], $script->ver );
 		$this->assertTrue( wp_script_is( 'translation-stats-plugins', 'enqueued' ) );
 	}
+
+
+	/**
+	 * Test the scripts aren't registered on other pages.
+	 */
+	public function test_register_plugin_scripts_not_allowed_page() {
+
+		$translation_stats = new Translation_Stats();
+		$translation_stats->register_plugin_scripts( 'index.php' );
+
+		$this->assertFalse( wp_script_is( 'translation-stats-settings', 'registered' ) );
+		$this->assertFalse( wp_script_is( 'translation-stats-plugins', 'registered' ) );
+	}
 }

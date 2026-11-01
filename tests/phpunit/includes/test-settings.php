@@ -204,4 +204,80 @@ class Test_Settings extends Translation_Stats_TestCase {
 		$this->assertSame( 'pt_PT', get_option( TRANSLATION_STATS_WP_OPTION )['settings']['translation_language'] );
 		$this->assertTrue( get_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . 'translation-stats' ) );
 	}
+
+
+	/**
+	 * Test the settings page is added to the Settings menu.
+	 */
+	public function test_admin_menu() {
+		global $submenu;
+
+		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
+
+		$settings = new Settings();
+		$settings->admin_menu();
+
+		$this->assertContains( TRANSLATION_STATS_SETTINGS_PAGE, wp_list_pluck( $submenu['options-general.php'], 2 ) );
+		$this->assertSame( 10, has_action( get_plugin_page_hookname( TRANSLATION_STATS_SETTINGS_PAGE, 'options-general.php' ), array( $settings, 'add_options_page' ) ) );
+	}
+
+
+	/**
+	 * Test the settings page renders the tabs and the settings sections in the form, with the sidebar.
+	 */
+	public function test_add_options_page() {
+
+		// The available translations from WordPress.org aren't needed.
+		$this->mock_translate_api( 500 );
+
+		$this->set_settings( array( 'translation_language' => 'pt_PT' ) );
+
+		wp_set_current_user( self::factory()->user->create( array( 'role' => 'administrator' ) ) );
+
+		$settings = new Settings();
+		$settings->settings_sections();
+
+		ob_start();
+		$settings->add_options_page();
+		$html = (string) ob_get_clean();
+
+		// Tabs, the hidden page has no tab.
+		foreach ( array( 'plugins', 'settings', 'tools', 'debug' ) as $tab ) {
+			$this->assertStringContainsString( '<a class="nav-tab" href="#' . $tab . '">', $html );
+			$this->assertStringContainsString( 'id="tab-' . $tab . '"', $html );
+		}
+		$this->assertStringNotContainsString( 'href="#hidden"', $html );
+		$this->assertStringContainsString( 'id="tab-hidden"', $html );
+
+		// Settings fields.
+		$this->assertStringContainsString( "<form action='options.php' method='post'>", $html );
+		$this->assertStringContainsString( 'name="tstats_settings[settings][show_warnings]"', $html );
+		$this->assertStringContainsString( 'name="tstats_settings[settings][settings_version]"', $html );
+		$this->assertStringContainsString( 'name="translation_stats_nonce_check"', $html );
+		$this->assertStringContainsString( 'value="Save Changes"', $html );
+
+		// Debug info, in development mode.
+		$this->assertStringContainsString( 'PHP Version: <code>' . PHP_VERSION . '</code>', $html );
+		$this->assertStringContainsString( 'Settings database version: <code>' . TRANSLATION_STATS_SETTINGS_VERSION . '</code>', $html );
+
+		// Sidebar.
+		$this->assertStringContainsString( 'tstats-settings__sidebar', $html );
+		$this->assertStringContainsString( 'tstats_settings_metabox__about', $html );
+	}
+
+
+	/**
+	 * Test the settings page requires the 'manage_options' capability.
+	 */
+	public function test_add_options_page_without_permission() {
+
+		wp_set_current_user( self::factory()->user->create( array( 'role' => 'editor' ) ) );
+
+		$settings = new Settings();
+
+		$this->expectException( WPDieException::class );
+		$this->expectExceptionMessage( 'You do not have sufficient permissions to access this page.' );
+
+		$settings->add_options_page();
+	}
 }
