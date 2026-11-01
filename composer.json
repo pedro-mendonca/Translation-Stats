@@ -67,6 +67,11 @@
 		"scripts-list": "composer run-script --list",
 		"test": "phpunit --colors=always",
 		"test:coverage": "phpunit --colors=always --coverage-clover coverage.xml",
+		"test:js": "npm run test:unit",
+		"test:multisite": [
+			"@putenv WP_MULTISITE=1",
+			"@test"
+		],
 		"zip": "composer archive --file=translation-stats --format=zip"
 	},
 	"scripts-descriptions": {
@@ -85,6 +90,8 @@
 		"scripts-list": "List all Composer scripts.",
 		"test": "Runs the PHPUnit tests.",
 		"test:coverage": "Runs the PHPUnit tests with code coverage.",
+		"test:js": "Runs the JavaScript unit tests with npm.",
+		"test:multisite": "Runs the PHPUnit tests as multisite.",
 		"zip": "Build production zip archive."
 	}
 }

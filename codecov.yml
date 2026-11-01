@@ -1,7 +1,26 @@
 coverage:
   status:
     project:
-      default:
+      # PHP and JavaScript coverage are compared separately, with their flags.
+      php:
+        flags:
+          - php
+        target: auto
         # Allow a small drop, e.g. when the remote API test is skipped.
+        threshold: 1%
+      javascript:
+        flags:
+          - javascript
         target: auto
         threshold: 1%
+    patch:
+      default:
+        # New and changed code should be covered by tests.
+        target: 80%
+
+flags:
+  # Keep the coverage of the flags not uploaded in a commit, as the workflows only run on related changes.
+  php:
+    carryforward: true
+  javascript:
+    carryforward: true

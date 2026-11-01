@@ -145,6 +145,7 @@ jobs:
         with:
           files: ./coverage.xml
           disable_search: true
+          flags: php
           verbose: true
           token: ${{ secrets.codecov-token }}
 
