@@ -36,17 +36,26 @@ class Test_Settings_Section_Debug extends Translation_Stats_TestCase {
 	 */
 	public function test_debug_info__settings() {
 
-		$this->set_settings( array( 'translation_language' => 'pt_PT' ), array( 'hello' => array( 'enabled' => 'true' ) ) );
+		update_option(
+			TRANSLATION_STATS_WP_OPTION,
+			array(
+				'settings' => array( 'translation_language' => 'pt_PT' ),
+				'plugins'  => array( 'hello' => array( 'enabled' => 'true' ) ),
+				'themes'   => array( 'twentytwentyfive' => array( 'enabled' => true ) ),
+			)
+		);
 
 		$html = $this->render( 'debug_info__settings' );
 
 		$this->assertStringContainsString( 'Translation Stats Locale: <code>pt_PT</code>', $html );
 		$this->assertStringContainsString( '&quot;hello&quot;', $html );
+		$this->assertStringContainsString( 'Installed themes settings:', $html );
+		$this->assertStringContainsString( '&quot;twentytwentyfive&quot;', $html );
 		$this->assertStringNotContainsString( 'No settings found.', $html );
 
 		delete_option( TRANSLATION_STATS_WP_OPTION );
 
-		$this->assertSame( 2, substr_count( $this->render( 'debug_info__settings' ), 'No settings found.' ) );
+		$this->assertSame( 3, substr_count( $this->render( 'debug_info__settings' ), 'No settings found.' ) );
 	}
 
 

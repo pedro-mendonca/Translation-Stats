@@ -242,7 +242,7 @@ class Test_Settings extends Translation_Stats_TestCase {
 		$html = (string) ob_get_clean();
 
 		// Tabs, the hidden page has no tab.
-		foreach ( array( 'plugins', 'settings', 'tools', 'debug' ) as $tab ) {
+		foreach ( array( 'plugins', 'themes', 'settings', 'tools', 'debug' ) as $tab ) {
 			$this->assertStringContainsString( '<a class="nav-tab" href="#' . $tab . '">', $html );
 			$this->assertStringContainsString( 'id="tab-' . $tab . '"', $html );
 		}

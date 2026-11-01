@@ -17,6 +17,9 @@ export function initSettings() {
 	// Sort and filter plugins settings list.
 	tstatsPluginsSort();
 
+	// Sort and filter themes settings list.
+	tstatsThemesSort();
+
 	// Click on Settings Navigation Tab.
 	$( '.tstats-settings__content > .nav-tab-wrapper a' ).on( 'click', tstatsClickSettingsTab );
 
@@ -31,6 +34,12 @@ export function initSettings() {
 
 	// Select single plugin subproject checkbox on Settings projects table.
 	$( '.tstats-settings__content input.checkbox-plugin-subproject' ).on( 'click', tstatsPluginsSelectPluginSubproject );
+
+	// Select all themes checkbox on Settings themes table.
+	$( '.tstats-settings__content #all_themes' ).on( 'click', tstatsThemesSelectAll );
+
+	// Select single theme checkbox on Settings themes table.
+	$( '.tstats-settings__content input.checkbox-theme' ).on( 'click', tstatsThemesSelectTheme );
 
 	// Click plugins table header.
 	$( '.tablesorter-header:not(.sorter-false)' ).on( 'mouseup', tstatsClickPluginsSort );
@@ -74,6 +83,9 @@ export function tstatsOnLoad() {
 		// Set Active Tab Content on Settings page load.
 		$( '.tabs-content form' ).children( '.tab-content' ).addClass( 'hidden' );
 		$( '.tabs-content form div' + tstatsActiveTabID.replace( '#', '#tab-' ) ).removeClass( 'hidden' );
+
+		// Return to the active tab after saving.
+		tstatsSetFormReferer( tstatsActiveTabID );
 	}
 
 	console.log( 'Loaded admin-settings.js' );
@@ -116,12 +128,29 @@ export function tstatsPluginsSort() {
 }
 
 /**
+ * Set the active tab in the settings form referer, to return to the same tab after saving.
+ * The browser doesn't send the URL hash, and options.php redirects to the referer.
+ *
+ * @since 1.5.0
+ *
+ * @param {string} tabID Active tab ID ( e.g. '#themes' ).
+ */
+export function tstatsSetFormReferer( tabID ) {
+	$( '.tabs-content form input[name="_wp_http_referer"]' ).val( function( index, referer ) {
+		return referer.split( '#' )[ 0 ] + tabID;
+	} );
+}
+
+/**
  * Change active Settings Navigation Tab.
  *
  * @since 0.9.3
  */
 export function tstatsClickSettingsTab() {
 	const tstatsActiveTabContentID = $( this ).attr( 'href' ).replace( '#', '#tab-' );
+
+	// Return to the active tab after saving.
+	tstatsSetFormReferer( $( this ).attr( 'href' ) );
 
 	// Active tab.
 	$( this ).parent().children().removeClass( 'nav-tab-active' );
@@ -496,4 +525,82 @@ export function tstatsPluginsUpdateHeader() {
 export function tstatsClickPluginsSort() {
 	// Unfocus element.
 	$( this ).blur();
+}
+
+/**
+ * Translation Stats themes list table sorting.
+ *
+ * @since 1.5.0
+ */
+export function tstatsThemesSort() {
+	$( '#tstats-table-themes' ).tablesorter( {
+		// Initial sort column (2nd column).
+		sortList: [
+			[ 1, 0 ],
+		],
+		sortRestart: true,
+		sortInitialOrder: 'asc',
+		widgets: [
+			'filter',
+		],
+		widgetOptions: {
+			filter_external: '#themes-search-input',
+			filter_columnFilters: false,
+			filter_saveFilters: false,
+			filter_reset: '#themes-search-reset',
+		},
+	} );
+}
+
+/**
+ * Select all the themes in Settings themes table, or unselect them if all are selected.
+ *
+ * @since 1.5.0
+ */
+export function tstatsThemesSelectAll() {
+	const themes = $( '#tstats-table-themes input.checkbox-theme' );
+	const select = themes.filter( ':checked' ).length < themes.length;
+
+	themes.prop( 'checked', select ).each( function() {
+		tstatsThemesUpdateRow( $( this ) );
+	} );
+
+	tstatsThemesUpdateHeader();
+}
+
+/**
+ * Select single theme in Settings themes table.
+ *
+ * @since 1.5.0
+ */
+export function tstatsThemesSelectTheme() {
+	tstatsThemesUpdateRow( $( this ) );
+	tstatsThemesUpdateHeader();
+}
+
+/**
+ * Update the theme row status with its checkbox.
+ *
+ * @since 1.5.0
+ *
+ * @param {Object} checkbox Theme checkbox jQuery object.
+ */
+export function tstatsThemesUpdateRow( checkbox ) {
+	const checked = checkbox.prop( 'checked' );
+
+	checkbox.closest( 'tr' ).toggleClass( 'active', checked ).toggleClass( 'inactive', ! checked );
+}
+
+/**
+ * Update the select all checkbox of the themes table, indeterminate if only some themes are selected.
+ *
+ * @since 1.5.0
+ */
+export function tstatsThemesUpdateHeader() {
+	const themes = $( '#tstats-table-themes input.checkbox-theme' );
+	const selected = themes.filter( ':checked' ).length;
+
+	$( '#tstats-table-themes thead input#all_themes' )
+		.prop( 'checked', selected > 0 )
+		.attr( 'data-indeterminate', selected > 0 && selected < themes.length ? 'true' : 'false' );
 }

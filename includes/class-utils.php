@@ -21,7 +21,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 	 * Class Utils.
 	 *
 	 * @phpstan-type SettingsData array{show_warnings?: bool|string, translation_language?: string, delete_data_on_uninstall?: bool|string, transients_expiration?: int|string, settings_version?: string}
-	 * @phpstan-type Options array{settings?: SettingsData, plugins?: array<string, array<string, string>>}
+	 * @phpstan-type Options array{settings?: SettingsData, plugins?: array<string, array<string, string>>, themes?: array<string, array{enabled?: bool}>}
 	 */
 	class Utils {
 

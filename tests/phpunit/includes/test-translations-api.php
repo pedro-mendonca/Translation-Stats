@@ -212,4 +212,27 @@ class Test_Translations_API extends Translation_Stats_TestCase {
 		$this->assertSame( 'other', Translations_API::plugin_metadata( 'other/other.php', 'slug' ) );
 		$this->assertSame( '', Translations_API::plugin_metadata( 'other/other.php', 'new_version' ) );
 	}
+
+
+	/**
+	 * Test if a theme is on WordPress.org, from the themes updates transient, with or without available update.
+	 */
+	public function test_theme_on_wporg() {
+
+		delete_site_transient( 'update_themes' );
+
+		$this->assertFalse( Translations_API::theme_on_wporg( 'twentytwentyfive' ) );
+
+		set_site_transient(
+			'update_themes',
+			(object) array(
+				'response'  => array( 'twentytwentyfour' => array( 'new_version' => '99.0' ) ),
+				'no_update' => array( 'twentytwentyfive' => array( 'new_version' => '1.0' ) ),
+			)
+		);
+
+		$this->assertTrue( Translations_API::theme_on_wporg( 'twentytwentyfour' ) );
+		$this->assertTrue( Translations_API::theme_on_wporg( 'twentytwentyfive' ) );
+		$this->assertFalse( Translations_API::theme_on_wporg( 'other-theme' ) );
+	}
 }

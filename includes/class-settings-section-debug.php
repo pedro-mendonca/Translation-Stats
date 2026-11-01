@@ -249,6 +249,22 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 				}
 				?>
 			</div>
+			<p>
+				<?php esc_html_e( 'Installed themes settings:', 'translation-stats' ); ?>
+			</p>
+			<div>
+				<?php
+				if ( isset( $options['themes'] ) ) {
+					?>
+					<pre><code class="tstats-code-block"><?php echo esc_html( (string) wp_json_encode( $options['themes'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) ); ?></code></pre>
+					<?php
+				} else {
+					?>
+					<code><?php esc_html_e( 'No settings found.', 'translation-stats' ); ?></code>
+					<?php
+				}
+				?>
+			</div>
 			<?php
 		}
 
