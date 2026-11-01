@@ -23,6 +23,19 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 
 
 		/**
+		 * Settings stored as booleans, from the settings form checkboxes.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @var array
+		 */
+		const BOOLEAN_SETTINGS = array(
+			'show_warnings',
+			'delete_data_on_uninstall',
+		);
+
+
+		/**
 		 * Transients.
 		 *
 		 * @var Transients

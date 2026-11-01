@@ -70,15 +70,19 @@ class Test_Uninstall extends Translation_Stats_TestCase {
 	 */
 	public function provide_test_uninstall_deletes_data() {
 		return array(
-			'delete data, saved from settings form' => array(
-				'delete_data_on_uninstall' => 'true',
-				'expected_data'            => false,
-			),
-			'delete data, default settings'         => array(
+			'delete data'                       => array(
 				'delete_data_on_uninstall' => true,
 				'expected_data'            => false,
 			),
-			'keep data'                             => array(
+			'keep data'                         => array(
+				'delete_data_on_uninstall' => false,
+				'expected_data'            => true,
+			),
+			'delete data, settings version 1.0' => array(
+				'delete_data_on_uninstall' => 'true',
+				'expected_data'            => false,
+			),
+			'keep data, settings version 1.0'   => array(
 				'delete_data_on_uninstall' => '',
 				'expected_data'            => true,
 			),

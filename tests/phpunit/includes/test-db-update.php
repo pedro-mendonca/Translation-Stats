@@ -35,6 +35,29 @@ class Test_DB_Update extends Translation_Stats_TestCase {
 
 
 	/**
+	 * Get the settings in the version 1.0 format, with the checkboxes saved as string 'true' or missing if unchecked.
+	 *
+	 * @return array  Settings v1.0.
+	 */
+	private function get_settings_v1() {
+		return array(
+			'settings' => array(
+				'show_warnings'         => 'true',
+				'translation_language'  => 'pt_PT',
+				'transients_expiration' => DAY_IN_SECONDS,
+				'settings_version'      => '1.0',
+			),
+			'plugins'  => array(
+				'translation-stats' => array(
+					'enabled' => 'true',
+					'stable'  => 'true',
+				),
+			),
+		);
+	}
+
+
+	/**
 	 * Test the hooks added on construct.
 	 */
 	public function test_construct() {
@@ -104,11 +127,114 @@ class Test_DB_Update extends Translation_Stats_TestCase {
 
 
 	/**
-	 * Test the settings database check updates outdated settings and shows a notice.
+	 * Data provider.
+	 *
+	 * @var array
 	 */
-	public function test_settings_db_check() {
+	public function provide_test_settings_update_v1_to_v2() {
+		return array(
+			'checked'   => array(
+				'value'           => 'true',
+				'expected_result' => true,
+			),
+			'unchecked' => array(
+				'value'           => '',
+				'expected_result' => false,
+			),
+			'boolean'   => array(
+				'value'           => true,
+				'expected_result' => true,
+			),
+		);
+	}
 
-		update_option( TRANSLATION_STATS_WP_OPTION, $this->get_settings_v0() );
+
+	/**
+	 * Test update the settings from version 1.0 to version 2.0, with the checkboxes saved as booleans.
+	 *
+	 * @dataProvider provide_test_settings_update_v1_to_v2
+	 *
+	 * @param mixed $value             The 'delete_data_on_uninstall' setting value in version 1.0.
+	 * @param bool  $expected_result   The 'delete_data_on_uninstall' setting value in version 2.0.
+	 */
+	public function test_settings_update_v1_to_v2( $value, $expected_result ) {
+
+		$settings_v1 = $this->get_settings_v1();
+
+		$settings_v1['settings']['delete_data_on_uninstall'] = $value;
+
+		update_option( TRANSLATION_STATS_WP_OPTION, $settings_v1 );
+
+		$db_update = new DB_Update();
+		$db_update->settings_update_v1_to_v2();
+
+		$this->assertSame(
+			array(
+				'settings' => array(
+					'show_warnings'            => true,
+					'translation_language'     => 'pt_PT',
+					'transients_expiration'    => DAY_IN_SECONDS,
+					'settings_version'         => '2.0',
+					'delete_data_on_uninstall' => $expected_result,
+				),
+				'plugins'  => $settings_v1['plugins'],
+			),
+			get_option( TRANSLATION_STATS_WP_OPTION )
+		);
+	}
+
+
+	/**
+	 * Test update the settings from version 1.0 to version 2.0, with the unchecked checkboxes missing.
+	 */
+	public function test_settings_update_v1_to_v2_unchecked_missing() {
+
+		$settings_v1 = $this->get_settings_v1();
+
+		unset( $settings_v1['settings']['show_warnings'] );
+
+		update_option( TRANSLATION_STATS_WP_OPTION, $settings_v1 );
+
+		$db_update = new DB_Update();
+		$db_update->settings_update_v1_to_v2();
+
+		$settings = get_option( TRANSLATION_STATS_WP_OPTION )['settings'];
+
+		$this->assertFalse( $settings['show_warnings'] );
+		$this->assertFalse( $settings['delete_data_on_uninstall'] );
+	}
+
+
+	/**
+	 * Data provider.
+	 *
+	 * @var array
+	 */
+	public function provide_test_settings_db_check() {
+		return array(
+			'from version 0.0' => array(
+				'settings'          => $this->get_settings_v0(),
+				'installed_version' => '0.0',
+			),
+			'from version 1.0' => array(
+				'settings'          => $this->get_settings_v1(),
+				'installed_version' => '1.0',
+			),
+		);
+	}
+
+
+	/**
+	 * Test the settings database check runs all the updates since the installed version and shows a notice.
+	 *
+	 * @dataProvider provide_test_settings_db_check
+	 *
+	 * @param array  $settings            Installed settings.
+	 * @param string $installed_version   Installed settings version.
+	 */
+	public function test_settings_db_check( $settings, $installed_version ) {
+
+		update_option( TRANSLATION_STATS_WP_OPTION, $settings );
 
 		$db_update = new DB_Update();
 
@@ -116,8 +242,30 @@ class Test_DB_Update extends Translation_Stats_TestCase {
 		$db_update->settings_db_check();
 		$output = ob_get_clean();
 
-		$this->assertSame( TRANSLATION_STATS_SETTINGS_VERSION, $db_update->installed_settings_version() );
-		$this->assertStringContainsString( 'successfully updated from version <code>0.0</code> to version <code>1.0</code>', $output );
+		$updated_settings = get_option( TRANSLATION_STATS_WP_OPTION );
+
+		// Ignore the settings order.
+		ksort( $updated_settings['settings'] );
+
+		$this->assertSame(
+			array(
+				'settings' => array(
+					'delete_data_on_uninstall' => '0.0' === $installed_version,
+					'settings_version'         => '2.0',
+					'show_warnings'            => true,
+					'transients_expiration'    => DAY_IN_SECONDS,
+					'translation_language'     => 'pt_PT',
+				),
+				'plugins'  => array(
+					'translation-stats' => array(
+						'enabled' => 'true',
+						'stable'  => 'true',
+					),
+				),
+			),
+			$updated_settings
+		);
+		$this->assertStringContainsString( 'successfully updated from version <code>' . $installed_version . '</code> to version <code>2.0</code>', $output );
 	}
 
 
@@ -140,6 +288,18 @@ class Test_DB_Update extends Translation_Stats_TestCase {
 
 		// Settings with current version.
 		$this->set_settings( array( 'translation_language' => 'pt_PT' ) );
+
+		$settings = get_option( TRANSLATION_STATS_WP_OPTION );
+
+		ob_start();
+		$db_update->settings_db_check();
+		$output = ob_get_clean();
+
+		$this->assertSame( $settings, get_option( TRANSLATION_STATS_WP_OPTION ) );
+		$this->assertSame( '', $output );
+
+		// Settings with a newer version, after a plugin downgrade.
+		$this->set_settings( array( 'settings_version' => '99.0' ) );
 
 		$settings = get_option( TRANSLATION_STATS_WP_OPTION );
 

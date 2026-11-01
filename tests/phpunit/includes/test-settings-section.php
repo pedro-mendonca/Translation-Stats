@@ -25,8 +25,9 @@ class Test_Settings_Section extends Translation_Stats_TestCase {
 		$this->assertSame(
 			array(
 				'settings' => array(
-					'translation_language' => 'pt_PT',
-					'show_warnings'        => 'true',
+					'translation_language'     => 'pt_PT',
+					'show_warnings'            => true,
+					'delete_data_on_uninstall' => false,
 				),
 				'plugins'  => array(
 					'translation-stats' => array(
@@ -51,6 +52,33 @@ class Test_Settings_Section extends Translation_Stats_TestCase {
 				)
 			)
 		);
+	}
+
+
+	/**
+	 * Test sanitize the settings saves the checkboxes as booleans, also when saving the default settings.
+	 */
+	public function test_sanitize_settings_booleans() {
+
+		$section  = new Settings_Section_General();
+		$settings = new Settings();
+
+		$sanitized = $section->sanitize_settings( $settings->settings_defaults() );
+
+		$this->assertTrue( $sanitized['settings']['show_warnings'] );
+		$this->assertTrue( $sanitized['settings']['delete_data_on_uninstall'] );
+
+		$sanitized = $section->sanitize_settings(
+			array(
+				'settings' => array(
+					'show_warnings'            => '',
+					'delete_data_on_uninstall' => '<b>true</b>',
+				),
+			)
+		);
+
+		$this->assertFalse( $sanitized['settings']['show_warnings'] );
+		$this->assertTrue( $sanitized['settings']['delete_data_on_uninstall'] );
 	}
 
 

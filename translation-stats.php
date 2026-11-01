@@ -51,7 +51,7 @@ if ( ! defined( 'TRANSLATION_STATS_REQUIRED_PHP' ) ) {
 }
 
 // Set Translation Stats settings database version.
-define( 'TRANSLATION_STATS_SETTINGS_VERSION', '1.0' );
+define( 'TRANSLATION_STATS_SETTINGS_VERSION', '2.0' );
 
 // Set the WordPress option to store Translation Stats settings.
 define( 'TRANSLATION_STATS_WP_OPTION', 'tstats_settings' );

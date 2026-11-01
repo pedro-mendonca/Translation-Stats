@@ -285,7 +285,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 
 			// Sanitize settings data.
 			if ( isset( $data['settings'] ) && is_array( $data['settings'] ) ) {
-				$sanitized['settings'] = array_map( 'sanitize_text_field', $data['settings'] );
+				$sanitized['settings'] = array_map( 'sanitize_text_field', array_diff_key( $data['settings'], array_flip( Settings::BOOLEAN_SETTINGS ) ) );
+
+				// Save the checkboxes as booleans. Unchecked checkboxes aren't submitted.
+				foreach ( Settings::BOOLEAN_SETTINGS as $setting ) {
+					$sanitized['settings'][ $setting ] = ! empty( $data['settings'][ $setting ] );
+				}
 			} else {
 				$sanitized['settings'] = $default_settings['settings'];
 			}
