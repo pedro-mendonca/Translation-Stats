@@ -34,6 +34,9 @@ class Test_Settings_Section extends Translation_Stats_TestCase {
 						'enabled' => 'true',
 						'stable'  => 'true',
 					),
+					'akismet'           => array(
+						'enabled' => '',
+					),
 				),
 			),
 			$section->sanitize_settings(
@@ -46,6 +49,9 @@ class Test_Settings_Section extends Translation_Stats_TestCase {
 						'Translation-Stats' => array(
 							'enabled' => 'true',
 							'stable'  => '<b>true</b>',
+						),
+						'akismet'           => array(
+							'enabled' => array( 'true' ),
 						),
 						'invalid'           => 'true',
 					),

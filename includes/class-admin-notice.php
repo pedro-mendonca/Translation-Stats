@@ -99,7 +99,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Admin_Notice' ) ) {
 			$this->set( $args );
 
 			// Check if 'show_warnings' is true.
-			$wp_option = get_option( TRANSLATION_STATS_WP_OPTION );
+			$wp_option = Utils::get_options();
 			if ( empty( $wp_option['settings']['show_warnings'] ) && empty( $args['force_show'] ) ) {
 				return;
 			}

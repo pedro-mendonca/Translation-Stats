@@ -37,7 +37,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Field_Select_Language' ) ) {
 			$label       = $args['label'];
 			$description = $args['description'];
 			$default     = $args['default'];
-			$options     = get_option( TRANSLATION_STATS_WP_OPTION );
+			$options     = Utils::get_options();
 			$option      = empty( $options[ $args['path'] ][ $args['id'] ] ) ? '' : $options[ $args['path'] ][ $args['id'] ];
 			$value       = is_array( $options ) ? $option : $default;
 

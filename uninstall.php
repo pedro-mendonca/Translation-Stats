@@ -36,7 +36,7 @@ if ( is_multisite() ) {
 function translation_stats_uninstall() {
 	$option = get_option( 'tstats_settings' );
 	// Check if Delete Data on Uninstall is set. Saved as boolean since settings version 2.0, previously as string 'true'.
-	if ( ! empty( $option['settings']['delete_data_on_uninstall'] ) ) {
+	if ( is_array( $option ) && is_array( $option['settings'] ?? null ) && ! empty( $option['settings']['delete_data_on_uninstall'] ) ) {
 		// Delete option, set per site also in Multisite.
 		delete_option( 'tstats_settings' );
 		// Delete transients.

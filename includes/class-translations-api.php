@@ -37,6 +37,10 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 		public static function plugin_on_wporg( $plugin_file ) {
 			$update_plugins = get_site_transient( 'update_plugins' );
 
+			if ( ! is_object( $update_plugins ) ) {
+				return false;
+			}
+
 			return ( isset( $update_plugins->response[ $plugin_file ]->id ) || isset( $update_plugins->no_update[ $plugin_file ]->id ) );
 		}
 
@@ -58,7 +62,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 		public static function plugin_metadata( $plugin_file, $metadata ) {
 			$update_plugins = get_site_transient( 'update_plugins' );
 			// Check if plugin is on WordPress.org.
-			if ( ! self::plugin_on_wporg( $plugin_file ) ) {
+			if ( ! is_object( $update_plugins ) || ! self::plugin_on_wporg( $plugin_file ) ) {
 				// If plugin doesn't have 'slug' key in metadata, get it from its file path.
 				if ( 'slug' === $metadata ) {
 					return self::get_plugin_slug( $plugin_file );
@@ -153,7 +157,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 					return true;
 				}
 				$on_wporg = 200 === wp_remote_retrieve_response_code( $json );
-				set_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . $project_slug, $on_wporg, get_option( TRANSLATION_STATS_WP_OPTION )['settings']['transients_expiration'] );
+				set_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . $project_slug, $on_wporg, Utils::transients_expiration() );
 			}
 			// Cached values are strings.
 			return (bool) $on_wporg;
@@ -183,7 +187,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 					return true;
 				}
 				$on_wporg = 200 === wp_remote_retrieve_response_code( $json );
-				set_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug, $on_wporg, get_option( TRANSLATION_STATS_WP_OPTION )['settings']['transients_expiration'] );
+				set_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug, $on_wporg, Utils::transients_expiration() );
 			}
 			// Cached values are strings.
 			return (bool) $on_wporg;

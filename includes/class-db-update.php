@@ -67,7 +67,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 		 */
 		public function installed_settings_version() {
 
-			$options = get_option( TRANSLATION_STATS_WP_OPTION );
+			$options = Utils::get_options();
 
 			// Check if Translation Stats settings exist.
 			if ( empty( $options ) ) {
@@ -137,7 +137,12 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 		 */
 		public function settings_update_v0_to_v1() {
 
+			// Settings without the 'settings' and 'plugins' keys.
 			$options = get_option( TRANSLATION_STATS_WP_OPTION );
+
+			if ( ! is_array( $options ) ) {
+				return;
+			}
 
 			$settings_v0 = array(
 				'show_warnings',
@@ -178,7 +183,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 				$message = sprintf(
 					'<h3>%s</h3><pre>%s</pre>',
 					esc_html__( 'Settings', 'translation-stats' ),
-					wp_json_encode( get_option( TRANSLATION_STATS_WP_OPTION )['settings'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES )
+					wp_json_encode( $settings_v1['settings'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES )
 				);
 
 				$admin_notice = array(
@@ -195,7 +200,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 				$message = sprintf(
 					'<h3>%s</h3><pre>%s</pre>',
 					esc_html__( 'Plugins', 'translation-stats' ),
-					wp_json_encode( get_option( TRANSLATION_STATS_WP_OPTION )['plugins'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES )
+					wp_json_encode( $settings_v1['plugins'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES )
 				);
 
 				$admin_notice = array(
@@ -224,7 +229,11 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 		 */
 		public function settings_update_v1_to_v2() {
 
-			$options = get_option( TRANSLATION_STATS_WP_OPTION );
+			$options = Utils::get_options();
+
+			if ( false === $options ) {
+				return;
+			}
 
 			foreach ( Settings::BOOLEAN_SETTINGS as $setting ) {
 				$options['settings'][ $setting ] = ! empty( $options['settings'][ $setting ] );
