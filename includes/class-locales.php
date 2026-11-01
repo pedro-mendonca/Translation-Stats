@@ -41,7 +41,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Locales' ) ) {
 		 */
 		public static function &instance() {
 
-			if ( ! isset( $GLOBALS['translation_stats_locales'] ) ) {
+			if ( ! isset( $GLOBALS['translation_stats_locales'] ) || ! $GLOBALS['translation_stats_locales'] instanceof Locales ) {
 
 				$locales = new Locales();
 

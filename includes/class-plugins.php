@@ -110,7 +110,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 						return;
 					}
 
-					$options = get_option( TRANSLATION_STATS_WP_OPTION );
+					$options = Utils::get_options();
 
 					// Show Stats only if plugin is enabled in plugin settings.
 					if ( empty( $options['plugins'][ $project_slug ]['enabled'] ) ) {
@@ -321,7 +321,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 */
 		public function render_stats_placeholder( $project_slug ) {
 
-			$options = get_option( TRANSLATION_STATS_WP_OPTION );
+			$options = Utils::get_options();
 
 			?>
 			<div class="translation-stats-content-stats widget-inside translation-stats-placeholder" aria-hidden="true">
@@ -405,7 +405,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		public function plugin_widget_content_stats( $project_slug, $locale, $force_update ) {
 
 			// Get options.
-			$options = get_option( TRANSLATION_STATS_WP_OPTION );
+			$options = Utils::get_options();
 
 			// Get standard WP.org subprojects.
 			$subprojects = Translations_API::plugin_subprojects();
@@ -747,7 +747,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				} else {
 
 					$body = json_decode( wp_remote_retrieve_body( $json ) );
-					if ( empty( $body->translation_sets ) ) {
+					if ( ! is_object( $body ) || empty( $body->translation_sets ) ) {
 
 						// No translation sets found.
 						$stats = false;
@@ -766,7 +766,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 					}
 				}
 
-				set_transient( $this->plugin_subproject_stats_transient( $locale, $project_slug, $subproject_slug ), $stats, get_option( TRANSLATION_STATS_WP_OPTION )['settings']['transients_expiration'] );
+				set_transient( $this->plugin_subproject_stats_transient( $locale, $project_slug, $subproject_slug ), $stats, Utils::transients_expiration() );
 			}
 
 			return $stats;
@@ -803,7 +803,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				return;
 			}
 
-			$options = get_option( TRANSLATION_STATS_WP_OPTION );
+			$options = Utils::get_options();
 
 			foreach ( $plugins as $plugin_file => $plugin_data ) {
 
@@ -861,7 +861,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 				return $status_links;
 			}
 
-			$options = get_option( TRANSLATION_STATS_WP_OPTION );
+			$options = Utils::get_options();
 
 			// Check if Translation Stats settings exist.
 			if ( empty( $options ) ) {

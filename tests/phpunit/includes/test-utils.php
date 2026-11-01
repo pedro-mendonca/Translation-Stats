@@ -11,7 +11,7 @@ use Translation_Stats\Utils;
 /**
  * Utils test case.
  */
-class Test_Utils extends WP_UnitTestCase {
+class Test_Utils extends Translation_Stats_TestCase {
 
 	/**
 	 * Test developmente mode.
@@ -309,5 +309,40 @@ class Test_Utils extends WP_UnitTestCase {
 
 		// Assert that the result matches the expected array.
 		$this->assertEquals( $expected, $result );
+	}
+
+
+	/**
+	 * Test get the settings, or false if not found or not an array.
+	 */
+	public function test_get_options() {
+
+		delete_option( TRANSLATION_STATS_WP_OPTION );
+
+		$this->assertFalse( Utils::get_options() );
+
+		update_option( TRANSLATION_STATS_WP_OPTION, 'invalid' );
+
+		$this->assertFalse( Utils::get_options() );
+
+		$this->set_settings( array( 'translation_language' => 'pt_PT' ) );
+
+		$this->assertSame( get_option( TRANSLATION_STATS_WP_OPTION ), Utils::get_options() );
+	}
+
+
+	/**
+	 * Test get the transients expiration from the settings, or the default if not set.
+	 */
+	public function test_transients_expiration() {
+
+		delete_option( TRANSLATION_STATS_WP_OPTION );
+
+		$this->assertSame( TRANSLATION_STATS_TRANSIENTS_TRANSLATIONS_EXPIRATION, Utils::transients_expiration() );
+
+		// Saved from the settings form as string.
+		$this->set_settings( array( 'transients_expiration' => (string) HOUR_IN_SECONDS ) );
+
+		$this->assertSame( HOUR_IN_SECONDS, Utils::transients_expiration() );
 	}
 }

@@ -35,7 +35,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Field_Hidden' ) ) {
 
 			$field_id = TRANSLATION_STATS_WP_OPTION . '[' . $args['path'] . '][' . $args['id'] . ']';
 			$default  = $args['default'];
-			$options  = get_option( TRANSLATION_STATS_WP_OPTION );
+			$options  = Utils::get_options();
 			$option   = empty( $options[ $args['path'] ][ $args['id'] ] ) ? '' : $options[ $args['path'] ][ $args['id'] ];
 			$value    = is_array( $options ) ? $option : $default;
 			?>

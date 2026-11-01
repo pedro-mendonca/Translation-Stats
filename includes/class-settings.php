@@ -131,11 +131,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 		 */
 		public function settings_reset_callback() {
 			$action = 'reset_settings';
-			if ( isset( $_POST[ $action ] ) ) {
+			if ( isset( $_POST[ $action ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in check_nonce().
 				// Check nonce.
-				if ( ! isset( $_POST['translation_stats_nonce_check'] ) || ! wp_verify_nonce( sanitize_key( $_POST['translation_stats_nonce_check'] ), 'translation_stats_action' ) ) {
-					$this->nonce_fail();
-				}
+				$this->check_nonce();
 
 				// Update to default settings.
 				update_option( TRANSLATION_STATS_WP_OPTION, $this->settings_defaults() );
@@ -163,11 +161,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 		 */
 		public function transients_delete_callback() {
 			$action = 'delete_transients';
-			if ( isset( $_POST[ $action ] ) ) {
+			if ( isset( $_POST[ $action ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in check_nonce().
 				// Check nonce.
-				if ( ! isset( $_POST['translation_stats_nonce_check'] ) || ! wp_verify_nonce( sanitize_key( $_POST['translation_stats_nonce_check'] ), 'translation_stats_action' ) ) {
-					$this->nonce_fail();
-				}
+				$this->check_nonce();
 				// Delete translations stats and available languages transients.
 				// The transient 'translation_stats_plugin_available_translations' will be immediately rebuilt on Settings_Section_Plugins->plugins_list() loading.
 				$this->transients->delete_transients( TRANSLATION_STATS_TRANSIENTS_PREFIX );
@@ -180,6 +176,21 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 					'message'     => '<strong>' . esc_html__( 'Cache cleaned successfully.', 'translation-stats' ) . '</strong>',
 				);
 				new Admin_Notice( $admin_notice );
+			}
+		}
+
+
+		/**
+		 * Check the settings form nonce, or die if not valid.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @return void
+		 */
+		public function check_nonce() {
+			$nonce = isset( $_POST['translation_stats_nonce_check'] ) && is_string( $_POST['translation_stats_nonce_check'] ) ? sanitize_key( $_POST['translation_stats_nonce_check'] ) : '';
+			if ( ! wp_verify_nonce( $nonce, 'translation_stats_action' ) ) {
+				$this->nonce_fail();
 			}
 		}
 

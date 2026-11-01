@@ -19,6 +19,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 
 	/**
 	 * Class Utils.
+	 *
+	 * @phpstan-type SettingsData array{show_warnings?: bool|string, translation_language?: string, delete_data_on_uninstall?: bool|string, transients_expiration?: int|string, settings_version?: string}
+	 * @phpstan-type Options array{settings?: SettingsData, plugins?: array<string, array<string, string>>}
 	 */
 	class Utils {
 
@@ -84,6 +87,49 @@ if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 
 
 		/**
+		 * Get the Translation Stats settings.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @return Options|false   The 'settings' and 'plugins' settings, or false if not found.
+		 */
+		public static function get_options() {
+
+			$options = get_option( TRANSLATION_STATS_WP_OPTION );
+
+			if ( ! is_array( $options ) ) {
+				return false;
+			}
+
+			/**
+			 * The saved settings.
+			 *
+			 * @var Options $options
+			 */
+			return $options;
+		}
+
+
+		/**
+		 * Get the transients expiration, from the settings.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @return int   Transients expiration in seconds, or the default if not set.
+		 */
+		public static function transients_expiration() {
+
+			$options = self::get_options();
+
+			if ( ! isset( $options['settings']['transients_expiration'] ) ) {
+				return TRANSLATION_STATS_TRANSIENTS_TRANSLATIONS_EXPIRATION;
+			}
+
+			return (int) $options['settings']['transients_expiration'];
+		}
+
+
+		/**
 		 * Set the Translation Language.
 		 *
 		 * @since 0.8.0
@@ -98,13 +144,13 @@ if ( ! class_exists( __NAMESPACE__ . '\Utils' ) ) {
 			$wp_locale = get_locale();
 
 			// Get plugin settings.
-			$settings = get_option( TRANSLATION_STATS_WP_OPTION );
+			$settings = self::get_options();
 			if ( ! $settings ) {
 				return $wp_locale;
 			}
 
 			// Get Translation Language from Settings.
-			$translation_language = $settings['settings']['translation_language'];
+			$translation_language = $settings['settings']['translation_language'] ?? '';
 			if ( ! $translation_language || 'site-default' === $translation_language ) {
 				return $wp_locale;
 			}

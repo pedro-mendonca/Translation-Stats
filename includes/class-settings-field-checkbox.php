@@ -38,7 +38,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Field_Checkbox' ) ) {
 			$description = $args['description'];
 			$class       = $args['class'];
 			$default     = $args['default'];
-			$options     = get_option( TRANSLATION_STATS_WP_OPTION );
+			$options     = Utils::get_options();
 			$option      = empty( $options[ $args['path'] ][ $args['id'] ] ) ? '' : true;
 			$value       = is_array( $options ) ? $option : $default;
 			?>

@@ -285,7 +285,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 
 			// Sanitize settings data.
 			if ( isset( $data['settings'] ) && is_array( $data['settings'] ) ) {
-				$sanitized['settings'] = array_map( 'sanitize_text_field', array_diff_key( $data['settings'], array_flip( Settings::BOOLEAN_SETTINGS ) ) );
+				$sanitized['settings'] = $this->sanitize_text_fields( array_diff_key( $data['settings'], array_flip( Settings::BOOLEAN_SETTINGS ) ) );
 
 				// Save the checkboxes as booleans. Unchecked checkboxes aren't submitted.
 				foreach ( Settings::BOOLEAN_SETTINGS as $setting ) {
@@ -307,8 +307,29 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 					$plugin_slug = sanitize_key( $plugin_slug );
 
 					// Sanitize each plugin data.
-					$sanitized['plugins'][ $plugin_slug ] = array_map( 'sanitize_text_field', $plugin_data );
+					$sanitized['plugins'][ $plugin_slug ] = $this->sanitize_text_fields( $plugin_data );
 				}
+			}
+
+			return $sanitized;
+		}
+
+
+		/**
+		 * Sanitize the text fields of the form input. Values that aren't text, like arrays, are emptied.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @param array $data   Array of input data.
+		 *
+		 * @return array<string>   Array of sanitized data.
+		 */
+		private function sanitize_text_fields( $data ) {
+
+			$sanitized = array();
+
+			foreach ( $data as $key => $value ) {
+				$sanitized[ $key ] = is_scalar( $value ) ? sanitize_text_field( (string) $value ) : '';
 			}
 
 			return $sanitized;

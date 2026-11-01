@@ -88,7 +88,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Plugins' ) ) {
 		public function plugins_list() {
 
 			// Get Translation Stats general options.
-			$options = get_option( TRANSLATION_STATS_WP_OPTION );
+			$options = Utils::get_options();
 
 			// Get Translation Stats plugins settings.
 			$plugins_settings = isset( $options['plugins'] ) ? $options['plugins'] : array();

@@ -146,7 +146,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins_REST_Controller' ) ) {
 			if ( ! is_null( $locale ) ) {
 
 				ob_start();
-				$result = $this->plugins->plugin_widget_content_stats( $request['slug'], $locale, $request['force'] );
+				$result = $this->plugins->plugin_widget_content_stats( is_string( $request['slug'] ) ? $request['slug'] : '', $locale, (bool) $request['force'] );
 				$html   = (string) ob_get_clean();
 
 				if ( is_wp_error( $result ) ) {

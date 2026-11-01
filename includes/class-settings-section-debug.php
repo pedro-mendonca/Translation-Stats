@@ -163,7 +163,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 		public function debug_info__settings() {
 
 			// Get plugin settings.
-			$options = get_option( TRANSLATION_STATS_WP_OPTION );
+			$options = Utils::get_options();
 			?>
 			<h3>
 				<?php esc_html_e( 'Translation Stats', 'translation-stats' ); ?>
@@ -217,7 +217,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 						printf(
 							/* translators: %s: WordPress Locale code. */
 							esc_html__( 'Translation Stats Locale: %s', 'translation-stats' ),
-							'<code>' . esc_html( $options['settings']['translation_language'] ) . '</code>'
+							'<code>' . esc_html( $options['settings']['translation_language'] ?? '' ) . '</code>'
 						);
 						$translationstats_locale = Translations_API::locale( Utils::translation_language() );
 						?>
