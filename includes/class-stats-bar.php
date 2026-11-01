@@ -67,14 +67,10 @@ if ( ! class_exists( __NAMESPACE__ . '\Stats_Bar' ) ) {
 			// CSS class of the subproject, or of the project itself without subproject.
 			$subproject_class = '' === $subproject_slug ? 'project' : $subproject_slug;
 
-			// Percent translated.
-			$percent_translated = $subproject_exist && isset( $subproject_stats->percent_translated ) ? $subproject_stats->percent_translated : 0;
-
-			// Current count.
-			$current_count = $subproject_exist && isset( $subproject_stats->current_count ) ? $subproject_stats->current_count : 0;
-
-			// All count.
-			$all_count = $subproject_exist && isset( $subproject_stats->all_count ) ? $subproject_stats->all_count : 0;
+			// Percent translated, current count and all count.
+			$percent_translated = self::get_stat( $subproject_stats, 'percent_translated' );
+			$current_count      = self::get_stat( $subproject_stats, 'current_count' );
+			$all_count          = self::get_stat( $subproject_stats, 'all_count' );
 
 			?>
 			<div class="content__subproject <?php echo esc_attr( $subproject_class ); ?>">
@@ -85,20 +81,20 @@ if ( ! class_exists( __NAMESPACE__ . '\Stats_Bar' ) ) {
 					?>
 					<style>
 						<?php echo esc_html( $container ); ?>[data-slug="<?php echo esc_attr( $project->get_slug() ); ?>"] div.subproject.<?php echo esc_attr( $subproject_class ); ?> {
-							width: <?php echo esc_attr( $percent_translated ); ?>%;
+							width: <?php echo esc_attr( (string) $percent_translated ); ?>%;
 						}
 					</style>
 					<div class="subproject <?php echo esc_attr( 'percent' . 10 * floor( $percent_translated / 10 ) . ' ' . $subproject_class ); ?>">
 						<div class="subproject-bar">
-							<span class="subproject-bar__percentage"><?php echo esc_html( $percent_translated ); ?>%</span>
+							<span class="subproject-bar__percentage"><?php echo esc_html( (string) $percent_translated ); ?>%</span>
 							<span class="subproject-bar__name"><?php echo esc_html( $subproject ); ?></span>
 							<span class="subproject-bar__count">
 								<?php
 								printf(
 									// translators: 1: Current count. 2: All count.
 									esc_html__( '(%1$d/%2$d)', 'translation-stats' ),
-									esc_html( $current_count ),
-									esc_html( $all_count )
+									esc_html( (string) $current_count ),
+									esc_html( (string) $all_count )
 								);
 								?>
 							</span>
@@ -130,6 +126,21 @@ if ( ! class_exists( __NAMESPACE__ . '\Stats_Bar' ) ) {
 				</a>
 			</div>
 			<?php
+		}
+
+
+		/**
+		 * Get a numeric stat of the subproject stats object.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @param object|false $subproject_stats   Subproject stats object, or false if the subproject doesn't exist.
+		 * @param string       $stat               Stat name ( e.g. 'percent_translated' ).
+		 *
+		 * @return int   The stat value, or 0 if not available.
+		 */
+		private static function get_stat( $subproject_stats, $stat ) {
+			return is_object( $subproject_stats ) && isset( $subproject_stats->$stat ) && is_numeric( $subproject_stats->$stat ) ? (int) $subproject_stats->$stat : 0;
 		}
 	}
 }
