@@ -1,6 +1,6 @@
 <?php
 /**
- * Class file for the Translation Stats Plugins REST API controller.
+ * Class file for the Translation Stats projects REST API controller.
  *
  * @package Translation_Stats
  *
@@ -20,14 +20,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // @codeCoverageIgnore
 }
 
-if ( ! class_exists( __NAMESPACE__ . '\Plugins_REST_Controller' ) ) {
+if ( ! class_exists( __NAMESPACE__ . '\Projects_REST_Controller' ) ) {
 
 	/**
-	 * Class Plugins_REST_Controller.
+	 * Class Projects_REST_Controller.
 	 *
-	 * REST API controller to load the plugins translation stats widget content.
+	 * REST API controller to load the plugins and themes translation stats widget content.
 	 */
-	class Plugins_REST_Controller extends WP_REST_Controller {
+	class Projects_REST_Controller extends WP_REST_Controller {
 
 
 		/**
@@ -38,11 +38,14 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins_REST_Controller' ) ) {
 		const REST_NAMESPACE = 'translation-stats/v1';
 
 		/**
-		 * REST API base route.
+		 * Capability required to load the translation stats of each project type, to access the screen where they are shown.
 		 *
-		 * @var string
+		 * @var array<string, string>
 		 */
-		const REST_BASE = 'plugins';
+		const CAPABILITIES = array(
+			'plugins' => 'activate_plugins',
+			'themes'  => 'switch_themes',
+		);
 
 		/**
 		 * Plugins instance, to render the plugins translation stats.
@@ -51,25 +54,34 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins_REST_Controller' ) ) {
 		 */
 		protected $plugins;
 
+		/**
+		 * Themes instance, to render the themes translation stats.
+		 *
+		 * @var Themes
+		 */
+		protected $themes;
+
 
 		/**
 		 * Constructor.
 		 *
 		 * @param Plugins $plugins   Plugins instance, to render the plugins translation stats.
+		 * @param Themes  $themes    Themes instance, to render the themes translation stats.
 		 */
-		public function __construct( $plugins ) {
+		public function __construct( $plugins, $themes ) {
 
 			$this->plugins   = $plugins;
+			$this->themes    = $themes;
 			$this->namespace = self::REST_NAMESPACE;
-			$this->rest_base = self::REST_BASE;
+			$this->rest_base = '(?P<type>' . implode( '|', array_keys( self::CAPABILITIES ) ) . ')';
 		}
 
 
 		/**
-		 * Register the route to load the plugin translation stats.
+		 * Register the route to load the project translation stats.
 		 *
 		 * @since 1.4.0   Registered by Plugins::register_rest_routes().
-		 * @since 1.5.0   Moved to the REST API controller.
+		 * @since 1.5.0   Moved to the REST API controller, for plugins and themes.
 		 *
 		 * @return void
 		 */
@@ -77,15 +89,20 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins_REST_Controller' ) ) {
 
 			register_rest_route(
 				self::REST_NAMESPACE,
-				'/' . self::REST_BASE . '/(?P<slug>[a-z0-9_-]+)/stats',
+				'/' . $this->rest_base . '/(?P<slug>[a-z0-9_-]+)/stats',
 				array(
 					array(
 						'methods'             => WP_REST_Server::READABLE,
 						'callback'            => array( $this, 'get_item' ),
 						'permission_callback' => array( $this, 'get_item_permissions_check' ),
 						'args'                => array(
+							'type'  => array(
+								'description' => __( 'Project type.', 'translation-stats' ),
+								'type'        => 'string',
+								'enum'        => array_keys( self::CAPABILITIES ),
+							),
 							'slug'  => array(
-								'description' => __( 'Plugin slug.', 'translation-stats' ),
+								'description' => __( 'Project slug.', 'translation-stats' ),
 								'type'        => 'string',
 							),
 							'force' => array(
@@ -102,21 +119,23 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins_REST_Controller' ) ) {
 
 
 		/**
-		 * Check if the user can access the plugins, where the plugin translation stats are shown.
+		 * Check if the user can access the screen where the project translation stats are shown.
 		 *
 		 * @since 1.4.0   Plugins::rest_permission_check().
-		 * @since 1.5.0   Moved to the REST API controller.
+		 * @since 1.5.0   Moved to the REST API controller, with the capability of each project type.
 		 *
 		 * @param WP_REST_Request $request   The REST API request.
 		 *
-		 * @return true|WP_Error   True if the user can access the plugins, otherwise WP_Error.
+		 * @return true|WP_Error   True if the user can access the projects, otherwise WP_Error.
 		 */
-		public function get_item_permissions_check( $request ) { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable -- Required by the WP_REST_Controller method signature.
+		public function get_item_permissions_check( $request ) {
 
-			if ( ! current_user_can( 'activate_plugins' ) ) {
+			$type = $request['type'];
+
+			if ( ! is_string( $type ) || ! isset( self::CAPABILITIES[ $type ] ) || ! current_user_can( self::CAPABILITIES[ $type ] ) ) {
 				return new WP_Error(
 					'rest_forbidden',
-					__( 'Sorry, you are not allowed to load the plugins translation stats.', 'translation-stats' ),
+					__( 'Sorry, you are not allowed to load these translation stats.', 'translation-stats' ),
 					array( 'status' => rest_authorization_required_code() )
 				);
 			}
@@ -126,16 +145,16 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins_REST_Controller' ) ) {
 
 
 		/**
-		 * Load the plugin translation stats widget content.
+		 * Load the project translation stats widget content.
 		 *
 		 * @since 0.9.4
 		 * @since 1.2.0   Renamed from tstats_stats_plugin_widget_content_load() to plugin_widget_content_load().
 		 * @since 1.4.0   Use the REST API instead of Ajax, renamed to rest_plugin_widget_content().
-		 * @since 1.5.0   Moved to the REST API controller, renamed to get_item().
+		 * @since 1.5.0   Moved to the REST API controller, renamed to get_item(), for plugins and themes.
 		 *
 		 * @param WP_REST_Request $request   The REST API request.
 		 *
-		 * @return WP_REST_Response|WP_Error   Response with the plugin widget content HTML, or WP_Error if translate.WordPress.org is unavailable.
+		 * @return WP_REST_Response|WP_Error   Response with the widget content HTML, or WP_Error if translate.WordPress.org is unavailable.
 		 */
 		public function get_item( $request ) {
 
@@ -145,9 +164,16 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins_REST_Controller' ) ) {
 
 			if ( ! is_null( $locale ) ) {
 
+				$slug  = is_string( $request['slug'] ) ? $request['slug'] : '';
+				$force = (bool) $request['force'];
+
 				ob_start();
-				$result = $this->plugins->plugin_widget_content_stats( is_string( $request['slug'] ) ? $request['slug'] : '', $locale, (bool) $request['force'] );
-				$html   = (string) ob_get_clean();
+				if ( 'themes' === $request['type'] ) {
+					$result = $this->themes->theme_widget_content_stats( $slug, $locale, $force );
+				} else {
+					$result = $this->plugins->plugin_widget_content_stats( $slug, $locale, $force );
+				}
+				$html = (string) ob_get_clean();
 
 				if ( is_wp_error( $result ) ) {
 					return $result;
@@ -159,7 +185,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins_REST_Controller' ) ) {
 
 
 		/**
-		 * Get the plugin translation stats response schema.
+		 * Get the project translation stats response schema.
 		 *
 		 * @since 1.5.0
 		 *
@@ -173,11 +199,11 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins_REST_Controller' ) ) {
 
 			$this->schema = array(
 				'$schema'    => 'http://json-schema.org/draft-04/schema#',
-				'title'      => 'translation-stats-plugin-stats',
+				'title'      => 'translation-stats-project-stats',
 				'type'       => 'object',
 				'properties' => array(
 					'html' => array(
-						'description' => __( 'Plugin translation stats widget content HTML.', 'translation-stats' ),
+						'description' => __( 'Translation stats widget content HTML.', 'translation-stats' ),
 						'type'        => 'string',
 						'context'     => array( 'view' ),
 						'readonly'    => true,

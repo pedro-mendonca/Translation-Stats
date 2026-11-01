@@ -1,14 +1,14 @@
 <?php
 /**
- * Class Plugins REST API Test.
+ * Class Projects REST API Test.
  *
  * @package Translation_Stats
  */
 
 /**
- * Plugins REST API test case.
+ * Projects REST API test case, for plugins and themes.
  */
-class Test_Plugins_REST extends Translation_Stats_TestCase {
+class Test_Projects_REST extends Translation_Stats_TestCase {
 
 
 	/**
@@ -17,6 +17,14 @@ class Test_Plugins_REST extends Translation_Stats_TestCase {
 	 * @var string
 	 */
 	const ROUTE = '/translation-stats/v1/plugins/translation-stats/stats';
+
+
+	/**
+	 * The theme translation stats route.
+	 *
+	 * @var string
+	 */
+	const THEME_ROUTE = '/translation-stats/v1/themes/twentytwentyfive/stats';
 
 
 	/**
@@ -107,7 +115,7 @@ class Test_Plugins_REST extends Translation_Stats_TestCase {
 	 */
 	public function test_register_route() {
 
-		$this->assertArrayHasKey( '/translation-stats/v1/plugins/(?P<slug>[a-z0-9_-]+)/stats', rest_get_server()->get_routes() );
+		$this->assertArrayHasKey( '/translation-stats/v1/(?P<type>plugins|themes)/(?P<slug>[a-z0-9_-]+)/stats', rest_get_server()->get_routes() );
 	}
 
 
@@ -120,7 +128,7 @@ class Test_Plugins_REST extends Translation_Stats_TestCase {
 
 		$this->assertSame( 10, has_action( 'rest_api_init', array( $translation_stats, 'register_rest_routes' ) ) );
 		$this->assertFalse( has_action( 'rest_api_init', array( new Translation_Stats\Plugins(), 'register_rest_routes' ) ) );
-		$this->assertInstanceOf( WP_REST_Controller::class, new Translation_Stats\Plugins_REST_Controller( new Translation_Stats\Plugins() ) );
+		$this->assertInstanceOf( WP_REST_Controller::class, new Translation_Stats\Projects_REST_Controller( new Translation_Stats\Plugins(), new Translation_Stats\Themes() ) );
 	}
 
 
@@ -133,12 +141,12 @@ class Test_Plugins_REST extends Translation_Stats_TestCase {
 
 		$schema = $response->get_data()['schema'];
 
-		$this->assertSame( 'translation-stats-plugin-stats', $schema['title'] );
+		$this->assertSame( 'translation-stats-project-stats', $schema['title'] );
 		$this->assertSame( 'string', $schema['properties']['html']['type'] );
 		$this->assertTrue( $schema['properties']['html']['readonly'] );
 
 		// The schema is built once, and then reused.
-		$controller = new Translation_Stats\Plugins_REST_Controller( new Translation_Stats\Plugins() );
+		$controller = new Translation_Stats\Projects_REST_Controller( new Translation_Stats\Plugins(), new Translation_Stats\Themes() );
 
 		$this->assertSame( $controller->get_item_schema(), $controller->get_item_schema() );
 	}
@@ -186,13 +194,30 @@ class Test_Plugins_REST extends Translation_Stats_TestCase {
 
 
 	/**
-	 * Test the request with an invalid plugin slug doesn't match the route.
+	 * Data provider.
+	 *
+	 * @var array
 	 */
-	public function test_request_invalid_slug() {
+	public function provide_test_request_invalid_route() {
+		return array(
+			'invalid slug' => array( '/translation-stats/v1/plugins/Translation%20Stats/stats' ),
+			'invalid type' => array( '/translation-stats/v1/core/translation-stats/stats' ),
+		);
+	}
+
+
+	/**
+	 * Test the request with an invalid project type or slug doesn't match the route.
+	 *
+	 * @dataProvider provide_test_request_invalid_route
+	 *
+	 * @param string $route   The route to request.
+	 */
+	public function test_request_invalid_route( $route ) {
 
 		$this->login( 'administrator' );
 
-		$response = $this->request( '/translation-stats/v1/plugins/Translation%20Stats/stats' );
+		$response = $this->request( $route );
 
 		$this->assertSame( 404, $response->get_status() );
 		$this->assertSame( array(), $this->requested_urls );
@@ -272,5 +297,77 @@ class Test_Plugins_REST extends Translation_Stats_TestCase {
 
 		$this->assertContains( 'wp-api-fetch', wp_scripts()->registered['translation-stats-plugins']->deps );
 		$this->assertStringNotContainsString( 'nonce', (string) wp_scripts()->get_data( 'translation-stats-plugins', 'data' ) );
+	}
+
+
+	/**
+	 * Data provider.
+	 *
+	 * @var array
+	 */
+	public function provide_test_theme_request_denied() {
+		return array(
+			'logged out'                 => array(
+				'role'   => null,
+				'status' => 401,
+			),
+			'user without themes access' => array(
+				'role'   => 'editor',
+				'status' => 403,
+			),
+		);
+	}
+
+
+	/**
+	 * Test the theme request is denied without permission to switch themes, before requesting the API.
+	 *
+	 * @dataProvider provide_test_theme_request_denied
+	 *
+	 * @param string|null $role     User role, or null if logged out.
+	 * @param int         $status   Expected response status.
+	 */
+	public function test_theme_request_denied( $role, $status ) {
+
+		if ( null !== $role ) {
+			$this->login( $role );
+		}
+
+		$response = $this->request( self::THEME_ROUTE );
+
+		$this->assertSame( $status, $response->get_status() );
+		$this->assertSame( array(), $this->requested_urls );
+	}
+
+
+	/**
+	 * Test the theme translation stats are returned with permission, from the theme project.
+	 */
+	public function test_theme_request_allowed() {
+
+		$this->login( 'administrator' );
+
+		$response = $this->request( self::THEME_ROUTE );
+
+		$this->assertSame( 200, $response->get_status() );
+		$this->assertContains( 'https://translate.wordpress.org/api/projects/wp-themes/twentytwentyfive', $this->requested_urls );
+		$this->assertStringContainsString( 'data-slug="twentytwentyfive"', $response->get_data()['html'] );
+		$this->assertStringContainsString( '95%', $response->get_data()['html'] );
+	}
+
+
+	/**
+	 * Test the theme request returns an error when translate.WordPress.org is unavailable.
+	 */
+	public function test_theme_request_api_unavailable() {
+
+		$this->login( 'administrator' );
+
+		$this->mock_translate_api( 503 );
+
+		$response = $this->request( self::THEME_ROUTE );
+
+		$this->assertSame( 503, $response->get_status() );
+		$this->assertSame( 'translation_stats_api_unavailable', $response->get_data()['code'] );
 	}
 }

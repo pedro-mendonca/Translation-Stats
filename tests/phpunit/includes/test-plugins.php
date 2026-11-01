@@ -123,6 +123,8 @@ class Test_Plugins extends Translation_Stats_TestCase {
 		$this->assertStringContainsString( 'translation-stats-cached', $html );
 		$this->assertStringContainsString( 'translation-stats-content-stats', $html );
 		$this->assertStringContainsString( '95%', $html );
+		$this->assertStringContainsString( 'tr[data-slug="translation-stats"] div.subproject.stable {', $html );
+		$this->assertStringContainsString( '<div class="content__subproject stable">', $html );
 		$this->assertSame( array(), $this->requested_urls );
 
 		// The status notice is below the stats, to not move them when shown.
