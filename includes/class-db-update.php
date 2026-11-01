@@ -49,7 +49,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 				return;
 			}
 
-			if ( TRANSLATION_STATS_SETTINGS_VERSION !== $installed_version ) {
+			if ( version_compare( $installed_version, TRANSLATION_STATS_SETTINGS_VERSION, '<' ) ) {
 
 				// Update settings data version.
 				$this->update_settings_version( $installed_version );
@@ -87,6 +87,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 		 * Update settings data version.
 		 *
 		 * @since 1.0.0
+		 * @since 1.5.0   Run all the updates since the installed version.
 		 *
 		 * @param string $installed_version   Currently installed settings data version.
 		 *
@@ -94,9 +95,15 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 		 */
 		public function update_settings_version( $installed_version ) {
 
-			if ( '0.0' === $installed_version ) {
+			if ( version_compare( $installed_version, '1.0', '<' ) ) {
 
 				$this->settings_update_v0_to_v1();
+
+			}
+
+			if ( version_compare( $installed_version, '2.0', '<' ) ) {
+
+				$this->settings_update_v1_to_v2();
 
 			}
 
@@ -202,6 +209,30 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 				);
 				new Admin_Notice( $admin_notice );
 			}
+		}
+
+
+		/**
+		 * Update settings data from version 1.0 to version 2.0.
+		 *
+		 * Saves the checkboxes settings as booleans, instead of the string 'true' from the settings form.
+		 * Unchecked checkboxes weren't saved, so missing settings are unchecked.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @return void
+		 */
+		public function settings_update_v1_to_v2() {
+
+			$options = get_option( TRANSLATION_STATS_WP_OPTION );
+
+			foreach ( Settings::BOOLEAN_SETTINGS as $setting ) {
+				$options['settings'][ $setting ] = ! empty( $options['settings'][ $setting ] );
+			}
+
+			$options['settings']['settings_version'] = '2.0';
+
+			update_option( TRANSLATION_STATS_WP_OPTION, $options );
 		}
 	}
 }
