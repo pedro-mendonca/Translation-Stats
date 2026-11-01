@@ -118,7 +118,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 					}
 
 					$plugin_on_wporg             = Translations_API::plugin_on_wporg( $plugin_file );
-					$plugin_translation_on_wporg = Translations_API::plugin_project_on_translate_wporg( $project_slug );
+					$plugin_translation_on_wporg = ( new Plugin_Project( $project_slug ) )->on_translate_wporg();
 
 					// Check if plugin is on WordPress.org.
 					if ( ! $plugin_on_wporg ) {
@@ -273,7 +273,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 */
 		public function plugin_widget_content( $project_slug = '', $locale = null ) {
 
-			$cached = '' !== $project_slug && ! is_null( $locale ) && $this->plugin_stats_cached( $project_slug, $locale );
+			$cached = '' !== $project_slug && ! is_null( $locale ) && ( new Plugin_Project( $project_slug ) )->stats_cached( $locale );
 
 			// The status notice is hidden, to show errors. The stats without cache are loaded with the REST API.
 			$additional_classes = array(
@@ -351,42 +351,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		}
 
 
-		/**
-		 * Check if the stats of all the plugin subprojects are cached.
-		 *
-		 * @since 1.4.0
-		 *
-		 * @param string $project_slug   Plugin Slug.
-		 * @param Locale $locale         Locale object.
-		 *
-		 * @return bool   True if all the subprojects stats are cached.
-		 */
-		public function plugin_stats_cached( $project_slug, $locale ) {
-
-			foreach ( Translations_API::plugin_subprojects() as $subproject ) {
-				if ( false === get_transient( $this->plugin_subproject_stats_transient( $locale, $project_slug, $subproject['slug'] ) ) ) {
-					return false;
-				}
-			}
-
-			return true;
-		}
-
-
-		/**
-		 * Get the transient name of the plugin subproject stats.
-		 *
-		 * @since 1.4.0
-		 *
-		 * @param Locale $locale            Locale object.
-		 * @param string $project_slug      Plugin Slug.
-		 * @param string $subproject_slug   Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).
-		 *
-		 * @return string   Transient name.
-		 */
-		public function plugin_subproject_stats_transient( $locale, $project_slug, $subproject_slug ) {
-			return TRANSLATION_STATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug . '_' . $locale->wp_locale;
-		}
 
 
 		/**
@@ -407,28 +371,20 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			// Get options.
 			$options = Utils::get_options();
 
-			// Get standard WP.org subprojects.
-			$subprojects = Translations_API::plugin_subprojects();
-
-			// Define project translation stats.
-			$project_stats = array();
+			$project = new Plugin_Project( $project_slug );
 
 			// Get all the subprojects stats before rendering, to not render partial stats.
-			foreach ( $subprojects as $subproject ) {
+			$project_stats = $project->stats( $locale, $force_update );
 
-				// Get plugin subproject translation stats.
-				$project_stats[ $subproject['slug'] ] = $this->plugin_subproject_stats( $locale, $project_slug, $subproject['slug'], $force_update );
-
-				if ( is_wp_error( $project_stats[ $subproject['slug'] ] ) ) {
-					return $project_stats[ $subproject['slug'] ];
-				}
+			if ( is_wp_error( $project_stats ) ) {
+				return $project_stats;
 			}
 
 			?>
 			<div class="translation-stats-content-stats widget-inside">
 				<?php
 
-				foreach ( $subprojects as $subproject ) {
+				foreach ( $project->get_subprojects() as $subproject ) {
 
 					// Show bar only if subproject is enabled on its settings.
 					if ( isset( $options['plugins'][ $project_slug ][ $subproject['slug'] ] ) ) {
@@ -489,7 +445,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			$subproject_exist = is_object( $subproject_stats ) ? true : false;
 
 			$class = $subproject_exist ? 'enabled' : 'disabled';
-			$href  = $subproject_exist ? 'href="' . esc_url( Translations_API::translate_url( 'plugins', false ) . $project_slug . '/' . $subproject_slug . '/' . $locale->locale_slug ) . '"' : '';
+			$href  = $subproject_exist ? 'href="' . esc_url( ( new Plugin_Project( $project_slug ) )->translate_url( $subproject_slug, $locale ) ) . '"' : '';
 
 			// Percent translated.
 			$percent_translated = $subproject_exist && isset( $subproject_stats->percent_translated ) ? $subproject_stats->percent_translated : 0;
@@ -604,7 +560,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 						$language_packs_threshold,
 						sprintf(
 							'<a href="%1$s" target="_blank">%2$s</a>',
-							esc_url( Translations_API::translate_url( 'plugins', false ) . $project_slug . '/stable/' . $locale->locale_slug ),
+							esc_url( ( new Plugin_Project( $project_slug ) )->translate_url( 'stable', $locale ) ),
 							esc_html_x( 'Stable (latest release)', 'Subproject name', 'translation-stats' )
 						),
 						$project_stats['stable']->percent_translated
@@ -626,7 +582,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 						$language_packs_threshold,
 						sprintf(
 							'<a href="%1$s" target="_blank">%2$s</a>',
-							esc_url( Translations_API::translate_url( 'plugins', false ) . $project_slug . '/dev/' . $locale->locale_slug ),
+							esc_url( ( new Plugin_Project( $project_slug ) )->translate_url( 'dev', $locale ) ),
 							esc_html_x( 'Development (trunk)', 'Subproject name', 'translation-stats' )
 						),
 						$project_stats['dev']->percent_translated
@@ -698,79 +654,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			<?php
 		}
 
-
-		/**
-		 * Render plugin subproject stats bar.
-		 *
-		 * @since 0.8.0
-		 * @since 1.1.0   Use Locale object.
-		 * @since 1.2.0   Renamed from tstats_plugin_subproject_stats() to plugin_subproject_stats().
-		 * @since 1.4.0   Return WP_Error if translate.WordPress.org is unavailable, without caching it.
-		 *
-		 * @param Locale $locale            Locale object.
-		 * @param string $project_slug      Plugin Slug.
-		 * @param string $subproject_slug   Translation subproject Slug ( 'dev', 'dev-readme', 'stable', 'stable-readme' ).
-		 * @param bool   $force_update      True: Force get new stats. False: Use transients.
-		 *
-		 * @return object|false|WP_Error    Project stats if exist, 'false' if not, or WP_Error if translate.WordPress.org is unavailable.
-		 */
-		public function plugin_subproject_stats( $locale, $project_slug, $subproject_slug, $force_update ) {
-
-			// Check for force update setting.
-			if ( true === $force_update ) {
-				$stats = false;
-			} else {
-				// Get subproject transients.
-				$stats = get_transient( $this->plugin_subproject_stats_transient( $locale, $project_slug, $subproject_slug ) );
-			}
-
-			if ( false === $stats ) {
-
-				$json = Translations_API::translations_api_get_plugin( $project_slug . '/' . $subproject_slug );
-
-				if ( Translations_API::is_api_unavailable( $json ) ) {
-
-					// Don't cache, to get the stats again on the next request.
-					return new WP_Error(
-						'translation_stats_api_unavailable',
-						__( 'The translation stats couldn\'t be loaded from translate.wordpress.org. Please try again later.', 'translation-stats' ),
-						array( 'status' => 503 )
-					);
-
-				}
-
-				if ( wp_remote_retrieve_response_code( $json ) !== 200 ) {
-
-					// Subproject not found (Error 404) - Plugin is not properly prepared for localization.
-					$stats = false;
-
-				} else {
-
-					$body = json_decode( wp_remote_retrieve_body( $json ) );
-					if ( ! is_object( $body ) || empty( $body->translation_sets ) ) {
-
-						// No translation sets found.
-						$stats = false;
-
-					} else {
-
-						foreach ( $body->translation_sets as $translation_set ) {
-
-							// Check for exact match of locale/variant (translation set variant/slug).
-							if ( $translation_set->locale . '/' . $translation_set->slug === $locale->locale_slug ) {
-								// Set transient value.
-								$stats = $translation_set;
-								continue;
-							}
-						}
-					}
-				}
-
-				set_transient( $this->plugin_subproject_stats_transient( $locale, $project_slug, $subproject_slug ), $stats, Utils::transients_expiration() );
-			}
-
-			return $stats;
-		}
 
 
 		/**

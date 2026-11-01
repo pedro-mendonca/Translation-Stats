@@ -5,8 +5,7 @@
  * @package Translation_Stats
  */
 
-use Translation_Stats\GP_Locale;
-use Translation_Stats\Locale;
+use Translation_Stats\Plugin_Project;
 use Translation_Stats\Plugins;
 
 
@@ -14,53 +13,6 @@ use Translation_Stats\Plugins;
  * Plugins test case.
  */
 class Test_Plugins extends Translation_Stats_TestCase {
-
-
-	/**
-	 * Get a Locale object.
-	 *
-	 * @param string      $wp_locale   WordPress Locale ( e.g. 'pt_PT' ).
-	 * @param string      $slug        Locale slug ( e.g. 'pt' or 'pt/ao90' ).
-	 * @param string|null $root_slug   Root Locale slug, for variants ( e.g. 'pt' ).
-	 *
-	 * @return Locale  Locale object.
-	 */
-	private function get_locale( $wp_locale, $slug, $root_slug = null ) {
-
-		$gp_locale = new GP_Locale();
-
-		$gp_locale->wp_locale = $wp_locale;
-		$gp_locale->slug      = $slug;
-
-		if ( null !== $root_slug ) {
-			$gp_locale->root_slug = $root_slug;
-		}
-
-		return new Locale( $gp_locale );
-	}
-
-
-	/**
-	 * Get a translate.WordPress.org API subproject response body.
-	 *
-	 * @return array  Response body with translation sets.
-	 */
-	private function get_subproject_body() {
-		return array(
-			'translation_sets' => array(
-				array(
-					'locale'             => 'pt',
-					'slug'               => 'default',
-					'percent_translated' => 95,
-				),
-				array(
-					'locale'             => 'pt',
-					'slug'               => 'ao90',
-					'percent_translated' => 80,
-				),
-			),
-		);
-	}
 
 
 	/**
@@ -99,166 +51,11 @@ class Test_Plugins extends Translation_Stats_TestCase {
 	}
 
 
-	/**
-	 * Data provider.
-	 *
-	 * @var array
-	 */
-	public function provide_test_plugin_subproject_stats() {
-		return array(
-			'root locale'          => array(
-				'wp_locale'       => 'pt_PT',
-				'slug'            => 'pt',
-				'root_slug'       => null,
-				'expected_result' => 95,
-			),
-			'variant locale'       => array(
-				'wp_locale'       => 'pt_PT_ao90',
-				'slug'            => 'pt/ao90',
-				'root_slug'       => 'pt',
-				'expected_result' => 80,
-			),
-			'locale without stats' => array(
-				'wp_locale'       => 'pt_BR',
-				'slug'            => 'pt-br',
-				'root_slug'       => null,
-				'expected_result' => false,
-			),
-		);
-	}
 
 
-	/**
-	 * Test get the subproject stats for the Locale translation set.
-	 *
-	 * @dataProvider provide_test_plugin_subproject_stats
-	 *
-	 * @param string      $wp_locale         WordPress Locale.
-	 * @param string      $slug              Locale slug.
-	 * @param string|null $root_slug         Root Locale slug, for variants.
-	 * @param int|false   $expected_result   Expected translated percentage, or false if no stats.
-	 */
-	public function test_plugin_subproject_stats( $wp_locale, $slug, $root_slug, $expected_result ) {
-
-		$this->mock_translate_api( 200, $this->get_subproject_body() );
-
-		$plugins = new Plugins();
-
-		$stats = $plugins->plugin_subproject_stats( $this->get_locale( $wp_locale, $slug, $root_slug ), 'translation-stats', 'stable', false );
-
-		$this->assertSame( array( 'https://translate.wordpress.org/api/projects/wp-plugins/translation-stats/stable' ), $this->requested_urls );
-
-		if ( false === $expected_result ) {
-			$this->assertFalse( $stats );
-		} else {
-			$this->assertSame( $expected_result, $stats->percent_translated );
-		}
-	}
 
 
-	/**
-	 * Data provider.
-	 *
-	 * @var array
-	 */
-	public function provide_test_plugin_subproject_stats_not_found() {
-		return array(
-			'no translation sets' => array(
-				'response' => 200,
-				'body'     => array( 'translation_sets' => array() ),
-			),
-			'not found'           => array(
-				'response' => 404,
-				'body'     => '',
-			),
-		);
-	}
 
-
-	/**
-	 * Test get the subproject stats when there are no stats for the subproject.
-	 *
-	 * @dataProvider provide_test_plugin_subproject_stats_not_found
-	 *
-	 * @param int|WP_Error $response   The mocked API response.
-	 * @param mixed        $body       The mocked API response body.
-	 */
-	public function test_plugin_subproject_stats_not_found( $response, $body ) {
-
-		$this->mock_translate_api( $response, $body );
-
-		$plugins = new Plugins();
-
-		$this->assertFalse( $plugins->plugin_subproject_stats( $this->get_locale( 'pt_PT', 'pt' ), 'translation-stats', 'stable', false ) );
-	}
-
-
-	/**
-	 * Data provider.
-	 *
-	 * @var array
-	 */
-	public function provide_test_plugin_subproject_stats_api_unavailable() {
-		return array(
-			'rate limited' => array(
-				'response' => 429,
-			),
-			'server error' => array(
-				'response' => 503,
-			),
-			'error'        => array(
-				'response' => new WP_Error( 'http_request_failed', 'Connection timed out.' ),
-			),
-		);
-	}
-
-
-	/**
-	 * Test get the subproject stats when translate.WordPress.org is unavailable returns an error, which isn't cached.
-	 *
-	 * @dataProvider provide_test_plugin_subproject_stats_api_unavailable
-	 *
-	 * @param int|WP_Error $response   The mocked API response.
-	 */
-	public function test_plugin_subproject_stats_api_unavailable( $response ) {
-
-		$this->mock_translate_api( $response );
-
-		$plugins = new Plugins();
-
-		$stats = $plugins->plugin_subproject_stats( $this->get_locale( 'pt_PT', 'pt' ), 'translation-stats', 'stable', false );
-
-		$this->assertWPError( $stats );
-		$this->assertSame( 503, $stats->get_error_data()['status'] );
-		$this->assertFalse( get_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . 'translation-stats_stable_pt_PT' ) );
-	}
-
-
-	/**
-	 * Test the subproject stats are cached in a transient, unless forcing the update.
-	 */
-	public function test_plugin_subproject_stats_cache() {
-
-		$this->mock_translate_api( 200, $this->get_subproject_body() );
-
-		$plugins = new Plugins();
-		$locale  = $this->get_locale( 'pt_PT', 'pt' );
-
-		$plugins->plugin_subproject_stats( $locale, 'translation-stats', 'stable', false );
-
-		$this->assertSame( 95, get_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . 'translation-stats_stable_pt_PT' )->percent_translated );
-
-		// The second request uses the transient.
-		$stats = $plugins->plugin_subproject_stats( $locale, 'translation-stats', 'stable', false );
-
-		$this->assertSame( 95, $stats->percent_translated );
-		$this->assertCount( 1, $this->requested_urls );
-
-		// Forcing the update ignores the transient.
-		$plugins->plugin_subproject_stats( $locale, 'translation-stats', 'stable', true );
-
-		$this->assertCount( 2, $this->requested_urls );
-	}
 
 
 	/**
@@ -301,10 +98,10 @@ class Test_Plugins extends Translation_Stats_TestCase {
 
 		$this->mock_translate_api( 200, $this->get_subproject_body() );
 
-		$plugins = new Plugins();
+		$project = new Plugin_Project( 'translation-stats' );
 
 		foreach ( $subprojects as $subproject ) {
-			$plugins->plugin_subproject_stats( $this->get_locale( 'pt_PT', 'pt' ), 'translation-stats', $subproject, false );
+			$project->subproject_stats( $this->get_locale( 'pt_PT', 'pt' ), $subproject, false );
 		}
 
 		// Reset the requests, to check the requests made while rendering.

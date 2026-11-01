@@ -90,4 +90,51 @@ trait Translation_Stats_Test_Helpers {
 			3
 		);
 	}
+
+
+	/**
+	 * Get a Locale object.
+	 *
+	 * @param string      $wp_locale   WordPress Locale ( e.g. 'pt_PT' ).
+	 * @param string      $slug        Locale slug ( e.g. 'pt' or 'pt/ao90' ).
+	 * @param string|null $root_slug   Root Locale slug, for variants ( e.g. 'pt' ).
+	 *
+	 * @return Translation_Stats\Locale  Locale object.
+	 */
+	protected function get_locale( $wp_locale, $slug, $root_slug = null ) {
+
+		$gp_locale = new Translation_Stats\GP_Locale();
+
+		$gp_locale->wp_locale = $wp_locale;
+		$gp_locale->slug      = $slug;
+
+		if ( null !== $root_slug ) {
+			$gp_locale->root_slug = $root_slug;
+		}
+
+		return new Translation_Stats\Locale( $gp_locale );
+	}
+
+
+	/**
+	 * Get a translate.WordPress.org API project response body.
+	 *
+	 * @return array  Response body with translation sets.
+	 */
+	protected function get_subproject_body() {
+		return array(
+			'translation_sets' => array(
+				array(
+					'locale'             => 'pt',
+					'slug'               => 'default',
+					'percent_translated' => 95,
+				),
+				array(
+					'locale'             => 'pt',
+					'slug'               => 'ao90',
+					'percent_translated' => 80,
+				),
+			),
+		);
+	}
 }
