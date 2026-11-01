@@ -10,9 +10,6 @@
 namespace Translation_Stats;
 
 use WP_Error;
-use WP_REST_Request;
-use WP_REST_Response;
-use WP_REST_Server;
 
 // Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
@@ -46,9 +43,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 
 			// Add Translation Stats plugin widget content.
 			add_action( 'translation_stats_plugin_widget_content', array( $this, 'plugin_widget_content' ), 10, 2 );
-
-			// Register the REST API route to load the plugin subprojects stats.
-			add_action( 'rest_api_init', array( $this, 'register_rest_routes' ) );
 
 			// Filter plugins list to show only Translation Stats enabled plugins.
 			add_action( 'pre_current_active_plugins', array( $this, 'plugins_filter_by_translation_stats' ) );
@@ -392,82 +386,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 */
 		public function plugin_subproject_stats_transient( $locale, $project_slug, $subproject_slug ) {
 			return TRANSLATION_STATS_TRANSIENTS_PREFIX . $project_slug . '_' . $subproject_slug . '_' . $locale->wp_locale;
-		}
-
-
-		/**
-		 * Register the REST API route to load the plugin widget content.
-		 *
-		 * @since 1.4.0
-		 *
-		 * @return void
-		 */
-		public function register_rest_routes() {
-
-			register_rest_route(
-				'translation-stats/v1',
-				'/plugins/(?P<slug>[a-z0-9_-]+)/stats',
-				array(
-					'methods'             => WP_REST_Server::READABLE,
-					'callback'            => array( $this, 'rest_plugin_widget_content' ),
-					'permission_callback' => array( $this, 'rest_permission_check' ),
-					'args'                => array(
-						'slug'  => array(
-							'description' => __( 'Plugin slug.', 'translation-stats' ),
-							'type'        => 'string',
-						),
-						'force' => array(
-							'description' => __( 'Force getting new stats instead of the cached ones.', 'translation-stats' ),
-							'type'        => 'boolean',
-							'default'     => false,
-						),
-					),
-				)
-			);
-		}
-
-
-		/**
-		 * Check if the user can access the plugins, where the plugin widget is shown.
-		 *
-		 * @since 1.4.0
-		 *
-		 * @return bool   True if the user can access the plugins.
-		 */
-		public function rest_permission_check() {
-			return current_user_can( 'activate_plugins' );
-		}
-
-
-		/**
-		 * Load plugin widget content with the REST API.
-		 *
-		 * @since 0.9.4
-		 * @since 1.2.0   Renamed from tstats_stats_plugin_widget_content_load() to plugin_widget_content_load().
-		 * @since 1.4.0   Use the REST API instead of Ajax, renamed to rest_plugin_widget_content().
-		 *
-		 * @param WP_REST_Request $request   The REST API request.
-		 *
-		 * @return WP_REST_Response|WP_Error   Response with the plugin widget content HTML, or WP_Error if translate.WordPress.org is unavailable.
-		 */
-		public function rest_plugin_widget_content( $request ) {
-
-			$html = '';
-
-			$locale = Translations_API::locale( Utils::translation_language() );
-
-			if ( ! is_null( $locale ) ) {
-
-				ob_start();
-				$result = $this->plugin_widget_content_stats( $request['slug'], $locale, $request['force'] );
-				$html   = (string) ob_get_clean();
-
-				if ( is_wp_error( $result ) ) {
-					return $result;
-				}
-			}
-
-			return rest_ensure_response( array( 'html' => $html ) );
 		}
 
 

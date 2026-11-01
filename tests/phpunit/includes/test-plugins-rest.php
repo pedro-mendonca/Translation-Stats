@@ -112,6 +112,34 @@ class Test_Plugins_REST extends Translation_Stats_TestCase {
 
 
 	/**
+	 * Test the route is registered by the REST controller, and the plugins don't register it.
+	 */
+	public function test_register_route_controller() {
+
+		$translation_stats = new Translation_Stats\Translation_Stats();
+
+		$this->assertSame( 10, has_action( 'rest_api_init', array( $translation_stats, 'register_rest_routes' ) ) );
+		$this->assertFalse( has_action( 'rest_api_init', array( new Translation_Stats\Plugins(), 'register_rest_routes' ) ) );
+		$this->assertInstanceOf( WP_REST_Controller::class, new Translation_Stats\Plugins_REST_Controller( new Translation_Stats\Plugins() ) );
+	}
+
+
+	/**
+	 * Test the route schema describes the response.
+	 */
+	public function test_route_schema() {
+
+		$response = rest_do_request( new WP_REST_Request( 'OPTIONS', self::ROUTE ) );
+
+		$schema = $response->get_data()['schema'];
+
+		$this->assertSame( 'translation-stats-plugin-stats', $schema['title'] );
+		$this->assertSame( 'string', $schema['properties']['html']['type'] );
+		$this->assertTrue( $schema['properties']['html']['readonly'] );
+	}
+
+
+	/**
 	 * Data provider.
 	 *
 	 * @var array
