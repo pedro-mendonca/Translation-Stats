@@ -35,6 +35,8 @@ function addSettingsPage( plugins = [ 'first', 'second' ] ) {
 			<a href="#settings" class="nav-tab">Settings</a>
 		</div>
 		<div class="tabs-content"><form>
+			<input type="hidden" name="_wp_http_referer" value="/wp-admin/options-general.php?page=translation-stats" />
+			<input type="hidden" name="_wp_http_referer" value="/wp-admin/options-general.php?page=translation-stats" />
 			<div id="tab-plugins" class="tab-content">
 				<table id="tstats-table-plugins" class="tstats-plugin-list-table">
 					<thead><tr>
@@ -141,13 +143,44 @@ describe( 'tabs', () => {
 	} );
 } );
 
+describe( 'form referer', () => {
+	/**
+	 * Get the settings form referers.
+	 *
+	 * @return {string[]} Referers of the settings sections.
+	 */
+	function referers() {
+		return jQuery( 'input[name="_wp_http_referer"]' ).map( ( index, input ) => input.value ).get();
+	}
+
+	it( 'returns to the active tab after saving', () => {
+		addSettingsPage();
+		window.location.hash = '#settings';
+
+		tstatsOnLoad();
+
+		expect( referers() ).toEqual( Array( 2 ).fill( '/wp-admin/options-general.php?page=translation-stats#settings' ) );
+	} );
+
+	it( 'returns to the clicked tab after saving', () => {
+		addSettingsPage();
+		window.location.hash = '#settings';
+		initSettings();
+
+		jQuery( 'a[href="#plugins"]' ).trigger( 'click' );
+
+		expect( referers() ).toEqual( Array( 2 ).fill( '/wp-admin/options-general.php?page=translation-stats#plugins' ) );
+	} );
+} );
+
 describe( 'plugins table', () => {
 	it( 'sorts and filters the plugins table', () => {
 		addSettingsPage();
 
 		initSettings();
 
-		expect( jQuery.fn.tablesorter ).toHaveBeenCalledTimes( 1 );
+		// The plugins and themes tables.
+		expect( jQuery.fn.tablesorter ).toHaveBeenCalledTimes( 2 );
 		expect( jQuery.fn.tablesorter.mock.contexts[ 0 ].attr( 'id' ) ).toBe( 'tstats-table-plugins' );
 		expect( jQuery.fn.tablesorter ).toHaveBeenCalledWith( expect.objectContaining( {
 			sortList: [ [ 1, 0 ] ],
@@ -242,3 +275,90 @@ describe( 'plugins table', () => {
 		expect( headerCheckbox( 'subprojects_dev' ) ).toEqual( { checked: false, indeterminate: 'false' } );
 	} );
 } );
+
+/**
+ * Add the themes table to the settings page.
+ *
+ * @param {Object} themes Slugs of the themes on WordPress.org, with their selected status.
+ */
+function addThemesTable( themes ) {
+	const rows = Object.keys( themes ).map( ( theme ) =>
+		`<tr class="${ themes[ theme ] ? 'active' : 'inactive' }" data-theme="${ theme }">
+			<th><input id="themes_${ theme }" class="checkbox-theme" type="checkbox" value="true" ${ themes[ theme ] ? 'checked' : '' } /></th>
+		</tr>`,
+	).join( '' );
+
+	jQuery( '.tabs-content form' ).append( `<div id="tab-themes" class="tab-content">
+		<table id="tstats-table-themes" class="tstats-theme-list-table">
+			<thead><tr><td><input class="all_themes" id="all_themes" type="checkbox" value="true" data-indeterminate="false" /></td></tr></thead>
+			<tbody>
+				${ rows }
+				<tr class="disabled" data-theme="disabled"><th></th></tr>
+			</tbody>
+		</table>
+	</div>` );
+}
+
+/**
+ * Get the selected themes.
+ *
+ * @return {string[]} Slugs of the selected themes.
+ */
+function selectedThemes() {
+	return jQuery( '#tstats-table-themes input.checkbox-theme:checked' ).closest( 'tr' ).map( ( index, row ) => row.dataset.theme ).get();
+}
+
+describe( 'themes table', () => {
+	it( 'sorts and filters the themes table', () => {
+		addSettingsPage();
+		addThemesTable( { first: false } );
+
+		initSettings();
+
+		const table = jQuery.fn.tablesorter.mock.contexts.find( ( context ) => 'tstats-table-themes' === context.attr( 'id' ) );
+		const call = jQuery.fn.tablesorter.mock.contexts.indexOf( table );
+
+		expect( table ).toBeDefined();
+		expect( jQuery.fn.tablesorter.mock.calls[ call ][ 0 ] ).toEqual( expect.objectContaining( {
+			sortList: [ [ 1, 0 ] ],
+			widgetOptions: expect.objectContaining( { filter_external: '#themes-search-input', filter_reset: '#themes-search-reset' } ),
+		} ) );
+	} );
+
+	it( 'selects a theme, and updates the row and the header', () => {
+		addSettingsPage();
+		addThemesTable( { first: false, second: false } );
+		initSettings();
+
+		jQuery( '#themes_first' ).trigger( 'click' );
+
+		expect( selectedThemes() ).toEqual( [ 'first' ] );
+		expect( jQuery( 'tr[data-theme="first"]' ).hasClass( 'active' ) ).toBe( true );
+		expect( headerCheckbox( 'all_themes' ) ).toEqual( { checked: true, indeterminate: 'true' } );
+
+		jQuery( '#themes_first' ).trigger( 'click' );
+
+		expect( selectedThemes() ).toEqual( [] );
+		expect( jQuery( 'tr[data-theme="first"]' ).hasClass( 'inactive' ) ).toBe( true );
+		expect( headerCheckbox( 'all_themes' ) ).toEqual( { checked: false, indeterminate: 'false' } );
+	} );
+
+	it( 'selects all the themes, and unselects them if all are selected', () => {
+		addSettingsPage();
+		addThemesTable( { first: true, second: false } );
+		initSettings();
+
+		jQuery( '#all_themes' ).trigger( 'click' );
+
+		expect( selectedThemes() ).toEqual( [ 'first', 'second' ] );
+		expect( jQuery( 'tr[data-theme="second"]' ).hasClass( 'active' ) ).toBe( true );
+		expect( jQuery( 'tr[data-theme="disabled"]' ).hasClass( 'active' ) ).toBe( false );
+		expect( headerCheckbox( 'all_themes' ) ).toEqual( { checked: true, indeterminate: 'false' } );
+
+		jQuery( '#all_themes' ).trigger( 'click' );
+
+		expect( selectedThemes() ).toEqual( [] );
+		expect( headerCheckbox( 'all_themes' ) ).toEqual( { checked: false, indeterminate: 'false' } );
+	} );
+} );
+

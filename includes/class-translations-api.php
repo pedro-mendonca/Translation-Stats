@@ -46,6 +46,26 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 
 
 		/**
+		 * Check if a theme is on WordPress.org, if it exists in 'response' or 'no_update' in the 'update_themes' transient.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @param string $theme_slug   Theme slug, its stylesheet directory ( e.g. 'twentytwentyfive' ).
+		 *
+		 * @return bool   True if the theme exists on WordPress.org.
+		 */
+		public static function theme_on_wporg( $theme_slug ) {
+			$update_themes = get_site_transient( 'update_themes' );
+
+			if ( ! is_object( $update_themes ) ) {
+				return false;
+			}
+
+			return isset( $update_themes->response[ $theme_slug ] ) || isset( $update_themes->no_update[ $theme_slug ] );
+		}
+
+
+		/**
 		 * Get plugin metadata, if the plugin exists on WordPress.org.
 		 *
 		 * Example:

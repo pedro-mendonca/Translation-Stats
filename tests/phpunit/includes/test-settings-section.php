@@ -38,6 +38,7 @@ class Test_Settings_Section extends Translation_Stats_TestCase {
 						'enabled' => '',
 					),
 				),
+				'themes'   => array(),
 			),
 			$section->sanitize_settings(
 				array(
@@ -100,8 +101,30 @@ class Test_Settings_Section extends Translation_Stats_TestCase {
 			array(
 				'settings' => $settings->settings_defaults()['settings'],
 				'plugins'  => array(),
+				'themes'   => array(),
 			),
 			$section->sanitize_settings( array() )
 		);
+	}
+
+
+	/**
+	 * Test sanitize the themes saves only the enabled themes, as booleans.
+	 */
+	public function test_sanitize_settings_themes() {
+
+		$section = new Settings_Section_General();
+
+		$sanitized = $section->sanitize_settings(
+			array(
+				'themes' => array(
+					'TwentyTwentyFive' => array( 'enabled' => 'true' ),
+					'twentytwentyfour' => array( 'enabled' => '' ),
+					'invalid'          => 'true',
+				),
+			)
+		);
+
+		$this->assertSame( array( 'twentytwentyfive' => array( 'enabled' => true ) ), $sanitized['themes'] );
 	}
 }

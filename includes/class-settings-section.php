@@ -311,6 +311,18 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 				}
 			}
 
+			// Sanitize themes data, with the enabled themes as booleans.
+			$sanitized['themes'] = array();
+			if ( isset( $data['themes'] ) && is_array( $data['themes'] ) ) {
+				foreach ( $data['themes'] as $theme_slug => $theme_data ) {
+					if ( ! is_array( $theme_data ) || empty( $theme_data['enabled'] ) ) {
+						continue;
+					}
+
+					$sanitized['themes'][ sanitize_key( $theme_slug ) ] = array( 'enabled' => true );
+				}
+			}
+
 			return $sanitized;
 		}
 

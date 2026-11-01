@@ -251,6 +251,15 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 						'plugins',
 					),
 				),
+				'themes'   => array(
+					'tab'      => array(
+						'title' => esc_html__( 'Themes', 'translation-stats' ),
+						'icon'  => 'dashicons dashicons-admin-appearance',
+					),
+					'sections' => array(
+						'themes',
+					),
+				),
 				'settings' => array(
 					'tab'      => array(
 						'title' => esc_html__( 'Settings', 'translation-stats' ),

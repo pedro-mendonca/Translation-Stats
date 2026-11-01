@@ -293,7 +293,8 @@ table.wp-list-table.plugins { // WordPress Installed Plugins table.
 }
 
 
-table.tstats-plugin-list-table.widefat { // Translation Stats Settings Plugins table.
+table.tstats-plugin-list-table.widefat, // Translation Stats Settings Plugins table.
+table.tstats-theme-list-table.widefat { // Translation Stats Settings Themes table.
 
 
 	&.tablesorter {
@@ -621,7 +622,7 @@ table.tstats-plugin-list-table.widefat { // Translation Stats Settings Plugins t
 
 		@media (min-width: global.$break-large) {
 			order: 1;
-			overflow: auto;
+			min-width: 0; // Allow shrinking with wide content, like the debug code blocks, without clipping the buttons focus.
 		}
 	}
 
