@@ -79,18 +79,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Themes' ) ) {
 
 			$themes = wp_get_themes();
 
-			// Count the themes on WordPress.org and the enabled ones, for the select all checkbox.
-			$themes_on_wporg = 0;
-			$themes_enabled  = 0;
-			foreach ( array_keys( $themes ) as $theme_slug ) {
-				if ( Translations_API::theme_on_wporg( (string) $theme_slug ) ) {
-					++$themes_on_wporg;
-					if ( ! empty( $themes_settings[ $theme_slug ]['enabled'] ) ) {
-						++$themes_enabled;
-					}
-				}
-			}
-
 			// Locale WordPress.org subdomain for the themes links ( e.g. 'pt.' ).
 			$locale          = Translations_API::locale( Utils::translation_language() );
 			$wporg_subdomain = isset( $locale->wporg_subdomain ) && 'en_US' !== $locale->wp_locale ? $locale->wporg_subdomain . '.' : '';
@@ -100,8 +88,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Themes' ) ) {
 				<thead>
 					<tr>
 						<td scope="col" class="manage-column column-cb check-column plugin-select" data-sorter="false">
-							<label class="screen-reader-text" for="all_themes"><?php esc_html_e( 'Select All', 'translation-stats' ); ?></label>
-							<input class="all_themes" id="all_themes" type="checkbox" value="true" <?php checked( $themes_enabled > 0, true ); ?> data-indeterminate="<?php echo esc_attr( $themes_enabled > 0 && $themes_enabled < $themes_on_wporg ? 'true' : 'false' ); ?>" />
+							<?php $this->render_select_all( array_map( 'strval', array_keys( $themes ) ), $themes_settings ); ?>
 						</td>
 						<th scope="col" class="manage-column column-name column-primary">
 							<?php esc_html_e( 'Theme', 'translation-stats' ); ?>
@@ -123,82 +110,133 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Themes' ) ) {
 				</thead>
 				<tbody>
 					<?php
-
 					foreach ( $themes as $theme_slug => $theme ) {
-
-						$theme_slug        = (string) $theme_slug;
-						$theme_on_wporg    = Translations_API::theme_on_wporg( $theme_slug );
-						$theme_text_domain = (string) $theme->get( 'TextDomain' );
-						$theme_name        = (string) $theme->get( 'Name' );
-						$theme_author      = (string) $theme->get( 'Author' );
-						$theme_author_uri  = (string) $theme->get( 'AuthorURI' );
-
-						if ( ! $theme_on_wporg ) {
-							$status = 'disabled';
-						} else {
-							$status = empty( $themes_settings[ $theme_slug ]['enabled'] ) ? 'inactive' : 'active';
-						}
-
-						$field_name = TRANSLATION_STATS_WP_OPTION . '[themes][' . $theme_slug . '][enabled]';
-						$row_id     = 'themes_' . $theme_slug;
-
-						?>
-						<tr class="<?php echo esc_attr( $status ); ?>" data-theme="<?php echo esc_attr( $theme_slug ); ?>">
-							<th scope="row" class="plugin-select">
-								<?php
-								if ( $theme_on_wporg ) {
-									?>
-									<label class="screen-reader-text" for="<?php echo esc_attr( $row_id ); ?>"><?php esc_html_e( 'Select Theme', 'translation-stats' ); ?></label>
-									<input name="<?php echo esc_attr( $field_name ); ?>" <?php checked( 'active' === $status, true ); ?> id="<?php echo esc_attr( $row_id ); ?>" class="checkbox-theme" type="checkbox" value="true" />
-									<?php
-								}
-								?>
-							</th>
-							<td class="plugin-name">
-								<?php
-								if ( $theme_on_wporg ) {
-									printf(
-										'<a href="%s" target="_blank">%s</a>',
-										esc_url( 'https://' . $wporg_subdomain . 'wordpress.org/themes/' . $theme_slug . '/' ),
-										esc_html( $theme_name )
-									);
-								} else {
-									echo esc_html( $theme_name );
-								}
-								?>
-							</td>
-							<td class="plugin-author">
-								<?php
-								if ( $theme_on_wporg && '' !== $theme_author_uri ) {
-									printf( '<a href="%s" target="_blank">%s</a>', esc_url( $theme_author_uri ), esc_html( $theme_author ) );
-								} else {
-									echo esc_html( $theme_author );
-								}
-								?>
-							</td>
-							<td class="plugin-slug-text-domain">
-								<div class="plugin-slug-text-domain-icon">
-									<span class="dashicons <?php echo esc_attr( $theme_slug === $theme_text_domain ? 'dashicons-yes' : 'dashicons-no' ); ?>"></span>
-								</div>
-								<div class="plugin-slug-text-domain-message">
-									<code><?php echo esc_html( $theme_slug ); ?></code><br>
-									<?php
-									if ( $theme_slug !== $theme_text_domain ) {
-										?>
-										<code class="code-error"><?php echo esc_html( $theme_text_domain ); ?></code><br>
-										<?php
-									}
-									?>
-								</div>
-							</td>
-						</tr>
-						<?php
+						$this->render_theme_row( (string) $theme_slug, $theme, ! empty( $themes_settings[ $theme_slug ]['enabled'] ), $wporg_subdomain );
 					}
-
 					?>
 				</tbody>
 			</table>
 			<?php
+		}
+
+
+		/**
+		 * Render the select all checkbox, checked if some themes on WordPress.org are enabled, and indeterminate if not all.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @param array<int, string>                   $theme_slugs       Slugs of the installed themes.
+		 * @param array<string, array{enabled?: bool}> $themes_settings   Themes settings.
+		 *
+		 * @return void
+		 */
+		private function render_select_all( $theme_slugs, $themes_settings ) {
+
+			$themes_on_wporg = array_filter( $theme_slugs, array( Translations_API::class, 'theme_on_wporg' ) );
+
+			$themes_enabled = count(
+				array_filter(
+					$themes_on_wporg,
+					function ( $theme_slug ) use ( $themes_settings ) {
+						return ! empty( $themes_settings[ $theme_slug ]['enabled'] );
+					}
+				)
+			);
+
+			?>
+			<label class="screen-reader-text" for="all_themes"><?php esc_html_e( 'Select All', 'translation-stats' ); ?></label>
+			<input class="all_themes" id="all_themes" type="checkbox" value="true" <?php checked( $themes_enabled > 0, true ); ?> data-indeterminate="<?php echo esc_attr( $themes_enabled > 0 && $themes_enabled < count( $themes_on_wporg ) ? 'true' : 'false' ); ?>" />
+			<?php
+		}
+
+
+		/**
+		 * Render a theme row, with its checkbox if the theme is on WordPress.org.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @param string    $theme_slug        Theme slug.
+		 * @param \WP_Theme $theme             Theme object.
+		 * @param bool      $enabled           Whether the theme is enabled in the settings.
+		 * @param string    $wporg_subdomain   Locale WordPress.org subdomain ( e.g. 'pt.' ).
+		 *
+		 * @return void
+		 */
+		private function render_theme_row( $theme_slug, $theme, $enabled, $wporg_subdomain ) {
+
+			$theme_on_wporg    = Translations_API::theme_on_wporg( $theme_slug );
+			$theme_text_domain = (string) $theme->get( 'TextDomain' );
+
+			if ( ! $theme_on_wporg ) {
+				$status = 'disabled';
+			} else {
+				$status = $enabled ? 'active' : 'inactive';
+			}
+
+			$field_name = TRANSLATION_STATS_WP_OPTION . '[themes][' . $theme_slug . '][enabled]';
+			$row_id     = 'themes_' . $theme_slug;
+
+			?>
+			<tr class="<?php echo esc_attr( $status ); ?>" data-theme="<?php echo esc_attr( $theme_slug ); ?>">
+				<th scope="row" class="plugin-select">
+					<?php
+					if ( $theme_on_wporg ) {
+						?>
+						<label class="screen-reader-text" for="<?php echo esc_attr( $row_id ); ?>"><?php esc_html_e( 'Select Theme', 'translation-stats' ); ?></label>
+						<input name="<?php echo esc_attr( $field_name ); ?>" <?php checked( $enabled, true ); ?> id="<?php echo esc_attr( $row_id ); ?>" class="checkbox-theme" type="checkbox" value="true" />
+						<?php
+					}
+					?>
+				</th>
+				<td class="plugin-name">
+					<?php
+					$this->render_link(
+						(string) $theme->get( 'Name' ),
+						$theme_on_wporg ? 'https://' . $wporg_subdomain . 'wordpress.org/themes/' . $theme_slug . '/' : ''
+					);
+					?>
+				</td>
+				<td class="plugin-author">
+					<?php $this->render_link( (string) $theme->get( 'Author' ), $theme_on_wporg ? (string) $theme->get( 'AuthorURI' ) : '' ); ?>
+				</td>
+				<td class="plugin-slug-text-domain">
+					<div class="plugin-slug-text-domain-icon">
+						<span class="dashicons <?php echo esc_attr( $theme_slug === $theme_text_domain ? 'dashicons-yes' : 'dashicons-no' ); ?>"></span>
+					</div>
+					<div class="plugin-slug-text-domain-message">
+						<code><?php echo esc_html( $theme_slug ); ?></code><br>
+						<?php
+						if ( $theme_slug !== $theme_text_domain ) {
+							?>
+							<code class="code-error"><?php echo esc_html( $theme_text_domain ); ?></code><br>
+							<?php
+						}
+						?>
+					</div>
+				</td>
+			</tr>
+			<?php
+		}
+
+
+		/**
+		 * Render a text, linked to a URL if not empty.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @param string $text   Text.
+		 * @param string $url    URL, or empty for no link.
+		 *
+		 * @return void
+		 */
+		private function render_link( $text, $url ) {
+
+			if ( '' === $url ) {
+				echo esc_html( $text );
+				return;
+			}
+
+			printf( '<a href="%s" target="_blank">%s</a>', esc_url( $url ), esc_html( $text ) );
 		}
 	}
 }
