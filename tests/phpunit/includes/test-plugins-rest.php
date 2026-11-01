@@ -136,6 +136,11 @@ class Test_Plugins_REST extends Translation_Stats_TestCase {
 		$this->assertSame( 'translation-stats-plugin-stats', $schema['title'] );
 		$this->assertSame( 'string', $schema['properties']['html']['type'] );
 		$this->assertTrue( $schema['properties']['html']['readonly'] );
+
+		// The schema is built once, and then reused.
+		$controller = new Translation_Stats\Plugins_REST_Controller( new Translation_Stats\Plugins() );
+
+		$this->assertSame( $controller->get_item_schema(), $controller->get_item_schema() );
 	}
 
 

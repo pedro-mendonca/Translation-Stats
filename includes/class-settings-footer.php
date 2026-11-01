@@ -29,9 +29,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Footer' ) ) {
 
 			// Replace admin footer text with customized message.
 			add_filter( 'admin_footer_text', array( $this, 'admin_footer_text' ), 1 );
-
-			// Replace admin footer WordPress version with plugin version.
-			// add_filter( 'update_footer', array( $this, 'admin_footer_version' ), 11 ); // phpcs: ignore.
 		}
 
 
@@ -72,29 +69,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Footer' ) ) {
 						esc_url( Utils::campaign_link( $external_link_url, 'tstats', 'link', 'plugin_footer_link' ) ),
 						esc_html__( 'Pedro Mendonça', 'translation-stats' )
 					)
-				);
-			}
-			return $text;
-		}
-
-
-		/**
-		 * Replace admin footer WordPress version with plugin version.
-		 *
-		 * @since 0.9.0
-		 * @since 1.1.1   Renamed from tstats_admin_footer_version() to admin_footer_version().
-		 *
-		 * @param string $text   Footer version.
-		 *
-		 * @return string $text  Return translation stats footer version.
-		 */
-		public function admin_footer_version( $text ) {
-			global $current_screen;
-			if ( ! empty( $current_screen->id ) && strpos( $current_screen->id, 'translation-stats' ) !== false ) {
-				$text = sprintf(
-					/* translators: Plugin Name and version - Do not translate! */
-					esc_html__( 'Translation Stats %s', 'translation-stats' ),
-					'<small>v.' . esc_html( TRANSLATION_STATS_VERSION ) . '</small>'
 				);
 			}
 			return $text;

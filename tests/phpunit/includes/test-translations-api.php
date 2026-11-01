@@ -327,4 +327,42 @@ class Test_Translations_API extends Translation_Stats_TestCase {
 			$expected_result
 		);
 	}
+
+
+	/**
+	 * Test get the plugin metadata from the plugins updates transient, with or without available update, or from the plugin file if not on WordPress.org.
+	 */
+	public function test_plugin_metadata() {
+
+		$update_plugins = new stdClass();
+
+		$update_plugins->response  = array(
+			'akismet/akismet.php' => (object) array(
+				'id'          => 'w.org/plugins/akismet',
+				'slug'        => 'akismet',
+				'new_version' => '99.0',
+			),
+		);
+		$update_plugins->no_update = array(
+			'hello.php' => (object) array(
+				'id'   => 'w.org/plugins/hello-dolly',
+				'slug' => 'hello-dolly',
+			),
+		);
+
+		set_site_transient( 'update_plugins', $update_plugins );
+
+		// Plugin with available update.
+		$this->assertTrue( Translations_API::plugin_on_wporg( 'akismet/akismet.php' ) );
+		$this->assertSame( '99.0', Translations_API::plugin_metadata( 'akismet/akismet.php', 'new_version' ) );
+
+		// Plugin without available update.
+		$this->assertSame( 'hello-dolly', Translations_API::plugin_metadata( 'hello.php', 'slug' ) );
+		$this->assertNull( Translations_API::plugin_metadata( 'hello.php', 'new_version' ) );
+
+		// Plugin not on WordPress.org, with the slug from the plugin file.
+		$this->assertFalse( Translations_API::plugin_on_wporg( 'other/other.php' ) );
+		$this->assertSame( 'other', Translations_API::plugin_metadata( 'other/other.php', 'slug' ) );
+		$this->assertSame( '', Translations_API::plugin_metadata( 'other/other.php', 'new_version' ) );
+	}
 }
