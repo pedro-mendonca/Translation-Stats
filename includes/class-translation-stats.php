@@ -31,6 +31,14 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 
 
 		/**
+		 * Themes instance, for the REST API.
+		 *
+		 * @var Themes
+		 */
+		protected $themes;
+
+
+		/**
 		 * Constructor.
 		 */
 		public function __construct() {
@@ -56,6 +64,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 			// Initialize the plugins page metadata view.
 			$this->plugins = new Plugins();
 
+			// Initialize the themes translation stats.
+			$this->themes = new Themes();
+
 			// Register the REST API routes.
 			add_action( 'rest_api_init', array( $this, 'register_rest_routes' ) );
 
@@ -75,8 +86,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 		 */
 		public function register_rest_routes() {
 
-			$plugins_controller = new Plugins_REST_Controller( $this->plugins );
-			$plugins_controller->register_routes();
+			$projects_controller = new Projects_REST_Controller( $this->plugins, $this->themes );
+			$projects_controller->register_routes();
 		}
 
 

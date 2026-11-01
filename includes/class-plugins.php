@@ -413,6 +413,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * @since 1.1.0   Use Locale object.
 		 * @since 1.2.0   Renamed from tstats_render_stats_bar() to render_stats_bar().
 		 * @since 1.2.1   Removed unused parameter $force_update.
+		 * @since 1.5.0   Rendered by Stats_Bar, shared with the themes.
 		 *
 		 * @param object|false $subproject_stats   Subproject stats object, or false if the subproject doesn't exist.
 		 * @param Locale       $locale             Locale object.
@@ -423,93 +424,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * @return void
 		 */
 		public function render_stats_bar( $subproject_stats, $locale, $project_slug, $subproject, $subproject_slug ) {
-			/*
-			 * Check if subproject is an object.
-			 *
-			 * Example of the object properties:
-			 * [id] => 416518
-			 * [name] => Portuguese (Portugal)
-			 * [slug] => default | ao90 | informal
-			 * [project_id] => 3333
-			 * [locale] => pt
-			 * [current_count] => 136
-			 * [untranslated_count] => 0
-			 * [waiting_count] => 0
-			 * [fuzzy_count] => 0
-			 * [all_count] => 136
-			 * [warnings_count] => 0
-			 * [percent_translated] => 100
-			 * [wp_locale] => pt_PT
-			 * [last_modified] => 2018-10-11 10:05:30
-			 */
-			$subproject_exist = is_object( $subproject_stats ) ? true : false;
-
-			$class = $subproject_exist ? 'enabled' : 'disabled';
-			$href  = $subproject_exist ? 'href="' . esc_url( ( new Plugin_Project( $project_slug ) )->translate_url( $subproject_slug, $locale ) ) . '"' : '';
-
-			// Percent translated.
-			$percent_translated = $subproject_exist && isset( $subproject_stats->percent_translated ) ? $subproject_stats->percent_translated : 0;
-
-			// Current count.
-			$current_count = $subproject_exist && isset( $subproject_stats->current_count ) ? $subproject_stats->current_count : 0;
-
-			// All count.
-			$all_count = $subproject_exist && isset( $subproject_stats->all_count ) ? $subproject_stats->all_count : 0;
-
-			?>
-			<div class="content__subproject <?php echo esc_attr( $subproject_slug ); ?>">
-				<a class="<?php echo esc_attr( $class ); ?>" target="_blank" <?php echo wp_kses_post( $href ); ?>>
-				<?php
-				if ( $subproject_exist ) {
-
-					?>
-					<style>
-						tr[data-slug="<?php echo esc_attr( $project_slug ); ?>"] div.subproject.<?php echo esc_attr( $subproject_slug ); ?> {
-							width: <?php echo esc_attr( $percent_translated ); ?>%;
-						}
-					</style>
-					<div class="subproject <?php echo esc_attr( 'percent' . 10 * floor( $percent_translated / 10 ) . ' ' . $subproject_slug ); ?>">
-						<div class="subproject-bar">
-							<span class="subproject-bar__percentage"><?php echo esc_html( $percent_translated ); ?>%</span>
-							<span class="subproject-bar__name"><?php echo esc_html( $subproject ); ?></span>
-							<span class="subproject-bar__count">
-								<?php
-								printf(
-									// translators: 1: Current count. 2: All count.
-									esc_html__( '(%1$d/%2$d)', 'translation-stats' ),
-									esc_html( $current_count ),
-									esc_html( $all_count )
-								);
-								?>
-							</span>
-						</div>
-					</div>
-					<?php
-
-				} else {
-
-					?>
-					<div class="subproject">
-						<div class="subproject-bar">
-							<?php
-							echo wp_kses_post(
-								sprintf(
-									/* translators: 1: Name of subproject. 2: Error message. */
-									__( '%1$s: %2$s', 'translation-stats' ),
-									$subproject,
-									'<strong>' . __( 'Not found', 'translation-stats' ) . '</strong>'
-								)
-							);
-							?>
-						</div>
-					</div>
-					<?php
-
-				}
-				?>
-				</a>
-			</div>
-			<?php
+			Stats_Bar::render( new Plugin_Project( $project_slug ), $subproject_stats, $locale, $subproject, $subproject_slug, 'tr' );
 		}
 
 
