@@ -8,7 +8,7 @@ const $ = jQuery;
 /**
  * Initialize the settings page: the tabs, and the plugins table sorting and selection.
  *
- * @since 1.5.0
+ * @since 2.0.0
  */
 export function initSettings() {
 	// Run scripts on page load.
@@ -146,7 +146,7 @@ export function tstatsPluginsSort() {
  * Set the active tab in the settings form referer, to return to the same tab after saving.
  * The browser doesn't send the URL hash, and options.php redirects to the referer.
  *
- * @since 1.5.0
+ * @since 2.0.0
  *
  * @param {string} tabID Active tab ID ( e.g. '#themes' ).
  */
@@ -571,7 +571,7 @@ export function tstatsClickPluginsSort() {
 /**
  * Translation Stats themes list table sorting.
  *
- * @since 1.5.0
+ * @since 2.0.0
  */
 export function tstatsThemesSort() {
 	$( '#tstats-table-themes' ).tablesorter( {
@@ -592,7 +592,7 @@ export function tstatsThemesSort() {
 /**
  * Select all the themes in Settings themes table, or unselect them if all are selected.
  *
- * @since 1.5.0
+ * @since 2.0.0
  */
 export function tstatsThemesSelectAll() {
 	const themes = $( '#tstats-table-themes input.checkbox-theme' );
@@ -608,7 +608,7 @@ export function tstatsThemesSelectAll() {
 /**
  * Select single theme in Settings themes table.
  *
- * @since 1.5.0
+ * @since 2.0.0
  */
 export function tstatsThemesSelectTheme() {
 	tstatsThemesUpdateRow( $( this ) );
@@ -618,7 +618,7 @@ export function tstatsThemesSelectTheme() {
 /**
  * Update the theme row status with its checkbox.
  *
- * @since 1.5.0
+ * @since 2.0.0
  *
  * @param {Object} checkbox Theme checkbox jQuery object.
  */
@@ -634,7 +634,7 @@ export function tstatsThemesUpdateRow( checkbox ) {
 /**
  * Update the select all checkbox of the themes table, indeterminate if only some themes are selected.
  *
- * @since 1.5.0
+ * @since 2.0.0
  */
 export function tstatsThemesUpdateHeader() {
 	const themes = $( '#tstats-table-themes input.checkbox-theme' );

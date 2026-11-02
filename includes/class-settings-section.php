@@ -330,7 +330,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section' ) ) {
 		/**
 		 * Sanitize the text fields of the form input. Values that aren't text, like arrays, are emptied.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @param array $data   Array of input data.
 		 *

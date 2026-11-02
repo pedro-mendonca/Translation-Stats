@@ -54,7 +54,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Widgets' ) ) {
 							<div class="tstats-logo-image"></div>
 						</a>
 					</div>
-					<p><?php esc_html_e( 'Show plugins translation stats on your WordPress install.', 'translation-stats' ); ?></p>
+					<p><?php esc_html_e( 'Show plugins and themes translation stats on your WordPress install.', 'translation-stats' ); ?></p>
 
 					<div class="tstats-resources">
 						<h3><?php esc_html_e( 'Resources', 'translation-stats' ); ?></h3>

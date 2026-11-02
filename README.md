@@ -1,6 +1,6 @@
 # Translation Stats
 
-Show plugins translation stats on your WordPress install.
+Show plugins and themes translation stats on your WordPress install.
 
 [![Translation Stats banner](./.wordpress-org/banner-1544x500.png)](https://wordpress.org/plugins/translation-stats/)
 
@@ -23,9 +23,11 @@ Show plugins translation stats on your WordPress install.
 
 ## Description
 
-The plugin adds a "Translation Stats" column to the plugin list screen in WordPress admin.
+The plugin adds a "Translation Stats" column to the Plugins screen, and the translation stats to the Themes screen in WordPress admin: a translation stats bar on the theme cards, and a translation stats widget in the theme details.
 
-The translation stats are shown only for plugins that exist in [translate.wordpress.org](https://translate.wordpress.org/) and are [prepared for localization](https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/).
+Select the plugins and themes to show the translation stats in the plugin settings.
+
+The translation stats are shown only for plugins and themes that exist in [translate.wordpress.org](https://translate.wordpress.org/) and are [prepared for localization](https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/).
 
 If a plugin doesn't have complete translation stats, you'll see a notice with one of the reasons below:
 
@@ -41,36 +43,55 @@ This plugin is properly prepared for localization.
 
 ### What are the plugin subprojects?
 
-| Subproject             | Description                                                                                                |
-| ---                    | ---                                                                                                        |
-| **Development**        | Translation of the *Development* version of the plugin                                                     |
-| **Development Readme** | Readme of the *Development* version of the plugin page on [wp.org/plugins](https://wordpress.org/plugins/) |
-| **Stable**             | Translation of the *Stable* version of the plugin                                                          |
-| **Stable Readme**      | Readme of the *Stable* version of the plugin page on [wp.org/plugins](https://wordpress.org/plugins/)      |
+* **Development**: the plugin's *Development* version (trunk)
+* **Development Readme**: the plugin page on [WordPress.org/plugins](https://wordpress.org/plugins/), from the *Development* version
+* **Stable**: the plugin's *Stable* version (latest release)
+* **Stable Readme**: the plugin page on WordPress.org/plugins, from the *Stable* version
 
-### How can I translate a plugin?
+### Do themes have subprojects?
 
-* Register and login in [wp.org](https://login.wordpress.org/)
-* Click on the plugin subproject stats bar you want to translate
-* Read the Polyglots [Translator’s Handbook](https://make.wordpress.org/polyglots/handbook/)
-* Translate according the rules of your [Locale Translation Team](https://make.wordpress.org/polyglots/teams/)
+No. The themes translation projects on translate.wordpress.org have no subprojects, so the theme translation stats have a single translation stats bar.
+
+### Why don't I see the translation stats for a plugin or theme?
+
+Only plugins and themes hosted on WordPress.org have translation projects on translate.wordpress.org. Check that it's selected in Settings > Translation Stats, and that its slug matches its text domain: the settings table shows a check mark when it does.
+
+### Which language are the stats shown for?
+
+The language set in Settings > Translation Stats > Settings. By default, the site language.
+
+### How often are the stats updated?
+
+The stats are cached for the time set in the Tools tab, 24 hours by default. Use the refresh button on each plugin or theme to update them right away, or clean the whole cache in the Tools tab.
+
+### How can I translate a plugin or theme?
+
+* Log in to [WordPress.org](https://login.wordpress.org/), or create an account
+* Click the translation stats bar of the plugin subproject or theme you want to translate
+* Read the Polyglots [Translator's Handbook](https://make.wordpress.org/polyglots/handbook/)
+* Translate according to the rules of your [Locale Translation Team](https://make.wordpress.org/polyglots/teams/)
 
 ### Should I translate both Stable and Development?
 
-Since mid-April 2016, not only new strings but also edits are synced between dev and stable (both ways, only approved translations). When a plugin releases a new version all translations are copied from dev to stable. [Read more...](https://make.wordpress.org/polyglots/handbook/frequently-asked-questions/#should-i-translate-both-stable-and-dev)
+Usually not. New strings and edits to approved translations are synced between Development and Stable, and when a plugin releases a new version, its Development translations are copied to Stable. [Read more...](https://make.wordpress.org/polyglots/handbook/frequently-asked-questions/#should-i-translate-both-stable-and-dev)
 
 ### How long does it take for a translation to become available?
 
-Translations for the readme are published almost immediately.
-The language pack for a plugin will be generated when 90% of the Stable (latest release) sub-project strings have been translated and approved.
+Readme translations are published almost immediately.
 
-### Can I help translating this plugin to my own language?
+The first language pack of a plugin or theme is generated when 90% of its strings are translated and approved. For plugins, that's the Stable (latest release) subproject. After that, language packs are updated with each new approved translation.
+
+### Can I help translate this plugin to my own language?
 
 Yes you can! If you want to translate this plugin to your language, please [translate it on translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/translation-stats).
 
 ### Can I contribute to this plugin?
 
 Sure! You are welcome to report any issues or add feature suggestions on the [GitHub repository](https://github.com/pedro-mendonca/Translation-Stats).
+
+### Where can I get support?
+
+Ask your questions in the [support forum](https://wordpress.org/support/plugin/translation-stats/) on WordPress.org.
 
 ## Screenshots
 
@@ -90,7 +111,38 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
    ![screenshot-4](./.wordpress-org/screenshot-4.png)
 
+5. Translation Stats shown in WordPress themes page
+
+   ![screenshot-5](./.wordpress-org/screenshot-5.png)
+
+6. Translation Stats shown in WordPress theme details
+
+   ![screenshot-6](./.wordpress-org/screenshot-6.png)
+
+7. Translation Stats installed themes list
+
+   ![screenshot-7](./.wordpress-org/screenshot-7.png)
+
 ## Changelog
+
+### 2.0.0
+
+* New: Show the translation stats of themes on the Themes screen, with a translation stats bar on the theme cards and a translation stats widget in the theme details.
+* New: Select the themes to show the translation stats in the new Themes settings tab.
+* Show the translate.wordpress.org error message in the translation stats notice, like when it's unavailable.
+* Show a placeholder of the translation stats bars while loading them.
+* Return to the same settings tab after saving the settings.
+* Fix the settings update notice shown before the page, and in any request, after updating the plugin. It's now shown once in the admin notices.
+* Fix the activation notice not shown with a different plugin folder name, and mention the themes.
+* Fix the settings Save button focus cut on the left.
+* Save the settings checkboxes as booleans, updating the saved settings automatically.
+* Remove the console logs.
+* Remove the bundled Portuguese (pt_PT) translation files, not loaded by WordPress. The translations are loaded from translate.wordpress.org.
+* Developers: Add the `Project`, `Plugin_Project` and `Theme_Project` classes for the translate.wordpress.org projects and their translation stats. Remove `Translations_API::translations_api_get_plugin()`, `plugin_project_on_translate_wporg()` and `plugin_subproject_on_translate_wporg()`, and `Plugins::plugin_subproject_stats()`, `plugin_stats_cached()` and `plugin_subproject_stats_transient()`.
+* Developers: The REST API route `translation-stats/v1/(plugins|themes)/<slug>/stats` loads the plugins and themes translation stats.
+* Developers: Rename the `TRANSLATION_STATS_TRANSIENTS_PREFIX` constant to `TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX`. The themes transients use `TRANSLATION_STATS_TRANSIENTS_THEMES_PREFIX`.
+* Build the JavaScript and CSS with `@wordpress/scripts`.
+* Increase PHPStan level to 9, and unit tests coverage.
 
 ### 1.4.0
 

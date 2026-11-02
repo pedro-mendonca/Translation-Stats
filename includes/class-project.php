@@ -4,7 +4,7 @@
  *
  * @package Translation_Stats
  *
- * @since 1.5.0
+ * @since 2.0.0
  */
 
 namespace Translation_Stats;
@@ -47,7 +47,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Project' ) ) {
 		/**
 		 * Get the project type, as in the translate.WordPress.org URL.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @return string   Project type ( 'plugins' or 'themes' ).
 		 */
@@ -57,7 +57,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Project' ) ) {
 		/**
 		 * Get the translation subprojects, with 'slug' and 'name'. A subproject with an empty slug is the project itself.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @return array<int, array{slug: string, name: string}>   Subprojects.
 		 */
@@ -67,7 +67,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Project' ) ) {
 		/**
 		 * Get the project slug.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @return string   Project slug.
 		 */
@@ -79,7 +79,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Project' ) ) {
 		/**
 		 * Get the prefix of the project transients, for each project type.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @return string   Transients prefix.
 		 */
@@ -91,7 +91,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Project' ) ) {
 		/**
 		 * Get the path of the project, or of one of its subprojects, on translate.WordPress.org.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @param string $subproject_slug   Subproject slug, or empty for the project.
 		 *
@@ -105,7 +105,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Project' ) ) {
 		/**
 		 * Get the translate.WordPress.org URL of a subproject translation for a Locale.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @param string $subproject_slug   Subproject slug, or empty for the project.
 		 * @param Locale $locale            Locale object.
@@ -120,7 +120,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Project' ) ) {
 		/**
 		 * Get the project, or one of its subprojects, from translate.WordPress.org API.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @param string $subproject_slug   Subproject slug, or empty for the project.
 		 *
@@ -135,7 +135,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Project' ) ) {
 		 * Check if the translation project exists on translate.WordPress.org, cached in a transient.
 		 * If translate.WordPress.org is unavailable, assume the project exists and don't cache the result.
 		 *
-		 * @since 1.5.0   Moved from Translations_API::plugin_project_on_translate_wporg().
+		 * @since 2.0.0   Moved from Translations_API::plugin_project_on_translate_wporg().
 		 *
 		 * @return bool   True if the translation project exists on translate.WordPress.org.
 		 */
@@ -167,7 +167,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Project' ) ) {
 		/**
 		 * Get the transient name of the subproject stats for a Locale.
 		 *
-		 * @since 1.5.0   Moved from Plugins::plugin_subproject_stats_transient().
+		 * @since 2.0.0   Moved from Plugins::plugin_subproject_stats_transient().
 		 *
 		 * @param Locale $locale            Locale object.
 		 * @param string $subproject_slug   Subproject slug, or empty for the project.
@@ -185,7 +185,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Project' ) ) {
 		/**
 		 * Get the subproject stats for a Locale, cached in a transient.
 		 *
-		 * @since 1.5.0   Moved from Plugins::plugin_subproject_stats().
+		 * @since 2.0.0   Moved from Plugins::plugin_subproject_stats().
 		 *
 		 * @param Locale $locale            Locale object.
 		 * @param string $subproject_slug   Subproject slug, or empty for the project.
@@ -245,7 +245,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Project' ) ) {
 		/**
 		 * Get the stats of all the subprojects for a Locale.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @param Locale $locale         Locale object.
 		 * @param bool   $force_update   True: Force get new stats. False: Use transients.
@@ -274,7 +274,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Project' ) ) {
 		/**
 		 * Check if the stats of all the subprojects are cached for a Locale.
 		 *
-		 * @since 1.5.0   Moved from Plugins::plugin_stats_cached().
+		 * @since 2.0.0   Moved from Plugins::plugin_stats_cached().
 		 *
 		 * @param Locale $locale   Locale object.
 		 *

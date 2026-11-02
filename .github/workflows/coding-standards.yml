@@ -15,8 +15,6 @@ on:
       - 'composer.*'
       # This file configures Stylelint. Changes could affect the outcome.
       - '.stylelintrc.json'
-      # This file configures Markdownlint. Changes could affect the outcome.
-      - '.markdownlint.json'
       # This file configures PHPCS. Changes could affect the outcome.
       - 'phpcs.xml.dist'
       # Changes to workflow files should always verify all workflows are successful.

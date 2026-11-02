@@ -31,7 +31,7 @@ import { createQueue, loadWidgetStats } from './stats-widget';
 /**
  * Get the REST API route path of the theme stats.
  *
- * @since 1.5.0
+ * @since 2.0.0
  *
  * @param {string} slug Theme slug.
  *
@@ -47,7 +47,7 @@ export function themeStatsPath( slug ) {
  * Render the theme card stats bar, with the markup and styles of the plugins stats bars:
  * filled to the percent translated, or an empty placeholder while loading.
  *
- * @since 1.5.0
+ * @since 2.0.0
  *
  * @param {ThemeStats} stats Theme translation stats.
  *
@@ -95,7 +95,7 @@ export function renderCardBar( stats ) {
 /**
  * Render the theme widget, for the theme details.
  *
- * @since 1.5.0
+ * @since 2.0.0
  *
  * @param {string}     slug  Theme slug.
  * @param {ThemeStats} stats Theme translation stats.
@@ -122,7 +122,7 @@ export function renderWidget( slug, stats ) {
 /**
  * Load the theme stats, and update its card badge and its widget if open.
  *
- * @since 1.5.0
+ * @since 2.0.0
  *
  * @param {Object}  model       Theme model.
  * @param {Object}  widget      Widget or theme card jQuery object, to show the loading state.
@@ -174,7 +174,7 @@ export function loadThemeStats( model, widget, forceUpdate, queue ) {
  * Add the stats bar to a theme card, at the bottom of the screenshot, above the theme name, without changing the card height.
  * Loads the theme stats if not cached.
  *
- * @since 1.5.0
+ * @since 2.0.0
  *
  * @param {Object} view  Theme card view.
  * @param {Queue}  queue Queue to add the request.
@@ -199,7 +199,7 @@ export function addThemeCardBar( view, queue ) {
 /**
  * Add the widget to the theme details, above the theme description, with the update button.
  *
- * @since 1.5.0
+ * @since 2.0.0
  *
  * @param {Object} view  Theme details view.
  * @param {Queue}  queue Queue to add the request.
@@ -237,7 +237,7 @@ export function addThemeWidget( view, queue ) {
 /**
  * Add the link to the Translation Stats themes settings in the Themes screen header, after the Add New Theme button.
  *
- * @since 1.5.0
+ * @since 2.0.0
  *
  * @param {string} settingsUrl Themes settings URL, or empty if the user can't manage the settings.
  *
@@ -269,7 +269,7 @@ export function addSettingsLink( settingsUrl ) {
  * Add the translation stats to the Themes screen: a stats bar on the theme cards, and a widget in the theme details.
  * Extends the render of the WordPress themes views, if available.
  *
- * @since 1.5.0
+ * @since 2.0.0
  *
  * @param {Object} themes WordPress themes, with the views. Defaults to wp.themes.
  * @param {Queue}  queue  Queue to add the requests. Defaults to a new queue.

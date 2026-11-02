@@ -4,7 +4,7 @@
  *
  * @package Translation_Stats
  *
- * @since 1.5.0
+ * @since 2.0.0
  */
 
 namespace Translation_Stats;
@@ -25,7 +25,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Themes' ) ) {
 		/**
 		 * Data for the themes section.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @return array   Array of settings section data.
 		 */
@@ -43,7 +43,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Themes' ) ) {
 		/**
 		 * Callback function for section "Themes Settings".
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @return void
 		 */
@@ -80,7 +80,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Themes' ) ) {
 		/**
 		 * Render the themes settings table.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @return void
 		 */
@@ -136,7 +136,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Themes' ) ) {
 		/**
 		 * Render the select all checkbox, checked if some themes on WordPress.org are enabled, and indeterminate if not all.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @param array<int, string>                   $theme_slugs       Slugs of the installed themes.
 		 * @param array<string, array{enabled?: bool}> $themes_settings   Themes settings.
@@ -166,7 +166,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Themes' ) ) {
 		/**
 		 * Render a theme row, with its checkbox if the theme is on WordPress.org.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @param string    $theme_slug        Theme slug.
 		 * @param \WP_Theme $theme             Theme object.
@@ -235,7 +235,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Themes' ) ) {
 		/**
 		 * Render a text, linked to a URL if not empty.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @param string $text   Text.
 		 * @param string $url    URL, or empty for no link.

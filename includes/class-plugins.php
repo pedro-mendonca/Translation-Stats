@@ -254,7 +254,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * @since 0.9.4
 		 * @since 1.2.0   Renamed from tstats_stats_plugin_widget_content() to plugin_widget_content().
 		 * @since 1.4.0   Render the cached stats, without loading them with the REST API.
-		 * @since 1.5.0   Render an empty stats placeholder without the cached stats, instead of the Waiting notice.
+		 * @since 2.0.0   Render an empty stats placeholder without the cached stats, instead of the Waiting notice.
 		 *
 		 * @param string      $project_slug   Plugin Slug.
 		 * @param Locale|null $locale         Locale object.
@@ -285,7 +285,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		/**
 		 * Render an empty stats placeholder, with a bar for each enabled subproject, while loading the stats.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @param string $project_slug   Plugin Slug.
 		 *
@@ -367,7 +367,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * @since 1.1.0   Use Locale object.
 		 * @since 1.2.0   Renamed from tstats_render_stats_bar() to render_stats_bar().
 		 * @since 1.2.1   Removed unused parameter $force_update.
-		 * @since 1.5.0   Rendered by Stats_Bar, shared with the themes.
+		 * @since 2.0.0   Rendered by Stats_Bar, shared with the themes.
 		 *
 		 * @param object|false $subproject_stats   Subproject stats object, or false if the subproject doesn't exist.
 		 * @param Locale       $locale             Locale object.
