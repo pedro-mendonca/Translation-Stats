@@ -127,4 +127,29 @@ class Test_Settings_Section extends Translation_Stats_TestCase {
 
 		$this->assertSame( array( 'twentytwentyfive' => array( 'enabled' => true ) ), $sanitized['themes'] );
 	}
+
+
+	/**
+	 * Test the default section data, overridden by the settings sections.
+	 */
+	public function test_section_defaults() {
+
+		$section = new class() extends Translation_Stats\Settings_Section {
+
+			/**
+			 * Constructor, without registering the section.
+			 */
+			public function __construct() {}
+		};
+
+		$this->assertSame(
+			array(
+				'page'        => null,
+				'id'          => null,
+				'title'       => null,
+				'description' => null,
+			),
+			$section->section()
+		);
+	}
 }

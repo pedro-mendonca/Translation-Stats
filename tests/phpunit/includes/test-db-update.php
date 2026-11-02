@@ -392,4 +392,23 @@ class Test_DB_Update extends Translation_Stats_TestCase {
 		$this->assertSame( $settings, get_option( TRANSLATION_STATS_WP_OPTION ) );
 		$this->assertSame( '', $output );
 	}
+
+
+	/**
+	 * Test the settings updates do nothing with invalid settings.
+	 */
+	public function test_settings_update_invalid_settings() {
+
+		$db_update = new DB_Update();
+
+		update_option( TRANSLATION_STATS_WP_OPTION, 'invalid' );
+
+		$db_update->settings_update_v0_to_v1();
+
+		$this->assertSame( 'invalid', get_option( TRANSLATION_STATS_WP_OPTION ) );
+
+		$db_update->settings_update_v1_to_v2();
+
+		$this->assertSame( 'invalid', get_option( TRANSLATION_STATS_WP_OPTION ) );
+	}
 }

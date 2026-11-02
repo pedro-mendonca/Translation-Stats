@@ -47,6 +47,14 @@ class Test_Translation_Stats extends WP_UnitTestCase {
 		// Allowed pages.
 		$this->assertTrue( $translation_stats->allowed_pages( 'plugins.php' ) );
 		$this->assertTrue( $translation_stats->allowed_pages( 'themes.php' ) );
+
+		// The Network Admin themes list table, with the same hook.
+		set_current_screen( 'themes-network' );
+
+		$this->assertFalse( $translation_stats->allowed_pages( 'themes.php' ) );
+		$this->assertTrue( $translation_stats->allowed_pages( 'plugins.php' ) );
+
+		set_current_screen( 'front' );
 		$this->assertTrue( $translation_stats->allowed_pages( 'update-core.php' ) );
 		$this->assertTrue( $translation_stats->allowed_pages( 'settings_page_' . TRANSLATION_STATS_SETTINGS_PAGE ) );
 

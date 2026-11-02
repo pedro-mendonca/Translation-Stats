@@ -79,9 +79,10 @@ jobs:
           - php: 'latest' # Latest stable version.
             db-type: 'mariadb' # Latest MariaDB version.
 
-          # Test the latest WP and PHP versions, as multisite.
+          # Test the latest WP and PHP versions, as multisite, with code coverage of the multisite code.
           - php: 'latest' # Latest stable version.
             multisite: true
+            coverage: true
 
     with:
       php: ${{ matrix.php || '7.4' }}                                                     # Defaults to '7.4'.

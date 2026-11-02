@@ -74,19 +74,16 @@ export function tstatsOnLoad() {
 		console.log( 'Use default tab: ' + tstatsActiveTabID );
 	}
 
-	// Check for URL tstatsActiveTabID on Settings page load.
-	if ( tstatsActiveTabID ) {
-		// Set Active Tab on Settings page load.
-		$( '.nav-tab-wrapper' ).children().removeClass( 'nav-tab-active' );
-		$( '.nav-tab-wrapper a[href="' + tstatsActiveTabID + '"]' ).addClass( 'nav-tab-active' );
+	// Set Active Tab on Settings page load, from the URL hash or the default.
+	$( '.nav-tab-wrapper' ).children().removeClass( 'nav-tab-active' );
+	$( '.nav-tab-wrapper a[href="' + tstatsActiveTabID + '"]' ).addClass( 'nav-tab-active' );
 
-		// Set Active Tab Content on Settings page load.
-		$( '.tabs-content form' ).children( '.tab-content' ).addClass( 'hidden' );
-		$( '.tabs-content form div' + tstatsActiveTabID.replace( '#', '#tab-' ) ).removeClass( 'hidden' );
+	// Set Active Tab Content on Settings page load.
+	$( '.tabs-content form' ).children( '.tab-content' ).addClass( 'hidden' );
+	$( '.tabs-content form div' + tstatsActiveTabID.replace( '#', '#tab-' ) ).removeClass( 'hidden' );
 
-		// Return to the active tab after saving.
-		tstatsSetFormReferer( tstatsActiveTabID );
-	}
+	// Return to the active tab after saving.
+	tstatsSetFormReferer( tstatsActiveTabID );
 
 	console.log( 'Loaded admin-settings.js' );
 }

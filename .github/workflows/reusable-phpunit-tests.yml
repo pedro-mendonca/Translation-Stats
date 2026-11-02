@@ -149,8 +149,9 @@ jobs:
           verbose: true
           token: ${{ secrets.codecov-token }}
 
+      # Codacy only from the single site coverage, as it needs partial reports to merge them. Codecov merges the single site and multisite reports.
       - name: Run codacy-coverage-reporter
-        if: ${{ inputs.coverage }}
+        if: ${{ inputs.coverage && ! inputs.multisite }}
         # Pull requests from Dependabot or forks don't have access to the token.
         continue-on-error: true
         uses: codacy/codacy-coverage-reporter-action@v1.3.0
