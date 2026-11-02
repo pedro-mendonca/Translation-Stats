@@ -10,9 +10,14 @@ import { initStatsWidgets } from '../../assets/src/js/stats-widget';
 import { initSettings } from '../../assets/src/js/settings';
 import { addSettingsLink, initThemesStats } from '../../assets/src/js/themes';
 
-vi.mock( '../../assets/src/js/stats-widget', () => ( { initStatsWidgets: vi.fn() } ) );
+vi.mock( '../../assets/src/js/stats-widget', () => ( {
+	initStatsWidgets: vi.fn(),
+} ) );
 vi.mock( '../../assets/src/js/settings', () => ( { initSettings: vi.fn() } ) );
-vi.mock( '../../assets/src/js/themes', () => ( { addSettingsLink: vi.fn(), initThemesStats: vi.fn() } ) );
+vi.mock( '../../assets/src/js/themes', () => ( {
+	addSettingsLink: vi.fn(),
+	initThemesStats: vi.fn(),
+} ) );
 vi.mock( 'tablesorter/dist/js/jquery.tablesorter.combined', () => ( {} ) );
 
 /**
@@ -45,7 +50,9 @@ describe( 'entries', () => {
 	} );
 
 	it( 'extends the themes views right away, and adds the settings link on document ready', async () => {
-		window.tstatsThemes = { settingsUrl: 'options-general.php?page=translation-stats#themes' };
+		window.tstatsThemes = {
+			settingsUrl: 'options-general.php?page=translation-stats#themes',
+		};
 
 		await import( '../../assets/src/js/admin-themes' );
 
@@ -55,7 +62,9 @@ describe( 'entries', () => {
 
 		await documentReady();
 
-		expect( addSettingsLink ).toHaveBeenCalledWith( 'options-general.php?page=translation-stats#themes' );
+		expect( addSettingsLink ).toHaveBeenCalledWith(
+			'options-general.php?page=translation-stats#themes'
+		);
 	} );
 
 	it( 'adds no settings link without the themes data', async () => {

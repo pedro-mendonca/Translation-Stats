@@ -39,6 +39,7 @@
 		"test:unit": "wp-scripts test-unit-js",
 		"test:unit:coverage": "wp-scripts test-unit-js --coverage",
 		"test:unit:watch": "wp-scripts test-unit-js --watch",
+		"format:js": "wp-scripts format assets/src/js tests/js webpack.config.js vitest.config.mjs",
 		"lint:css": "wp-scripts lint-style",
 		"lint:css:fix": "npm run lint:css -- --fix",
 		"lint:js": "wp-scripts lint-js",

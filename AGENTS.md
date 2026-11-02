@@ -40,7 +40,8 @@ WordPress plugin that shows the translation stats of the installed plugins and t
 | `composer lint:phpstan` | PHPStan, level 9 (`phpstan.neon.dist`). |
 | `composer compat:php` | PHP compatibility from 7.4. |
 | `composer lint:phpmd` | PHPMD size and complexity rules, also checked by Codacy. |
-| `npm run lint:js` and `npm run lint:css` | ESLint and Stylelint, with the WordPress configurations. |
+| `npm run lint:js` and `npm run lint:css` | ESLint, with the `@wordpress/scripts` default config and its Prettier formatting, and Stylelint. |
+| `npm run format:js` | Format the JavaScript with Prettier. |
 | `npm run lint:md:docs` | Markdown lint. |
 | `composer test` | PHPUnit, single site, with the built assets. `composer test:multisite` for multisite. |
 | `composer zip` | Build, and zip the plugin files allowed by `.distignore`, as deployed to WordPress.org. |
