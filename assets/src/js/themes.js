@@ -38,7 +38,9 @@ import { createQueue, loadWidgetStats } from './stats-widget';
  * @return {string} REST API route path.
  */
 export function themeStatsPath( slug ) {
-	return '/translation-stats/v1/themes/' + encodeURIComponent( slug ) + '/stats';
+	return (
+		'/translation-stats/v1/themes/' + encodeURIComponent( slug ) + '/stats'
+	);
 }
 
 /**
@@ -57,23 +59,23 @@ export function renderCardBar( stats ) {
 	const card = jQuery(
 		'<div class="tstats-theme-card"><div class="translation-stats-content"><div class="translation-stats-content-stats">' +
 			'<div class="content__subproject project"><a><div class="subproject project"><div class="subproject-bar">' +
-				'<span class="subproject-bar__name"></span>' +
+			'<span class="subproject-bar__name"></span>' +
 			'</div></div></a></div>' +
-		'</div></div></div>',
+			'</div></div></div>'
 	);
 
 	const label = loading
 		? sprintf(
-			/* translators: %s: Language native name. */
-			__( 'Translated to %s', 'translation-stats' ),
-			stats.language,
-		)
+				/* translators: %s: Language native name. */
+				__( 'Translated to %s', 'translation-stats' ),
+				stats.language
+			)
 		: sprintf(
-			/* translators: 1: Language native name. 2: Percent translated. */
-			__( 'Translated to %1$s: %2$d%%', 'translation-stats' ),
-			stats.language,
-			stats.percent,
-		);
+				/* translators: 1: Language native name. 2: Percent translated. */
+				__( 'Translated to %1$s: %2$d%%', 'translation-stats' ),
+				stats.language,
+				stats.percent
+			);
 
 	card.find( '.subproject-bar__name' ).text( label );
 
@@ -84,7 +86,7 @@ export function renderCardBar( stats ) {
 
 	card.find( 'a' ).addClass( 'enabled' );
 	card.find( 'div.subproject' )
-		.addClass( 'percent' + ( 10 * Math.floor( stats.percent / 10 ) ) )
+		.addClass( 'percent' + 10 * Math.floor( stats.percent / 10 ) )
 		.css( 'width', stats.percent + '%' );
 
 	return card;
@@ -103,9 +105,15 @@ export function renderCardBar( stats ) {
 export function renderWidget( slug, stats ) {
 	const widget = jQuery(
 		'<div class="tstats-theme-widget">' +
-			'<div class="translation-stats-title"><p>' + stats.title + '</p></div>' +
-			'<div class="translation-stats-content"><div class="content">' + stats.stats + '</div>' + stats.notice + '</div>' +
-		'</div>',
+			'<div class="translation-stats-title"><p>' +
+			stats.title +
+			'</p></div>' +
+			'<div class="translation-stats-content"><div class="content">' +
+			stats.stats +
+			'</div>' +
+			stats.notice +
+			'</div>' +
+			'</div>'
 	);
 
 	return widget.attr( 'data-slug', slug );
@@ -130,9 +138,16 @@ export function loadThemeStats( model, widget, forceUpdate, queue ) {
 	stats.loading = true;
 
 	// Show the loading state also in the theme card, with the moving stripes while updating.
-	const targets = widget.add( jQuery( '.theme[data-slug="' + slug + '"] .tstats-theme-card' ) );
+	const targets = widget.add(
+		jQuery( '.theme[data-slug="' + slug + '"] .tstats-theme-card' )
+	);
 
-	return loadWidgetStats( targets, themeStatsPath( slug ), forceUpdate, queue ).then( function( response ) {
+	return loadWidgetStats(
+		targets,
+		themeStatsPath( slug ),
+		forceUpdate,
+		queue
+	).then( function ( response ) {
 		stats.loading = false;
 
 		if ( ! response ) {
@@ -144,8 +159,14 @@ export function loadThemeStats( model, widget, forceUpdate, queue ) {
 		stats.stats = response.html;
 		stats.percent = response.percent;
 
-		jQuery( '.theme[data-slug="' + slug + '"] .tstats-theme-card' ).replaceWith( renderCardBar( stats ) );
-		jQuery( '.tstats-theme-widget[data-slug="' + slug + '"] div.translation-stats-content div.content' ).html( response.html );
+		jQuery(
+			'.theme[data-slug="' + slug + '"] .tstats-theme-card'
+		).replaceWith( renderCardBar( stats ) );
+		jQuery(
+			'.tstats-theme-widget[data-slug="' +
+				slug +
+				'"] div.translation-stats-content div.content'
+		).html( response.html );
 	} );
 }
 
@@ -201,9 +222,12 @@ export function addThemeWidget( view, queue ) {
 	}
 
 	// Show the update button with its display, as the theme details aren't in the page yet to show it with jQuery.
-	widget.find( 'button.tstats-update-button' ).css( 'display', 'inline-block' ).on( 'click', function() {
-		loadThemeStats( view.model, widget, true, queue );
-	} );
+	widget
+		.find( 'button.tstats-update-button' )
+		.css( 'display', 'inline-block' )
+		.on( 'click', function () {
+			loadThemeStats( view.model, widget, true, queue );
+		} );
 
 	if ( ! stats.cached && ! stats.loading ) {
 		loadThemeStats( view.model, widget, false, queue );
@@ -226,9 +250,15 @@ export function addSettingsLink( settingsUrl ) {
 		return false;
 	}
 
-	const link = jQuery( '<a class="page-title-action tstats-themes-settings-link"><span class="dashicons dashicons-edit" aria-hidden="true"></span> </a>' );
+	const link = jQuery(
+		'<a class="page-title-action tstats-themes-settings-link"><span class="dashicons dashicons-edit" aria-hidden="true"></span> </a>'
+	);
 
-	link.attr( 'href', settingsUrl ).append( document.createTextNode( __( 'Translation Stats', 'translation-stats' ) ) );
+	link.attr( 'href', settingsUrl ).append(
+		document.createTextNode(
+			__( 'Translation Stats', 'translation-stats' )
+		)
+	);
 
 	actions.last().after( link );
 
@@ -246,21 +276,29 @@ export function addSettingsLink( settingsUrl ) {
  *
  * @return {boolean} True if the themes views were extended.
  */
-export function initThemesStats( themes = window.wp && window.wp.themes, queue = createQueue() ) {
-	if ( ! themes || ! themes.view || ! themes.view.Theme || ! themes.view.Details ) {
+export function initThemesStats(
+	themes = window.wp && window.wp.themes,
+	queue = createQueue()
+) {
+	if (
+		! themes ||
+		! themes.view ||
+		! themes.view.Theme ||
+		! themes.view.Details
+	) {
 		return false;
 	}
 
 	const renderTheme = themes.view.Theme.prototype.render;
 	const renderDetails = themes.view.Details.prototype.render;
 
-	themes.view.Theme.prototype.render = function() {
+	themes.view.Theme.prototype.render = function () {
 		const result = renderTheme.apply( this, arguments );
 		addThemeCardBar( this, queue );
 		return result;
 	};
 
-	themes.view.Details.prototype.render = function() {
+	themes.view.Details.prototype.render = function () {
 		const result = renderDetails.apply( this, arguments );
 		addThemeWidget( this, queue );
 		return result;

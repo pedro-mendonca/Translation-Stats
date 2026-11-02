@@ -12,7 +12,11 @@ import apiFetch from '@wordpress/api-fetch';
 /**
  * Internal dependencies
  */
-import { createQueue, initStatsWidgets, loadStats } from '../../assets/src/js/stats-widget';
+import {
+	createQueue,
+	initStatsWidgets,
+	loadStats,
+} from '../../assets/src/js/stats-widget';
 
 vi.mock( '@wordpress/api-fetch', () => ( { default: vi.fn() } ) );
 
@@ -39,7 +43,7 @@ function addWidget( slug, { cached = false } = {} ) {
 				<div class="content">${ cached ? '<div class="translation-stats-content-stats">Cached stats</div>' : '<div class="translation-stats-placeholder">Placeholder</div>' }</div>
 				<div class="notice notice-warning translation-stats-loading hidden${ cached ? ' translation-stats-cached' : '' }"><p></p></div>
 			</div>
-		</td></tr></tbody></table>`,
+		</td></tr></tbody></table>`
 	);
 
 	return jQuery( `tr[data-slug="${ slug }"] td.translation-stats` );
@@ -100,14 +104,20 @@ describe( 'loadStats', () => {
 		expect( button.hasClass( 'waiting' ) ).toBe( true );
 
 		// Loading.
-		await vi.waitFor( () => expect( apiFetch ).toHaveBeenCalledWith( { path: '/translation-stats/v1/plugins/hello/stats' } ) );
+		await vi.waitFor( () =>
+			expect( apiFetch ).toHaveBeenCalledWith( {
+				path: '/translation-stats/v1/plugins/hello/stats',
+			} )
+		);
 		expect( status.text() ).toBe( 'Updating…' );
 		expect( button.hasClass( 'waiting' ) ).toBe( false );
 		expect( button.hasClass( 'updating' ) ).toBe( true );
 		expect( widget.hasClass( 'tstats-loading' ) ).toBe( true );
 
 		// Loaded.
-		request.resolve( { html: '<div class="translation-stats-content-stats">95%</div>' } );
+		request.resolve( {
+			html: '<div class="translation-stats-content-stats">95%</div>',
+		} );
 		await loaded;
 
 		expect( content.text() ).toBe( '95%' );
@@ -127,7 +137,9 @@ describe( 'loadStats', () => {
 		loadStats( 'hello', true, createQueue() );
 		await vi.advanceTimersByTimeAsync( 100 );
 
-		expect( apiFetch ).toHaveBeenCalledWith( { path: '/translation-stats/v1/plugins/hello/stats?force=true' } );
+		expect( apiFetch ).toHaveBeenCalledWith( {
+			path: '/translation-stats/v1/plugins/hello/stats?force=true',
+		} );
 		expect( content.text() ).toBe( 'New stats' );
 		expect( status.text() ).toBe( 'Updated!' );
 
@@ -139,7 +151,11 @@ describe( 'loadStats', () => {
 	it( 'shows the error notice with the REST API error message when the request fails', async () => {
 		const widget = addWidget( 'hello' );
 		const { status, button, notice, content } = elements( widget );
-		vi.mocked( apiFetch ).mockRejectedValue( { code: 'translation_stats_api_unavailable', message: 'The translation stats couldn\'t be loaded from <b>translate.wordpress.org</b>.' } );
+		vi.mocked( apiFetch ).mockRejectedValue( {
+			code: 'translation_stats_api_unavailable',
+			message:
+				"The translation stats couldn't be loaded from <b>translate.wordpress.org</b>.",
+		} );
 
 		await loadStats( 'hello', false, createQueue() );
 
@@ -148,7 +164,9 @@ describe( 'loadStats', () => {
 		expect( notice[ 0 ].style.display ).not.toBe( 'none' );
 
 		// As text, not HTML.
-		expect( notice.text() ).toBe( 'The translation stats couldn\'t be loaded from <b>translate.wordpress.org</b>.' );
+		expect( notice.text() ).toBe(
+			"The translation stats couldn't be loaded from <b>translate.wordpress.org</b>."
+		);
 		expect( notice.find( 'b' ).length ).toBe( 0 );
 		expect( status.text() ).toBe( '' );
 		expect( button.prop( 'disabled' ) ).toBe( false );
@@ -169,7 +187,9 @@ describe( 'loadStats', () => {
 		addWidget( 'first' );
 		const second = elements( addWidget( 'second' ) );
 		const firstRequest = deferred();
-		vi.mocked( apiFetch ).mockReturnValueOnce( firstRequest.promise ).mockResolvedValueOnce( { html: 'Second stats' } );
+		vi.mocked( apiFetch )
+			.mockReturnValueOnce( firstRequest.promise )
+			.mockResolvedValueOnce( { html: 'Second stats' } );
 
 		const queue = createQueue();
 		loadStats( 'first', false, queue );
@@ -187,7 +207,9 @@ describe( 'loadStats', () => {
 		await secondLoaded;
 
 		expect( apiFetch ).toHaveBeenCalledTimes( 2 );
-		expect( apiFetch ).toHaveBeenLastCalledWith( { path: '/translation-stats/v1/plugins/second/stats' } );
+		expect( apiFetch ).toHaveBeenLastCalledWith( {
+			path: '/translation-stats/v1/plugins/second/stats',
+		} );
 		expect( second.content.text() ).toBe( 'Second stats' );
 	} );
 } );
@@ -208,10 +230,14 @@ describe( 'initStatsWidgets', () => {
 		expect( notCached.button[ 0 ].style.display ).not.toBe( 'none' );
 		expect( notCached.button.prop( 'disabled' ) ).toBe( true );
 
-		await vi.waitFor( () => expect( notCached.content.text() ).toBe( 'Loaded stats' ) );
+		await vi.waitFor( () =>
+			expect( notCached.content.text() ).toBe( 'Loaded stats' )
+		);
 
 		expect( apiFetch ).toHaveBeenCalledTimes( 1 );
-		expect( apiFetch ).toHaveBeenCalledWith( { path: '/translation-stats/v1/plugins/not-cached/stats' } );
+		expect( apiFetch ).toHaveBeenCalledWith( {
+			path: '/translation-stats/v1/plugins/not-cached/stats',
+		} );
 		expect( cached.content.text() ).toBe( 'Cached stats' );
 		expect( notCached.button.prop( 'disabled' ) ).toBe( false );
 	} );
@@ -223,8 +249,12 @@ describe( 'initStatsWidgets', () => {
 		initStatsWidgets( createQueue() );
 		cached.button.trigger( 'click' );
 
-		await vi.waitFor( () => expect( cached.content.text() ).toBe( 'Updated stats' ) );
+		await vi.waitFor( () =>
+			expect( cached.content.text() ).toBe( 'Updated stats' )
+		);
 
-		expect( apiFetch ).toHaveBeenCalledWith( { path: '/translation-stats/v1/plugins/cached/stats?force=true' } );
+		expect( apiFetch ).toHaveBeenCalledWith( {
+			path: '/translation-stats/v1/plugins/cached/stats?force=true',
+		} );
 	} );
 } );

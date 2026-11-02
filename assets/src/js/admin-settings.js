@@ -9,6 +9,6 @@ import 'tablesorter/dist/js/jquery.tablesorter.combined';
  */
 import { initSettings } from './settings';
 
-jQuery( document ).ready( function() {
+jQuery( document ).ready( function () {
 	initSettings();
 } );

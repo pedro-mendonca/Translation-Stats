@@ -13,24 +13,39 @@ const defaultConfig = require( '@wordpress/scripts/config/webpack.config' );
  */
 class RemoveEmptyStyleScripts {
 	apply( compiler ) {
-		compiler.hooks.thisCompilation.tap( 'RemoveEmptyStyleScripts', ( compilation ) => {
-			compilation.hooks.processAssets.tap(
-				{
-					name: 'RemoveEmptyStyleScripts',
-					stage: compiler.webpack.Compilation.PROCESS_ASSETS_STAGE_REPORT,
-				},
-				( assets ) => {
-					Object.keys( assets )
-						.filter( ( name ) => name.startsWith( 'css/' ) && name.endsWith( '.js' ) && '' === assets[ name ].source().toString().trim() )
-						.forEach( ( name ) => compilation.deleteAsset( name ) );
-				}
-			);
-		} );
+		compiler.hooks.thisCompilation.tap(
+			'RemoveEmptyStyleScripts',
+			( compilation ) => {
+				compilation.hooks.processAssets.tap(
+					{
+						name: 'RemoveEmptyStyleScripts',
+						stage: compiler.webpack.Compilation
+							.PROCESS_ASSETS_STAGE_REPORT,
+					},
+					( assets ) => {
+						Object.keys( assets )
+							.filter(
+								( name ) =>
+									name.startsWith( 'css/' ) &&
+									name.endsWith( '.js' ) &&
+									'' ===
+										assets[ name ]
+											.source()
+											.toString()
+											.trim()
+							)
+							.forEach( ( name ) =>
+								compilation.deleteAsset( name )
+							);
+					}
+				);
+			}
+		);
 	}
 }
 
 /**
- * Disable the PostCSS config files lookup, to only use the @wordpress/scripts default config.
+ * Disable the PostCSS config files lookup, to only use the `@wordpress/scripts` default config.
  * Otherwise, a config file in a parent directory, like a development environment, changes the build.
  *
  * @param {Array} rules Webpack module rules.
@@ -41,9 +56,16 @@ function disablePostCSSConfigLookup( rules ) {
 	rules
 		.filter( ( rule ) => Array.isArray( rule.use ) )
 		.flatMap( ( rule ) => rule.use )
-		.filter( ( loader ) => loader.loader && loader.loader.includes( 'postcss-loader' ) )
+		.filter(
+			( loader ) =>
+				loader.loader && loader.loader.includes( 'postcss-loader' )
+		)
 		.forEach( ( loader ) => {
-			loader.options.postcssOptions = Object.assign( {}, loader.options.postcssOptions, { config: false } );
+			loader.options.postcssOptions = Object.assign(
+				{},
+				loader.options.postcssOptions,
+				{ config: false }
+			);
 		} );
 
 	return rules;

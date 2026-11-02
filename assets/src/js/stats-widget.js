@@ -27,7 +27,7 @@ import { __ } from '@wordpress/i18n';
 export function createQueue() {
 	let previous = new jQuery.Deferred().resolve();
 
-	return function( fn ) {
+	return function ( fn ) {
 		previous = previous.then( fn, fn );
 		return previous;
 	};
@@ -46,9 +46,18 @@ export function createQueue() {
  * @return {Promise} Promise resolved when the request is completed.
  */
 export function loadStats( tstatsPlugin, forceUpdate, queue ) {
-	const widget = jQuery( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats' );
+	const widget = jQuery(
+		'tr[data-slug=' + tstatsPlugin + '] td.translation-stats'
+	);
 
-	return loadWidgetStats( widget, '/translation-stats/v1/plugins/' + encodeURIComponent( tstatsPlugin ) + '/stats', forceUpdate, queue );
+	return loadWidgetStats(
+		widget,
+		'/translation-stats/v1/plugins/' +
+			encodeURIComponent( tstatsPlugin ) +
+			'/stats',
+		forceUpdate,
+		queue
+	);
 }
 
 /**
@@ -64,7 +73,9 @@ export function loadStats( tstatsPlugin, forceUpdate, queue ) {
  * @return {Promise} Promise resolved with the REST API response, or undefined if the request failed.
  */
 export function loadWidgetStats( widget, path, forceUpdate, queue ) {
-	const notice = widget.find( 'div.translation-stats-content div.notice.translation-stats-loading' );
+	const notice = widget.find(
+		'div.translation-stats-content div.notice.translation-stats-loading'
+	);
 	const button = widget.find( 'button.tstats-update-button' );
 	const status = widget.find( '.tstats-update-status' );
 
@@ -79,7 +90,7 @@ export function loadWidgetStats( widget, path, forceUpdate, queue ) {
 	status.text( __( 'Waiting…', 'translation-stats' ) );
 
 	// Add request to queue.
-	return queue( function() {
+	return queue( function () {
 		// Start colored bars animation.
 		widget.addClass( 'tstats-loading' );
 
@@ -89,37 +100,62 @@ export function loadWidgetStats( widget, path, forceUpdate, queue ) {
 
 		return apiFetch( {
 			path: path + ( forceUpdate ? '?force=true' : '' ),
-		} ).then( function( response ) {
-			if ( forceUpdate ) {
-				// Show the Updated status for a few seconds.
-				status.text( __( 'Updated!', 'translation-stats' ) );
-				status.data( 'timeout', setTimeout( function() {
+		} )
+			.then( function ( response ) {
+				if ( forceUpdate ) {
+					// Show the Updated status for a few seconds.
+					status.text( __( 'Updated!', 'translation-stats' ) );
+					status.data(
+						'timeout',
+						setTimeout( function () {
+							status.text( '' );
+						}, 3000 )
+					);
+				} else {
+					// Clear the status after the first load.
 					status.text( '' );
-				}, 3000 ) );
-			} else {
-				// Clear the status after the first load.
+				}
+
+				// Show Translation Stats content.
+				widget
+					.find( 'div.translation-stats-content div.content' )
+					.html( response.html );
+
+				return response;
+			} )
+			.catch( function ( error ) {
+				// Clear the status and show the Error notice.
 				status.text( '' );
-			}
+				notice
+					.removeClass(
+						'hidden notice-success updated-message notice-warning updating-message'
+					)
+					.addClass( 'notice-error update-message' )
+					.show();
+				// Show the REST API error message, like translate.WordPress.org unavailable, or a generic message.
+				notice
+					.find( 'p' )
+					.text(
+						error && error.message
+							? error.message
+							: __(
+									'An error occurred while updating.',
+									'translation-stats'
+								)
+					);
+			} )
+			.then( function ( response ) {
+				// Stop colored bars animation.
+				widget.removeClass( 'tstats-loading' );
 
-			// Show Translation Stats content.
-			widget.find( 'div.translation-stats-content div.content' ).html( response.html );
+				// Enable and show update button, and stop spinning its icon.
+				button
+					.prop( 'disabled', false )
+					.removeClass( 'waiting updating' )
+					.show();
 
-			return response;
-		} ).catch( function( error ) {
-			// Clear the status and show the Error notice.
-			status.text( '' );
-			notice.removeClass( 'hidden notice-success updated-message notice-warning updating-message' ).addClass( 'notice-error update-message' ).show();
-			// Show the REST API error message, like translate.WordPress.org unavailable, or a generic message.
-			notice.find( 'p' ).text( error && error.message ? error.message : __( 'An error occurred while updating.', 'translation-stats' ) );
-		} ).then( function( response ) {
-			// Stop colored bars animation.
-			widget.removeClass( 'tstats-loading' );
-
-			// Enable and show update button, and stop spinning its icon.
-			button.prop( 'disabled', false ).removeClass( 'waiting updating' ).show();
-
-			return response;
-		} );
+				return response;
+			} );
 	} );
 }
 
@@ -132,17 +168,23 @@ export function loadWidgetStats( widget, path, forceUpdate, queue ) {
  */
 export function initStatsWidgets( queue = createQueue() ) {
 	// Action on click update button.
-	jQuery( 'table.wp-list-table td.translation-stats button.tstats-update-button' ).on( 'click', function() {
+	jQuery(
+		'table.wp-list-table td.translation-stats button.tstats-update-button'
+	).on( 'click', function () {
 		const tstatsPlugin = jQuery( this ).closest( 'tr' ).attr( 'data-slug' );
 		loadStats( tstatsPlugin, true, queue );
 	} );
 
 	// Action on each loading div, except the ones with the cached stats already rendered.
-	jQuery( 'table.wp-list-table td.translation-stats div.translation-stats-loading:not(.translation-stats-cached)' ).each( function() {
+	jQuery(
+		'table.wp-list-table td.translation-stats div.translation-stats-loading:not(.translation-stats-cached)'
+	).each( function () {
 		const tstatsPlugin = jQuery( this ).closest( 'tr' ).attr( 'data-slug' );
 		loadStats( tstatsPlugin, false, queue );
 	} );
 
 	// Show the update buttons, disabled and dimmed while loading the stats without cache.
-	jQuery( 'table.wp-list-table td.translation-stats button.tstats-update-button' ).show();
+	jQuery(
+		'table.wp-list-table td.translation-stats button.tstats-update-button'
+	).show();
 }
