@@ -32,29 +32,41 @@ This plugin is properly prepared for localization.
 == Frequently Asked Questions ==
 
 = What are the plugin subprojects? =
-*   **Development** - Translation of the *Development* version of the plugin
-*   **Development Readme** - Readme of the *Development* version of the plugin page on [wp.org/plugins](https://wordpress.org/plugins/)
-*   **Stable** - Translation of the *Stable* version of the plugin
-*   **Stable Readme** - Readme of the *Stable* version of the plugin page on [wp.org/plugins](https://wordpress.org/plugins/)
+*   **Development**: the plugin's *Development* version (trunk)
+*   **Development Readme**: the plugin page on [WordPress.org/plugins](https://wordpress.org/plugins/), from the *Development* version
+*   **Stable**: the plugin's *Stable* version (latest release)
+*   **Stable Readme**: the plugin page on WordPress.org/plugins, from the *Stable* version
 
 = Do themes have subprojects? =
 No. The themes translation projects on translate.wordpress.org have no subprojects, so the theme translation stats have a single translation stats bar.
 
-= How can I translate a plugin? =
-*   Register and login in [wp.org](https://login.wordpress.org/)
-*   Click on the plugin subproject stats bar you want to translate
-*   Read the Polyglots [Translator’s Handbook](https://make.wordpress.org/polyglots/handbook/)
-*   Translate according the rules of your [Locale Translation Team](https://make.wordpress.org/polyglots/teams/)
+= Why don't I see the translation stats for a plugin or theme? =
+Only plugins and themes hosted on WordPress.org have translation projects on translate.wordpress.org. Check that it's selected in Settings > Translation Stats, and that its slug matches its text domain: the settings table shows a check mark when it does.
+
+= Which language are the stats shown for? =
+The language set in Settings > Translation Stats > Settings. By default, the site language.
+
+= How often are the stats updated? =
+The stats are cached for the time set in the Tools tab, 24 hours by default. Use the refresh button on each plugin or theme to update them right away, or clean the whole cache in the Tools tab.
+
+= How can I translate a plugin or theme? =
+*   Log in to [WordPress.org](https://login.wordpress.org/), or create an account
+*   Click the translation stats bar of the plugin subproject or theme you want to translate
+*   Read the Polyglots [Translator's Handbook](https://make.wordpress.org/polyglots/handbook/)
+*   Translate according to the rules of your [Locale Translation Team](https://make.wordpress.org/polyglots/teams/)
 
 = Should I translate both Stable and Development? =
-Since mid-April 2016, not only new strings but also edits are synced between dev and stable (both ways, only approved translations). When a plugin releases a new version all translations are copied from dev to stable. [Read more...](https://make.wordpress.org/polyglots/handbook/frequently-asked-questions/#should-i-translate-both-stable-and-dev)
+Usually not. New strings and edits to approved translations are synced between Development and Stable, and when a plugin releases a new version, its Development translations are copied to Stable. [Read more...](https://make.wordpress.org/polyglots/handbook/frequently-asked-questions/#should-i-translate-both-stable-and-dev)
 
 = How long does it take for a translation to become available? =
-Translations for the readme are published almost immediately.
-The language pack for a plugin will be generated when 90% of the Stable (latest release) sub-project strings have been translated and approved.
+Readme translations are published almost immediately.
+The first language pack of a plugin or theme is generated when 90% of its strings are translated and approved. For plugins, that's the Stable (latest release) subproject. After that, language packs are updated with each new approved translation.
 
-= Can I help translating this plugin to my own language? =
+= Can I help translate this plugin to my own language? =
 Yes you can! If you want to translate this plugin to your language, please [translate it on translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/translation-stats).
+
+= Where can I get support? =
+Ask your questions in the [support forum](https://wordpress.org/support/plugin/translation-stats/) on WordPress.org.
 
 = Can I contribute to this plugin? =
 Sure! You are welcome to report any issues or add feature suggestions on the [GitHub repository](https://github.com/pedro-mendonca/Translation-Stats).
