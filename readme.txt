@@ -5,17 +5,19 @@ Tags: internationalization, i18n, localization, l10n, translation
 Requires at least: 5.9
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 1.4.0
+Stable tag: 2.0.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Show plugins translation stats on your WordPress install.
+Show plugins and themes translation stats on your WordPress install.
 
 == Description ==
 
-The plugin adds a "Translation Stats" column to the plugin list screen in WordPress admin.
+The plugin adds a "Translation Stats" column to the Plugins screen, and the translation stats to the Themes screen in WordPress admin: a translation stats bar on the theme cards, and a translation stats widget in the theme details.
 
-The translation stats are shown only for plugins that exist in [translate.wordpress.org](https://translate.wordpress.org/) and are [prepared for localization](https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/).
+Select the plugins and themes to show the translation stats in the plugin settings.
+
+The translation stats are shown only for plugins and themes that exist in [translate.wordpress.org](https://translate.wordpress.org/) and are [prepared for localization](https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/).
 
 If a plugin doesn't have complete translation stats, you'll see a notice with one of the reasons below:
 
@@ -34,6 +36,9 @@ This plugin is properly prepared for localization.
 *   **Development Readme** - Readme of the *Development* version of the plugin page on [wp.org/plugins](https://wordpress.org/plugins/)
 *   **Stable** - Translation of the *Stable* version of the plugin
 *   **Stable Readme** - Readme of the *Stable* version of the plugin page on [wp.org/plugins](https://wordpress.org/plugins/)
+
+= Do themes have subprojects? =
+No. The themes translation projects on translate.wordpress.org have no subprojects, so the theme translation stats have a single translation stats bar.
 
 = How can I translate a plugin? =
 *   Register and login in [wp.org](https://login.wordpress.org/)
@@ -62,6 +67,23 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 4. Translation Stats tools tab
 
 == Changelog ==
+
+= 2.0.0 =
+*   New: Show the translation stats of themes on the Themes screen, with a translation stats bar on the theme cards and a translation stats widget in the theme details.
+*   New: Select the themes to show the translation stats in the new Themes settings tab.
+*   Show the translate.wordpress.org error message in the translation stats notice, like when it's unavailable.
+*   Show a placeholder of the translation stats bars while loading them.
+*   Return to the same settings tab after saving the settings.
+*   Fix the settings update notice shown before the page, and in any request, after updating the plugin. It's now shown once in the admin notices.
+*   Fix the activation notice not shown with a different plugin folder name, and mention the themes.
+*   Fix the settings Save button focus cut on the left.
+*   Save the settings checkboxes as booleans, updating the saved settings automatically.
+*   Remove the console logs.
+*   Developers: Add the Project, Plugin_Project and Theme_Project classes for the translate.wordpress.org projects and their translation stats. Remove Translations_API::translations_api_get_plugin(), plugin_project_on_translate_wporg() and plugin_subproject_on_translate_wporg(), and Plugins::plugin_subproject_stats(), plugin_stats_cached() and plugin_subproject_stats_transient().
+*   Developers: The REST API route translation-stats/v1/(plugins|themes)/<slug>/stats loads the plugins and themes translation stats.
+*   Developers: Deprecate the TRANSLATION_STATS_TRANSIENTS_PREFIX constant, replaced by TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX. The themes transients use TRANSLATION_STATS_TRANSIENTS_THEMES_PREFIX.
+*   Build the JavaScript and CSS with @wordpress/scripts.
+*   Increase PHPStan level to 9, and unit tests coverage.
 
 = 1.4.0 =
 *   Bump minimum WP version to 5.9.

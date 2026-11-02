@@ -48,7 +48,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 		/**
 		 * Check if a theme is on WordPress.org, if it exists in 'response' or 'no_update' in the 'update_themes' transient.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @param string $theme_slug   Theme slug, its stylesheet directory ( e.g. 'twentytwentyfive' ).
 		 *

@@ -4,7 +4,7 @@
  *
  * @package Translation_Stats
  *
- * @since 1.5.0
+ * @since 2.0.0
  */
 
 namespace Translation_Stats;
@@ -28,7 +28,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Stats_Widget' ) ) {
 		 * Render the widget update button, with the update status announced to screen readers.
 		 *
 		 * @since 0.9.4   Plugins::plugin_update_button().
-		 * @since 1.5.0   Moved to Stats_Widget, for plugins and themes.
+		 * @since 2.0.0   Moved to Stats_Widget, for plugins and themes.
 		 *
 		 * @return void
 		 */
@@ -50,7 +50,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Stats_Widget' ) ) {
 		/**
 		 * Render the widget status notice, hidden to show the errors, below the stats to not move them when shown.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @param bool $cached   Whether the stats are cached, or are loaded with the REST API.
 		 *
@@ -83,7 +83,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Stats_Widget' ) ) {
 		/**
 		 * Render an empty stats placeholder, with a bar for each subproject, while loading the stats.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @param array<int, array{slug: string, name: string}> $subprojects   Subprojects to show, with an empty slug for the project itself.
 		 *

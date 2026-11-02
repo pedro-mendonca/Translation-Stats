@@ -12,8 +12,8 @@
  * Plugin Name:       Translation Stats
  * Plugin URI:        https://translationstats.com
  * GitHub Plugin URI: https://github.com/pedro-mendonca/Translation-Stats
- * Description:       Show plugins translation stats on your WordPress install.
- * Version:           1.4.0
+ * Description:       Show plugins and themes translation stats on your WordPress install.
+ * Version:           2.0.0
  * Requires at least: 5.9
  * Tested up to:      7.1
  * Requires PHP:      7.4
@@ -65,7 +65,7 @@ define( 'TRANSLATION_STATS_SETTINGS_SECTIONS_PREFIX', 'translation_stats_' );
 // Set Translation Stats plugins transients prefix.
 define( 'TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX', 'translation_stats_plugin_' );
 
-// Deprecated since 1.5.0, kept for compatibility. Use TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX.
+// Deprecated since 2.0.0, kept for compatibility. Use TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX.
 define( 'TRANSLATION_STATS_TRANSIENTS_PREFIX', TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX );
 
 // Set Translation Stats themes transients prefix.

@@ -4,7 +4,7 @@
  *
  * @package Translation_Stats
  *
- * @since 1.5.0
+ * @since 2.0.0
  */
 
 namespace Translation_Stats;
@@ -81,7 +81,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Projects_REST_Controller' ) ) {
 		 * Register the route to load the project translation stats.
 		 *
 		 * @since 1.4.0   Registered by Plugins::register_rest_routes().
-		 * @since 1.5.0   Moved to the REST API controller, for plugins and themes.
+		 * @since 2.0.0   Moved to the REST API controller, for plugins and themes.
 		 *
 		 * @return void
 		 */
@@ -122,7 +122,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Projects_REST_Controller' ) ) {
 		 * Check if the user can access the screen where the project translation stats are shown.
 		 *
 		 * @since 1.4.0   Plugins::rest_permission_check().
-		 * @since 1.5.0   Moved to the REST API controller, with the capability of each project type.
+		 * @since 2.0.0   Moved to the REST API controller, with the capability of each project type.
 		 *
 		 * @param WP_REST_Request $request   The REST API request.
 		 *
@@ -150,7 +150,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Projects_REST_Controller' ) ) {
 		 * @since 0.9.4
 		 * @since 1.2.0   Renamed from tstats_stats_plugin_widget_content_load() to plugin_widget_content_load().
 		 * @since 1.4.0   Use the REST API instead of Ajax, renamed to rest_plugin_widget_content().
-		 * @since 1.5.0   Moved to the REST API controller, renamed to get_item(), for plugins and themes.
+		 * @since 2.0.0   Moved to the REST API controller, renamed to get_item(), for plugins and themes.
 		 *
 		 * @param WP_REST_Request $request   The REST API request.
 		 *
@@ -198,7 +198,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Projects_REST_Controller' ) ) {
 		/**
 		 * Get the project translation stats response schema.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @return array<string, mixed>   Response schema.
 		 */

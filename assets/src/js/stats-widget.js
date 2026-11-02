@@ -20,7 +20,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Create a queue to run the REST API requests one after another.
  *
- * @since 1.5.0
+ * @since 2.0.0
  *
  * @return {Queue} Function to add a request to the queue.
  */
@@ -37,7 +37,7 @@ export function createQueue() {
  * Load the plugin subprojects stats.
  *
  * @since 0.9.4
- * @since 1.5.0 Renamed from tstatsPluginSubprojectsLoad() to loadStats(), with the queue as argument.
+ * @since 2.0.0 Renamed from tstatsPluginSubprojectsLoad() to loadStats(), with the queue as argument.
  *
  * @param {string}  tstatsPlugin Project slug.
  * @param {boolean} forceUpdate  True to get new stats, false to use the cached stats.
@@ -63,7 +63,7 @@ export function loadStats( tstatsPlugin, forceUpdate, queue ) {
 /**
  * Load the stats of a project widget, with the REST API route of the project.
  *
- * @since 1.5.0
+ * @since 2.0.0
  *
  * @param {Object}  widget      Widget jQuery object, empty to load the stats without widget.
  * @param {string}  path        REST API route path of the project stats.
@@ -162,7 +162,7 @@ export function loadWidgetStats( widget, path, forceUpdate, queue ) {
 /**
  * Initialize the plugins stats widgets: load the stats without cache, and update them on click.
  *
- * @since 1.5.0
+ * @since 2.0.0
  *
  * @param {Queue} queue Queue to add the requests. Defaults to a new queue.
  */

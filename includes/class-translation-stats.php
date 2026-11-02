@@ -80,7 +80,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 		/**
 		 * Register the REST API routes.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @return void
 		 */
@@ -114,7 +114,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 		 *
 		 * @since 0.8.0
 		 * @since 1.1.1   Renamed from tstats_register_plugin_styles() to register_plugin_styles().
-		 * @since 1.5.0   Use the style built with @wordpress/scripts, with RTL support.
+		 * @since 2.0.0   Use the style built with @wordpress/scripts, with RTL support.
 		 *
 		 * @param string $hook  Hook.
 		 *
@@ -147,7 +147,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 		 *
 		 * @since 0.8.0
 		 * @since 1.1.1   Renamed from tstats_register_plugin_scripts() to register_plugin_scripts().
-		 * @since 1.5.0   Use the scripts built with @wordpress/scripts, with their dependencies and version.
+		 * @since 2.0.0   Use the scripts built with @wordpress/scripts, with their dependencies and version.
 		 *
 		 * @param string $hook  Hook.
 		 *

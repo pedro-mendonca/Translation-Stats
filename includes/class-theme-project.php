@@ -4,7 +4,7 @@
  *
  * @package Translation_Stats
  *
- * @since 1.5.0
+ * @since 2.0.0
  */
 
 namespace Translation_Stats;
@@ -27,7 +27,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Theme_Project' ) ) {
 		/**
 		 * Get the project type.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @return string   Project type.
 		 */
@@ -39,7 +39,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Theme_Project' ) ) {
 		/**
 		 * Get the theme translation subprojects: only the project itself, named as the theme.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @return array<int, array{slug: string, name: string}>   Subprojects.
 		 */
@@ -59,7 +59,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Theme_Project' ) ) {
 		/**
 		 * Get the prefix of the theme transients, to not conflict with a plugin with the same slug.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @return string   Transients prefix.
 		 */

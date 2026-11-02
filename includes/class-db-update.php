@@ -90,7 +90,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 		 * Update settings data version.
 		 *
 		 * @since 1.0.0
-		 * @since 1.5.0   Run all the updates since the installed version, and show the notice later in the admin notices.
+		 * @since 2.0.0   Run all the updates since the installed version, and show the notice later in the admin notices.
 		 *
 		 * @param string $installed_version   Currently installed settings data version.
 		 *
@@ -119,7 +119,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 		 * Show the settings update notice once, to a user who can manage the settings, after the settings update.
 		 * In development mode, also show the updated settings.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @return void
 		 */
@@ -239,7 +239,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 		 * Saves the checkboxes settings as booleans, instead of the string 'true' from the settings form.
 		 * Unchecked checkboxes weren't saved, so missing settings are unchecked.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @return void
 		 */

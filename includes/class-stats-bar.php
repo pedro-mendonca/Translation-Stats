@@ -4,7 +4,7 @@
  *
  * @package Translation_Stats
  *
- * @since 1.5.0
+ * @since 2.0.0
  */
 
 namespace Translation_Stats;
@@ -28,7 +28,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Stats_Bar' ) ) {
 		 * Render the stats bar of a subproject, or of the project itself without subprojects.
 		 *
 		 * @since 0.8.0   Plugins::render_stats_bar().
-		 * @since 1.5.0   Moved to Stats_Bar, for all the project types.
+		 * @since 2.0.0   Moved to Stats_Bar, for all the project types.
 		 *
 		 * @param Project      $project            Translation project.
 		 * @param object|false $subproject_stats   Subproject stats object, or false if the subproject doesn't exist.
@@ -132,7 +132,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Stats_Bar' ) ) {
 		/**
 		 * Get a numeric stat of the subproject stats object.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @param object|false $subproject_stats   Subproject stats object, or false if the subproject doesn't exist.
 		 * @param string       $stat               Stat name ( e.g. 'percent_translated' ).

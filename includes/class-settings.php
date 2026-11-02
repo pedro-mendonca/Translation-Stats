@@ -25,7 +25,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 		/**
 		 * Settings stored as booleans, from the settings form checkboxes.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @var array
 		 */
@@ -184,7 +184,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 		/**
 		 * Check the settings form nonce, or die if not valid.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @return void
 		 */

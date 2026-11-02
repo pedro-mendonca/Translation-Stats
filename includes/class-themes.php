@@ -4,7 +4,7 @@
  *
  * @package Translation_Stats
  *
- * @since 1.5.0
+ * @since 2.0.0
  */
 
 namespace Translation_Stats;
@@ -39,7 +39,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Themes' ) ) {
 		/**
 		 * Add the translation stats to the enabled themes data of the Themes screen, for the theme card and details.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @param array $prepared_themes   Themes data, by theme slug.
 		 *
@@ -75,7 +75,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Themes' ) ) {
 		 * Get the translation stats data of a theme, for the theme card badge and the widget in the theme details:
 		 * the widget title, the cached stats or a placeholder, the status notice, the language and the percent translated.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @param string $theme_slug   Theme slug.
 		 * @param Locale $locale       Locale object.
@@ -119,7 +119,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Themes' ) ) {
 		/**
 		 * Render the theme widget title, with the link to the theme translation of the Locale on translate.WordPress.org, as the plugins.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @param string $theme_slug   Theme slug.
 		 * @param Locale $locale       Locale object.
@@ -143,7 +143,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Themes' ) ) {
 		/**
 		 * Get the Translation Stats themes settings URL, if the user can manage the settings.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @return string   Themes settings URL, or empty if the user can't manage the settings.
 		 */
@@ -160,7 +160,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Themes' ) ) {
 		/**
 		 * Get the cached percent translated of a theme.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @param string $theme_slug   Theme slug.
 		 * @param Locale $locale       Locale object.
@@ -184,7 +184,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Themes' ) ) {
 		/**
 		 * Load the theme widget content stats, with the stats bar of the theme project.
 		 *
-		 * @since 1.5.0
+		 * @since 2.0.0
 		 *
 		 * @param string $theme_slug     Theme slug.
 		 * @param Locale $locale         Locale object.
