@@ -207,8 +207,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 
 			}
 
-			// Check for themes page.
-			if ( 'themes.php' === $hook ) {
+			// Check for themes page of the site. In the Network Admin, the themes list table doesn't have the WordPress themes script.
+			if ( 'themes.php' === $hook && ! is_network_admin() ) {
 
 				$asset = Utils::get_build_asset( 'js/admin-themes', 'js' );
 
@@ -249,8 +249,13 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 		 */
 		public function allowed_pages( $hook ) {
 
-			// Check for plugins page, themes page, updates page and Translation Stats settings page.
-			if ( 'plugins.php' === $hook || 'themes.php' === $hook || 'update-core.php' === $hook || 'settings_page_' . TRANSLATION_STATS_SETTINGS_PAGE === $hook ) {
+			// Check for plugins page, updates page and Translation Stats settings page.
+			if ( 'plugins.php' === $hook || 'update-core.php' === $hook || 'settings_page_' . TRANSLATION_STATS_SETTINGS_PAGE === $hook ) {
+				return true;
+			}
+
+			// Check for themes page of the site, not the Network Admin themes list table, which has the same hook.
+			if ( 'themes.php' === $hook && ! is_network_admin() ) {
 				return true;
 			}
 

@@ -133,4 +133,23 @@ class Test_Translation_Stats_Assets extends Translation_Stats_TestCase {
 		// The themes settings URL, for the Themes screen header.
 		$this->assertStringContainsString( 'var tstatsThemes = {"settingsUrl":', (string) wp_scripts()->get_data( 'translation-stats-themes', 'data' ) );
 	}
+
+
+	/**
+	 * Test the themes script and the styles aren't loaded on the Network Admin themes list table, which has the same hook.
+	 */
+	public function test_register_plugin_scripts_network_themes_page() {
+
+		set_current_screen( 'themes-network' );
+
+		$translation_stats = new Translation_Stats();
+		$translation_stats->register_plugin_styles( 'themes.php' );
+		$translation_stats->register_plugin_scripts( 'themes.php' );
+
+		set_current_screen( 'front' );
+
+		$this->assertFalse( wp_script_is( 'translation-stats-themes', 'registered' ) );
+		$this->assertFalse( wp_script_is( 'theme', 'enqueued' ) );
+		$this->assertFalse( wp_style_is( 'translation-stats', 'registered' ) );
+	}
 }
