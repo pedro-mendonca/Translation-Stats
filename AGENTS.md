@@ -12,7 +12,7 @@ WordPress plugin that shows the translation stats of the installed plugins and t
 | --- | --- |
 | `translation-stats.php` | Plugin file: headers, constants, PHP version check, class autoloader. |
 | `includes/` | One class per file, `Translation_Stats\Class_Name` in `class-class-name.php`, loaded by the autoloader. |
-| `assets/src/` | JavaScript and SCSS sources. |
+| `assets/src/` | JavaScript and SCSS sources. The Translation Stats block in `blocks/stats/`, with its `block.json` and `render.php`. |
 | `assets/build/` | Built assets, **not committed**. Build with `npm run build` after cloning, pulling or changing the sources: the plugin needs them. |
 | `assets/lib/` | Third party libraries (GlotPress Locales). |
 | `tests/phpunit/` | PHPUnit tests, `includes/test-*.php` for the classes, test themes in `data/`. |
@@ -24,7 +24,8 @@ WordPress plugin that shows the translation stats of the installed plugins and t
 * `Translation_Stats`: initializes the plugin, registers the assets and the REST API routes.
 * `Project`, with `Plugin_Project` and `Theme_Project`: a translate.WordPress.org project, its subprojects, translate URLs and stats, cached in transients. Themes have no subprojects: their stats are in the project itself.
 * `Plugins`: the Plugins screen column. `Themes`: the Themes screen data.
-* `Stats_Bar` and `Stats_Widget`: the stats widget parts shared by plugins and themes.
+* `Stats_Bar` and `Stats_Widget`: the stats widget parts shared by plugins and themes, and the block.
+* `Stats_Block`: the Translation Stats block, with the stats of any plugin or theme on the frontend. Visitors only get the cached stats: the missing stats load in the background with WP-Cron, and the public `translation-stats/v1/block-stats` route only reads the cache, to show them when loaded. Requires WordPress 6.3.
 * `Projects_REST_Controller`: `translation-stats/v1/(plugins|themes)/<slug>/stats`, the stats widget content.
 * `Settings`, `Settings_Section_*` and `Settings_Field_*`: the settings page tabs, sections and fields.
 * `DB_Update`: the settings format migrations.

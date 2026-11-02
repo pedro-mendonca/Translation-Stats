@@ -20,8 +20,12 @@
 	"devDependencies": {
 		"@vitest/coverage-v8": "^5.0.5",
 		"@wordpress/api-fetch": "^8.0.0",
+		"@wordpress/block-editor": "^19.0.0",
+		"@wordpress/blocks": "^17.0.0",
+		"@wordpress/components": "^43.0.0",
 		"@wordpress/i18n": "^7.0.0",
 		"@wordpress/scripts": "^37.0.0",
+		"@wordpress/server-side-render": "^7.0.0",
 		"jquery": "^3.7.1",
 		"jsdom": "^26.1.0",
 		"tablesorter": "^2.31.3",
@@ -35,12 +39,12 @@
 		"katex": "^0.18.2"
 	},
 	"scripts": {
-		"build": "wp-scripts build",
-		"start": "wp-scripts start",
+		"build": "wp-scripts build --source-path=assets/src",
+		"start": "wp-scripts start --source-path=assets/src",
 		"test:unit": "wp-scripts test-unit-js",
 		"test:unit:coverage": "wp-scripts test-unit-js --coverage",
 		"test:unit:watch": "wp-scripts test-unit-js --watch",
-		"format:js": "wp-scripts format assets/src/js tests/js webpack.config.js vitest.config.mjs",
+		"format:js": "wp-scripts format assets/src/js assets/src/blocks tests/js webpack.config.js vitest.config.mjs",
 		"lint:css": "wp-scripts lint-style",
 		"lint:css:fix": "npm run lint:css -- --fix",
 		"lint:js": "wp-scripts lint-js",

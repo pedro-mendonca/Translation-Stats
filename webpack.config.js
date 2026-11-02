@@ -52,6 +52,8 @@ module.exports = {
 		'js/admin-themes': './assets/src/js/admin-themes.js',
 		'js/admin-settings': './assets/src/js/admin-settings.js',
 		'css/admin': './assets/src/css/admin.scss',
+		'blocks/stats/index': './assets/src/blocks/stats/index.js',
+		'blocks/stats/view': './assets/src/blocks/stats/view.js',
 	},
 	output: {
 		...defaultConfig.output,

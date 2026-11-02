@@ -30,10 +30,14 @@ if ( is_multisite() ) {
  * Removes ALL plugin data if set in the settings.
  *
  * @since 0.8.0
+ * @since 2.1.0   Always remove the scheduled block stats loading.
  *
  * @return void
  */
 function translation_stats_uninstall() {
+	// Delete the scheduled block stats loading, always as it needs the plugin code.
+	wp_unschedule_hook( 'translation_stats_block_refresh' );
+	delete_transient( 'translation_stats_block_loading' );
 	$option = get_option( 'tstats_settings' );
 	// Check if Delete Data on Uninstall is set. Saved as boolean since settings version 2.0, previously as string 'true'.
 	if ( is_array( $option ) && is_array( $option['settings'] ?? null ) && ! empty( $option['settings']['delete_data_on_uninstall'] ) ) {

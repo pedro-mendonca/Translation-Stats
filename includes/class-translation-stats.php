@@ -67,6 +67,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 			// Initialize the themes translation stats.
 			$this->themes = new Themes();
 
+			// Initialize the Translation Stats block.
+			new Stats_Block();
+
 			// Register the REST API routes.
 			add_action( 'rest_api_init', array( $this, 'register_rest_routes' ) );
 
