@@ -20,6 +20,7 @@ class Test_Translation_Stats_Assets extends Translation_Stats_TestCase {
 		wp_deregister_style( 'translation-stats' );
 		wp_deregister_script( 'translation-stats-settings' );
 		wp_deregister_script( 'translation-stats-plugins' );
+		wp_deregister_script( 'translation-stats-themes' );
 		parent::tear_down();
 	}
 
@@ -109,5 +110,27 @@ class Test_Translation_Stats_Assets extends Translation_Stats_TestCase {
 
 		$this->assertFalse( wp_script_is( 'translation-stats-settings', 'registered' ) );
 		$this->assertFalse( wp_script_is( 'translation-stats-plugins', 'registered' ) );
+	}
+
+
+	/**
+	 * Test the built themes script is registered with its dependencies and the WordPress themes script, in the footer.
+	 */
+	public function test_register_plugin_scripts_themes_page() {
+
+		$translation_stats = new Translation_Stats();
+		$translation_stats->register_plugin_scripts( 'themes.php' );
+
+		$script = wp_scripts()->registered['translation-stats-themes'];
+		$asset  = $this->get_asset_file( 'js/admin-themes' );
+
+		$this->assertSame( TRANSLATION_STATS_DIR_URL . 'assets/build/js/admin-themes.js', $script->src );
+		$this->assertSame( array_merge( $asset['dependencies'], array( 'theme' ) ), $script->deps );
+		$this->assertSame( $asset['version'], $script->ver );
+		$this->assertSame( 1, wp_scripts()->get_data( 'translation-stats-themes', 'group' ) );
+		$this->assertTrue( wp_script_is( 'translation-stats-themes', 'enqueued' ) );
+
+		// The themes settings URL, for the Themes screen header.
+		$this->assertStringContainsString( 'var tstatsThemes = {"settingsUrl":', (string) wp_scripts()->get_data( 'translation-stats-themes', 'data' ) );
 	}
 }

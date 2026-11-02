@@ -62,8 +62,14 @@ define( 'TRANSLATION_STATS_SETTINGS_PAGE', 'translation-stats' );
 // Set Translation Stats settings sections prefix.
 define( 'TRANSLATION_STATS_SETTINGS_SECTIONS_PREFIX', 'translation_stats_' );
 
-// Set Translation Stats transients prefix.
-define( 'TRANSLATION_STATS_TRANSIENTS_PREFIX', 'translation_stats_plugin_' );
+// Set Translation Stats plugins transients prefix.
+define( 'TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX', 'translation_stats_plugin_' );
+
+// Deprecated since 1.5.0, kept for compatibility. Use TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX.
+define( 'TRANSLATION_STATS_TRANSIENTS_PREFIX', TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX );
+
+// Set Translation Stats themes transients prefix.
+define( 'TRANSLATION_STATS_TRANSIENTS_THEMES_PREFIX', 'translation_stats_theme_' );
 
 // Set Translation Stats transients default 24h expiration for Translations data.
 define( 'TRANSLATION_STATS_TRANSIENTS_TRANSLATIONS_EXPIRATION', DAY_IN_SECONDS );

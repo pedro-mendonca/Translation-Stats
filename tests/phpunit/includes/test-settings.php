@@ -135,14 +135,16 @@ class Test_Settings extends Translation_Stats_TestCase {
 
 		$this->set_settings();
 
-		set_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . 'translation-stats', true );
+		set_transient( TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX . 'translation-stats', true );
+		set_transient( TRANSLATION_STATS_TRANSIENTS_THEMES_PREFIX . 'twentytwentyfive', true );
 
 		$settings = new Settings();
 
 		// Without the delete action, the transients are kept.
 		$settings->transients_delete_callback();
 
-		$this->assertTrue( get_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . 'translation-stats' ) );
+		$this->assertTrue( get_transient( TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX . 'translation-stats' ) );
+		$this->assertTrue( get_transient( TRANSLATION_STATS_TRANSIENTS_THEMES_PREFIX . 'twentytwentyfive' ) );
 
 		$this->submit_action( 'delete_transients' );
 
@@ -150,7 +152,9 @@ class Test_Settings extends Translation_Stats_TestCase {
 		$settings->transients_delete_callback();
 		$output = ob_get_clean();
 
-		$this->assertFalse( get_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . 'translation-stats' ) );
+		// The plugins and themes transients.
+		$this->assertFalse( get_transient( TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX . 'translation-stats' ) );
+		$this->assertFalse( get_transient( TRANSLATION_STATS_TRANSIENTS_THEMES_PREFIX . 'twentytwentyfive' ) );
 		$this->assertStringContainsString( 'Cache cleaned successfully.', $output );
 	}
 
@@ -186,7 +190,7 @@ class Test_Settings extends Translation_Stats_TestCase {
 
 		$this->set_settings( array( 'translation_language' => 'pt_PT' ) );
 
-		set_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . 'translation-stats', true );
+		set_transient( TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX . 'translation-stats', true );
 
 		$this->submit_action( $action );
 
@@ -202,7 +206,7 @@ class Test_Settings extends Translation_Stats_TestCase {
 		}
 
 		$this->assertSame( 'pt_PT', get_option( TRANSLATION_STATS_WP_OPTION )['settings']['translation_language'] );
-		$this->assertTrue( get_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . 'translation-stats' ) );
+		$this->assertTrue( get_transient( TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX . 'translation-stats' ) );
 	}
 
 

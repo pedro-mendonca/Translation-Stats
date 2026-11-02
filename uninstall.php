@@ -41,8 +41,9 @@ function translation_stats_uninstall() {
 		delete_option( 'tstats_settings' );
 		// Delete the settings update notice transient.
 		delete_transient( 'translation_stats_settings_updated' );
-		// Delete transients.
+		// Delete transients, of the plugins and themes.
 		translation_stats_uninstall_delete_transients( 'translation_stats_plugin_' );
+		translation_stats_uninstall_delete_transients( 'translation_stats_theme_' );
 	}
 }
 

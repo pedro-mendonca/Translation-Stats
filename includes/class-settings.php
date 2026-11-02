@@ -164,9 +164,10 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings' ) ) {
 			if ( isset( $_POST[ $action ] ) ) { // phpcs:ignore WordPress.Security.NonceVerification.Missing -- Verified in check_nonce().
 				// Check nonce.
 				$this->check_nonce();
-				// Delete translations stats and available languages transients.
+				// Delete translations stats and available languages transients, of the plugins and themes.
 				// The transient 'translation_stats_plugin_available_translations' will be immediately rebuilt on Settings_Section_Plugins->plugins_list() loading.
-				$this->transients->delete_transients( TRANSLATION_STATS_TRANSIENTS_PREFIX );
+				$this->transients->delete_transients( TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX );
+				$this->transients->delete_transients( TRANSLATION_STATS_TRANSIENTS_THEMES_PREFIX );
 				$admin_notice = array(
 					'type'        => 'success',
 					'notice-alt'  => false,

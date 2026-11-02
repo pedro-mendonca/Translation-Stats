@@ -206,6 +206,35 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 				wp_set_script_translations( 'translation-stats-plugins', 'translation-stats' );
 
 			}
+
+			// Check for themes page.
+			if ( 'themes.php' === $hook ) {
+
+				$asset = Utils::get_build_asset( 'js/admin-themes', 'js' );
+
+				// Load after the WordPress themes script, to extend its views before they are rendered on document ready.
+				wp_register_script(
+					'translation-stats-themes',
+					$asset['url'],
+					array_merge( $asset['dependencies'], array( 'theme' ) ),
+					$asset['version'],
+					true
+				);
+
+				wp_enqueue_script( 'translation-stats-themes' );
+
+				wp_set_script_translations( 'translation-stats-themes', 'translation-stats' );
+
+				// The themes settings URL, for the link in the Themes screen header.
+				wp_localize_script(
+					'translation-stats-themes',
+					'tstatsThemes',
+					array(
+						'settingsUrl' => Themes::settings_url(),
+					)
+				);
+
+			}
 		}
 
 
@@ -220,8 +249,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 		 */
 		public function allowed_pages( $hook ) {
 
-			// Check for plugins page, updates page and Translation Stats settings page.
-			if ( 'plugins.php' === $hook || 'update-core.php' === $hook || 'settings_page_' . TRANSLATION_STATS_SETTINGS_PAGE === $hook ) {
+			// Check for plugins page, themes page, updates page and Translation Stats settings page.
+			if ( 'plugins.php' === $hook || 'themes.php' === $hook || 'update-core.php' === $hook || 'settings_page_' . TRANSLATION_STATS_SETTINGS_PAGE === $hook ) {
 				return true;
 			}
 
