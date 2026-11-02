@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-02T10:32:20+00:00\n"
+"POT-Creation-Date: 2026-11-02T15:20:52+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: translation-stats\n"
@@ -19,7 +19,6 @@ msgstr ""
 #: translation-stats.php:12
 #: includes/class-settings-footer.php:60
 #: includes/class-settings-section-debug.php:169
-#: assets/src/js/themes.js:259
 msgid "Translation Stats"
 msgstr ""
 
@@ -569,6 +568,7 @@ msgstr ""
 #: includes/class-settings.php:82
 #: includes/class-settings.php:83
 #: includes/class-settings.php:330
+#: assets/src/js/themes.js:260
 msgctxt "Options Page Title"
 msgid "Translation Stats"
 msgstr ""
@@ -650,23 +650,23 @@ msgid "Stable Readme"
 msgstr ""
 
 #. translators: 1: Plugin name. 2: Error message.
-#: translation-stats.php:162
+#: translation-stats.php:159
 #, php-format
 msgid "The plugin %1$s has been deactivated due to an error: %2$s"
 msgstr ""
 
-#: translation-stats.php:165
+#: translation-stats.php:162
 msgid "This plugin doesn&#8217;t work with your version of PHP."
 msgstr ""
 
 #. translators: %s: Minimum PHP version required.
-#: translation-stats.php:175
+#: translation-stats.php:172
 #, php-format
 msgid "Requires PHP version %s or higher."
 msgstr ""
 
 #. translators: %s: URL to Update PHP page.
-#: translation-stats.php:183
+#: translation-stats.php:180
 #, php-format
 msgid "<a href=\"%s\">Learn more about updating PHP</a>."
 msgstr ""

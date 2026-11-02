@@ -6,7 +6,7 @@ import jQuery from 'jquery';
 /**
  * WordPress dependencies
  */
-import { __, sprintf } from '@wordpress/i18n';
+import { __, _x, sprintf } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
@@ -256,7 +256,8 @@ export function addSettingsLink( settingsUrl ) {
 
 	link.attr( 'href', settingsUrl ).append(
 		document.createTextNode(
-			__( 'Translation Stats', 'translation-stats' )
+			// As the settings page title, translated unlike the plugin name.
+			_x( 'Translation Stats', 'Options Page Title', 'translation-stats' )
 		)
 	);
 
