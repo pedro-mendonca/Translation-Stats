@@ -2,20 +2,24 @@ coverage:
   status:
     project:
       # PHP and JavaScript coverage are compared separately, with their flags.
+      # Informational: shown in the pull requests without failing them, as the total coverage can change
+      # for reasons unrelated to the pull request, like the coverage of a flag carried forward from an older commit.
       php:
         flags:
           - php
         target: auto
         # Allow a small drop, e.g. when the remote API test is skipped.
         threshold: 1%
+        informational: true
       javascript:
         flags:
           - javascript
         target: auto
         threshold: 1%
+        informational: true
     patch:
       default:
-        # New and changed code should be covered by tests.
+        # New and changed code should be covered by tests. This is the check that fails the pull requests.
         target: 80%
 
 flags:
