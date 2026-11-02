@@ -39,6 +39,8 @@ function translation_stats_uninstall() {
 	if ( is_array( $option ) && is_array( $option['settings'] ?? null ) && ! empty( $option['settings']['delete_data_on_uninstall'] ) ) {
 		// Delete option, set per site also in Multisite.
 		delete_option( 'tstats_settings' );
+		// Delete the settings update notice transient.
+		delete_transient( 'translation_stats_settings_updated' );
 		// Delete transients.
 		translation_stats_uninstall_delete_transients( 'translation_stats_plugin_' );
 	}

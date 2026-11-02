@@ -48,6 +48,7 @@ class Test_Uninstall extends Translation_Stats_TestCase {
 		$this->set_settings( array( 'delete_data_on_uninstall' => $delete_data_on_uninstall ) );
 
 		set_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . 'translation-stats', true );
+		set_transient( 'translation_stats_settings_updated', '1.0' );
 	}
 
 
@@ -60,6 +61,7 @@ class Test_Uninstall extends Translation_Stats_TestCase {
 
 		$this->assertSame( $exists, false !== get_option( TRANSLATION_STATS_WP_OPTION ) );
 		$this->assertSame( $exists, false !== get_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . 'translation-stats' ) );
+		$this->assertSame( $exists, false !== get_transient( 'translation_stats_settings_updated' ) );
 	}
 
 

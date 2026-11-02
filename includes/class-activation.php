@@ -36,7 +36,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Activation' ) ) {
 		public function __construct() {
 
 			// Register activation hook.
-			register_activation_hook( 'translation-stats/translation-stats.php', array( $this, 'activate' ) );
+			register_activation_hook( TRANSLATION_STATS_FILE, array( $this, 'activate' ) );
 
 			// Add activation admin notice.
 			add_action( 'admin_notices', array( $this, 'activate_notice' ) );
@@ -76,7 +76,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Activation' ) ) {
 					sprintf(
 						wp_kses_post(
 							/* translators: 1: Opening link tag <a href="[link]">. 2: Closing link tag </a>. */
-							__( 'Go to %1$ssettings%2$s to start selecting some of your favorite plugins.', 'translation-stats' )
+							__( 'Go to %1$ssettings%2$s to select the plugins and themes to show their translation stats.', 'translation-stats' )
 						),
 						'<a href="' . esc_url( add_query_arg( 'page', 'translation-stats', admin_url( 'options-general.php' ) ) ) . '">',
 						'</a>'

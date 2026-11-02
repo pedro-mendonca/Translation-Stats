@@ -65,6 +65,7 @@ class Test_DB_Update extends Translation_Stats_TestCase {
 		$db_update = new DB_Update();
 
 		$this->assertSame( 10, has_action( 'plugins_loaded', array( $db_update, 'settings_db_check' ) ) );
+		$this->assertSame( 10, has_action( 'admin_notices', array( $db_update, 'settings_update_notice' ) ) );
 	}
 
 
@@ -225,7 +226,7 @@ class Test_DB_Update extends Translation_Stats_TestCase {
 
 
 	/**
-	 * Test the settings database check runs all the updates since the installed version and shows a notice.
+	 * Test the settings database check runs all the updates since the installed version, without output, to show the notice later.
 	 *
 	 * @dataProvider provide_test_settings_db_check
 	 *
@@ -265,7 +266,86 @@ class Test_DB_Update extends Translation_Stats_TestCase {
 			),
 			$updated_settings
 		);
-		$this->assertStringContainsString( 'successfully updated from version <code>' . $installed_version . '</code> to version <code>2.0</code>', $output );
+
+		// No output in any request, the notice is shown later in the admin notices.
+		$this->assertSame( '', $output );
+		$this->assertSame( $installed_version, get_transient( 'translation_stats_settings_updated' ) );
+	}
+
+
+	/**
+	 * Test the settings update notice is shown once, only to the users who can manage the settings.
+	 */
+	public function test_settings_update_notice() {
+
+		add_filter( 'translation_stats_development_mode', '__return_false' );
+
+		$db_update = new DB_Update();
+
+		// Without settings update.
+		ob_start();
+		$db_update->settings_update_notice();
+		$this->assertSame( '', ob_get_clean() );
+
+		set_transient( 'translation_stats_settings_updated', '1.0' );
+
+		// User without permission to manage the settings, the notice waits.
+		wp_set_current_user( self::factory()->user->create( array( 'role' => 'editor' ) ) );
+
+		ob_start();
+		$db_update->settings_update_notice();
+		$this->assertSame( '', ob_get_clean() );
+		$this->assertSame( '1.0', get_transient( 'translation_stats_settings_updated' ) );
+
+		// Administrator.
+		$user_id = self::factory()->user->create( array( 'role' => 'administrator' ) );
+		if ( is_multisite() ) {
+			grant_super_admin( $user_id );
+		}
+		wp_set_current_user( $user_id );
+
+		ob_start();
+		$db_update->settings_update_notice();
+		$output = (string) ob_get_clean();
+
+		$this->assertStringContainsString( 'notice-success', $output );
+		$this->assertStringContainsString( 'successfully updated from version <code>1.0</code> to version <code>2.0</code>', $output );
+		$this->assertStringNotContainsString( '<h3>Settings</h3>', $output );
+		$this->assertFalse( get_transient( 'translation_stats_settings_updated' ) );
+
+		// Only once.
+		ob_start();
+		$db_update->settings_update_notice();
+		$this->assertSame( '', ob_get_clean() );
+	}
+
+
+	/**
+	 * Test the settings update notice shows the updated settings in development mode.
+	 */
+	public function test_settings_update_notice_development_mode() {
+
+		add_filter( 'translation_stats_development_mode', '__return_true' );
+
+		$this->set_settings( array( 'translation_language' => 'pt_PT' ), array( 'translation-stats' => array( 'enabled' => 'true' ) ) );
+
+		set_transient( 'translation_stats_settings_updated', '0.0' );
+
+		$user_id = self::factory()->user->create( array( 'role' => 'administrator' ) );
+		if ( is_multisite() ) {
+			grant_super_admin( $user_id );
+		}
+		wp_set_current_user( $user_id );
+
+		ob_start();
+		( new DB_Update() )->settings_update_notice();
+		$output = (string) ob_get_clean();
+
+		$this->assertStringContainsString( 'successfully updated from version <code>0.0</code>', $output );
+		$this->assertStringContainsString( '<h3>Settings</h3>', $output );
+		$this->assertStringContainsString( '&quot;translation_language&quot;: &quot;pt_PT&quot;', $output );
+		$this->assertStringContainsString( '<h3>Plugins</h3>', $output );
+		$this->assertStringContainsString( '&quot;translation-stats&quot;', $output );
 	}
 
 

@@ -21,5 +21,10 @@ if ( ! defined( 'TRANSLATION_STATS_REQUIRED_PHP' ) ) {
 }
 
 
+// Set Translation Stats file path, as plugin_basename() isn't available.
+if ( ! defined( 'TRANSLATION_STATS_FILE' ) ) {
+	define( 'TRANSLATION_STATS_FILE', 'translation-stats/translation-stats.php' );
+}
+
 // Require plugin main file.
 require_once 'translation-stats.php';

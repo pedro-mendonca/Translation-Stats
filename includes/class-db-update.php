@@ -29,6 +29,9 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 
 			// Add database update check.
 			add_action( 'plugins_loaded', array( $this, 'settings_db_check' ) );
+
+			// Show the settings update notice in the admin notices, after the update.
+			add_action( 'admin_notices', array( $this, 'settings_update_notice' ) );
 		}
 
 
@@ -87,7 +90,7 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 		 * Update settings data version.
 		 *
 		 * @since 1.0.0
-		 * @since 1.5.0   Run all the updates since the installed version.
+		 * @since 1.5.0   Run all the updates since the installed version, and show the notice later in the admin notices.
 		 *
 		 * @param string $installed_version   Currently installed settings data version.
 		 *
@@ -107,12 +110,35 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 
 			}
 
+			// Show the update notice in the admin notices, as the update runs before any output, in any request.
+			set_transient( 'translation_stats_settings_updated', $installed_version, DAY_IN_SECONDS );
+		}
+
+
+		/**
+		 * Show the settings update notice once, to a user who can manage the settings, after the settings update.
+		 * In development mode, also show the updated settings.
+		 *
+		 * @since 1.5.0
+		 *
+		 * @return void
+		 */
+		public function settings_update_notice() {
+
+			$installed_version = get_transient( 'translation_stats_settings_updated' );
+
+			if ( false === $installed_version || ! current_user_can( 'manage_options' ) ) {
+				return;
+			}
+
+			delete_transient( 'translation_stats_settings_updated' );
+
 			$update_message = sprintf(
 				wp_kses_post(
 					/* translators: 1: Old settings version. 2: New settings version. */
 					__( 'Translation Stats settings database successfully updated from version %1$s to version %2$s.', 'translation-stats' )
 				),
-				'<code>' . esc_html( $installed_version ) . '</code>',
+				'<code>' . esc_html( is_string( $installed_version ) ? $installed_version : '' ) . '</code>',
 				'<code>' . esc_html( TRANSLATION_STATS_SETTINGS_VERSION ) . '</code>'
 			);
 
@@ -125,6 +151,33 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 				'message'     => $update_message,
 			);
 			new Admin_Notice( $admin_notice );
+
+			if ( ! Utils::is_development_mode() ) {
+				return;
+			}
+
+			$options = Utils::get_options();
+
+			foreach ( array(
+				'settings' => esc_html__( 'Settings', 'translation-stats' ),
+				'plugins'  => esc_html__( 'Plugins', 'translation-stats' ),
+			) as $key => $title ) {
+
+				$admin_notice = array(
+					'type'        => 'info',
+					'notice-alt'  => true,
+					'inline'      => false,
+					'dismissible' => true,
+					'force_show'  => true,
+					'wrap'        => false,
+					'message'     => sprintf(
+						'<h3>%s</h3><pre>%s</pre>',
+						$title,
+						esc_html( (string) wp_json_encode( $options[ $key ] ?? array(), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) )
+					),
+				);
+				new Admin_Notice( $admin_notice );
+			}
 		}
 
 
@@ -177,43 +230,6 @@ if ( ! class_exists( __NAMESPACE__ . '\DB_Update' ) ) {
 			$settings_v1['plugins'] = $options;
 
 			update_option( TRANSLATION_STATS_WP_OPTION, $settings_v1 );
-
-			if ( Utils::is_development_mode() ) {
-
-				$message = sprintf(
-					'<h3>%s</h3><pre>%s</pre>',
-					esc_html__( 'Settings', 'translation-stats' ),
-					wp_json_encode( $settings_v1['settings'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES )
-				);
-
-				$admin_notice = array(
-					'type'        => 'info',
-					'notice-alt'  => true,
-					'inline'      => false,
-					'dismissible' => true,
-					'force_show'  => true,
-					'wrap'        => false,
-					'message'     => $message,
-				);
-				new Admin_Notice( $admin_notice );
-
-				$message = sprintf(
-					'<h3>%s</h3><pre>%s</pre>',
-					esc_html__( 'Plugins', 'translation-stats' ),
-					wp_json_encode( $settings_v1['plugins'], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES )
-				);
-
-				$admin_notice = array(
-					'type'        => 'info',
-					'notice-alt'  => true,
-					'inline'      => false,
-					'dismissible' => true,
-					'force_show'  => true,
-					'wrap'        => false,
-					'message'     => $message,
-				);
-				new Admin_Notice( $admin_notice );
-			}
 		}
 
 
