@@ -156,16 +156,19 @@ export function debounce( callback, wait ) {
  * @return {{path: string, method: string, data: Object}} REST API request.
  */
 export function updateRequest( attributes ) {
-	return {
+	const request = {
 		path: '/translation-stats/v1/block-stats',
 		method: 'POST',
-		data: {
-			type: attributes.type,
-			slug: attributes.slug,
-			language: attributes.language,
-			subprojects: attributes.subprojects.join( ',' ),
-		},
 	};
+
+	request.data = {
+		type: attributes.type,
+		slug: attributes.slug,
+		language: attributes.language,
+		subprojects: attributes.subprojects.join( ',' ),
+	};
+
+	return request;
 }
 
 /**
