@@ -119,6 +119,17 @@ describe( 'initThemesStats', () => {
 		expect( initThemesStats( { view: {} } ) ).toBe( false );
 	} );
 
+	it( 'extends the WordPress themes views by default', () => {
+		window.wp = { themes: createThemes() };
+
+		const render = window.wp.themes.view.Theme.prototype.render;
+
+		expect( initThemesStats() ).toBe( true );
+		expect( window.wp.themes.view.Theme.prototype.render ).not.toBe( render );
+
+		delete window.wp;
+	} );
+
 	it( 'adds the cached stats bar to the enabled theme cards, without requesting the stats', () => {
 		const themes = createThemes();
 		initThemesStats( themes, createQueue() );
@@ -275,6 +286,15 @@ describe( 'addThemeWidget', () => {
 		const details = new themes.view.Details( createModel( 'generatepress', { cached: true, percent: 100 } ) ).render();
 
 		expect( details.$el.find( '.theme-info > .tstats-theme-widget:last-child' ).length ).toBe( 1 );
+	} );
+
+	it( 'adds no widget to the details of the themes without stats', () => {
+		const themes = createThemes();
+		initThemesStats( themes, createQueue() );
+
+		const details = new themes.view.Details( createModel( 'disabled', null ) ).render();
+
+		expect( details.$el.find( '.tstats-theme-widget' ).length ).toBe( 0 );
 	} );
 } );
 
