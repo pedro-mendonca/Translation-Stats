@@ -92,6 +92,18 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 
    ![screenshot-4](./.wordpress-org/screenshot-4.png)
 
+5. Translation Stats shown in WordPress themes page
+
+   ![screenshot-5](./.wordpress-org/screenshot-5.png)
+
+6. Translation Stats shown in WordPress theme details
+
+   ![screenshot-6](./.wordpress-org/screenshot-6.png)
+
+7. Translation Stats installed themes list
+
+   ![screenshot-7](./.wordpress-org/screenshot-7.png)
+
 ## Changelog
 
 ### 2.0.0
@@ -106,10 +118,11 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 * Fix the settings Save button focus cut on the left.
 * Save the settings checkboxes as booleans, updating the saved settings automatically.
 * Remove the console logs.
-* Developers: Add the Project, Plugin_Project and Theme_Project classes for the translate.wordpress.org projects and their translation stats. Remove Translations_API::translations_api_get_plugin(), plugin_project_on_translate_wporg() and plugin_subproject_on_translate_wporg(), and Plugins::plugin_subproject_stats(), plugin_stats_cached() and plugin_subproject_stats_transient().
-* Developers: The REST API route translation-stats/v1/(plugins|themes)/<slug>/stats loads the plugins and themes translation stats.
-* Developers: Deprecate the TRANSLATION_STATS_TRANSIENTS_PREFIX constant, replaced by TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX. The themes transients use TRANSLATION_STATS_TRANSIENTS_THEMES_PREFIX.
-* Build the JavaScript and CSS with @wordpress/scripts.
+* Remove the bundled Portuguese (pt_PT) translation files, not loaded by WordPress. The translations are loaded from translate.wordpress.org.
+* Developers: Add the `Project`, `Plugin_Project` and `Theme_Project` classes for the translate.wordpress.org projects and their translation stats. Remove `Translations_API::translations_api_get_plugin()`, `plugin_project_on_translate_wporg()` and `plugin_subproject_on_translate_wporg()`, and `Plugins::plugin_subproject_stats()`, `plugin_stats_cached()` and `plugin_subproject_stats_transient()`.
+* Developers: The REST API route `translation-stats/v1/(plugins|themes)/<slug>/stats` loads the plugins and themes translation stats.
+* Developers: Deprecate the `TRANSLATION_STATS_TRANSIENTS_PREFIX` constant, replaced by `TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX`. The themes transients use `TRANSLATION_STATS_TRANSIENTS_THEMES_PREFIX`.
+* Build the JavaScript and CSS with `@wordpress/scripts`.
 * Increase PHPStan level to 9, and unit tests coverage.
 
 ### 1.4.0
