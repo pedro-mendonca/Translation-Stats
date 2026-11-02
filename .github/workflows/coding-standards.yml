@@ -13,8 +13,6 @@ on:
       - 'package*.json'
       # These files configure Composer. Changes could affect the outcome.
       - 'composer.*'
-      # This file configures ESLint. Changes could affect the outcome.
-      - '.eslintrc.json'
       # This file configures Stylelint. Changes could affect the outcome.
       - '.stylelintrc.json'
       # This file configures Markdownlint. Changes could affect the outcome.

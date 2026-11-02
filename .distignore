@@ -25,7 +25,6 @@ CLAUDE.md
 codecov.yml
 composer.json
 composer.lock
-eslint.config.js
 package-lock.json
 package.json
 phpcompat.xml.dist

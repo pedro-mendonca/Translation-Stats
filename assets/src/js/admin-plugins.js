@@ -8,6 +8,6 @@ import jQuery from 'jquery';
  */
 import { initStatsWidgets } from './stats-widget';
 
-jQuery( document ).ready( function() {
+jQuery( document ).ready( function () {
 	initStatsWidgets();
 } );
