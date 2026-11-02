@@ -26,14 +26,30 @@
 		}
 
 		.translation-stats-content .translation-stats-content-stats { // As the admin widget box, without the admin styles.
+			grid-template-columns: minmax(0, 1fr); // The bars fit the box, as in narrow columns, without growing with their text.
 			margin: 0;
 			border: 1px solid #dcdcde;
 			background-color: #fff;
 			line-height: 1.4;
+
+			.content__subproject a { // The bars text cut at the box in narrow columns, without the strings count option.
+				overflow: hidden;
+			}
 		}
 	}
 
-	&.tstats-hide-counts .subproject-bar__count {
+	&.tstats-hide-counts .translation-stats-widget .translation-stats-content .translation-stats-content-stats .content__subproject .subproject-bar .subproject-bar__count { // Without the strings count, over the stats widget styles.
 		display: none;
+	}
+}
+
+// Updating in the block editor, with the moving stripes of the admin widgets while loading.
+.tstats-block-updating .wp-block-translation-stats-stats .translation-stats-content .translation-stats-content-stats div a div.subproject {
+	background-image: repeating-linear-gradient(-45deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.25) 10px, rgba(0, 0, 0, 0) 10px, rgba(0, 0, 0, 0) 20px);
+	background-size: 28px 28px;
+	animation: tstats_bar_loading 0.5s linear infinite;
+
+	@media (prefers-reduced-motion: reduce) {
+		animation: none;
 	}
 }

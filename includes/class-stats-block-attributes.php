@@ -118,7 +118,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Stats_Block_Attributes' ) ) {
 		}
 
 		/**
-		 * Get the subprojects to show: the selected plugin subprojects, or the theme project.
+		 * Get the subprojects to show: the selected plugin subprojects, or the theme project, with the block project name.
 		 *
 		 * @since 2.1.0
 		 *
@@ -129,8 +129,14 @@ if ( ! class_exists( __NAMESPACE__ . '\Stats_Block_Attributes' ) ) {
 		 */
 		public static function subprojects( $project, $attributes ) {
 
+			// The theme project bar, with the block project name, as the theme may not be installed.
 			if ( 'themes' === $project->get_type() ) {
-				return array_values( $project->get_subprojects() );
+				return array(
+					array(
+						'slug' => '',
+						'name' => self::project_name( $project, $attributes ),
+					),
+				);
 			}
 
 			$selected = isset( $attributes['subprojects'] ) && is_array( $attributes['subprojects'] ) ? $attributes['subprojects'] : array( 'stable', 'stable-readme' );

@@ -2,21 +2,40 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
+import apiFetch from '@wordpress/api-fetch';
+import {
+	BlockControls,
+	InspectorControls,
+	useBlockProps,
+} from '@wordpress/block-editor';
 import {
 	CheckboxControl,
+	ComboboxControl,
+	Notice,
 	PanelBody,
 	Placeholder,
 	SelectControl,
 	TextControl,
 	ToggleControl,
+	ToolbarButton,
+	ToolbarGroup,
 } from '@wordpress/components';
+import { useEffect, useMemo, useRef, useState } from '@wordpress/element';
 import ServerSideRender from '@wordpress/server-side-render';
 
 /**
  * Internal dependencies
  */
-import { pluginSubprojects, projectOptions, toggleSubproject } from './utils';
+import {
+	debounce,
+	pluginSubprojects,
+	projectName,
+	searchOptions,
+	searchPath,
+	spinIcon,
+	toggleSubproject,
+	updateRequest,
+} from './utils';
 
 /**
  * Editor data: the languages, and the installed plugins and themes.
@@ -48,8 +67,68 @@ export default function Edit( { attributes, setAttributes } ) {
 
 	const projects = 'themes' === type ? data.themes : data.plugins;
 
+	// Projects found on WordPress.org.
+	const [ found, setFound ] = useState( [] );
+
+	// Updating the stats from translate.wordpress.org, the updates count to render the preview again, and the update error.
+	const [ updating, setUpdating ] = useState( false );
+	const [ updates, setUpdates ] = useState( 0 );
+	const [ updateError, setUpdateError ] = useState( '' );
+
+	// Spin the update button icon while updating, as the admin widgets update button.
+	const updateButton = useRef();
+	useEffect( () => spinIcon( updateButton.current, updating ), [ updating ] );
+
+	// Update the stats, as the update button of the admin widgets.
+	const update = () => {
+		setUpdating( true );
+		setUpdateError( '' );
+		apiFetch( updateRequest( attributes ) )
+			.then( () => setUpdates( updates + 1 ) )
+			.catch( ( error ) =>
+				setUpdateError(
+					( error && error.message ) ||
+						__(
+							'An error occurred while updating.',
+							'translation-stats'
+						)
+				)
+			)
+			.finally( () => setUpdating( false ) );
+	};
+
+	// Search WordPress.org when the typing stops, from 2 characters.
+	const search = useMemo(
+		() =>
+			debounce( ( value ) => {
+				if ( value.trim().length < 2 ) {
+					return;
+				}
+				apiFetch( { path: searchPath( type, value.trim() ) } )
+					.then( setFound )
+					.catch( () => setFound( [] ) );
+			}, 500 ),
+		[ type ]
+	);
+
 	return (
 		<div { ...useBlockProps() }>
+			{ slug && (
+				<BlockControls>
+					<ToolbarGroup>
+						<ToolbarButton
+							icon="update"
+							label={ __(
+								'Update translation stats',
+								'translation-stats'
+							) }
+							ref={ updateButton }
+							disabled={ updating }
+							onClick={ update }
+						/>
+					</ToolbarGroup>
+				</BlockControls>
+			) }
 			<InspectorControls>
 				<PanelBody title={ __( 'Project', 'translation-stats' ) }>
 					<SelectControl
@@ -67,37 +146,54 @@ export default function Edit( { attributes, setAttributes } ) {
 								label: __( 'Theme', 'translation-stats' ),
 							},
 						] }
-						onChange={ ( value ) =>
-							setAttributes( { type: value, slug: '' } )
-						}
+						onChange={ ( value ) => {
+							setFound( [] );
+							setAttributes( {
+								type: value,
+								slug: '',
+								name: '',
+							} );
+						} }
 					/>
-					<SelectControl
-						__nextHasNoMarginBottom
-						__next40pxDefaultSize
-						label={
-							'themes' === type
-								? __( 'Installed theme', 'translation-stats' )
-								: __( 'Installed plugin', 'translation-stats' )
-						}
-						value={ slug }
-						options={ projectOptions( projects, slug ) }
-						onChange={ ( value ) =>
-							setAttributes( { slug: value } )
-						}
-					/>
-					<TextControl
-						__nextHasNoMarginBottom
-						__next40pxDefaultSize
-						label={ __( 'Slug', 'translation-stats' ) }
-						help={ __(
-							'Or any project slug on WordPress.org, as in its URL.',
-							'translation-stats'
-						) }
-						value={ slug }
-						onChange={ ( value ) =>
-							setAttributes( { slug: value.trim() } )
-						}
-					/>
+					{ /* With the space below of the other fields, as the search field has none. */ }
+					<div style={ { marginBottom: '24px' } }>
+						<ComboboxControl
+							__nextHasNoMarginBottom
+							__next40pxDefaultSize
+							label={
+								'themes' === type
+									? __( 'Theme', 'translation-stats' )
+									: __( 'Plugin', 'translation-stats' )
+							}
+							help={
+								'themes' === type
+									? __(
+											'Search the installed themes, or the themes on WordPress.org.',
+											'translation-stats'
+										)
+									: __(
+											'Search the installed plugins, or the plugins on WordPress.org.',
+											'translation-stats'
+										)
+							}
+							value={ slug }
+							options={ searchOptions(
+								projects,
+								found,
+								slug,
+								name
+							) }
+							onFilterValueChange={ search }
+							onChange={ ( value ) =>
+								setAttributes( {
+									slug: value || '',
+									name: value
+										? projectName( projects, found, value )
+										: '',
+								} )
+							}
+						/>
+					</div>
 					<SelectControl
 						__nextHasNoMarginBottom
 						__next40pxDefaultSize
@@ -191,11 +287,20 @@ export default function Edit( { attributes, setAttributes } ) {
 					/>
 				</PanelBody>
 			</InspectorControls>
+			{ updateError && (
+				<Notice status="error" onRemove={ () => setUpdateError( '' ) }>
+					{ updateError }
+				</Notice>
+			) }
 			{ slug ? (
-				<ServerSideRender
-					block="translation-stats/stats"
-					attributes={ attributes }
-				/>
+				// The moving stripes while updating, and rendered again when updated.
+				<div className={ updating ? 'tstats-block-updating' : '' }>
+					<ServerSideRender
+						key={ updates }
+						block="translation-stats/stats"
+						attributes={ attributes }
+					/>
+				</div>
 			) : (
 				<Placeholder
 					icon="translation"
