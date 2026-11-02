@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-02T15:20:52+00:00\n"
+"POT-Creation-Date: 2026-11-02T16:04:15+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: translation-stats\n"
@@ -19,6 +19,7 @@ msgstr ""
 #: translation-stats.php:12
 #: includes/class-settings-footer.php:60
 #: includes/class-settings-section-debug.php:169
+#: assets/src/blocks/stats/edit.js:204
 msgid "Translation Stats"
 msgstr ""
 
@@ -59,7 +60,7 @@ msgstr ""
 
 #: includes/class-db-update.php:162
 #: includes/class-settings.php:266
-#: includes/class-translation-stats.php:106
+#: includes/class-translation-stats.php:109
 msgid "Settings"
 msgstr ""
 
@@ -128,6 +129,7 @@ msgstr ""
 
 #. translators: %s: Language native name.
 #: includes/class-plugins.php:231
+#: includes/class-stats-block.php:391
 #: includes/class-themes.php:136
 #, php-format
 msgid "Translation for %s"
@@ -384,6 +386,7 @@ msgid "Select All"
 msgstr ""
 
 #: includes/class-settings-section-plugins.php:169
+#: assets/src/blocks/stats/edit.js:65
 msgid "Plugin"
 msgstr ""
 
@@ -401,6 +404,7 @@ msgstr ""
 
 #: includes/class-settings-section-plugins.php:192
 #: includes/class-settings-section-themes.php:117
+#: assets/src/blocks/stats/edit.js:93
 msgid "Slug"
 msgstr ""
 
@@ -436,6 +440,7 @@ msgid "View installed themes"
 msgstr ""
 
 #: includes/class-settings-section-themes.php:107
+#: assets/src/blocks/stats/edit.js:69
 msgid "Theme"
 msgstr ""
 
@@ -627,24 +632,28 @@ msgstr ""
 
 #. translators: Subproject name in translate.wordpress.org, do not translate!
 #: includes/class-translations-api.php:158
+#: assets/src/blocks/stats/utils.js:17
 msgctxt "Subproject name"
 msgid "Development"
 msgstr ""
 
 #. translators: Subproject name in translate.wordpress.org, do not translate!
 #: includes/class-translations-api.php:163
+#: assets/src/blocks/stats/utils.js:21
 msgctxt "Subproject name"
 msgid "Development Readme"
 msgstr ""
 
 #. translators: Subproject name in translate.wordpress.org, do not translate!
 #: includes/class-translations-api.php:168
+#: assets/src/blocks/stats/utils.js:29
 msgctxt "Subproject name"
 msgid "Stable"
 msgstr ""
 
 #. translators: Subproject name in translate.wordpress.org, do not translate!
 #: includes/class-translations-api.php:173
+#: assets/src/blocks/stats/utils.js:33
 msgctxt "Subproject name"
 msgid "Stable Readme"
 msgstr ""
@@ -669,6 +678,70 @@ msgstr ""
 #: translation-stats.php:180
 #, php-format
 msgid "<a href=\"%s\">Learn more about updating PHP</a>."
+msgstr ""
+
+#: assets/src/blocks/stats/edit.js:56
+msgid "Project"
+msgstr ""
+
+#: assets/src/blocks/stats/edit.js:60
+msgid "Type"
+msgstr ""
+
+#: assets/src/blocks/stats/edit.js:81
+msgid "Installed theme"
+msgstr ""
+
+#: assets/src/blocks/stats/edit.js:82
+msgid "Installed plugin"
+msgstr ""
+
+#: assets/src/blocks/stats/edit.js:94
+msgid "Or any project slug on WordPress.org, as in its URL."
+msgstr ""
+
+#: assets/src/blocks/stats/edit.js:106
+msgid "Language"
+msgstr ""
+
+#: assets/src/blocks/stats/edit.js:111
+msgid "Site language"
+msgstr ""
+
+#: assets/src/blocks/stats/edit.js:125
+msgid "Subprojects"
+msgstr ""
+
+#: assets/src/blocks/stats/edit.js:148
+msgid "Display"
+msgstr ""
+
+#: assets/src/blocks/stats/edit.js:151
+msgid "Show the project name"
+msgstr ""
+
+#: assets/src/blocks/stats/edit.js:164
+msgid "Name"
+msgstr ""
+
+#: assets/src/blocks/stats/edit.js:165
+msgid "Leave empty to use the name of the installed plugin or theme, or the slug."
+msgstr ""
+
+#: assets/src/blocks/stats/edit.js:177
+msgid "Show the language"
+msgstr ""
+
+#: assets/src/blocks/stats/edit.js:185
+msgid "Show the strings count"
+msgstr ""
+
+#: assets/src/blocks/stats/edit.js:205
+msgid "Select a plugin or theme in the block settings, to show its translation stats from translate.wordpress.org."
+msgstr ""
+
+#: assets/src/blocks/stats/utils.js:71
+msgid "Select…"
 msgstr ""
 
 #: assets/src/js/stats-widget.js:90
@@ -697,4 +770,34 @@ msgstr ""
 #: assets/src/js/themes.js:75
 #, js-format
 msgid "Translated to %1$s: %2$d%%"
+msgstr ""
+
+#: assets/src/blocks/stats/block.json
+msgctxt "block title"
+msgid "Translation Stats"
+msgstr ""
+
+#: assets/src/blocks/stats/block.json
+msgctxt "block description"
+msgid "Show the translate.wordpress.org translation stats of a plugin or theme."
+msgstr ""
+
+#: assets/src/blocks/stats/block.json
+msgctxt "block keyword"
+msgid "translation"
+msgstr ""
+
+#: assets/src/blocks/stats/block.json
+msgctxt "block keyword"
+msgid "stats"
+msgstr ""
+
+#: assets/src/blocks/stats/block.json
+msgctxt "block keyword"
+msgid "translate"
+msgstr ""
+
+#: assets/src/blocks/stats/block.json
+msgctxt "block keyword"
+msgid "polyglots"
 msgstr ""
