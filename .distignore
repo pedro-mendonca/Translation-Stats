@@ -15,16 +15,10 @@ AGENTS.md
 CLAUDE.md
 .distignore
 .editorconfig
-.eslintignore
-.eslintrc.json
 .gitattributes
 .gitignore
-.markdownlint.json
-.markdownlintignore
 .nvmrc
-.stylelintignore
 .stylelintrc.json
-.travis.yml
 codecov.yml
 composer.json
 composer.lock

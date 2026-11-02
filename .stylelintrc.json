@@ -10,8 +10,6 @@
 			}
 		],
 		"font-weight-notation": null,
-		"no-descending-specificity": null,
-		"selector-class-pattern": null,
-		"scss/operator-no-unspaced": null
+		"selector-class-pattern": null
 	}
 }
