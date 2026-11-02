@@ -38,7 +38,7 @@
 		}
 	}
 
-	&.tstats-hide-counts .subproject-bar__count {
+	&.tstats-hide-counts .translation-stats-widget .translation-stats-content .translation-stats-content-stats .content__subproject .subproject-bar .subproject-bar__count { // Without the strings count, over the stats widget styles.
 		display: none;
 	}
 }
