@@ -276,31 +276,31 @@ export function addSettingsLink( settingsUrl ) {
  *
  * @return {boolean} True if the themes views were extended.
  */
-export function initThemesStats(
-	themes = window.wp && window.wp.themes,
-	queue = createQueue()
-) {
+export function initThemesStats( themes, queue ) {
+	const views = undefined === themes ? window.wp && window.wp.themes : themes;
+	const requests = queue || createQueue();
+
 	if (
-		! themes ||
-		! themes.view ||
-		! themes.view.Theme ||
-		! themes.view.Details
+		! views ||
+		! views.view ||
+		! views.view.Theme ||
+		! views.view.Details
 	) {
 		return false;
 	}
 
-	const renderTheme = themes.view.Theme.prototype.render;
-	const renderDetails = themes.view.Details.prototype.render;
+	const renderTheme = views.view.Theme.prototype.render;
+	const renderDetails = views.view.Details.prototype.render;
 
-	themes.view.Theme.prototype.render = function () {
+	views.view.Theme.prototype.render = function () {
 		const result = renderTheme.apply( this, arguments );
-		addThemeCardBar( this, queue );
+		addThemeCardBar( this, requests );
 		return result;
 	};
 
-	themes.view.Details.prototype.render = function () {
+	views.view.Details.prototype.render = function () {
 		const result = renderDetails.apply( this, arguments );
-		addThemeWidget( this, queue );
+		addThemeWidget( this, requests );
 		return result;
 	};
 
