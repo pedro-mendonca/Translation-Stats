@@ -661,9 +661,10 @@ class GP_Locales {
 		$ca_valencia->lang_code_iso_639_1 = 'ca';
 		$ca_valencia->lang_code_iso_639_2 = 'cat';
 		$ca_valencia->wp_locale = 'ca_valencia';
-		$ca_valencia->slug = 'ca-val';
+		$ca_valencia->slug = 'ca/valencia';
 		$ca_valencia->google_code = 'ca';
 		$ca_valencia->facebook_locale = 'ca_ES';
+		$ca_valencia->root_slug = $ca->slug;
 
 		$ce = new GP_Locale();
 		$ce->english_name = 'Chechen';
@@ -804,6 +805,13 @@ class GP_Locales {
 		$de->google_code = 'de';
 		$de->facebook_locale = 'de_DE';
 
+		$de_formal = clone $de;
+		$de_formal->english_name = 'German (Formal)';
+		$de_formal->native_name = 'Deutsch (Sie)';
+		$de_formal->slug = 'de/formal';
+		$de_formal->wp_locale = 'de_DE_formal';
+		$de_formal->root_slug = $de->slug;
+
 		$de_at = new GP_Locale();
 		$de_at->english_name = 'German (Austria)';
 		$de_at->native_name = 'Deutsch (Österreich)';
@@ -821,6 +829,13 @@ class GP_Locales {
 		$de_ch->wp_locale = 'de_CH';
 		$de_ch->slug = 'de-ch';
 		$de_ch->google_code = 'de';
+
+		$de_ch_informal = clone $de_ch;
+		$de_ch_informal->english_name = 'German (Switzerland, Informal)';
+		$de_ch_informal->native_name = 'Deutsch (Schweiz, Du)';
+		$de_ch_informal->slug = 'de-ch/informal';
+		$de_ch_informal->wp_locale = 'de_CH_informal';
+		$de_ch_informal->root_slug = $de_ch->slug;
 
 		$dsb = new GP_Locale();
 		$dsb->english_name = 'Lower Sorbian';
@@ -2102,6 +2117,13 @@ class GP_Locales {
 		$nl->google_code = 'nl';
 		$nl->facebook_locale = 'nl_NL';
 
+		$nl_formal = clone $nl;
+		$nl_formal->english_name = 'Dutch (Formal)';
+		$nl_formal->native_name = 'Nederlands (Formeel)';
+		$nl_formal->slug = 'nl/formal';
+		$nl_formal->wp_locale = 'nl_NL_formal';
+		$nl_formal->root_slug = $nl->slug;
+
 		$nl_be = new GP_Locale();
 		$nl_be->english_name = 'Dutch (Belgium)';
 		$nl_be->native_name = 'Nederlands (België)';
@@ -2286,14 +2308,12 @@ class GP_Locales {
 		$pt->google_code = 'pt-PT';
 		$pt->facebook_locale = 'pt_PT';
 
-		$pt_ao90 = new GP_Locale();
+		$pt_ao90 = clone $pt;
 		$pt_ao90->english_name = 'Portuguese (Portugal, AO90)';
 		$pt_ao90->native_name = 'Português (AO90)';
-		$pt_ao90->lang_code_iso_639_1 = 'pt';
-		$pt_ao90->country_code = 'pt';
+		$pt_ao90->slug = 'pt/ao90';
 		$pt_ao90->wp_locale = 'pt_PT_ao90';
-		$pt_ao90->slug = 'pt-ao90';
-		$pt_ao90->google_code = 'pt-PT';
+		$pt_ao90->root_slug = $pt->slug;
 
 		$pt_ao = new GP_Locale();
 		$pt_ao->english_name = 'Portuguese (Angola)';
