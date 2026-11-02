@@ -50,6 +50,10 @@ This plugin is properly prepared for localization.
 | **Stable**             | Translation of the *Stable* version of the plugin                                                          |
 | **Stable Readme**      | Readme of the *Stable* version of the plugin page on [wp.org/plugins](https://wordpress.org/plugins/)      |
 
+### Do themes have subprojects?
+
+No. The themes translation projects on translate.wordpress.org have no subprojects, so the theme translation stats have a single translation stats bar.
+
 ### How can I translate a plugin?
 
 * Register and login in [wp.org](https://login.wordpress.org/)
@@ -121,7 +125,7 @@ Sure! You are welcome to report any issues or add feature suggestions on the [Gi
 * Remove the bundled Portuguese (pt_PT) translation files, not loaded by WordPress. The translations are loaded from translate.wordpress.org.
 * Developers: Add the `Project`, `Plugin_Project` and `Theme_Project` classes for the translate.wordpress.org projects and their translation stats. Remove `Translations_API::translations_api_get_plugin()`, `plugin_project_on_translate_wporg()` and `plugin_subproject_on_translate_wporg()`, and `Plugins::plugin_subproject_stats()`, `plugin_stats_cached()` and `plugin_subproject_stats_transient()`.
 * Developers: The REST API route `translation-stats/v1/(plugins|themes)/<slug>/stats` loads the plugins and themes translation stats.
-* Developers: Deprecate the `TRANSLATION_STATS_TRANSIENTS_PREFIX` constant, replaced by `TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX`. The themes transients use `TRANSLATION_STATS_TRANSIENTS_THEMES_PREFIX`.
+* Developers: Rename the `TRANSLATION_STATS_TRANSIENTS_PREFIX` constant to `TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX`. The themes transients use `TRANSLATION_STATS_TRANSIENTS_THEMES_PREFIX`.
 * Build the JavaScript and CSS with `@wordpress/scripts`.
 * Increase PHPStan level to 9, and unit tests coverage.
 
