@@ -166,9 +166,18 @@ class Test_Stats_Block extends Translation_Stats_TestCase {
 		$this->assertSame( array( 'dev', 'stable' ), wp_list_pluck( Stats_Block_Attributes::subprojects( $plugin, array( 'subprojects' => array( 'stable', 'dev', 'unknown' ) ) ), 'slug' ) );
 		$this->assertSame( array(), Stats_Block_Attributes::subprojects( $plugin, array( 'subprojects' => array() ) ) );
 
-		// Themes have no subprojects, their stats are in the project.
-		$theme = new Theme_Project( 'twentytwentyfive' );
-		$this->assertSame( array( '' ), wp_list_pluck( Stats_Block_Attributes::subprojects( $theme, array( 'subprojects' => array( 'stable' ) ) ), 'slug' ) );
+		// Themes have no subprojects, their stats are in the project, with the block project name.
+		$theme = new Theme_Project( 'not-installed-theme' );
+		$this->assertSame(
+			array(
+				array(
+					'slug' => '',
+					'name' => 'not-installed-theme',
+				),
+			),
+			Stats_Block_Attributes::subprojects( $theme, array( 'subprojects' => array( 'stable' ) ) )
+		);
+		$this->assertSame( 'GeneratePress', Stats_Block_Attributes::subprojects( $theme, array( 'name' => 'GeneratePress' ) )[0]['name'] );
 	}
 
 
