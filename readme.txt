@@ -5,7 +5,7 @@ Tags: internationalization, i18n, localization, l10n, translation
 Requires at least: 5.9
 Tested up to: 7.1
 Requires PHP: 7.4
-Stable tag: 2.0.0
+Stable tag: 2.1.0
 License: GPLv2
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,6 +16,8 @@ Show plugins and themes translation stats on your WordPress install.
 The plugin adds a "Translation Stats" column to the Plugins screen, and the translation stats to the Themes screen in WordPress admin: a translation stats bar on the theme cards, and a translation stats widget in the theme details.
 
 Select the plugins and themes to show the translation stats in the plugin settings.
+
+Show the translation stats of any plugin or theme on your site with the Translation Stats block: search the project on WordPress.org, choose the language and the subprojects, and update the stats right from the block editor. The block requires WordPress 6.3 or later.
 
 The translation stats are shown only for plugins and themes that exist in [translate.wordpress.org](https://translate.wordpress.org/) and are [prepared for localization](https://developer.wordpress.org/plugins/internationalization/how-to-internationalize-your-plugin/).
 
@@ -47,7 +49,10 @@ Only plugins and themes hosted on WordPress.org have translation projects on tra
 The language set in Settings > Translation Stats > Settings. By default, the site language.
 
 = How often are the stats updated? =
-The stats are cached for the time set in the Tools tab, 24 hours by default. Use the refresh button on each plugin or theme to update them right away, or clean the whole cache in the Tools tab.
+The stats are cached for the time set in the Tools tab, 24 hours by default. Use the refresh button on each plugin or theme to update them right away, or clean the whole cache in the Tools tab. In the block editor, use the update button in the Translation Stats block toolbar.
+
+= How can I show the translation stats on my site? =
+Add the Translation Stats block to any post, page or template, and search the plugin or theme, installed or on WordPress.org. Choose the language and the plugin subprojects in the block settings. Visitors see the cached stats, loaded in the background when needed, without slowing down the page. The block requires WordPress 6.3 or later.
 
 = How can I translate a plugin or theme? =
 *   Log in to [WordPress.org](https://login.wordpress.org/), or create an account
@@ -80,8 +85,17 @@ Ask your questions in the [support forum](https://wordpress.org/support/plugin/t
 5. Translation Stats shown in WordPress themes page
 6. Translation Stats shown in WordPress theme details
 7. Translation Stats installed themes list
+8. Translation Stats block, with the stats of plugins and themes on the frontend
 
 == Changelog ==
+
+= 2.1.0 =
+*   New: The Translation Stats block, to show the translation stats of any plugin or theme on your site, in any language, with the project name and links to translate it. Search the plugins and themes on WordPress.org, and update the stats from the block editor. Requires WordPress 6.3.
+*   Fix the stats of the language variants, like Português (AO90), Deutsch (Sie), Nederlands (Formeel) or Català (Valencià), shown as not found since 1.3.3, and their links to translate.wordpress.org. The cached stats update when they expire: to see them right away, use Clean Cache in Settings > Translation Stats > Tools.
+*   Fix the Translation Stats link of the Themes screen, not translated.
+*   Include the SCSS sources in the GitHub archives.
+*   Update the development dependencies.
+*   Developers: The REST API routes `translation-stats/v1/block-stats` and `translation-stats/v1/block-projects` for the block, and the `translation_stats_block_load_stats` filter.
 
 = 2.0.0 =
 *   New: Show the translation stats of themes on the Themes screen, with a translation stats bar on the theme cards and a translation stats widget in the theme details.
