@@ -37,31 +37,34 @@ if ( ! class_exists( __NAMESPACE__ . '\Theme_Project' ) ) {
 
 
 		/**
-		 * Get the theme translation subprojects: only the project itself.
+		 * Get the theme translation subprojects: only the project itself, named as the theme.
 		 *
 		 * @since 1.5.0
 		 *
 		 * @return array<int, array{slug: string, name: string}>   Subprojects.
 		 */
 		public function get_subprojects() {
+
+			$theme = wp_get_theme( $this->get_slug() );
+
 			return array(
 				array(
 					'slug' => '',
-					'name' => _x( 'Theme', 'Project type', 'translation-stats' ),
+					'name' => $theme->exists() ? (string) $theme->get( 'Name' ) : $this->get_slug(),
 				),
 			);
 		}
 
 
 		/**
-		 * Get the theme key for its transients, to not conflict with a plugin with the same slug.
+		 * Get the prefix of the theme transients, to not conflict with a plugin with the same slug.
 		 *
 		 * @since 1.5.0
 		 *
-		 * @return string   Transients key.
+		 * @return string   Transients prefix.
 		 */
-		protected function transients_key() {
-			return 'theme_' . $this->get_slug();
+		public function transients_prefix() {
+			return TRANSLATION_STATS_TRANSIENTS_THEMES_PREFIX;
 		}
 	}
 }

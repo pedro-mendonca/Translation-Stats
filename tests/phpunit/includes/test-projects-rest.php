@@ -189,7 +189,7 @@ class Test_Projects_REST extends Translation_Stats_TestCase {
 
 		$this->assertSame( $status, $response->get_status() );
 		$this->assertSame( array(), $this->requested_urls );
-		$this->assertFalse( get_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . 'translation-stats_stable_pt_PT' ) );
+		$this->assertFalse( get_transient( TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX . 'translation-stats_stable_pt_PT' ) );
 	}
 
 
@@ -237,6 +237,9 @@ class Test_Projects_REST extends Translation_Stats_TestCase {
 		$this->assertContains( 'https://translate.wordpress.org/api/projects/wp-plugins/translation-stats/stable', $this->requested_urls );
 		$this->assertStringContainsString( 'translation-stats-content-stats', $response->get_data()['html'] );
 		$this->assertStringContainsString( '95%', $response->get_data()['html'] );
+
+		// No percent for the plugins, with subprojects.
+		$this->assertNull( $response->get_data()['percent'] );
 	}
 
 
@@ -253,7 +256,7 @@ class Test_Projects_REST extends Translation_Stats_TestCase {
 
 		$this->assertSame( 503, $response->get_status() );
 		$this->assertSame( 'translation_stats_api_unavailable', $response->get_data()['code'] );
-		$this->assertFalse( get_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . 'translation-stats_stable_pt_PT' ) );
+		$this->assertFalse( get_transient( TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX . 'translation-stats_stable_pt_PT' ) );
 	}
 
 
@@ -353,6 +356,9 @@ class Test_Projects_REST extends Translation_Stats_TestCase {
 		$this->assertContains( 'https://translate.wordpress.org/api/projects/wp-themes/twentytwentyfive', $this->requested_urls );
 		$this->assertStringContainsString( 'data-slug="twentytwentyfive"', $response->get_data()['html'] );
 		$this->assertStringContainsString( '95%', $response->get_data()['html'] );
+
+		// The percent translated, for the theme card.
+		$this->assertSame( 95, $response->get_data()['percent'] );
 	}
 
 

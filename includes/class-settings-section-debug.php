@@ -279,7 +279,10 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 		 */
 		public function debug_info__transients() {
 
-			$transients = $this->transients->get_transients( TRANSLATION_STATS_TRANSIENTS_PREFIX );
+			$transients = array_merge(
+				$this->transients->get_transients( TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX ),
+				$this->transients->get_transients( TRANSLATION_STATS_TRANSIENTS_THEMES_PREFIX )
+			);
 
 			?>
 			<h3>
@@ -290,7 +293,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Debug' ) ) {
 				printf(
 					/* translators: %s: Prefix Name. */
 					esc_html__( 'Transients Prefix: %s', 'translation-stats' ),
-					'<code>' . esc_html( TRANSLATION_STATS_TRANSIENTS_PREFIX ) . '</code>'
+					'<code>' . esc_html( TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX ) . '</code> <code>' . esc_html( TRANSLATION_STATS_TRANSIENTS_THEMES_PREFIX ) . '</code>'
 				);
 				?>
 			</p>

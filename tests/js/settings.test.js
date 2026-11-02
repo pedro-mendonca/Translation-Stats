@@ -255,6 +255,19 @@ describe( 'plugins table', () => {
 		expect( pluginRow( 'first' ).checkbox.prop( 'checked' ) ).toBe( false );
 	} );
 
+	it( 'unfocuses the plugins table header after clicking to sort', () => {
+		addSettingsPage();
+		jQuery( '#tstats-table-plugins thead tr' ).append( '<th class="tablesorter-header" tabindex="0">Plugin</th>' );
+		initSettings();
+
+		const header = jQuery( '#tstats-table-plugins th.tablesorter-header' );
+		header[ 0 ].focus();
+
+		header.trigger( 'mouseup' );
+
+		expect( document.activeElement ).not.toBe( header[ 0 ] );
+	} );
+
 	it( 'activates the plugin row when selecting one of its subprojects', () => {
 		addSettingsPage();
 		initSettings();

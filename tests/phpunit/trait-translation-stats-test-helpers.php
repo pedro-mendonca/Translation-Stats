@@ -137,4 +137,36 @@ trait Translation_Stats_Test_Helpers {
 			),
 		);
 	}
+
+
+	/**
+	 * Original theme directories, before adding the test themes.
+	 *
+	 * @var array|null
+	 */
+	private $original_theme_directories;
+
+
+	/**
+	 * Add the test themes, from 'tests/phpunit/data/themes'.
+	 */
+	protected function add_test_themes() {
+		global $wp_theme_directories;
+
+		$this->original_theme_directories = $wp_theme_directories;
+
+		register_theme_directory( __DIR__ . '/data/themes' );
+		wp_clean_themes_cache();
+	}
+
+
+	/**
+	 * Remove the test themes, restoring the theme directories.
+	 */
+	protected function remove_test_themes() {
+		global $wp_theme_directories;
+
+		$wp_theme_directories = $this->original_theme_directories; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
+		wp_clean_themes_cache();
+	}
 }

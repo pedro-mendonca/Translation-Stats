@@ -77,14 +77,14 @@ if ( ! class_exists( __NAMESPACE__ . '\Project' ) ) {
 
 
 		/**
-		 * Get the project key for its transients, unique for all the project types.
+		 * Get the prefix of the project transients, for each project type.
 		 *
 		 * @since 1.5.0
 		 *
-		 * @return string   Transients key.
+		 * @return string   Transients prefix.
 		 */
-		protected function transients_key() {
-			return $this->get_slug();
+		public function transients_prefix() {
+			return TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX;
 		}
 
 
@@ -141,7 +141,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Project' ) ) {
 		 */
 		public function on_translate_wporg() {
 
-			$transient = TRANSLATION_STATS_TRANSIENTS_PREFIX . $this->transients_key();
+			$transient = $this->transients_prefix() . $this->get_slug();
 
 			$on_wporg = get_transient( $transient );
 
@@ -176,9 +176,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Project' ) ) {
 		 */
 		public function subproject_stats_transient( $locale, $subproject_slug ) {
 
-			$key = '' === $subproject_slug ? $this->transients_key() : $this->transients_key() . '_' . $subproject_slug;
+			$key = '' === $subproject_slug ? $this->get_slug() : $this->get_slug() . '_' . $subproject_slug;
 
-			return TRANSLATION_STATS_TRANSIENTS_PREFIX . $key . '_' . $locale->wp_locale;
+			return $this->transients_prefix() . $key . '_' . $locale->wp_locale;
 		}
 
 

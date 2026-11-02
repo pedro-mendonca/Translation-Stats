@@ -49,7 +49,7 @@ class Test_Project extends Translation_Stats_TestCase {
 		$this->assertSame( 'translation-stats', $project->get_path() );
 		$this->assertSame( 'translation-stats/stable', $project->get_path( 'stable' ) );
 		$this->assertSame( 'https://translate.wordpress.org/projects/wp-plugins/translation-stats/stable/pt/ao90', $project->translate_url( 'stable', $locale ) );
-		$this->assertSame( TRANSLATION_STATS_TRANSIENTS_PREFIX . 'translation-stats_stable_pt_PT_ao90', $project->subproject_stats_transient( $locale, 'stable' ) );
+		$this->assertSame( TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX . 'translation-stats_stable_pt_PT_ao90', $project->subproject_stats_transient( $locale, 'stable' ) );
 	}
 
 
@@ -65,8 +65,25 @@ class Test_Project extends Translation_Stats_TestCase {
 		$this->assertSame( array( '' ), wp_list_pluck( $project->get_subprojects(), 'slug' ) );
 		$this->assertSame( 'twentytwentyfive', $project->get_path( '' ) );
 		$this->assertSame( 'https://translate.wordpress.org/projects/wp-themes/twentytwentyfive/pt/default', $project->translate_url( '', $locale ) );
-		$this->assertSame( TRANSLATION_STATS_TRANSIENTS_PREFIX . 'theme_twentytwentyfive_pt_PT', $project->subproject_stats_transient( $locale, '' ) );
+		$this->assertSame( TRANSLATION_STATS_TRANSIENTS_THEMES_PREFIX . 'twentytwentyfive_pt_PT', $project->subproject_stats_transient( $locale, '' ) );
 		$this->assertNotSame( ( new Plugin_Project( 'twentytwentyfive' ) )->subproject_stats_transient( $locale, '' ), $project->subproject_stats_transient( $locale, '' ) );
+	}
+
+
+	/**
+	 * Test the theme project is named as the installed theme, or with its slug if not installed.
+	 */
+	public function test_theme_project_name() {
+
+		$this->add_test_themes();
+
+		$installed     = ( new Theme_Project( 'tstats-theme-wporg' ) )->get_subprojects();
+		$not_installed = ( new Theme_Project( 'tstats-theme-not-installed' ) )->get_subprojects();
+
+		$this->remove_test_themes();
+
+		$this->assertSame( 'Translation Stats Theme on WordPress.org', $installed[0]['name'] );
+		$this->assertSame( 'tstats-theme-not-installed', $not_installed[0]['name'] );
 	}
 
 
@@ -320,7 +337,7 @@ class Test_Project extends Translation_Stats_TestCase {
 
 		$this->assertWPError( $stats );
 		$this->assertSame( 503, $stats->get_error_data()['status'] );
-		$this->assertFalse( get_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . 'translation-stats_stable_pt_PT' ) );
+		$this->assertFalse( get_transient( TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX . 'translation-stats_stable_pt_PT' ) );
 	}
 
 
@@ -336,7 +353,7 @@ class Test_Project extends Translation_Stats_TestCase {
 
 		$project->subproject_stats( $locale, 'stable', false );
 
-		$this->assertSame( 95, get_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . 'translation-stats_stable_pt_PT' )->percent_translated );
+		$this->assertSame( 95, get_transient( TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX . 'translation-stats_stable_pt_PT' )->percent_translated );
 
 		// The second request uses the transient.
 		$stats = $project->subproject_stats( $locale, 'stable', false );

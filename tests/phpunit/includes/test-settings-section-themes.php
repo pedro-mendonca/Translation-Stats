@@ -15,24 +15,12 @@ class Test_Settings_Section_Themes extends Translation_Stats_TestCase {
 
 
 	/**
-	 * Original theme directories.
-	 *
-	 * @var array
-	 */
-	private $wp_theme_directories;
-
-
-	/**
 	 * Add the test themes: one on WordPress.org, in the themes updates transient, and other not.
 	 */
 	public function set_up() {
 		parent::set_up();
 
-		global $wp_theme_directories;
-		$this->wp_theme_directories = $wp_theme_directories;
-
-		register_theme_directory( dirname( __DIR__ ) . '/data/themes' );
-		wp_clean_themes_cache();
+		$this->add_test_themes();
 
 		set_site_transient(
 			'update_themes',
@@ -52,9 +40,7 @@ class Test_Settings_Section_Themes extends Translation_Stats_TestCase {
 	 * Restore the theme directories.
 	 */
 	public function tear_down() {
-		global $wp_theme_directories;
-		$wp_theme_directories = $this->wp_theme_directories; // phpcs:ignore WordPress.WP.GlobalVariablesOverride.Prohibited
-		wp_clean_themes_cache();
+		$this->remove_test_themes();
 
 		parent::tear_down();
 	}
@@ -113,6 +99,7 @@ class Test_Settings_Section_Themes extends Translation_Stats_TestCase {
 		$html = $this->render();
 
 		$this->assertStringContainsString( 'id="themes-search-input"', $html );
+		$this->assertStringContainsString( 'from the list of installed themes. <a href="' . admin_url( 'themes.php' ) . '" aria-label="View installed themes">View installed themes</a>', $html );
 		$this->assertStringContainsString( '<table id="tstats-table-themes" class="tstats-theme-list-table widefat plugins tablesorter">', $html );
 
 		// Theme on WordPress.org, not selected, with the link to the Locale WordPress.org themes directory.
