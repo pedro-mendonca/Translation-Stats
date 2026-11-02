@@ -84,7 +84,9 @@ define( 'TRANSLATION_STATS_DIR_URL', plugin_dir_url( __FILE__ ) );
 define( 'TRANSLATION_STATS_DIR_PATH', plugin_dir_path( __FILE__ ) );
 
 // Set Translation Stats file path.
-define( 'TRANSLATION_STATS_FILE', plugin_basename( __FILE__ ) );
+if ( ! defined( 'TRANSLATION_STATS_FILE' ) ) {
+	define( 'TRANSLATION_STATS_FILE', plugin_basename( __FILE__ ) );
+}
 
 
 /**

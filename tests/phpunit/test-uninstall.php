@@ -49,6 +49,7 @@ class Test_Uninstall extends Translation_Stats_TestCase {
 
 		set_transient( TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX . 'translation-stats', true );
 		set_transient( TRANSLATION_STATS_TRANSIENTS_THEMES_PREFIX . 'twentytwentyfive', true );
+		set_transient( 'translation_stats_settings_updated', '1.0' );
 	}
 
 
@@ -62,6 +63,7 @@ class Test_Uninstall extends Translation_Stats_TestCase {
 		$this->assertSame( $exists, false !== get_option( TRANSLATION_STATS_WP_OPTION ) );
 		$this->assertSame( $exists, false !== get_transient( TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX . 'translation-stats' ) );
 		$this->assertSame( $exists, false !== get_transient( TRANSLATION_STATS_TRANSIENTS_THEMES_PREFIX . 'twentytwentyfive' ) );
+		$this->assertSame( $exists, false !== get_transient( 'translation_stats_settings_updated' ) );
 	}
 
 

@@ -21,7 +21,8 @@ class Test_Activation extends Translation_Stats_TestCase {
 
 		$activation = new Activation();
 
-		$this->assertSame( 10, has_action( 'activate_translation-stats/translation-stats.php', array( $activation, 'activate' ) ) );
+		// With the plugin file, whatever the plugin folder name.
+		$this->assertSame( 10, has_action( 'activate_' . TRANSLATION_STATS_FILE, array( $activation, 'activate' ) ) );
 		$this->assertSame( 10, has_action( 'admin_notices', array( $activation, 'activate_notice' ) ) );
 	}
 
@@ -50,6 +51,7 @@ class Test_Activation extends Translation_Stats_TestCase {
 
 		$this->assertStringContainsString( 'notice-success', $html );
 		$this->assertStringContainsString( 'Thank you for installing Translation Stats.', $html );
+		$this->assertStringContainsString( 'to select the plugins and themes to show their translation stats.', $html );
 		$this->assertStringContainsString( 'options-general.php?page=translation-stats', $html );
 		$this->assertFalse( get_transient( 'translation_stats_activate' ) );
 
