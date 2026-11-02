@@ -58,7 +58,6 @@ class Test_Locales extends WP_UnitTestCase {
 			'de_CH_informal' => array( 'de_CH_informal', 'de-ch/informal', 'de-ch' ),
 			'nl_NL_formal'   => array( 'nl_NL_formal', 'nl/formal', 'nl' ),
 			'pt_PT_ao90'     => array( 'pt_PT_ao90', 'pt/ao90', 'pt' ),
-			'pt_PT_informal' => array( 'pt_PT_informal', 'pt/informal', 'pt' ),
 		);
 	}
 

@@ -2315,13 +2315,6 @@ class GP_Locales {
 		$pt_ao90->wp_locale = 'pt_PT_ao90';
 		$pt_ao90->root_slug = $pt->slug;
 
-		$pt_informal = clone $pt;
-		$pt_informal->english_name = 'Portuguese (Portugal, Informal)';
-		$pt_informal->native_name = 'Português (Informal)';
-		$pt_informal->slug = 'pt/informal';
-		$pt_informal->wp_locale = 'pt_PT_informal';
-		$pt_informal->root_slug = $pt->slug;
-
 		$pt_ao = new GP_Locale();
 		$pt_ao->english_name = 'Portuguese (Angola)';
 		$pt_ao->native_name = 'Português de Angola';
