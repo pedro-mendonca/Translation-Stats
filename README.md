@@ -85,13 +85,13 @@ The first language pack of a plugin or theme is generated when 90% of its string
 
 Yes you can! If you want to translate this plugin to your language, please [translate it on translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/translation-stats).
 
-### Where can I get support?
-
-Ask your questions in the [support forum](https://wordpress.org/support/plugin/translation-stats/) on WordPress.org.
-
 ### Can I contribute to this plugin?
 
 Sure! You are welcome to report any issues or add feature suggestions on the [GitHub repository](https://github.com/pedro-mendonca/Translation-Stats).
+
+### Where can I get support?
+
+Ask your questions in the [support forum](https://wordpress.org/support/plugin/translation-stats/) on WordPress.org.
 
 ## Screenshots
 
