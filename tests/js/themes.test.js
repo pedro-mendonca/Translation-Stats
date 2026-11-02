@@ -85,7 +85,6 @@ async function flush() {
 }
 
 beforeEach( () => {
-	vi.spyOn( console, 'log' ).mockImplementation( () => {} );
 	apiFetch.mockResolvedValue( { html: '<div class="translation-stats-content-stats">Loaded stats</div>', percent: 91 } );
 } );
 

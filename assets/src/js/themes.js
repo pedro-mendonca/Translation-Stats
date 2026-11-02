@@ -132,7 +132,7 @@ export function loadThemeStats( model, widget, forceUpdate, queue ) {
 	// Show the loading state also in the theme card, with the moving stripes while updating.
 	const targets = widget.add( jQuery( '.theme[data-slug="' + slug + '"] .tstats-theme-card' ) );
 
-	return loadWidgetStats( targets, themeStatsPath( slug ), slug, forceUpdate, queue ).then( function( response ) {
+	return loadWidgetStats( targets, themeStatsPath( slug ), forceUpdate, queue ).then( function( response ) {
 		stats.loading = false;
 
 		if ( ! response ) {
@@ -248,7 +248,6 @@ export function addSettingsLink( settingsUrl ) {
  */
 export function initThemesStats( themes = window.wp && window.wp.themes, queue = createQueue() ) {
 	if ( ! themes || ! themes.view || ! themes.view.Theme || ! themes.view.Details ) {
-		console.log( 'Translation Stats: the themes views are not available.' );
 		return false;
 	}
 

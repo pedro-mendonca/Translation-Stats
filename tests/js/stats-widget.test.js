@@ -78,7 +78,6 @@ function elements( widget ) {
 
 beforeEach( () => {
 	vi.mocked( apiFetch ).mockReset();
-	vi.spyOn( console, 'log' ).mockImplementation( () => {} );
 } );
 
 afterEach( () => {
@@ -137,20 +136,33 @@ describe( 'loadStats', () => {
 		expect( status.text() ).toBe( '' );
 	} );
 
-	it( 'shows the error notice when the request fails', async () => {
+	it( 'shows the error notice with the REST API error message when the request fails', async () => {
 		const widget = addWidget( 'hello' );
 		const { status, button, notice, content } = elements( widget );
-		vi.mocked( apiFetch ).mockRejectedValue( { code: 'translation_stats_api_unavailable', message: 'Unavailable.' } );
+		vi.mocked( apiFetch ).mockRejectedValue( { code: 'translation_stats_api_unavailable', message: 'The translation stats couldn\'t be loaded from <b>translate.wordpress.org</b>.' } );
 
 		await loadStats( 'hello', false, createQueue() );
 
 		expect( notice.hasClass( 'hidden' ) ).toBe( false );
 		expect( notice.hasClass( 'notice-error' ) ).toBe( true );
 		expect( notice[ 0 ].style.display ).not.toBe( 'none' );
-		expect( notice.text() ).toBe( 'An error occurred while updating.' );
+
+		// As text, not HTML.
+		expect( notice.text() ).toBe( 'The translation stats couldn\'t be loaded from <b>translate.wordpress.org</b>.' );
+		expect( notice.find( 'b' ).length ).toBe( 0 );
 		expect( status.text() ).toBe( '' );
 		expect( button.prop( 'disabled' ) ).toBe( false );
 		expect( content.text() ).toBe( 'Placeholder' );
+	} );
+
+	it( 'shows a generic error notice without the REST API error message', async () => {
+		const widget = addWidget( 'hello' );
+		const { notice } = elements( widget );
+		vi.mocked( apiFetch ).mockRejectedValue( new Error( '' ) );
+
+		await loadStats( 'hello', false, createQueue() );
+
+		expect( notice.text() ).toBe( 'An error occurred while updating.' );
 	} );
 
 	it( 'runs the requests one after another', async () => {

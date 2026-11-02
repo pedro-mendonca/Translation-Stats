@@ -67,11 +67,9 @@ export function tstatsOnLoad() {
 	if ( tstatsSettingsURLHash ) {
 		// Use Hash tab ID.
 		tstatsActiveTabID = tstatsSettingsURLHash;
-		console.log( 'Use hash tab: ' + tstatsActiveTabID );
 	} else {
 		// Use default tab ID.
 		tstatsActiveTabID = tstatsDefaultTabID;
-		console.log( 'Use default tab: ' + tstatsActiveTabID );
 	}
 
 	// Set Active Tab on Settings page load, from the URL hash or the default.
@@ -84,8 +82,6 @@ export function tstatsOnLoad() {
 
 	// Return to the active tab after saving.
 	tstatsSetFormReferer( tstatsActiveTabID );
-
-	console.log( 'Loaded admin-settings.js' );
 }
 
 /**
@@ -168,8 +164,6 @@ export function tstatsPluginsSelectAll() {
 
 	$( '#tstats-table-plugins thead input#all_plugins' ).attr( 'data-indeterminate', false );
 
-	console.log( 'activeSubprojects', activeSubprojects );
-
 	if ( activeSubprojects < 4 ) {
 		// Activate all plugins.
 		tstatsPluginsActivateAllPlugins();
@@ -194,8 +188,6 @@ export function tstatsPluginsActivateAllPlugins() {
 		// Activate plugin.
 		tstatsPluginsActivatePlugin( plugin );
 	} );
-
-	console.log( 'Activate all plugins.' );
 }
 
 /**
@@ -210,8 +202,6 @@ export function tstatsPluginsDeactivateAllPlugins() {
 		// Deactivate plugin.
 		tstatsPluginsDeactivatePlugin( plugin );
 	} );
-
-	console.log( 'Deactivate all plugins.' );
 }
 
 /**
@@ -241,8 +231,6 @@ export function tstatsPluginsActivatePlugin( plugin ) {
 			checked: true,
 		},
 	);
-
-	console.log( 'Activate plugin.' );
 }
 
 /**
@@ -272,8 +260,6 @@ export function tstatsPluginsDeactivatePlugin( plugin ) {
 			checked: false,
 		},
 	);
-
-	console.log( 'Deactivate plugin.' );
 }
 
 /**
@@ -354,12 +340,8 @@ export function tstatsPluginsSelectSubprojectColumn( event ) {
 
 	if ( totalCount > 0 && currentCount < totalCount ) {
 		$( 'input[data-subproject="' + subproject + '"]' ).prop( 'checked', true );
-
-		console.log( 'Subproject enabled.' );
 	} else {
 		$( 'input[data-subproject="' + subproject + '"]' ).prop( 'checked', false );
-
-		console.log( 'Subproject disabled.' );
 	}
 
 	// Update all rows.
@@ -494,11 +476,9 @@ export function tstatsPluginsUpdateHeader() {
 		if ( completelyActiveSubprojects < 4 ) {
 			// Some subprojects activated.
 			$( '#tstats-table-plugins thead input#all_plugins' ).attr( 'data-indeterminate', true );
-			console.log( 'Some subprojects activated.' );
 		} else {
 			// All subprojects completely activated.
 			$( '#tstats-table-plugins thead input#all_plugins' ).attr( 'data-indeterminate', false );
-			console.log( 'All subprojects completely activated.' );
 		}
 	} else {
 		// No subprojects activated.
@@ -508,10 +488,7 @@ export function tstatsPluginsUpdateHeader() {
 			},
 		);
 		$( '#tstats-table-plugins thead input#all_plugins' ).attr( 'data-indeterminate', false );
-		console.log( 'No subprojects activated.' );
 	}
-	console.log( 'Activated subprojects:', activeSubprojects );
-	console.log( 'Completely activated subprojects:', completelyActiveSubprojects );
 }
 
 /**

@@ -97,7 +97,6 @@ function headerCheckbox( id ) {
 }
 
 beforeEach( () => {
-	vi.spyOn( console, 'log' ).mockImplementation( () => {} );
 	jQuery.fn.tablesorter = vi.fn().mockReturnThis();
 } );
 

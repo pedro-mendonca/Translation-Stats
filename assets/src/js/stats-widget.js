@@ -48,7 +48,7 @@ export function createQueue() {
 export function loadStats( tstatsPlugin, forceUpdate, queue ) {
 	const widget = jQuery( 'tr[data-slug=' + tstatsPlugin + '] td.translation-stats' );
 
-	return loadWidgetStats( widget, '/translation-stats/v1/plugins/' + encodeURIComponent( tstatsPlugin ) + '/stats', tstatsPlugin, forceUpdate, queue );
+	return loadWidgetStats( widget, '/translation-stats/v1/plugins/' + encodeURIComponent( tstatsPlugin ) + '/stats', forceUpdate, queue );
 }
 
 /**
@@ -56,15 +56,14 @@ export function loadStats( tstatsPlugin, forceUpdate, queue ) {
  *
  * @since 1.5.0
  *
- * @param {Object}  widget       Widget jQuery object, empty to load the stats without widget.
- * @param {string}  path         REST API route path of the project stats.
- * @param {string}  tstatsPlugin Project slug, for the log messages.
- * @param {boolean} forceUpdate  True to get new stats, false to use the cached stats.
- * @param {Queue}   queue        Queue to add the request.
+ * @param {Object}  widget      Widget jQuery object, empty to load the stats without widget.
+ * @param {string}  path        REST API route path of the project stats.
+ * @param {boolean} forceUpdate True to get new stats, false to use the cached stats.
+ * @param {Queue}   queue       Queue to add the request.
  *
  * @return {Promise} Promise resolved with the REST API response, or undefined if the request failed.
  */
-export function loadWidgetStats( widget, path, tstatsPlugin, forceUpdate, queue ) {
+export function loadWidgetStats( widget, path, forceUpdate, queue ) {
 	const notice = widget.find( 'div.translation-stats-content div.notice.translation-stats-loading' );
 	const button = widget.find( 'button.tstats-update-button' );
 	const status = widget.find( '.tstats-update-status' );
@@ -78,12 +77,9 @@ export function loadWidgetStats( widget, path, tstatsPlugin, forceUpdate, queue 
 	// Show the Waiting status in the widget title, to not move the stats.
 	clearTimeout( status.data( 'timeout' ) );
 	status.text( __( 'Waiting…', 'translation-stats' ) );
-	console.log( 'REST API request to update translation stats for \'' + tstatsPlugin + '\' was queued.' );
 
 	// Add request to queue.
 	return queue( function() {
-		console.log( 'REST API request to update translation stats for \'' + tstatsPlugin + '\' is starting...' );
-
 		// Start colored bars animation.
 		widget.addClass( 'tstats-loading' );
 
@@ -108,15 +104,13 @@ export function loadWidgetStats( widget, path, tstatsPlugin, forceUpdate, queue 
 			// Show Translation Stats content.
 			widget.find( 'div.translation-stats-content div.content' ).html( response.html );
 
-			console.log( 'REST API request to update translation stats for \'' + tstatsPlugin + '\' has been completed.' );
-
 			return response;
 		} ).catch( function( error ) {
 			// Clear the status and show the Error notice.
 			status.text( '' );
 			notice.removeClass( 'hidden notice-success updated-message notice-warning updating-message' ).addClass( 'notice-error update-message' ).show();
-			notice.find( 'p' ).html( __( 'An error occurred while updating.', 'translation-stats' ) );
-			console.log( 'REST API request to update translation stats for \'' + tstatsPlugin + '\' has failed (' + error.code + '): ' + error.message );
+			// Show the REST API error message, like translate.WordPress.org unavailable, or a generic message.
+			notice.find( 'p' ).text( error && error.message ? error.message : __( 'An error occurred while updating.', 'translation-stats' ) );
 		} ).then( function( response ) {
 			// Stop colored bars animation.
 			widget.removeClass( 'tstats-loading' );
@@ -137,8 +131,6 @@ export function loadWidgetStats( widget, path, tstatsPlugin, forceUpdate, queue 
  * @param {Queue} queue Queue to add the requests. Defaults to a new queue.
  */
 export function initStatsWidgets( queue = createQueue() ) {
-	console.log( 'Loaded admin-plugins.js' );
-
 	// Action on click update button.
 	jQuery( 'table.wp-list-table td.translation-stats button.tstats-update-button' ).on( 'click', function() {
 		const tstatsPlugin = jQuery( this ).closest( 'tr' ).attr( 'data-slug' );
