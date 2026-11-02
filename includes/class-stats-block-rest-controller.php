@@ -213,10 +213,10 @@ if ( ! class_exists( __NAMESPACE__ . '\Stats_Block_REST_Controller' ) ) {
 		 *
 		 * @param WP_REST_Request $request   The REST API request.
 		 *
-		 * @return bool   True if the user can edit posts.
+		 * @return true|WP_Error   True if the user can edit posts, otherwise WP_Error.
 		 */
 		public function update_item_permissions_check( $request ) { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable -- Parent method parameter.
-			return current_user_can( 'edit_posts' );
+			return self::can_edit_posts();
 		}
 
 
@@ -269,10 +269,10 @@ if ( ! class_exists( __NAMESPACE__ . '\Stats_Block_REST_Controller' ) ) {
 		 *
 		 * @param WP_REST_Request $request   The REST API request.
 		 *
-		 * @return bool   True if the user can edit posts.
+		 * @return true|WP_Error   True if the user can edit posts, otherwise WP_Error.
 		 */
 		public function get_items_permissions_check( $request ) { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable -- Parent method parameter.
-			return current_user_can( 'edit_posts' );
+			return self::can_edit_posts();
 		}
 
 
@@ -355,6 +355,27 @@ if ( ! class_exists( __NAMESPACE__ . '\Stats_Block_REST_Controller' ) ) {
 			}
 
 			return $results;
+		}
+
+
+		/**
+		 * Check if the user can edit posts, for the block editor routes.
+		 *
+		 * @since 2.1.0
+		 *
+		 * @return true|WP_Error   True if the user can edit posts, otherwise WP_Error.
+		 */
+		private static function can_edit_posts() {
+
+			if ( current_user_can( 'edit_posts' ) ) {
+				return true;
+			}
+
+			return new WP_Error(
+				'rest_forbidden',
+				__( 'Sorry, you are not allowed to manage the Translation Stats blocks.', 'translation-stats' ),
+				array( 'status' => rest_authorization_required_code() )
+			);
 		}
 	}
 }
