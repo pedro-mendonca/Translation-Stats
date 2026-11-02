@@ -24,6 +24,7 @@ jobs:
   #
   # Performs the following steps:
   # - Checks out the repository.
+  # - Builds the JavaScript and CSS.
   # - Sets up PHP.
   # - Installs Composer dependencies.
   # - Runs the Plugin Check.
@@ -34,6 +35,18 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v7
+
+    # The built assets aren't committed: build them to check the plugin as deployed.
+    - name: Setup Node
+      uses: actions/setup-node@v7
+      with:
+        node-version-file: '.nvmrc'
+        cache: npm
+
+    - name: Build
+      run: |
+        npm ci
+        npm run build
 
     - name: Set up PHP
       uses: shivammathur/setup-php@2.40.0

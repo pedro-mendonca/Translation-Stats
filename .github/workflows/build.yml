@@ -6,7 +6,6 @@ on:
     paths: &paths
       # The JavaScript and CSS sources and the committed build.
       - 'assets/src/**'
-      - 'assets/build/**'
       # These files configure NPM and the build. Changes could affect the outcome.
       - 'package*.json'
       - 'webpack.config.js'
@@ -26,7 +25,7 @@ concurrency:
 
 jobs:
 
-  # Checks the committed build is up to date with the sources.
+  # Checks the JavaScript and CSS build, not committed, succeeds.
   #
   # Performs the following steps:
   # - Checks out the repository.
@@ -34,7 +33,6 @@ jobs:
   # - Logs updated debug information.
   # - Installs NPM dependencies.
   # - Builds the JavaScript and CSS with @wordpress/scripts.
-  # - Fails if the build differs from the committed one in assets/build.
   build:
     name: JavaScript and CSS build
     runs-on: ubuntu-latest
@@ -59,11 +57,3 @@ jobs:
 
       - name: Build
         run: npm run build
-
-      - name: Check the build is up to date
-        run: |
-          if [ -n "$(git status --porcelain -- assets/build)" ]; then
-            git status --porcelain -- assets/build
-            echo "::error::The build in assets/build is outdated. Run 'npm run build' and commit the changes."
-            exit 1
-          fi

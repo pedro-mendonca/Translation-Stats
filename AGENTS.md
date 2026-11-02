@@ -13,7 +13,7 @@ WordPress plugin that shows the translation stats of the installed plugins and t
 | `translation-stats.php` | Plugin file: headers, constants, PHP version check, class autoloader. |
 | `includes/` | One class per file, `Translation_Stats\Class_Name` in `class-class-name.php`, loaded by the autoloader. |
 | `assets/src/` | JavaScript and SCSS sources. |
-| `assets/build/` | Built assets, **committed**. Rebuild with `npm run build` after changing the sources. |
+| `assets/build/` | Built assets, **not committed**. Build with `npm run build` after cloning, pulling or changing the sources: the plugin needs them. |
 | `assets/lib/` | Third party libraries (GlotPress Locales). |
 | `tests/phpunit/` | PHPUnit tests, `includes/test-*.php` for the classes, test themes in `data/`. |
 | `tests/js/` | Vitest tests, `*.test.js`. |
@@ -34,7 +34,7 @@ WordPress plugin that shows the translation stats of the installed plugins and t
 
 | Command | Does |
 | --- | --- |
-| `composer install` and `npm ci` | Install the dependencies. |
+| `composer install`, `npm ci` and `npm run build` | Install the dependencies, and build the assets. |
 | `npm run build` | Build the assets with `@wordpress/scripts`. `npm run start` to watch. |
 | `composer lint:php` | PHP_CodeSniffer, WordPress coding standards (`phpcs.xml.dist`). `composer format:php` fixes. |
 | `composer lint:phpstan` | PHPStan, level 9 (`phpstan.neon.dist`). |
@@ -42,7 +42,8 @@ WordPress plugin that shows the translation stats of the installed plugins and t
 | `composer lint:phpmd` | PHPMD size and complexity rules, also checked by Codacy. |
 | `npm run lint:js` and `npm run lint:css` | ESLint and Stylelint, with the WordPress configurations. |
 | `npm run lint:md:docs` | Markdown lint. |
-| `composer test` | PHPUnit, single site. `composer test:multisite` for multisite. |
+| `composer test` | PHPUnit, single site, with the built assets. `composer test:multisite` for multisite. |
+| `composer zip` | Build, and zip the plugin files allowed by `.distignore`, as deployed to WordPress.org. |
 | `npm run test:unit` | Vitest. `npm run test:unit:coverage` for the coverage. |
 
 ### PHPUnit setup
@@ -68,5 +69,5 @@ WordPress plugin that shows the translation stats of the installed plugins and t
 
 * New and changed code needs tests: the Codecov patch coverage target is 80%. The project coverage is informational.
 * Run PHPUnit on the minimum PHP (7.4) and the latest PHP, single site and multisite, before pushing.
-* Run the linters and the tests of the changed code, and rebuild the assets if the sources changed: CI checks that the build is up to date.
+* Run the linters and the tests of the changed code. The deploy to WordPress.org builds the assets.
 * In the pull request description, separate the test plan in **Locally** and **CI**, and tick CI only after it passes.

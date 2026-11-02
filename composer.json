@@ -72,7 +72,14 @@
 			"@putenv WP_MULTISITE=1",
 			"@test"
 		],
-		"zip": "composer archive --file=translation-stats --format=zip"
+		"zip": [
+			"npm run build",
+			"rm -rf build-zip translation-stats.zip",
+			"mkdir -p build-zip",
+			"rsync -rc --exclude-from=.distignore ./ build-zip/translation-stats/",
+			"cd build-zip && zip -rq ../translation-stats.zip translation-stats",
+			"rm -rf build-zip"
+		]
 	},
 	"scripts-descriptions": {
 		"build": "Compile all CSS and JS with npm run build",

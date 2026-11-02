@@ -1,5 +1,7 @@
 # Exclude directories from WP.org
 .git
+build-zip
+coverage
 .github
 .wordpress-org
 bin
@@ -8,6 +10,7 @@ tests
 vendor
 
 # Exclude files from WP.org
+coverage.xml
 AGENTS.md
 CLAUDE.md
 .distignore

@@ -80,6 +80,13 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v7
 
+      # The built assets aren't committed: download them from the build job of the calling workflow.
+      - name: Download the built assets
+        uses: actions/download-artifact@v8
+        with:
+          name: assets-build
+          path: assets/build/
+
       - name: Set up ${{ 'mariadb' == inputs.db-type && 'MariaDB' || 'MySQL' }}
         uses: shogo82148/actions-setup-mysql@v1
         with:
