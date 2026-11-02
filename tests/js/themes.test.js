@@ -8,6 +8,7 @@ import jQuery from 'jquery';
  * WordPress dependencies
  */
 import apiFetch from '@wordpress/api-fetch';
+import { resetLocaleData, setLocaleData } from '@wordpress/i18n';
 
 /**
  * Internal dependencies
@@ -367,6 +368,28 @@ describe( 'addSettingsLink', () => {
 			'options-general.php?page=translation-stats#themes'
 		);
 		expect( link.text().trim() ).toBe( 'Translation Stats' );
+	} );
+
+	it( 'translates the link as the settings page title, not as the plugin name', () => {
+		setLocaleData(
+			{
+				'Translation Stats': [ 'Translation Stats' ],
+				'Options Page Title\u0004Translation Stats': [
+					'Estatísticas de tradução',
+				],
+			},
+			'translation-stats'
+		);
+		document.body.innerHTML =
+			'<div class="wrap"><h1 class="wp-heading-inline">Themes</h1> <a href="theme-install.php" class="page-title-action">Add New Theme</a></div>';
+
+		addSettingsLink( 'options-general.php?page=translation-stats#themes' );
+
+		expect( jQuery( '.tstats-themes-settings-link' ).text().trim() ).toBe(
+			'Estatísticas de tradução'
+		);
+
+		resetLocaleData( undefined, 'translation-stats' );
 	} );
 
 	it( 'adds no link without permission or without the header buttons', () => {
