@@ -1,9 +1,13 @@
 name: JavaScript Unit Tests
 
 on:
+  # Run on all the pull requests, to always upload the current JavaScript coverage of the pull request to Codecov.
+  # Without it, Codecov compares an older coverage of the branch with the target branch.
   pull_request:
     branches: [ master, dev ]
-    paths: &paths
+  push:
+    branches: [ master, dev ]
+    paths:
       # The JavaScript sources and tests.
       - 'assets/src/**.js'
       - 'tests/js/**'
@@ -13,9 +17,6 @@ on:
       - '.nvmrc'
       # Changes to workflow files should always verify all workflows are successful.
       - '.github/workflows/*.yml'
-  push:
-    branches: [ master, dev ]
-    paths: *paths
   # Allows you to run this workflow manually from the Actions tab.
   workflow_dispatch:
 
