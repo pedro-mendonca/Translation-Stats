@@ -244,17 +244,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 		 * @return void
 		 */
 		public function plugin_update_button() {
-			?>
-
-			<span class="tstats-update-link">
-				<span class="tstats-update-status" aria-live="polite"></span>
-				<button class="handlediv button-link tstats-update-button" type="button" aria-expanded="true">
-					<span class="dashicons dashicons-update"></span>
-					<span class="screen-reader-text"><?php esc_html_e( 'Update', 'translation-stats' ); ?></span>
-				</button>
-			</span>
-
-			<?php
+			Stats_Widget::render_update_button();
 		}
 
 
@@ -275,16 +265,6 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 
 			$cached = '' !== $project_slug && ! is_null( $locale ) && ( new Plugin_Project( $project_slug ) )->stats_cached( $locale );
 
-			// The status notice is hidden, to show errors. The stats without cache are loaded with the REST API.
-			$additional_classes = array(
-				'translation-stats-loading',
-				'hidden',
-			);
-
-			if ( $cached ) {
-				$additional_classes[] = 'translation-stats-cached';
-			}
-
 			?>
 			<div class="content">
 				<?php
@@ -297,16 +277,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 			</div>
 			<?php
 
-			// Show the status notice below the stats, to not move them when the notice is shown.
-			$admin_notice_status = array(
-				'type'               => 'warning',
-				'notice-alt'         => true,
-				'additional-classes' => $additional_classes,
-				'update-icon'        => true,
-				'force_show'         => true,
-				'message'            => '',
-			);
-			new Admin_Notice( $admin_notice_status );
+			// The status notice is hidden, to show errors. The stats without cache are loaded with the REST API.
+			Stats_Widget::render_status_notice( $cached );
 		}
 
 
@@ -323,34 +295,16 @@ if ( ! class_exists( __NAMESPACE__ . '\Plugins' ) ) {
 
 			$options = Utils::get_options();
 
-			?>
-			<div class="translation-stats-content-stats widget-inside translation-stats-placeholder" aria-hidden="true">
-				<?php
-				foreach ( Translations_API::plugin_subprojects() as $subproject ) {
-
-					// Show bar only if subproject is enabled on its settings.
-					if ( ! isset( $options['plugins'][ $project_slug ][ $subproject['slug'] ] ) ) {
-						continue;
-					}
-
-					?>
-					<div class="content__subproject <?php echo esc_attr( $subproject['slug'] ); ?>">
-						<a class="placeholder">
-							<div class="subproject">
-								<div class="subproject-bar">
-									<span class="subproject-bar__name"><?php echo esc_html( $subproject['name'] ); ?></span>
-								</div>
-							</div>
-						</a>
-					</div>
-					<?php
+			// Show bar only if subproject is enabled on its settings.
+			$subprojects = array_filter(
+				Translations_API::plugin_subprojects(),
+				function ( $subproject ) use ( $options, $project_slug ) {
+					return isset( $options['plugins'][ $project_slug ][ $subproject['slug'] ] );
 				}
-				?>
-			</div>
-			<?php
+			);
+
+			Stats_Widget::render_placeholder( $subprojects );
 		}
-
-
 
 
 		/**

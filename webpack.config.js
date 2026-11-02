@@ -58,6 +58,7 @@ module.exports = {
 	plugins: [ ...defaultConfig.plugins, new RemoveEmptyStyleScripts() ],
 	entry: {
 		'js/admin-plugins': './assets/src/js/admin-plugins.js',
+		'js/admin-themes': './assets/src/js/admin-themes.js',
 		'js/admin-settings': './assets/src/js/admin-settings.js',
 		'css/admin': './assets/src/css/admin.scss',
 	},

@@ -46,6 +46,7 @@ class Test_Translation_Stats extends WP_UnitTestCase {
 
 		// Allowed pages.
 		$this->assertTrue( $translation_stats->allowed_pages( 'plugins.php' ) );
+		$this->assertTrue( $translation_stats->allowed_pages( 'themes.php' ) );
 		$this->assertTrue( $translation_stats->allowed_pages( 'update-core.php' ) );
 		$this->assertTrue( $translation_stats->allowed_pages( 'settings_page_' . TRANSLATION_STATS_SETTINGS_PAGE ) );
 

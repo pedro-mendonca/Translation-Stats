@@ -158,7 +158,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Projects_REST_Controller' ) ) {
 		 */
 		public function get_item( $request ) {
 
-			$html = '';
+			$html    = '';
+			$percent = null;
 
 			$locale = Translations_API::locale( Utils::translation_language() );
 
@@ -178,9 +179,19 @@ if ( ! class_exists( __NAMESPACE__ . '\Projects_REST_Controller' ) ) {
 				if ( is_wp_error( $result ) ) {
 					return $result;
 				}
+
+				// The percent translated of the theme, for the theme card badge.
+				if ( 'themes' === $request['type'] ) {
+					$percent = $this->themes->percent_translated( $slug, $locale );
+				}
 			}
 
-			return rest_ensure_response( array( 'html' => $html ) );
+			return rest_ensure_response(
+				array(
+					'html'    => $html,
+					'percent' => $percent,
+				)
+			);
 		}
 
 
@@ -202,9 +213,15 @@ if ( ! class_exists( __NAMESPACE__ . '\Projects_REST_Controller' ) ) {
 				'title'      => 'translation-stats-project-stats',
 				'type'       => 'object',
 				'properties' => array(
-					'html' => array(
+					'html'    => array(
 						'description' => __( 'Translation stats widget content HTML.', 'translation-stats' ),
 						'type'        => 'string',
+						'context'     => array( 'view' ),
+						'readonly'    => true,
+					),
+					'percent' => array(
+						'description' => __( 'Percent translated of the theme, or null for plugins.', 'translation-stats' ),
+						'type'        => array( 'integer', 'null' ),
 						'context'     => array( 'view' ),
 						'readonly'    => true,
 					),

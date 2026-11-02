@@ -56,7 +56,20 @@ if ( ! class_exists( __NAMESPACE__ . '\Settings_Section_Themes' ) ) {
 				<button type="button" id="themes-search-reset" class="button reset"><?php esc_html_e( 'Clean', 'translation-stats' ); ?></button>
 			</p>
 
-			<p><?php esc_html_e( 'Select the themes you want to show the translation stats from the list of installed themes.', 'translation-stats' ); ?></p>
+			<p>
+				<?php
+				printf(
+					'%s %s',
+					esc_html__( 'Select the themes you want to show the translation stats from the list of installed themes.', 'translation-stats' ),
+					sprintf(
+						'<a href="%1$s" aria-label="%2$s">%3$s</a>',
+						esc_url( admin_url( 'themes.php' ) ),
+						esc_attr__( 'View installed themes', 'translation-stats' ),
+						esc_html__( 'View installed themes', 'translation-stats' )
+					)
+				);
+				?>
+			</p>
 			<br>
 			<?php
 

@@ -66,11 +66,15 @@ class Test_Settings_Section_Debug extends Translation_Stats_TestCase {
 
 		$this->assertStringContainsString( 'No transients found.', $this->render( 'debug_info__transients' ) );
 
-		set_transient( TRANSLATION_STATS_TRANSIENTS_PREFIX . 'translation-stats', true );
+		set_transient( TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX . 'translation-stats', true );
+		set_transient( TRANSLATION_STATS_TRANSIENTS_THEMES_PREFIX . 'twentytwentyfive', true );
 
 		$html = $this->render( 'debug_info__transients' );
 
-		$this->assertStringContainsString( '&quot;' . TRANSLATION_STATS_TRANSIENTS_PREFIX . 'translation-stats&quot;', $html );
+		// The plugins and themes prefixes and transients.
+		$this->assertStringContainsString( '<code>' . TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX . '</code> <code>' . TRANSLATION_STATS_TRANSIENTS_THEMES_PREFIX . '</code>', $html );
+		$this->assertStringContainsString( '&quot;' . TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX . 'translation-stats&quot;', $html );
+		$this->assertStringContainsString( '&quot;' . TRANSLATION_STATS_TRANSIENTS_THEMES_PREFIX . 'twentytwentyfive&quot;', $html );
 		$this->assertStringNotContainsString( 'No transients found.', $html );
 	}
 }
