@@ -21,3 +21,9 @@ Thumbs.db
 
 # Vitest
 /coverage/
+
+# Built assets, with npm run build.
+/assets/build/
+
+# Plugin zip folder, with composer zip.
+/build-zip/

@@ -25,10 +25,41 @@ concurrency:
 
 jobs:
   #
+  # Builds the JavaScript and CSS once, not committed, for the tests of the assets in all the test jobs.
+  #
+  build:
+    name: Build assets
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v7
+
+      - name: Setup Node
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: '.nvmrc'
+          cache: npm
+
+      - name: Build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Upload the built assets
+        uses: actions/upload-artifact@v7
+        with:
+          name: assets-build
+          path: assets/build/
+          if-no-files-found: error
+          retention-days: 1
+
+  #
   # Creates a PHPUnit test job for each PHP/MySQL combination.
   #
   phpunit:
     name: PHP ${{ matrix.php || '7.4' }} | ${{ 'mariadb' == matrix.db-type && 'MariaDB' || 'MySQL' }}
+    needs: build
     uses: ./.github/workflows/reusable-phpunit-tests.yml
     secrets:
       codecov-token: ${{ secrets.CODECOV_TOKEN }}
