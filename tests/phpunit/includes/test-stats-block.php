@@ -452,6 +452,117 @@ class Test_Stats_Block extends Translation_Stats_TestCase {
 
 
 	/**
+	 * Search the WordPress.org projects with the REST API, with a mocked WordPress.org API response.
+	 *
+	 * @param array<string, string>       $params     Request parameters.
+	 * @param int                         $code       WordPress.org API response code.
+	 * @param array<string, mixed>|string $body WordPress.org API response body.
+	 *
+	 * @return WP_REST_Response   Response.
+	 */
+	private function search_projects( $params, $code = 200, $body = array() ) {
+
+		$this->mock_translate_api( $code, $body );
+
+		$request = new WP_REST_Request( 'GET', '/translation-stats/v1/block-projects' );
+		$request->set_query_params( $params );
+
+		return rest_get_server()->dispatch( $request );
+	}
+
+
+	/**
+	 * Test the WordPress.org projects search, for the users who can edit posts.
+	 */
+	public function test_rest_search_projects() {
+
+		$params = array(
+			'type'   => 'plugins',
+			'search' => 'woo',
+		);
+		$body   = array(
+			'info'    => array( 'results' => 2 ),
+			'plugins' => array(
+				array(
+					'slug' => 'woocommerce',
+					'name' => 'WooCommerce',
+				),
+				array(
+					'slug' => 'essential-addons',
+					'name' => 'Essential Addons &#8211; Templates &amp; Widgets',
+				),
+				array( 'slug' => 'without-name' ),
+			),
+		);
+
+		// Not public.
+		$this->assertSame( 401, $this->search_projects( $params, 200, $body )->get_status() );
+		$this->assertSame( array(), $this->requested_urls );
+
+		wp_set_current_user( self::factory()->user->create( array( 'role' => 'subscriber' ) ) );
+		$this->assertSame( 403, $this->search_projects( $params, 200, $body )->get_status() );
+
+		wp_set_current_user( self::factory()->user->create( array( 'role' => 'author' ) ) );
+		$response = $this->search_projects( $params, 200, $body );
+
+		$this->assertSame( 200, $response->get_status() );
+		$this->assertSame(
+			array(
+				array(
+					'value' => 'woocommerce',
+					'label' => 'WooCommerce',
+				),
+				array(
+					'value' => 'essential-addons',
+					'label' => 'Essential Addons – Templates & Widgets',
+				),
+			),
+			$response->get_data()
+		);
+		$this->assertStringContainsString( 'api.wordpress.org/plugins/info/', $this->requested_urls[0] );
+		$this->assertStringContainsString( 'request[search]=woo', rawurldecode( $this->requested_urls[0] ) );
+
+		// Themes.
+		$response = $this->search_projects(
+			array(
+				'type'   => 'themes',
+				'search' => 'twenty',
+			),
+			200,
+			array(
+				'info'   => array( 'results' => 1 ),
+				'themes' => array(
+					array(
+						'slug' => 'twentytwentyfive',
+						'name' => 'Twenty Twenty-Five',
+					),
+				),
+			)
+		);
+		$this->assertSame(
+			array(
+				array(
+					'value' => 'twentytwentyfive',
+					'label' => 'Twenty Twenty-Five',
+				),
+			),
+			$response->get_data()
+		);
+		$this->assertStringContainsString( 'api.wordpress.org/themes/info/', $this->requested_urls[0] );
+
+		// WordPress.org unavailable, without a JSON response.
+		$response = $this->search_projects( $params, 503, '' );
+		$this->assertSame( 503, $response->get_status() );
+		$this->assertSame( 'translation_stats_search_unavailable', $response->get_data()['code'] );
+
+		// Too short search, without requests.
+		$response = $this->search_projects( array_merge( $params, array( 'search' => 'w' ) ), 200, $body );
+		$this->assertSame( 400, $response->get_status() );
+		$this->assertSame( array(), $this->requested_urls );
+	}
+
+
+	/**
 	 * Test the block editor preview check, outside REST API requests.
 	 */
 	public function test_is_editor_preview() {

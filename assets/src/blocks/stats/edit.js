@@ -2,21 +2,31 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
+import apiFetch from '@wordpress/api-fetch';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import {
 	CheckboxControl,
+	ComboboxControl,
 	PanelBody,
 	Placeholder,
 	SelectControl,
 	TextControl,
 	ToggleControl,
 } from '@wordpress/components';
+import { useMemo, useState } from '@wordpress/element';
 import ServerSideRender from '@wordpress/server-side-render';
 
 /**
  * Internal dependencies
  */
-import { pluginSubprojects, projectOptions, toggleSubproject } from './utils';
+import {
+	debounce,
+	pluginSubprojects,
+	projectName,
+	searchOptions,
+	searchPath,
+	toggleSubproject,
+} from './utils';
 
 /**
  * Editor data: the languages, and the installed plugins and themes.
@@ -48,6 +58,23 @@ export default function Edit( { attributes, setAttributes } ) {
 
 	const projects = 'themes' === type ? data.themes : data.plugins;
 
+	// Projects found on WordPress.org.
+	const [ found, setFound ] = useState( [] );
+
+	// Search WordPress.org when the typing stops, from 2 characters.
+	const search = useMemo(
+		() =>
+			debounce( ( value ) => {
+				if ( value.trim().length < 2 ) {
+					return;
+				}
+				apiFetch( { path: searchPath( type, value.trim() ) } )
+					.then( setFound )
+					.catch( () => setFound( [] ) );
+			}, 500 ),
+		[ type ]
+	);
+
 	return (
 		<div { ...useBlockProps() }>
 			<InspectorControls>
@@ -67,37 +94,54 @@ export default function Edit( { attributes, setAttributes } ) {
 								label: __( 'Theme', 'translation-stats' ),
 							},
 						] }
-						onChange={ ( value ) =>
-							setAttributes( { type: value, slug: '' } )
-						}
+						onChange={ ( value ) => {
+							setFound( [] );
+							setAttributes( {
+								type: value,
+								slug: '',
+								name: '',
+							} );
+						} }
 					/>
-					<SelectControl
-						__nextHasNoMarginBottom
-						__next40pxDefaultSize
-						label={
-							'themes' === type
-								? __( 'Installed theme', 'translation-stats' )
-								: __( 'Installed plugin', 'translation-stats' )
-						}
-						value={ slug }
-						options={ projectOptions( projects, slug ) }
-						onChange={ ( value ) =>
-							setAttributes( { slug: value } )
-						}
-					/>
-					<TextControl
-						__nextHasNoMarginBottom
-						__next40pxDefaultSize
-						label={ __( 'Slug', 'translation-stats' ) }
-						help={ __(
-							'Or any project slug on WordPress.org, as in its URL.',
-							'translation-stats'
-						) }
-						value={ slug }
-						onChange={ ( value ) =>
-							setAttributes( { slug: value.trim() } )
-						}
-					/>
+					{ /* With the space below of the other fields, as the search field has none. */ }
+					<div style={ { marginBottom: '24px' } }>
+						<ComboboxControl
+							__nextHasNoMarginBottom
+							__next40pxDefaultSize
+							label={
+								'themes' === type
+									? __( 'Theme', 'translation-stats' )
+									: __( 'Plugin', 'translation-stats' )
+							}
+							help={
+								'themes' === type
+									? __(
+											'Search the installed themes, or the themes on WordPress.org.',
+											'translation-stats'
+										)
+									: __(
+											'Search the installed plugins, or the plugins on WordPress.org.',
+											'translation-stats'
+										)
+							}
+							value={ slug }
+							options={ searchOptions(
+								projects,
+								found,
+								slug,
+								name
+							) }
+							onFilterValueChange={ search }
+							onChange={ ( value ) =>
+								setAttributes( {
+									slug: value || '',
+									name: value
+										? projectName( projects, found, value )
+										: '',
+								} )
+							}
+						/>
+					</div>
 					<SelectControl
 						__nextHasNoMarginBottom
 						__next40pxDefaultSize

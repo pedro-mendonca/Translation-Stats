@@ -9,6 +9,7 @@
 
 namespace Translation_Stats;
 
+use WP_Error;
 use WP_REST_Controller;
 use WP_REST_Request;
 use WP_REST_Response;
@@ -36,6 +37,20 @@ if ( ! class_exists( __NAMESPACE__ . '\Stats_Block_REST_Controller' ) ) {
 		 * @var string
 		 */
 		const REST_ROUTE = '/block-stats';
+
+		/**
+		 * REST API route of the WordPress.org projects search, for the block settings.
+		 *
+		 * @var string
+		 */
+		const SEARCH_ROUTE = '/block-projects';
+
+		/**
+		 * Number of WordPress.org projects found by the search.
+		 *
+		 * @var int
+		 */
+		const SEARCH_RESULTS = 10;
 
 
 		/**
@@ -65,7 +80,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Stats_Block_REST_Controller' ) ) {
 		}
 
 		/**
-		 * Register the REST API route of the cached stats of a block.
+		 * Register the REST API routes of the cached stats of a block, and of the WordPress.org projects search.
 		 *
 		 * @since 2.1.0
 		 *
@@ -102,6 +117,28 @@ if ( ! class_exists( __NAMESPACE__ . '\Stats_Block_REST_Controller' ) ) {
 							'type'     => 'string',
 							'pattern'  => '^translation-stats-block-[0-9a-f]+$',
 							'required' => true,
+						),
+					),
+				)
+			);
+
+			register_rest_route(
+				Projects_REST_Controller::REST_NAMESPACE,
+				self::SEARCH_ROUTE,
+				array(
+					'methods'             => WP_REST_Server::READABLE,
+					'callback'            => array( $this, 'get_items' ),
+					'permission_callback' => array( $this, 'get_items_permissions_check' ),
+					'args'                => array(
+						'type'   => array(
+							'type'     => 'string',
+							'enum'     => array( 'plugins', 'themes' ),
+							'required' => true,
+						),
+						'search' => array(
+							'type'      => 'string',
+							'minLength' => 2,
+							'required'  => true,
 						),
 					),
 				)
@@ -150,6 +187,102 @@ if ( ! class_exists( __NAMESPACE__ . '\Stats_Block_REST_Controller' ) ) {
 					'status' => $status,
 				)
 			);
+		}
+
+
+		/**
+		 * Check if the user can search the WordPress.org projects: only in the block editor, for the users who can edit posts.
+		 *
+		 * @since 2.1.0
+		 *
+		 * @param WP_REST_Request $request   The REST API request.
+		 *
+		 * @return bool   True if the user can edit posts.
+		 */
+		public function get_items_permissions_check( $request ) { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable -- Parent method parameter.
+			return current_user_can( 'edit_posts' );
+		}
+
+
+		/**
+		 * Search the plugins or themes on WordPress.org, for the block settings.
+		 *
+		 * @since 2.1.0
+		 *
+		 * @param WP_REST_Request $request   The REST API request.
+		 *
+		 * @return WP_REST_Response|WP_Error   Projects found, with their slug and name, or WP_Error if WordPress.org is unavailable.
+		 */
+		public function get_items( $request ) {
+
+			$search = is_string( $request['search'] ) ? $request['search'] : '';
+
+			if ( 'themes' === $request['type'] ) {
+				require_once ABSPATH . 'wp-admin/includes/theme.php';
+				$response = themes_api(
+					'query_themes',
+					array(
+						'search'   => $search,
+						'per_page' => self::SEARCH_RESULTS,
+					)
+				);
+				$projects = is_object( $response ) && isset( $response->themes ) ? $response->themes : array();
+			} else {
+				require_once ABSPATH . 'wp-admin/includes/plugin-install.php';
+				$response = plugins_api(
+					'query_plugins',
+					array(
+						'search'   => $search,
+						'per_page' => self::SEARCH_RESULTS,
+						'fields'   => array(
+							'short_description' => false,
+							'icons'             => false,
+						),
+					)
+				);
+				$projects = is_object( $response ) && isset( $response->plugins ) ? $response->plugins : array();
+			}
+
+			if ( is_wp_error( $response ) ) {
+				return new WP_Error(
+					'translation_stats_search_unavailable',
+					__( 'The projects couldn\'t be searched on WordPress.org. Please try again later.', 'translation-stats' ),
+					array( 'status' => 503 )
+				);
+			}
+
+			return rest_ensure_response( self::search_results( is_array( $projects ) ? $projects : array() ) );
+		}
+
+
+		/**
+		 * Get the slug and name of the projects found, with the names decoded as the WordPress.org API encodes them.
+		 *
+		 * @since 2.1.0
+		 *
+		 * @param array<mixed> $projects   Projects found on WordPress.org, as arrays or objects.
+		 *
+		 * @return list<array{value: string, label: string}>   Projects slug and name.
+		 */
+		private static function search_results( $projects ) {
+
+			$results = array();
+
+			foreach ( $projects as $project ) {
+
+				$project = (array) $project;
+
+				if ( ! isset( $project['slug'], $project['name'] ) || ! is_string( $project['slug'] ) || ! is_string( $project['name'] ) ) {
+					continue;
+				}
+
+				$results[] = array(
+					'value' => $project['slug'],
+					'label' => html_entity_decode( $project['name'], ENT_QUOTES, 'UTF-8' ),
+				);
+			}
+
+			return $results;
 		}
 	}
 }
