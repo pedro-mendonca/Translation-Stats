@@ -26,7 +26,7 @@ WordPress plugin that shows the translation stats of the installed plugins and t
 * `Plugins`: the Plugins screen column. `Themes`: the Themes screen data.
 * `Stats_Bar` and `Stats_Widget`: the stats widget parts shared by plugins and themes, and the block.
 * `Stats_Block`: the Translation Stats block, with the stats of any plugin or theme on the frontend. Requires WordPress 6.3. `Stats_Block_Attributes`: its project, language and subprojects.
-* `Stats_Block_Cache`: visitors only get the cached stats, the missing stats load in the background with WP-Cron, one project at a time. `Stats_Block_REST_Controller`: the public `translation-stats/v1/block-stats` route, that only reads the cache, to show the stats when loaded, and the `translation-stats/v1/block-projects` route, to search the WordPress.org projects in the block settings, for the users who can edit posts.
+* `Stats_Block_Cache`: visitors only get the cached stats, the missing stats load in the background with WP-Cron, one project at a time. `Stats_Block_REST_Controller`: the public `translation-stats/v1/block-stats` route, that only reads the cache, to show the stats when loaded (updated with a POST from the block editor), and the `translation-stats/v1/block-projects` route, to search the WordPress.org projects in the block settings, for the users who can edit posts.
 * `Projects_REST_Controller`: `translation-stats/v1/(plugins|themes)/<slug>/stats`, the stats widget content.
 * `Settings`, `Settings_Section_*` and `Settings_Field_*`: the settings page tabs, sections and fields.
 * `DB_Update`: the settings format migrations.

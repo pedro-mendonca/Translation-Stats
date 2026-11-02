@@ -80,7 +80,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Stats_Block_REST_Controller' ) ) {
 		}
 
 		/**
-		 * Register the REST API routes of the cached stats of a block, and of the WordPress.org projects search.
+		 * Register the REST API routes of the cached stats of a block, to get them and to update them, and of the WordPress.org projects search.
 		 *
 		 * @since 2.1.0
 		 *
@@ -88,36 +88,52 @@ if ( ! class_exists( __NAMESPACE__ . '\Stats_Block_REST_Controller' ) ) {
 		 */
 		public function register_routes() {
 
+			$project_args = array(
+				'type'        => array(
+					'type'     => 'string',
+					'enum'     => array( 'plugins', 'themes' ),
+					'required' => true,
+				),
+				'slug'        => array(
+					'type'     => 'string',
+					'required' => true,
+				),
+				'language'    => array(
+					'type'     => 'string',
+					'required' => true,
+				),
+				'subprojects' => array(
+					'type'    => 'string',
+					'default' => '',
+				),
+			);
+
 			register_rest_route(
 				Projects_REST_Controller::REST_NAMESPACE,
 				self::REST_ROUTE,
 				array(
-					'methods'             => WP_REST_Server::READABLE,
-					'callback'            => array( $this, 'get_item' ),
-					'permission_callback' => '__return_true',
-					'args'                => array(
-						'type'        => array(
-							'type'     => 'string',
-							'enum'     => array( 'plugins', 'themes' ),
-							'required' => true,
+					// The cached stats, for the visitors.
+					array(
+						'methods'             => WP_REST_Server::READABLE,
+						'callback'            => array( $this, 'get_item' ),
+						'permission_callback' => '__return_true',
+						'args'                => array_merge(
+							$project_args,
+							array(
+								'id' => array(
+									'type'     => 'string',
+									'pattern'  => '^translation-stats-block-[0-9a-f]+$',
+									'required' => true,
+								),
+							)
 						),
-						'slug'        => array(
-							'type'     => 'string',
-							'required' => true,
-						),
-						'language'    => array(
-							'type'     => 'string',
-							'required' => true,
-						),
-						'subprojects' => array(
-							'type'    => 'string',
-							'default' => '',
-						),
-						'id'          => array(
-							'type'     => 'string',
-							'pattern'  => '^translation-stats-block-[0-9a-f]+$',
-							'required' => true,
-						),
+					),
+					// Update the stats from translate.wordpress.org, in the block editor.
+					array(
+						'methods'             => WP_REST_Server::CREATABLE,
+						'callback'            => array( $this, 'update_item' ),
+						'permission_callback' => array( $this, 'update_item_permissions_check' ),
+						'args'                => $project_args,
 					),
 				)
 			);
@@ -187,6 +203,62 @@ if ( ! class_exists( __NAMESPACE__ . '\Stats_Block_REST_Controller' ) ) {
 					'status' => $status,
 				)
 			);
+		}
+
+
+		/**
+		 * Check if the user can update the block stats: only in the block editor, for the users who can edit posts.
+		 *
+		 * @since 2.1.0
+		 *
+		 * @param WP_REST_Request $request   The REST API request.
+		 *
+		 * @return bool   True if the user can edit posts.
+		 */
+		public function update_item_permissions_check( $request ) { // phpcs:ignore VariableAnalysis.CodeAnalysis.VariableAnalysis.UnusedVariable -- Parent method parameter.
+			return current_user_can( 'edit_posts' );
+		}
+
+
+		/**
+		 * Update the stats of a block from translate.wordpress.org, as the update button of the admin widgets.
+		 *
+		 * @since 2.1.0
+		 *
+		 * @param WP_REST_Request $request   The REST API request.
+		 *
+		 * @return WP_REST_Response|WP_Error   Response with the 'updated' status, or WP_Error if not found or translate.wordpress.org is unavailable.
+		 */
+		public function update_item( $request ) {
+
+			$attributes = array(
+				'type'        => $request['type'],
+				'slug'        => $request['slug'],
+				'language'    => $request['language'],
+				'subprojects' => explode( ',', is_string( $request['subprojects'] ) ? $request['subprojects'] : '' ),
+			);
+
+			$project = Stats_Block_Attributes::project( $attributes );
+			$locale  = Stats_Block_Attributes::locale( $attributes );
+
+			if ( null === $project || null === $locale ) {
+				return new WP_Error(
+					'translation_stats_block_not_found',
+					__( 'The project or language of the block wasn\'t found.', 'translation-stats' ),
+					array( 'status' => 404 )
+				);
+			}
+
+			foreach ( Stats_Block_Attributes::subprojects( $project, $attributes ) as $subproject ) {
+
+				$stats = $project->subproject_stats( $locale, $subproject['slug'], true );
+
+				if ( is_wp_error( $stats ) ) {
+					return $stats;
+				}
+			}
+
+			return rest_ensure_response( array( 'status' => 'updated' ) );
 		}
 
 

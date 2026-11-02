@@ -12,7 +12,9 @@ import {
 	projectName,
 	searchOptions,
 	searchPath,
+	spinIcon,
 	toggleSubproject,
+	updateRequest,
 } from '../../assets/src/blocks/stats/utils';
 
 describe( 'pluginSubprojects', () => {
@@ -111,5 +113,74 @@ describe( 'debounce', () => {
 
 		expect( callback ).toHaveBeenCalledTimes( 1 );
 		expect( callback ).toHaveBeenCalledWith( 'woo' );
+	} );
+} );
+
+describe( 'updateRequest', () => {
+	it( 'gets the REST API request to update the block stats', () => {
+		expect(
+			updateRequest( {
+				type: 'plugins',
+				slug: 'hello-dolly',
+				language: '',
+				subprojects: [ 'stable', 'stable-readme' ],
+				showName: true,
+			} )
+		).toEqual( {
+			path: '/translation-stats/v1/block-stats',
+			method: 'POST',
+			data: {
+				type: 'plugins',
+				slug: 'hello-dolly',
+				language: '',
+				subprojects: 'stable,stable-readme',
+			},
+		} );
+	} );
+} );
+
+describe( 'spinIcon', () => {
+	/**
+	 * Get a button with an icon that can be animated.
+	 *
+	 * @return {Object} The button, and the icon animation cancel mock.
+	 */
+	function button() {
+		document.body.innerHTML =
+			'<button><svg class="dashicon"></svg></button>';
+		const cancel = vi.fn();
+		const icon = document.querySelector( 'svg' );
+		icon.animate = vi.fn( () => ( { cancel } ) );
+		return { element: document.querySelector( 'button' ), icon, cancel };
+	}
+
+	afterEach( () => {
+		document.body.innerHTML = '';
+	} );
+
+	it( 'spins the icon until stopped', () => {
+		window.matchMedia = vi.fn( () => ( { matches: false } ) );
+		const { element, icon, cancel } = button();
+
+		const stop = spinIcon( element, true );
+
+		expect( icon.animate ).toHaveBeenCalledWith(
+			[ { transform: 'rotate(0deg)' }, { transform: 'rotate(360deg)' } ],
+			{ duration: 1000, iterations: Infinity }
+		);
+
+		stop();
+
+		expect( cancel ).toHaveBeenCalled();
+	} );
+
+	it( "doesn't spin when not updating, without the button, or with reduced motion", () => {
+		window.matchMedia = vi.fn( () => ( { matches: true } ) );
+		const { element, icon } = button();
+
+		expect( spinIcon( element, false ) ).toBeUndefined();
+		expect( spinIcon( undefined, true ) ).toBeUndefined();
+		expect( spinIcon( element, true ) ).toBeUndefined();
+		expect( icon.animate ).not.toHaveBeenCalled();
 	} );
 } );

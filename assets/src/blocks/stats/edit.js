@@ -3,17 +3,24 @@
  */
 import { __ } from '@wordpress/i18n';
 import apiFetch from '@wordpress/api-fetch';
-import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
+import {
+	BlockControls,
+	InspectorControls,
+	useBlockProps,
+} from '@wordpress/block-editor';
 import {
 	CheckboxControl,
 	ComboboxControl,
+	Notice,
 	PanelBody,
 	Placeholder,
 	SelectControl,
 	TextControl,
 	ToggleControl,
+	ToolbarButton,
+	ToolbarGroup,
 } from '@wordpress/components';
-import { useMemo, useState } from '@wordpress/element';
+import { useEffect, useMemo, useRef, useState } from '@wordpress/element';
 import ServerSideRender from '@wordpress/server-side-render';
 
 /**
@@ -25,7 +32,9 @@ import {
 	projectName,
 	searchOptions,
 	searchPath,
+	spinIcon,
 	toggleSubproject,
+	updateRequest,
 } from './utils';
 
 /**
@@ -61,6 +70,33 @@ export default function Edit( { attributes, setAttributes } ) {
 	// Projects found on WordPress.org.
 	const [ found, setFound ] = useState( [] );
 
+	// Updating the stats from translate.wordpress.org, the updates count to render the preview again, and the update error.
+	const [ updating, setUpdating ] = useState( false );
+	const [ updates, setUpdates ] = useState( 0 );
+	const [ updateError, setUpdateError ] = useState( '' );
+
+	// Spin the update button icon while updating, as the admin widgets update button.
+	const updateButton = useRef();
+	useEffect( () => spinIcon( updateButton.current, updating ), [ updating ] );
+
+	// Update the stats, as the update button of the admin widgets.
+	const update = () => {
+		setUpdating( true );
+		setUpdateError( '' );
+		apiFetch( updateRequest( attributes ) )
+			.then( () => setUpdates( updates + 1 ) )
+			.catch( ( error ) =>
+				setUpdateError(
+					( error && error.message ) ||
+						__(
+							'An error occurred while updating.',
+							'translation-stats'
+						)
+				)
+			)
+			.finally( () => setUpdating( false ) );
+	};
+
 	// Search WordPress.org when the typing stops, from 2 characters.
 	const search = useMemo(
 		() =>
@@ -77,6 +113,22 @@ export default function Edit( { attributes, setAttributes } ) {
 
 	return (
 		<div { ...useBlockProps() }>
+			{ slug && (
+				<BlockControls>
+					<ToolbarGroup>
+						<ToolbarButton
+							icon="update"
+							label={ __(
+								'Update translation stats',
+								'translation-stats'
+							) }
+							ref={ updateButton }
+							disabled={ updating }
+							onClick={ update }
+						/>
+					</ToolbarGroup>
+				</BlockControls>
+			) }
 			<InspectorControls>
 				<PanelBody title={ __( 'Project', 'translation-stats' ) }>
 					<SelectControl
@@ -235,11 +287,20 @@ export default function Edit( { attributes, setAttributes } ) {
 					/>
 				</PanelBody>
 			</InspectorControls>
+			{ updateError && (
+				<Notice status="error" onRemove={ () => setUpdateError( '' ) }>
+					{ updateError }
+				</Notice>
+			) }
 			{ slug ? (
-				<ServerSideRender
-					block="translation-stats/stats"
-					attributes={ attributes }
-				/>
+				// The moving stripes while updating, and rendered again when updated.
+				<div className={ updating ? 'tstats-block-updating' : '' }>
+					<ServerSideRender
+						key={ updates }
+						block="translation-stats/stats"
+						attributes={ attributes }
+					/>
+				</div>
 			) : (
 				<Placeholder
 					icon="translation"

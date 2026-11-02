@@ -141,3 +141,60 @@ export function debounce( callback, wait ) {
 		timeout = setTimeout( () => callback( ...args ), wait );
 	};
 }
+
+/**
+ * Get the REST API request to update the stats of a block from translate.wordpress.org.
+ *
+ * @since 2.1.0
+ *
+ * @param {Object}   attributes             Block attributes.
+ * @param {string}   attributes.type        Project type, 'plugins' or 'themes'.
+ * @param {string}   attributes.slug        Project slug.
+ * @param {string}   attributes.language    Language, or empty for the site language.
+ * @param {string[]} attributes.subprojects Plugin subprojects slugs.
+ *
+ * @return {{path: string, method: string, data: Object}} REST API request.
+ */
+export function updateRequest( { type, slug, language, subprojects } ) {
+	return {
+		path: '/translation-stats/v1/block-stats',
+		method: 'POST',
+		data: {
+			type,
+			slug,
+			language,
+			subprojects: subprojects.join( ',' ),
+		},
+	};
+}
+
+/**
+ * Spin the icon of a button, as the update button of the admin widgets while updating.
+ * Without spinning if the user prefers reduced motion.
+ *
+ * @since 2.1.0
+ *
+ * @param {HTMLElement|undefined} button Button with the icon.
+ * @param {boolean}               spin   True to spin the icon.
+ *
+ * @return {(() => void)|undefined} Stop spinning, or undefined if not spinning.
+ */
+export function spinIcon( button, spin ) {
+	const icon = button && button.querySelector( 'svg, .dashicon' );
+
+	if (
+		! spin ||
+		! icon ||
+		! icon.animate ||
+		window.matchMedia( '(prefers-reduced-motion: reduce)' ).matches
+	) {
+		return undefined;
+	}
+
+	const animation = icon.animate(
+		[ { transform: 'rotate(0deg)' }, { transform: 'rotate(360deg)' } ],
+		{ duration: 1000, iterations: Infinity }
+	);
+
+	return () => animation.cancel();
+}

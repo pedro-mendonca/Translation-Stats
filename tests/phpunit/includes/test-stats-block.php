@@ -563,6 +563,62 @@ class Test_Stats_Block extends Translation_Stats_TestCase {
 
 
 	/**
+	 * Test updating the block stats from translate.wordpress.org, for the users who can edit posts.
+	 */
+	public function test_rest_update_stats() {
+
+		$this->cache_plugin_stats(
+			'hello-dolly',
+			array(
+				'stable'        => $this->stats( 10 ),
+				'stable-readme' => $this->stats( 10 ),
+			)
+		);
+
+		$update = function ( $params ) {
+			$request = new WP_REST_Request( 'POST', '/translation-stats/v1/block-stats' );
+			$request->set_body_params( $params );
+			return rest_get_server()->dispatch( $request );
+		};
+
+		$params = array(
+			'type'        => 'plugins',
+			'slug'        => 'hello-dolly',
+			'language'    => 'pt_PT',
+			'subprojects' => 'stable,stable-readme',
+		);
+
+		// Not public.
+		$this->mock_translate_api( 200, $this->get_subproject_body() );
+		$this->assertSame( 401, $update( $params )->get_status() );
+		wp_set_current_user( self::factory()->user->create( array( 'role' => 'subscriber' ) ) );
+		$this->assertSame( 403, $update( $params )->get_status() );
+		$this->assertSame( array(), $this->requested_urls );
+
+		// Updated, also with cached stats.
+		wp_set_current_user( self::factory()->user->create( array( 'role' => 'author' ) ) );
+		$response = $update( $params );
+		$this->assertSame( 200, $response->get_status() );
+		$this->assertSame( array( 'status' => 'updated' ), $response->get_data() );
+		$this->assertCount( 2, $this->requested_urls );
+		$project = new Plugin_Project( 'hello-dolly' );
+		$locale  = Stats_Block_Attributes::locale( $params );
+		$this->assertSame( 95, get_transient( $project->subproject_stats_transient( $locale, 'stable' ) )->percent_translated );
+
+		// translate.wordpress.org unavailable.
+		$this->mock_translate_api( 503 );
+		$response = $update( $params );
+		$this->assertSame( 503, $response->get_status() );
+		$this->assertSame( 'translation_stats_api_unavailable', $response->get_data()['code'] );
+
+		// Unknown language.
+		$response = $update( array_merge( $params, array( 'language' => 'xx_XX' ) ) );
+		$this->assertSame( 404, $response->get_status() );
+		$this->assertSame( 'translation_stats_block_not_found', $response->get_data()['code'] );
+	}
+
+
+	/**
 	 * Test the block editor preview check, outside REST API requests.
 	 */
 	public function test_is_editor_preview() {
