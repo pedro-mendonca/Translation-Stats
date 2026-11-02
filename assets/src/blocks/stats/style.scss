@@ -31,17 +31,9 @@
 			border: 1px solid #dcdcde;
 			background-color: #fff;
 			line-height: 1.4;
-			container-type: inline-size;
 
-			.content__subproject a { // The bars text cut at the box, if still too long.
+			.content__subproject a { // The bars text cut at the box in narrow columns, without the strings count option.
 				overflow: hidden;
-			}
-
-			@container (max-width: 360px) { // Without the strings count in narrow blocks, to fit the bars text.
-
-				.content__subproject .subproject-bar .subproject-bar__count {
-					display: none;
-				}
 			}
 		}
 	}
