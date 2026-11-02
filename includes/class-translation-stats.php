@@ -67,8 +67,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 			// Initialize the themes translation stats.
 			$this->themes = new Themes();
 
-			// Initialize the Translation Stats block.
+			// Initialize the Translation Stats block, and its cache and background loading.
 			new Stats_Block();
+			new Stats_Block_Cache();
 
 			// Register the REST API routes.
 			add_action( 'rest_api_init', array( $this, 'register_rest_routes' ) );
@@ -91,6 +92,9 @@ if ( ! class_exists( __NAMESPACE__ . '\Translation_Stats' ) ) {
 
 			$projects_controller = new Projects_REST_Controller( $this->plugins, $this->themes );
 			$projects_controller->register_routes();
+
+			$block_controller = new Stats_Block_REST_Controller();
+			$block_controller->register_routes();
 		}
 
 

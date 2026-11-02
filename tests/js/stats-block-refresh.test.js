@@ -55,7 +55,10 @@ describe( 'refreshBlock', () => {
 				response( { html: null, status: 'loading' } )
 			)
 			.mockReturnValueOnce( response( {}, false ) )
-			.mockReturnValueOnce( Promise.reject( new Error( 'Offline' ) ) )
+			// Rejected when fetched, as a network error.
+			.mockImplementationOnce( () =>
+				Promise.reject( new Error( 'Offline' ) )
+			)
 			.mockReturnValueOnce(
 				response( {
 					html: '<div class="translation-stats-content-stats">95%</div>',

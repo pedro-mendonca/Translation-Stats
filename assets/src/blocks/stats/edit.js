@@ -37,16 +37,8 @@ const data = window.tstatsBlock || { languages: [], plugins: [], themes: [] };
  * @return {Element} Block edit element.
  */
 export default function Edit( { attributes, setAttributes } ) {
-	const {
-		type,
-		slug,
-		name,
-		language,
-		subprojects,
-		showName,
-		showTitle,
-		showCounts,
-	} = attributes;
+	const { type, slug, name, language } = attributes;
+	const { subprojects, showName, showTitle, showCounts } = attributes;
 
 	const projects = 'themes' === type ? data.themes : data.plugins;
 

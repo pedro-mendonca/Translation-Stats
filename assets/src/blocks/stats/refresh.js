@@ -19,20 +19,17 @@ function wait( ms ) {
  *
  * @param {HTMLElement}                        widget             Block widget, with the cached stats REST API URL.
  * @param {Object}                             options            Options.
- * @param {number}                             options.interval   Time between the checks, in milliseconds.
- * @param {number}                             options.attempts   Maximum number of checks.
+ * @param {number}                             options.interval   Time between the checks, in milliseconds. Defaults to 3 seconds.
+ * @param {number}                             options.attempts   Maximum number of checks. Defaults to 20.
  * @param {(url: string) => Promise<Response>} options.fetchStats Fetch the cached stats, as window.fetch.
  *
  * @return {Promise<boolean>} Promise resolved with true if the stats were shown, false if not cached after all the checks.
  */
-export function refreshBlock(
-	widget,
-	{
-		interval = 3000,
-		attempts = 20,
-		fetchStats = ( url ) => window.fetch( url ),
-	} = {}
-) {
+export function refreshBlock( widget, options = {} ) {
+	const interval = undefined === options.interval ? 3000 : options.interval;
+	const attempts = undefined === options.attempts ? 20 : options.attempts;
+	const fetchStats =
+		options.fetchStats || ( ( path ) => window.fetch( path ) );
 	const url = widget.dataset.tstatsRefresh;
 
 	const check = ( attempt ) =>

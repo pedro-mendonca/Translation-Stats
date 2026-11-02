@@ -7,6 +7,8 @@
 
 use Translation_Stats\Plugin_Project;
 use Translation_Stats\Stats_Block;
+use Translation_Stats\Stats_Block_Attributes;
+use Translation_Stats\Stats_Block_Cache;
 use Translation_Stats\Theme_Project;
 
 /**
@@ -21,7 +23,7 @@ class Test_Stats_Block extends Translation_Stats_TestCase {
 	 * @return void
 	 */
 	public function tear_down() {
-		wp_unschedule_hook( Stats_Block::REFRESH_HOOK );
+		wp_unschedule_hook( Stats_Block_Cache::REFRESH_HOOK );
 		remove_all_filters( 'translation_stats_block_load_stats' );
 		parent::tear_down();
 	}
@@ -38,7 +40,7 @@ class Test_Stats_Block extends Translation_Stats_TestCase {
 	private function cache_plugin_stats( $slug, $stats ) {
 
 		$project = new Plugin_Project( $slug );
-		$locale  = Stats_Block::locale( array( 'language' => 'pt_PT' ) );
+		$locale  = Stats_Block_Attributes::locale( array( 'language' => 'pt_PT' ) );
 
 		foreach ( $stats as $subproject_slug => $subproject_stats ) {
 			set_transient( $project->subproject_stats_transient( $locale, $subproject_slug ), $subproject_stats, HOUR_IN_SECONDS );
@@ -67,15 +69,15 @@ class Test_Stats_Block extends Translation_Stats_TestCase {
 	 */
 	public function test_project() {
 
-		$this->assertNull( Stats_Block::project( array() ) );
-		$this->assertNull( Stats_Block::project( array( 'slug' => '' ) ) );
-		$this->assertNull( Stats_Block::project( array( 'slug' => array( 'hello' ) ) ) );
+		$this->assertNull( Stats_Block_Attributes::project( array() ) );
+		$this->assertNull( Stats_Block_Attributes::project( array( 'slug' => '' ) ) );
+		$this->assertNull( Stats_Block_Attributes::project( array( 'slug' => array( 'hello' ) ) ) );
 
-		$plugin = Stats_Block::project( array( 'slug' => 'Hello Dolly' ) );
+		$plugin = Stats_Block_Attributes::project( array( 'slug' => 'Hello Dolly' ) );
 		$this->assertInstanceOf( Plugin_Project::class, $plugin );
 		$this->assertSame( 'hello-dolly', $plugin->get_slug() );
 
-		$theme = Stats_Block::project(
+		$theme = Stats_Block_Attributes::project(
 			array(
 				'type' => 'themes',
 				'slug' => 'twentytwentyfive',
@@ -91,14 +93,14 @@ class Test_Stats_Block extends Translation_Stats_TestCase {
 	public function test_project_name() {
 
 		$plugin = new Plugin_Project( 'hello' );
-		$this->assertSame( 'Hello Dolly', Stats_Block::project_name( $plugin, array() ) );
-		$this->assertSame( 'Custom name', Stats_Block::project_name( $plugin, array( 'name' => ' Custom name ' ) ) );
-		$this->assertSame( 'Hello Dolly', Stats_Block::project_name( $plugin, array( 'name' => ' ' ) ) );
-		$this->assertSame( 'not-installed', Stats_Block::project_name( new Plugin_Project( 'not-installed' ), array() ) );
+		$this->assertSame( 'Hello Dolly', Stats_Block_Attributes::project_name( $plugin, array() ) );
+		$this->assertSame( 'Custom name', Stats_Block_Attributes::project_name( $plugin, array( 'name' => ' Custom name ' ) ) );
+		$this->assertSame( 'Hello Dolly', Stats_Block_Attributes::project_name( $plugin, array( 'name' => ' ' ) ) );
+		$this->assertSame( 'not-installed', Stats_Block_Attributes::project_name( new Plugin_Project( 'not-installed' ), array() ) );
 
 		$theme = wp_get_theme();
-		$this->assertSame( $theme->get( 'Name' ), Stats_Block::project_name( new Theme_Project( $theme->get_stylesheet() ), array() ) );
-		$this->assertSame( 'not-installed', Stats_Block::project_name( new Theme_Project( 'not-installed' ), array() ) );
+		$this->assertSame( $theme->get( 'Name' ), Stats_Block_Attributes::project_name( new Theme_Project( $theme->get_stylesheet() ), array() ) );
+		$this->assertSame( 'not-installed', Stats_Block_Attributes::project_name( new Theme_Project( 'not-installed' ), array() ) );
 	}
 
 
@@ -108,13 +110,13 @@ class Test_Stats_Block extends Translation_Stats_TestCase {
 	public function test_block_id() {
 
 		$plugin = new Plugin_Project( 'akismet' );
-		$pt     = Stats_Block::locale( array( 'language' => 'pt_PT' ) );
-		$ao90   = Stats_Block::locale( array( 'language' => 'pt_PT_ao90' ) );
+		$pt     = Stats_Block_Attributes::locale( array( 'language' => 'pt_PT' ) );
+		$ao90   = Stats_Block_Attributes::locale( array( 'language' => 'pt_PT_ao90' ) );
 
-		$this->assertMatchesRegularExpression( '/^translation-stats-block-[0-9a-f]{12}$/', Stats_Block::block_id( $plugin, $pt ) );
-		$this->assertSame( Stats_Block::block_id( $plugin, $pt ), Stats_Block::block_id( new Plugin_Project( 'akismet' ), $pt ) );
-		$this->assertNotSame( Stats_Block::block_id( $plugin, $pt ), Stats_Block::block_id( $plugin, $ao90 ) );
-		$this->assertNotSame( Stats_Block::block_id( $plugin, $pt ), Stats_Block::block_id( new Theme_Project( 'akismet' ), $pt ) );
+		$this->assertMatchesRegularExpression( '/^translation-stats-block-[0-9a-f]{12}$/', Stats_Block_Attributes::block_id( $plugin, $pt ) );
+		$this->assertSame( Stats_Block_Attributes::block_id( $plugin, $pt ), Stats_Block_Attributes::block_id( new Plugin_Project( 'akismet' ), $pt ) );
+		$this->assertNotSame( Stats_Block_Attributes::block_id( $plugin, $pt ), Stats_Block_Attributes::block_id( $plugin, $ao90 ) );
+		$this->assertNotSame( Stats_Block_Attributes::block_id( $plugin, $pt ), Stats_Block_Attributes::block_id( new Theme_Project( 'akismet' ), $pt ) );
 	}
 
 
@@ -123,10 +125,10 @@ class Test_Stats_Block extends Translation_Stats_TestCase {
 	 */
 	public function test_locale_project_url() {
 
-		$locale = Stats_Block::locale( array( 'language' => 'pt_PT' ) );
+		$locale = Stats_Block_Attributes::locale( array( 'language' => 'pt_PT' ) );
 
-		$this->assertSame( 'https://translate.wordpress.org/locale/pt/default/wp-plugins/hello-dolly', Stats_Block::locale_project_url( new Plugin_Project( 'hello-dolly' ), $locale ) );
-		$this->assertSame( 'https://translate.wordpress.org/locale/pt/default/wp-themes/twentytwentyfive', Stats_Block::locale_project_url( new Theme_Project( 'twentytwentyfive' ), $locale ) );
+		$this->assertSame( 'https://translate.wordpress.org/locale/pt/default/wp-plugins/hello-dolly', Stats_Block_Attributes::locale_project_url( new Plugin_Project( 'hello-dolly' ), $locale ) );
+		$this->assertSame( 'https://translate.wordpress.org/locale/pt/default/wp-themes/twentytwentyfive', Stats_Block_Attributes::locale_project_url( new Theme_Project( 'twentytwentyfive' ), $locale ) );
 	}
 
 
@@ -135,12 +137,12 @@ class Test_Stats_Block extends Translation_Stats_TestCase {
 	 */
 	public function test_locale() {
 
-		$this->assertSame( 'pt_PT', Stats_Block::locale( array( 'language' => 'pt_PT' ) )->wp_locale );
-		$this->assertSame( 'pt/default', Stats_Block::locale( array( 'language' => 'pt_PT' ) )->locale_slug );
-		$this->assertNull( Stats_Block::locale( array( 'language' => 'xx_XX' ) ) );
+		$this->assertSame( 'pt_PT', Stats_Block_Attributes::locale( array( 'language' => 'pt_PT' ) )->wp_locale );
+		$this->assertSame( 'pt/default', Stats_Block_Attributes::locale( array( 'language' => 'pt_PT' ) )->locale_slug );
+		$this->assertNull( Stats_Block_Attributes::locale( array( 'language' => 'xx_XX' ) ) );
 
 		// Without language, the site language. English has no translations.
-		$this->assertNull( Stats_Block::locale( array() ) );
+		$this->assertNull( Stats_Block_Attributes::locale( array() ) );
 
 		add_filter(
 			'locale',
@@ -148,7 +150,7 @@ class Test_Stats_Block extends Translation_Stats_TestCase {
 				return 'pt_PT';
 			}
 		);
-		$this->assertSame( 'pt_PT', Stats_Block::locale( array( 'language' => '' ) )->wp_locale );
+		$this->assertSame( 'pt_PT', Stats_Block_Attributes::locale( array( 'language' => '' ) )->wp_locale );
 		remove_all_filters( 'locale' );
 	}
 
@@ -160,13 +162,13 @@ class Test_Stats_Block extends Translation_Stats_TestCase {
 
 		$plugin = new Plugin_Project( 'hello-dolly' );
 
-		$this->assertSame( array( 'stable', 'stable-readme' ), wp_list_pluck( Stats_Block::subprojects( $plugin, array() ), 'slug' ) );
-		$this->assertSame( array( 'dev', 'stable' ), wp_list_pluck( Stats_Block::subprojects( $plugin, array( 'subprojects' => array( 'stable', 'dev', 'unknown' ) ) ), 'slug' ) );
-		$this->assertSame( array(), Stats_Block::subprojects( $plugin, array( 'subprojects' => array() ) ) );
+		$this->assertSame( array( 'stable', 'stable-readme' ), wp_list_pluck( Stats_Block_Attributes::subprojects( $plugin, array() ), 'slug' ) );
+		$this->assertSame( array( 'dev', 'stable' ), wp_list_pluck( Stats_Block_Attributes::subprojects( $plugin, array( 'subprojects' => array( 'stable', 'dev', 'unknown' ) ) ), 'slug' ) );
+		$this->assertSame( array(), Stats_Block_Attributes::subprojects( $plugin, array( 'subprojects' => array() ) ) );
 
 		// Themes have no subprojects, their stats are in the project.
 		$theme = new Theme_Project( 'twentytwentyfive' );
-		$this->assertSame( array( '' ), wp_list_pluck( Stats_Block::subprojects( $theme, array( 'subprojects' => array( 'stable' ) ) ), 'slug' ) );
+		$this->assertSame( array( '' ), wp_list_pluck( Stats_Block_Attributes::subprojects( $theme, array( 'subprojects' => array( 'stable' ) ) ), 'slug' ) );
 	}
 
 
@@ -229,7 +231,7 @@ class Test_Stats_Block extends Translation_Stats_TestCase {
 
 		// Only the cached stats, without requests to translate.wordpress.org nor background loading.
 		$this->assertSame( array(), $this->requested_urls );
-		$this->assertFalse( wp_next_scheduled( Stats_Block::REFRESH_HOOK, array( 'plugins', 'hello-dolly', 'pt_PT' ) ) );
+		$this->assertFalse( wp_next_scheduled( Stats_Block_Cache::REFRESH_HOOK, array( 'plugins', 'hello-dolly', 'pt_PT' ) ) );
 	}
 
 
@@ -288,17 +290,17 @@ class Test_Stats_Block extends Translation_Stats_TestCase {
 		$this->assertSame( 'hello-dolly', $query['slug'] );
 		$this->assertSame( 'pt_PT', $query['language'] );
 		$this->assertSame( 'stable,stable-readme', $query['subprojects'] );
-		$this->assertSame( Stats_Block::block_id( new Plugin_Project( 'hello-dolly' ), Stats_Block::locale( $attributes ) ), $query['id'] );
+		$this->assertSame( Stats_Block_Attributes::block_id( new Plugin_Project( 'hello-dolly' ), Stats_Block_Attributes::locale( $attributes ) ), $query['id'] );
 		$this->assertStringContainsString( 'Stable Readme', $html );
 		$this->assertSame( array(), $this->requested_urls );
 
 		$args = array( 'plugins', 'hello-dolly', 'pt_PT' );
-		$this->assertIsInt( wp_next_scheduled( Stats_Block::REFRESH_HOOK, $args ) );
+		$this->assertIsInt( wp_next_scheduled( Stats_Block_Cache::REFRESH_HOOK, $args ) );
 
 		// The next in the queue, without other project loading, with the moving stripes as the admin widgets.
 		$project = new Plugin_Project( 'hello-dolly' );
-		$locale  = Stats_Block::locale( $attributes );
-		$this->assertSame( 'loading', Stats_Block::loading_status( $project, $locale ) );
+		$locale  = Stats_Block_Attributes::locale( $attributes );
+		$this->assertSame( 'loading', Stats_Block_Cache::loading_status( $project, $locale ) );
 		$this->assertStringContainsString( 'translation-stats-widget tstats-loading', $html );
 
 		// Queued, after the first in the queue.
@@ -310,28 +312,28 @@ class Test_Stats_Block extends Translation_Stats_TestCase {
 		);
 		$this->assertStringContainsString( 'translation-stats-placeholder', $second );
 		$this->assertStringNotContainsString( 'tstats-loading', $second );
-		$this->assertSame( 'queued', Stats_Block::loading_status( new Plugin_Project( 'akismet' ), $locale ) );
+		$this->assertSame( 'queued', Stats_Block_Cache::loading_status( new Plugin_Project( 'akismet' ), $locale ) );
 
 		// Queued, while other project is loading.
-		set_transient( Stats_Block::LOADING_TRANSIENT, array( 'plugins', 'akismet', 'pt_PT' ) );
-		$this->assertSame( 'queued', Stats_Block::loading_status( $project, $locale ) );
-		$this->assertSame( 'loading', Stats_Block::loading_status( new Plugin_Project( 'akismet' ), $locale ) );
-		delete_transient( Stats_Block::LOADING_TRANSIENT );
+		set_transient( Stats_Block_Cache::LOADING_TRANSIENT, array( 'plugins', 'akismet', 'pt_PT' ) );
+		$this->assertSame( 'queued', Stats_Block_Cache::loading_status( $project, $locale ) );
+		$this->assertSame( 'loading', Stats_Block_Cache::loading_status( new Plugin_Project( 'akismet' ), $locale ) );
+		delete_transient( Stats_Block_Cache::LOADING_TRANSIENT );
 
 		// Scheduled once.
 		Stats_Block::render( $attributes );
 		$events = 0;
 		foreach ( _get_cron_array() as $hooks ) {
-			$events += count( $hooks[ Stats_Block::REFRESH_HOOK ] ?? array() );
+			$events += count( $hooks[ Stats_Block_Cache::REFRESH_HOOK ] ?? array() );
 		}
 		$this->assertSame( 2, $events );
 
 		// Not queued while loading.
-		wp_unschedule_hook( Stats_Block::REFRESH_HOOK );
-		set_transient( Stats_Block::LOADING_TRANSIENT, array( 'plugins', 'hello-dolly', 'pt_PT' ) );
+		wp_unschedule_hook( Stats_Block_Cache::REFRESH_HOOK );
+		set_transient( Stats_Block_Cache::LOADING_TRANSIENT, array( 'plugins', 'hello-dolly', 'pt_PT' ) );
 		Stats_Block::render( $attributes );
-		$this->assertFalse( wp_next_scheduled( Stats_Block::REFRESH_HOOK, $args ) );
-		delete_transient( Stats_Block::LOADING_TRANSIENT );
+		$this->assertFalse( wp_next_scheduled( Stats_Block_Cache::REFRESH_HOOK, $args ) );
+		delete_transient( Stats_Block_Cache::LOADING_TRANSIENT );
 	}
 
 
@@ -353,7 +355,7 @@ class Test_Stats_Block extends Translation_Stats_TestCase {
 		$this->assertStringContainsString( '95%', $html );
 		$this->assertStringNotContainsString( 'translation-stats-placeholder', $html );
 		$this->assertCount( 2, $this->requested_urls );
-		$this->assertFalse( wp_next_scheduled( Stats_Block::REFRESH_HOOK, array( 'plugins', 'hello-dolly', 'pt_PT' ) ) );
+		$this->assertFalse( wp_next_scheduled( Stats_Block_Cache::REFRESH_HOOK, array( 'plugins', 'hello-dolly', 'pt_PT' ) ) );
 	}
 
 
@@ -419,11 +421,11 @@ class Test_Stats_Block extends Translation_Stats_TestCase {
 		);
 
 		// Loading in the background.
-		set_transient( Stats_Block::LOADING_TRANSIENT, array( 'plugins', 'hello-dolly', 'pt_PT' ) );
+		set_transient( Stats_Block_Cache::LOADING_TRANSIENT, array( 'plugins', 'hello-dolly', 'pt_PT' ) );
 		$this->assertSame( 'loading', $this->request_block_stats( $params )->get_data()['status'] );
-		delete_transient( Stats_Block::LOADING_TRANSIENT );
+		delete_transient( Stats_Block_Cache::LOADING_TRANSIENT );
 		$this->assertSame( array(), $this->requested_urls );
-		$this->assertFalse( wp_next_scheduled( Stats_Block::REFRESH_HOOK, array( 'plugins', 'hello-dolly', 'pt_PT' ) ) );
+		$this->assertFalse( wp_next_scheduled( Stats_Block_Cache::REFRESH_HOOK, array( 'plugins', 'hello-dolly', 'pt_PT' ) ) );
 
 		$this->cache_plugin_stats(
 			'hello-dolly',
@@ -466,59 +468,34 @@ class Test_Stats_Block extends Translation_Stats_TestCase {
 		$this->mock_translate_api( 200, $this->get_subproject_body() );
 
 		$project = new Plugin_Project( 'hello-dolly' );
-		$locale  = Stats_Block::locale( array( 'language' => 'pt_PT' ) );
+		$locale  = Stats_Block_Attributes::locale( array( 'language' => 'pt_PT' ) );
 
 		// Loading while getting the stats.
 		$statuses = array();
 		add_filter(
 			'pre_http_request',
 			function ( $preempt ) use ( $project, $locale, &$statuses ) {
-				$statuses[] = Stats_Block::loading_status( $project, $locale );
+				$statuses[] = Stats_Block_Cache::loading_status( $project, $locale );
 				return $preempt;
 			},
 			5
 		);
 
-		( new Stats_Block() )->refresh( 'plugins', 'hello-dolly', 'pt_PT' );
+		( new Stats_Block_Cache() )->refresh( 'plugins', 'hello-dolly', 'pt_PT' );
 
 		// All the plugin subprojects.
 		$this->assertCount( 4, $this->requested_urls );
 		$this->assertSame( array( 'loading', 'loading', 'loading', 'loading' ), $statuses );
-		$this->assertSame( 'queued', Stats_Block::loading_status( $project, $locale ) );
+		$this->assertSame( 'queued', Stats_Block_Cache::loading_status( $project, $locale ) );
 
 		$this->assertSame( 95, get_transient( $project->subproject_stats_transient( $locale, 'stable' ) )->percent_translated );
 
 		// Unknown language, without requests.
 		$this->mock_translate_api( 200, $this->get_subproject_body() );
-		( new Stats_Block() )->refresh( 'plugins', 'hello-dolly', 'xx_XX' );
+		( new Stats_Block_Cache() )->refresh( 'plugins', 'hello-dolly', 'xx_XX' );
 		$this->assertSame( array(), $this->requested_urls );
 	}
 
-
-	/**
-	 * Test finding the Translation Stats blocks, also in the inner blocks.
-	 */
-	public function test_find_blocks() {
-
-		$blocks = parse_blocks(
-			'<!-- wp:paragraph --><p>Hello</p><!-- /wp:paragraph -->' .
-			'<!-- wp:translation-stats/stats {"slug":"hello-dolly"} /-->' .
-			'<!-- wp:group --><div class="wp-block-group"><!-- wp:translation-stats/stats {"type":"themes","slug":"twentytwentyfive"} /--></div><!-- /wp:group -->' .
-			'<!-- wp:translation-stats/stats /-->'
-		);
-
-		$this->assertSame(
-			array(
-				array( 'slug' => 'hello-dolly' ),
-				array(
-					'type' => 'themes',
-					'slug' => 'twentytwentyfive',
-				),
-				array(),
-			),
-			Stats_Block::find_blocks( array_merge( $blocks, array( 'not a block' ) ) )
-		);
-	}
 
 
 	/**
@@ -540,22 +517,23 @@ class Test_Stats_Block extends Translation_Stats_TestCase {
 					'<!-- wp:translation-stats/stats {"slug":"hello-dolly","language":"pt_PT"} /-->' .
 					'<!-- wp:translation-stats/stats {"slug":"cached-plugin","language":"pt_PT"} /-->' .
 					'<!-- wp:translation-stats/stats {"slug":"no-language"} /-->' .
+					'<!-- wp:translation-stats/stats /-->' .
 					'</div><!-- /wp:group -->',
 			)
 		);
 
-		$this->assertIsInt( wp_next_scheduled( Stats_Block::REFRESH_HOOK, array( 'plugins', 'hello-dolly', 'pt_PT' ) ) );
-		$this->assertFalse( wp_next_scheduled( Stats_Block::REFRESH_HOOK, array( 'plugins', 'cached-plugin', 'pt_PT' ) ) );
+		$this->assertIsInt( wp_next_scheduled( Stats_Block_Cache::REFRESH_HOOK, array( 'plugins', 'hello-dolly', 'pt_PT' ) ) );
+		$this->assertFalse( wp_next_scheduled( Stats_Block_Cache::REFRESH_HOOK, array( 'plugins', 'cached-plugin', 'pt_PT' ) ) );
 
 		// Posts without the block.
-		wp_unschedule_hook( Stats_Block::REFRESH_HOOK );
+		wp_unschedule_hook( Stats_Block_Cache::REFRESH_HOOK );
 		wp_update_post(
 			array(
 				'ID'           => $post_id,
 				'post_content' => '<!-- wp:paragraph --><p>Hello</p><!-- /wp:paragraph -->',
 			)
 		);
-		$this->assertFalse( wp_next_scheduled( Stats_Block::REFRESH_HOOK, array( 'plugins', 'hello-dolly', 'pt_PT' ) ) );
+		$this->assertFalse( wp_next_scheduled( Stats_Block_Cache::REFRESH_HOOK, array( 'plugins', 'hello-dolly', 'pt_PT' ) ) );
 	}
 
 
@@ -567,9 +545,9 @@ class Test_Stats_Block extends Translation_Stats_TestCase {
 		$post_id = self::factory()->post->create();
 
 		$revision = wp_save_post_revision( $post_id );
-		wp_unschedule_hook( Stats_Block::REFRESH_HOOK );
+		wp_unschedule_hook( Stats_Block_Cache::REFRESH_HOOK );
 
-		( new Stats_Block() )->save_post(
+		( new Stats_Block_Cache() )->save_post(
 			(int) $revision,
 			new WP_Post(
 				(object) array(
@@ -580,7 +558,7 @@ class Test_Stats_Block extends Translation_Stats_TestCase {
 			)
 		);
 
-		$this->assertFalse( wp_next_scheduled( Stats_Block::REFRESH_HOOK, array( 'plugins', 'hello-dolly', 'pt_PT' ) ) );
+		$this->assertFalse( wp_next_scheduled( Stats_Block_Cache::REFRESH_HOOK, array( 'plugins', 'hello-dolly', 'pt_PT' ) ) );
 	}
 
 
@@ -589,11 +567,11 @@ class Test_Stats_Block extends Translation_Stats_TestCase {
 	 */
 	public function test_deactivate() {
 
-		wp_schedule_single_event( time(), Stats_Block::REFRESH_HOOK, array( 'plugins', 'hello-dolly', 'pt_PT' ) );
+		wp_schedule_single_event( time(), Stats_Block_Cache::REFRESH_HOOK, array( 'plugins', 'hello-dolly', 'pt_PT' ) );
 
-		Stats_Block::deactivate();
+		Stats_Block_Cache::deactivate();
 
-		$this->assertFalse( wp_next_scheduled( Stats_Block::REFRESH_HOOK, array( 'plugins', 'hello-dolly', 'pt_PT' ) ) );
+		$this->assertFalse( wp_next_scheduled( Stats_Block_Cache::REFRESH_HOOK, array( 'plugins', 'hello-dolly', 'pt_PT' ) ) );
 	}
 
 
