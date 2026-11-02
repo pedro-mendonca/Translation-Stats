@@ -5,7 +5,6 @@
 /tests/                export-ignore
 
 # Exclude files from export
-/assets/src/css/*.scss export-ignore
 /.distignore           export-ignore
 /.editorconfig         export-ignore
 /.gitattributes        export-ignore
