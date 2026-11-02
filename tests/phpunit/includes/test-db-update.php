@@ -343,9 +343,11 @@ class Test_DB_Update extends Translation_Stats_TestCase {
 
 		$this->assertStringContainsString( 'successfully updated from version <code>0.0</code>', $output );
 		$this->assertStringContainsString( '<h3>Settings</h3>', $output );
-		$this->assertStringContainsString( '&quot;translation_language&quot;: &quot;pt_PT&quot;', $output );
 		$this->assertStringContainsString( '<h3>Plugins</h3>', $output );
-		$this->assertStringContainsString( '&quot;translation-stats&quot;', $output );
+
+		// The quotes are encoded or not, depending on the WordPress version.
+		$this->assertStringContainsString( '"translation_language": "pt_PT"', html_entity_decode( $output ) );
+		$this->assertStringContainsString( '"translation-stats": {', html_entity_decode( $output ) );
 	}
 
 
