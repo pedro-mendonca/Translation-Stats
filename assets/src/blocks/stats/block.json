@@ -1,0 +1,61 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "translation-stats/stats",
+	"version": "2.1.0",
+	"title": "Translation Stats",
+	"category": "widgets",
+	"icon": "translation",
+	"description": "Show the translate.wordpress.org translation stats of a plugin or theme.",
+	"keywords": [ "translation", "stats", "translate", "polyglots" ],
+	"textdomain": "translation-stats",
+	"attributes": {
+		"type": {
+			"type": "string",
+			"enum": [ "plugins", "themes" ],
+			"default": "plugins"
+		},
+		"slug": {
+			"type": "string",
+			"default": ""
+		},
+		"name": {
+			"type": "string",
+			"default": ""
+		},
+		"language": {
+			"type": "string",
+			"default": ""
+		},
+		"subprojects": {
+			"type": "array",
+			"items": {
+				"type": "string"
+			},
+			"default": [ "stable", "stable-readme" ]
+		},
+		"showName": {
+			"type": "boolean",
+			"default": true
+		},
+		"showTitle": {
+			"type": "boolean",
+			"default": true
+		},
+		"showCounts": {
+			"type": "boolean",
+			"default": true
+		}
+	},
+	"supports": {
+		"html": false,
+		"spacing": {
+			"margin": true,
+			"padding": true
+		}
+	},
+	"editorScript": "file:./index.js",
+	"viewScript": "file:./view.js",
+	"style": "file:./style-index.css",
+	"render": "file:./render.php"
+}

@@ -1,0 +1,39 @@
+// Translation Stats block, with the stats widget styles of the admin screens.
+@use "../../css/stats-widget" as *;
+
+.wp-block-translation-stats-stats {
+
+	.translation-stats-widget {
+
+		@include stats-widget;
+
+		.translation-stats-name,
+		.translation-stats-title p {
+			margin: 0 0 0.5em;
+		}
+
+		.translation-stats-title {
+			white-space: normal;
+
+			a { // The language link, with the theme links style, as the admin widget removes the underline.
+				text-decoration: underline;
+			}
+		}
+
+		.translation-stats-content .content__subproject .subproject-bar .subproject-bar__percentage { // Fits "100%" in the theme font size, as the fixed width of the admin screens doesn't.
+			width: auto;
+			min-width: 2.75em;
+		}
+
+		.translation-stats-content .translation-stats-content-stats { // As the admin widget box, without the admin styles.
+			margin: 0;
+			border: 1px solid #dcdcde;
+			background-color: #fff;
+			line-height: 1.4;
+		}
+	}
+
+	&.tstats-hide-counts .subproject-bar__count {
+		display: none;
+	}
+}

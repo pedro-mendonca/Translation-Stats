@@ -113,6 +113,23 @@ class Test_Uninstall extends Translation_Stats_TestCase {
 
 
 	/**
+	 * Test the uninstall always removes the scheduled block stats loading, also when keeping the data.
+	 */
+	public function test_uninstall_unschedules_block_refresh() {
+
+		$this->add_plugin_data( false );
+		wp_schedule_single_event( time(), 'translation_stats_block_refresh', array( 'plugins', 'hello-dolly', 'pt_PT' ) );
+		set_transient( 'translation_stats_block_loading', array( 'plugins', 'hello-dolly', 'pt_PT' ) );
+
+		$this->uninstall();
+
+		$this->assertFalse( wp_next_scheduled( 'translation_stats_block_refresh', array( 'plugins', 'hello-dolly', 'pt_PT' ) ) );
+		$this->assertFalse( get_transient( 'translation_stats_block_loading' ) );
+		$this->assert_plugin_data( true );
+	}
+
+
+	/**
 	 * Test the plugin data is deleted in all the sites, with an additional site on multisite.
 	 */
 	public function test_uninstall_all_sites() {
