@@ -21,6 +21,7 @@
 /codecov.yml           export-ignore
 /composer.json         export-ignore
 /composer.lock         export-ignore
+/eslint.config.js      export-ignore
 /package-lock.json     export-ignore
 /package.json          export-ignore
 /phpcompat.xml.dist    export-ignore
@@ -31,3 +32,5 @@
 /vitest.config.mjs     export-ignore
 /webpack.config.js     export-ignore
 /README.md             export-ignore
+/AGENTS.md             export-ignore
+/CLAUDE.md             export-ignore

@@ -8,6 +8,8 @@ tests
 vendor
 
 # Exclude files from WP.org
+AGENTS.md
+CLAUDE.md
 .distignore
 .editorconfig
 .eslintignore
@@ -23,6 +25,7 @@ vendor
 codecov.yml
 composer.json
 composer.lock
+eslint.config.js
 package-lock.json
 package.json
 phpcompat.xml.dist
