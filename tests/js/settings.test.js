@@ -7,7 +7,7 @@ import jQuery from 'jquery';
 /**
  * Internal dependencies
  */
-import { initSettings, tstatsOnLoad } from '../../assets/src/js/settings';
+import { initSettings, tstatsOnLoad, tstatsPluginsUpdateColumn } from '../../assets/src/js/settings';
 
 const SUBPROJECTS = [ 'dev', 'dev-readme', 'stable', 'stable-readme' ];
 
@@ -253,6 +253,15 @@ describe( 'plugins table', () => {
 		expect( checkedSubprojects( 'first' ) ).toEqual( [] );
 		expect( pluginRow( 'first' ).row.hasClass( 'inactive' ) ).toBe( true );
 		expect( pluginRow( 'first' ).checkbox.prop( 'checked' ) ).toBe( false );
+	} );
+
+	it( 'keeps the subproject column header without plugins on WordPress.org', () => {
+		addSettingsPage( [] );
+		jQuery( '#subprojects_stable' ).prop( 'checked', true ).attr( 'data-indeterminate', 'true' );
+
+		tstatsPluginsUpdateColumn( 'stable' );
+
+		expect( headerCheckbox( 'subprojects_stable' ) ).toEqual( { checked: true, indeterminate: 'true' } );
 	} );
 
 	it( 'unfocuses the plugins table header after clicking to sort', () => {
