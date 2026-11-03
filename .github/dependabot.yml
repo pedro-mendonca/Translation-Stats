@@ -24,6 +24,10 @@ updates:
     schedule:
       # Check for updates every weekday.
       interval: "daily"
+    ignore:
+      # The scripts use the jQuery bundled with WordPress (3.x), so the tests use the same major version.
+      - dependency-name: "jquery"
+        update-types: ["version-update:semver-major"]
     groups:
       npm-version-updates:
         applies-to: version-updates
