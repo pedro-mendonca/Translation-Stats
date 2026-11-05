@@ -9,6 +9,7 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import {
 	refreshBlock,
 	refreshBlocks,
+	watchBlocks,
 } from '../../assets/src/blocks/stats/refresh';
 
 /**
@@ -119,6 +120,25 @@ describe( 'refreshBlock', () => {
 		expect( widget.textContent.trim() ).toBe( 'Placeholder' );
 	} );
 
+	it( 'stops checking when cancelled', async () => {
+		const widget = addBlock( 'hello' );
+		let cancelled = false;
+		const fetchStats = vi.fn( () => {
+			cancelled = true;
+			return response( { html: null, status: 'queued' } );
+		} );
+
+		const shown = await refreshBlock( widget, {
+			interval: 0,
+			attempts: 5,
+			fetchStats,
+			isCancelled: () => cancelled,
+		} );
+
+		expect( shown ).toBe( false );
+		expect( fetchStats ).toHaveBeenCalledTimes( 1 );
+	} );
+
 	it( 'uses window.fetch by default', async () => {
 		const widget = addBlock( 'hello' );
 		const fetch = vi
@@ -146,5 +166,73 @@ describe( 'refreshBlocks', () => {
 			await refreshBlocks( document, { interval: 0, fetchStats } )
 		).toEqual( [ true ] );
 		expect( fetchStats ).toHaveBeenCalledTimes( 1 );
+	} );
+} );
+
+describe( 'watchBlocks', () => {
+	/**
+	 * Wait for the pending checks, with the interval of 0.
+	 *
+	 * @return {Promise} Promise resolved after the pending checks.
+	 */
+	const flush = () => new Promise( ( resolve ) => setTimeout( resolve, 10 ) );
+
+	it( 'refreshes the blocks loading in the background, also when added later', async () => {
+		addBlock( 'first' );
+		const fetchStats = vi.fn( () => response( { html: 'Stats' } ) );
+
+		const stop = watchBlocks( document.body, { interval: 0, fetchStats } );
+		await flush();
+
+		expect( fetchStats ).toHaveBeenCalledTimes( 1 );
+
+		// A block preview rendered later, as in the block editor.
+		const later = addBlock( 'later' );
+		await flush();
+
+		expect( fetchStats ).toHaveBeenCalledTimes( 2 );
+		expect( later.textContent.trim() ).toBe( 'Stats' );
+
+		stop();
+	} );
+
+	it( 'checks each block once, while not removed or stopped', async () => {
+		const widget = addBlock( 'hello' );
+		const fetchStats = vi.fn( () => response( { html: null } ) );
+
+		const stop = watchBlocks( document.body, {
+			interval: 0,
+			attempts: 1000,
+			fetchStats,
+		} );
+		// Changes in the container don't check the same block again.
+		document.body.insertAdjacentHTML( 'beforeend', '<p>Other</p>' );
+		await flush();
+
+		const checks = fetchStats.mock.calls.length;
+		expect( checks ).toBeGreaterThan( 0 );
+
+		// Removed, as a block preview rendered again.
+		widget.closest( '.wp-block-translation-stats-stats' ).remove();
+		await flush();
+		const afterRemoved = fetchStats.mock.calls.length;
+		await flush();
+
+		expect( fetchStats.mock.calls.length ).toBe( afterRemoved );
+
+		// Stopped, as a block removed from the editor.
+		addBlock( 'other' );
+		await flush();
+		stop();
+		await flush();
+		const afterStopped = fetchStats.mock.calls.length;
+		await flush();
+
+		expect( fetchStats.mock.calls.length ).toBe( afterStopped );
+	} );
+
+	it( 'does nothing without a container', () => {
+		expect( watchBlocks( undefined ) ).toBeInstanceOf( Function );
+		expect( watchBlocks( undefined )() ).toBeUndefined();
 	} );
 } );

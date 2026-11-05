@@ -26,6 +26,9 @@ import ServerSideRender from '@wordpress/server-side-render';
 /**
  * Internal dependencies
  */
+import data from './editor-data';
+import BlockPlaceholder from './placeholder';
+import { watchBlocks } from './refresh';
 import {
 	debounce,
 	pluginSubprojects,
@@ -36,13 +39,6 @@ import {
 	toggleSubproject,
 	updateRequest,
 } from './utils';
-
-/**
- * Editor data: the languages, and the installed plugins and themes.
- *
- * @type {{languages: Array, plugins: Array, themes: Array}}
- */
-const data = window.tstatsBlock || { languages: [], plugins: [], themes: [] };
 
 /**
  * Edit the Translation Stats block, with a server side rendered preview.
@@ -74,6 +70,13 @@ export default function Edit( { attributes, setAttributes } ) {
 	const [ updating, setUpdating ] = useState( false );
 	const [ updates, setUpdates ] = useState( 0 );
 	const [ updateError, setUpdateError ] = useState( '' );
+
+	// Show the stats loading in the background as soon as they are cached, as in the frontend.
+	const preview = useRef();
+	useEffect(
+		() => watchBlocks( preview.current, { attempts: 100 } ),
+		[ slug ]
+	);
 
 	// Spin the update button icon while updating, as the admin widgets update button.
 	const updateButton = useRef();
@@ -294,11 +297,16 @@ export default function Edit( { attributes, setAttributes } ) {
 			) }
 			{ slug ? (
 				// The moving stripes while updating, and rendered again when updated.
-				<div className={ updating ? 'tstats-block-updating' : '' }>
+				// The stats placeholder while rendering, and the stats loading in the background shown when cached.
+				<div
+					ref={ preview }
+					className={ updating ? 'tstats-block-updating' : '' }
+				>
 					<ServerSideRender
 						key={ updates }
 						block="translation-stats/stats"
 						attributes={ attributes }
+						LoadingResponsePlaceholder={ BlockPlaceholder }
 					/>
 				</div>
 			) : (
