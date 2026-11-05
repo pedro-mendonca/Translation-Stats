@@ -7,7 +7,11 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
  * Internal dependencies
  */
 import {
+	blockProjectName,
 	debounce,
+	blockLanguage,
+	localeProjectUrl,
+	placeholderSubprojects,
 	pluginSubprojects,
 	projectName,
 	searchOptions,
@@ -182,5 +186,87 @@ describe( 'spinIcon', () => {
 		expect( spinIcon( undefined, true ) ).toBeUndefined();
 		expect( spinIcon( element, true ) ).toBeUndefined();
 		expect( icon.animate ).not.toHaveBeenCalled();
+	} );
+} );
+
+describe( 'blockProjectName', () => {
+	const installed = [ { value: 'hello-dolly', label: 'Hello Dolly' } ];
+
+	it( 'gets the block name, the installed project name, or the slug', () => {
+		expect(
+			blockProjectName(
+				{ slug: 'hello-dolly', name: ' Dolly ' },
+				installed
+			)
+		).toBe( 'Dolly' );
+		expect(
+			blockProjectName( { slug: 'hello-dolly', name: ' ' }, installed )
+		).toBe( 'Hello Dolly' );
+		expect(
+			blockProjectName( { slug: 'akismet', name: '' }, installed )
+		).toBe( 'akismet' );
+	} );
+} );
+
+describe( 'blockLanguage', () => {
+	const portuguese = {
+		value: 'pt_PT',
+		label: 'Português (pt_PT)',
+		name: 'Português',
+		slug: 'pt/default',
+	};
+	const german = {
+		value: 'de_DE',
+		label: 'Deutsch (de_DE)',
+		name: 'Deutsch',
+		slug: 'de/default',
+	};
+
+	it( 'gets the block language, or the site language', () => {
+		expect(
+			blockLanguage( 'de_DE', [ portuguese, german ], 'pt_PT' )
+		).toBe( german );
+		expect( blockLanguage( '', [ portuguese, german ], 'pt_PT' ) ).toBe(
+			portuguese
+		);
+		expect(
+			blockLanguage( '', [ portuguese, german ], 'en_US' )
+		).toBeUndefined();
+	} );
+} );
+
+describe( 'localeProjectUrl', () => {
+	it( 'gets the translate.wordpress.org URL of the project in a language', () => {
+		expect(
+			localeProjectUrl(
+				{ type: 'themes', slug: 'twentytwentyfive' },
+				'pt/ao90'
+			)
+		).toBe(
+			'https://translate.wordpress.org/locale/pt/ao90/wp-themes/twentytwentyfive'
+		);
+	} );
+} );
+
+describe( 'placeholderSubprojects', () => {
+	it( 'gets the selected plugin subprojects, in the translate.wordpress.org order', () => {
+		expect(
+			placeholderSubprojects(
+				{
+					type: 'plugins',
+					subprojects: [ 'stable-readme', 'dev' ],
+				},
+				'Hello Dolly'
+			).map( ( subproject ) => subproject.slug )
+		).toEqual( [ 'dev', 'stable-readme' ] );
+	} );
+
+	it( 'gets the theme project, with the project name', () => {
+		expect(
+			placeholderSubprojects(
+				{ type: 'themes', subprojects: [ 'stable' ] },
+				'Twenty Twenty-Five'
+			)
+		).toEqual( [ { slug: '', name: 'Twenty Twenty-Five' } ] );
 	} );
 } );

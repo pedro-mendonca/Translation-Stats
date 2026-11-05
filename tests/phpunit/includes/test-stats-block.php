@@ -369,6 +369,50 @@ class Test_Stats_Block extends Translation_Stats_TestCase {
 
 
 	/**
+	 * Test the block editor preview shows the placeholder and loads the stats in the background, as the frontend,
+	 * instead of loading the stats of each block in its preview request.
+	 *
+	 * In a separate process, to define REST_REQUEST as in the block editor preview requests.
+	 *
+	 * @runInSeparateProcess
+	 * @preserveGlobalState disabled
+	 */
+	public function test_editor_preview_loads_stats_in_background() {
+
+		if ( ! is_wp_version_compatible( Stats_Block::MIN_WP_VERSION ) ) {
+			$this->markTestSkipped( 'The block requires WordPress ' . Stats_Block::MIN_WP_VERSION . '.' );
+		}
+
+		if ( ! defined( 'REST_REQUEST' ) ) {
+			define( 'REST_REQUEST', true );
+		}
+
+		$this->mock_translate_api( 200, $this->get_subproject_body() );
+		wp_set_current_user( self::factory()->user->create( array( 'role' => 'editor' ) ) );
+
+		$request = new WP_REST_Request( 'GET', '/wp/v2/block-renderer/' . Stats_Block::NAME );
+		$request->set_query_params(
+			array(
+				'context'    => 'edit',
+				'attributes' => array(
+					'slug'     => 'hello-dolly',
+					'language' => 'pt_PT',
+				),
+			)
+		);
+		$response = rest_get_server()->dispatch( $request );
+		$data     = $response->get_data();
+
+		$this->assertSame( 200, $response->get_status() );
+		$this->assertIsArray( $data );
+		$this->assertStringContainsString( 'translation-stats-placeholder', $data['rendered'] );
+		$this->assertStringContainsString( 'data-tstats-refresh=', $data['rendered'] );
+		$this->assertCount( 0, $this->requested_urls );
+		$this->assertNotFalse( wp_next_scheduled( Stats_Block_Cache::REFRESH_HOOK, array( 'plugins', 'hello-dolly', 'pt_PT' ) ) );
+	}
+
+
+	/**
 	 * Test the block renders the placeholder if translate.wordpress.org is unavailable.
 	 */
 	public function test_render_loads_stats_unavailable() {
@@ -752,7 +796,7 @@ class Test_Stats_Block extends Translation_Stats_TestCase {
 
 
 	/**
-	 * Test the block editor data: the languages, and the installed plugins and themes.
+	 * Test the block editor data: the languages, the site language, and the installed plugins and themes.
 	 */
 	public function test_editor_data() {
 
@@ -762,9 +806,12 @@ class Test_Stats_Block extends Translation_Stats_TestCase {
 			array(
 				'value' => 'pt_PT',
 				'label' => 'Português (pt_PT)',
+				'name'  => 'Português',
+				'slug'  => 'pt/default',
 			),
 			$data['languages']
 		);
+		$this->assertSame( get_locale(), $data['siteLanguage'] );
 		$this->assertNotContains( 'en_US', wp_list_pluck( $data['languages'], 'value' ) );
 		$this->assertContains( 'hello', wp_list_pluck( $data['plugins'], 'value' ) );
 		$this->assertContains( 'Hello Dolly', wp_list_pluck( $data['plugins'], 'label' ) );

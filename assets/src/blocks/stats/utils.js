@@ -201,3 +201,92 @@ export function spinIcon( button, spin ) {
 
 	return () => animation.cancel();
 }
+
+/**
+ * Get the project name shown in the block: the block name, the installed plugin or theme name, or the slug.
+ *
+ * @since 2.1.1
+ *
+ * @param {Object}                                attributes      Block attributes.
+ * @param {string}                                attributes.slug Project slug.
+ * @param {string}                                attributes.name Project name, or empty for the installed project name.
+ * @param {Array<{value: string, label: string}>} installed       Installed plugins or themes.
+ *
+ * @return {string} Project name.
+ */
+export function blockProjectName( attributes, installed ) {
+	if ( attributes.name && attributes.name.trim() ) {
+		return attributes.name.trim();
+	}
+
+	const project = installed.find(
+		( option ) => option.value === attributes.slug
+	);
+
+	return project ? project.label : attributes.slug;
+}
+
+/**
+ * Get the block language: the selected language, or the site language.
+ *
+ * @since 2.1.1
+ *
+ * @param {string}                                                            language     Language, or empty for the site language.
+ * @param {Array<{value: string, label: string, name: string, slug: string}>} languages    Languages.
+ * @param {string}                                                            siteLanguage Site language.
+ *
+ * @return {{value: string, label: string, name: string, slug: string}|undefined} Language, or undefined if not found.
+ */
+export function blockLanguage( language, languages, siteLanguage ) {
+	const wpLocale = language || siteLanguage;
+
+	return languages.find( ( option ) => option.value === wpLocale );
+}
+
+/**
+ * Get the translate.wordpress.org URL of the project in a language.
+ *
+ * @since 2.1.1
+ *
+ * @param {Object} attributes      Block attributes.
+ * @param {string} attributes.type Project type, 'plugins' or 'themes'.
+ * @param {string} attributes.slug Project slug.
+ * @param {string} localeSlug      Language slug on translate.wordpress.org, as 'pt/default'.
+ *
+ * @return {string} translate.wordpress.org URL.
+ */
+export function localeProjectUrl( attributes, localeSlug ) {
+	return (
+		'https://translate.wordpress.org/locale/' +
+		localeSlug +
+		'/wp-' +
+		attributes.type +
+		'/' +
+		attributes.slug
+	);
+}
+
+/**
+ * Get the stats bars of the block placeholder: the selected plugin subprojects, or the theme project, with the project name.
+ *
+ * @since 2.1.1
+ *
+ * @param {Object}   attributes             Block attributes.
+ * @param {string}   attributes.type        Project type, 'plugins' or 'themes'.
+ * @param {string[]} attributes.subprojects Plugin subprojects slugs.
+ * @param {string}   name                   Project name.
+ *
+ * @return {Array<{slug: string, name: string}>} Stats bars subprojects.
+ */
+export function placeholderSubprojects( attributes, name ) {
+	if ( 'themes' === attributes.type ) {
+		// The theme project bar, with the project name, as the stats placeholder of the server render.
+		const project = { slug: '' };
+		project.name = name;
+		return [ project ];
+	}
+
+	return pluginSubprojects().filter( ( subproject ) =>
+		attributes.subprojects.includes( subproject.slug )
+	);
+}

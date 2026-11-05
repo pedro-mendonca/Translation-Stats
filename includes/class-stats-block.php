@@ -99,11 +99,12 @@ if ( ! class_exists( __NAMESPACE__ . '\Stats_Block' ) ) {
 		}
 
 		/**
-		 * Get the editor data: the languages and the installed plugins and themes.
+		 * Get the editor data: the languages, the site language, and the installed plugins and themes.
 		 *
 		 * @since 2.1.0
+		 * @since 2.1.1 Added the languages native name and translate.wordpress.org slug, and the site language, for the stats placeholder.
 		 *
-		 * @return array{languages: list<array{value: string, label: string}>, plugins: list<array{value: string, label: string}>, themes: list<array{value: string, label: string}>}
+		 * @return array{languages: list<array{value: string, label: string, name: string, slug: string}>, siteLanguage: string, plugins: list<array{value: string, label: string}>, themes: list<array{value: string, label: string}>}
 		 */
 		public static function editor_data() {
 
@@ -115,6 +116,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Stats_Block' ) ) {
 				$languages[] = array(
 					'value' => $locale->wp_locale,
 					'label' => $locale->native_name . ' (' . $locale->wp_locale . ')',
+					'name'  => $locale->native_name,
+					'slug'  => $locale->locale_slug,
 				);
 			}
 
@@ -139,9 +142,10 @@ if ( ! class_exists( __NAMESPACE__ . '\Stats_Block' ) ) {
 			}
 
 			return array(
-				'languages' => $languages,
-				'plugins'   => $plugins,
-				'themes'    => $themes,
+				'languages'    => $languages,
+				'siteLanguage' => get_locale(),
+				'plugins'      => $plugins,
+				'themes'       => $themes,
 			);
 		}
 
@@ -149,8 +153,8 @@ if ( ! class_exists( __NAMESPACE__ . '\Stats_Block' ) ) {
 		/**
 		 * Render the block.
 		 *
-		 * Shows the cached stats. Without cached stats, shows the stats placeholder and loads the stats in the background.
-		 * The block editor preview loads the stats right away.
+		 * Shows the cached stats. Without cached stats, shows the stats placeholder and loads the stats in the background,
+		 * also in the block editor preview, that shows the stats when loaded.
 		 *
 		 * @since 2.1.0
 		 *
@@ -199,7 +203,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Stats_Block' ) ) {
 
 
 		/**
-		 * Get the block stats: the cached stats, loaded right away in the block editor preview, or loaded in the background.
+		 * Get the block stats: the cached stats, or loaded in the background.
 		 *
 		 * @since 2.1.0
 		 *
@@ -223,10 +227,13 @@ if ( ! class_exists( __NAMESPACE__ . '\Stats_Block' ) ) {
 			 *
 			 * @since 2.1.0
 			 *
-			 * @param bool                 $load         True to load the missing stats right away. Defaults to true only in the block editor preview.
+			 * @since 2.1.1 Defaults to false also in the block editor preview, that loads the stats in the background,
+			 *              instead of loading each block stats in its preview request.
+			 *
+			 * @param bool                 $load         True to load the missing stats right away. Defaults to false.
 			 * @param array<string, mixed> $attributes   Block attributes.
 			 */
-			if ( true === apply_filters( 'translation_stats_block_load_stats', self::is_editor_preview(), $attributes ) ) {
+			if ( true === apply_filters( 'translation_stats_block_load_stats', false, $attributes ) ) {
 				return Stats_Block_Cache::load_stats( $project, $locale, $subprojects );
 			}
 
