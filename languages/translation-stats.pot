@@ -2,14 +2,14 @@
 # This file is distributed under the GPL v2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Translation Stats 2.1.0\n"
+"Project-Id-Version: Translation Stats 2.1.1\n"
 "Report-Msgid-Bugs-To: https://github.com/pedro-mendonca/Translation-Stats/issues\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-02T17:57:41+00:00\n"
+"POT-Creation-Date: 2026-11-05T09:50:36+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: translation-stats\n"
@@ -19,7 +19,7 @@ msgstr ""
 #: translation-stats.php:12
 #: includes/class-settings-footer.php:60
 #: includes/class-settings-section-debug.php:169
-#: assets/src/blocks/stats/edit.js:307
+#: assets/src/blocks/stats/edit.js:315
 msgid "Translation Stats"
 msgstr ""
 
@@ -129,9 +129,10 @@ msgstr ""
 
 #. translators: %s: Language native name.
 #: includes/class-plugins.php:231
-#: includes/class-stats-block.php:316
+#: includes/class-stats-block.php:323
 #: includes/class-themes.php:136
-#, php-format
+#: assets/src/blocks/stats/placeholder.js:97
+#, php-format,js-format
 msgid "Translation for %s"
 msgstr ""
 
@@ -386,8 +387,8 @@ msgid "Select All"
 msgstr ""
 
 #: includes/class-settings-section-plugins.php:169
-#: assets/src/blocks/stats/edit.js:142
-#: assets/src/blocks/stats/edit.js:166
+#: assets/src/blocks/stats/edit.js:145
+#: assets/src/blocks/stats/edit.js:169
 msgid "Plugin"
 msgstr ""
 
@@ -440,8 +441,8 @@ msgid "View installed themes"
 msgstr ""
 
 #: includes/class-settings-section-themes.php:107
-#: assets/src/blocks/stats/edit.js:146
-#: assets/src/blocks/stats/edit.js:165
+#: assets/src/blocks/stats/edit.js:149
+#: assets/src/blocks/stats/edit.js:168
 msgid "Theme"
 msgstr ""
 
@@ -672,89 +673,89 @@ msgid "Stable Readme"
 msgstr ""
 
 #. translators: 1: Plugin name. 2: Error message.
-#: translation-stats.php:160
+#: translation-stats.php:159
 #, php-format
 msgid "The plugin %1$s has been deactivated due to an error: %2$s"
 msgstr ""
 
-#: translation-stats.php:163
+#: translation-stats.php:162
 msgid "This plugin doesn&#8217;t work with your version of PHP."
 msgstr ""
 
 #. translators: %s: Minimum PHP version required.
-#: translation-stats.php:173
+#: translation-stats.php:172
 #, php-format
 msgid "Requires PHP version %s or higher."
 msgstr ""
 
 #. translators: %s: URL to Update PHP page.
-#: translation-stats.php:181
+#: translation-stats.php:180
 #, php-format
 msgid "<a href=\"%s\">Learn more about updating PHP</a>."
 msgstr ""
 
-#: assets/src/blocks/stats/edit.js:91
+#: assets/src/blocks/stats/edit.js:94
 #: assets/src/js/stats-widget.js:141
 msgid "An error occurred while updating."
 msgstr ""
 
-#: assets/src/blocks/stats/edit.js:121
+#: assets/src/blocks/stats/edit.js:124
 msgid "Update translation stats"
 msgstr ""
 
-#: assets/src/blocks/stats/edit.js:133
+#: assets/src/blocks/stats/edit.js:136
 msgid "Project"
 msgstr ""
 
-#: assets/src/blocks/stats/edit.js:137
+#: assets/src/blocks/stats/edit.js:140
 msgid "Type"
 msgstr ""
 
-#: assets/src/blocks/stats/edit.js:170
+#: assets/src/blocks/stats/edit.js:173
 msgid "Search the installed themes, or the themes on WordPress.org."
 msgstr ""
 
-#: assets/src/blocks/stats/edit.js:174
+#: assets/src/blocks/stats/edit.js:177
 msgid "Search the installed plugins, or the plugins on WordPress.org."
 msgstr ""
 
-#: assets/src/blocks/stats/edit.js:200
+#: assets/src/blocks/stats/edit.js:203
 msgid "Language"
 msgstr ""
 
-#: assets/src/blocks/stats/edit.js:205
+#: assets/src/blocks/stats/edit.js:208
 msgid "Site language"
 msgstr ""
 
-#: assets/src/blocks/stats/edit.js:219
+#: assets/src/blocks/stats/edit.js:222
 msgid "Subprojects"
 msgstr ""
 
-#: assets/src/blocks/stats/edit.js:242
+#: assets/src/blocks/stats/edit.js:245
 msgid "Display"
 msgstr ""
 
-#: assets/src/blocks/stats/edit.js:245
+#: assets/src/blocks/stats/edit.js:248
 msgid "Show the project name"
 msgstr ""
 
-#: assets/src/blocks/stats/edit.js:258
+#: assets/src/blocks/stats/edit.js:261
 msgid "Name"
 msgstr ""
 
-#: assets/src/blocks/stats/edit.js:259
+#: assets/src/blocks/stats/edit.js:262
 msgid "Leave empty to use the name of the installed plugin or theme, or the slug."
 msgstr ""
 
-#: assets/src/blocks/stats/edit.js:271
+#: assets/src/blocks/stats/edit.js:274
 msgid "Show the language"
 msgstr ""
 
-#: assets/src/blocks/stats/edit.js:279
+#: assets/src/blocks/stats/edit.js:282
 msgid "Show the strings count"
 msgstr ""
 
-#: assets/src/blocks/stats/edit.js:308
+#: assets/src/blocks/stats/edit.js:316
 msgid "Select a plugin or theme in the block settings, to show its translation stats from translate.wordpress.org."
 msgstr ""
 
