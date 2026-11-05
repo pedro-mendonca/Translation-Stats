@@ -16,6 +16,43 @@ import {
 } from './utils';
 
 /**
+ * Get a stats bar of the block placeholder, as the server render placeholder.
+ *
+ * @since 2.1.1
+ *
+ * @param {{slug: string, name: string}} subproject Subproject, or the theme project.
+ *
+ * @return {Element} Stats bar placeholder element.
+ */
+function placeholderBar( subproject ) {
+	// An anchor without a link, as the server render placeholder, for the stats widget styles.
+	/* eslint-disable jsx-a11y/anchor-is-valid */
+	const bar = (
+		<a className="placeholder">
+			<div className="subproject">
+				<div className="subproject-bar">
+					<span className="subproject-bar__name">
+						{ subproject.name }
+					</span>
+				</div>
+			</div>
+		</a>
+	);
+	/* eslint-enable jsx-a11y/anchor-is-valid */
+
+	return (
+		<div
+			key={ subproject.slug }
+			className={
+				'content__subproject ' + ( subproject.slug || 'project' )
+			}
+		>
+			{ bar }
+		</div>
+	);
+}
+
+/**
  * Show the stats placeholder of the block while its preview loads, as the server render of the stats loading,
  * instead of a spinner. Shows the previous preview while it loads again, as when the attributes change.
  *
@@ -87,27 +124,7 @@ export default function BlockPlaceholder( props ) {
 						aria-hidden="true"
 					>
 						{ placeholderSubprojects( attributes, name ).map(
-							( subproject ) => (
-								<div
-									key={ subproject.slug }
-									className={
-										'content__subproject ' +
-										( subproject.slug || 'project' )
-									}
-								>
-									{ /* An anchor without a link, as the server render placeholder, for the stats widget styles. */ }
-									{ /* eslint-disable-next-line jsx-a11y/anchor-is-valid */ }
-									<a className="placeholder">
-										<div className="subproject">
-											<div className="subproject-bar">
-												<span className="subproject-bar__name">
-													{ subproject.name }
-												</span>
-											</div>
-										</div>
-									</a>
-								</div>
-							)
+							placeholderBar
 						) }
 					</div>
 				</div>
