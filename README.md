@@ -135,6 +135,12 @@ Ask your questions in the [support forum](https://wordpress.org/support/plugin/t
 
 ## Changelog
 
+### 2.1.1
+
+* Fix the block editor slow to load pages with many Translation Stats blocks, with a spinner on each block. The stats load in the background, as on the frontend, and each block shows the stats placeholder until they are loaded.
+* Update the development dependencies.
+* Developers: The `translation_stats_block_load_stats` filter defaults to false also in the block editor.
+
 ### 2.1.0
 
 * New: The Translation Stats block, to show the translation stats of any plugin or theme on your site, in any language, with the project name and links to translate it. Search the plugins and themes on WordPress.org, and update the stats from the block editor. Requires WordPress 6.3.
