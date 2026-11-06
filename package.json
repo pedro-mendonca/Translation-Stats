@@ -18,7 +18,7 @@
 		"url": "https://github.com/pedro-mendonca/Translation-Stats/issues"
 	},
 	"devDependencies": {
-		"@vitest/coverage-v8": "^5.0.5",
+		"@vitest/coverage-v8": "^5.1.0",
 		"@wordpress/api-fetch": "^8.0.0",
 		"@wordpress/block-editor": "^19.0.0",
 		"@wordpress/blocks": "^17.0.0",
