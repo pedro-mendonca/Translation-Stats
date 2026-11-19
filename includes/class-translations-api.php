@@ -140,6 +140,87 @@ if ( ! class_exists( __NAMESPACE__ . '\Translations_API' ) ) {
 		}
 
 
+		/**
+		 * Request the translate.WordPress.org API with throttling and retries for rate limits and transient errors.
+		 *
+		 * @since 2.1.2
+		 *
+		 * @param string $url   translate.WordPress.org API URL.
+		 *
+		 * @return array|WP_Error   The HTTP API response.
+		 */
+		public static function remote_get( $url ) {
+
+			static $last_request = 0.0;
+
+			/**
+			 * Filters the minimum time between translate.WordPress.org API requests, in seconds.
+			 *
+			 * @since 2.1.2
+			 *
+			 * @param float $min_interval   Minimum interval between requests. Default 0.25.
+			 */
+			$min_interval = (float) apply_filters( 'translation_stats_api_min_interval', 0.25 );
+
+			/**
+			 * Filters the maximum number of attempts for each translate.WordPress.org API request.
+			 *
+			 * @since 2.1.2
+			 *
+			 * @param int $max_attempts   Maximum attempts. Default 3.
+			 */
+			$max_attempts = (int) apply_filters( 'translation_stats_api_max_attempts', 3 );
+
+			$args = array(
+				'timeout' => 15,
+			);
+
+			$response = null;
+
+			for ( $attempt = 1; $attempt <= $max_attempts; $attempt++ ) {
+
+				$now = microtime( true );
+				if ( $last_request > 0 && ( $now - $last_request ) < $min_interval ) {
+					usleep( (int) ( ( $min_interval - ( $now - $last_request ) ) * 1000000 ) );
+				}
+
+				$response = wp_remote_get( $url, $args );
+				$last_request = microtime( true );
+
+				if ( ! self::is_api_unavailable( $response ) ) {
+					return $response;
+				}
+
+				if ( $attempt < $max_attempts ) {
+					$delay = (int) pow( 2, $attempt );
+					if ( ! is_wp_error( $response ) && 429 === wp_remote_retrieve_response_code( $response ) ) {
+						$retry_after = wp_remote_retrieve_header( $response, 'retry-after' );
+						if ( is_numeric( $retry_after ) ) {
+							$delay = max( $delay, (int) $retry_after );
+						}
+					}
+
+					/**
+					 * Filters the delay before retrying a translate.WordPress.org API request, in seconds.
+					 *
+					 * @since 2.1.2
+					 *
+					 * @param int          $delay      Delay before the next attempt.
+					 * @param int          $attempt    The failed attempt number.
+					 * @param array|WP_Error $response The HTTP API response from the failed attempt.
+					 */
+					$delay = (int) apply_filters( 'translation_stats_api_retry_delay', min( $delay, 30 ), $attempt, $response );
+
+					if ( $delay > 0 ) {
+						sleep( $delay );
+					}
+				}
+			}
+
+			return $response;
+		}
+
+
 
 
 		/**
