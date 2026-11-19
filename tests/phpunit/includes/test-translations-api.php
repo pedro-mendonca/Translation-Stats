@@ -235,4 +235,58 @@ class Test_Translations_API extends Translation_Stats_TestCase {
 		$this->assertTrue( Translations_API::theme_on_wporg( 'twentytwentyfive' ) );
 		$this->assertFalse( Translations_API::theme_on_wporg( 'other-theme' ) );
 	}
+
+
+	/**
+	 * Test the translate.WordPress.org API is requested again after a rate limit response.
+	 */
+	public function test_remote_get_retries_on_rate_limit() {
+
+		$attempt = 0;
+		$url     = 'https://translate.wordpress.org/api/projects/wp-plugins/translation-stats/stable/';
+
+		remove_all_filters( 'pre_http_request' );
+
+		add_filter(
+			'pre_http_request',
+			function ( $preempt, $args, $request_url ) use ( &$attempt, $url ) {
+				if ( $request_url !== $url ) {
+					return $preempt;
+				}
+
+				++$attempt;
+
+				if ( $attempt < 2 ) {
+					return array(
+						'headers'  => array(),
+						'body'     => '',
+						'response' => array(
+							'code'    => 429,
+							'message' => 'Too Many Requests',
+						),
+						'cookies'  => array(),
+						'filename' => null,
+					);
+				}
+
+				return array(
+					'headers'  => array(),
+					'body'     => '{}',
+					'response' => array(
+						'code'    => 200,
+						'message' => 'OK',
+					),
+					'cookies'  => array(),
+					'filename' => null,
+				);
+			},
+			10,
+			3
+		);
+
+		$response = Translations_API::remote_get( $url );
+
+		$this->assertSame( 200, wp_remote_retrieve_response_code( $response ) );
+		$this->assertSame( 2, $attempt );
+	}
 }

@@ -89,6 +89,10 @@ Ask your questions in the [support forum](https://wordpress.org/support/plugin/t
 
 == Changelog ==
 
+= 2.1.2 =
+*   Fix intermittent translation stats errors on the Plugins screen when translate.wordpress.org rate limits the API requests.
+*   Developers: Throttle and retry translate.wordpress.org requests in `Translations_API::remote_get()`. New filters: `translation_stats_api_min_interval`, `translation_stats_api_max_attempts`, and `translation_stats_api_retry_delay`.
+
 = 2.1.1 =
 *   Fix the block editor slow to load pages with many Translation Stats blocks, with a spinner on each block. The stats load in the background, as on the frontend, and each block shows the stats placeholder until they are loaded.
 *   Update the development dependencies.

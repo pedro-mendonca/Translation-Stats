@@ -34,6 +34,8 @@ function translation_stats_manually_load_plugin() {
 
 tests_add_filter( 'muplugins_loaded', 'translation_stats_manually_load_plugin' );
 
+tests_add_filter( 'translation_stats_api_retry_delay', '__return_zero' );
+
 // Start up the WP testing environment.
 require "{$translation_stats_tests_dir}/includes/bootstrap.php";
 

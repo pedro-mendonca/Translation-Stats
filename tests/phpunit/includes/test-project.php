@@ -159,17 +159,17 @@ class Test_Project extends Translation_Stats_TestCase {
 			'rate limited' => array(
 				'response'          => 429,
 				'expected_result'   => true,
-				'expected_requests' => 2,
+				'expected_requests' => 6,
 			),
 			'server error' => array(
 				'response'          => 503,
 				'expected_result'   => true,
-				'expected_requests' => 2,
+				'expected_requests' => 6,
 			),
 			'error'        => array(
 				'response'          => new WP_Error( 'http_request_failed', 'Connection timed out.' ),
 				'expected_result'   => true,
-				'expected_requests' => 2,
+				'expected_requests' => 6,
 			),
 		);
 	}
@@ -338,6 +338,7 @@ class Test_Project extends Translation_Stats_TestCase {
 		$this->assertWPError( $stats );
 		$this->assertSame( 503, $stats->get_error_data()['status'] );
 		$this->assertFalse( get_transient( TRANSLATION_STATS_TRANSIENTS_PLUGINS_PREFIX . 'translation-stats_stable_pt_PT' ) );
+		$this->assertCount( 3, $this->requested_urls );
 	}
 
 
@@ -418,6 +419,6 @@ class Test_Project extends Translation_Stats_TestCase {
 		$project = new Plugin_Project( 'translation-stats' );
 
 		$this->assertWPError( $project->stats( $this->get_locale( 'pt_PT', 'pt' ), false ) );
-		$this->assertCount( 1, $this->requested_urls );
+		$this->assertCount( 3, $this->requested_urls );
 	}
 }

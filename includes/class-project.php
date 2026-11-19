@@ -127,7 +127,7 @@ if ( ! class_exists( __NAMESPACE__ . '\Project' ) ) {
 		 * @return array|WP_Error   The translate.WordPress.org API response.
 		 */
 		public function api_get( $subproject_slug = '' ) {
-			return wp_remote_get( Translations_API::translate_url( $this->get_type(), true ) . $this->get_path( $subproject_slug ) );
+			return Translations_API::remote_get( Translations_API::translate_url( $this->get_type(), true ) . $this->get_path( $subproject_slug ) );
 		}
 
 
