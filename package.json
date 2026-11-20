@@ -27,10 +27,10 @@
 		"@wordpress/i18n": "^7.0.0",
 		"@wordpress/scripts": "^37.1.0",
 		"@wordpress/server-side-render": "^7.1.0",
-		"jquery": "^3.7.1",
-		"jsdom": "^31.0.0",
+		"jquery": "^3.8.0",
+		"jsdom": "^31.0.1",
 		"tablesorter": "^2.31.3",
-		"vite": "^8.3.6",
+		"vite": "^8.3.8",
 		"vitest": "^5.0.5"
 	},
 	"overrides": {
